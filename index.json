@@ -1,0 +1,57 @@
+{
+    "title": "Comfotably Numbered",
+    "author": "Hardmath123",
+    "description": "My blog.",
+    "url": "http://hardmath123.github.io",
+    "templates": {
+        "404": "404.html",
+        "header": "header.html",
+        "footer": "footer.html",
+        "postpage": "post.html",
+        "home": "home.html"
+    },
+    "posts": [
+        {
+            "title": "Why Math is a Sport",
+            "author": "Hardmath123",
+            "description": "And why we should worry.",
+            "file": "math.html",
+            "date": "3/23/14"
+        },
+        {
+            "title": "How Newbies Codebreak",
+            "author": "Hardmath123",
+            "description": "A story of codebreaking using Python, Google, and common sense.",
+            "file": "crypto.html",
+            "date": "2/8/14"
+        },
+        {
+            "title": "Blown to Bitcoins",
+            "author": "Hardmath123",
+            "description": "Bitcoin for Liberal Arts majors.",
+            "file": "bitcoin.html",
+            "date": "12/30/13"
+        },
+        {
+            "title": "Lampshades and Analytic Geometry",
+            "author": "Hardmath123",
+            "description": "Exploring conic sections with lampshades, potatoes, and smoke simulations.",
+            "file": "conics.html",
+            "date": "12/8/13"
+        },
+        {
+            "title": "Living Without Sudo",
+            "author": "Hardmath123",
+            "description": "UNIX hacking for the faint at heard, or those blessed with mean sysadmins.",
+            "file": "sudo.html",
+            "date": "11/29/13"
+        },
+        {
+            "title": "Hello, World!",
+            "author": "Hardmath123",
+            "description": "Welcoming myself to my blog.",
+            "file": "hw.html",
+            "date": "11/27/13"
+        }
+    ]
+}

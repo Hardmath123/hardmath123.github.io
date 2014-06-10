@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/prism.css"/>
+        <title>Hello, World! | Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="/static/prism.js"></script>
+        <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+
+        <div id="header">
+    <h1>
+        <a href="/">Comfortably Numbered</a>
+    </h1>
+    <div id="rightbox">
+        <a href="/feed.xml"><img src="/static/feed-icon.png" width="15" height="15"/></a>
+    </div>
+    <div class="clearer"></div>
+</div>
+
+
+        <div id="postlist" class="language-bash">
+            <h2>Hello, World!</h2>
+            <h4>Hardmath123 &middot; Wednesday, November 27, 2013
+            </h4>
+            <br/>
+            <p class="dropcap">I started on Comfortably Numbered a couple of months ago, because I needed a blog. I needed a blog to dump interesting thoughts and I wanted a place besides GitHub to show off projects. I wanted, for once, to write industrial-strength code that would face <em>real people</em> instead of fellow hackers. When you write code for a hacker, you write the bare minimum for it to work. So I ended up obsessing insanely about the design, typography, and optimization of this site. Pretty much everything except the content.
+
+<p>I thought I'd present a cool non-trivial Hello, World program here. But all the cool languages have really boring Hello, Worlds, and I have a natural revulsion to a language whose most basic Hello, World is more than a line long&mdash;C variants, Java, etc. So here's an assortment of my favorite Hello, World programs.
+
+<pre><code>echo 'print "console.log(\"print \\\"echo Hello, World\\\"\")"' | ruby | node | python | bash</code></pre>
+
+<p>Here's a merry (pure) CSS3D welcome. It's essentially just a bunch of animations with 3D transforms, but the end result is pretty impressive. It's also overkill, which is the <s>best</s> only way to show off.
+
+<style>
+#hw {
+  text-align: center;
+  font-weight: 900;
+  font-size: 40px;
+  touch-callout: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -khtml-user-select: none;
+}
+
+#hw span {
+  color: #aaa;
+  display: inline-block;
+  width: 30px;
+  margin: 0;
+  padding: 0;
+  height: 50px;
+  text-shadow: 0 0 3px #aaf;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -ms-transform-origin: 0 0 100px;
+  -webkit-transform-origin: 0 0 100px;
+  transform-origin: 0 0 100px;
+}
+
+#hw span:nth-child(8n) {
+  -webkit-animation-name: rot0;
+  animation-name: rot0;
+}
+
+#hw span:nth-child(8n+1) {
+  -webkit-animation-name: rot1;
+  animation-name: rot1;
+}
+
+#hw span:nth-child(8n+2) {
+  -webkit-animation-name: rot2;
+  animation-name: rot2;
+}
+
+#hw span:nth-child(8n+3) {
+  -webkit-animation-name: rot3;
+  animation-name: rot3;
+}
+
+#hw span:nth-child(8n+4) {
+  -webkit-animation-name: rot4;
+  animation-name: rot4;
+}
+
+#hw span:nth-child(8n+5) {
+  -webkit-animation-name: rot5;
+  animation-name: rot5;
+}
+
+#hw span:nth-child(8n+6) {
+  -webkit-animation-name: rot6;
+  animation-name: rot6;
+}
+
+#hw span:nth-child(8n+7) {
+  -webkit-animation-name: rot7;
+  animation-name: rot7;
+}
+
+@-webkit-keyframes rot0 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rot0 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    -ms-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@-webkit-keyframes rot1 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(-360deg);
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(-360deg);
+  }
+}
+
+@keyframes rot1 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(-360deg);
+    -ms-transform: rotateX(360deg) rotateY(360deg) rotateZ(-360deg);
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(-360deg);
+  }
+}
+
+@-webkit-keyframes rot2 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(-360deg) rotateZ(360deg);
+    transform: rotateX(360deg) rotateY(-360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rot2 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(-360deg) rotateZ(360deg);
+    -ms-transform: rotateX(360deg) rotateY(-360deg) rotateZ(360deg);
+    transform: rotateX(360deg) rotateY(-360deg) rotateZ(360deg);
+  }
+}
+
+@-webkit-keyframes rot3 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(-360deg) rotateZ(-360deg);
+    transform: rotateX(360deg) rotateY(-360deg) rotateZ(-360deg);
+  }
+}
+
+@keyframes rot3 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(-360deg) rotateZ(-360deg);
+    -ms-transform: rotateX(360deg) rotateY(-360deg) rotateZ(-360deg);
+    transform: rotateX(360deg) rotateY(-360deg) rotateZ(-360deg);
+  }
+}
+
+@-webkit-keyframes rot4 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(360deg) rotateZ(360deg);
+    transform: rotateX(-360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rot4 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(360deg) rotateZ(360deg);
+    -ms-transform: rotateX(-360deg) rotateY(360deg) rotateZ(360deg);
+    transform: rotateX(-360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@-webkit-keyframes rot5 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(360deg) rotateZ(-360deg);
+    transform: rotateX(-360deg) rotateY(360deg) rotateZ(-360deg);
+  }
+}
+
+@keyframes rot5 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(360deg) rotateZ(-360deg);
+    -ms-transform: rotateX(-360deg) rotateY(360deg) rotateZ(-360deg);
+    transform: rotateX(-360deg) rotateY(360deg) rotateZ(-360deg);
+  }
+}
+
+@-webkit-keyframes rot6 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(-360deg) rotateZ(360deg);
+    transform: rotateX(-360deg) rotateY(-360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rot6 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(-360deg) rotateZ(360deg);
+    -ms-transform: rotateX(-360deg) rotateY(-360deg) rotateZ(360deg);
+    transform: rotateX(-360deg) rotateY(-360deg) rotateZ(360deg);
+  }
+}
+
+@-webkit-keyframes rot7 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(-360deg) rotateZ(-360deg);
+    transform: rotateX(-360deg) rotateY(-360deg) rotateZ(-360deg);
+  }
+}
+
+@keyframes rot7 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(-360deg) rotateZ(-360deg);
+    -ms-transform: rotateX(-360deg) rotateY(-360deg) rotateZ(-360deg);
+    transform: rotateX(-360deg) rotateY(-360deg) rotateZ(-360deg);
+  }
+}
+</style>
+
+<div id="hw">
+	<span id="hw-1">H</span>
+	<span id="hw-2">e</span>
+	<span id="hw-3">l</span>
+	<span id="hw-4">l</span>
+	<span id="hw-5">o</span>
+	<span id="hw-6">,</span>
+	<span id="hw-7"> </span>
+	<span id="hw-8">w</span>
+	<span id="hw-9">o</span>
+	<span id="hw-10">r</span>
+	<span id="hw-11">l</span>
+	<span id="hw-12">d</span>
+</div>
+
+<p>While we're feeling masochistic, here's Hello, World in Malbolge (the first working Malbolge program took 2 years and a LISP program to find, so don't feel too bad if you don't get it right away):
+<pre class="language-plaintext"><code>(&#039;&amp;%:9]!~}|z2Vxwv-,POqponl$Hjig%eB@@&gt;}=&lt;M:9wv6WsU2T|nm-,jcL(I&amp;%$#&quot;
+`CB]V?Tx&lt;uVtT`Rpo3NlF.Jh++FdbCBA@?]!~|4XzyTT43Qsqq(Lnmkj&quot;Fhg${z@&gt;</code></pre>
+
+
+<p>If you're on a Mac, it's always nice to hear a human voice (or a reasonable approximation thereof). The <code>say</code> command is a very easy way to annoy your sysadmin. Try putting a <code>say</code> command in a shared computer's <code>.profile</code>&mdash;perhaps along the lines of <q>Where have you hidden the body?</q>.
+
+<pre class="language-bash"><code>$ say -v Zarvox "Hello, World"</code></pre>
+
+<p>Piet's Hello, World is pretty, self-referential, and a nice avatar for the aspiring esolang geek.
+<p><img src="http://www.dangermouse.net/esoteric/piet/hw6_big.png"/>
+
+<p>I'd post a Hello, World program in Whitespace, but I decided to save myself the effort and dump an empty box below. Use your imagination.
+<pre class="language-plaintext" style="height:300px;"><code></code></pre>
+
+<p>The following is a Hello, World program. Honest.
+<pre style="height:300px;" class="language-plaintext">Romeo, a young man with a remarkable patience.
+Juliet, a likewise young woman of remarkable grace.
+Ophelia, a remarkable woman much in dispute with Hamlet.
+Hamlet, the flatterer of Andersen Insulting A/S.
+
+                   Act I: Hamlet's insults and flattery.
+                   Scene I: The insulting of Romeo.
+[Enter Hamlet and Romeo]
+Hamlet:
+You lying stupid fatherless big smelly half-witted coward! You are as
+stupid as the difference between a handsome rich brave hero and thyself!
+Speak your mind!
+You are as brave as the sum of your fat little stuffed misused dusty
+old rotten codpiece and a beautiful fair warm peaceful sunny summer's
+day. You are as healthy as the difference between the sum of the
+sweetest reddest rose and my father and yourself! Speak your mind!
+You are as cowardly as the sum of yourself and the difference
+between a big mighty proud kingdom and a horse. Speak your mind.
+Speak your mind!
+[Exit Romeo]
+                   Scene II: The praising of Juliet.
+[Enter Juliet]
+Hamlet:
+Thou art as sweet as the sum of the sum of Romeo and his horse and his
+black cat! Speak thy mind!
+[Exit Juliet]
+                   Scene III: The praising of Ophelia.
+[Enter Ophelia]
+Hamlet:
+Thou art as lovely as the product of a large rural town and my amazing
+bottomless embroidered purse. Speak thy mind!
+Thou art as loving as the product of the bluest clearest sweetest sky
+and the sum of a squirrel and a white horse. Thou art as beautiful as
+the difference between Juliet and thyself. Speak thy mind!
+[Exeunt Ophelia and Hamlet]
+
+                   Act II: Behind Hamlet's back.
+                   Scene I: Romeo and Juliet's conversation.
+[Enter Romeo and Juliet]
+Romeo:
+Speak your mind. You are as worried as the sum of yourself and the
+difference between my small smooth hamster and my nose. Speak your
+mind!
+Juliet:
+Speak YOUR mind! You are as bad as Hamlet! You are as small as the
+difference between the square of the difference between my little pony
+and your big hairy hound and the cube of your sorry little
+codpiece. Speak your mind!
+[Exit Romeo]
+                   Scene II: Juliet and Ophelia's conversation.
+[Enter Ophelia]
+Juliet:
+Thou art as good as the quotient between Romeo and the sum of a small
+furry animal and a leech. Speak your mind!
+Ophelia:
+Thou art as disgusting as the quotient between Romeo and twice the
+difference between a mistletoe and an oozing infected blister! Speak
+your mind!
+[Exeunt]</pre>
+
+<p>And finally, FiM++ looks like an average letter to Grandma:
+<pre class="language-plaintext"><code>Dear Princess Celestia:Hello World!
+
+Today I learned how to say hello world!
+I said "Hello, World!"!
+That's all about how to say hello world.
+
+Your faithful student, Kyli Rouge.</code></pre>
+
+<p>(Other people, however, write their letters in LOLCODE.)
+<pre class="language-plaintext"><code>HAI
+CAN HAS STDIO?
+VISIBLE "HAI WORLD!"
+KTHXBYE</code></pre>
+
+        <div id="footer">
+    Comfortably Numbered &middot; Hardmath123 (2013)
+    <br/>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png" /></a>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46120535-1', 'comfortablynumbered.appspot.com');
+  ga('send', 'pageview');
+
+</script>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/prism.css"/>
+        <title>How Newbies Codebreak | Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="/static/prism.js"></script>
+        <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+
+        <div id="header">
+    <h1>
+        <a href="/">Comfortably Numbered</a>
+    </h1>
+    <div id="rightbox">
+        <a href="/feed.xml"><img src="/static/feed-icon.png" width="15" height="15"/></a>
+    </div>
+    <div class="clearer"></div>
+</div>
+
+
+        <div id="postlist" class="language-bash">
+            <h2>How Newbies Codebreak</h2>
+            <h4>Hardmath123 &middot; Saturday, February 8, 2014
+            </h4>
+            <br/>
+            <div style="font-style:italic; text-align:center; padding:20px;">Special thanks to Tim, Nathan, and the Water Bottle Stealer (you know who you are). I probably wouldn't have gotten close to a solution without you guys.</div>
+
+<p class="dropcap">So I'm overdue for a post. Not my fault: school's keeping me busy. In fact, it's keeping me very busy. On Friday night I had to crack a cipher for a competition. It's not a very exciting feat, but it was the most fun I have had in ages, and it offers a nice glance into how people think about problems.
+
+<p>If you liked this, you'll love Simon Singh's <em>The Code Book</em>, which is a rather nice introduction to cryptography that has a whole bunch of awesome true stories about historical top-secret codebreaking feats. This sentence was totally not sponsored by Simon.
+
+<p>Our ciphertext looked like this:
+
+
+<pre style="white-space: pre-wrap;">"25112311'15 525422 24 142112'22 222524127 52123715: 412 11121122113241 15315221113 2225422 5415 621212141114 2412 222511 152417221111122225 11112222233 41214 4122122251123 2225422 5415 621212141114 2412 222511 12241211221111122225 11112222233. 24'13 2224231114 216 22252415 142415121515242112 216 14162422426241513 41214 1521124426241513; 511 2624811 2412 222511 2251112223-624231522 11112222233; 511 12111114 412 11121122113241 15315221113 2225422 25415 14111321123413 415 242215 2121411231624121224121815 41214 412 112225241426 1211411." -132412541126 1321212311</pre>
+
+<p>Ugh. We were told that it's a substitution cipher, with A-Z represented by 1-26 in some order. The <q>standard</q> way to solve these is frequency analysis: we look at the percentage of each coded letter. For example, if 12 shows up 8% of the time, it's probably a more common letter like <em>e</em> or <em>a</em> as opposed to <em>x</em>. Cryptographers have tables of letter frequencies in various languages, so this is easy stuff.
+
+<p>Before you read on, take a moment to see if you can get anywhere with it. Make some intelligent guesses and see if you can make any progress.
+
+<p>(Back so quick? Go back give it a real try!)
+
+<p>Did you see the problem? Our cipher is much tougher than frequency analysis, because we don't have any delimiters between encrypted letters. So <code>112</code> could be any of <code>1-1-2, 11-2, 1-12</code>. That's a <em>big</em> problem: it makes words ambiguous. Even the intended recipient of the encrypted message doesn't know the way the word is broken up for sure, he needs some trial and error (but with the key and a reasonable English vocabulary, it's relatively easy).
+
+<p><em>(Mathematical aside: If you have a string of length ($l$), how many ways can you break it up into a series 2 or 1 digit numbers? The answer is, believe it or not, the l<sup>th</sup> Fibonacci number. The proof is simple: given a string, we can chomp off the first digit and break up the rest in ($f(l-1)$) ways, or chomp off the first 2 digits and break up the rest in ($f(l-2)$) ways. So the total is ($f(l) = f(l-1) + f(l-2)$), which is Fibonacci.)</em>
+
+<p>Anyway, Tim ended up writing a nice little Python program that breaks up words into a list of numbers (it turns out we can eliminate quite a few, because the two-digit numbers have to be 26 or lower). That was exciting, though the huge outputs were slightly disturbing. So it was possible to brute-force it: we generate all possible breaking-ups, then try all possible keys, and then use a large list of words to see if things make sense. (For those of you that don't know, on UNIX systems <code>/usr/share/dict/words</code> contains a very handy list of English words you can grep in).
+
+<p>It turns out, the number of possibilities to try is big. None of us owned a supercomputer, and we didn't have a couple billion years to spare to spare. But we did have some hints. We had a bunch of words that ended with apostrophes: <code>25112311'15</code>, <code>142112'22</code>, and <code>24'13</code>. We started with some initial guessing. The first one looked too long to be a contraction, so it could be a possessive. So perhaps 15 is <em>s</em>. 22 could be <em>t</em>, because of contractions like <q>don't</q> or <q>can't</q>. The last one has a bunch of choices. However, we saw <em>24</em> exist on its own at the beginning of the first sentence. This is helpful because it could be a word like <q>I</q> which is both a letter and a word. (We knew none of this for sure: 24 could very well have meant <q>it</q> or <q>is</q>). So we conjectured that 13 is <em>m</em>, to form <q>I'm</q>. We had other clues, too, but nothing too definitive. The guesses above seemed mutually consistent, but we didn't have any solid proof. For example, looking at words like <code>412</code> and <code>413</code>, we guessed 4 was <em>a</em>, because a lot of short words begin with <q>a</q>.
+
+<p>Then we had a realization. This was obviously a quote from someone (look at the structure of the punctuation), and that someone was probably famous. So the name gives a lot of hints. In particular, both the first and last name start with <q>13</q>. Hmm. My first instinct was <q>Marilyn Monroe</q>, so Tim wrote another program to deduce the possible meanings of letters if I gave a guess for the word. Marilyn fit beautifully, but Monroe didn't (the <q>n</q> in Marilyn and the <q>n</q> in Monroe corresponded to different numbers). Boo.
+
+<p>We tried Mickey Mantle, though I swear I only knew about him from <em>Seinfeld</em>. That didn't work either. Boo again. So I gave up all hope and Googled <q>celebreties whose first and last names start with m</q>. And that led me to <a href="http://uk.answers.yahoo.com/question/index?qid=20100901003736AASluOp">a wonderful Yahoo answer</a> that actually listed out a dozen famous people with initials M. M. This is so impressive, that I reproduce the list below:
+
+<ol>
+	<li>Michael (Mike) Myers, comedian, actor
+	<li>Maureen McCormick, actress 
+	<li>Matthew Maconahay, actor 
+	<li>Max McGee, former Green Bay Packer (1960's) later, Packer's radio announcer 
+	<li>Marlee Matlin, actress 
+	<li>Mark Mcguire, baseball star 
+	<li>Mark Martin, Nascar driver 
+	<li>Marylin McCoo, singer 
+	<li>Marilyn Manson, singer 
+	<li>Mickey Mantle, HOF baseball player 
+	<li>Matthew Modine, actor ("Full Metal Jacket") 
+	<li>Melissa Manchester, singer 
+	<li>Michael Moore, film maker 
+	<li>Martina McBride, country singer 
+	<li>Marsha Mason, actress, "The Good-Bye Girl) 
+	<li>Marilyn Monroe, actress 
+	<li>Mary McGregor, singer, "Torn Between Tow Lovers"
+</ol>
+
+<p>We manually tried the first names; the clear winner was <q>Michael</q>. Very exciting. The last name is now rather obvious: <q>Moore</q> (13 21 21 23 11: the double 21 makes it strikingly clear). This couldn't be an accident.
+
+<p>So we got to substituting in the newfound letters into the rest of the message. Not too easy, because of all the ambiguity, but with some educated guesses we made enough progress to be able to read bits and pieces, most notably <q>Here's</q> at the very beginning.
+
+<p>The way forward was pretty clear now, we searched some quote databases for Michael Moore quotes.
+
+<p>The first couple were hopeful but clearly wrong:
+
+<blockquote>Here's a way to stop suicide bombings &mdash; give the Palestinians a bunch of missile-firing Apache helicopters and let them and the Israelis go at each other head to head. Four billion dollars a year to Israel &mdash; four billion dollars a year to the Palestinians &mdash; they can just blow each other up and leave the rest of us the hell alone.</blockquote>
+
+<blockquote>Here's what I do support: I support them coming home.</blockquote>
+
+<p>It turns out Moore's a rather prolific political commentator and filmmaker, so that couldn't possibly be <em>helping</em> narrow the search space. No worries. At that point I gave in and made some wild assumptions (like in a Sudoku, when you give up on logic and take some leaps of faith). That gave me <q>Here's what I can't think&hellip;</q>
+
+<p>(At this point I feel it is worth mentioning that Tim somehow generated the following. I think it's fair to say Humans: 1, Python: 0.)
+
+<blockquote>ehaaeyaa'ah hehaee i aaeaae'ee eeeheaaek heaeykah: ac aaaeaaeeaayeaa ahyaheeaaay eeehaee hal teaeaeaaaaaa eaae eeehaa aheaakeeaaaaaeeeeh aaaaeeeeeyy acs aaeeaeeehaaey eeehaee hal teaeaeaaaaaa eaae eeehaa aeeaaeaaeeaaaaaeeeeh aaaaeeeeeyy. i'm sines it soil aaeaahaeahaheaeaae it aaateaeeaeteaahay acs aheaaeaaeteaahay; he line eaae eeehaa eehaaaeeey-teaeyahee aaaaeeeeeyy; he aeaaaaaa ac aaaeaaeeaayeaa ahyaheeaaay eeehaee ehaah aaaaayeaaeyaay al eaeeah eaeaaaaeyateaaeaeeaaeanah acs ac aaeeeheaaaet aeaaaaa." -ayeaaehaaaet ayeaeaeyaa
+</blockquote>
+
+<p>Anyway, with a few more guesses, we found it:
+
+<blockquote>Here's what I don't think works: An economic system that was founded in the 16th century and another that was founded in the 19th century. I'm tired of this discussion of capitalism and socialism; we live in the 21st century; we need an economic system that has democracy as its underpinnings and an ethical code.</blockquote>
+
+<p>So that was that. Two hours, a root beer lollipop, and four nerds was all it took.
+
+<p>(In retrospect, we could have gotten some clues from frequency analysis. There are no 9's, so 19 and 29 are probably x and z. And there is a scary number of places where there are a bunch of 1's in a row. The only letter to repeat itself so much is e, and indeed 11 corresponds to e.)
+
+<p>One last thing: Tim's final answer was:
+
+<blockquote>here's hhat i .oc't thick horks: ac ecete.ic s.stem that has .oooae. ic the si.teecth eettr. ac. acother that has .oooae. ic the ciceteecth eettr.. i'm tire. o. this .iscssioc o. ..italism ac. socaalism; he li.e ic the thect.-.irst eettr.; he cee. ac ecete.ic s.stem that has .emoc.am as its ooaer.iccic.s ac. ac ethical ceae." -michael moore</blockquote>
+
+<p>which is rather impressive, coming from a computer program. If anyone wants eternal fame, go ahead and take up the challenge to write a robust, generic cipher-like-this solver. We can use it next year!
+
+        <div id="footer">
+    Comfortably Numbered &middot; Hardmath123 (2013)
+    <br/>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png" /></a>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46120535-1', 'comfortablynumbered.appspot.com');
+  ga('send', 'pageview');
+
+</script>
+</div>
+
+    </body>
+</html>

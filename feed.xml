@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Comfotably Numbered]]></title>
+        <description><![CDATA[My blog.]]></description>
+        <link>http://hardmath123.github.io</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Tue, 10 Jun 2014 05:37:55 GMT</lastBuildDate>
+        <author><![CDATA[Hardmath123]]></author>
+        <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Why Math is a Sport]]></title>
+            <description><![CDATA[And why we should worry.]]></description>
+            <link>http://hardmath123.github.io/math.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/math.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sun, 23 Mar 2014 07:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[How Newbies Codebreak]]></title>
+            <description><![CDATA[A story of codebreaking using Python, Google, and common sense.]]></description>
+            <link>http://hardmath123.github.io/crypto.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/crypto.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sat, 08 Feb 2014 08:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Blown to Bitcoins]]></title>
+            <description><![CDATA[Bitcoin for Liberal Arts majors.]]></description>
+            <link>http://hardmath123.github.io/bitcoin.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/bitcoin.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Mon, 30 Dec 2013 08:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Lampshades and Analytic Geometry]]></title>
+            <description><![CDATA[Exploring conic sections with lampshades, potatoes, and smoke simulations.]]></description>
+            <link>http://hardmath123.github.io/conics.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/conics.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sun, 08 Dec 2013 08:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Living Without Sudo]]></title>
+            <description><![CDATA[UNIX hacking for the faint at heard, or those blessed with mean sysadmins.]]></description>
+            <link>http://hardmath123.github.io/sudo.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/sudo.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Fri, 29 Nov 2013 08:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Hello, World!]]></title>
+            <description><![CDATA[Welcoming myself to my blog.]]></description>
+            <link>http://hardmath123.github.io/hw.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/hw.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Wed, 27 Nov 2013 08:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>
