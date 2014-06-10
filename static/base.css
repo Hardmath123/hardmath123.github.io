@@ -181,7 +181,8 @@ h4 {
   font-size: 16px;
 }
 
-.dropcap:first-letter {
+
+#postlist > p:first-of-type:first-letter, .dropcap:first-letter {
   font-size: 30px;
   font-family: "Didot", "Baskerville", "Garamond", serif;
   color: #666;
