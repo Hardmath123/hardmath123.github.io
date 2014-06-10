@@ -144,7 +144,7 @@ h4 {
   color: gray;
 }
 
-#postlist {
+.centered, #postlist {
   -margin-left: 10px;
   -margin-right: 10px;
   padding: 30px;
@@ -182,7 +182,7 @@ h4 {
 }
 
 
-#postlist > p:first-of-type:first-letter, .dropcap:first-letter {
+#postcontent > p:first-of-type:first-letter, .dropcap:first-letter {
   font-size: 30px;
   font-family: "Didot", "Baskerville", "Garamond", serif;
   color: #666;
