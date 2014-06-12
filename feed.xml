@@ -5,14 +5,14 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 12 Jun 2014 00:00:51 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 12 Jun 2014 20:45:31 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
             <title><![CDATA[Well, well, well, we meet again.]]></title>
             <description><![CDATA[A new beginning?]]></description>
-            <link>http://hardmath123.github.io/helloagain.md</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/helloagain.md</guid>
+            <link>http://hardmath123.github.io/helloagain.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/helloagain.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Wed, 11 Jun 2014 07:00:00 GMT</pubDate>
         </item>
