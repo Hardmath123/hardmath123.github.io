@@ -52,6 +52,14 @@
             "description": "Welcoming myself to my blog.",
             "file": "hw.html",
             "date": "11/27/13"
+        },
+        {
+            "title": "Well, well, well, we meet again.",
+            "author": "Hardmath123",
+            "description": "A new beginning?",
+            "file": "helloagain.md",
+            "date": "6/11/14",
+            "markdown": true
         }
     ]
 }
