@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/prism.css"/>
+        <title>Lord of the Strings | Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="/static/prism.js"></script>
+        <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+
+        <div id="header">
+    <h1>
+        <a href="/">Comfortably Numbered</a>
+    </h1>
+    <div id="rightbox">
+        <a href="/feed.xml"><img src="/static/feed-icon.png" width="15" height="15"/></a>
+    </div>
+    <div class="clearer"></div>
+</div>
+
+
+        <div id="postcontent" class="language-bash centered">
+            <h2>Lord of the Strings</h2>
+            <h4>Hardmath123 &middot; Saturday, June 14, 2014
+            </h4>
+            <br/>
+            <blockquote>
+<p>It all began with the forking of the great pings...</p>
+</blockquote>
+<p>Gandalf was trapped. Surrounded by malicious shell scripts, his only hope lay in <code>/rivendell</code>, which only granted access to the user group <code>Elves</code>.</p>
+<p>He cd&#39;d himself into <code>/rivendell</code> moments before a violent fork bomb exploded.</p>
+<p>&quot;Well, Elrond, it appears we have some visitors,&quot;&quot; he said, putting down his staff for a moment.</p>
+<p>&quot;Ah, Gandalf, a welcome sight in our time of need.&quot; Elrond appeared. He was perturbed—things must really be bad.</p>
+<p>&quot;As are you, my friend. The recent attacks are troubling. Not many dare attack a Sysadmin.&quot;</p>
+<p>&quot;Yes, indeed, they worry me, too,&quot; sighed Elrond, &quot;the Dwarves sent word that their bitcoin mines in <code>/moria</code> were raided for valuable nonces.&quot;</p>
+<p>&quot;<code>/moria</code>? Don&#39;t they log all commands run there, ever since the Trolls of 1402775481?&quot;</p>
+<p>&quot;Yes, Gandalf, I believe <code>/moria/log</code> contains information about everyone that tries to access <code>/moria</code>. I wonder…&quot;</p>
+<p>&quot;Way ahead of you.&quot; <code>cat /moria/log</code>, chanted Gandalf. His staff started spewing hundreds of lines of information. &quot;Argh, there&#39;s too much data! We&#39;ll never analyze it all manually.&quot; He flushed the smoke-words in a puff of <code>^C</code>.</p>
+<p>&quot;Just got word from the Dwarves—they said they flagged suspicious log messages with the word <code>suspicious</code> at the end.&quot;</p>
+<p>&quot;Good, so we don&#39;t have to filter it by hand. We can just <code>grep</code>.&quot;</p>
+<p>&quot;Grep? Is that another of those black spells you found in <code>/mordor</code>?&quot;</p>
+<p>&quot;No, Elrond, <code>grep</code> is the purest of spells. Grep searches files.&quot; <code>grep suspicious /moria/log</code>, he shouted, and the staff started listing all log messages containing &#39;suspicious&#39;.</p>
+<pre><code>3:12:12 legolas &#39;just visiting&#39; suspicious
+3:12:15 samwise &#39;lost my pony!&#39; suspicious
+3:12:18 saruman &#39;mwahahahaha!!&#39; suspicious
+3:13:53 gandalf &#39;meet a friend&#39; suspicious
+3:15:30 baggins &#39;where is sam?&#39; suspicious
+3:16:32 smeagol &#39;lost, we are!&#39; suspicious
+4:43:33 aragorn &#39;meeting gimli&#39; suspicious
+...
+</code></pre><p>&quot;Aha! 3:12:15—saruman&#39;s involved.&quot; Gandalf winked.</p>
+<p>&quot;Gandalf, this is still far too much output. The Dwarves think everyone who isn&#39;t a Dwarf is suspicious!&quot;</p>
+<p>&quot;Ah, but you haven&#39;t seen the power of <code>grep</code> yet. What else do we know about the intruders&#39; log messages?&quot; Gandalf looked excited. Elrond did not approve.</p>
+<p>&quot;Well, let&#39;s assume they all said <code>mwahahahaha</code>&quot;</p>
+<p>&quot;How many ha&#39;s were there, again?&quot;</p>
+<p>&quot;It doesn&#39;t matter. We can <code>grep</code> by regexes, too.&quot; Gandalf picked up his infamous pipe, and smoked the first grep&#39;s output into a new charm: <code>grep suspicious /moria/log | grep -e &quot;mwa\(ha\)*&quot;</code>.</p>
+<p>&quot;The Kleene star operator <code>*</code> we used searches any number of the group before it.&quot;</p>
+<p>&quot;And those backslashes?&quot;</p>
+<p>&quot;Escaping. Parentheses are special words in spell charms, you need to use backslashes to prevent them from accidentally burning a Hobbit-subdirectory or something.&quot;</p>
+<pre><code>3:12:18 saruman &#39;mwahahahaha!!&#39; suspicious
+3:12:18 azogorc &#39;mwahahaha....&#39; suspicious
+3:12:18 urukhai &#39;mwahahahahaha&#39; suspicious
+</code></pre><p>&quot;Gandalf, I&#39;ve got to hand it to you, you are the greatest—&quot;</p>
+<p>&quot;—no time for that,&quot; interrupted Gandalf, &quot;we&#39;ve got to stop them before they get to Rivendell!&quot;</p>
+<p>&quot;They&#39;ll never guess the password. We&#39;re safe for a bit.&quot;</p>
+<p>&quot;With all due respect, Elrond, it&#39;s trivial to guess it.&quot;</p>
+<p>Elrond choked. &quot;What?!&quot;</p>
+<p>&quot;Shush. Knowing you, it&#39;s probably not Elvish—you&#39;re too clever for that. It&#39;s probably English.&quot;</p>
+<p>&quot;And knowing your memory, probably not more than a word.&quot; He got up and started pacing.</p>
+<p>(<code>cat /usr/share/dict/words</code>, he chanted under his breath.)</p>
+<p>&quot;Gandalf, I swear upon sword, this password was forged by the high elves of—&quot;</p>
+<p>&quot;—and between six and eight characters, I would guess…&quot;</p>
+<p>(<code>grep &quot;^\w\{6,8\}$&quot;</code>, he chanted. &quot;This one&#39;s tricky. <code>^</code> means start of the word, <code>\w</code> means an alphabet, and <code>{6,8}$</code> mean 6-8 of those until the end.&quot;)</p>
+<p>&quot;Now we can be a bit clever. Elvish uses the <code>ui</code> sound a lot, I bet that&#39;s in there. Can&#39;t teach an old orc new tricks.&quot;</p>
+<p>(<code>grep ui</code>, he chanted)</p>
+<p>&quot;Oh, and you&#39;ve always been partial to vowels before words (your kids are Arwen, Aragorn, Elladan and Elrohir)&quot;</p>
+<p>(<code>grep &quot;^\(a\|e\)&quot;</code>, he chanted. &quot;Start-of-word and then a or e. The <code>|</code> means or.&quot;)</p>
+<p>&quot;so that narrows it down to about…&quot; He waved his wand about rapidly. &quot;…Sixty-six.&quot;</p>
+<p>&quot;GANDALF!&quot; Elrond&#39;s ears were turning red. MAybe his hair was, too. &quot;You only get one chance at guessing, though,&quot; he added with a wry smile.</p>
+<p>&quot;Let&#39;s go through that list. Which one fits an Elf-king? It must be… yes…&quot; Gandalf got up and whispered: &quot;Altruism.&quot;</p>
+<p>To be continued.</p>
+
+
+        <div id="footer">
+    Comfortably Numbered &middot; Hardmath123 (2013)
+    <br/>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png" /></a>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+        ga('send', 'pageview');
+    </script>
+</div>
+
+    </body>
+</html>

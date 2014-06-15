@@ -5,9 +5,17 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 13 Jun 2014 16:57:43 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 15 Jun 2014 01:01:52 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Lord of the Strings]]></title>
+            <description><![CDATA[String Theory for hackers.]]></description>
+            <link>http://hardmath123.github.io/string1.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/string1.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sat, 14 Jun 2014 07:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Well, well, well, we meet again.]]></title>
             <description><![CDATA[A new beginning?]]></description>
