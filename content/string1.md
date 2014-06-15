@@ -4,7 +4,7 @@ Gandalf was trapped. Surrounded by malicious shell scripts, his only hope lay in
 
 He cd'd himself into `/rivendell` moments before a violent fork bomb exploded.
 
-"Well, Elrond, it appears we have some visitors,"" he said, putting down his staff for a moment.
+"Well, Elrond, it appears we have some visitors," he said, putting down his staff for a moment.
 
 "Ah, Gandalf, a welcome sight in our time of need." Elrond appeared. He was perturbed—things must really be bad.
 
@@ -92,7 +92,7 @@ Elrond choked. "What?!"
 
 "so that narrows it down to about…" He waved his wand about rapidly. "…Sixty-six."
 
-"GANDALF!" Elrond's ears were turning red. MAybe his hair was, too. "You only get one chance at guessing, though," he added with a wry smile.
+"GANDALF!" Elrond's ears were turning red. Maybe his hair was, too. "You only get one chance at guessing, though," he added with a wry smile.
 
 "Let's go through that list. Which one fits an Elf-king? It must be… yes…" Gandalf got up and whispered: "Altruism."
 
