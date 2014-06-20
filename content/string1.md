@@ -1,4 +1,20 @@
-> It all began with the forking of the great pings...
+> It all began with the forging of the great rings of protection...
+
+> The third ring for the user scripts, written on the fly.
+
+> The second for superusers, to let them `sudo chown`.
+
+> The first for system calls, in the CLI.
+
+> The zeroth for the kernel, where the hardware's shown.
+
+> In the land of MULTICS, where the hackers lie,
+
+> One ring to rule them all, one ring to find them.
+
+> One ring to bring them all, and in the darkness bind them.
+
+> In the land of MULTICS, where the hackers lie.
 
 Gandalf was trapped. Surrounded by malicious shell scripts, his only hope lay in `/rivendell`, which only granted access to the user group `Elves`.
 
