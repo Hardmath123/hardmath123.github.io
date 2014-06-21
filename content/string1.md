@@ -1,4 +1,4 @@
-> It all began with the forging of the great rings of protection...
+> It all began with the forging of the great rings of protection…
 
 > The third ring for the user scripts, written on the fly.
 

@@ -145,8 +145,6 @@ h4 {
 }
 
 .centered, #postlist {
-  -margin-left: 10px;
-  -margin-right: 10px;
   padding: 30px;
   width: 100%;
   max-width: 30em;
@@ -193,9 +191,9 @@ strong a {
 }
 
 * {
-  box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 
 textarea,
