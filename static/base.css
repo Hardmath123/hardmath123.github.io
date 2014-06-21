@@ -227,6 +227,7 @@ input[type=text]:focus {
 
 blockquote {
   word-wrap:break-word;
+  font-style: italic;
   -webkit-hyphens:auto;
   -moz-hyphens:auto;
   hyphens:auto;
