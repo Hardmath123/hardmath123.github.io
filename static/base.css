@@ -172,7 +172,6 @@ h4 {
   margin-right: auto;
   font-size: 14px;
   color: gray;
-  word-wrap: break-word;
 }
 
 #whoami h2 {
@@ -224,9 +223,9 @@ input[type=text]:focus {
 }
 
 blockquote {
-  word-wrap:break-word;
   font-style: italic;
-  -webkit-hyphens:auto;
-  -moz-hyphens:auto;
-  hyphens:auto;
+}
+
+blockquote p {
+    text-indent:0px;
 }
