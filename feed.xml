@@ -5,9 +5,17 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 20 Jun 2014 18:54:25 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 01 Jul 2014 21:25:23 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Jazz is Open Source]]></title>
+            <description><![CDATA[Why jazz embodies the hacker spirit.]]></description>
+            <link>http://hardmath123.github.io/jazz.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/jazz.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Tue, 01 Jul 2014 07:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Lord of the Strings]]></title>
             <description><![CDATA[String Theory for hackers.]]></description>

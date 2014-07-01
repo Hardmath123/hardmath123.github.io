@@ -68,6 +68,14 @@
             "file": "string1.md",
             "date": "6/14/14",
             "markdown": true
+        },
+        {
+            "title": "Jazz is Open Source",
+            "author": "Hardmath123",
+            "description": "Why jazz embodies the hacker spirit.",
+            "file": "jazz.md",
+            "date": "7/1/14",
+            "markdown": true
         }
     ]
 }
