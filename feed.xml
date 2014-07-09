@@ -5,12 +5,39 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 04 Jul 2014 21:26:13 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 09 Jul 2014 14:14:13 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
             <title><![CDATA[Jazz is Open Source]]></title>
-            <description><![CDATA[Why jazz embodies the hacker spirit.]]></description>
+            <description><![CDATA[Why jazz embodies the hacker spirit.
+
+People who sound like they're in charge of things—such as the *Associated Board of the Royal Schools of Music*—agree that the role of the classical performer is merely to present the music written by the composer. And present it in the exact form that the composer wrote.
+
+> *Good* performers, it should be said, do not resent this. After all, they are seeking to turn into real sounds the music which the composer had in his imagination; the more they can discover what exactly he had in mind, the more they are helped.
+
+> -- Eric Taylor, *The AB [Associated Board] Guide to Music Theory*
+
+Perhaps this is a way to honor the genius of great composers of the past. But nevertheless, classical performers, therefore, are just that. Performers.
+
+Jazz, on the other hand is different. Jazz is fluid. A jazz track is far more about the performer than the piece played, so no two performances of *Autumn Leaves* will sound the same. Or even close to each other. This is because a jazz song defines the minimum you need for musicians to play together: a **theme** and the **changes**. The theme is a single melody line that everyone relates to the song. The changes are the chords that go with the melody. Jazz musicians take turns improvising while the rest play those chords to guide the improvisation and stay together.
+
+Take jazz notation, for instance. Jazz musicians get their theme and changes from so-called 'fake books' (allegedly because fake books let them 'fake' it so it sounds like they know the song). Fake books are also called real books, because logic.
+
+Anyhow, a fake book is usually a stack of photocopies of hand-written music of questionable origins. The changes are scrawled on top. While classical musicians write theses on what notes Bach would approve of in a trill, jazz musicians barely mark an accent. This is what gives a jazz musician freedom: you could play the same song slowly, or fast, or with a Bossa Nova, or with a walking bass; or you could play with three beats in a measure (like a Waltz) or five (which is [rather rare in classical music](https://en.wikipedia.org/wiki/Quintuple_meter)), or nine. You could phrase notes together, or play them individually. You could swing notes, or play them straight. Each variation on each note is what gives a certain performance its character. Jazz is a hackable music.
+
+But it's not just hackable, it's open-source. Jazz musicians learn from other jazz musicians by listening. It's not a conscious effort—as you hear music, your brain registers interesting bits. It could be a sequence of notes, a chord, even a rhythmic structure. But if you like it, you'll try to imitate it when you play, and soon it's incorporated into your music. Jazz works because jazz musicians listen to each other and contribute to the growth and evolution of jazz as a genre.
+
+Now, the beauty of the system is that such new musical ideas aren't created intentionally as paintings are painted. They're accidents. Jazz musicians experiment as they improvise. Some experiments don't work, but most of them do, because jazz inherently allows for experimentation. The experiments that work are new music.
+
+This is similar, in a way, to how design evolves. There were times when a webpage which used rounded corners and gradients and shocking animations was cool, because that was stunning new technology. At some point, Apple introduced skeuomorphic designs inspired by real-world material. Now software is moving towards flat design, where bold colors and sans-serif fonts prevail. This evolution is fueled by what designers get inspired by and what people like. Jazz evolves the same way. Music is directed towards trends, entirely based off what people enjoy listening to.
+
+You may have noticed where I'm going with this. Jazz evolves through random mutations, the less musical of which are pruned out. Musicians mix strains of jazz together to produce new music which may survive better or may not work out. It's natural selection.
+
+Jazz evolves, just like creatures do.
+
+And that points to a key idea: when people can directly influence a system, it evolves very rapidly. That's why the open-source software world evolves so rapidly: the open-source world is built by the people who live in it. That, I think, is one of the key elements of the hacker culture.
+]]></description>
             <link>http://hardmath123.github.io/jazz.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/jazz.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
@@ -18,7 +45,124 @@
         </item>
         <item>
             <title><![CDATA[Lord of the Strings]]></title>
-            <description><![CDATA[String Theory for hackers.]]></description>
+            <description><![CDATA[String Theory for hackers.
+
+> It all began with the forging of the great rings of protection…
+
+> The third ring for the user scripts, written on the fly.
+
+> The second for superusers, to let them `sudo chown`.
+
+> The first for system calls, in the CLI.
+
+> The zeroth for the kernel, where the hardware's shown.
+
+> In the land of MULTICS, where the hackers lie,
+
+> One ring to rule them all, one ring to find them.
+
+> One ring to bring them all, and in the darkness bind them.
+
+> In the land of MULTICS, where the hackers lie.
+
+Gandalf was trapped. Surrounded by malicious shell scripts, his only hope lay in `/rivendell`, which only granted access to the user group `Elves`.
+
+He cd'd himself into `/rivendell` moments before a violent fork bomb exploded.
+
+"Well, Elrond, it appears we have some visitors," he said, putting down his staff for a moment.
+
+"Ah, Gandalf, a welcome sight in our time of need." Elrond appeared. He was perturbed—things must really be bad.
+
+"As are you, my friend. The recent attacks are troubling. Not many dare attack a Sysadmin."
+
+"Yes, indeed, they worry me, too," sighed Elrond, "the Dwarves sent word that their bitcoin mines in `/moria` were raided for valuable nonces."
+
+"`/moria`? Don't they log all commands run there, ever since the Trolls of 1402775481?"
+
+"Yes, Gandalf, I believe `/moria/log` contains information about everyone that tries to access `/moria`. I wonder…"
+
+"Way ahead of you." `cat /moria/log`, chanted Gandalf. His staff started spewing hundreds of lines of information. "Argh, there's too much data! We'll never analyze it all manually." He flushed the smoke-words in a puff of `^C`.
+
+"Just got word from the Dwarves—they said they flagged suspicious log messages with the word `suspicious` at the end."
+
+"Good, so we don't have to filter it by hand. We can just `grep`."
+
+"Grep? Is that another of those black spells you found in `/mordor`?"
+
+"No, Elrond, `grep` is the purest of spells. Grep searches files." `grep suspicious /moria/log`, he shouted, and the staff started listing all log messages containing 'suspicious'.
+
+```
+3:12:12 legolas 'just visiting' suspicious
+3:12:15 samwise 'lost my pony!' suspicious
+3:12:18 saruman 'mwahahahaha!!' suspicious
+3:13:53 gandalf 'meet a friend' suspicious
+3:15:30 baggins 'where is sam?' suspicious
+3:16:32 smeagol 'lost, we are!' suspicious
+4:43:33 aragorn 'meeting gimli' suspicious
+...
+```
+"Aha! 3:12:15—saruman's involved." Gandalf winked.
+
+"Gandalf, this is still far too much output. The Dwarves think everyone who isn't a Dwarf is suspicious!"
+
+"Ah, but you haven't seen the power of `grep` yet. What else do we know about the intruders' log messages?" Gandalf looked excited. Elrond did not approve.
+
+"Well, let's assume they all said `mwahahahaha`"
+
+"How many ha's were there, again?"
+
+"It doesn't matter. We can `grep` by regexes, too." Gandalf picked up his infamous pipe, and smoked the first grep's output into a new charm: `grep suspicious /moria/log | grep -e "mwa\(ha\)*"`.
+
+"The Kleene star operator `*` we used searches any number of the group before it."
+
+"And those backslashes?"
+
+"Escaping. Parentheses are special words in spell charms, you need to use backslashes to prevent them from accidentally burning a Hobbit-subdirectory or something."
+
+```
+3:12:18 saruman 'mwahahahaha!!' suspicious
+3:12:18 azogorc 'mwahahaha....' suspicious
+3:12:18 urukhai 'mwahahahahaha' suspicious
+```
+
+"Gandalf, I've got to hand it to you, you are the greatest—"
+
+"—no time for that," interrupted Gandalf, "we've got to stop them before they get to Rivendell!"
+
+"They'll never guess the password. We're safe for a bit."
+
+"With all due respect, Elrond, it's trivial to guess it."
+
+Elrond choked. "What?!"
+
+"Shush. Knowing you, it's probably not Elvish—you're too clever for that. It's probably English."
+
+"And knowing your memory, probably not more than a word." He got up and started pacing.
+
+(`cat /usr/share/dict/words`, he chanted under his breath.)
+
+"Gandalf, I swear upon sword, this password was forged by the high elves of—"
+
+"—and between six and eight characters, I would guess…"
+
+(`grep "^\w\{6,8\}$"`, he chanted. "This one's tricky. `^` means start of the word, `\w` means an alphabet, and `{6,8}$` mean 6-8 of those until the end.")
+
+"Now we can be a bit clever. Elvish uses the `ui` sound a lot, I bet that's in there. Can't teach an old orc new tricks."
+
+(`grep ui`, he chanted)
+
+"Oh, and you've always been partial to vowels before words (your kids are Arwen, Aragorn, Elladan and Elrohir)"
+
+(`grep "^\(a\|e\)"`, he chanted. "Start-of-word and then a or e. The `|` means or.")
+
+"so that narrows it down to about…" He waved his wand about rapidly. "…Sixty-six."
+
+"GANDALF!" Elrond's ears were turning red. Maybe his hair was, too. "You only get one chance at guessing, though," he added with a wry smile.
+
+"Let's go through that list. Which one fits an Elf-king? It must be… yes…" Gandalf got up and whispered: "Altruism."
+
+To be continued.
+]]></description>
             <link>http://hardmath123.github.io/string1.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/string1.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
@@ -26,7 +170,24 @@
         </item>
         <item>
             <title><![CDATA[Well, well, well, we meet again.]]></title>
-            <description><![CDATA[A new beginning?]]></description>
+            <description><![CDATA[A new beginning?
+
+I'm back.
+
+The new Comfortably Numbered runs on a new state-of-the art blogging platform, developed (of course) by yours truly: shock. Shock brings together a lot of powerful technologies written by smarter people, and bundles them up into a command line tool to publish posts.
+
+Shock generates an RSS feed, a homepage, a 404 page, and content pages, all built on templates and CSS that *you* write yourself. Then it lumps those in a directory that you can serve on anything clever enough to serve static filesystems: Dropbox, Google Drive, Github Pages, Amazon S3, even your home computer.
+
+Shock uses Mustache's non-logical templating system (non-logical, in this context, is a compliment). It was built on a rather simple idea: **if you're using a node-based command-line platform to create a blog, chances are you want control over every single aspect of presentation**. In fact, I consider that one of the primary symptoms of being a hacker.
+
+Hackers want control over everything that they use. It's why we prefer extensible text editors and browser add-ons, and why we spend hours tinkering with spacing equations in TeX. It's also part of the reason I migrated away from Google; App Engine is a very closed non-hacker-friendly environment. The hacker-control symptoms are what guide us subconsciously in choosing and designing software. We prefer open-source projects and scriptable systems because they conform to the pattern of software that gives control to the user.
+
+The opposite is true for most nonhacker packages. Word and PowerPoint are 'merciful god' software: they give you features (for example, those dreadful PowerPoint animations) which you may or may not use, but they retain complete control over what can be done. Compare that to a hacker-friendly document generation technology like TeX or CSS. Similarly, nonhacker image editors or other similar applications try to hide the filesystem from you. The most recent project you were working on magically appears, along with a list of other recent projects. This is unaccaptable to a hacker.
+
+I feel the easiest way to convey this message is: "don't be afraid to expose your software's guts". Often, the best software is the kind that gives you as many handles and hooks as possible. Make your command-line tools UNIX filters wherever possible: read from `stdin` and write to `stdout`. Use a universally usable format like JSON for storing data. Most importantly, *never* explicitly disallow a user from doing anything.
+
+Preventing stupid things also prevents clever things.
+]]></description>
             <link>http://hardmath123.github.io/helloagain.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/helloagain.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
@@ -34,7 +195,43 @@
         </item>
         <item>
             <title><![CDATA[Why Math is a Sport]]></title>
-            <description><![CDATA[And why we should worry.]]></description>
+            <description><![CDATA[And why we should worry.
+
+<p class="dropcap">I am not sure whether math has become more cool or less cool over the past few years; and I'm <em>definitely</em> not sure which one I prefer. Math used to be something people did because they loved math. Now&hellip; not so much.
+
+<p>The Rubik's started off as a cool puzzling toy that kids would fiddle with. The process of playing with this mechanism, finding patterns, and getting elated when you solve it was invaluable to your development as a person. But then people realized you could get better at it. Fast forward a few years, and people can solve them in 10 seconds flat. There are algorithms that people memorize, they oil their cubes regularly, and they even do hand excercises to warm up. It's crazy. How is being the #1 Cube-solver in the world going to help you in life?
+
+<p>The same thing's happening to math. A small set of people is emerging who are stretching competition math to its limit, and that's going to be a problem very soon.
+
+<h3>Football for nerds.</h3>
+
+<p>People do competition math for the sake of doing competition math. Which is bad. As a high schooler into competition math, I routinely hear conversations like <q>You got 98%? Sheesh, you're slipping&hellip;</q> and <q>&hellip;so I forgot to divide by two. I'm so dumb, I should move down a grade.</q> I suppose that's as close as I will ever get to trash talk, but it's still rather depressing.
+
+<p>But being good at math isn't about acing tests or remembering to divide by two. Math is about taking ideas and exploring; and competition math has slowly shadowed that out. Now being good at math is like being good at solving problems.
+
+<p>To be good at competition math, you train all year long. You know the tricks that you should know&mdash;there are entire companies focused on collecting problem solving tips and tricks. You slowly learn heaps of techniques and formulae and theorems for all sorts of situations, and eventually you build up a mental index of all the major patterns of problems. You learn which situations merit Stewart's Theorem and when it is fruitful to try to apply the Pigeonhole Principle (answer: if the problem contains the phrase <q>Prove that there exists&hellip;</q>).
+
+<p>There are important seasons when the big tests come around: the AMC, AIME, and USAMO. You know the scoring systems for all these perfectly, and you think a lot about what your optimal strategy should be: how many questions you need to get right to make it to the next level, how many you should attempt, and how long you should spend on each problem. You need to do practice tests each day to keep yourself in shape. During the real test, you're nervous. You obsess over your answers, making sure you haven't made a calculation mistake anywhere. You spend far too long filling in the bubbles on the answer sheet. And when the test is over, the serious folk congregate in a circle and compare answers. If you've made a silly mistake somewhere, people look at you disapprovingly.
+
+<p>If you replace math with football and test with game, this describes a high-school athlete's life rather well. Weren't geeks supposed to hate sports?
+
+<h3>What's wrong.</h3>
+
+<p>I mean, there's even the term 'mathlete'. Mathletes are their own unique culture, who take pride in doing math. You see them doing masochistic things like <q>pi recitation competitions</q>. But that's not what math is! Math is about taking an idea and thinking about it and deducing something surprising from it. Math is about spending days thinking about a problem, not just 30 minutes.
+
+<p>My favorite math competition is the USAMTS (USA Math Talent Search). It offers you five problems and 30 days to think about them and submit proofs for your solutions. USAMTS teaches you to think about problems persistently, to try fresh approaches, to research on a subject, and finally explain and justify your answer formally. Compare that to the AMC, which is 75 minutes for 25 multiple-choice problems, the first 18 of which are elementary and the last 7 of which are nontrivial. The AMC doesn't test your math skills, it tests your test-taking skills. And <em>that</em> is definitely bad.
+
+<p>Which is not to say that people who do well on these tests are not good at math. Many of them certainly are brilliant kids, and it is fascinating to watch them approach a problem. But I would imagine a substantial portion of AMC high-scorers consist of children who aren't sure they like math at all. They do it as a sport, perhaps because their parents want them to, or perhaps because all their friends are doing it. And the ulterior motivation often isn't even the competition itself. It's college. It's the fact that 'USAMO qualifier' looks stellar on an application that drives a large chunk of math students.
+
+<h3>Why it's wrong.</h3>
+
+<p>In itself, this isn't horrible. We've invented a game which people compete in. Why do I care?
+
+<p>Because it's a disaster for anyone who can't bring themselves to be part of the game. For the math lovers who look at their mathlete friends 3 grades ahead and get discouraged. Your math class becomes like a badge, and mathletes try to take the hardest class they can possibly survive. And that hurts the rest of us, because the line between being good at math and being good at competition math fades, and even if you love math you aren't one of them.
+
+<p>Competition math is a wonderful thing if you do it for the right reasons. If you do it because you love math, patterns, and puzzles, then it's perfect for you. It gives you an opportunity to see where you stand in the world. You get dozens of beautiful problems every day. You meet smart people. It is probably one of the most fitting hobbies you could have.
+
+<p>If you do it because it will help your college application, because your friends are doing it, or for any reason that isn't for the love of math, then rethink it. It becomes an obsession. You worry about your scores far more than is reasonable. It bothers you, and it puts you off math for the sake of math. And that's tragic.]]></description>
             <link>http://hardmath123.github.io/math.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/math.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
@@ -42,7 +239,89 @@
         </item>
         <item>
             <title><![CDATA[How Newbies Codebreak]]></title>
-            <description><![CDATA[A story of codebreaking using Python, Google, and common sense.]]></description>
+            <description><![CDATA[A story of codebreaking using Python, Google, and common sense.
+
+<div style="font-style:italic; text-align:center; padding:20px;">Special thanks to Tim, Nathan, and the Water Bottle Stealer (you know who you are). I probably wouldn't have gotten close to a solution without you guys.</div>
+
+<p class="dropcap">So I'm overdue for a post. Not my fault: school's keeping me busy. In fact, it's keeping me very busy. On Friday night I had to crack a cipher for a competition. It's not a very exciting feat, but it was the most fun I have had in ages, and it offers a nice glance into how people think about problems.
+
+<p>If you liked this, you'll love Simon Singh's <em>The Code Book</em>, which is a rather nice introduction to cryptography that has a whole bunch of awesome true stories about historical top-secret codebreaking feats. This sentence was totally not sponsored by Simon.
+
+<p>Our ciphertext looked like this:
+
+
+<pre style="white-space: pre-wrap;">"25112311'15 525422 24 142112'22 222524127 52123715: 412 11121122113241 15315221113 2225422 5415 621212141114 2412 222511 152417221111122225 11112222233 41214 4122122251123 2225422 5415 621212141114 2412 222511 12241211221111122225 11112222233. 24'13 2224231114 216 22252415 142415121515242112 216 14162422426241513 41214 1521124426241513; 511 2624811 2412 222511 2251112223-624231522 11112222233; 511 12111114 412 11121122113241 15315221113 2225422 25415 14111321123413 415 242215 2121411231624121224121815 41214 412 112225241426 1211411." -132412541126 1321212311</pre>
+
+<p>Ugh. We were told that it's a substitution cipher, with A-Z represented by 1-26 in some order. The <q>standard</q> way to solve these is frequency analysis: we look at the percentage of each coded letter. For example, if 12 shows up 8% of the time, it's probably a more common letter like <em>e</em> or <em>a</em> as opposed to <em>x</em>. Cryptographers have tables of letter frequencies in various languages, so this is easy stuff.
+
+<p>Before you read on, take a moment to see if you can get anywhere with it. Make some intelligent guesses and see if you can make any progress.
+
+<p>(Back so quick? Go back give it a real try!)
+
+<p>Did you see the problem? Our cipher is much tougher than frequency analysis, because we don't have any delimiters between encrypted letters. So <code>112</code> could be any of <code>1-1-2, 11-2, 1-12</code>. That's a <em>big</em> problem: it makes words ambiguous. Even the intended recipient of the encrypted message doesn't know the way the word is broken up for sure, he needs some trial and error (but with the key and a reasonable English vocabulary, it's relatively easy).
+
+<p><em>(Mathematical aside: If you have a string of length ($l$), how many ways can you break it up into a series 2 or 1 digit numbers? The answer is, believe it or not, the l<sup>th</sup> Fibonacci number. The proof is simple: given a string, we can chomp off the first digit and break up the rest in ($f(l-1)$) ways, or chomp off the first 2 digits and break up the rest in ($f(l-2)$) ways. So the total is ($f(l) = f(l-1) + f(l-2)$), which is Fibonacci.)</em>
+
+<p>Anyway, Tim ended up writing a nice little Python program that breaks up words into a list of numbers (it turns out we can eliminate quite a few, because the two-digit numbers have to be 26 or lower). That was exciting, though the huge outputs were slightly disturbing. So it was possible to brute-force it: we generate all possible breaking-ups, then try all possible keys, and then use a large list of words to see if things make sense. (For those of you that don't know, on UNIX systems <code>/usr/share/dict/words</code> contains a very handy list of English words you can grep in).
+
+<p>It turns out, the number of possibilities to try is big. None of us owned a supercomputer, and we didn't have a couple billion years to spare to spare. But we did have some hints. We had a bunch of words that ended with apostrophes: <code>25112311'15</code>, <code>142112'22</code>, and <code>24'13</code>. We started with some initial guessing. The first one looked too long to be a contraction, so it could be a possessive. So perhaps 15 is <em>s</em>. 22 could be <em>t</em>, because of contractions like <q>don't</q> or <q>can't</q>. The last one has a bunch of choices. However, we saw <em>24</em> exist on its own at the beginning of the first sentence. This is helpful because it could be a word like <q>I</q> which is both a letter and a word. (We knew none of this for sure: 24 could very well have meant <q>it</q> or <q>is</q>). So we conjectured that 13 is <em>m</em>, to form <q>I'm</q>. We had other clues, too, but nothing too definitive. The guesses above seemed mutually consistent, but we didn't have any solid proof. For example, looking at words like <code>412</code> and <code>413</code>, we guessed 4 was <em>a</em>, because a lot of short words begin with <q>a</q>.
+
+<p>Then we had a realization. This was obviously a quote from someone (look at the structure of the punctuation), and that someone was probably famous. So the name gives a lot of hints. In particular, both the first and last name start with <q>13</q>. Hmm. My first instinct was <q>Marilyn Monroe</q>, so Tim wrote another program to deduce the possible meanings of letters if I gave a guess for the word. Marilyn fit beautifully, but Monroe didn't (the <q>n</q> in Marilyn and the <q>n</q> in Monroe corresponded to different numbers). Boo.
+
+<p>We tried Mickey Mantle, though I swear I only knew about him from <em>Seinfeld</em>. That didn't work either. Boo again. So I gave up all hope and Googled <q>celebreties whose first and last names start with m</q>. And that led me to <a href="http://uk.answers.yahoo.com/question/index?qid=20100901003736AASluOp">a wonderful Yahoo answer</a> that actually listed out a dozen famous people with initials M. M. This is so impressive, that I reproduce the list below:
+
+<ol>
+	<li>Michael (Mike) Myers, comedian, actor
+	<li>Maureen McCormick, actress 
+	<li>Matthew Maconahay, actor 
+	<li>Max McGee, former Green Bay Packer (1960's) later, Packer's radio announcer 
+	<li>Marlee Matlin, actress 
+	<li>Mark Mcguire, baseball star 
+	<li>Mark Martin, Nascar driver 
+	<li>Marylin McCoo, singer 
+	<li>Marilyn Manson, singer 
+	<li>Mickey Mantle, HOF baseball player 
+	<li>Matthew Modine, actor ("Full Metal Jacket") 
+	<li>Melissa Manchester, singer 
+	<li>Michael Moore, film maker 
+	<li>Martina McBride, country singer 
+	<li>Marsha Mason, actress, "The Good-Bye Girl) 
+	<li>Marilyn Monroe, actress 
+	<li>Mary McGregor, singer, "Torn Between Tow Lovers"
+</ol>
+
+<p>We manually tried the first names; the clear winner was <q>Michael</q>. Very exciting. The last name is now rather obvious: <q>Moore</q> (13 21 21 23 11: the double 21 makes it strikingly clear). This couldn't be an accident.
+
+<p>So we got to substituting in the newfound letters into the rest of the message. Not too easy, because of all the ambiguity, but with some educated guesses we made enough progress to be able to read bits and pieces, most notably <q>Here's</q> at the very beginning.
+
+<p>The way forward was pretty clear now, we searched some quote databases for Michael Moore quotes.
+
+<p>The first couple were hopeful but clearly wrong:
+
+<blockquote>Here's a way to stop suicide bombings &mdash; give the Palestinians a bunch of missile-firing Apache helicopters and let them and the Israelis go at each other head to head. Four billion dollars a year to Israel &mdash; four billion dollars a year to the Palestinians &mdash; they can just blow each other up and leave the rest of us the hell alone.</blockquote>
+
+<blockquote>Here's what I do support: I support them coming home.</blockquote>
+
+<p>It turns out Moore's a rather prolific political commentator and filmmaker, so that couldn't possibly be <em>helping</em> narrow the search space. No worries. At that point I gave in and made some wild assumptions (like in a Sudoku, when you give up on logic and take some leaps of faith). That gave me <q>Here's what I can't think&hellip;</q>
+
+<p>(At this point I feel it is worth mentioning that Tim somehow generated the following. I think it's fair to say Humans: 1, Python: 0.)
+
+<blockquote>ehaaeyaa'ah hehaee i aaeaae'ee eeeheaaek heaeykah: ac aaaeaaeeaayeaa ahyaheeaaay eeehaee hal teaeaeaaaaaa eaae eeehaa aheaakeeaaaaaeeeeh aaaaeeeeeyy acs aaeeaeeehaaey eeehaee hal teaeaeaaaaaa eaae eeehaa aeeaaeaaeeaaaaaeeeeh aaaaeeeeeyy. i'm sines it soil aaeaahaeahaheaeaae it aaateaeeaeteaahay acs aheaaeaaeteaahay; he line eaae eeehaa eehaaaeeey-teaeyahee aaaaeeeeeyy; he aeaaaaaa ac aaaeaaeeaayeaa ahyaheeaaay eeehaee ehaah aaaaayeaaeyaay al eaeeah eaeaaaaeyateaaeaeeaaeanah acs ac aaeeeheaaaet aeaaaaa." -ayeaaehaaaet ayeaeaeyaa
+</blockquote>
+
+<p>Anyway, with a few more guesses, we found it:
+
+<blockquote>Here's what I don't think works: An economic system that was founded in the 16th century and another that was founded in the 19th century. I'm tired of this discussion of capitalism and socialism; we live in the 21st century; we need an economic system that has democracy as its underpinnings and an ethical code.</blockquote>
+
+<p>So that was that. Two hours, a root beer lollipop, and four nerds was all it took.
+
+<p>(In retrospect, we could have gotten some clues from frequency analysis. There are no 9's, so 19 and 29 are probably x and z. And there is a scary number of places where there are a bunch of 1's in a row. The only letter to repeat itself so much is e, and indeed 11 corresponds to e.)
+
+<p>One last thing: Tim's final answer was:
+
+<blockquote>here's hhat i .oc't thick horks: ac ecete.ic s.stem that has .oooae. ic the si.teecth eettr. ac. acother that has .oooae. ic the ciceteecth eettr.. i'm tire. o. this .iscssioc o. ..italism ac. socaalism; he li.e ic the thect.-.irst eettr.; he cee. ac ecete.ic s.stem that has .emoc.am as its ooaer.iccic.s ac. ac ethical ceae." -michael moore</blockquote>
+
+<p>which is rather impressive, coming from a computer program. If anyone wants eternal fame, go ahead and take up the challenge to write a robust, generic cipher-like-this solver. We can use it next year!]]></description>
             <link>http://hardmath123.github.io/crypto.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/crypto.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
@@ -50,7 +329,114 @@
         </item>
         <item>
             <title><![CDATA[Blown to Bitcoins]]></title>
-            <description><![CDATA[Bitcoin for Liberal Arts majors.]]></description>
+            <description><![CDATA[Bitcoin for Liberal Arts majors.
+
+<!--
+Blown to Bitcoins
+Bitcoin for Liberal Arts Majors
+-->
+
+<p class="dropcap">Bitcoin is a hard-core nerd thing. It was built by nerds, and was used by nerds&mdash;until recently. <em>Normal</em> people have finally caught on to this powerful new alternate currency (it became rather popular in black markets when they realized purchases were untracable). And now a caf&eacute; a few blocks from my home accepts bitcoins.
+
+<p>So how do bitcoins work? How can something as fragile as money run completely in the cloud? And why should the public trust us nerds, anyway? Well, here's a short Bitcoin 101: Bitcoin for Liberal Arts Majors.
+
+<p>The article is in three parts: how bitcoin transactions work, why it is secure, and how bitcoins come to be in the first place.
+
+<h3>The Whiteboard</h3>
+
+<p>Let's assume that we have already, somehow, <q>created</q> some amount of bitcoins, and distributed them among some people. We'll formally establish how bitcoins come into being later. We can model the Bitcoin system as a large whiteboard that anyone can see or write on (but not erase). Suppose Alice wants to send Bob some bitcoins. She just writes an IOU on the whiteboard:
+
+<blockquote style="font-family:cursive;">I, Alice, agree to send Bob a sum of 2 bitcoins.</blockquote>
+
+<p>Since IOU is kind of childish, we nerds call it a <em>transaction</em>. Now if Bob claims to have 2 bitcoins to pay Charlie, Charlie (or anyone else, really) can take a look at the whiteboard and trace all of Bob's transactions.
+
+<p>That's really it&mdash;Bitcoin is a large public whiteboard listing transactions. Nobody keeps track of accounts or balances, because those can be recalculated if needed. In reality, it's a bit more complicated. People all over the world run a <em>Bitcoin Daemon</em>, which is connected to other Bitcoin Daemons over the internet. Each transaction is sent to a daemon, which then forwards it to others. The end result is that the whiteboard isn't centralized, it's distributed across a network. It's more like Alice writes a postcard to the nearest daemon, and the daemon forwards photocopies to its neighbors.
+
+<p>Compare this to a traditional paper currency system, where you have central banks. Each transaction goes through a bank: the bank deducts money from the sender's account and adds money to the recipient's account, possibly deducting some as a fee. That puts the bank above other people. They can freeze accounts, track people, or delay transactions for as long as they want. Bitcoin bypasses this bank and makes transactions directly between people: <em>peer-to-peer</em>.
+
+<h3>The dotted line.</h3>
+
+<p>If you've been paying attention, you may have noticed that since anyone can write to the board, anyone can put up a transaction from Alice to himself. Nobody knows who wrote that message. So Bob can easily write fake transactions and get all of Alice's bitcoins. Which is a problem.
+
+<p>The solution is called <strong>public key cryptography</strong>, a remarkably snazzy trick. It relies on using certain clever mathematical properties of really big numbers to encrypt data. This math is called <strong>RSA</strong>, which are the initials of all three inventors (Rivest, Shamir, and Adleman). We accept RSA as being the most secure option available, but that's only because it hasn't been hacked yet. Conspiracy theorists do talk about how the people at the NSA already have broken it.
+
+<p>To get started, Alice picks a huge number (in practice, this is several hundred digits worth of huge). She does some math with that number to get two new numbers: her <em>public key</em> and <em>private key</em>. As expected, she guards her private key with her life, but she is free to give out her public key. Both of these look a lot like a cat started dancing on your keyboard: long sequences of random-looking numbers and letters.
+
+<p>Alice can now <em>sign</em> a message (piece of text) by applying some mathematical transformations that depend on knowing her private key. Since Alice keeps her private key a secret, only she can create a signed message. A signed message can then be <em>verified</em> by applying a different set of transformations which depend on the public key. If the message was signed with the correct, matching private key, then the verifying transformations will give a meaningful result.
+
+<p>Let's say Alice wants to send Bob a bitcoin. Now all she has to do is create a public statement which says:
+
+<blockquote style="font-family:cursive;">I, [Alice's public key] agree to send [Bob's public key] a sum of 2 bitcoins.</blockquote>
+
+<p>She now signs this message and puts it up on the whiteboard. Charlie can verify that the transaction is legitimately from Alice by checking it with Alice's public key.
+
+<p>Notice how this makes Alice and Bob anonymous. Neither Alice nor Bob are mentioned, just their public keys. This is why Bitcoin doesn't need an account or email address or registration. If she wanted to, Alice could make a new public key for each transaction. In fact, Bitcoin encourages that.
+
+<h3>Where do bitcoins come from?</h3>
+
+<p>The short answer is that people get paid to run Bitcoin Daemons, because daemons take up a lot of power. One of the more profitable daemons duns in Reykjanesbaer, Iceland where the Arctic prevents the computers from physically <em>melting</em> because of the huge computations (they also have cheap geothermal power there).
+
+<p>The long answer is a lot cooler. To really understand how it all works, you need to know what a cryptographic hash function is.
+
+<h4>Hashes&mdash;There, but not back again</h4>
+
+<p>Paint is fun. You mix yellow and blue, and just like that you have green. Kindergarten stuff. But what if you were presented with a brand new color, and asked to name its constituents? You can't, without a lot of experimentation. So mixing paint is a one-way road: it's easy to go from constituents to mixture, but not the other way around.
+
+<p>In Computer Science, we have something very similar, called <strong>cryptographic hash functions</strong>. That's just a fancy word for some operation that takes a number, and spits out another number, but it is mathematically impossible to go the other way. This may be hard to believe, but one example is taking the sum of the digits of a number: it's easy to find the sum, but impossible to tell the original number given the sum of its digits. Some common hash functions are <code>md5</code>, <code>SHA</code>, and <code>RIPEM-D</code>.
+
+<p>We already have standards in place to convert text to a large number and a large number back to text using hexadecimal notation. So you can find a hash of any piece of text, or any data (even an image or a video!).
+
+<p>Hashes have two cool properties: they are unstable (so a small change in the input produces a wildly different hash) and they are fixed-length (so any input will generate a hash of the same size). Here are some hashes (pay attention to the difference between the second and third!):
+
+<table style="border-spacing: 20px;">
+	<tr><th style="text-align:left;">Input</th><th style="text-align:left;">SHA-256</th></tr>
+	<tr><td>banana</td><td style="font-family:monospace;">5a81483d96b0bc15ad19af7f5a662e14-b275729fbc05579b18513e7f550016b1</td></tr>
+	<tr><td>Hello, World!</td><td style="font-family:monospace;">d6d0e133111615497a62e9f84e061a49-d106e90d90b7bc975790a84c8588fe80</td></tr>
+	<tr><td>Hello, World </td><td style="font-family:monospace;">8663bab6d124806b9727f89bb4ab9db4-cbcc3862f6bbf22024dfa7212aa4ab7d</td></tr>
+</table>
+
+<h4>Blocks</h4>
+
+<p>Anyway, back to Bitcoin. The giant stack of transactions is broken up into a large number of sections called <strong>blocks</strong> that are chained together. A block contains the following important information:
+
+<ul>
+	<li>The version of the software being used
+	<li>A reference to the previous block
+	<li>All the transactions, in order
+	<li>The time
+	<li>The <strong>target</strong> at that time (this is a number that Bitcoin provides)
+	<li>A <strong>nonce</strong> (this is a number that has a very specific property)
+</ul>
+
+<p>A completed block has a <em>header</em>, which is a hash of all of these elements smushed together in order. A bitcoin daemon's job is to try to complete the current block by finding a <em>nonce</em> so that the header obtained from the completed hash is less than the <em>target</em> (remember, hashes are just numbers). This process is called <strong>mining bitcoins</strong>.
+
+<p>Since hashes are so unstable, it is pretty much impossible to work backwards from the target to get a nonce. Instead, you have to guess a nonce, and see if it works. Furthermore, a lot of transactions happen every second, so the same nonce will return different hashes over time. So you can't really eliminate a nonce either. It's just guessing again and again. More powerful computers clearly have an advantage, which is why people use supercomputers to mine bitcoins.
+
+<p>You can find the current target at <a href="http://blockchain.info/q/getdifficulty">BlockChain.info's API</a>. You may find <a href="http://blockchain.info/q/probability">the current probability of a nonce working</a> more interesting. At the time of writing, it is approximately the probability of rolling a die 24 times and getting a 6 every single time. The daemons automatically control the target so that on average, each block is solved in 10 minutes. As computers get more powerful and more people start competing in the bitcoin mining industry, we will be guessing many more hashes per second and so the target will slowly decrease, reducing the number of valid nonces.
+
+<p>When you find a nonce, you get the power to tack on a new transaction that doesn't have a sender, only a recipient. This new transaction adds bitcoins into the system by rewarding the recipient with bitcoins. When bitcoin was first launched, you got 50 bitcoins for solving a block. This number goes down so that it halves every four years&mdash;as of today, it is exactly 25 bitcoins, which would today trade in the market at over $18,000 (you can find the current trading value of bitcoin <a href="http://preev.com">here</a>). This means that eventually, the bitcoin economy will stabilize at around 21,000,000 bitcoins in circulation and the new bitcoins added into the system will be insignificant. The plan is to introduce a transaction fee to keep it going beyond that point.
+
+<h3>Recap!</h3>
+
+<p>You've come a long way. From being an oblivious newbie, you now know the internals of a rising cryptocurrency. You learned how bitcoin is a peer-to-peer system with no central authority, which stores transactions rather than accounts and balances. You learned how we use public key cryptography to verify transactions by digitally signing each message with a private key, and checking the message with the corresponding public key. Finally, you learned how bitcoin mining works, by using the instability of cryptographic hash functions to create a sort of computational lottery. Congratulations!
+
+<p>Now you can explore the insides of bitcoin some more by viewing real live data. Check out <a href="http://blockchain.info">blockchain.info</a>. This site provides real-time information on each block. For example, we can <a href="http://blockchain.info/block-index/123456">investigate block #123456</a>: it looks like the nonce was <code>3794651987</code>, which produced a hash of <span style="font-family:monospace;">0000 0000 0000 21a8 34fd 780d bd25 e43a b565 b4e5 7a1f 7df0 435a c88e f982 a737</span>. See all those leading zeros? That shows that the hash is a (relatively) small number (for example, 00029 is clearly less than 42001). Scrolling down, the top transaction says "Newly Generated Coins", and produced 50 bitcoins which went to public key <code>1H54JGkh9TE5myxdamSNvm7zeFHnRWrVes</code>, who solved it.
+
+<h4>Further reading</h4>
+
+<p>I hope I got you excited about Bitcoin. The best thing to do now is to dive right in. <a href="http://bitcoin.org/en/download">Download the "official" Bitcoin Wallet</a> and start using it! Or <a href="https://en.bitcoin.it/wiki/Clients">find another one</a> you may like. You can try sending <code>1HKKK9RX3ZxcJjMSHje1GWbjXyRyez8R36</code> some money. (Ok, that wasn't as subtle as it could have been, but&hellip;)
+
+<p>Finally, here are some links for you to keep on learning. See you soon!
+
+<ul>
+	<li><a href="http://www.youtube.com/watch?v=Um63OQz3bjo">Bitcoin's promotional YouTube video</a>
+	<li><a href="https://en.bitcoin.it/wiki/Introduction">Bitcoin's own Wiki has a great introduction.</a>
+	<li><a href="http://qz.com/154877/by-reading-this-page-you-are-mining-bitcoins/#/">Another great introduction from qz.com</a>
+	<li><a href="https://github.com/bitcoin/bitcoin">If you're into code, view their Github repository where the real Bitcoin software lives</a>
+	<li><a href="http://en.wikipedia.org/wiki/Bitcoin">Wikipedia: Intimidating introduction</a>
+	<li><a href="http://en.wikipedia.org/wiki/Public-key_cryptography">Wikipedia: Public-key cryptography</a>
+	<li><a href="http://en.wikipedia.org/wiki/Cryptographic_hash">Wikipedia: Cryptographic hash functions</a>
+</ul>]]></description>
             <link>http://hardmath123.github.io/bitcoin.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/bitcoin.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
@@ -58,7 +444,83 @@
         </item>
         <item>
             <title><![CDATA[Lampshades and Analytic Geometry]]></title>
-            <description><![CDATA[Exploring conic sections with lampshades, potatoes, and smoke simulations.]]></description>
+            <description><![CDATA[Exploring conic sections with lampshades, potatoes, and smoke simulations.
+
+<p class="dropcap">A couple of months ago, I was sitting at the dining table, and I caught myself staring at the lamp. And I had just finished reading about conics, so I immediately saw something awesome. Take a moment to think about it. Do you see it?
+
+<p><img src="http://i39.tinypic.com/ix8214.png" width=200 />
+
+<p>I saw that the pattern on the wall was very special. It belongs to a class of curves called <em>hyperbolas</em>. Let's see how that happens.
+
+<p>To start off, how does that lamp create a pattern on the wall in the first place? Well, one way to tackle this is to think about where the light is going. What parts does the lampshade actually shade, and where is there light? A clever trick here would be to get a smoke machine to create some smoke around the lamp. You can see where the the light is going in the smoke. It's fun, like a search beam (or the Batman sign).
+
+<p>Unfortunately, they don't sell dry ice to minors (partly because you can do really dangerous things with it, and partly because adults want to keep the fun stuff to themselves), so I did the next best thing: overkill. I created a model in Blender and simulated some smoke.
+
+<blockquote><em>Sidenote: You haven't had a steep learning curve until you've tried to do something trivial with Blender. All the important functions are hidden away in various keystrokes, and there are all sorts of pitfalls all over the place. It's an amazing technology made with absolutely no consideration for beginners.</em></blockquote>
+
+<p>Rants aside, here's my snazzy modern Blender lamp with a funky lampshade and hardwood stem. Pretty, eh? It's just a sliced up cone (called a <em>frustum</em>) with a really bright divinely ethereal halo placed inside. I put a screen behind it to catch the projection.
+
+<p><img src="http://i41.tinypic.com/2aiin83.png"/>
+
+<p>You cen even see our mystery curve! Now let's blow around some smoke (easier said than done; Blender's smoke simulation takes a lot of Googling to get right).
+
+<p><img src="http://i41.tinypic.com/16m37r6.png"/>
+
+<p>Hmm, that looks like a cone of light coming out the top&mdash;conics! The cone kind of makes sense if you think about it (if it doesn't, think about how a spotlight works). In fact, there are two cones; one shooting out the top and an upside-down one shooting out the bottom. Together, they make a sort of straight-lined hourglass shape.
+
+<p>We want to find the nature of that curve, so we want to do some analytic geometry. Let's say our double-cone hourglass of illumination is centered at the origin. What equation describes a cone? Well, a cone is like several circles of increasing (or decreasing) size stacked above each other (like a pile of tires of different radii). For convenience, we can say that each circle's radius is equal to it's height above the origin.
+
+<p>The equation of a circle is ($x^2 + y^2 = r^2$), and if ($r = z$), we have ($x^2 + y^2 = z^2$). If we plug that into a graphing application, we get:
+
+<p><img src="http://i43.tinypic.com/2dm7gc6.png"/>
+
+<p>Note that we're doing several simplifications here, most importantly the width of the cone. We could have picked a narrower cone by squishing or stretching our equation, but this one is easy to deal with.
+
+<p>Now the screen: that's just a vertical plane. We describe that with ($x=c$) for some constant ($c$) (let's pick 1 for simplicity).
+
+<p>And now we can solve for the intersection: just substiture in ($x=1$) into the first equation:
+\[
+1^2 + y^2 = z^2
+\]
+<p>Or, more canonically:
+\[
+z^2 - y^2 = 1
+\]
+<p>Wolfram|Alpha <a href="http://www.wolframalpha.com/input/?i=z%5E2-y%5E2+%3D+1">plots this</a> for us:
+
+<p><img src="http://www5a.wolframalpha.com/Calculate/MSP/MSP1051eaf620b99c3h3gb0000342fbd6bg84d3fc7?MSPStoreType=image/gif&s=37&w=200.&h=201.&cdf=RangeControl"/>
+
+<p>That looks perfect. This is indeed the equation of a hyperbola you find in math textbooks (except simplified). So <strong>Result 1: When a vertical plane slices a cone, the result is a <em>hyperbola</em>.</strong>
+
+<h3>Thus emboldened, we experiment</h3>
+<p>Now we get to ask the magic question: <q>what happens if&hellip;?</q>. In particular, what would have happened if I had decided to play with the lamp and knocked it over? When you tilt the lamp, is it still a hyperbola?
+
+<p>Turns out, only to a point. Let's see how. When we tilt a plane, we go from ($x=c$) to ($z = mx + c$). Here, ($m$) is the inclination or slope of the plane [insert your own inclined plane joke here], and ($c$) is how far it is from the origin (once more, we'll let this be 1 without loss of generality). When we substitute, we get:
+
+\[ x^2 + y^2 = (mx+c)^2 = (mx + 1)^2 = m^2x^2 + 2mx + 1 \]
+\[ y^2 + [(1-m^2)x^2 - 2mx] = 1 \]
+
+<p>Now, the quadratic ($x^2$) term can either be positive, negative, or 0. If it's negative, then ($m > 1$). Of course, we get a hyperbola when the ($x^2$) term is negative (just like above). When ($ m > 1 $), the slope is steeper, or closer to vertical.
+
+<p>If it's positive, then ($m < 1$). We get an <strong>ellipse</strong> when the ($x^2$) term is positive. When ($ m < 1 $), the slope is flatter, or closer to horizontal. Notice how this plane will chop through just one of the cones, but all the way through. So, intuitively, you should get a stretched circle.
+
+<p>Ellipses show up all over the place. Planets orbit stars in ellipses (though this truth cost some scientists their reputation, and in some cases, lives).
+
+<p>Finally, that term can be 0 if ($m=1$). That means the plane is parallel to the side of the cone. Think about how the intersection would look. It only intersects one of the cones, but the intersection doesn't chop all the way through like an ellipse. Removing that term gives us a quadratic equation, and the resulting curve is called a <strong>parabola</strong>. Parabolas show up when you're throwing things. Baseballs follow parabolic arcs in the air when you throw them.
+
+<p>There three curves are called the <em>conic sections</em>, and they are plenty of fun to study.
+
+<h3>Want more?</h3>
+<ul>
+	<li>Buy some potatoes, cut them into cones, and slice them for a while to convince yourself that I'm making some sense around here. Don't trust me.
+	<li>Since the lampshade's top and bottom openings have different diameters, the top cone and bottom cones aren't necessarily the same, and so we don't necessarily have a perfectly symmetrical hyperbola. Find the unique point where you can place the light bulb in the lamp so that the cones are in fact the same.
+	<li>You may have heard of the pencil-and-string way to build an ellipse. You can stick two pushpins into a piece of paper, and tie each end of a piece of string to one pushpin. Then trace the curve you get with a pencil by keeping the string taught&mdash;it's an ellipse! In other words, given a point on an ellipse, the sum of the distance to each pushpin is a constant. Each pushpin's position is called a <em>focus</em> of an ellipse. This is a perfectly valid definition of an ellipse.<br/>What is the corresponding definition for a hyporbola? If you're ambitious, try to get the equation of an ellipse given the above definition.
+	<li>A parabola is the set of all points that are equidistant from a point and a <em>line</em> (the distance from a point to a line is the length of the perpendicular segment from the point to the line). Can you prove this?
+	<li>Without graphing or drawing or anything, try to imagine what happens to a hyperbola as you keep on zooming out. What does it look like?<br/>You get a pair of intersecting lines called the <em>asymptotes</em>. What are the equations of the asymptotes of ($y^2 - x^2 = 1$)?
+</ul>
+<p>P.S. The lesson here wasn't about conic sections. The lesson here was that there is really cool math in <em>everything</em>. Even lampshades. And you gotta grok math to see them.
+
+<br/><br/>Cheers,<br/>Hardmath123]]></description>
             <link>http://hardmath123.github.io/conics.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/conics.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
@@ -66,7 +528,54 @@
         </item>
         <item>
             <title><![CDATA[Living Without Sudo]]></title>
-            <description><![CDATA[UNIX hacking for the faint at heard, or those blessed with mean sysadmins.]]></description>
+            <description><![CDATA[UNIX hacking for the faint at heard, or those blessed with mean sysadmins.
+
+<p class="dropcap">You should not trust me with matches, knives, expensive cars, and <code>sudo</code>: the command that makes you a god-like user with root powers. I'm the kind of person who accidentally <code>rm -rf</code>'s his <em>Desktop</em> (by the way, the sporadically disappearing icons are both hilarious and mortifying). So whenever I'm asked to <code>sudo</code> something, I get both worried and suspicious. And over the years, I have perfected the art of installing things without <code>sudo</code>. You can follow along this tutorial with just a shell.
+
+<h3>Why sudo?</h3>
+<p>The first thing to realize here is that 99% of the time, the only reason we need to use <code>sudo</code> is to make that program accessible to everyone. That's it. When you run a UNIX program, you're saying <q>execute this file</q>; and when you <code>sudo</code> you essentially say <q>everyone can access this file from everywhere</q>.
+
+<p>For example, suppose I want to install a program called <code>easy</code> that acts like the classic Staples Easy Button and executes <code>say that was easy</code> (I actually do have this on my computer, and yes, I use it a lot). It's not too tough:
+
+<pre><code>echo "say that was easy" > ~/Desktop/easy # create the file "easy" with our contents
+chmod +x ~/Desktop/easy # tell Bash that it's ok to execute this file
+~/Desktop/easy # run it!
+</code></pre>
+
+<p>Now I can run my script by typing <code>~/Desktop/easy</code>. But I don't want to have to type that huge thing each time I do something awesome&mdash;I want <code>easy</code> to be one-step executable just like <code>vim</code>. This is where <code>sudo</code> comes in.
+
+<p>Bash reads a variable called <code>$PATH</code>, which contains a list of various directories separated by colons. When you type a command on the shell, Bash searches each of these directories for that file, one by one. You can see this list right now with <code>echo $PATH</code>. These directories contain important system files, and are accessible by everyone. So it makes sense not to let mortals like me to mess with them. When you install a package, most of the time you're just moving the script files to one of these directories so it's easy to run, and Bash asks you for <code>sudo</code> to make sure you know what you're doing.
+
+<h3>.profile</h3>
+
+<p>If we could tack on our own directory to the <code>$PATH</code>, we could dump our junk in there without messing with anything sudo-ey, right? Right. To modify <code>$PATH</code>, you need another UNIX trick: a file called <code>~/.profile</code>.
+
+<p><code>.profile</code> is another script file that's executed before your shell loads, so that you can customize it. The dot in front makes it invisible to Finder, so you can only mess with it using a shell. You can do all sorts of neat things with <code>.profile</code>: print a friendly message on top of the Terminal when you start it up, customize your prompt, and mess with your <code>$PATH</code>.
+
+<p>Since it's a hidden file, you should create it using the command line:
+
+<pre><code>cd ~/ # go to your home directory
+touch .profile # create the file
+open -a TextEdit .profile # open with TextEdit (you can also use pico/vim/emacs)</code></pre>
+&hellip;and you should have TextEdit open up with a blank <code>.profile</code>. Now we can create our new <code>$PATH</code> by tacking on <code>~/my_bin</code> to it. Add the following to the <code>.profile</code>: <code>export PATH=$PATH:~/my_bin</code>. Save, and quit; and then refresh your Terminal (you can just close this window and open a new one). This forces the profile to be run. If you want a sanity check, try <code>echo $PATH</code> and see if it changed from last time.
+
+<p>We just told Bash that <code>~/my_bin</code> contains executable files. We have <em>not</em> created that directory yet, so let's got do that: <code>mkdir my_bin</code>. And, just for fun, dump <code>easy</code> in there.
+
+<p>Now you can test it out: type <code>easy</code>. If all went well, there shouldn't be any errors. (If something exploded, feel free to drop a comment below.)
+
+<h3>Using your powers.</h3>
+
+<p>That's actually all you need. To install a package, download it and look for its binaries (they will probably in a directory called <code>bin</code>). Alias the commands you care about to <code>~/my_bin</code>. And then have fun.
+
+<p>If you use Python, you may want to add the following line to your profile: <code>export PYTHONPATH=$PYTHONPATH:~/my_bin/</code>. This lets you simply copy Python modules to your <code>~/my_bin</code>, instead of using <code>pip</code> or something.
+
+<p>You're going to have to do some digging to find the binaries; but I assure you that they probably exist. You can find binaries for Node, ffmpeg, Homebrew, and just about anything else you'll ever need.
+
+<p>Some packages need configuration files to work right from a foreign directory. For example, <code>npm</code> needs you to create <code>.npmrc</code> and add a <em>prefix</em>, or the directory which you want to isolate all node stuff in. Mine simply reads <code>prefix = "~/my_bin/node_stuff"</code>.
+
+<p>Finally: if you mess up your profile, you may have unpleasantries with your terminal (what if you accidentally clear your <code>$PATH</code>? Bash won't find any executables whatsoever&hellip;). To fix this, always remember that you can reference a command from its full path. Your last resort should be <code>/bin/rm ~/.profile</code>, which will wipe out the profile file, and let you start fresh.
+
+<p>Good luck, and hack on!]]></description>
             <link>http://hardmath123.github.io/sudo.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/sudo.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
@@ -74,7 +583,400 @@
         </item>
         <item>
             <title><![CDATA[Hello, World!]]></title>
-            <description><![CDATA[Welcoming myself to my blog.]]></description>
+            <description><![CDATA[Welcoming myself to my blog.
+
+<p class="dropcap">I started on Comfortably Numbered a couple of months ago, because I needed a blog. I needed a blog to dump interesting thoughts and I wanted a place besides GitHub to show off projects. I wanted, for once, to write industrial-strength code that would face <em>real people</em> instead of fellow hackers. When you write code for a hacker, you write the bare minimum for it to work. So I ended up obsessing insanely about the design, typography, and optimization of this site. Pretty much everything except the content.
+
+<p>I thought I'd present a cool non-trivial Hello, World program here. But all the cool languages have really boring Hello, Worlds, and I have a natural revulsion to a language whose most basic Hello, World is more than a line long&mdash;C variants, Java, etc. So here's an assortment of my favorite Hello, World programs.
+
+<pre><code>echo 'print "console.log(\"print \\\"echo Hello, World\\\"\")"' | ruby | node | python | bash</code></pre>
+
+<p>Here's a merry (pure) CSS3D welcome. It's essentially just a bunch of animations with 3D transforms, but the end result is pretty impressive. It's also overkill, which is the <s>best</s> only way to show off.
+
+<style>
+#hw {
+  text-align: center;
+  font-weight: 900;
+  font-size: 40px;
+  touch-callout: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -khtml-user-select: none;
+}
+
+#hw span {
+  color: #aaa;
+  display: inline-block;
+  width: 30px;
+  margin: 0;
+  padding: 0;
+  height: 50px;
+  text-shadow: 0 0 3px #aaf;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -ms-transform-origin: 0 0 100px;
+  -webkit-transform-origin: 0 0 100px;
+  transform-origin: 0 0 100px;
+}
+
+#hw span:nth-child(8n) {
+  -webkit-animation-name: rot0;
+  animation-name: rot0;
+}
+
+#hw span:nth-child(8n+1) {
+  -webkit-animation-name: rot1;
+  animation-name: rot1;
+}
+
+#hw span:nth-child(8n+2) {
+  -webkit-animation-name: rot2;
+  animation-name: rot2;
+}
+
+#hw span:nth-child(8n+3) {
+  -webkit-animation-name: rot3;
+  animation-name: rot3;
+}
+
+#hw span:nth-child(8n+4) {
+  -webkit-animation-name: rot4;
+  animation-name: rot4;
+}
+
+#hw span:nth-child(8n+5) {
+  -webkit-animation-name: rot5;
+  animation-name: rot5;
+}
+
+#hw span:nth-child(8n+6) {
+  -webkit-animation-name: rot6;
+  animation-name: rot6;
+}
+
+#hw span:nth-child(8n+7) {
+  -webkit-animation-name: rot7;
+  animation-name: rot7;
+}
+
+@-webkit-keyframes rot0 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rot0 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    -ms-transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@-webkit-keyframes rot1 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(-360deg);
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(-360deg);
+  }
+}
+
+@keyframes rot1 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(360deg) rotateZ(-360deg);
+    -ms-transform: rotateX(360deg) rotateY(360deg) rotateZ(-360deg);
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(-360deg);
+  }
+}
+
+@-webkit-keyframes rot2 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(-360deg) rotateZ(360deg);
+    transform: rotateX(360deg) rotateY(-360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rot2 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(-360deg) rotateZ(360deg);
+    -ms-transform: rotateX(360deg) rotateY(-360deg) rotateZ(360deg);
+    transform: rotateX(360deg) rotateY(-360deg) rotateZ(360deg);
+  }
+}
+
+@-webkit-keyframes rot3 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(-360deg) rotateZ(-360deg);
+    transform: rotateX(360deg) rotateY(-360deg) rotateZ(-360deg);
+  }
+}
+
+@keyframes rot3 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(360deg) rotateY(-360deg) rotateZ(-360deg);
+    -ms-transform: rotateX(360deg) rotateY(-360deg) rotateZ(-360deg);
+    transform: rotateX(360deg) rotateY(-360deg) rotateZ(-360deg);
+  }
+}
+
+@-webkit-keyframes rot4 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(360deg) rotateZ(360deg);
+    transform: rotateX(-360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rot4 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(360deg) rotateZ(360deg);
+    -ms-transform: rotateX(-360deg) rotateY(360deg) rotateZ(360deg);
+    transform: rotateX(-360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@-webkit-keyframes rot5 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(360deg) rotateZ(-360deg);
+    transform: rotateX(-360deg) rotateY(360deg) rotateZ(-360deg);
+  }
+}
+
+@keyframes rot5 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(360deg) rotateZ(-360deg);
+    -ms-transform: rotateX(-360deg) rotateY(360deg) rotateZ(-360deg);
+    transform: rotateX(-360deg) rotateY(360deg) rotateZ(-360deg);
+  }
+}
+
+@-webkit-keyframes rot6 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(-360deg) rotateZ(360deg);
+    transform: rotateX(-360deg) rotateY(-360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rot6 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(-360deg) rotateZ(360deg);
+    -ms-transform: rotateX(-360deg) rotateY(-360deg) rotateZ(360deg);
+    transform: rotateX(-360deg) rotateY(-360deg) rotateZ(360deg);
+  }
+}
+
+@-webkit-keyframes rot7 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(-360deg) rotateZ(-360deg);
+    transform: rotateX(-360deg) rotateY(-360deg) rotateZ(-360deg);
+  }
+}
+
+@keyframes rot7 {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(-360deg) rotateY(-360deg) rotateZ(-360deg);
+    -ms-transform: rotateX(-360deg) rotateY(-360deg) rotateZ(-360deg);
+    transform: rotateX(-360deg) rotateY(-360deg) rotateZ(-360deg);
+  }
+}
+</style>
+
+<div id="hw">
+	<span id="hw-1">H</span>
+	<span id="hw-2">e</span>
+	<span id="hw-3">l</span>
+	<span id="hw-4">l</span>
+	<span id="hw-5">o</span>
+	<span id="hw-6">,</span>
+	<span id="hw-7"> </span>
+	<span id="hw-8">w</span>
+	<span id="hw-9">o</span>
+	<span id="hw-10">r</span>
+	<span id="hw-11">l</span>
+	<span id="hw-12">d</span>
+</div>
+
+<p>While we're feeling masochistic, here's Hello, World in Malbolge (the first working Malbolge program took 2 years and a LISP program to find, so don't feel too bad if you don't get it right away):
+<pre class="language-plaintext"><code>(&#039;&amp;%:9]!~}|z2Vxwv-,POqponl$Hjig%eB@@&gt;}=&lt;M:9wv6WsU2T|nm-,jcL(I&amp;%$#&quot;
+`CB]V?Tx&lt;uVtT`Rpo3NlF.Jh++FdbCBA@?]!~|4XzyTT43Qsqq(Lnmkj&quot;Fhg${z@&gt;</code></pre>
+
+
+<p>If you're on a Mac, it's always nice to hear a human voice (or a reasonable approximation thereof). The <code>say</code> command is a very easy way to annoy your sysadmin. Try putting a <code>say</code> command in a shared computer's <code>.profile</code>&mdash;perhaps along the lines of <q>Where have you hidden the body?</q>.
+
+<pre class="language-bash"><code>$ say -v Zarvox "Hello, World"</code></pre>
+
+<p>Piet's Hello, World is pretty, self-referential, and a nice avatar for the aspiring esolang geek.
+<p><img src="http://www.dangermouse.net/esoteric/piet/hw6_big.png"/>
+
+<p>I'd post a Hello, World program in Whitespace, but I decided to save myself the effort and dump an empty box below. Use your imagination.
+<pre class="language-plaintext" style="height:300px;"><code></code></pre>
+
+<p>The following is a Hello, World program. Honest.
+<pre style="height:300px;" class="language-plaintext">Romeo, a young man with a remarkable patience.
+Juliet, a likewise young woman of remarkable grace.
+Ophelia, a remarkable woman much in dispute with Hamlet.
+Hamlet, the flatterer of Andersen Insulting A/S.
+
+                   Act I: Hamlet's insults and flattery.
+                   Scene I: The insulting of Romeo.
+[Enter Hamlet and Romeo]
+Hamlet:
+You lying stupid fatherless big smelly half-witted coward! You are as
+stupid as the difference between a handsome rich brave hero and thyself!
+Speak your mind!
+You are as brave as the sum of your fat little stuffed misused dusty
+old rotten codpiece and a beautiful fair warm peaceful sunny summer's
+day. You are as healthy as the difference between the sum of the
+sweetest reddest rose and my father and yourself! Speak your mind!
+You are as cowardly as the sum of yourself and the difference
+between a big mighty proud kingdom and a horse. Speak your mind.
+Speak your mind!
+[Exit Romeo]
+                   Scene II: The praising of Juliet.
+[Enter Juliet]
+Hamlet:
+Thou art as sweet as the sum of the sum of Romeo and his horse and his
+black cat! Speak thy mind!
+[Exit Juliet]
+                   Scene III: The praising of Ophelia.
+[Enter Ophelia]
+Hamlet:
+Thou art as lovely as the product of a large rural town and my amazing
+bottomless embroidered purse. Speak thy mind!
+Thou art as loving as the product of the bluest clearest sweetest sky
+and the sum of a squirrel and a white horse. Thou art as beautiful as
+the difference between Juliet and thyself. Speak thy mind!
+[Exeunt Ophelia and Hamlet]
+
+                   Act II: Behind Hamlet's back.
+                   Scene I: Romeo and Juliet's conversation.
+[Enter Romeo and Juliet]
+Romeo:
+Speak your mind. You are as worried as the sum of yourself and the
+difference between my small smooth hamster and my nose. Speak your
+mind!
+Juliet:
+Speak YOUR mind! You are as bad as Hamlet! You are as small as the
+difference between the square of the difference between my little pony
+and your big hairy hound and the cube of your sorry little
+codpiece. Speak your mind!
+[Exit Romeo]
+                   Scene II: Juliet and Ophelia's conversation.
+[Enter Ophelia]
+Juliet:
+Thou art as good as the quotient between Romeo and the sum of a small
+furry animal and a leech. Speak your mind!
+Ophelia:
+Thou art as disgusting as the quotient between Romeo and twice the
+difference between a mistletoe and an oozing infected blister! Speak
+your mind!
+[Exeunt]</pre>
+
+<p>And finally, FiM++ looks like an average letter to Grandma:
+<pre class="language-plaintext"><code>Dear Princess Celestia:Hello World!
+
+Today I learned how to say hello world!
+I said "Hello, World!"!
+That's all about how to say hello world.
+
+Your faithful student, Kyli Rouge.</code></pre>
+
+<p>(Other people, however, write their letters in LOLCODE.)
+<pre class="language-plaintext"><code>HAI
+CAN HAS STDIO?
+VISIBLE "HAI WORLD!"
+KTHXBYE</code></pre>]]></description>
             <link>http://hardmath123.github.io/hw.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/hw.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
