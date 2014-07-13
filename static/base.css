@@ -64,19 +64,20 @@ strong.visitedposts a {
 
 #header {
   padding: 10px;
-  background-image: -webkit-gradient(linear, top left, bottom left, from(#f9f9f9), to(#f3f3f3));
-  background-image: -webkit-linear-gradient(top, #f9f9f9, #f3f3f3);
-  background-image: linear-gradient(top, #f9f9f9, #f3f3f3);
-  -webkit-box-shadow: 0px 2px 5px #ddd;
-  box-shadow: 0px 2px 5px #ddd;
+  /*background-image: -webkit-gradient(linear, top left, bottom left, from(#f9f9f9), to(#f3f3f3));*/
+  /*background-image: -webkit-linear-gradient(top, #f9f9f9, #f3f3f3);*/
+  /*background-image: linear-gradient(top, #f9f9f9, #f3f3f3);*/
+  /*-webkit-box-shadow: 0px 2px 5px #ddd;*/
+  /*box-shadow: 0px 2px 5px #ddd;*/
   overflow: hidden;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #ddd;
 }
 
 #header h1 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 100;
-  -webkit-transition: text-shadow 0.2s;
-  transition: text-shadow 0.2s;
   text-shadow: none;
   letter-spacing: 3px;
   word-spacing: 2px;
@@ -96,9 +97,7 @@ strong.visitedposts a {
 }
 
 #header h1:hover {
-  -webkit-transition: text-shadow 0.2s ease-in-out;
   transition: text-shadow 0.2s ease-in-out;
-  text-shadow: 0 0 5px #F66;
   cursor: pointer;
 }
 
