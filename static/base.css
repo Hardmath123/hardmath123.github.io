@@ -146,7 +146,7 @@ h4 {
 .centered, #postlist {
   padding: 30px;
   width: 100%;
-  max-width: 30em;
+  max-width: 40em;
   margin-left: auto;
   margin-right: auto;
 }
@@ -166,7 +166,7 @@ h4 {
   -webkit-column-count: 2;
   column-count: 2;
   width: 100%;
-  max-width: 30em;
+  max-width: 35em;
   margin-left: auto;
   margin-right: auto;
   font-size: 14px;
