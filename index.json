@@ -76,6 +76,14 @@
             "file": "jazz.md",
             "date": "7/1/14",
             "markdown": true
+        },
+        {
+            "title": "Cryptolegal",
+            "author": "Hardmath123",
+            "description": "A short story I wrote late last night.",
+            "file": "cryptolegal.md",
+            "date": "7/18/14",
+            "markdown": true
         }
     ]
 }
