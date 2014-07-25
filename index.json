@@ -84,6 +84,14 @@
             "file": "cryptolegal.md",
             "date": "7/18/14",
             "markdown": true
+        },
+        {
+            "title": "Re: Re: Programming is not math",
+            "author": "Hardmath123",
+            "description": "My two cents on a couple of blog posts.",
+            "file": "isprogrammingmath.md",
+            "date": "7/24/14",
+            "markdown": true
         }
     ]
 }
