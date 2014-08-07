@@ -5,9 +5,50 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 31 Jul 2014 18:02:27 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 07 Aug 2014 00:36:50 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[ANSIble]]></title>
+            <description><![CDATA[Using ANSI escape codes for more interactive CLI interfaces
+
+<p>Have you ever wondered how to print color to terminals? Or why on some CLI interfaces, the arrow keys print out mysterious sequences like <code>^[[A</code>? Or why sometimes the keyboard shortcut control-C becomes <code>^C</code>? Well, the answers to these are all  based on ANSI escape codes.</p>
+<p>In UNIX programs, there&#39;s the concept of &#39;raw&#39; and &#39;canonical&#39; mode for input. &#39;Raw&#39; mode takes input character-by-character, while &#39;canonical&#39; mode lets the user write a line and hit enter to send the program the written line. Canonical mode is generally more useful: it lets you go back and delete something if you make a mistake. But applications that work on a per-keypress basis need to bypass this. In node, you can enter raw mode with <code>process.stdin.setRawMode(true);</code>.</p>
+<p>CLI interactions also need the concept of control characters. When you type control-C, you&#39;re sending the program the byte <code>0x3</code>, which is… 3. But that&#39;s the ASCII <strong>control character</strong> which means &#39;end of text&#39;. The program takes this, by convention, as a signal to stop executing (<code>KeyboardInterrupt</code> in Python, for example). We print control characters with a caret (<code>^</code>), followed by the letter we type on the keyboard. There are 32 of them, which <a href="http://en.wikipedia.org/wiki/ASCII#ASCII_control_code_chart">Wikipedia lists</a>. You might be familiar with using <code>^D</code> (&#39;end of transmission&#39;) to quickly exit Python or nodejs.</p>
+<p>ANSI escape codes are a way to output to a terminal with more capability than just raw text (there <em>was</em>, for comparison, a time when computer output was printed, physically on paper, line by line). You can move the cursor back and overwrite or clear text. You can also color text or make it blink obnoxiously.</p>
+<p>ANSI escape codes start with the CSI: the <strong>Control Sequence Introducer</strong>. The most common one is <code>\e[</code>. <code>\e</code> is the ASCII escape character <code>0x1b</code>. You can type it with the control character <code>^[</code> (that is, <code>control-[</code>).</p>
+<p>Next, they have a sequence of numerical arguments, separated by semicolons, and finally, they have a letter which indicates the command. Once more, <a href="http://en.wikipedia.org/wiki/ANSI_escape_code#CSI_codes">Wikipedia lists</a> these. As an example, we can move the cursor to the top-left corner with <code>\e[1;1H</code> (H is the command to move, and the arguments are 1 and 1).</p>
+<p>Colors are just as easy. We use the <code>m</code> command, with an SGR (&#39;Set Graphics Rendition&#39;) parameter. 35 is the SGR parameter to set the text color to magenta, while 42 makes the background green. So <code>\e[35;42m</code> would give us a horrible magenta-on-green color scheme. (<code>\e[m</code> (no arguments) restores everything).</p>
+<p>This, by the way, explains the <code>^[[A</code> curiosity. When you press up-arrow, the terminal sends the application the ANSI escape code to move the cursor up—the command for this is <code>A</code>. So we get <code>\e[A</code>, and <code>\e</code> gets rendered as its control code equivalent of <code>^[</code>. (You can, in fact, manually enter control+[-[-A in Bash, and get the standard up-arrow behavior of pulling up the last entered command.)</p>
+<p>Some nodejs code to get you started—it&#39;s a utility to interactively display the bytes sent from a terminal when you press a key(combination).</p>
+<pre><code class="lang-javascript">process.stdin.resume();
+process.stdin.setRawMode(true);
+
+process.stdin.on(&quot;data&quot;, function(buffer) {
+    if (buffer.length === 1 &amp;&amp; buffer[0] === 3) {// detect ^C
+        process.stdout.write(&quot;\n&quot;); // A trailing \n prevents
+                                         // the shell prompt from
+                                         // messing up.
+
+        process.exit(0);                 // die
+    } else {
+        process.stdout.write(&quot;\x1b[1J\x1b[1;1H&quot;);
+                            // clear line and go to top
+        process.stdout.write(
+            require(&#39;util&#39;).inspect(buffer)
+            // Nice output format
+        );
+    }
+});
+</code></pre>
+<p>This should give you the tools to write shinier, interactive utilities. But keep in mind the UNIX philosophy—keep them simple, and make sure they cooperate as filters (you should be able to pipe stuff in and out of your utility).</p>
+<p>P.S. I wrote this post—including the code sample—in vim running in tmux. Please pardon typos.</p>
+]]></description>
+            <link>http://hardmath123.github.io/ansiescape.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/ansiescape.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Wed, 06 Aug 2014 07:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Re: Re: Programming is not math]]></title>
             <description><![CDATA[My two cents on a couple of blog posts.

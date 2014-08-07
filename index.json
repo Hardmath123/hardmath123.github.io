@@ -92,6 +92,14 @@
             "file": "isprogrammingmath.md",
             "date": "7/24/14",
             "markdown": true
+        },
+        {
+            "title": "ANSIble",
+            "author": "Hardmath123",
+            "description": "Using ANSI escape codes for more interactive CLI interfaces",
+            "file": "ansiescape.md",
+            "date": "8/6/14",
+            "markdown": true
         }
     ]
 }
