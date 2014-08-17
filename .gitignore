@@ -1,3 +1,5 @@
 drafts/*
 .DS_Store
 drafts/
+*.swp
+
