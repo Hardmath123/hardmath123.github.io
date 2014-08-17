@@ -1,17 +1,19 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,700);
+@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic);
 
 body {
-  font-family: "Open Sans", "Helvetica", Arial sans-serif;
-  font-weight: 100;
+  font-family: "Libre Baskerville", serif;
   background-color: white;
   margin: 0;
   padding: 0;
   color: black;
   height: 30px;
+  font-size: 18px;
 }
 
 p {
   text-indent: 20px;
+  line-height: 2em;
 }
 
 q {
@@ -29,8 +31,7 @@ q:after {
 strong a {
   text-decoration: none;
   color: black;
-  font-weight: 100;
-  font-size: 20px;
+  font-size: 1em;
 }
 
 strong a:visited {
@@ -64,11 +65,6 @@ strong.visitedposts a {
 
 #header {
   padding: 10px;
-  /*background-image: -webkit-gradient(linear, top left, bottom left, from(#f9f9f9), to(#f3f3f3));*/
-  /*background-image: -webkit-linear-gradient(top, #f9f9f9, #f3f3f3);*/
-  /*background-image: linear-gradient(top, #f9f9f9, #f3f3f3);*/
-  /*-webkit-box-shadow: 0px 2px 5px #ddd;*/
-  /*box-shadow: 0px 2px 5px #ddd;*/
   overflow: hidden;
   border-bottom-style: solid;
   border-bottom-width: 1px;
@@ -76,11 +72,9 @@ strong.visitedposts a {
 }
 
 #header h1 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Garamond", "Libre Baskerville", serif;
   font-weight: 100;
-  text-shadow: none;
-  letter-spacing: 3px;
-  word-spacing: 2px;
+  
   display: inline-block;
   float: left;
   padding-top: 0;
@@ -91,13 +85,18 @@ strong.visitedposts a {
   white-space: nowrap;
 }
 
-#header h1 a {
+#header h1 a, #header h1 a:visited {
   text-decoration: none;
-  color: black;
+}
+
+#header .left-word, #header .left-word:visited {
+  color: #77A;
+}
+#header .right-word, #header .right-word:visited {
+  color: #777;
 }
 
 #header h1:hover {
-  transition: text-shadow 0.2s ease-in-out;
   cursor: pointer;
 }
 
@@ -108,13 +107,18 @@ strong.visitedposts a {
   margin-right: 10px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 100;
+
+h2 {
+  margin-bottom: 2px;
+  padding-bottom: 2px;
+}
+
+h4 {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  color: #666;
+  font-size: 0.8em;
+  font-weight: normal;
 }
 
 .clearer {
@@ -122,16 +126,11 @@ h6 {
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 2em;
 }
 
 h3 {
-  font-size: 30px;
-  margin-bottom: 5px;
-}
-
-h4 {
-  font-size: 20px;
+  font-size: 1.5em;
   margin-bottom: 5px;
 }
 
@@ -139,7 +138,7 @@ h4 {
   text-align: right;
   padding-right: 10px;
   padding-top: 100px;
-  font-size: 12px;
+  font-size: 0.5em;
   color: gray;
 }
 
@@ -153,6 +152,9 @@ h4 {
 
 #postlist p {
     margin-bottom: 50px;
+    text-indent: 0px;
+    color: #666;
+    font-size: 0.8em;
 }
 
 #pagesbox {
@@ -169,19 +171,19 @@ h4 {
   max-width: 35em;
   margin-left: auto;
   margin-right: auto;
-  font-size: 14px;
+  font-size: 0.8em;
   color: gray;
 }
 
 #whoami h2 {
-  font-size: 16px;
+  font-size: 1.2em;
 }
 
 
 #postcontent > p:first-of-type:first-letter, .dropcap:first-letter {
-  font-size: 30px;
+  font-size: 4em;
+  margin-right: 2px;
   font-family: "Didot", "Baskerville", "Garamond", serif;
-  color: #666;
 }
 
 strong a {
@@ -192,33 +194,6 @@ strong a {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-}
-
-textarea,
-input[type=text] {
-  -webkit-transition: -webkit-box-shadow 0.2s;
-  transition: box-shadow 0.2s;
-  -webkit-box-shadow: 0 0 0px #CCC;
-  box-shadow: 0 0 0px #CCC;
-  border-style: solid;
-  border-color: #EEE;
-  border-radius: 5px;
-  border-width: 1px;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-family: sans-serif;
-  font-weight: 100;
-  font-size: 15px;
-  resize: none;
-}
-
-textarea:focus,
-input[type=text]:focus {
-  -webkit-transition: -webkit-box-shadow 0.2s;
-  transition: box-shadow 0.2s;
-  outline: none;
-  -webkit-box-shadow: 0 0 4px lightblue;
-  box-shadow: 0 0 4px lightblue;
 }
 
 blockquote {
