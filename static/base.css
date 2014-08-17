@@ -162,21 +162,29 @@ h3 {
 }
 
 #whoami {
-  padding: 30px;
-  margin-top: 10px;
-  -moz-column-count: 2;
-  -webkit-column-count: 2;
-  column-count: 2;
+  margin-top: 50px;
   width: 100%;
   max-width: 35em;
-  margin-left: auto;
-  margin-right: auto;
   font-size: 0.8em;
   color: gray;
 }
 
+@media screen and (min-width: 30em) {
+  #whoami {
+     column-count: 2;
+     -webkit-column-count: 2;
+  } 
+}
+
+
 #whoami h2 {
   font-size: 1.2em;
+  font-family: cursive;
+}
+
+#scrolldown {
+  text-align: center;
+  margin-bottom: 100px;
 }
 
 
