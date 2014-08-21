@@ -5,7 +5,7 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Mon, 18 Aug 2014 01:29:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 21 Aug 2014 02:24:53 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
@@ -13,14 +13,14 @@
             <description><![CDATA[Using ANSI escape codes for more interactive CLI interfaces
 
 <p>Have you ever wondered how to print color to terminals? Or why on some CLI interfaces, the arrow keys print out mysterious sequences like <code>^[[A</code>? Or why sometimes the keyboard shortcut control-C becomes <code>^C</code>? Well, the answers to these are all  based on ANSI escape codes.</p>
-<p>In UNIX programs, there&#39;s the concept of &#39;raw&#39; and &#39;canonical&#39; mode for input. &#39;Raw&#39; mode takes input character-by-character, while &#39;canonical&#39; mode lets the user write a line and hit enter to send the program the written line. Canonical mode is generally more useful: it lets you go back and delete something if you make a mistake. But applications that work on a per-keypress basis need to bypass this. In node, you can enter raw mode with <code>process.stdin.setRawMode(true);</code>.</p>
-<p>CLI interactions also need the concept of control characters. When you type control-C, you&#39;re sending the program the byte <code>0x3</code>, which is… 3. But that&#39;s the ASCII <strong>control character</strong> which means &#39;end of text&#39;. The program takes this, by convention, as a signal to stop executing (<code>KeyboardInterrupt</code> in Python, for example). We print control characters with a caret (<code>^</code>), followed by the letter we type on the keyboard. There are 32 of them, which <a href="http://en.wikipedia.org/wiki/ASCII#ASCII_control_code_chart">Wikipedia lists</a>. You might be familiar with using <code>^D</code> (&#39;end of transmission&#39;) to quickly exit Python or nodejs.</p>
+<p>In UNIX programs, there’s the concept of ‘raw’ and ‘canonical’ mode for input. ‘Raw’ mode takes input character-by-character, while ‘canonical’ mode lets the user write a line and hit enter to send the program the written line. Canonical mode is generally more useful: it lets you go back and delete something if you make a mistake. But applications that work on a per-keypress basis need to bypass this. In node, you can enter raw mode with <code>process.stdin.setRawMode(true);</code>.</p>
+<p>CLI interactions also need the concept of control characters. When you type control-C, you’re sending the program the byte <code>0x3</code>, which is… 3. But that’s the ASCII <strong>control character</strong> which means ‘end of text’. The program takes this, by convention, as a signal to stop executing (<code>KeyboardInterrupt</code> in Python, for example). We print control characters with a caret (<code>^</code>), followed by the letter we type on the keyboard. There are 32 of them, which <a href="http://en.wikipedia.org/wiki/ASCII#ASCII_control_code_chart">Wikipedia lists</a>. You might be familiar with using <code>^D</code> (‘end of transmission’) to quickly exit Python or nodejs.</p>
 <p>ANSI escape codes are a way to output to a terminal with more capability than just raw text (there <em>was</em>, for comparison, a time when computer output was printed, physically on paper, line by line). You can move the cursor back and overwrite or clear text. You can also color text or make it blink obnoxiously.</p>
 <p>ANSI escape codes start with the CSI: the <strong>Control Sequence Introducer</strong>. The most common one is <code>\e[</code>. <code>\e</code> is the ASCII escape character <code>0x1b</code>. You can type it with the control character <code>^[</code> (that is, <code>control-[</code>).</p>
 <p>Next, they have a sequence of numerical arguments, separated by semicolons, and finally, they have a letter which indicates the command. Once more, <a href="http://en.wikipedia.org/wiki/ANSI_escape_code#CSI_codes">Wikipedia lists</a> these. As an example, we can move the cursor to the top-left corner with <code>\e[1;1H</code> (H is the command to move, and the arguments are 1 and 1).</p>
-<p>Colors are just as easy. We use the <code>m</code> command, with an SGR (&#39;Set Graphics Rendition&#39;) parameter. 35 is the SGR parameter to set the text color to magenta, while 42 makes the background green. So <code>\e[35;42m</code> would give us a horrible magenta-on-green color scheme. (<code>\e[m</code> (no arguments) restores everything).</p>
+<p>Colors are just as easy. We use the <code>m</code> command, with an SGR (‘Set Graphics Rendition’) parameter. 35 is the SGR parameter to set the text color to magenta, while 42 makes the background green. So <code>\e[35;42m</code> would give us a horrible magenta-on-green color scheme. (<code>\e[m</code> (no arguments) restores everything).</p>
 <p>This, by the way, explains the <code>^[[A</code> curiosity. When you press up-arrow, the terminal sends the application the ANSI escape code to move the cursor up—the command for this is <code>A</code>. So we get <code>\e[A</code>, and <code>\e</code> gets rendered as its control code equivalent of <code>^[</code>. (You can, in fact, manually enter control+[-[-A in Bash, and get the standard up-arrow behavior of pulling up the last entered command.)</p>
-<p>Some nodejs code to get you started—it&#39;s a utility to interactively display the bytes sent from a terminal when you press a key(combination).</p>
+<p>Some nodejs code to get you started—it’s a utility to interactively display the bytes sent from a terminal when you press a key(combination).</p>
 <pre><code class="lang-javascript">process.stdin.resume();
 process.stdin.setRawMode(true);
 
@@ -55,19 +55,19 @@ process.stdin.on(&quot;data&quot;, function(buffer) {
 
 <p>So recently, Sarah Mei blogged that <a href="http://www.sarahmei.com/blog/2014/07/15/programming-is-not-math/">programming is not math</a>. Jeremy Kun <a href="http://j2kun.svbtle.com/programming-is-not-math-huh">responded</a>, pointing out that math is an integral part of programming.</p>
 <p>I found both articles interesting, but I wanted to add my thoughts on some things both of them wrote. So here they are.</p>
-<p>Let&#39;s start with math. Math feels like mining. You know there&#39;s gold somewhere below you. Perhaps it&#39;s some theorem you&#39;re trying to prove. Math is about digging in the right direction from the right spot in the massive network of tunnels we&#39;ve already derived. And although you can dig in any direction, it&#39;s not always obvious how to proceed from where you are to your target. The most brilliant mathematicians are the ones who have the best intuition about which way to dig. Some directions are obviously less efficient than others—digging through a rocky bit is much harder (but a clever mathematician might notice that it&#39;s just a thin wall and there&#39;s gold on the other side).</p>
-<p>For example, consider a problem like <em>&quot;Find the area of a triangle with side lengths 39, 52, and 65.&quot;</em> This was on my math final back in 7th grade. We were taught the path that goes through Heron&#39;s formula. Calculate semiperimeter, multiply, square root. That&#39;s the long way through soft earth. Of course, if you haven&#39;t noticed already, there&#39;s an easier way. You notice that 39, 52, and 65 are all multiples of 13, which is suspicious. If you divide by 13, you get 3, 4, and 5 which is a Pythagorean triple! So this is just a right triangle scaled up by a factor of 13. So the area is just the half the product of the two smaller side lengths.</p>
-<p>This was the short path through the rocky earth. You need intuition to even consider going that way; and that intuition isn&#39;t easy to acquire.</p>
+<p>Let’s start with math. Math feels like mining. You know there’s gold somewhere below you. Perhaps it’s some theorem you’re trying to prove. Math is about digging in the right direction from the right spot in the massive network of tunnels we’ve already derived. And although you can dig in any direction, it’s not always obvious how to proceed from where you are to your target. The most brilliant mathematicians are the ones who have the best intuition about which way to dig. Some directions are obviously less efficient than others—digging through a rocky bit is much harder (but a clever mathematician might notice that it’s just a thin wall and there’s gold on the other side).</p>
+<p>For example, consider a problem like <em>“Find the area of a triangle with side lengths 39, 52, and 65.”</em> This was on my math final back in 7th grade. We were taught the path that goes through Heron’s formula. Calculate semiperimeter, multiply, square root. That’s the long way through soft earth. Of course, if you haven’t noticed already, there’s an easier way. You notice that 39, 52, and 65 are all multiples of 13, which is suspicious. If you divide by 13, you get 3, 4, and 5 which is a Pythagorean triple! So this is just a right triangle scaled up by a factor of 13. So the area is just the half the product of the two smaller side lengths.</p>
+<p>This was the short path through the rocky earth. You need intuition to even consider going that way; and that intuition isn’t easy to acquire.</p>
 <p>This is far from a perfect analogy, but it suffices to explain why a lot of people find math hard. Many schools teach you the paths to take, rather than the intuition you need to build up to be able to find them yourself.</p>
-<p>I write all this to make a contrast with CS: <em>the majority of CS doesn&#39;t require mathematical rock-wall insights</em>. You simply need to be able to think about how to solve problems by breaking them into smaller problems. You never get &#39;stuck&#39;, because you can <em>always</em> reduce a problem you have to something else (even if it&#39;s an ugly brute-force solution). Math has dead ends and paths that circle back to where you were originally. Programming is like building a skyscraper: the only way is up.</p>
+<p>I write all this to make a contrast with CS: <em>the majority of CS doesn’t require mathematical rock-wall insights</em>. You simply need to be able to think about how to solve problems by breaking them into smaller problems. You never get ‘stuck’, because you can <em>always</em> reduce a problem you have to something else (even if it’s an ugly brute-force solution). Math has dead ends and paths that circle back to where you were originally. Programming is like building a skyscraper: the only way is up.</p>
 <p>This, I think, is why many people find programming easier than pure math.</p>
 <blockquote>
 <p>…computer science is not programming. At most academic CS schools, the explicit intent is that students learn programming as a byproduct of learning CS. Programming itself is seen as rather pedestrian, a sort of exercise left to the reader.</p>
-<p>-- Sarah Wei</p>
+<p>— Sarah Wei</p>
 </blockquote>
 <p>I thought this was rather interesting. I have seen this idea in a lot of places, but I have the opposite viewpoint.</p>
-<p>CS is a way to formalize programming concepts. Learning programming isn&#39;t a byproduct of learning CS, bur rather learning CS is a byproduct of learning programming. The more you have programmed, the more problems you have solved, and the more CS ideas you&#39;ve internalized.</p>
-<p>Here&#39;s an example. You have a curb 100 meters long. (Idealized) cars 3 meters long park randomly along the curb, one after another, until there&#39;s no space greater than 3 meters between any two cars. Write a program to simulate this many times and compute the average number of cars that can park.</p>
+<p>CS is a way to formalize programming concepts. Learning programming isn’t a byproduct of learning CS, bur rather learning CS is a byproduct of learning programming. The more you have programmed, the more problems you have solved, and the more CS ideas you’ve internalized.</p>
+<p>Here’s an example. You have a curb 100 meters long. (Idealized) cars 3 meters long park randomly along the curb, one after another, until there’s no space greater than 3 meters between any two cars. Write a program to simulate this many times and compute the average number of cars that can park.</p>
 <p>Take a moment to try to envision this program.</p>
 <p>If you took an awesome CS class, you should have ended up with something like this:</p>
 <pre><code class="lang-scheme">(define (number-of-cars len)
@@ -78,31 +78,31 @@ process.stdin.on(&quot;data&quot;, function(buffer) {
                     (number-of-cars (* (- len 3) offset))
                     (number-of-cars (* (- len 3) (- 1 offset))))))))
 </code></pre>
-<p>Guess what? It&#39;s <em>tree recursion</em>, which is, surprise surprise, a classic &#39;CS concept&#39;). But your programming mind didn&#39;t think of it as a tree recursion problem. CS formalizes the idea of tree recursion because it&#39;s so common in programming. It gives this idea a name, and lets you use this name when communicating with humans. It lets you use someone else&#39;s Tree implementation, knowing exactly what to expect. It gives you an overview of common ideas that expand on trees—binary search trees, or perhaps breadth-first searching.</p>
-<p>But in the end, it&#39;s all programming that has been catalogued so that you can do math on it.</p>
+<p>Guess what? It’s <em>tree recursion</em>, which is, surprise surprise, a classic ‘CS concept’). But your programming mind didn’t think of it as a tree recursion problem. CS formalizes the idea of tree recursion because it’s so common in programming. It gives this idea a name, and lets you use this name when communicating with humans. It lets you use someone else’s Tree implementation, knowing exactly what to expect. It gives you an overview of common ideas that expand on trees—binary search trees, or perhaps breadth-first searching.</p>
+<p>But in the end, it’s all programming that has been catalogued so that you can do math on it.</p>
 <blockquote>
 <p>I taught Ruby on Rails, which is a web programming framework; people came because they wanted to learn how to make websites. Because of those motivations, the curriculum had virtually no math.</p>
-<p>-- Sarah Wei</p>
+<p>— Sarah Wei</p>
 </blockquote>
-<p>Ah, this brings up the topic of a really interesting discussion I had with some friends a while ago. Here&#39;s a summary:</p>
-<p>There&#39;s a lot of CS to be learned by studying the Internet: networking, protocol design, language design, layout engines, and security are just a few.</p>
-<p>But is setting up a web server really programming? We felt it&#39;s a distinction between building and assembling. Teaching someone how to make a web server with today&#39;s frameworks is more about teaching them Ruby syntax and the APIs, and less about algorithms and logic. It&#39;s not raw computer science, it&#39;s following some instructions and inputting your own values. Using a clay mold shouldn&#39;t count as sculpting.</p>
+<p>Ah, this brings up the topic of a really interesting discussion I had with some friends a while ago. Here’s a summary:</p>
+<p>There’s a lot of CS to be learned by studying the Internet: networking, protocol design, language design, layout engines, and security are just a few.</p>
+<p>But is setting up a web server really programming? We felt it’s a distinction between building and assembling. Teaching someone how to make a web server with today’s frameworks is more about teaching them Ruby syntax and the APIs, and less about algorithms and logic. It’s not raw computer science, it’s following some instructions and inputting your own values. Using a clay mold shouldn’t count as sculpting.</p>
 <p>As much as I admire initiatives to teach CS, I feel that we should be teaching the algorithmic beauty alongside the more practical day-to-day skills.</p>
 <blockquote>
 <p>Specifically, learning to program is more like learning a new language than it is like doing math problems.</p>
-<p>-- Sarah Wei</p>
+<p>— Sarah Wei</p>
 </blockquote>
-<p>A lot of people talk about CS as math and language, but I&#39;ve always felt that it&#39;s more like building a tower with LEGOs. Programming isn&#39;t about the language you use—it&#39;s about the paradigm. Once you understand classes and methods, learning a new language of the same paradigm is at best a weekend job. Instead, programming is about taking blocks you already have, and fitting them together. The language is just a medium to communicate with the computer; we could use punch cards, or command lines, or fancy graphical programming software. What matters is what that medium is communicating. Writing in general follows this, too—writing a good blog post requires an exciting idea to convey. Text is just a medium to communicate the idea.</p>
+<p>A lot of people talk about CS as math and language, but I’ve always felt that it’s more like building a tower with LEGOs. Programming isn’t about the language you use—it’s about the paradigm. Once you understand classes and methods, learning a new language of the same paradigm is at best a weekend job. Instead, programming is about taking blocks you already have, and fitting them together. The language is just a medium to communicate with the computer; we could use punch cards, or command lines, or fancy graphical programming software. What matters is what that medium is communicating. Writing in general follows this, too—writing a good blog post requires an exciting idea to convey. Text is just a medium to communicate the idea.</p>
 <blockquote>
 <p>It helps even more that mathematics and programming readily share topics. You teach graph coloring for register allocation, linear algebra and vector calculus for graphics, combinatorics for algorithms.</p>
-<p>-- Jeremy Kun</p>
+<p>— Jeremy Kun</p>
 </blockquote>
-<p>Programming isn&#39;t about math you <em>implement</em>.</p>
-<p>Understanding, for example, vector algebra to write a raytracer is important to know <em>what</em> you&#39;re doing, but it&#39;s not programming—programming is being able to know <em>how</em> to do it.</p>
-<p>To be successful in the modern computing landscape, you need to know math because the ability to compute is enhanced by the ability to put computation in a mathematical context. Twenty or thirty years ago, you might have considered discrete math (parsing), calculus (waveforms), and trig (graphics) to be instrumental. Today, it&#39;s statistics (big data) and number theory (crypto).</p>
+<p>Programming isn’t about math you <em>implement</em>.</p>
+<p>Understanding, for example, vector algebra to write a raytracer is important to know <em>what</em> you’re doing, but it’s not programming—programming is being able to know <em>how</em> to do it.</p>
+<p>To be successful in the modern computing landscape, you need to know math because the ability to compute is enhanced by the ability to put computation in a mathematical context. Twenty or thirty years ago, you might have considered discrete math (parsing), calculus (waveforms), and trig (graphics) to be instrumental. Today, it’s statistics (big data) and number theory (crypto).</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>What I wanted to say—and ended up digressing in rambles along the way—was that the intrinsic difference between math and computing is that math needs you to have good taking-apart intuition, while programming needs you to have good putting-together intuition.</p>
-<p>And so here&#39;s a parting thought: in my school, CS is lumped with all the other electives. Theater, drawing, photography, food, and auto tech are in the same category. Would you move CS to the math department? Hint: this isn&#39;t a trivial question!</p>
+<p>And so here’s a parting thought: in my school, CS is lumped with all the other electives. Theater, drawing, photography, food, and auto tech are in the same category. Would you move CS to the math department? Hint: this isn’t a trivial question!</p>
 ]]></description>
             <link>http://hardmath123.github.io/isprogrammingmath.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/isprogrammingmath.html</guid>
@@ -113,17 +113,17 @@ process.stdin.on(&quot;data&quot;, function(buffer) {
             <title><![CDATA[Cryptolegal]]></title>
             <description><![CDATA[A short story I wrote late last night.
 
-<p>The judge banged the gavel. It didn&#39;t help, of course, since there was nobody to hear it. But the lead designer wanted to add a human touch so that the public would be more accepting, and so the gavel banged. 24 other gavels banged, too, throughout the day as the 24 other judges reached various points in their cycles. Hal, the janitor, disapproved of leaving them in the basement; they were truly magnificent; but they need to be kept below freezing to prevent the heat from melting them.</p>
+<p>The judge banged the gavel. It didn’t help, of course, since there was nobody to hear it. But the lead designer wanted to add a human touch so that the public would be more accepting, and so the gavel banged. 24 other gavels banged, too, throughout the day as the 24 other judges reached various points in their cycles. Hal, the janitor, disapproved of leaving them in the basement; they were truly magnificent; but they need to be kept below freezing to prevent the heat from melting them.</p>
 <p>As Conway Courts opened its doors on Monday morning, there was a bustle in the air, the kind of electric bustle that is distinctly in the air when the biggest hacking incident of the year (maybe even the decade) is about to be put on trial.</p>
-<p>The New York Cryptographic Currency Exchange&#39;s board of directors had some of the best (and most expensive) prosecuting software in the industry. They had enough computational power to brute-force all 21st century cryptography in under three days (though the Seattle Doctrine forbade them from doing so).</p>
-<p>&#39;Draper&#39;, as he was known, was writing his own defending software, a move which would be widely regarded as suicidal if Draper was not generally accepted as one of the most brilliant programmers of the century.</p>
-<p>Terminals across the world began establishing connections to Conway&#39;s servers, and receiving a live transmission of <code>judge:criminal:a54bfe</code>, popularly known as &#39;Judy&#39;. Judy sent viewers copies of all the evidence presented by NYCCE and Draper, cryptographically signed. Viewers could examine this evidence, assured that it was presented by a genuine judge. Free software allowed anyone to compare this evidence to a vast peer-to-peer database of past cases. Highly trained neural networks inside Judy processed this data in real time, trying to derive a solution that optimizes based on the framework set forth by the Third Constitution.</p>
+<p>The New York Cryptographic Currency Exchange’s board of directors had some of the best (and most expensive) prosecuting software in the industry. They had enough computational power to brute-force all 21st century cryptography in under three days (though the Seattle Doctrine forbade them from doing so).</p>
+<p>‘Draper’, as he was known, was writing his own defending software, a move which would be widely regarded as suicidal if Draper was not generally accepted as one of the most brilliant programmers of the century.</p>
+<p>Terminals across the world began establishing connections to Conway’s servers, and receiving a live transmission of <code>judge:criminal:a54bfe</code>, popularly known as ‘Judy’. Judy sent viewers copies of all the evidence presented by NYCCE and Draper, cryptographically signed. Viewers could examine this evidence, assured that it was presented by a genuine judge. Free software allowed anyone to compare this evidence to a vast peer-to-peer database of past cases. Highly trained neural networks inside Judy processed this data in real time, trying to derive a solution that optimizes based on the framework set forth by the Third Constitution.</p>
 <p><code>%nycce connected</code>, broadcast Judy, followed by <code>%draper connected</code>.</p>
-<p>Bits began to screech across the world; <code>nycce</code> presenting evidence in the form of Terabytes of data, and linking it to historic trials. <code>nycce</code>&#39;s sole purpose was to use data and legal axioms and rules of production defined by the Third Constitution to derive the fact that Draper was guilty of manipulating the cryptocurrency market. <code>draper</code> had to defend himself by presenting evidence to the contrary; disproving <code>nycce</code>&#39;s chain of reasoning by targeting specific links. If <code>draper</code> can parse the data into a more logical chain of reasoning, leading to his innocence, he wins.</p>
-<p>As the seconds ticked by, <code>nycce</code>&#39;s logic became stronger. Data supported other data: statistical models of Draper&#39;s online activity over the past year and cutting-edge analyses of economic patterns in the cryptocurrent market were soon correlated in a clear trend. <code>draper</code> was reeling under the intense computational tasks it faced to process those numbers. There were a few, sporadic counterarguments, mostly nonsensical. The world watched Draper tweak his algorithms frantically.</p>
-<p>Judy ceased broadcasting the data for a moment. She needed all her computational resources to weigh both chains of reasoning. <code>nycce</code>&#39;s argument broke down, in human terms, to the fact that Draper had made a suspicious amount of connections to key financial databases. <code>draper</code> appeared to be trying to decrypt logs of these databases to prove that the connections were innocent.</p>
+<p>Bits began to screech across the world; <code>nycce</code> presenting evidence in the form of Terabytes of data, and linking it to historic trials. <code>nycce</code>‘s sole purpose was to use data and legal axioms and rules of production defined by the Third Constitution to derive the fact that Draper was guilty of manipulating the cryptocurrency market. <code>draper</code> had to defend himself by presenting evidence to the contrary; disproving <code>nycce</code>‘s chain of reasoning by targeting specific links. If <code>draper</code> can parse the data into a more logical chain of reasoning, leading to his innocence, he wins.</p>
+<p>As the seconds ticked by, <code>nycce</code>‘s logic became stronger. Data supported other data: statistical models of Draper’s online activity over the past year and cutting-edge analyses of economic patterns in the cryptocurrent market were soon correlated in a clear trend. <code>draper</code> was reeling under the intense computational tasks it faced to process those numbers. There were a few, sporadic counterarguments, mostly nonsensical. The world watched Draper tweak his algorithms frantically.</p>
+<p>Judy ceased broadcasting the data for a moment. She needed all her computational resources to weigh both chains of reasoning. <code>nycce</code>‘s argument broke down, in human terms, to the fact that Draper had made a suspicious amount of connections to key financial databases. <code>draper</code> appeared to be trying to decrypt logs of these databases to prove that the connections were innocent.</p>
 <p><code>Guilty.</code> broadcast Judy, to the joy of financial overlords across the country. This case set a legal precedent which future neural networks would doubtless utilize to twist arguments in their favor. The entire legal system depended on previous computation, to optimize large computations and train the neural networks maintained by the government to perform the judging. Once humans were deemed emotionally unfit to decide the fate of citizens, the cryptolegal system was developed and implemented over a decade of research.</p>
-<p>Draper sighed, and took another sip of coffee. Possibly his last as a free man. But possibly not. In the huge outpour of emotion across social networks, a few key packets of data sent from <code>draper</code> eluded the NSA&#39;s monitoring servers. What nobody noticed was that these packets of data cleverly manipulated Judy&#39;s RAM. A small program was seeded, and without a trace, it flipped the bits necessary to reduce Draper&#39;s prison sentence to zero years.</p>
+<p>Draper sighed, and took another sip of coffee. Possibly his last as a free man. But possibly not. In the huge outpour of emotion across social networks, a few key packets of data sent from <code>draper</code> eluded the NSA’s monitoring servers. What nobody noticed was that these packets of data cleverly manipulated Judy’s RAM. A small program was seeded, and without a trace, it flipped the bits necessary to reduce Draper’s prison sentence to zero years.</p>
 ]]></description>
             <link>http://hardmath123.github.io/cryptolegal.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/cryptolegal.html</guid>
@@ -134,21 +134,21 @@ process.stdin.on(&quot;data&quot;, function(buffer) {
             <title><![CDATA[Jazz is Open Source]]></title>
             <description><![CDATA[Why jazz embodies the hacker spirit.
 
-<p>People who sound like they&#39;re in charge of things—such as the <em>Associated Board of the Royal Schools of Music</em>—agree that the role of the classical performer is merely to present the music written by the composer. And present it in the exact form that the composer wrote.</p>
+<p>People who sound like they’re in charge of things—such as the <em>Associated Board of the Royal Schools of Music</em>—agree that the role of the classical performer is merely to present the music written by the composer. And present it in the exact form that the composer wrote.</p>
 <blockquote>
 <p><em>Good</em> performers, it should be said, do not resent this. After all, they are seeking to turn into real sounds the music which the composer had in his imagination; the more they can discover what exactly he had in mind, the more they are helped.</p>
-<p>-- Eric Taylor, <em>The AB [Associated Board] Guide to Music Theory</em></p>
+<p>— Eric Taylor, <em>The AB [Associated Board] Guide to Music Theory</em></p>
 </blockquote>
 <p>Perhaps this is a way to honor the genius of great composers of the past. But nevertheless, classical performers, therefore, are just that. Performers.</p>
 <p>Jazz, on the other hand is different. Jazz is fluid. A jazz track is far more about the performer than the piece played, so no two performances of <em>Autumn Leaves</em> will sound the same. Or even close to each other. This is because a jazz song defines the minimum you need for musicians to play together: a <strong>theme</strong> and the <strong>changes</strong>. The theme is a single melody line that everyone relates to the song. The changes are the chords that go with the melody. Jazz musicians take turns improvising while the rest play those chords to guide the improvisation and stay together.</p>
-<p>Take jazz notation, for instance. Jazz musicians get their theme and changes from so-called &#39;fake books&#39; (allegedly because fake books let them &#39;fake&#39; it so it sounds like they know the song). Fake books are also called real books, because logic.</p>
+<p>Take jazz notation, for instance. Jazz musicians get their theme and changes from so-called ‘fake books’ (allegedly because fake books let them ‘fake’ it so it sounds like they know the song). Fake books are also called real books, because logic.</p>
 <p>Anyhow, a fake book is usually a stack of photocopies of hand-written music of questionable origins. The changes are scrawled on top. While classical musicians write theses on what notes Bach would approve of in a trill, jazz musicians barely mark an accent. This is what gives a jazz musician freedom: you could play the same song slowly, or fast, or with a Bossa Nova, or with a walking bass; or you could play with three beats in a measure (like a Waltz) or five (which is <a href="https://en.wikipedia.org/wiki/Quintuple_meter">rather rare in classical music</a>), or nine. You could phrase notes together, or play them individually. You could swing notes, or play them straight. Each variation on each note is what gives a certain performance its character. Jazz is a hackable music.</p>
-<p>But it&#39;s not just hackable, it&#39;s open-source. Jazz musicians learn from other jazz musicians by listening. It&#39;s not a conscious effort—as you hear music, your brain registers interesting bits. It could be a sequence of notes, a chord, even a rhythmic structure. But if you like it, you&#39;ll try to imitate it when you play, and soon it&#39;s incorporated into your music. Jazz works because jazz musicians listen to each other and contribute to the growth and evolution of jazz as a genre.</p>
-<p>Now, the beauty of the system is that such new musical ideas aren&#39;t created intentionally as paintings are painted. They&#39;re accidents. Jazz musicians experiment as they improvise. Some experiments don&#39;t work, but most of them do, because jazz inherently allows for experimentation. The experiments that work are new music.</p>
+<p>But it’s not just hackable, it’s open-source. Jazz musicians learn from other jazz musicians by listening. It’s not a conscious effort—as you hear music, your brain registers interesting bits. It could be a sequence of notes, a chord, even a rhythmic structure. But if you like it, you’ll try to imitate it when you play, and soon it’s incorporated into your music. Jazz works because jazz musicians listen to each other and contribute to the growth and evolution of jazz as a genre.</p>
+<p>Now, the beauty of the system is that such new musical ideas aren’t created intentionally as paintings are painted. They’re accidents. Jazz musicians experiment as they improvise. Some experiments don’t work, but most of them do, because jazz inherently allows for experimentation. The experiments that work are new music.</p>
 <p>This is similar, in a way, to how design evolves. There were times when a webpage which used rounded corners and gradients and shocking animations was cool, because that was stunning new technology. At some point, Apple introduced skeuomorphic designs inspired by real-world material. Now software is moving towards flat design, where bold colors and sans-serif fonts prevail. This evolution is fueled by what designers get inspired by and what people like. Jazz evolves the same way. Music is directed towards trends, entirely based off what people enjoy listening to.</p>
-<p>You may have noticed where I&#39;m going with this. Jazz evolves through random mutations, the less musical of which are pruned out. Musicians mix strains of jazz together to produce new music which may survive better or may not work out. It&#39;s natural selection.</p>
+<p>You may have noticed where I’m going with this. Jazz evolves through random mutations, the less musical of which are pruned out. Musicians mix strains of jazz together to produce new music which may survive better or may not work out. It’s natural selection.</p>
 <p>Jazz evolves, just like creatures do.</p>
-<p>And that points to a key idea: when people can directly influence a system, it evolves very rapidly. That&#39;s why the open-source software world evolves so rapidly: the open-source world is built by the people who live in it. That, I think, is one of the key elements of the hacker culture.</p>
+<p>And that points to a key idea: when people can directly influence a system, it evolves very rapidly. That’s why the open-source software world evolves so rapidly: the open-source world is built by the people who live in it. That, I think, is one of the key elements of the hacker culture.</p>
 ]]></description>
             <link>http://hardmath123.github.io/jazz.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/jazz.html</guid>
@@ -164,25 +164,25 @@ process.stdin.on(&quot;data&quot;, function(buffer) {
 <p>The third ring for the user scripts, written on the fly.</p>
 <p>The second for superusers, to let them <code>sudo chown</code>.</p>
 <p>The first for system calls, in the CLI.</p>
-<p>The zeroth for the kernel, where the hardware&#39;s shown.</p>
+<p>The zeroth for the kernel, where the hardware’s shown.</p>
 <p>In the land of MULTICS, where the hackers lie,</p>
 <p>One ring to rule them all, one ring to find them.</p>
 <p>One ring to bring them all, and in the darkness bind them.</p>
 <p>In the land of MULTICS, where the hackers lie.</p>
 </blockquote>
 <p>Gandalf was trapped. Surrounded by malicious shell scripts, his only hope lay in <code>/rivendell</code>, which only granted access to the user group <code>Elves</code>.</p>
-<p>He cd&#39;d himself into <code>/rivendell</code> moments before a violent fork bomb exploded.</p>
-<p>&quot;Well, Elrond, it appears we have some visitors,&quot; he said, putting down his staff for a moment.</p>
-<p>&quot;Ah, Gandalf, a welcome sight in our time of need.&quot; Elrond appeared. He was perturbed—things must really be bad.</p>
-<p>&quot;As are you, my friend. The recent attacks are troubling. Not many dare attack a Sysadmin.&quot;</p>
-<p>&quot;Yes, indeed, they worry me, too,&quot; sighed Elrond, &quot;the Dwarves sent word that their bitcoin mines in <code>/moria</code> were raided for valuable nonces.&quot;</p>
-<p>&quot;<code>/moria</code>? Don&#39;t they log all commands run there, ever since the Trolls of 1402775481?&quot;</p>
-<p>&quot;Yes, Gandalf, I believe <code>/moria/log</code> contains information about everyone that tries to access <code>/moria</code>. I wonder…&quot;</p>
-<p>&quot;Way ahead of you.&quot; <code>cat /moria/log</code>, chanted Gandalf. His staff started spewing hundreds of lines of information. &quot;Argh, there&#39;s too much data! We&#39;ll never analyze it all manually.&quot; He flushed the smoke-words in a puff of <code>^C</code>.</p>
-<p>&quot;Just got word from the Dwarves—they said they flagged suspicious log messages with the word <code>suspicious</code> at the end.&quot;</p>
-<p>&quot;Good, so we don&#39;t have to filter it by hand. We can just <code>grep</code>.&quot;</p>
-<p>&quot;Grep? Is that another of those black spells you found in <code>/mordor</code>?&quot;</p>
-<p>&quot;No, Elrond, <code>grep</code> is the purest of spells. Grep searches files.&quot; <code>grep suspicious /moria/log</code>, he shouted, and the staff started listing all log messages containing &#39;suspicious&#39;.</p>
+<p>He cd’d himself into <code>/rivendell</code> moments before a violent fork bomb exploded.</p>
+<p>“Well, Elrond, it appears we have some visitors,” he said, putting down his staff for a moment.</p>
+<p>“Ah, Gandalf, a welcome sight in our time of need.” Elrond appeared. He was perturbed—things must really be bad.</p>
+<p>“As are you, my friend. The recent attacks are troubling. Not many dare attack a Sysadmin.”</p>
+<p>“Yes, indeed, they worry me, too,” sighed Elrond, “the Dwarves sent word that their bitcoin mines in <code>/moria</code> were raided for valuable nonces.”</p>
+<p>“<code>/moria</code>? Don’t they log all commands run there, ever since the Trolls of 1402775481?”</p>
+<p>“Yes, Gandalf, I believe <code>/moria/log</code> contains information about everyone that tries to access <code>/moria</code>. I wonder…”</p>
+<p>“Way ahead of you.” <code>cat /moria/log</code>, chanted Gandalf. His staff started spewing hundreds of lines of information. “Argh, there’s too much data! We’ll never analyze it all manually.” He flushed the smoke-words in a puff of <code>^C</code>.</p>
+<p>“Just got word from the Dwarves—they said they flagged suspicious log messages with the word <code>suspicious</code> at the end.”</p>
+<p>“Good, so we don’t have to filter it by hand. We can just <code>grep</code>.”</p>
+<p>“Grep? Is that another of those black spells you found in <code>/mordor</code>?”</p>
+<p>“No, Elrond, <code>grep</code> is the purest of spells. Grep searches files.” <code>grep suspicious /moria/log</code>, he shouted, and the staff started listing all log messages containing ‘suspicious’.</p>
 <pre><code>3:12:12 legolas &#39;just visiting&#39; suspicious
 3:12:15 samwise &#39;lost my pony!&#39; suspicious
 3:12:18 saruman &#39;mwahahahaha!!&#39; suspicious
@@ -191,36 +191,36 @@ process.stdin.on(&quot;data&quot;, function(buffer) {
 3:16:32 smeagol &#39;lost, we are!&#39; suspicious
 4:43:33 aragorn &#39;meeting gimli&#39; suspicious
 ...
-</code></pre><p>&quot;Aha! 3:12:15—saruman&#39;s involved.&quot; Gandalf winked.</p>
-<p>&quot;Gandalf, this is still far too much output. The Dwarves think everyone who isn&#39;t a Dwarf is suspicious!&quot;</p>
-<p>&quot;Ah, but you haven&#39;t seen the power of <code>grep</code> yet. What else do we know about the intruders&#39; log messages?&quot; Gandalf looked excited. Elrond did not approve.</p>
-<p>&quot;Well, let&#39;s assume they all said <code>mwahahahaha</code>&quot;</p>
-<p>&quot;How many ha&#39;s were there, again?&quot;</p>
-<p>&quot;It doesn&#39;t matter. We can <code>grep</code> by regexes, too.&quot; Gandalf picked up his infamous pipe, and smoked the first grep&#39;s output into a new charm: <code>grep suspicious /moria/log | grep -e &quot;mwa\(ha\)*&quot;</code>.</p>
-<p>&quot;The Kleene star operator <code>*</code> we used searches any number of the group before it.&quot;</p>
-<p>&quot;And those backslashes?&quot;</p>
-<p>&quot;Escaping. Parentheses are special words in spell charms, you need to use backslashes to prevent them from accidentally burning a Hobbit-subdirectory or something.&quot;</p>
+</code></pre><p>“Aha! 3:12:15—saruman’s involved.” Gandalf winked.</p>
+<p>“Gandalf, this is still far too much output. The Dwarves think everyone who isn’t a Dwarf is suspicious!”</p>
+<p>“Ah, but you haven’t seen the power of <code>grep</code> yet. What else do we know about the intruders’ log messages?” Gandalf looked excited. Elrond did not approve.</p>
+<p>“Well, let’s assume they all said <code>mwahahahaha</code>“</p>
+<p>“How many ha’s were there, again?”</p>
+<p>“It doesn’t matter. We can <code>grep</code> by regexes, too.” Gandalf picked up his infamous pipe, and smoked the first grep’s output into a new charm: <code>grep suspicious /moria/log | grep -e &quot;mwa\(ha\)*&quot;</code>.</p>
+<p>“The Kleene star operator <code>*</code> we used searches any number of the group before it.”</p>
+<p>“And those backslashes?”</p>
+<p>“Escaping. Parentheses are special words in spell charms, you need to use backslashes to prevent them from accidentally burning a Hobbit-subdirectory or something.”</p>
 <pre><code>3:12:18 saruman &#39;mwahahahaha!!&#39; suspicious
 3:12:18 azogorc &#39;mwahahaha....&#39; suspicious
 3:12:18 urukhai &#39;mwahahahahaha&#39; suspicious
-</code></pre><p>&quot;Gandalf, I&#39;ve got to hand it to you, you are the greatest—&quot;</p>
-<p>&quot;—no time for that,&quot; interrupted Gandalf, &quot;we&#39;ve got to stop them before they get to Rivendell!&quot;</p>
-<p>&quot;They&#39;ll never guess the password. We&#39;re safe for a bit.&quot;</p>
-<p>&quot;With all due respect, Elrond, it&#39;s trivial to guess it.&quot;</p>
-<p>Elrond choked. &quot;What?!&quot;</p>
-<p>&quot;Shush. Knowing you, it&#39;s probably not Elvish—you&#39;re too clever for that. It&#39;s probably English.&quot;</p>
-<p>&quot;And knowing your memory, probably not more than a word.&quot; He got up and started pacing.</p>
+</code></pre><p>“Gandalf, I’ve got to hand it to you, you are the greatest—“</p>
+<p>“—no time for that,” interrupted Gandalf, “we’ve got to stop them before they get to Rivendell!”</p>
+<p>“They’ll never guess the password. We’re safe for a bit.”</p>
+<p>“With all due respect, Elrond, it’s trivial to guess it.”</p>
+<p>Elrond choked. “What?!”</p>
+<p>“Shush. Knowing you, it’s probably not Elvish—you’re too clever for that. It’s probably English.”</p>
+<p>“And knowing your memory, probably not more than a word.” He got up and started pacing.</p>
 <p>(<code>cat /usr/share/dict/words</code>, he chanted under his breath.)</p>
-<p>&quot;Gandalf, I swear upon sword, this password was forged by the high elves of—&quot;</p>
-<p>&quot;—and between six and eight characters, I would guess…&quot;</p>
-<p>(<code>grep &quot;^\w\{6,8\}$&quot;</code>, he chanted. &quot;This one&#39;s tricky. <code>^</code> means start of the word, <code>\w</code> means an alphabet, and <code>{6,8}$</code> mean 6-8 of those until the end.&quot;)</p>
-<p>&quot;Now we can be a bit clever. Elvish uses the <code>ui</code> sound a lot, I bet that&#39;s in there. Can&#39;t teach an old orc new tricks.&quot;</p>
+<p>“Gandalf, I swear upon sword, this password was forged by the high elves of—“</p>
+<p>“—and between six and eight characters, I would guess…”</p>
+<p>(<code>grep &quot;^\w\{6,8\}$&quot;</code>, he chanted. “This one’s tricky. <code>^</code> means start of the word, <code>\w</code> means an alphabet, and <code>{6,8}$</code> mean 6-8 of those until the end.”)</p>
+<p>“Now we can be a bit clever. Elvish uses the <code>ui</code> sound a lot, I bet that’s in there. Can’t teach an old orc new tricks.”</p>
 <p>(<code>grep ui</code>, he chanted)</p>
-<p>&quot;Oh, and you&#39;ve always been partial to vowels before words (your kids are Arwen, Aragorn, Elladan and Elrohir)&quot;</p>
-<p>(<code>grep &quot;^\(a\|e\)&quot;</code>, he chanted. &quot;Start-of-word and then a or e. The <code>|</code> means or.&quot;)</p>
-<p>&quot;so that narrows it down to about…&quot; He waved his wand about rapidly. &quot;…Sixty-six.&quot;</p>
-<p>&quot;GANDALF!&quot; Elrond&#39;s ears were turning red. Maybe his hair was, too. &quot;You only get one chance at guessing, though,&quot; he added with a wry smile.</p>
-<p>&quot;Let&#39;s go through that list. Which one fits an Elf-king? It must be… yes…&quot; Gandalf got up and whispered: &quot;Altruism.&quot;</p>
+<p>“Oh, and you’ve always been partial to vowels before words (your kids are Arwen, Aragorn, Elladan and Elrohir)”</p>
+<p>(<code>grep &quot;^\(a\|e\)&quot;</code>, he chanted. “Start-of-word and then a or e. The <code>|</code> means or.”)</p>
+<p>“so that narrows it down to about…” He waved his wand about rapidly. “…Sixty-six.”</p>
+<p>“GANDALF!” Elrond’s ears were turning red. Maybe his hair was, too. “You only get one chance at guessing, though,” he added with a wry smile.</p>
+<p>“Let’s go through that list. Which one fits an Elf-king? It must be… yes…” Gandalf got up and whispered: “Altruism.”</p>
 <p>To be continued.</p>
 ]]></description>
             <link>http://hardmath123.github.io/string1.html</link>
@@ -232,13 +232,13 @@ process.stdin.on(&quot;data&quot;, function(buffer) {
             <title><![CDATA[Well, well, well, we meet again.]]></title>
             <description><![CDATA[A new beginning?
 
-<p>I&#39;m back.</p>
+<p>I’m back.</p>
 <p>The new Comfortably Numbered runs on a new state-of-the art blogging platform, developed (of course) by yours truly: shock. Shock brings together a lot of powerful technologies written by smarter people, and bundles them up into a command line tool to publish posts.</p>
 <p>Shock generates an RSS feed, a homepage, a 404 page, and content pages, all built on templates and CSS that <em>you</em> write yourself. Then it lumps those in a directory that you can serve on anything clever enough to serve static filesystems: Dropbox, Google Drive, Github Pages, Amazon S3, even your home computer.</p>
-<p>Shock uses Mustache&#39;s non-logical templating system (non-logical, in this context, is a compliment). It was built on a rather simple idea: <strong>if you&#39;re using a node-based command-line platform to create a blog, chances are you want control over every single aspect of presentation</strong>. In fact, I consider that one of the primary symptoms of being a hacker.</p>
-<p>Hackers want control over everything that they use. It&#39;s why we prefer extensible text editors and browser add-ons, and why we spend hours tinkering with spacing equations in TeX. It&#39;s also part of the reason I migrated away from Google; App Engine is a very closed non-hacker-friendly environment. The hacker-control symptoms are what guide us subconsciously in choosing and designing software. We prefer open-source projects and scriptable systems because they conform to the pattern of software that gives control to the user.</p>
-<p>The opposite is true for most nonhacker packages. Word and PowerPoint are &#39;merciful god&#39; software: they give you features (for example, those dreadful PowerPoint animations) which you may or may not use, but they retain complete control over what can be done. Compare that to a hacker-friendly document generation technology like TeX or CSS. Similarly, nonhacker image editors or other similar applications try to hide the filesystem from you. The most recent project you were working on magically appears, along with a list of other recent projects. This is unaccaptable to a hacker.</p>
-<p>I feel the easiest way to convey this message is: &quot;don&#39;t be afraid to expose your software&#39;s guts&quot;. Often, the best software is the kind that gives you as many handles and hooks as possible. Make your command-line tools UNIX filters wherever possible: read from <code>stdin</code> and write to <code>stdout</code>. Use a universally usable format like JSON for storing data. Most importantly, <em>never</em> explicitly disallow a user from doing anything.</p>
+<p>Shock uses Mustache’s non-logical templating system (non-logical, in this context, is a compliment). It was built on a rather simple idea: <strong>if you’re using a node-based command-line platform to create a blog, chances are you want control over every single aspect of presentation</strong>. In fact, I consider that one of the primary symptoms of being a hacker.</p>
+<p>Hackers want control over everything that they use. It’s why we prefer extensible text editors and browser add-ons, and why we spend hours tinkering with spacing equations in TeX. It’s also part of the reason I migrated away from Google; App Engine is a very closed non-hacker-friendly environment. The hacker-control symptoms are what guide us subconsciously in choosing and designing software. We prefer open-source projects and scriptable systems because they conform to the pattern of software that gives control to the user.</p>
+<p>The opposite is true for most nonhacker packages. Word and PowerPoint are ‘merciful god’ software: they give you features (for example, those dreadful PowerPoint animations) which you may or may not use, but they retain complete control over what can be done. Compare that to a hacker-friendly document generation technology like TeX or CSS. Similarly, nonhacker image editors or other similar applications try to hide the filesystem from you. The most recent project you were working on magically appears, along with a list of other recent projects. This is unaccaptable to a hacker.</p>
+<p>I feel the easiest way to convey this message is: “don’t be afraid to expose your software’s guts”. Often, the best software is the kind that gives you as many handles and hooks as possible. Make your command-line tools UNIX filters wherever possible: read from <code>stdin</code> and write to <code>stdout</code>. Use a universally usable format like JSON for storing data. Most importantly, <em>never</em> explicitly disallow a user from doing anything.</p>
 <p>Preventing stupid things also prevents clever things.</p>
 ]]></description>
             <link>http://hardmath123.github.io/helloagain.html</link>

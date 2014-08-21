@@ -40,19 +40,19 @@
             <br/>
             <p>So recently, Sarah Mei blogged that <a href="http://www.sarahmei.com/blog/2014/07/15/programming-is-not-math/">programming is not math</a>. Jeremy Kun <a href="http://j2kun.svbtle.com/programming-is-not-math-huh">responded</a>, pointing out that math is an integral part of programming.</p>
 <p>I found both articles interesting, but I wanted to add my thoughts on some things both of them wrote. So here they are.</p>
-<p>Let&#39;s start with math. Math feels like mining. You know there&#39;s gold somewhere below you. Perhaps it&#39;s some theorem you&#39;re trying to prove. Math is about digging in the right direction from the right spot in the massive network of tunnels we&#39;ve already derived. And although you can dig in any direction, it&#39;s not always obvious how to proceed from where you are to your target. The most brilliant mathematicians are the ones who have the best intuition about which way to dig. Some directions are obviously less efficient than others—digging through a rocky bit is much harder (but a clever mathematician might notice that it&#39;s just a thin wall and there&#39;s gold on the other side).</p>
-<p>For example, consider a problem like <em>&quot;Find the area of a triangle with side lengths 39, 52, and 65.&quot;</em> This was on my math final back in 7th grade. We were taught the path that goes through Heron&#39;s formula. Calculate semiperimeter, multiply, square root. That&#39;s the long way through soft earth. Of course, if you haven&#39;t noticed already, there&#39;s an easier way. You notice that 39, 52, and 65 are all multiples of 13, which is suspicious. If you divide by 13, you get 3, 4, and 5 which is a Pythagorean triple! So this is just a right triangle scaled up by a factor of 13. So the area is just the half the product of the two smaller side lengths.</p>
-<p>This was the short path through the rocky earth. You need intuition to even consider going that way; and that intuition isn&#39;t easy to acquire.</p>
+<p>Let’s start with math. Math feels like mining. You know there’s gold somewhere below you. Perhaps it’s some theorem you’re trying to prove. Math is about digging in the right direction from the right spot in the massive network of tunnels we’ve already derived. And although you can dig in any direction, it’s not always obvious how to proceed from where you are to your target. The most brilliant mathematicians are the ones who have the best intuition about which way to dig. Some directions are obviously less efficient than others—digging through a rocky bit is much harder (but a clever mathematician might notice that it’s just a thin wall and there’s gold on the other side).</p>
+<p>For example, consider a problem like <em>“Find the area of a triangle with side lengths 39, 52, and 65.”</em> This was on my math final back in 7th grade. We were taught the path that goes through Heron’s formula. Calculate semiperimeter, multiply, square root. That’s the long way through soft earth. Of course, if you haven’t noticed already, there’s an easier way. You notice that 39, 52, and 65 are all multiples of 13, which is suspicious. If you divide by 13, you get 3, 4, and 5 which is a Pythagorean triple! So this is just a right triangle scaled up by a factor of 13. So the area is just the half the product of the two smaller side lengths.</p>
+<p>This was the short path through the rocky earth. You need intuition to even consider going that way; and that intuition isn’t easy to acquire.</p>
 <p>This is far from a perfect analogy, but it suffices to explain why a lot of people find math hard. Many schools teach you the paths to take, rather than the intuition you need to build up to be able to find them yourself.</p>
-<p>I write all this to make a contrast with CS: <em>the majority of CS doesn&#39;t require mathematical rock-wall insights</em>. You simply need to be able to think about how to solve problems by breaking them into smaller problems. You never get &#39;stuck&#39;, because you can <em>always</em> reduce a problem you have to something else (even if it&#39;s an ugly brute-force solution). Math has dead ends and paths that circle back to where you were originally. Programming is like building a skyscraper: the only way is up.</p>
+<p>I write all this to make a contrast with CS: <em>the majority of CS doesn’t require mathematical rock-wall insights</em>. You simply need to be able to think about how to solve problems by breaking them into smaller problems. You never get ‘stuck’, because you can <em>always</em> reduce a problem you have to something else (even if it’s an ugly brute-force solution). Math has dead ends and paths that circle back to where you were originally. Programming is like building a skyscraper: the only way is up.</p>
 <p>This, I think, is why many people find programming easier than pure math.</p>
 <blockquote>
 <p>…computer science is not programming. At most academic CS schools, the explicit intent is that students learn programming as a byproduct of learning CS. Programming itself is seen as rather pedestrian, a sort of exercise left to the reader.</p>
-<p>-- Sarah Wei</p>
+<p>— Sarah Wei</p>
 </blockquote>
 <p>I thought this was rather interesting. I have seen this idea in a lot of places, but I have the opposite viewpoint.</p>
-<p>CS is a way to formalize programming concepts. Learning programming isn&#39;t a byproduct of learning CS, bur rather learning CS is a byproduct of learning programming. The more you have programmed, the more problems you have solved, and the more CS ideas you&#39;ve internalized.</p>
-<p>Here&#39;s an example. You have a curb 100 meters long. (Idealized) cars 3 meters long park randomly along the curb, one after another, until there&#39;s no space greater than 3 meters between any two cars. Write a program to simulate this many times and compute the average number of cars that can park.</p>
+<p>CS is a way to formalize programming concepts. Learning programming isn’t a byproduct of learning CS, bur rather learning CS is a byproduct of learning programming. The more you have programmed, the more problems you have solved, and the more CS ideas you’ve internalized.</p>
+<p>Here’s an example. You have a curb 100 meters long. (Idealized) cars 3 meters long park randomly along the curb, one after another, until there’s no space greater than 3 meters between any two cars. Write a program to simulate this many times and compute the average number of cars that can park.</p>
 <p>Take a moment to try to envision this program.</p>
 <p>If you took an awesome CS class, you should have ended up with something like this:</p>
 <pre><code class="lang-scheme">(define (number-of-cars len)
@@ -63,31 +63,31 @@
                     (number-of-cars (* (- len 3) offset))
                     (number-of-cars (* (- len 3) (- 1 offset))))))))
 </code></pre>
-<p>Guess what? It&#39;s <em>tree recursion</em>, which is, surprise surprise, a classic &#39;CS concept&#39;). But your programming mind didn&#39;t think of it as a tree recursion problem. CS formalizes the idea of tree recursion because it&#39;s so common in programming. It gives this idea a name, and lets you use this name when communicating with humans. It lets you use someone else&#39;s Tree implementation, knowing exactly what to expect. It gives you an overview of common ideas that expand on trees—binary search trees, or perhaps breadth-first searching.</p>
-<p>But in the end, it&#39;s all programming that has been catalogued so that you can do math on it.</p>
+<p>Guess what? It’s <em>tree recursion</em>, which is, surprise surprise, a classic ‘CS concept’). But your programming mind didn’t think of it as a tree recursion problem. CS formalizes the idea of tree recursion because it’s so common in programming. It gives this idea a name, and lets you use this name when communicating with humans. It lets you use someone else’s Tree implementation, knowing exactly what to expect. It gives you an overview of common ideas that expand on trees—binary search trees, or perhaps breadth-first searching.</p>
+<p>But in the end, it’s all programming that has been catalogued so that you can do math on it.</p>
 <blockquote>
 <p>I taught Ruby on Rails, which is a web programming framework; people came because they wanted to learn how to make websites. Because of those motivations, the curriculum had virtually no math.</p>
-<p>-- Sarah Wei</p>
+<p>— Sarah Wei</p>
 </blockquote>
-<p>Ah, this brings up the topic of a really interesting discussion I had with some friends a while ago. Here&#39;s a summary:</p>
-<p>There&#39;s a lot of CS to be learned by studying the Internet: networking, protocol design, language design, layout engines, and security are just a few.</p>
-<p>But is setting up a web server really programming? We felt it&#39;s a distinction between building and assembling. Teaching someone how to make a web server with today&#39;s frameworks is more about teaching them Ruby syntax and the APIs, and less about algorithms and logic. It&#39;s not raw computer science, it&#39;s following some instructions and inputting your own values. Using a clay mold shouldn&#39;t count as sculpting.</p>
+<p>Ah, this brings up the topic of a really interesting discussion I had with some friends a while ago. Here’s a summary:</p>
+<p>There’s a lot of CS to be learned by studying the Internet: networking, protocol design, language design, layout engines, and security are just a few.</p>
+<p>But is setting up a web server really programming? We felt it’s a distinction between building and assembling. Teaching someone how to make a web server with today’s frameworks is more about teaching them Ruby syntax and the APIs, and less about algorithms and logic. It’s not raw computer science, it’s following some instructions and inputting your own values. Using a clay mold shouldn’t count as sculpting.</p>
 <p>As much as I admire initiatives to teach CS, I feel that we should be teaching the algorithmic beauty alongside the more practical day-to-day skills.</p>
 <blockquote>
 <p>Specifically, learning to program is more like learning a new language than it is like doing math problems.</p>
-<p>-- Sarah Wei</p>
+<p>— Sarah Wei</p>
 </blockquote>
-<p>A lot of people talk about CS as math and language, but I&#39;ve always felt that it&#39;s more like building a tower with LEGOs. Programming isn&#39;t about the language you use—it&#39;s about the paradigm. Once you understand classes and methods, learning a new language of the same paradigm is at best a weekend job. Instead, programming is about taking blocks you already have, and fitting them together. The language is just a medium to communicate with the computer; we could use punch cards, or command lines, or fancy graphical programming software. What matters is what that medium is communicating. Writing in general follows this, too—writing a good blog post requires an exciting idea to convey. Text is just a medium to communicate the idea.</p>
+<p>A lot of people talk about CS as math and language, but I’ve always felt that it’s more like building a tower with LEGOs. Programming isn’t about the language you use—it’s about the paradigm. Once you understand classes and methods, learning a new language of the same paradigm is at best a weekend job. Instead, programming is about taking blocks you already have, and fitting them together. The language is just a medium to communicate with the computer; we could use punch cards, or command lines, or fancy graphical programming software. What matters is what that medium is communicating. Writing in general follows this, too—writing a good blog post requires an exciting idea to convey. Text is just a medium to communicate the idea.</p>
 <blockquote>
 <p>It helps even more that mathematics and programming readily share topics. You teach graph coloring for register allocation, linear algebra and vector calculus for graphics, combinatorics for algorithms.</p>
-<p>-- Jeremy Kun</p>
+<p>— Jeremy Kun</p>
 </blockquote>
-<p>Programming isn&#39;t about math you <em>implement</em>.</p>
-<p>Understanding, for example, vector algebra to write a raytracer is important to know <em>what</em> you&#39;re doing, but it&#39;s not programming—programming is being able to know <em>how</em> to do it.</p>
-<p>To be successful in the modern computing landscape, you need to know math because the ability to compute is enhanced by the ability to put computation in a mathematical context. Twenty or thirty years ago, you might have considered discrete math (parsing), calculus (waveforms), and trig (graphics) to be instrumental. Today, it&#39;s statistics (big data) and number theory (crypto).</p>
+<p>Programming isn’t about math you <em>implement</em>.</p>
+<p>Understanding, for example, vector algebra to write a raytracer is important to know <em>what</em> you’re doing, but it’s not programming—programming is being able to know <em>how</em> to do it.</p>
+<p>To be successful in the modern computing landscape, you need to know math because the ability to compute is enhanced by the ability to put computation in a mathematical context. Twenty or thirty years ago, you might have considered discrete math (parsing), calculus (waveforms), and trig (graphics) to be instrumental. Today, it’s statistics (big data) and number theory (crypto).</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>What I wanted to say—and ended up digressing in rambles along the way—was that the intrinsic difference between math and computing is that math needs you to have good taking-apart intuition, while programming needs you to have good putting-together intuition.</p>
-<p>And so here&#39;s a parting thought: in my school, CS is lumped with all the other electives. Theater, drawing, photography, food, and auto tech are in the same category. Would you move CS to the math department? Hint: this isn&#39;t a trivial question!</p>
+<p>And so here’s a parting thought: in my school, CS is lumped with all the other electives. Theater, drawing, photography, food, and auto tech are in the same category. Would you move CS to the math department? Hint: this isn’t a trivial question!</p>
 
             <div id="disqus_thread"></div>
             <script type="text/javascript">
