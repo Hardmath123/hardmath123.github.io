@@ -211,3 +211,7 @@ blockquote {
 blockquote p {
     text-indent:0px;
 }
+
+code[class*="language-"] {
+  font-size: inherit !important;
+}
