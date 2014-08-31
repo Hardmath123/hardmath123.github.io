@@ -18,7 +18,7 @@ This happened, for instance, in my AP Computer Science class last year. Almost e
 
 Honestly, studying for the AP CS test isn't very different from studying for the Spelling Bee. It's just memorizing and practicing. It isn't learning.
 
-I propose a different course format, for students learning for pleasure. The course is *not* graded. Instead, it simply connects students with teachers, who guide them in their learning. There is no curriculum.
+I propose, as an intellectual exercise, a different course format, for students learning for pleasure. The course is *not* graded. Instead, it simply connects students with teachers, who guide them in their learning. There is no curriculum.
 
 The inspiration for this comes from my adventures trying to teach myself computer science--often, the hardest part is to choose something to study, and to decide how much detail to study it in. When a student is paired with a competent expert in a field, he has someone to ask for guidance.
 
