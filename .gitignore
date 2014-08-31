@@ -2,4 +2,4 @@ drafts/*
 .DS_Store
 drafts/
 *.swp
-
+content/stats.sh
