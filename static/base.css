@@ -13,6 +13,7 @@ body {
 p {
   text-indent: 20px;
   line-height: 2em;
+  text-rendering: optimizeLegibility;
 }
 
 q {
