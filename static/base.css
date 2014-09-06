@@ -16,6 +16,10 @@ p {
   text-rendering: optimizeLegibility;
 }
 
+img {
+  max-width: 100%;
+}
+
 q {
   quotes: "“" "”" "‘" "’";
 }
