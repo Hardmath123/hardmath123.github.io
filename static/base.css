@@ -1,7 +1,9 @@
-@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic);
+/*
+ * @import url(http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic);
+ */
 
 body {
-  font-family: "Libre Baskerville", serif;
+  font-family: Georgia, Times, serif;
   background-color: white;
   margin: 0;
   padding: 0;
@@ -185,11 +187,6 @@ h3 {
 #whoami h2 {
   font-size: 1.2em;
   font-family: cursive;
-}
-
-#scrolldown {
-  text-align: center;
-  margin-bottom: 100px;
 }
 
 
