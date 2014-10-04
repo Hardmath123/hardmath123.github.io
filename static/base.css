@@ -75,6 +75,10 @@ strong.visitedposts a {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #ddd;
+  
+  border-top-style:solid;
+  border-top-width:3px;
+  border-top-color:#77A;
 }
 
 #header h1 {
