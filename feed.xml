@@ -5,9 +5,39 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 04 Oct 2014 03:37:23 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 10 Oct 2014 17:18:20 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Detech Your Classroom]]></title>
+            <description><![CDATA[Technology isn't helping.
+
+<p>I go to a tech-savvy school. And it’s getting out of hand.</p>
+<p>On a daily basis, I navigate through several websites just to <em>find</em> my homework. <strong>Schoology</strong> tells me the assignment and due date. Then I head over to the teacher’s <strong>Google Site</strong> (almost every teacher maintains a class website). I need to complete sets of flashcards on <strong>Quizlet</strong>, make a project on <strong>Glogster</strong>, record my French on <strong>Audacity</strong> and post it to <strong>Dropbox</strong> (or, in one case, <strong>YouTube</strong> and print out a <strong>QR code</strong> that links there). I have to fill out final exams on <strong>Google Forms</strong>. I need to use <strong>SmartMusic</strong> to record my piano-playing.</p>
+<p>I check my grades on <strong>Infinite Campus</strong>, except for Chemistry, where my teacher has a <em>hand-coded</em> webpage (it uses frames and contains the tag <code>&lt;SCRIPT LANGUAGE=&quot;Javascript&quot;&gt;&lt;!--...//--&gt;</code>). One of my classes runs on <strong>ClassroomDojo</strong>, which is essentially the Karma system applied to class participation, and directly linked to grading.</p>
+<p><strong>Geddit</strong> wants each student to have an iPad, enabling teachers (for the first time in history!) to ask the entire class a question and see who can find the answer. Their website’s testimonial from a 9th grader is “Geddit, is like, totally private. So I can let my teacher know how I’m doing without, like, anyone else knowing.” English essays get turned into <strong>Turnitin</strong>, which checks them against a large database and informs us that most of them are liberally plagiarized, since we quoted Orwell. I’ve had to learn math on <strong>Mindspark</strong>; my fellow sixth graders could figure out how to crack the site (hint: they don’t sanitize HTML).</p>
+<p>Our teachers all have ‘Smart boards’, which are essentially things that project onto whiteboards, except you can’t write on them with normal markers without being yelled at. And the projecters take half the period to start working, and then they do, they’re tempramental at best. If the teacher remembers to bring the cable.</p>
+<p>Almost every class uses <strong>Scantrons</strong>, though the net increase in mis-bubbling, mis-grading, and overall stress made me realize that it might actually be less work for teachers to just check circled answers on a printout. I never liked multiple-choice tests, because it almost never tests the right things. It takes a far deeper understanding of science, history, a language, or math to write a coherent sentence. It’s also harder to cheat.</p>
+<p>And that’s just the technology <em>I</em> deal with. There’s <strong>NoRedInk</strong>, which tries to teach you grammar. There’s <strong>Understoodit</strong>, which tries to eliminate hand-raising (is the problem <em>really</em> that students are too embarrassed to raise their hands? I doubt it.). And then there are the various counterparts that each of these apps has.</p>
+<p>All I needed for my CS class was a terminal…</p>
+<hr>
+<p>Sure, I understand that teachers want to use technology to promote learning. But there’s a difference between using technology, and shoving technology into an otherwise functional classroom. Most of these new ‘classroom technologies’ <em>don’t</em> teach us French. They teach us how to tolerate a badly-coded website. Technology is all about picking (or building) tools to make life easier. It’s about automation. Just because it appears on a screen doesn’t mean that it’s making life easier. Is writing a “blog entry post” or “E-mail to your teacher” instead of a paragraph or letter really that much more exciting?</p>
+<p>As an analogy (because I don’t have too many of those already), it’s like telling a kid to use more special effects in their PowerPoint presentation. He’s learning the <em>opposite</em> of what he should. He’s going to end up as one of those people with red-text-on-a-blue-background, and five minute long slide transitions, and animations with Wile E. Coyote noises, because that’s what pleases the teacher.</p>
+<p>But you <em>want</em> to teach him how to make a presentation that appeals to people and conveys information. Hopefully.</p>
+<p>Similarly, technology at a classroom isn’t going to teach children what you want them to learn. It’s going to tell them to rapidly adopt any new technology without considering whether it’s needed. It’s going to tell them that the existence of technology makes things more impressive. It sends out a false message that they’re ‘computer whizzes’.</p>
+<p>It isn’t going to teach them to choose tools wisely. To be careful with how you invest your time. To assess whether the software is really helping you or not. And it’s <em>certainly</em> not going to teach them any computer science. Contrary to popular opinion, not all kids are tech savants. Not all kids even <em>have</em> the resources. I don’t own a smartphone; I can’t efficiently scan a QR code at home.</p>
+<p>The truth is that every student needs to learn by interacting with a learned instructor. Technology distances us from teachers. I will learn a lot more if I’m being assessed by a human. A computer can instantly give me the percent of questions I answered correctly, but I honestly don’t care. Start-ups that offer these services are, at the deepest level, businesses who don’t really have much interest in improving education (if they did, they would be doing a better job!). Stockholders aren’t in the classrooms.</p>
+<p>Yes, there’s an education crisis (and yes, there has <em>always</em> been an education crisis), but the solution is not to monkey-patch it by thinking technology is smarter. The solution is to make sure teachers, not technology, interface with students.</p>
+<p>I think I’m going to go write a script to poll my chem grades and email me when they’re updated.</p>
+<p>P.S. What technology <em>do</em> I approve of at school? <strong>Google Drive</strong> is wonderful for word processing for high school. <strong>Email</strong> turns out to be (surprise, surprise) really useful. <strong>iCal</strong> (a.k.a. “Calendar”) is a good brain dump software. Google <strong>Keep</strong> helps manage lists and links. <strong>Feedly</strong> helps keep track of reading material. But my favorite bit of school-managing is a printout in a three-ring binder.</p>
+<p>P.S.S. For nerds: <strong>Git</strong> is great to version-control big school projects. Because you’re going to mess up. <strong>LaTeX</strong> is great for reports/labs/essays/presentations (!), because typesetting means more than you think. <strong>WolframAlpha</strong> saved me in a lot of classes involving research. Oh, and it does math, too. <strong>GeoGebra</strong> turns out to be great for making diagrams and shiny demos in geometry.</p>
+<p>P.S.S.S. A lot of teachers (including my (awesome) CS teacher) try to enforce submission deadlines by asking you to save a timestamped copy of your document in case you can’t submit the assignment to Turnitin. This is a <em>terrible</em> idea. As an exercise, use <code>touch -t</code> to show that this is a trivial system to beat. Then suggest a practical but reasonably secure alternative (hashes are small enough to write down on paper and bring to school).</p>
+]]></description>
+            <link>http://hardmath123.github.io/tech-in-education.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/tech-in-education.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Fri, 10 Oct 2014 07:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Bingo is Boring]]></title>
             <description><![CDATA[Memories of elementary school
@@ -138,7 +168,7 @@ process.stdin.on(&quot;data&quot;, function(buffer) {
             <pubDate>Wed, 06 Aug 2014 07:00:00 GMT</pubDate>
         </item>
         <item>
-            <title><![CDATA[Re: Re: Programming is not math]]></title>
+            <title><![CDATA[Programming is not math]]></title>
             <description><![CDATA[My two cents on a couple of blog posts.
 
 <p>So recently, Sarah Mei blogged that <a href="http://www.sarahmei.com/blog/2014/07/15/programming-is-not-math/">programming is not math</a>. Jeremy Kun <a href="http://j2kun.svbtle.com/programming-is-not-math-huh">responded</a>, pointing out that math is an integral part of programming.</p>

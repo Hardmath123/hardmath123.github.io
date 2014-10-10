@@ -86,7 +86,7 @@
             "markdown": true
         },
         {
-            "title": "Re: Re: Programming is not math",
+            "title": "Programming is not math",
             "author": "Hardmath123",
             "description": "My two cents on a couple of blog posts.",
             "file": "isprogrammingmath.md",
@@ -123,6 +123,14 @@
             "description": "Memories of elementary school",
             "file": "smiley.md",
             "date": "10/2/14",
+            "markdown": true
+        },
+        {
+            "title": "Detech Your Classroom",
+            "author": "Hardmath123",
+            "description": "Technology isn't helping.",
+            "file": "tech-in-education.md",
+            "date": "10/10/14",
             "markdown": true
         }
     ]
