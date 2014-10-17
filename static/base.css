@@ -160,6 +160,7 @@ h3 {
   margin-right: auto;
 }
 
+
 #postlist p {
     margin-bottom: 50px;
     text-indent: 0px;
@@ -198,6 +199,10 @@ h3 {
   font-size: 4em;
   margin-right: 2px;
   font-family: "Didot", "Baskerville", "Garamond", serif;
+}
+
+#postcontent > p:first-of-type:first-line {
+  font-variant: small-caps;
 }
 
 strong a {
