@@ -132,6 +132,14 @@
             "file": "tech-in-education.md",
             "date": "10/10/14",
             "markdown": true
+        },
+        {
+            "title": "Better Earley then never",
+            "author": "Hardmath123",
+            "description": "An informal explanation of Earley parsing.",
+            "file": "earley.md",
+            "date": "10/25/14",
+            "markdown": true
         }
     ]
 }

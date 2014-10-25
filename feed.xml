@@ -5,9 +5,95 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 15 Oct 2014 03:33:28 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 25 Oct 2014 18:49:36 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Better Earley then never]]></title>
+            <description><![CDATA[An informal explanation of Earley parsing.
+
+<p>I wrote <a href="http://github.com/Hardmath123/nearley">nearley</a> working on course materials for a Berkeley CS course, but it quickly spiralled into a pretty big project. Perhaps more than parsing, I learned how to manage an open-source project with multiple contributors, and how to take concepts written in math-heavy notation and convert them to ideas (and code!).</p>
+<p>There aren’t many tutorials about Earley parsing, because Earley parsing has been shadowed by the recursive descent or lookahead parsers that everyone uses. (The only significant Earley project out there is Marpa; I got some help from Marpa’s creator, Jefferey Kegler.) But Earley parsers are awesome, because they will parse <em>anything</em> you give them. Depending on the algorithm specified, popular parsers such as lex/yacc, flex/bison, Jison, PEGjs, and Antlr will break depending on the grammar you give it. And by break, I mean infinite loops caused by left recursion, crashes, or stubborn refusals to compile because of a “shift-reduce error”.</p>
+<p>Here’s my mini-tutorial that explains Earley parsing, with an emphasis on de-emphasizing notation. It’s adapted from a file that used to live in the git repo for nearley.</p>
+<h3 id="primer-backus-naur-form">Primer: Backus-Naur Form</h3>
+<p>The Earley algorithm parses a string (or any other form of a stream of tokens) based on a grammar in Backus-Naur Form. A BNF grammar consists of a set of <strong>production rules</strong>, which are expansions of <strong>nonterminals</strong>. This is best illustrated with an example:</p>
+<pre><code>expression -&gt;
+    number # a number is a valid expression
+    | expression &quot;+&quot; expression # sum
+    | expression &quot;-&quot; expression # difference
+    | &quot;(&quot; expression &quot;)&quot; # parenthesization
+
+number -&gt; &quot;1&quot; | &quot;2&quot; # for simplicity&#39;s sake, there are only 2 numbers
+</code></pre><p>This small language would let you write programs such as <code>(1+2+1+2)-1-2-1</code>. <code>expression</code> and <code>number</code> are <em>nonterminals</em>, and <code>&quot;+&quot;</code> and <code>&quot;-&quot;</code> are <em>literals</em>. The literals and nonterminals together are <strong>tokens</strong>.</p>
+<p>The <strong>production rules</strong> followed the <code>-&gt;</code>s. The <code>|</code>s delimited different expansions. Thus, we could have written</p>
+<pre><code>number -&gt; &quot;1&quot;
+number -&gt; &quot;2&quot;
+</code></pre><p>and it would be an identical grammar.</p>
+<p>For the rest of this guide, we use the following simple, recursive grammar:</p>
+<pre><code>E -&gt; &quot;(&quot; E &quot;)&quot;
+   | null
+</code></pre><p>this matches an arbitrary number of balanced parentheses: <code>()</code>, <code>(())</code>, etc. It also matches the empty string ``. Keep in mind that for a parsing algorithm, this is already very powerful, because you cannot write a regular expression for this example.</p>
+<h3 id="algorithm">Algorithm</h3>
+<p>Earley works by producing a table of partial parsings.</p>
+<p>(Warning: some notation is about to ensue.)</p>
+<p>The nth column of the table contains all possible ways to parse <code>s[:n]</code>, the first <em>n</em> characters of <em>s</em>. Each parsing is represented by the relevant production rule, and a <strong>marker</strong> denoting how far we have parsed. This is represented with a dot <code>•</code> character placed after the last parsed token.</p>
+<p>Consider the parsing of ths string <code>()</code> with the grammar <code>E</code> above. Column 0 of the table looks like:</p>
+<pre><code># COL 0
+1. E -&gt; • &quot;(&quot; E &quot;)&quot;
+2. E -&gt; • null
+</code></pre><p>which indicates that we are expecting either of those two sequences.</p>
+<p>We now proceed to process each entry (in order) as follows:</p>
+<ol>
+<li>If the next token (the token after the marker <code>•</code>) is <code>null</code>, insert a new entry, which is identical excpept that the marker is incremented. (The <code>null</code> token doesn’t matter.) Then re-process according to these rules.</li>
+<li>If the next token is a nonterminal, insert a new entry, which expects this nonterminal.</li>
+<li>If there is no expected token (that is, the marker is all the way at the end), then we have parsed the nonterminal completely. Thus, find the rule that expected this nonterminal (as a result of rule 1), and increment its marker.</li>
+</ol>
+<h3 id="example-">Example!</h3>
+<p>Following this procedure for Column 0, we have:</p>
+<pre><code># COL 0 [processed]
+1. E -&gt; • &quot;(&quot; E &quot;)&quot;
+2. E -&gt; • null
+3. E -&gt; null •
+</code></pre><p>Now, we consume a character from our string. The first character is <code>&quot;(&quot;</code>. We bring forward any entry in the previous column that expects this character, incrementing the marker. In this case, it is only the first entry of column 0. Thus, we have:</p>
+<pre><code># COL 1, consuming &quot;(&quot;
+1. E -&gt; &quot;(&quot; • E &quot;)&quot; [from col 0 entry 1]
+</code></pre><p>Processing, we have (you can read the comments top-to-bottom to get an idea of how the execution works):</p>
+<pre><code># COL 1
+
+# brought from consuming a &quot;(&quot;
+1. E -&gt; &quot;(&quot; • E &quot;)&quot; [from col 0 entry 1]
+
+# copy the relevant rules for the E expected by
+# the first entry
+2. E -&gt; • &quot;(&quot; E &quot;)&quot; [from col 1 entry 1]
+3. E -&gt; • null [from col 1 entry 1]
+
+# increment the null rule
+4. E -&gt; null • [from col 1 entry 3]
+
+# entry 4 is completed, so we increment entry 1
+5. E -&gt; &quot;(&quot; E • &quot;)&quot; [from col 0 entry 1]
+</code></pre><p>Notice how we must keep track of where each entry was added so that we know which entry to increment when it is completed.</p>
+<p>Next, we consume a <code>&quot;)&quot;</code>, the second (and last) character of our string. We have:</p>
+<pre><code># COL 2, consuming &quot;)&quot;
+
+# brought from consuming a &quot;)&quot;
+1. E -&gt; &quot;(&quot; E &quot;)&quot; • [from col 0 entry 1]
+</code></pre><p>Nothing further can be done, so the parsing is complete. We now find entries that are complete and created from an entry in column 0. (That means we have a parsing from the beginning of the string to the end). Since we have such an entry in column 2, this represents the parsing.</p>
+<h3 id="finale">Finale</h3>
+<p>Nearley parses using the above algorithm, but giving each entry “baggage”, namely the parsed data as a tree structure. When we finish an entry (and are about to process it with rule 3), we apply the postprocessor function to the baggage. Once we determine a parsing, we can reveal—with a flourish—the postprocessed data to be used by the user.</p>
+<h3 id="parting-words">Parting words</h3>
+<p>If we had multiple entries that worked in the end, there would be multiple parsings of the grammar. This means the grammar is <strong>ambiguous</strong>, and this is generally a very bad sign. It can lead to messy programming bugs, or exponentially slow parsing.</p>
+<p>It is analogous to the confusion generated when one says</p>
+<blockquote>
+<p>I’m really worried Christopher Nolan will kill a man dressed like a bat in his next movie. (The man will be dressed like a bat, I mean. Christopher Nolan won’t be, probably.)</p>
+</blockquote>
+]]></description>
+            <link>http://hardmath123.github.io/earley.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/earley.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sat, 25 Oct 2014 07:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Detech Your Classroom]]></title>
             <description><![CDATA[Technology isn't helping.
