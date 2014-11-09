@@ -140,6 +140,14 @@
             "file": "earley.md",
             "date": "10/25/14",
             "markdown": true
+        },
+        {
+            "title": "Some PicoCTF Writeups",
+            "author": "Hardmath123",
+            "description": "In honor of PicoCTF, I wrote this post in pico.",
+            "file": "pico.md",
+            "date": "11/8/14",
+            "markdown": true
         }
     ]
 }

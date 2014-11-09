@@ -51,7 +51,7 @@
     | &quot;(&quot; expression &quot;)&quot; # parenthesization
 
 number -&gt; &quot;1&quot; | &quot;2&quot; # for simplicity&#39;s sake, there are only 2 numbers
-</code></pre><p>This small language would let you write programs such as <code>(1+2+1+2)-1-2-1</code>. <code>expression</code> and <code>number</code> are <em>nonterminals</em>, and <code>&quot;+&quot;</code> and <code>&quot;-&quot;</code> are <em>literals</em>. The literals and terminals together are <strong>tokens</strong>.</p>
+</code></pre><p>This small language would let you write programs such as <code>(1+2+1+2)-1-2-1</code>. <code>expression</code> and <code>number</code> are <em>nonterminals</em>, and <code>&quot;+&quot;</code> and <code>&quot;-&quot;</code> are <em>literals</em>. The literals and nonterminals together are <strong>tokens</strong>.</p>
 <p>The <strong>production rules</strong> followed the <code>-&gt;</code>s. The <code>|</code>s delimited different expansions. Thus, we could have written</p>
 <pre><code>number -&gt; &quot;1&quot;
 number -&gt; &quot;2&quot;
