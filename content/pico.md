@@ -84,7 +84,7 @@ function __destruct() {
 
 So it will dump its contents in an HTML comment for debugging when it's destroyed by the GC. Since we can instantiate arbitrary `Post` objects, we can get their contents printed out at will. We're very close now.
 
-We can also create `Filter`s that act on the `Post`s. `Filter`s use PHP's `preg\_replace`. That's insecure, because you can use the `e` flag to *evaluate arbitrary code* based on the replacement text generated from regex captures. Argh.
+We can also create `Filter`s that act on the `Post`s. `Filter`s use PHP's `preg_replace`. That's insecure, because you can use the `e` flag to *evaluate arbitrary code* based on the replacement text generated from regex captures. Argh.
 
 At this point, it was around 2am, my hands felt like rubber, and my eyes felt like mozzerella balls. So I just copied `posts/steve.txt`, and modified one of the filters to dump the contents of the flag, and went to sleep in peace.
 
