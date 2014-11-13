@@ -1,3 +1,5 @@
+> *I completely rewrote this story for an English assignment. Once it's graded, I'll updated this post with the much more exciting revised version. Maybe.*
+
 "Bingo."
 
 "Yes, bingo."

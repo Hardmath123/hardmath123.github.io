@@ -5,7 +5,7 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 09 Nov 2014 05:12:15 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 13 Nov 2014 23:24:42 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
@@ -64,7 +64,7 @@ for ($i = 0; $i &lt; count($settings_array); $i++) {
 }
 </code></pre>
 <p>So it will dump its contents in an HTML comment for debugging when it’s destroyed by the GC. Since we can instantiate arbitrary <code>Post</code> objects, we can get their contents printed out at will. We’re very close now.</p>
-<p>We can also create <code>Filter</code>s that act on the <code>Post</code>s. <code>Filter</code>s use PHP’s <code>preg\_replace</code>. That’s insecure, because you can use the <code>e</code> flag to <em>evaluate arbitrary code</em> based on the replacement text generated from regex captures. Argh.</p>
+<p>We can also create <code>Filter</code>s that act on the <code>Post</code>s. <code>Filter</code>s use PHP’s <code>preg_replace</code>. That’s insecure, because you can use the <code>e</code> flag to <em>evaluate arbitrary code</em> based on the replacement text generated from regex captures. Argh.</p>
 <p>At this point, it was around 2am, my hands felt like rubber, and my eyes felt like mozzerella balls. So I just copied <code>posts/steve.txt</code>, and modified one of the filters to dump the contents of the flag, and went to sleep in peace.</p>
 <p>There are several lessons to be learned here, but the most important are:</p>
 <ol>
@@ -204,6 +204,9 @@ number -&gt; &quot;2&quot;
             <title><![CDATA[Bingo is Boring]]></title>
             <description><![CDATA[Memories of elementary school
 
+<blockquote>
+<p><em>I completely rewrote this story for an English assignment. Once it’s graded, I’ll updated this post with the much more exciting revised version. Maybe.</em></p>
+</blockquote>
 <p>“Bingo.”</p>
 <p>“Yes, bingo.”</p>
 <p>“Like, the—“</p>
