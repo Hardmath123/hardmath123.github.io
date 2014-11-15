@@ -5,9 +5,123 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 13 Nov 2014 23:24:42 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 15 Nov 2014 04:30:28 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Notes on Binary Strings]]></title>
+            <description><![CDATA[A memory dump of useful functions
+
+<p>One of the things I had to do for PicoCTF was learn how to wrangle binary
+strings in various languages. The idea is that you think of a string as an
+array of numbers instead of an array of characters. It’s only coincidental that
+some of those numbers have alternate representations, such as “A”. The
+alphabet-number correspondence is an established table. Look up
+<a href="http://wikipedia.org/wiki/ASCII">ASCII</a>.</p>
+<p>Each number is a byte (aka an <code>unsigned char</code>), so it ranges from 0 to 255.
+This means it’s convenient to express them in hex notation—each number is two
+hex digits, so <code>0xff</code> is 256.</p>
+<p>Using this, we can turn strings into hex sequences (by doubling the number of
+printed characters), and then turn the hex sequence into a decimal number. This
+is great for crypto, because many algorithms (including RSA) can encrypt a
+single number.</p>
+<p>We can also use <a href="http://en.wikipedia.org/wiki/Base64">base64</a> scheme to turn
+binary strings into printable strings. It uses case-sensitive alphabet (52),
+numbers (10), <code>+</code>, and <code>/</code> (2) as the 64 symbols. Each set of three bytes is
+represented by four base64 symbols. Note that this means we need to pad the
+string if it isn’t a multiple of 3 bytes. The padding is indicated with <code>=</code> or
+<code>==</code> at the end of the encoded message.</p>
+<p>This post summarizes some really useful functions for working with binary
+strings.</p>
+<h3 id="python">Python</h3>
+<p>You can use hexadecimal literals in Python strings with a <code>\x</code> escape code:</p>
+<pre><code class="lang-python">s = &#39;\x63\x6f\x77&#39;
+</code></pre>
+<p>To get this representation of a string that’s already in memory, use <code>repr</code>. It
+will turn unprintable characters into their escape codes (though it will prefer
+abbreviations like <code>\n</code> over hex if possible).</p>
+<p>You can use <code>ord</code> to turn a character into a number, so <code>ord(&#39;x&#39;) == 120</code> (in
+decimal! It’s equal to <code>0x78</code>). The opposite function is <code>chr</code>, which turns a
+number into a character, so <code>chr(120) == &#39;x&#39;</code>. Python allows hex literals, so
+you can also directly say <code>chr(0x78) == &#39;x&#39;</code>.</p>
+<p>To convert a number to a hex string, use the (guesses, anyone?) <code>hex</code> function.
+To go the other way, use <code>int(hex_number, 16)</code>:</p>
+<pre><code class="lang-python">hex(3735928559) == &#39;0xdeadbeef&#39;
+int(&#39;deadbeef&#39;, 16) == 3735928559
+</code></pre>
+<p>To convert a string to or from hex, use <code>str.encode</code> and <code>str.decode</code>:</p>
+<pre><code class="lang-python">&gt;&gt;&gt; &#39;cow&#39;.encode(&#39;hex&#39;)
+&#39;636f77&#39;
+&gt;&gt;&gt; &#39;636f77&#39;.decode(&#39;hex&#39;)
+&#39;cow&#39;
+</code></pre>
+<p>The pattern <code>hex(number).decode(&#39;hex&#39;)</code> is quite common (for example, in RSA
+problems). Keep in mind that you need to strip the leading <code>0x</code> and possibly a
+trailing <code>L</code> from the output of <code>hex</code>, and also make sure to pad with a leading
+<code>0</code> if there are an odd number of characters.</p>
+<p>Finally, Python handles base64 with the <code>base64</code> module, but you can also just
+use <code>str.encode(&#39;base64&#39;)</code> and <code>str.decode(&#39;base64&#39;)</code>. Keep in mind that it
+tacks on trailing <code>\n</code>s. I don’t know why.</p>
+<h3 id="javascript">JavaScript</h3>
+<p>JavaScript is pretty similar. It supports <code>\x12</code> notation, and <code>0x123</code> hex
+literals. The equivalent of <code>ord</code> and <code>chr</code> are <code>&quot;a&quot;.charCodeAt(0)</code> and
+<code>String.fromCharCode(12)</code>, respectively.</p>
+<p>You can convert a hex string to decimal with <code>parseInt(hex_string, 16)</code>, and go
+the other way with <code>a_number.toString(16)</code>:</p>
+<pre><code class="lang-javascript">parseInt(&quot;deadbeef&quot;, 16) == 3735928559
+3735928559.toString(16) == &#39;deadbeef&#39;
+</code></pre>
+<p>Note the lack of <code>0x</code>.</p>
+<p>Unfortunately, there isn’t a built-in string to hex string encoding or decoding
+built into JavaScript, but it isn’t too hard to do on your own with some clever
+Regexes. The tricky part is knowing when to pad.</p>
+<p>Browser JS has <code>atob</code> and <code>btoa</code> for base64 conversions (read them as
+“ascii-to-binary” and “binary-to-ascii”). You can install both of those as
+Node modules from npm: <code>npm install atob btoa</code>.</p>
+<h3 id="bash">Bash</h3>
+<p>For the sake of completeness, I wanted to mention how to use Bash to input
+binary strings to programs. Use the <code>-e</code> flag to parse hex-escaping in string
+literals, and <code>-n</code> to suppress the trailing <code>\n</code> (both of these are useful to
+feed a binary a malformed string):</p>
+<pre><code class="lang-bash">$ echo &quot;abc\x78&quot;
+abc\x78
+$ echo -e &quot;abc\x78&quot;
+abcx
+$ echo -ne &quot;abc\x78&quot;
+abcx$ # the newline was suppressed so the prompt ran over
+</code></pre>
+<p>Alternatively, <code>printf</code> does pretty much the same thing as <code>echo -ne</code>.</p>
+<p>Sometimes you want to be able to write more data after that, but the binary is
+using <code>read()</code>. In those cases, it’s helpful to use <code>sleep</code> to fool <code>read</code> into
+thinking you finished typing:</p>
+<pre><code class="lang-bash">{ printf &quot;bad_input_1\x00 mwahaha&quot;;
+                     #  the zero char signals end-of-string
+                     #  in C, which can be used to wreak all
+                     #  sorts of havoc. :)
+    sleep 0.1;
+    printf &quot;bad_input_2&quot;;
+    sleep 0.1;
+    cat -; # arbitrary input once we have shell or something
+} | something
+</code></pre>
+<p>Or, if you’re intrepid, you can use Python’s <code>subprocess</code> or Node’s
+<code>child_process</code> to pipe input to the binary manually.</p>
+<p>UNIX comes with the <code>base64</code> command to encode the standard input. You can use
+<code>base64 -D</code> to decode.</p>
+<h3 id="parting-tips">Parting tips</h3>
+<p>Use <code>hex</code> when your binary string is a giant number, and use <code>base64</code> when
+you’re simply turning a binary string into a printable one.</p>
+<p>Use <code>wc -c</code> to get the character count of a binary file.</p>
+<p>Use <code>strings</code> to extract printable strings from a binary file, though ideally
+<a href="https://sourceware.org/bugzilla/show_bug.cgi?id=17512">not on trusted files</a>.</p>
+<p>Finally, use <code>od</code> or <code>xxd</code> to pretty-print binary strings along with their hex
+and plaintext representations.</p>
+]]></description>
+            <link>http://hardmath123.github.io/binarystrings.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/binarystrings.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Thu, 13 Nov 2014 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Some PicoCTF Writeups]]></title>
             <description><![CDATA[In honor of PicoCTF, I wrote this post in pico.
