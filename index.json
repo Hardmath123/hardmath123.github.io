@@ -156,6 +156,14 @@
             "file": "binarystrings.md",
             "date": "11/13/14",
             "markdown": true
+        },
+        {
+            "title": "It's not socket science: Part I",
+            "author": "Hardmath123",
+            "description": "A hands-on introduction to networking.",
+            "file": "socket-science.md",
+            "date": "11/29/14",
+            "markdown": true
         }
     ]
 }

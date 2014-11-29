@@ -5,9 +5,168 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 15 Nov 2014 04:30:28 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 29 Nov 2014 20:24:46 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[It's not socket science: Part I]]></title>
+            <description><![CDATA[A hands-on introduction to networking.
+
+<p>I like protocols. The Internet is like being in a party, and trying to have a
+conversation with the person across the room by passing post-it notes. Except
+you can only fit a couple of words onto a post-it note (of which you have, of
+course, a limited supply). And people take as long as they want to pass along
+the note. Or they could just forget about it. Some of them might read the
+notes, others may replace your notes with their own. And the person across the
+room only speaks Finnish.</p>
+<p>Despite these hostile conditions, the Internet works. It works because we have
+protocols—rules that computers in a network obey so that they can all get
+along.</p>
+<p>And you can understand these protocols. It’s not rocket science: it’s socket
+science! (I promise that was the only pun in this post.)</p>
+<p>Protocols fit onto other protocols. The lowest-level protocol you should really
+care about is TCP: the Transmission Control Protocol. TCP handles taking a
+large message, dividing it among many post-it notes, and then reassembling the
+message at the other end. If some notes get lost along the way, TCP sends
+replacements. Each post-it is called a “packet”.</p>
+<p>Of course, TCP fits on top of another protocol, the Internet Protocol (IP, as
+in IP Address), which handles even messier things like ensuring a packet gets
+passed on from its source to its destination. There are other protocols that
+live on IP: UDP is like TCP, except it doesn’t care whether packets get there.
+If you’re writing a video conferencing service, you don’t need to ensure that
+each packet makes it, because they’ll be out of date. So you use UDP.</p>
+<p>TCP is handled at the kernel level, so when you send out a message, it’s
+wrapped in TCP automatically. In fact, you need administrator privileges on
+UNIX to send out “raw” packets (there are occasionally reasons to do this).</p>
+<p>To create a TCP connection, we use <em>sockets</em>. Most languages provide socket
+bindings: I’ll use Python’s API (which is very similar to C’s), but Node.js’s
+<code>net</code> module does the same thing.</p>
+<p>A quick way to get a socket working is to use <code>netcat</code> (it’s called <code>nc</code> on
+most UNIX shells). There’s also <code>telnet</code>, but telnet listens for its own
+protocol (for instance, if your connection sends a specific string, <code>telnet</code>
+will automatically send back your screen width).</p>
+<p>Alternatively, you can use <code>ncat</code>, which comes bundled with <code>nmap</code>. I prefer
+<code>ncat</code>; I’ll explain why in a little bit. This command-line utility is pretty
+much a UNIX stream that sends out stdin by TCP, and writes incoming messages to
+stdout.</p>
+<p>Once you have TCP working, you can do all sorts of stuff, because now message
+length and integrity has been abstracted away. For example, you explore the web
+by abiding by the HyperText Transfer Protocol (HTTP, as in <a href="http://something">http://something</a>).</p>
+<p>In fact, it’s worth trying right now. HTTP has the concept of a “request” and a
+“response”. HTTP requests look sort of like <code>GET /index.html HTTP/1.1</code>. GET is
+the “method”, you can also POST, PUT, or DELETE (or even
+<a href="http://en.wikipedia.org/wiki/Hyper_Text_Coffee_Pot_Control_Protocol">BREW</a>).</p>
+<p><code>/index.html</code> is the path (the stuff you would type after <code>www.google.com</code> in
+the address bar), and <code>HTTP/1.1</code> is the protocol (you could, in theory, have
+another protocol running—HTTP 2.0 is being drafted as I write this).</p>
+<p>Let’s do it. Open up a shell and try <code>nc google.com 80</code>. You’re now connected
+to Google. Try sending it <code>GET /index.html HTTP/1.1</code>. You’ll need to hit
+“enter” <em>twice</em> (it’s part of the protocol!).</p>
+<p>You’ll be greeted by a huge mess of symbols, which is the HTML code that makes
+up the Google homepage. Note that the connection doesn’t close, so you can send
+another request if you want. In fact, let’s do that: if you only want to check
+out the protocol, you can send a <code>HEAD</code> request, which is identical to <code>GET</code>
+except it doesn’t send back an actual message. In the real world, <code>HEAD</code> is
+useful to efficiently check if a file exists on a server. If you try <code>HEAD
+/index.html HTTP/1.1</code>, you get:</p>
+<pre><code>HTTP/1.1 200 OK
+Date: Sat, 29 Nov 2014 19:40:02 GMT
+Expires: -1
+Cache-Control: private, max-age=0
+Content-Type: text/html; charset=ISO-8859-1
+Set-Cookie: PREF=ID=67a496862b9f3c29:FF=0:TM=1417290002:LM=1417290002:S=8UjQDBRWYSa1y9tA; expires=Mon, 28-Nov-2016 19:40:02 GMT; path=/; domain=.google.com
+Set-Cookie: NID=67=NnwRLRx4JVz-x3lWFTSxzV_ZxLi_TLVmbw8oDifyhzT2iuWwQ0mVveS15bE8jI28kI-p8cMIEXmmwDmwlxojTY07azz6XzcmeRD7mHerDLuVjPwjV180AxNqWBHqJrfp; expires=Sun, 31-May-2015 19:40:02 GMT; path=/; domain=.google.com; HttpOnly
+P3P: CP=&quot;This is not a P3P policy! See http://www.google.com/support/accounts/bin/answer.py?hl=en&amp;answer=151657 for more info.&quot;
+Server: gws
+X-XSS-Protection: 1; mode=block
+X-Frame-Options: SAMEORIGIN
+Alternate-Protocol: 80:quic,p=0.02
+Transfer-Encoding: chunked
+</code></pre><p>This looks messy, but it really isn’t. You can see how the protocol works: you
+start with the protocol name and <code>200 OK</code>, which is the <em>response code</em>. You
+are probably familiar with another response code, <code>404 NOT FOUND</code>.</p>
+<p>Then each line begins with some header, a colon, and then information. For
+instance, you get the date, you get the content type (<code>text/html</code>), etc.</p>
+<p>The Cookie headers instruct the browser to save those values in a local file.
+When the web browser sends further requests, the protocol instructs it to send
+the saved cookies as a part of the request. This lets websites track you—and
+is the reason Gmail keeps you logged in even when you close the window.</p>
+<p>So far, so good. One thing that may have bothered you was the <code>80</code> you typed
+as an argument for <code>nc</code>. That’s the <em>port number</em>. The idea is that a computer
+can serve multiple websites by having multiple active sockets. To allow this,
+TCP has a port argument: your computer has 65,536 ports and it delivers packets
+to the right one.</p>
+<p>As I said, <code>ncat</code> comes bundled with <code>nmap</code>. <code>nmap</code> is a <em>port scanner</em>, a
+script that checks every port of a computer to see if anything is listening
+(this is one of those places where raw sockets make things much more
+efficient). Running port scans lets an attacker find vulnerable programs
+running, and then exploit them (for instance, test servers or outdated services
+that have known security issues are easy targets).</p>
+<p>Don’t run port scans on computers you don’t own. <code>nmap</code> is designed to be used
+by professional network security people, who keep huge sites like Google up and
+running safely.</p>
+<p><code>80</code> is the conventional port for HTTP, but you can serve a website on any
+port. To access it from a web browser, you append the port after the domain
+name, like <code>http://example.com:81/index.html</code>.</p>
+<p>The other thing that may have bothered you was how the computer know who
+<code>google.com</code> was. The answer to that is another protocol: the DNS protocol,
+which is used to ask a DNS server to resolve a domain name (like Google.com)
+into an IP address. You can try this with the <code>host</code> command:</p>
+<pre><code>$ host google.com
+google.com has address 74.125.239.135
+google.com has address 74.125.239.129
+google.com has address 74.125.239.134
+google.com has address 74.125.239.131
+google.com has address 74.125.239.133
+google.com has address 74.125.239.142
+google.com has address 74.125.239.128
+google.com has address 74.125.239.137
+google.com has address 74.125.239.136
+google.com has address 74.125.239.130
+google.com has address 74.125.239.132
+google.com has IPv6 address 2607:f8b0:4005:800::1009
+google.com mail is handled by 30 alt2.aspmx.l.google.com.
+google.com mail is handled by 40 alt3.aspmx.l.google.com.
+google.com mail is handled by 10 aspmx.l.google.com.
+google.com mail is handled by 20 alt1.aspmx.l.google.com.
+google.com mail is handled by 50 alt4.aspmx.l.google.com.
+</code></pre><p>Once you choose an IP address, the protocol lets you track down that computer
+and establish a connection.</p>
+<p>Now, you’re often told to always use HTTPS, because it’s secure. You can
+probably already tell how insecure HTTP is: any guest at the party can read
+your post-it packets and know everything.</p>
+<p>A fun thing to try is to run <code>tcpdump</code>: it’ll dump packets from your computer
+as they’re sent out or received (you may like the <code>-X</code> option). Mess around
+with the options a bit, and you can read the raw contents of HTTP packets as
+you surf the web. You’ll need to be an administrator to run it, but if you
+think about it, that’s probably a good thing.</p>
+<p>Anyhow, back to HTTPS: it’s just HTTP, except sitting on top of another
+protocol called SSL (or TLS—it’s sort of complicated). SSL handles finding an
+encryption that both you and your connection agree is secure, negotiating a
+shared secret key, and then sending encrypted messages. It also lets you
+authenticate people by passing around certificates that are cryptographically
+signed by authorities.</p>
+<p>HTTPS runs on port 443, which is the other default port that your browser
+doesn’t need to be told. You can try the above HTTP fun on port 443: most
+websites will get mad at you and kill the connection.</p>
+<p>This is the reason I like <code>ncat</code>: the <code>--ssl</code> option wraps your connection in
+the SSL negotiations and encrypts what you send (you can’t viably do this
+manually). Try <code>ncat --ssl google.com 443</code>: things should work as normal now,
+but <code>tcpdump</code> will show you gibberish.</p>
+<p>At this point we’ve foiled almost all the hurdles in our initial party analogy,
+so I’m going to take a break.</p>
+<p>In Part II of this series, we’ll explore some more protocols and write clients
+using Python. We’ll talk about how protocols are established, and why it’s
+important that it works the way it does right now.</p>
+<p>In Part III, we’ll explore four recent showstopper exploits, all of which make
+plenty of sense once you understand protocols: Goto Fail, Heartbleed,
+Shellshock, and POODLE.</p>
+]]></description>
+            <link>http://hardmath123.github.io/socket-science.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/socket-science.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sat, 29 Nov 2014 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Notes on Binary Strings]]></title>
             <description><![CDATA[A memory dump of useful functions
