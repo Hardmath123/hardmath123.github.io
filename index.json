@@ -166,9 +166,9 @@
             "markdown": true
         },
         {
-            "title": "A tmux Quickstart",
+            "title": "Don your tmuxedo",
             "author": "Hardmath123",
-            "description": "Don your tmuxedo.",
+            "description": "A tmux quickstart.",
             "file": "tmux.md",
             "date": "12/7/14",
             "markdown": true

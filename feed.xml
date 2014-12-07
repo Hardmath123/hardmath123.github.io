@@ -5,7 +5,7 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 07 Dec 2014 17:11:25 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 07 Dec 2014 17:16:50 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
@@ -14,10 +14,12 @@
 
 <p><a href="http://tmux.sourceforge.net">tmux</a> is a <em>terminal multiplexor</em>, which is
 nerdspeak for a program that runs multiple processes simultaneously within a
-single parent process. This lets you have, for example, a text editor and a
-test server running in the same physical terminal window. Instead of opening
-multiple <code>ssh</code> connections to your server, <code>tmux</code> allows you to maintain a
-single connection and divide your screen up virtually into multiple panes.</p>
+single parent process. You might have heard of <code>screen</code>; it’s similar (and, in
+fact, a lot of <code>tmux</code> quickstarts assume that you’re transitioning from
+<code>screen</code>). This lets you have, for example, a text editor and a test server
+running in the same physical terminal window. Instead of opening multiple <code>ssh</code>
+connections to your server, <code>tmux</code> allows you to maintain a single connection
+and divide your screen up virtually into multiple panes.</p>
 <p>Another nice thing about <code>tmux</code> is that the virtual panes are independent of
 the processes running, so you can “detach” a process and leave it running in
 the background without any terminal displaying the output. In face, a detached

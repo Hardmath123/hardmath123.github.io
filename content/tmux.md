@@ -1,9 +1,11 @@
 [tmux](http://tmux.sourceforge.net) is a *terminal multiplexor*, which is
 nerdspeak for a program that runs multiple processes simultaneously within a
-single parent process. This lets you have, for example, a text editor and a
-test server running in the same physical terminal window. Instead of opening
-multiple `ssh` connections to your server, `tmux` allows you to maintain a
-single connection and divide your screen up virtually into multiple panes.
+single parent process. You might have heard of `screen`; it's similar (and, in
+fact, a lot of `tmux` quickstarts assume that you're transitioning from
+`screen`). This lets you have, for example, a text editor and a test server
+running in the same physical terminal window. Instead of opening multiple `ssh`
+connections to your server, `tmux` allows you to maintain a single connection
+and divide your screen up virtually into multiple panes.
 
 Another nice thing about `tmux` is that the virtual panes are independent of
 the processes running, so you can "detach" a process and leave it running in
