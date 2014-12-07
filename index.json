@@ -164,6 +164,14 @@
             "file": "socket-science.md",
             "date": "11/29/14",
             "markdown": true
+        },
+        {
+            "title": "A tmux Quickstart",
+            "author": "Hardmath123",
+            "description": "Don your tmuxedo.",
+            "file": "tmux.md",
+            "date": "12/7/14",
+            "markdown": true
         }
     ]
 }

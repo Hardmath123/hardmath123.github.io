@@ -5,9 +5,65 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 04 Dec 2014 00:30:49 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 07 Dec 2014 17:11:25 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[A tmux Quickstart]]></title>
+            <description><![CDATA[Don your tmuxedo.
+
+<p><a href="http://tmux.sourceforge.net">tmux</a> is a <em>terminal multiplexor</em>, which is
+nerdspeak for a program that runs multiple processes simultaneously within a
+single parent process. This lets you have, for example, a text editor and a
+test server running in the same physical terminal window. Instead of opening
+multiple <code>ssh</code> connections to your server, <code>tmux</code> allows you to maintain a
+single connection and divide your screen up virtually into multiple panes.</p>
+<p>Another nice thing about <code>tmux</code> is that the virtual panes are independent of
+the processes running, so you can “detach” a process and leave it running in
+the background without any terminal displaying the output. In face, a detached
+<code>tmux</code> session lives on even if you disconnect the <code>ssh</code> session. When you log
+back on, you can reattach to that process again.</p>
+<p>Anyway, let’s get started. You make a tmux session by typing <code>tmux</code> in bash.</p>
+<p>Your screen should get a pretty green ribbon under it, saying <code>0:bash</code>. This
+means you’re currently in window 0, running <code>bash</code>. You can do normal bashey
+things here (<code>ls</code>, <code>vim</code>, <code>irssi</code>, whatever): <code>tmux</code> simply feeds your user
+input along to the bash process.</p>
+<p>Well, almost. <code>tmux</code> listens in and intercepts any input that begins with a
+special keypress, <code>^B</code>. You type this with the control character and ‘B’ the
+way you would type <code>^C</code> to kill a bash process. We call <code>^B</code> the “prefix”.</p>
+<p>Let’s detach from <code>tmux</code>! For the dramatic effect, feel free to leave some
+process running—perhaps a Python session or even your IRC client. Type <code>^B D</code>
+(that is, the prefix followed by the <code>D</code> character).</p>
+<p>You should be back to the old bash. But the process you started is still
+running in the background: just not getting any input from you (or showing you
+any output). To reconnect to it, type <code>tmux attach</code> and you should get your
+process again. The easiest way to kill a session is to simply exit all the
+processes in it; if only <code>bash</code> is running, then type <code>exit</code>.</p>
+<p>You can use and manipulate multiple different named sessions, by specifying
+different command line arguments to <code>tmux</code>, such as <code>tmux new -s
+name_of_new_session</code> to make a new session, <code>tmux attach -t name</code> to attach to
+a named session, and <code>tmux kill-session -t name</code> to kill a session. <code>tmux ls</code>
+lists sessions.</p>
+<p>But the more interesting stuff is multiplexing. Open up a session and type <code>^B
+%</code>. Your pane should split into two columns. You now essentially have two
+virtual terminals. Use <code>^B arrow-keys</code> to switch between panes. To close a pane
+you exit the process that was running in that pane (<code>exit</code> in bash).</p>
+<p>You can use <code>^B &quot;</code> to split the other way (horizontally, so the new pane is
+below the old one). And there are a bunch of commands to resize and swap panes.</p>
+<p>Instead of saying them all over again, I’m going to point you to <a href="https://gist.github.com/MohamedAlaa/2961058">this
+gist</a>, which has all the
+information you need.</p>
+<p>In general, I use <code>tmux</code> as a way to keep my session as I left it when I logout
+(for example, this post was written across a couple of days, but I didn’t close
+vim at all). Also, it’s an easy way to leave a server or a bot running
+perpetually.</p>
+<p>Enjoy tmuxing!</p>
+]]></description>
+            <link>http://hardmath123.github.io/tmux.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/tmux.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sun, 07 Dec 2014 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[It's not socket science: Part I]]></title>
             <description><![CDATA[A hands-on introduction to networking.
