@@ -51,6 +51,13 @@ a {
   color: #559;
 }
 
+#rightbox a:visited {
+  color: #559;
+}
+#rightbox a:visited:hover {
+  color: #77A;
+}
+
 a:hover {
   color: #77A;
 }
