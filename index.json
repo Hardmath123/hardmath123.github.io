@@ -172,6 +172,14 @@
             "file": "tmux.md",
             "date": "12/7/14",
             "markdown": true
+        },
+        {
+            "title": "Dear Hollywood",
+            "author": "Hardmath123",
+            "description": "A rant about technobabble.",
+            "file": "dear-hollywood.md",
+            "date": "12/12/14",
+            "markdown": true
         }
     ]
 }

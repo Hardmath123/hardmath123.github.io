@@ -5,9 +5,100 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 13 Dec 2014 02:01:03 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 13 Dec 2014 04:46:35 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Dear Hollywood]]></title>
+            <description><![CDATA[A rant about technobabble.
+
+<p>Dear famous producers, scriptwriters, authors, and publishers:</p>
+<p>On behalf of the programming community, I would like to bring up a rather sore
+point among us. Whenever you have a scene involving “hacking”, you seem to make
+it a point to write scripts by mashing complex-sounding buzzwords. We all
+cringed when someone <a href="https://www.youtube.com/watch?v=hkDD03yeLnU">declared</a>
+“I’ll create a GUI interface using Visual Basic. See if I can track an IP
+address” in CSI. We facepalmed when Randy used <code>telnet</code> to make a secure
+connection in <em>Cryptonomicon</em>. We spawned a subreddit when Lex <a href="https://www.youtube.com/watch?v=dFUlAQZB9Ng">used a UNIX
+system</a>. And some of us broke out
+in hives at <a href="https://www.youtube.com/watch?v=O2rGTXHvPCQ">N3mbers’ description of
+IRC</a>.</p>
+<p>But we cheered when <a href="http://www.theregister.co.uk/2003/05/16/matrix_sequel_has_hacker_cred/">Trinity used
+<code>nmap</code></a>
+in <em>The Matrix Reloaded</em>.</p>
+<p>When you depict ‘hacking’ as an esoteric dark art, you tell the public that
+‘hackers’ are a breed of sorcerers who know the right incantations to make the
+Internet bow to their will.</p>
+<p>This is a lot like claiming pharmacists are brilliant potion-makers who pass
+down the secrets to make mystic brews that control the human body.</p>
+<p>But I don’t see any whizz kids saying “Hang on, I bet I can cook up a quick
+truth serum by distilling the monorubidium dibenzene crystal. Could you hand me
+the Bunsen burner?” (Followed by one of the most annoying line in all of
+cinema: “In <em>English</em>, Doc?”)</p>
+<p>This strange caricature that popular culture has drawn is what makes people
+regard ‘hackers’ with a blend of suspicion and fear. It leads to a vast
+misperception of what ‘hacking’ really is. As a more tangible effect, it also,
+indirectly leads to the government not knowing how to handle computer security
+cases as well as other cases.</p>
+<p>You’re stereotyping an entire community: a community with history and values.</p>
+<p>Of course, there are the bad guys who steal bitcoin and leak Sony employee’s
+personal emails. The least pop culture could do about them is to stop
+glorifying them as tech savants and pointing out that almost all such
+‘victories’ are simply cases of a big company not installing the latest updates
+to their software (this is not a joke).</p>
+<p>On the other hand, there are the heroes of computer security: people who
+dedicate their time and resources to finding and fixing critical issues in open
+source software to keep us safe. These are the real geniuses; they are
+brilliant folks with an immense knowledge of how <em>everything</em> works. It’s
+unfair to represent them as the same people as above.</p>
+<p>Public opinion is really important in things like this, and movies and books
+are huge influences on it.</p>
+<p>So here’s a request. Next time you have a scene with hacking, consult with an
+expert. Or even a geeky high school student (myself included). Ask them to tell
+you about a plausible real-world attack, and take the time to understand it at
+a conceptual level.</p>
+<p>Learn about its history: when was it discovered? Did anyone get in trouble by
+using it? Was it embargoed, allowing big companies to patch their systems
+before the general public was told about it? Or was it leaked? What might show
+up on a computer screen when you’re carrying out the attack?</p>
+<p>I <em>promise</em> it’s going to be much cooler than anything fictional. We regularly
+talk about things like the BEAST attack, the Heartbleed exploit and the
+Shellshock vulnerability. We have tools called Metasploit. We even use the
+phrase ‘poisoned cookies’ in research papers.</p>
+<p>In the world of ‘hackers’, truth is way cooler than fiction.</p>
+<hr>
+<p>P.S. You might have noticed that I put ‘hackers’ and ‘hacking’ under scare
+quotes throughout this article. There is a reason for this. In the CS culture,
+a ‘hacker’ is not a criminal. A ‘hack’ is simply an <a href="http://www.catb.org/jargon/html/meaning-of-hack.html">appropriate application of
+ingenuity</a>. Eric Steven
+Raymond explains this perfectly in his excellent document <a href="http://www.catb.org/esr/faqs/hacker-howto.html">how to be a
+hacker</a>:</p>
+<blockquote>
+<p>There is another group of people who loudly call themselves hackers, but
+aren’t. These are people (mainly adolescent males) who get a kick out of
+breaking into computers and phreaking the phone system. Real hackers call
+these people ‘crackers’ and want nothing to do with them. Real hackers mostly
+think crackers are lazy, irresponsible, and not very bright, and object that
+being able to break security doesn’t make you a hacker any more than being
+able to hotwire cars makes you an automotive engineer. Unfortunately, many
+journalists and writers have been fooled into using the word ‘hacker’ to
+describe crackers; this irritates real hackers no end.</p>
+<p>The basic difference is this: hackers build things, crackers break them.</p>
+<p>If you want to be a hacker, keep reading. If you want to be a cracker, go
+read the alt.2600 newsgroup and get ready to do five to ten in the slammer
+after finding out you aren’t as smart as you think you are. And that’s all
+I’m going to say about crackers.</p>
+</blockquote>
+<p>Someday, I’d like to watch a movie where the FBI imprisons a cracker, not a
+hacker.</p>
+<p>Until then,</p>
+<p>Yours Truly.</p>
+]]></description>
+            <link>http://hardmath123.github.io/dear-hollywood.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/dear-hollywood.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Fri, 12 Dec 2014 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Don your tmuxedo]]></title>
             <description><![CDATA[A tmux quickstart.
