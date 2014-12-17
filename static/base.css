@@ -13,12 +13,12 @@ body {
 }
 
 p, li {
-  line-height: 2em;
+  line-height: 1.8em;
   text-rendering: optimizeLegibility;
 }
 
 p {
-  text-indent: 2em;
+  /* text-indent: 0em; */
 }
 
 img {
@@ -165,7 +165,7 @@ h3 {
 .centered, #postlist {
   padding: 30px;
   width: 100%;
-  max-width: 40em;
+  max-width: 45em;
   margin-left: auto;
   margin-right: auto;
 }
