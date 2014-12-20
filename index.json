@@ -180,6 +180,14 @@
             "file": "dear-hollywood.md",
             "date": "12/12/14",
             "markdown": true
+        },
+        {
+            "title": "It's not socket science: Part II",
+            "author": "Hardmath123",
+            "description": "In which we invade a chatroom.",
+            "file": "socket-science-2.md",
+            "date": "12/17/14",
+            "markdown": true
         }
     ]
 }

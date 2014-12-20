@@ -176,10 +176,10 @@ but `tcpdump` will show you gibberish.
 At this point we've foiled almost all the hurdles in our initial party analogy,
 so I'm going to take a break.
 
-In Part II of this series, we'll explore some more protocols and write clients
-using Python. We'll talk about how protocols are established, and why it's
-important that it works the way it does right now.
+In [Part II](socket-science-2.html) of this series, we'll explore some more
+protocols and write clients using Python. We'll talk about how protocols are
+established, and why it's important that it works the way it does right now.
 
-In Part III, we'll explore four recent showstopper exploits, all of which make
-plenty of sense once you understand protocols: Goto Fail, Heartbleed,
-Shellshock, and POODLE.
+In Part III (yet-to-be-written), we'll explore four recent showstopper
+exploits, all of which make plenty of sense once you understand protocols: Goto
+Fail, Heartbleed, Shellshock, and POODLE.

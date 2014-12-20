@@ -5,9 +5,276 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 13 Dec 2014 04:46:35 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 20 Dec 2014 02:00:21 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[It's not socket science: Part II]]></title>
+            <description><![CDATA[In which we invade a chatroom.
+
+<p>A quick recap: in <a href="socket-science.html">Part I</a>, we learned about how protocols
+are really awesome, and how they stack onto each other to build abstractions.
+We learned to use <code>netcat</code> to create TCP connections, and then played with HTTP
+and HTTPS.</p>
+<p>Let’s write some protocol code. We’re going to use Python to build a bot for
+<a href="http://en.wikipedia.org/wiki/Internet_Relay_Chat">IRC</a>, a beautiful and
+<a href="http://www.ibiblio.org/pub/academic/communications/logs/report-ussr-gorbatchev">historic</a>
+protocol for chatting over the Internet.</p>
+<p>IRC bots are all over the place. Some do routine tasks like moderate channels.
+Others let you play games like Mafia, or perhaps provide simple services like
+spelling correction (or “make me a haiku”). Yet others simply keep logs of what
+is said and then try to say relevant things at the right times. Perhaps the
+most famous one is <a href="https://github.com/zigdon/xkcd-Bucket">Bucket</a>, who manages
+<code>#xkcd</code>.</p>
+<p>Our IRC bot is going to provide a utility which tells a joke when someone says
+<code>!joke</code> in a particular channel.</p>
+<hr>
+<p>The IRC protocol is specified in <a href="https://tools.ietf.org/html/rfc2812">this
+document</a> (that document updates <a href="https://tools.ietf.org/html/rfc1459">this
+one</a>, as listed in the header)). That
+document is called an RFC, or <em>Request For Comments</em>.</p>
+<p>I think the RFC system is beautiful. RFCs are documents that standardize the
+important messy details that hold the Internet together. They were ‘invented’
+by Stephen D. Crocker when he was <a href="http://www.nytimes.com/2009/04/07/opinion/07crocker.html?_r=2&amp;em&amp;">assigned the task to document
+ideas</a> in
+the early days of the Internet. An RFC is supposed to be a memo; a technical
+note or idea that is published for anyone to read, review, and (ha!) comment
+on. Everyone <a href="http://www.rfc-editor.org/rfc/rfc4846.txt">can write</a> an RFC.</p>
+<p>This is how standards come about. Once I have published a sensible RFC that
+standardizes some means of sharing files (for instance, the File Transfer
+Protocol or FTP, which people still use from time to time
+(<a href="http://tools.ietf.org/html/rfc114">RFC</a>)), I can put it out there for smart
+people all over the world to review. If it’s <em>really</em> exciting, someone may
+write an implementation. Future implementations would abide by the rules, and
+so your FTP server and my FTP client would cooperate.</p>
+<p>Notice how this is decentralized. It’s not Google saying “Ok, folks, this is
+how we’re going to transfer files. Deal with it.” RFCs specify the consensus of
+many experts—when you see an RFC describing a protocol that has many
+implementations, you know that many people agree that that’s the best way of
+doing things (and even if it isn’t, it’s a reasonable compromise).</p>
+<p>Of course, if you have a completely different way of transferring files which
+would use a brand new super-secure hyper-compressed protocol, you can write
+your own RFC and implementations, and hope that it catches on.</p>
+<p>There are a lot of RFCs around, some
+<a href="http://www.livinginternet.com/i/ia_rfc_interesting.htm">fascinating</a>, some
+<a href="http://www.livinginternet.com/i/ia_rfc_fun.htm">funny</a>. To us, however, they
+are simply documentation for the protocol we will use to build our IRC bot.</p>
+<p>But I digress.</p>
+<hr>
+<p>The RFC isn’t hard to read, but I’ll just tell you the important parts here.
+IRC works over the standard port <code>6667</code>, or port <code>6697</code> if it’s secure
+(SSL-wrapped).</p>
+<p>Let’s experiment on Freenode. I’m going to assume you have some idea of how IRC
+works (that is, you know what I mean when I say “channel” and “nick”). You may
+want to log into Freenode with another IRC client (an online one like KiwiIRC
+would suffice), just to see stuff happen.</p>
+<p>Now, start with <code>nc irc.freenode.net 6667</code>.</p>
+<p>You might get some messages that look sort of like this:</p>
+<pre><code>:wilhelm.freenode.net NOTICE * :*** Looking up your hostname...
+:wilhelm.freenode.net NOTICE * :*** Couldn&#39;t look up your hostname
+</code></pre><p>That just means that Freenode’s servers hoped you were logging in from an IP
+address with a registered domain, so that it can display your username as
+“user@hostname” in a <code>whois</code> query (and some other uses as well). But you’re at
+home, and your home’s IP probably doesn’t have a domain name pointing to it
+(unless you’re running a server at home!). So it just complains.</p>
+<p>Anyway.</p>
+<p>Type <code>NICK an-irc-explorer</code> and hit enter. Then type <code>USER an-irc-explorer * *
+:Mr. IRC</code>. You should be greeted with a huge block of text that starts with
+something like:</p>
+<pre><code>:wilhelm.freenode.net 001 an-irc-explorer :Welcome to the freenode Internet Relay Chat Network an-irc-explorer
+:wilhelm.freenode.net 002 an-irc-explorer :Your host is wilhelm.freenode.net[37.48.83.75/6667], running version ircd-seven-1.1.3
+:wilhelm.freenode.net 003 an-irc-explorer :This server was created Sat Mar 8 2014 at 15:57:41 CET
+</code></pre><p>Basically, it’s telling you that you’ve successfully connected to the server,
+and identified yourself with the nickname <code>an-irc-explorer</code>.</p>
+<p>You can now converse with server by sending it more commands (type <code>HELP</code> to
+list commands). Perhaps the most exciting one is <code>JOIN</code>: type <code>JOIN #bots</code> to
+join Freenode’s channel for bots.</p>
+<p>Your normal IRC client should show that <code>an-irc-explorer</code> joined.</p>
+<p>To say things, use <code>PRIVMSG #bots :Hello, world.</code> (The colon is a
+separator character, not part of the actual text that will be displayed on a
+client. Its purpose is to allow the last argument to contain spaces,
+which—unsurprisingly—show up quite a lot in chat messages.)</p>
+<p>If you say something from your client, you should get some scary text like this:</p>
+<pre><code>:hardmath123!hardmath123@gateway/web/cgi-irc/kiwiirc.com/ PRIVMSG #bots :Hi
+</code></pre><p>The first bit tells you who said something, and is of the form
+<code>nickname!username@hostname</code> (remember the hostname lecture above?). <code>PRIVMSG</code>
+means you’re getting a message, <code>#bots</code> is the channel, and <code>Hi</code> is the
+message.</p>
+<p>Not too hard.</p>
+<p>There’s one last thing you need to know. IRC checks if you’re there
+periodically by sending out a <code>PING</code> message. All you need to do is send the
+server <code>PONG</code> and it’ll be happy. If you don’t, the server assumes something
+bad happened, and kills the connection based on a “Ping Timeout” (generally 120
+seconds ish). It’s the protocol version of “if I’m not back in an hour, call
+the police.”</p>
+<p>And now you’re ready for some code.</p>
+<hr>
+<p>Fire up Python.</p>
+<p>Python gives you sockets with the <code>socket</code> module, which corresponds rather
+well with C’s sockets.</p>
+<pre><code class="lang-python">import socket
+</code></pre>
+<p>Let’s create a socket and connect it to Freenode.</p>
+<pre><code class="lang-python">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((&quot;irc.freenode.net&quot;, 6667))
+</code></pre>
+<p>The first line has two magic constants. <code>AF_INET</code> is best
+<a href="http://beej.us/net2/html/syscalls.html">explained</a> by Brian “Beej” Hall:</p>
+<blockquote>
+<p>In some documentation, you’ll see mention of a mystical “PF_INET”. This is a
+weird etherial beast that is rarely seen in nature, but I might as well
+clarify it a bit here. Once a long time ago, it was thought that maybe a
+address family (what the “AF” in “AF_INET” stands for) might support several
+protocols that were referenced by their protocol family (what the “PF” in
+“PF_INET” stands for).  That didn’t happen. Oh well. So the correct thing to
+do is to use AF_INET in your struct sockaddr_in and PF_INET in your call to
+socket(). But practically speaking, you can use AF_INET everywhere. And,
+since that’s what W. Richard Stevens does in his book, that’s what I’ll do
+here.</p>
+</blockquote>
+<p><code>SOCK_STREAM</code> means <code>TCP</code>. The alternative is <code>SOCK_DGRAM</code>, which means
+<code>UDP</code>—User <em>Datagram</em> Protocol. There’s also <code>SOCK_RAW</code>, which requires root
+privileges and makes (you guessed it) a raw IP socket. We discussed these in
+the previous installment.</p>
+<p>The <code>connect</code> line, of course, connects to a remote socket somewhere in the
+Freenode network. It’s important to realize that that remote socket is the same
+thing as the one you just created. The server/client-ness is an abstraction.
+Your own socket has a host and port, too, which you can find with
+<code>s.getsockname()</code>. You’ll get something like <code>(&#39;192.168.0.4&#39;, 60694)</code>.</p>
+<p>Getting data from a socket is kind of messy, because of how TCP works. You
+don’t really ever know if the server wants to send more data or not. So, UNIX
+sockets work like this: you specify how many bytes you want to read, and the
+process will be paused (“blocked”) until the server sends you stuff (it could,
+in theory, just sit there forever). When something is sent, at most that number
+of bytes is given to you as a string.</p>
+<p>In practice, this looks like:</p>
+<pre><code class="lang-python">data = s.recv(1024)
+</code></pre>
+<p>to read at most 1024 bytes from the server.</p>
+<p>There is a problem here. A chat client doesn’t want to just freeze until a new
+message is sent, it wants to do other things and occasionally carry out actions
+if there’s a new message.</p>
+<p>The hard solution is to use Python threads. You have multiple bits of code
+running around doing stuff at the same time, and you’re very careful about the
+socket’s state. If you’re not, you might end up reading and writing at the same
+time and bad things will ensue.</p>
+<p>That will end in a mess.</p>
+<p>The easy solution is the <code>select</code> module. It’s used as such:</p>
+<pre><code class="lang-python">import select
+readables, writables, exceptionals = select.select([s], [s], [s])
+</code></pre>
+<p><code>select.select</code> will return three lists: a list of sockets that are readable,
+a list of sockets that are writable, and a list of sockets that are in a bad
+situation and erroring/broken/eating your laundry.</p>
+<p>Now we can check:</p>
+<pre><code class="lang-python">if len(readables) == 1:
+    data = s.recv(1024) # won&#39;t block
+</code></pre>
+<p>Note that we still don’t know <em>how much</em> data there is. In fact, we have no way
+of knowing how much data there is, because the server may have sent another 20
+bytes which TCP hasn’t reassembled yet.</p>
+<p>So, it’s generally advisable for protocols to specify a maximum message length
+and some signal that a message has been terminated. Section 2.3 of RFC 2812
+very helpfully tells us how IRC handles this:</p>
+<blockquote>
+<p>IRC messages are always lines of characters terminated with a CR-LF (Carriage
+Return - Line Feed) pair, and these messages SHALL NOT exceed 512 characters
+in length, counting all characters including the trailing CR-LF. Thus, there
+are 510 characters maximum allowed for the command and its parameters.  There
+is no provision for continuation of message lines.</p>
+</blockquote>
+<p>We can put that all together as follows:</p>
+<pre><code class="lang-python">import select
+def read_loop(callback):
+    data = &quot;&quot;
+    CRLF = &#39;\r\n&#39;
+    while True:
+        readables, writables, exceptionals = select.select([s], [s], [s]) 
+        if len(readables) == 1:
+            data += s.recv(512);
+            while CRLF in data:
+                message = data[:data.index(CRLF)]
+                data = data[data.index(CRLF)+2:]
+                callback(message)
+</code></pre>
+<p><code>callback</code> is called every time a complete message has been received. Also,
+when it’s being called, no other socket operations are happening (reads or
+writes). As we discussed above, this is a major win.</p>
+<p>Writing to the socket is much easier, it’s literally <code>s.sendall(&#39;data&#39;)</code>.
+(There’s also <code>s.send(&#39;data&#39;)</code>, which isn’t guaranteed to actually send all of
+the data, but returns the number of bytes that actually made it (based on TCP
+acknowledgements). <code>sendall</code> is an abstraction on top of this.)</p>
+<p>Guess what? You know enough to write a bot now!</p>
+<pre><code class="lang-python">import random
+jokes = [
+    # populate me with some good ones!
+    # this might be the hardest part of writing the bot.
+    &quot;You kill vegetarian vampires with a steak to the heart.&quot;,
+    &quot;Is it solipsistic in here, or is it just me?&quot;,
+    &quot;What do you call two crows on a branch? Attempted murder.&quot;
+]
+s.sendall(&quot;NICK funnybot\r\n&quot;)
+s.sendall(&quot;USER funnybot * * :hardmath123&#39;s bot\r\n&quot;)
+connected = False
+def got_message(message):
+    global connected # yes, bad Python style. but it works to explain the concept, right?
+    words = message.split(&#39; &#39;)
+    if &#39;PING&#39; in message:
+        s.sendall(&#39;PONG\r\n&#39;) # it never hurts to do this :)
+    if words[1] == &#39;001&#39; and not connected:
+        # As per section 5.1 of the RFC, 001 is the numeric response for
+        # a successful connection/welcome message.
+        connected = True
+        s.sendall(&quot;JOIN #bots\r\n&quot;)
+    elif words[1] == &#39;PRIVMSG&#39; and words[2] == &#39;#bots&#39; and &#39;!joke&#39; in words[3] and connected:
+        # Someone probably said `!joke` in #bots.
+        s.sendall(&quot;PRIVMSG #bots :&quot; + random.choice(jokes) + &quot;\r\n&quot;)
+read_loop(got_message)
+</code></pre>
+<p>This is actually all you need. If you concatenate all the snippets in this blog
+post, you will have a working bot. It’s surprisingly terse (yay Python?).</p>
+<p>We can actually make this secure with just two more lines of code. Remember how
+I said SSL was ‘wrapped’ around a normal protocol?</p>
+<pre><code class="lang-python">import ssl
+secure_socket = ssl.wrap_socket(plain_old_socket)
+</code></pre>
+<p><code>secure_socket</code> has all the methods of a normal socket, but the <code>ssl</code> module
+handles the SSL negotiations and encryption behind the scenes. Abstraction at
+its finest.</p>
+<p>You can play around with <a href="https://docs.python.org/2/library/ssl.html">reading the
+documentation</a> and integrating this
+into your bot (remember to use the new secure port, 6697).</p>
+<p>If you end up deploying a bot, make sure you read the channel or server’s bot
+policy. For instance, Foonetic provides these instructions:</p>
+<blockquote>
+<p>Bot Policy: Well behaved bots are allowed. Annoying bots or bots which are
+insecure or poorly behaved are not allowed. Channel owners may have their own
+policy for public bots; it is advised you check with a channel operator
+before bringing a bot into a channel. Excessive bots from a single network
+address may exceed the session limit and/or be considered cloning. Please
+mark your bot with user mode +B and your nick in the “Real Name” field so
+that an oper can locate you if your bot malfunctions. Absolutely no “botnets”
+are allowed and any illegal activity will be reported to your ISP!</p>
+</blockquote>
+<hr>
+<p>So. We learned about how RFCs work, and we read the RFC on IRC. Then we used
+that knowledge to built an IRC bot on top of Python’s low-level <code>socket</code>
+library.</p>
+<p>The techniques you learned in this blog posts are useful for all sorts of
+things. For instance, SMTP is a simple email protocol (port 25), and it’s an
+easy way to send from a script (Python ships with <code>smtplib</code>, a module that
+wraps around the protocol). Similarly, <code>telnet</code> is a very lightweight protocol
+that adds some terminal-specific frills to netcat (screen size, raw mode, etc.)
+Even bitcoin needs <a href="https://en.bitcoin.it/wiki/Protocol_specification">documented
+protocols</a> to work. It’s
+definitely worth learning how these things work.</p>
+<p>Enjoy, and happy botwriting.</p>
+]]></description>
+            <link>http://hardmath123.github.io/socket-science-2.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/socket-science-2.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Wed, 17 Dec 2014 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Dear Hollywood]]></title>
             <description><![CDATA[A rant about technobabble.
@@ -304,12 +571,12 @@ manually). Try <code>ncat --ssl google.com 443</code>: things should work as nor
 but <code>tcpdump</code> will show you gibberish.</p>
 <p>At this point we’ve foiled almost all the hurdles in our initial party analogy,
 so I’m going to take a break.</p>
-<p>In Part II of this series, we’ll explore some more protocols and write clients
-using Python. We’ll talk about how protocols are established, and why it’s
-important that it works the way it does right now.</p>
-<p>In Part III, we’ll explore four recent showstopper exploits, all of which make
-plenty of sense once you understand protocols: Goto Fail, Heartbleed,
-Shellshock, and POODLE.</p>
+<p>In <a href="socket-science-2.html">Part II</a> of this series, we’ll explore some more
+protocols and write clients using Python. We’ll talk about how protocols are
+established, and why it’s important that it works the way it does right now.</p>
+<p>In Part III (yet-to-be-written), we’ll explore four recent showstopper
+exploits, all of which make plenty of sense once you understand protocols: Goto
+Fail, Heartbleed, Shellshock, and POODLE.</p>
 ]]></description>
             <link>http://hardmath123.github.io/socket-science.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/socket-science.html</guid>

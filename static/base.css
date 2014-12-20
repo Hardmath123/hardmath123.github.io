@@ -182,10 +182,12 @@ h3 {
   text-align: center;
 }
 
+
 #whoami {
+  text-align: justify;
   margin-top: 50px;
   width: 100%;
-  max-width: 35em;
+  max-width: 45em;
   font-size: 0.8em;
   color: gray;
 }
@@ -201,7 +203,7 @@ h3 {
 
 #whoami h2 {
   font-size: 1.2em;
-  font-family: cursive;
+  margin-bottom: 2em;
 }
 
 
