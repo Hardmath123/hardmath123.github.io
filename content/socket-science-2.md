@@ -3,8 +3,10 @@ are really awesome, and how they stack onto each other to build abstractions.
 We learned to use `netcat` to create TCP connections, and then played with HTTP
 and HTTPS.
 
-Let's write some protocol code. We're going to use Python to build a bot for
-[IRC](http://en.wikipedia.org/wiki/Internet_Relay_Chat), a beautiful and
+Let's write some protocol code (finished product available [on
+Github](https://github.com/Hardmath123/jokebot)). We're going to use Python to
+build a bot for [IRC](http://en.wikipedia.org/wiki/Internet_Relay_Chat), a
+beautiful and
 [historic](http://www.ibiblio.org/pub/academic/communications/logs/report-ussr-gorbatchev)
 protocol for chatting over the Internet.
 
@@ -313,6 +315,9 @@ policy. For instance, Foonetic provides these instructions:
 > mark your bot with user mode +B and your nick in the "Real Name" field so
 > that an oper can locate you if your bot malfunctions. Absolutely no "botnets"
 > are allowed and any illegal activity will be reported to your ISP!
+
+If you're lazy, you can get a slightly refined version of this code from [my
+Github](https://github.com/Hardmath123/jokebot).
 
 ---
 

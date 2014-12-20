@@ -5,7 +5,7 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 20 Dec 2014 02:00:21 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 20 Dec 2014 02:26:55 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
@@ -16,8 +16,10 @@
 are really awesome, and how they stack onto each other to build abstractions.
 We learned to use <code>netcat</code> to create TCP connections, and then played with HTTP
 and HTTPS.</p>
-<p>Let’s write some protocol code. We’re going to use Python to build a bot for
-<a href="http://en.wikipedia.org/wiki/Internet_Relay_Chat">IRC</a>, a beautiful and
+<p>Let’s write some protocol code (finished product available <a href="https://github.com/Hardmath123/jokebot">on
+Github</a>). We’re going to use Python to
+build a bot for <a href="http://en.wikipedia.org/wiki/Internet_Relay_Chat">IRC</a>, a
+beautiful and
 <a href="http://www.ibiblio.org/pub/academic/communications/logs/report-ussr-gorbatchev">historic</a>
 protocol for chatting over the Internet.</p>
 <p>IRC bots are all over the place. Some do routine tasks like moderate channels.
@@ -256,6 +258,8 @@ mark your bot with user mode +B and your nick in the “Real Name” field so
 that an oper can locate you if your bot malfunctions. Absolutely no “botnets”
 are allowed and any illegal activity will be reported to your ISP!</p>
 </blockquote>
+<p>If you’re lazy, you can get a slightly refined version of this code from <a href="https://github.com/Hardmath123/jokebot">my
+Github</a>.</p>
 <hr>
 <p>So. We learned about how RFCs work, and we read the RFC on IRC. Then we used
 that knowledge to built an IRC bot on top of Python’s low-level <code>socket</code>
