@@ -82,13 +82,9 @@ strong.visitedposts a {
 #header {
   padding: 10px;
   overflow: hidden;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #ddd;
-  
-  border-top-style:solid;
-  border-top-width:3px;
-  border-top-color:#77A;
+  background-color: #FFF8E7; /* Fun fact -- this color, "Cosmic Latte", is
+                                supposed to be the average color of the
+                                universe. */
 }
 
 #header h1 {
