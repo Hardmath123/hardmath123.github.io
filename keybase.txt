@@ -1,0 +1,69 @@
+==================================================================
+https://keybase.io/hardmath123
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://hardmath123.github.io
+  * I am hardmath123 (https://keybase.io/hardmath123) on keybase.
+  * I have a public key with fingerprint 844A E763 FEA5 B7AD BC42  965B ECF6 E2AE 19C0 E4E6
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "844ae763fea5b7adbc42965becf6e2ae19c0e4e6",
+            "host": "keybase.io",
+            "key_id": "ecf6e2ae19c0e4e6",
+            "uid": "6360ce39ffeced210297f03a205ea700",
+            "username": "hardmath123"
+        },
+        "service": {
+            "hostname": "hardmath123.github.io",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1419207181,
+    "expire_in": 157680000,
+    "prev": null,
+    "seqno": 1,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v1.1.6
+Comment: https://keybase.io/crypto
+
+yMK/AnicO8LLzMDF+Obbo3WSB548Yzx94EApQ8j0JN5qpaT8lEolq2ql7FQwlZaZ
+l55aVFCUmVeiZKVkYWKSmGpuZpyWmmiaZJ6YkpRsYmRpZpqUmpxmlmqUmGpomWyQ
+apJqpqSjlJFfDNIBNCYpsThVLzMfKAbkxGemAEWxqC8FS5gZmxkkpxpbpqWlJqem
+GBkaGFmapxkYJxoZmKYmmhsYgBQWpxblJeamAlVnJBal5CaWZBgaGSvV6igBJcoy
+k1NBzgbZjqlILz2zJKM0CeKYgqL8kvzk/ByQkpKSgmIrkBEllQUgPeWpSfFQ0+KT
+MvNSgIEA1FGWWlScmZ+nZGUIVJlckgky3tDE0NLIwNzQwlBHKbWiILMoNT4TpMLU
+3MzCAAhA9qSWKVnllebkgFxYmJcPlAValJgOtKc4Mz0vsaS0KFWp9tDBGBYGRi4G
+NlYmUEQwcHEKwKLHJor/r1jz6inqS4/Pm2wa5W2VXGp6If3fiX0+GdlNKWprNyb8
++HIwT2dh34Mf1myfFA4e3SywmeHBmuPndxqrrA44d1+3xH6B0fVWa8EdVz1qkzoS
+Ih1+fy0//ndL+zYbs/Pnb63W5l/Wtfnr6wm9njqThczOnthblGCj+Tueb5HJ1J7F
+BtPfqRRv+f/dWcWrimFVq0nwq1dpFlfn/c7qV5p+4Tfr0b9fle+zON//M+WAA7/+
+3K5Z+r05R8OWeJ5+5f/X3fmyQ+rxq31LimcI/5FSX33XaxZPwtk3c0o2lm/W+1/b
+77joTdQda1afJ1vdgp8zJhvGcws8ufxNoHn6PUPxvdc3n2JWsbKad8Ay+9LUqq6m
+fR11LpskdjCbtV2rP57GpZvCIXR2cZTIV6n/9zz5bfiylLWCo/kDW4ortEr6P5nH
+cRX+PKwus8q7NeVi99y97yU/nl8fWHS3rq7X7vCxpRIXc19Y71v1v3FX+G3r7o4Z
+rrfY5Ta9si66KHuJ454QY4jDaXYX1z1nFLZdvBSXdTFCsLT4+JWl3lnKNcUaj9d5
+Nx1/fnXl64jfdiL8e0VW6afa+HT5Ls25MXHiPcFJDQZ2P2dn6yrZH2la92KpxuZT
+N3c/Ojh3Vf+66veX3ZcL776otlVacuPMgL7Y5Bm6JZE7/Oe+5dey2fO2csk/xw3H
+dHv4Z2ici7ue8H3K6Z/5vFe/6XosCe8wOFAxcTMAq1SR+Q==
+=Z+Um
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/hardmath123
+
+==================================================================
