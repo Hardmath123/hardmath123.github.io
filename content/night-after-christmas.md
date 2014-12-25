@@ -13,7 +13,7 @@ Until he called out for his dear spouse.
 "I bet some crackers just made a good guess."  
 "Perhaps we can track down their IP address?"
 
-So Mrs. Clause began looking through the logs,  
+So Mrs. Clause began looking through logs,  
 While Santa whipped up some nice thick grog,  
 And soon enough, she found the clog:  
 "Who writes a database in Prolog?!"
