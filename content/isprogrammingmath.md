@@ -20,7 +20,7 @@ This, I think, is why many people find programming easier than pure math.
 
 I thought this was rather interesting. I have seen this idea in a lot of places, but I have the opposite viewpoint.
 
-CS is a way to formalize programming concepts. Learning programming isn't a byproduct of learning CS, bur rather learning CS is a byproduct of learning programming. The more you have programmed, the more problems you have solved, and the more CS ideas you've internalized.
+CS is a way to formalize programming concepts. Learning programming isn't a byproduct of learning CS, but rather learning CS is a byproduct of learning programming. The more you have programmed, the more problems you have solved, and the more CS ideas you've internalized.
 
 Here's an example. You have a curb 100 meters long. (Idealized) cars 3 meters long park randomly along the curb, one after another, until there's no space greater than 3 meters between any two cars. Write a program to simulate this many times and compute the average number of cars that can park.
 

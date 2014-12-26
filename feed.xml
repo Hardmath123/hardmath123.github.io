@@ -5,7 +5,7 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 25 Dec 2014 21:17:52 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 26 Dec 2014 00:28:06 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
@@ -1063,7 +1063,7 @@ process.stdin.on(&quot;data&quot;, function(buffer) {
 <p>— Sarah Wei</p>
 </blockquote>
 <p>I thought this was rather interesting. I have seen this idea in a lot of places, but I have the opposite viewpoint.</p>
-<p>CS is a way to formalize programming concepts. Learning programming isn’t a byproduct of learning CS, bur rather learning CS is a byproduct of learning programming. The more you have programmed, the more problems you have solved, and the more CS ideas you’ve internalized.</p>
+<p>CS is a way to formalize programming concepts. Learning programming isn’t a byproduct of learning CS, but rather learning CS is a byproduct of learning programming. The more you have programmed, the more problems you have solved, and the more CS ideas you’ve internalized.</p>
 <p>Here’s an example. You have a curb 100 meters long. (Idealized) cars 3 meters long park randomly along the curb, one after another, until there’s no space greater than 3 meters between any two cars. Write a program to simulate this many times and compute the average number of cars that can park.</p>
 <p>Take a moment to try to envision this program.</p>
 <p>If you took an awesome CS class, you should have ended up with something like this:</p>
