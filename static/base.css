@@ -82,9 +82,9 @@ strong.visitedposts a {
 #header {
   padding: 10px;
   overflow: hidden;
-  background-color: #FFF8E7; /* Fun fact -- this color, "Cosmic Latte", is
-                                supposed to be the average color of the
-                                universe. */
+  border-top: solid 0.5em #FFF8E7; /* Fun fact: this color, "Cosmic Latte", is
+                                      supposed to be the average color of the
+                                      universe. */
 }
 
 #header h1 {
