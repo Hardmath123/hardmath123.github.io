@@ -68,11 +68,11 @@ a:active {
 }
 
 a:visited {
-  color: gray;
+  color: #77A;
 }
 
 a:visited:hover {
-  color: #77A;
+  color: #77C;
 }
 
 strong.visitedposts a {
