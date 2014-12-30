@@ -5,7 +5,7 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Mon, 29 Dec 2014 20:08:08 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 30 Dec 2014 21:22:09 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
@@ -208,10 +208,12 @@ is no provision for continuation of message lines.</p>
 </blockquote>
 <p>We can put that all together as follows:</p>
 <pre><code class="lang-python">import select
+import time
 def read_loop(callback):
     data = &quot;&quot;
     CRLF = &#39;\r\n&#39;
     while True:
+        time.sleep(1) # prevent CPU hogging :)
         readables, writables, exceptionals = select.select([s], [s], [s]) 
         if len(readables) == 1:
             data += s.recv(512);

@@ -219,10 +219,12 @@ is no provision for continuation of message lines.</p>
 </blockquote>
 <p>We can put that all together as follows:</p>
 <pre><code class="lang-python">import select
+import time
 def read_loop(callback):
     data = &quot;&quot;
     CRLF = &#39;\r\n&#39;
     while True:
+        time.sleep(1) # prevent CPU hogging :)
         readables, writables, exceptionals = select.select([s], [s], [s]) 
         if len(readables) == 1:
             data += s.recv(512);
