@@ -183,7 +183,7 @@ h3 {
 
 
 #whoami {
-  text-align: justify;
+  /* text-align: justify; */
   margin-top: 50px;
   width: 100%;
   max-width: 45em;
