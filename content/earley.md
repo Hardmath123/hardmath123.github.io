@@ -65,7 +65,8 @@ first *n* characters of *s*. Each parsing is represented by the relevant
 production rule, and a **marker** denoting how far we have parsed. This is
 represented with a dot `•` character placed after the last parsed token.
 
-Consider the parsing of ths string `()` with the grammar `E` above. Column 0 of the table looks like:
+Consider the parsing of this string `()` with the grammar `E` above. Column 0 of
+the table looks like:
 
     # COL 0
     1. E -> • "(" E ")"
@@ -102,7 +103,8 @@ Thus, we have:
     # COL 1, consuming "("
     1. E -> "(" • E ")" [from col 0 entry 1]
 
-Processing, we have (you can read the comments top-to-bottom to get an idea of how the execution works):
+Processing, we have (you can read the comments top-to-bottom to get an idea of
+how the execution works):
 
     # COL 1
     

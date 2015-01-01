@@ -74,6 +74,9 @@ process.stdin.on("data", function(buffer) {
 });
 ```
 
-This should give you the tools to write shinier, interactive utilities. But keep in mind the UNIX philosophy—keep them simple, and make sure they cooperate as filters (you should be able to pipe stuff in and out of your utility).
+This should give you the tools to write shinier, interactive utilities. But
+keep in mind the UNIX philosophy—keep them simple, and make sure they cooperate
+as filters (you should be able to pipe stuff in and out of your utility).
 
-P.S. I wrote this post—including the code sample—in vim running in tmux. Please pardon typos.
+P.S. I wrote this post—including the code sample—in vim running in tmux. Please
+pardon typos.

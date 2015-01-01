@@ -5,7 +5,7 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 01 Jan 2015 19:28:44 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 01 Jan 2015 19:42:58 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
@@ -931,7 +931,8 @@ for this example.</p>
 first <em>n</em> characters of <em>s</em>. Each parsing is represented by the relevant
 production rule, and a <strong>marker</strong> denoting how far we have parsed. This is
 represented with a dot <code>•</code> character placed after the last parsed token.</p>
-<p>Consider the parsing of ths string <code>()</code> with the grammar <code>E</code> above. Column 0 of the table looks like:</p>
+<p>Consider the parsing of this string <code>()</code> with the grammar <code>E</code> above. Column 0 of
+the table looks like:</p>
 <pre><code># COL 0
 1. E -&gt; • &quot;(&quot; E &quot;)&quot;
 2. E -&gt; • null
@@ -962,7 +963,8 @@ incrementing the marker. In this case, it is only the first entry of column 0.
 Thus, we have:</p>
 <pre><code># COL 1, consuming &quot;(&quot;
 1. E -&gt; &quot;(&quot; • E &quot;)&quot; [from col 0 entry 1]
-</code></pre><p>Processing, we have (you can read the comments top-to-bottom to get an idea of how the execution works):</p>
+</code></pre><p>Processing, we have (you can read the comments top-to-bottom to get an idea of
+how the execution works):</p>
 <pre><code># COL 1
 
 # brought from consuming a &quot;(&quot;
@@ -1127,33 +1129,63 @@ enough to write down on paper and bring to school).</p>
             <description><![CDATA[Memories of elementary school
 
 <blockquote>
-<p><em>I completely rewrote this story for an English assignment. Once it’s graded, I’ll updated this post with the much more exciting revised version. Maybe.</em></p>
+<p><em>I completely rewrote this story for an English assignment. Once it’s graded,
+I’ll updated this post with the much more exciting revised version. Maybe.</em></p>
 </blockquote>
 <p>“Bingo.”</p>
 <p>“Yes, bingo.”</p>
 <p>“Like, the—“</p>
 <p>“Yes, Mr. Smiley, bingo.”</p>
-<p>Back in elementary school, our favorite adult was a Mr. Smiley. He hung out with us at lunch, told jokes on rainy days, and <em>always</em> won thumb wars. I remember very little about him, but I remember him having thick, bulging veins in his arms. There was always a different explanation for how they came to be. Some involved bears. Mr. Smiley was the school custodian.</p>
+<p>Back in elementary school, our favorite adult was a Mr. Smiley. He hung out
+with us at lunch, told jokes on rainy days, and <em>always</em> won thumb wars. I
+remember very little about him, but I remember him having thick, bulging veins
+in his arms. There was always a different explanation for how they came to be.
+Some involved bears. Mr. Smiley was the school custodian.</p>
 <hr>
 <p>“Alright, everyone, quiet down. <em>Shhh!</em> Come up—ONE BY ONE!—and get your boards.”</p>
-<p>It was a rainy day. The grown-ups intended to herd us into the art room. Mrs. J (I never knew her real name, and after the third year it became too awkward to ask) was in there, with her stash of green boards. They had little red sliders across each of the 25 cells.</p>
-<p>“The first one is… B-4!” Someone cried out “before what?”. This was traditional and obligatory.</p>
-<p>Bingo days were the worst. It’s hard to explain the feeling a third grader has when he’s being told to quietly pretend to enjoy a game meant for people several times his age. You know that you could be drawing or talking to your friend. Or you could be out playing in the rain (an adult bursts into flames at the mere thought).</p>
+<p>It was a rainy day. The grown-ups intended to herd us into the art room. Mrs. J
+(I never knew her real name, and after the third year it became too awkward to
+ask) was in there, with her stash of green boards. They had little red sliders
+across each of the 25 cells.</p>
+<p>“The first one is… B-4!” Someone cried out “before what?”. This was
+traditional and obligatory.</p>
+<p>Bingo days were the worst. It’s hard to explain the feeling a third grader has
+when he’s being told to quietly pretend to enjoy a game meant for people
+several times his age. You know that you could be drawing or talking to your
+friend. Or you could be out playing in the rain (an adult bursts into flames at
+the mere thought).</p>
 <p>“N-32! Remember, I want you to have <em>all four corners</em> before you come up!”</p>
-<p>And then there was the thrill of secretly communicating with people in the silence. I can still sign in Handspeak, our dialect of sign language, where you simply imitate the letters’ shapes with your fingers. Given another couple of years, I’m confident that we would have invented Morse code.</p>
+<p>And then there was the thrill of secretly communicating with people in the
+silence. I can still sign in Handspeak, our dialect of sign language, where you
+simply imitate the letters’ shapes with your fingers. Given another couple of
+years, I’m confident that we would have invented Morse code.</p>
 <p>“O-42! That’s Oh-fooooorty-two!”</p>
-<p>On top of all that, there was a distinct lack of exciting prizes. To date, the most exciting thing any of us had won was a whistle, which we were naturally forbidden from using.</p>
+<p>On top of all that, there was a distinct lack of exciting prizes. To date, the
+most exciting thing any of us had won was a whistle, which we were naturally
+forbidden from using.</p>
 <hr>
 <p>“That’s adorable.”</p>
-<p>“It’s not adorable, Mr. Smiley.” (Third graders cower at the word.) “It’s democracy.”</p>
+<p>“It’s not adorable, Mr. Smiley.” (Third graders cower at the word.) “It’s
+democracy.”</p>
 <p>“Yes, of course. I’ll, uh, get you those photocopies riiiight away.”</p>
-<p>I remember handing over a crumpled sheet of notebook paper. On each line was the name of one of the 80 students in the third grade who agreed with us. Next to it was the name written in worse handwriting, our attempts at signatures.</p>
-<p>That sheet of paper marked the culmination of six weeks of convicincing kids that Bingo Is Boring&trade;. We made lists, brainstormed alternatives (“where’s the nearest bowling alley?”), and drafted a letter to the principal. We had a president and a vice-president of the BIB&trade;. We had meetings, speeches, and debates.</p>
-<p>We had opposition. We had to merge with a competing group to form the Bingo Elimination Group (BEG&trade;). Contracts were signed. As secretary, Chris handled the paperwork for me.</p>
-<p>We had allies, especially the wonderfully helpful Mrs. Ayer who helpfully shot down our plan to send recon missions to the staff room.</p>
+<p>I remember handing over a crumpled sheet of notebook paper. On each line was
+the name of one of the 80 students in the third grade who agreed with us. Next
+to it was the name written in worse handwriting, our attempts at signatures.</p>
+<p>That sheet of paper marked the culmination of six weeks of convicincing kids
+that Bingo Is Boring&trade;. We made lists, brainstormed alternatives (“where’s
+the nearest bowling alley?”), and drafted a letter to the principal. We had a
+president and a vice-president of the BIB&trade;. We had meetings, speeches,
+and debates.</p>
+<p>We had opposition. We had to merge with a competing group to form the Bingo
+Elimination Group (BEG&trade;). Contracts were signed. As secretary, Chris
+handled the paperwork for me.</p>
+<p>We had allies, especially the wonderfully helpful Mrs. Ayer who helpfully shot
+down our plan to send recon missions to the staff room.</p>
 <p>We had more fun than we would ever have at recess.</p>
-<p>In the long run, of course, we never did get rid of Bingo. But I don’t think that matters.</p>
-<p>(A shoutout to Sardor, Ethan, and Chris. I hope I don’t need to wait till you’re all famous to find you again.)</p>
+<p>In the long run, of course, we never did get rid of Bingo. But I don’t think
+that matters.</p>
+<p>(A shoutout to Sardor, Ethan, and Chris. I hope I don’t need to wait till
+you’re all famous to find you again.)</p>
 ]]></description>
             <link>http://hardmath123.github.io/smiley.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/smiley.html</guid>
@@ -1164,26 +1196,91 @@ enough to write down on paper and bring to school).</p>
             <title><![CDATA[Brown M&Ms]]></title>
             <description><![CDATA[A request.
 
-<p>David finally convinced me why we use MLA format. This is a story that involves Van Halen, and the existence of a clause in their contract that demanded a bowl full of M&amp;Ms, but no brown ones. I’ve included the story from the horse’s mouth, i.e. lead singer David Lee Roth (not the same David). All this is quoted from <a href="http://www.snopes.com/music/artists/vanhalen.asp">Snopes</a>.</p>
+<p>David finally convinced me why we use MLA format. This is a story that involves
+Van Halen, and the existence of a clause in their contract that demanded a bowl
+full of M&amp;Ms, but no brown ones. I’ve included the story from the horse’s
+mouth, i.e. lead singer David Lee Roth (not the same David). All this is quoted
+from <a href="http://www.snopes.com/music/artists/vanhalen.asp">Snopes</a>.</p>
 <blockquote>
-<p>Van Halen was the first band to take huge productions into tertiary, third-level markets. We’d pull up with nine eighteen-wheeler trucks, full of gear, where the standard was three trucks, max. And there were many, many technical errors — whether it was the girders couldn’t support the weight, or the flooring would sink in, or the doors weren’t big enough to move the gear through. </p>
-<p>The contract rider read like a version of the Chinese Yellow Pages because there was so much equipment, and so many human beings to make it function. So just as a little test, in the technical aspect of the rider, it would say “Article 148: There will be fifteen amperage voltage sockets at twenty-foot spaces, evenly, providing nineteen amperes…” This kind of thing. And article number 126, in the middle of nowhere, was: “There will be no brown M&amp;M’s in the backstage area, upon pain of forfeiture of the show, with full compensation.” </p>
-<p>So, when I would walk backstage, if I saw a brown M&amp;M in that bowl… well, line-check the entire production. Guaranteed you’re going to arrive at a technical error. They didn’t read the contract. Guaranteed you’d run into a problem. Sometimes it would threaten to just destroy the whole show. Something like, literally, life-threatening.</p>
-<p>The folks in Pueblo, Colorado, at the university, took the contract rather kinda casual. They had one of these new rubberized bouncy basketball floorings in their arena. They hadn’t read the contract, and weren’t sure, really, about the weight of this production; this thing weighed like the business end of a 747. </p>
-<p>I came backstage. I found some brown M&amp;M’s, I went into full Shakespearean “What is this before me?” … you know, with the skull in one hand … and promptly trashed the dressing room. Dumped the buffet, kicked a hole in the door, twelve thousand dollars’ worth of fun. </p>
-<p>The staging sank through their floor. They didn’t bother to look at the weight requirements or anything, and this sank through their new flooring and did eighty thousand dollars’ worth of damage to the arena floor. The whole thing had to be replaced. It came out in the press that I discovered brown M&amp;M’s and did eighty-five thousand dollars’ worth of damage to the backstage area. </p>
+<p>Van Halen was the first band to take huge productions into tertiary,
+third-level markets. We’d pull up with nine eighteen-wheeler trucks, full of
+gear, where the standard was three trucks, max. And there were many, many
+technical errors — whether it was the girders couldn’t support the weight, or
+the flooring would sink in, or the doors weren’t big enough to move the gear
+through. </p>
+<p>The contract rider read like a version of the Chinese Yellow Pages because
+there was so much equipment, and so many human beings to make it function. So
+just as a little test, in the technical aspect of the rider, it would say
+“Article 148: There will be fifteen amperage voltage sockets at twenty-foot
+spaces, evenly, providing nineteen amperes…” This kind of thing. And
+article number 126, in the middle of nowhere, was: “There will be no brown
+M&amp;M’s in the backstage area, upon pain of forfeiture of the show, with full
+compensation.” </p>
+<p>So, when I would walk backstage, if I saw a brown M&amp;M in that bowl… well,
+line-check the entire production. Guaranteed you’re going to arrive at a
+technical error. They didn’t read the contract. Guaranteed you’d run into a
+problem. Sometimes it would threaten to just destroy the whole show.
+Something like, literally, life-threatening.</p>
+<p>The folks in Pueblo, Colorado, at the university, took the contract rather
+kinda casual. They had one of these new rubberized bouncy basketball
+floorings in their arena. They hadn’t read the contract, and weren’t sure,
+really, about the weight of this production; this thing weighed like the
+business end of a 747. </p>
+<p>I came backstage. I found some brown M&amp;M’s, I went into full Shakespearean
+“What is this before me?” … you know, with the skull in one hand … and
+promptly trashed the dressing room. Dumped the buffet, kicked a hole in the
+door, twelve thousand dollars’ worth of fun. </p>
+<p>The staging sank through their floor. They didn’t bother to look at the
+weight requirements or anything, and this sank through their new flooring and
+did eighty thousand dollars’ worth of damage to the arena floor. The whole
+thing had to be replaced. It came out in the press that I discovered brown
+M&amp;M’s and did eighty-five thousand dollars’ worth of damage to the backstage
+area. </p>
 <p>Well, who am I to get in the way of a good rumor?</p>
 </blockquote>
 <p><img src="static/brownmnm.gif" alt="The clause"></p>
-<p>Well, (the real) David figured that conforming to MLA’s restrictions was your way of proclaiming a lack of brown M&amp;Ms. If you got MLA wrong, then who knows what else you’ve messed up?</p>
-<p>To be honest, I don’t care much for MLA, because whenever I’m using it, it’s because I’m doing another one of those English assignments where I feel I’m being graded on my word count. However, since David’s lecture, I’ve seen brown M&amp;Ms pop up everywhere in my life. Most notably, in the programming world.</p>
-<p>There are ‘best practices’ everywhere. Almost all of them, of course, are justifiable. Don’t use GOTO because nobody will be able to follow your code. Don’t use eval because it’s a welcome mat for crackers. Don’t indent with tabs, they render differently for everyone. Anyone sharing their first Python project knows how many opinions everyone has. It’s almost discouraging, because you’re trying to implement something for fun and people are yelling at you because you didn’t cache intermediate results in a binary search tree, and so the whole thing’s too slow to be practical, and you should just give up now and spend your time one something more useful, like learning <em>[insert language here]</em>.</p>
+<p>Well, (the real) David figured that conforming to MLA’s restrictions was your
+way of proclaiming a lack of brown M&amp;Ms. If you got MLA wrong, then who knows
+what else you’ve messed up?</p>
+<p>To be honest, I don’t care much for MLA, because whenever I’m using it, it’s
+because I’m doing another one of those English assignments where I feel I’m
+being graded on my word count. However, since David’s lecture, I’ve seen brown
+M&amp;Ms pop up everywhere in my life. Most notably, in the programming world.</p>
+<p>There are ‘best practices’ everywhere. Almost all of them, of course, are
+justifiable. Don’t use GOTO because nobody will be able to follow your code.
+Don’t use eval because it’s a welcome mat for crackers. Don’t indent with tabs,
+they render differently for everyone. Anyone sharing their first Python project
+knows how many opinions everyone has. It’s almost discouraging, because you’re
+trying to implement something for fun and people are yelling at you because you
+didn’t cache intermediate results in a binary search tree, and so the whole
+thing’s too slow to be practical, and you should just give up now and spend
+your time one something more useful, like learning <em>[insert language here]</em>.</p>
 <p>Don’t listen to those people.</p>
-<p>Learning programming, or any other human endeavor, is all about implementation. You need to run into problems before you can appreciate the solutions we have devised.</p>
-<p>For instance, I learned optics by writing a raytracer on my own, in seventh grade (side story: I didn’t know what vectors were, and later discovered that I had invented the cross product on my own, but mirror-imaged). In the beginning, it used to take a few hours to render a 100-by-100 image. As I found various optimizations, I incorporated them, and it got faster.</p>
-<p>Would I have learned as much if the first time I showed it to someone, they told me to go implement k-D trees before they’ll give real constructive criticism? What kept me interested was implementing shiny ideas like Phong illumination (pun intended), and then optimizing them so that I could fit more tests within my lifetime. Anyone can find plenty of things wrong with my implementation. I was storing images as a JSON array of pixel values since I didn’t grok PNG.</p>
-<p>Everyone has their own Brown M&amp;Ms. We’re presented so much information on a daily basis, that we need Brown M&amp;Ms to decide what matters and what doesn’t. I will probably put off an email whose subject line is misspelled. Or close a webpage with a pop-up. Or disregard pull requests that mess up whitespace. It’s <em>ok</em> to have Brown M&amp;Ms—and it’s ok for them to be as obscure as you want—but it’s not ok to foist them upon others.</p>
-<p>The next time you see a newbie modify the <code>Array</code> prototype directly, <em>please</em> don’t yell at them. Take a deep breath and let it go. Someday, they will run into a namespace conflict, and that will be far more educational than your rant. It’s a favor.</p>
+<p>Learning programming, or any other human endeavor, is all about implementation.
+You need to run into problems before you can appreciate the solutions we have
+devised.</p>
+<p>For instance, I learned optics by writing a raytracer on my own, in seventh
+grade (side story: I didn’t know what vectors were, and later discovered that I
+had invented the cross product on my own, but mirror-imaged). In the beginning,
+it used to take a few hours to render a 100-by-100 image. As I found various
+optimizations, I incorporated them, and it got faster.</p>
+<p>Would I have learned as much if the first time I showed it to someone, they
+told me to go implement k-D trees before they’ll give real constructive
+criticism? What kept me interested was implementing shiny ideas like Phong
+illumination (pun intended), and then optimizing them so that I could fit more
+tests within my lifetime. Anyone can find plenty of things wrong with my
+implementation. I was storing images as a JSON array of pixel values since I
+didn’t grok PNG.</p>
+<p>Everyone has their own Brown M&amp;Ms. We’re presented so much information on a
+daily basis, that we need Brown M&amp;Ms to decide what matters and what doesn’t. I
+will probably put off an email whose subject line is misspelled. Or close a
+webpage with a pop-up. Or disregard pull requests that mess up whitespace. It’s
+<em>ok</em> to have Brown M&amp;Ms—and it’s ok for them to be as obscure as you want—but
+it’s not ok to foist them upon others.</p>
+<p>The next time you see a newbie modify the <code>Array</code> prototype directly, <em>please</em>
+don’t yell at them. Take a deep breath and let it go. Someday, they will run
+into a namespace conflict, and that will be far more educational than your
+rant. It’s a favor.</p>
 ]]></description>
             <link>http://hardmath123.github.io/brownmnms.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/brownmnms.html</guid>
@@ -1194,19 +1291,67 @@ enough to write down on paper and bring to school).</p>
             <title><![CDATA[GamifiEd]]></title>
             <description><![CDATA[The pitfalls of quantifying learning.
 
-<p>I have gone to a lot of schools. I have gone to schools where you can ace an English writing test be memorizing an essay the teacher gives you, and reproducing it on the test. I have done art classes where you spend every period copying a poster into your notebook (graded on accuracy of the reproduction). I have taken computer classes where you’re encouraged to use as many font and color variations as possible, to ‘display your knowledge’, and so end up with yellow italicized comic sans on a red gradient background. My English teacher plays a vocabulary game, where the first person to miss a word has to bring in a snack the next day. I’m currently in a French class that uses a Reddit-esque Karma system to monitor class participation, which is directly translated to a letter grade.</p>
+<p>I have gone to a lot of schools. I have gone to schools where you can ace an
+English writing test be memorizing an essay the teacher gives you, and
+reproducing it on the test. I have done art classes where you spend every
+period copying a poster into your notebook (graded on accuracy of the
+reproduction). I have taken computer classes where you’re encouraged to use as
+many font and color variations as possible, to ‘display your knowledge’, and so
+end up with yellow italicized comic sans on a red gradient background. My
+English teacher plays a vocabulary game, where the first person to miss a word
+has to bring in a snack the next day. I’m currently in a French class that uses
+a Reddit-esque Karma system to monitor class participation, which is directly
+translated to a letter grade.</p>
 <p>What do all these things have in common?</p>
-<p>All these schools are trying to solve the same problem: how do you quantify learning? A district needs to know how well a school is doing (hence standardized tests), a school needs to know how well a teacher is doing, and a teacher needs to report a quantitative measure of how well a student is doing.</p>
-<p>Of course, doing well isn’t quantifiable, so teachers manage by introducing various ‘objective’ measures. And any form of objective measurement becomes a game. Your GPA, for example, is something you can maximize. Tests are memory games. Any system where you can influence a number becomes a game.</p>
-<p>Without grades, we have no way to quickly analyze a student’s performance. But grades don’t offer much insight into that, either. As a student, knowing someone has good grades tells me that they are good at the game. They work hard, consistently finish their homework, and study for tests. More importantly, they know what a teacher wants to see to give them good grades. They know that they should <a href="http://anonymouslawyer.blogspot.com/2006/05/ive-received-number-of-e-mails-asking.html">do well</a>.</p>
-<p>Only the student and the teacher can  <em>really</em> know a student’s status. For a student who really needs help coming up to his or her goals, this turns out to be disastrous: any third party would first judge them by the numbers, and getting help becomes hard. Students end up working hard, not to reach <em>their</em> goals, but to improve their numbers. This is a problem, but that’s not what this post is about.</p>
-<p>This post is about the opposite end: students who don’t have trouble keeping up. If you aren’t struggling, several parameters change. You’re now learning because you <em>want</em> to. This means you don’t care about the numbers that measure the learning. It’s blissful.</p>
-<p>Well, it would be blissful, except that courses have already been designed, over decades, to guide you towards an objective test. And so even if you want to learn for pleasure, you’re being pushed through an objective, rigid ‘curriculum’.</p>
-<p>This happened, for instance, in my AP Computer Science class last year. Almost every student there was far above average, and exceeding all expectations at school. It was the perfect environment for them to learn freely—and our teacher encouraged this—but they had to spend hours studying for the AP CS test.</p>
-<p>Honestly, studying for the AP CS test isn’t very different from studying for the Spelling Bee. It’s just memorizing and practicing. It isn’t learning.</p>
-<p>I propose, as an intellectual exercise, a different course format, for students learning for pleasure. The course is <em>not</em> graded. Instead, it simply connects students with teachers, who guide them in their learning. There is no curriculum.</p>
-<p>The inspiration for this comes from my adventures trying to teach myself computer science—often, the hardest part is to choose something to study, and to decide how much detail to study it in. When a student is paired with a competent expert in a field, he has someone to ask for guidance.</p>
-<p>Again, this program would only work in certain districts—those with the resources, interested and capable students, and competent teachers. Almost every school has much higher priorities, bringing every student to a strong level in core subjects. But for those few schools with a large mass of accomplished students, I feel gamified education is not the right answer.</p>
+<p>All these schools are trying to solve the same problem: how do you quantify
+learning? A district needs to know how well a school is doing (hence
+standardized tests), a school needs to know how well a teacher is doing, and a
+teacher needs to report a quantitative measure of how well a student is doing.</p>
+<p>Of course, doing well isn’t quantifiable, so teachers manage by introducing
+various ‘objective’ measures. And any form of objective measurement becomes a
+game. Your GPA, for example, is something you can maximize. Tests are memory
+games. Any system where you can influence a number becomes a game.</p>
+<p>Without grades, we have no way to quickly analyze a student’s performance. But
+grades don’t offer much insight into that, either. As a student, knowing
+someone has good grades tells me that they are good at the game. They work
+hard, consistently finish their homework, and study for tests. More
+importantly, they know what a teacher wants to see to give them good grades.
+They know that they should <a href="http://anonymouslawyer.blogspot.com/2006/05/ive-received-number-of-e-mails-asking.html">do
+well</a>.</p>
+<p>Only the student and the teacher can  <em>really</em> know a student’s status. For a
+student who really needs help coming up to his or her goals, this turns out to
+be disastrous: any third party would first judge them by the numbers, and
+getting help becomes hard. Students end up working hard, not to reach <em>their</em>
+goals, but to improve their numbers. This is a problem, but that’s not what
+this post is about.</p>
+<p>This post is about the opposite end: students who don’t have trouble keeping
+up. If you aren’t struggling, several parameters change. You’re now learning
+because you <em>want</em> to. This means you don’t care about the numbers that measure
+the learning. It’s blissful.</p>
+<p>Well, it would be blissful, except that courses have already been designed,
+over decades, to guide you towards an objective test. And so even if you want
+to learn for pleasure, you’re being pushed through an objective, rigid
+‘curriculum’.</p>
+<p>This happened, for instance, in my AP Computer Science class last year. Almost
+every student there was far above average, and exceeding all expectations at
+school. It was the perfect environment for them to learn freely—and our
+teacher encouraged this—but they had to spend hours studying for the AP CS
+test.</p>
+<p>Honestly, studying for the AP CS test isn’t very different from studying for
+the Spelling Bee. It’s just memorizing and practicing. It isn’t learning.</p>
+<p>I propose, as an intellectual exercise, a different course format, for students
+learning for pleasure. The course is <em>not</em> graded. Instead, it simply connects
+students with teachers, who guide them in their learning. There is no
+curriculum.</p>
+<p>The inspiration for this comes from my adventures trying to teach myself
+computer science—often, the hardest part is to choose something to study, and
+to decide how much detail to study it in. When a student is paired with a
+competent expert in a field, he has someone to ask for guidance.</p>
+<p>Again, this program would only work in certain districts—those with the
+resources, interested and capable students, and competent teachers. Almost
+every school has much higher priorities, bringing every student to a strong
+level in core subjects. But for those few schools with a large mass of
+accomplished students, I feel gamified education is not the right answer.</p>
 ]]></description>
             <link>http://hardmath123.github.io/gamifiededucation.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/gamifiededucation.html</guid>
@@ -1282,8 +1427,11 @@ process.stdin.on(&quot;data&quot;, function(buffer) {
     }
 });
 </code></pre>
-<p>This should give you the tools to write shinier, interactive utilities. But keep in mind the UNIX philosophy—keep them simple, and make sure they cooperate as filters (you should be able to pipe stuff in and out of your utility).</p>
-<p>P.S. I wrote this post—including the code sample—in vim running in tmux. Please pardon typos.</p>
+<p>This should give you the tools to write shinier, interactive utilities. But
+keep in mind the UNIX philosophy—keep them simple, and make sure they cooperate
+as filters (you should be able to pipe stuff in and out of your utility).</p>
+<p>P.S. I wrote this post—including the code sample—in vim running in tmux. Please
+pardon typos.</p>
 ]]></description>
             <link>http://hardmath123.github.io/ansiescape.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/ansiescape.html</guid>
@@ -1676,12 +1824,41 @@ Gandalf got up and whispered: “Altruism.”</p>
             <description><![CDATA[A new beginning?
 
 <p>I’m back.</p>
-<p>The new Comfortably Numbered runs on a new state-of-the art blogging platform, developed (of course) by yours truly: shock. Shock brings together a lot of powerful technologies written by smarter people, and bundles them up into a command line tool to publish posts.</p>
-<p>Shock generates an RSS feed, a homepage, a 404 page, and content pages, all built on templates and CSS that <em>you</em> write yourself. Then it lumps those in a directory that you can serve on anything clever enough to serve static filesystems: Dropbox, Google Drive, Github Pages, Amazon S3, even your home computer.</p>
-<p>Shock uses Mustache’s non-logical templating system (non-logical, in this context, is a compliment). It was built on a rather simple idea: <strong>if you’re using a node-based command-line platform to create a blog, chances are you want control over every single aspect of presentation</strong>. In fact, I consider that one of the primary symptoms of being a hacker.</p>
-<p>Hackers want control over everything that they use. It’s why we prefer extensible text editors and browser add-ons, and why we spend hours tinkering with spacing equations in TeX. It’s also part of the reason I migrated away from Google; App Engine is a very closed non-hacker-friendly environment. The hacker-control symptoms are what guide us subconsciously in choosing and designing software. We prefer open-source projects and scriptable systems because they conform to the pattern of software that gives control to the user.</p>
-<p>The opposite is true for most nonhacker packages. Word and PowerPoint are ‘merciful god’ software: they give you features (for example, those dreadful PowerPoint animations) which you may or may not use, but they retain complete control over what can be done. Compare that to a hacker-friendly document generation technology like TeX or CSS. Similarly, nonhacker image editors or other similar applications try to hide the filesystem from you. The most recent project you were working on magically appears, along with a list of other recent projects. This is unaccaptable to a hacker.</p>
-<p>I feel the easiest way to convey this message is: “don’t be afraid to expose your software’s guts”. Often, the best software is the kind that gives you as many handles and hooks as possible. Make your command-line tools UNIX filters wherever possible: read from <code>stdin</code> and write to <code>stdout</code>. Use a universally usable format like JSON for storing data. Most importantly, <em>never</em> explicitly disallow a user from doing anything.</p>
+<p>The new Comfortably Numbered runs on a new state-of-the art blogging platform,
+developed (of course) by yours truly: shock. Shock brings together a lot of
+powerful technologies written by smarter people, and bundles them up into a
+command line tool to publish posts.</p>
+<p>Shock generates an RSS feed, a homepage, a 404 page, and content pages, all
+built on templates and CSS that <em>you</em> write yourself. Then it lumps those in a
+directory that you can serve on anything clever enough to serve static
+filesystems: Dropbox, Google Drive, Github Pages, Amazon S3, even your home
+computer.</p>
+<p>Shock uses Mustache’s non-logical templating system (non-logical, in this
+context, is a compliment). It was built on a rather simple idea: <strong>if you’re
+using a node-based command-line platform to create a blog, chances are you want
+control over every single aspect of presentation</strong>. In fact, I consider that
+one of the primary symptoms of being a hacker.</p>
+<p>Hackers want control over everything that they use. It’s why we prefer
+extensible text editors and browser add-ons, and why we spend hours tinkering
+with spacing equations in TeX. It’s also part of the reason I migrated away
+from Google; App Engine is a very closed non-hacker-friendly environment. The
+hacker-control symptoms are what guide us subconsciously in choosing and
+designing software. We prefer open-source projects and scriptable systems
+because they conform to the pattern of software that gives control to the user.</p>
+<p>The opposite is true for most nonhacker packages. Word and PowerPoint are
+‘merciful god’ software: they give you features (for example, those dreadful
+PowerPoint animations) which you may or may not use, but they retain complete
+control over what can be done. Compare that to a hacker-friendly document
+generation technology like TeX or CSS. Similarly, nonhacker image editors or
+other similar applications try to hide the filesystem from you. The most recent
+project you were working on magically appears, along with a list of other
+recent projects. This is unaccaptable to a hacker.</p>
+<p>I feel the easiest way to convey this message is: “don’t be afraid to expose
+your software’s guts”. Often, the best software is the kind that gives you as
+many handles and hooks as possible. Make your command-line tools UNIX filters
+wherever possible: read from <code>stdin</code> and write to <code>stdout</code>. Use a universally
+usable format like JSON for storing data. Most importantly, <em>never</em> explicitly
+disallow a user from doing anything.</p>
 <p>Preventing stupid things also prevents clever things.</p>
 ]]></description>
             <link>http://hardmath123.github.io/helloagain.html</link>
