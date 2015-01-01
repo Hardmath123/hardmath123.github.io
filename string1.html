@@ -45,29 +45,33 @@
             </h4>
             <br/>
             <blockquote>
-<p>It all began with the forging of the great rings of protection…</p>
-<p>The third ring for the user scripts, written on the fly.</p>
-<p>The second for superusers, to let them <code>sudo chown</code>.</p>
-<p>The first for system calls, in the CLI.</p>
-<p>The zeroth for the kernel, where the hardware’s shown.</p>
-<p>In the land of MULTICS, where the hackers lie,</p>
-<p>One ring to rule them all, one ring to find them.</p>
-<p>One ring to bring them all, and in the darkness bind them.</p>
-<p>In the land of MULTICS, where the hackers lie.</p>
+<p>It all began with the forging of the great rings of protection…<br>The third ring for the user scripts, written on the fly.<br>The second for superusers, to let them <code>sudo chown</code>.<br>The first for system calls, in the CLI.<br>The zeroth for the kernel, where the hardware’s shown.<br>In the land of MULTICS, where the hackers lie,<br>One ring to rule them all, one ring to find them.<br>One ring to bring them all, and in the darkness bind them.<br>In the land of MULTICS, where the hackers lie.  </p>
 </blockquote>
-<p>Gandalf was trapped. Surrounded by malicious shell scripts, his only hope lay in <code>/rivendell</code>, which only granted access to the user group <code>Elves</code>.</p>
+<p>Gandalf was trapped. Surrounded by malicious shell scripts, his only hope lay
+in <code>/rivendell</code>, which only granted access to the user group <code>Elves</code>.</p>
 <p>He cd’d himself into <code>/rivendell</code> moments before a violent fork bomb exploded.</p>
-<p>“Well, Elrond, it appears we have some visitors,” he said, putting down his staff for a moment.</p>
-<p>“Ah, Gandalf, a welcome sight in our time of need.” Elrond appeared. He was perturbed—things must really be bad.</p>
-<p>“As are you, my friend. The recent attacks are troubling. Not many dare attack a Sysadmin.”</p>
-<p>“Yes, indeed, they worry me, too,” sighed Elrond, “the Dwarves sent word that their bitcoin mines in <code>/moria</code> were raided for valuable nonces.”</p>
-<p>“<code>/moria</code>? Don’t they log all commands run there, ever since the Trolls of 1402775481?”</p>
-<p>“Yes, Gandalf, I believe <code>/moria/log</code> contains information about everyone that tries to access <code>/moria</code>. I wonder…”</p>
-<p>“Way ahead of you.” <code>cat /moria/log</code>, chanted Gandalf. His staff started spewing hundreds of lines of information. “Argh, there’s too much data! We’ll never analyze it all manually.” He flushed the smoke-words in a puff of <code>^C</code>.</p>
-<p>“Just got word from the Dwarves—they said they flagged suspicious log messages with the word <code>suspicious</code> at the end.”</p>
+<p>“Well, Elrond, it appears we have some visitors,” he said, putting down his
+staff for a moment.</p>
+<p>“Ah, Gandalf, a welcome sight in our time of need.” Elrond appeared. He was
+perturbed—things must really be bad.</p>
+<p>“As are you, my friend. The recent attacks are troubling. Not many dare attack
+a Sysadmin.”</p>
+<p>“Yes, indeed, they worry me, too,” sighed Elrond, “the Dwarves sent word that
+their bitcoin mines in <code>/moria</code> were raided for valuable nonces.”</p>
+<p>“<code>/moria</code>? Don’t they log all commands run there, ever since the Trolls of
+1402775481?”</p>
+<p>“Yes, Gandalf, I believe <code>/moria/log</code> contains information about everyone that
+tries to access <code>/moria</code>. I wonder…”</p>
+<p>“Way ahead of you.” <code>cat /moria/log</code>, chanted Gandalf. His staff started
+spewing hundreds of lines of information. “Argh, there’s too much data! We’ll
+never analyze it all manually.” He flushed the smoke-words in a puff of <code>^C</code>.</p>
+<p>“Just got word from the Dwarves—they said they flagged suspicious log messages
+with the word <code>suspicious</code> at the end.”</p>
 <p>“Good, so we don’t have to filter it by hand. We can just <code>grep</code>.”</p>
 <p>“Grep? Is that another of those black spells you found in <code>/mordor</code>?”</p>
-<p>“No, Elrond, <code>grep</code> is the purest of spells. Grep searches files.” <code>grep suspicious /moria/log</code>, he shouted, and the staff started listing all log messages containing ‘suspicious’.</p>
+<p>“No, Elrond, <code>grep</code> is the purest of spells. Grep searches files.” <code>grep
+suspicious /moria/log</code>, he shouted, and the staff started listing all log
+messages containing ‘suspicious’.</p>
 <pre><code>3:12:12 legolas &#39;just visiting&#39; suspicious
 3:12:15 samwise &#39;lost my pony!&#39; suspicious
 3:12:18 saruman &#39;mwahahahaha!!&#39; suspicious
@@ -77,35 +81,52 @@
 4:43:33 aragorn &#39;meeting gimli&#39; suspicious
 ...
 </code></pre><p>“Aha! 3:12:15—saruman’s involved.” Gandalf winked.</p>
-<p>“Gandalf, this is still far too much output. The Dwarves think everyone who isn’t a Dwarf is suspicious!”</p>
-<p>“Ah, but you haven’t seen the power of <code>grep</code> yet. What else do we know about the intruders’ log messages?” Gandalf looked excited. Elrond did not approve.</p>
+<p>“Gandalf, this is still far too much output. The Dwarves think everyone who
+isn’t a Dwarf is suspicious!”</p>
+<p>“Ah, but you haven’t seen the power of <code>grep</code> yet. What else do we know about
+the intruders’ log messages?” Gandalf looked excited. Elrond did not approve.</p>
 <p>“Well, let’s assume they all said <code>mwahahahaha</code>“</p>
 <p>“How many ha’s were there, again?”</p>
-<p>“It doesn’t matter. We can <code>grep</code> by regexes, too.” Gandalf picked up his infamous pipe, and smoked the first grep’s output into a new charm: <code>grep suspicious /moria/log | grep -e &quot;mwa\(ha\)*&quot;</code>.</p>
-<p>“The Kleene star operator <code>*</code> we used searches any number of the group before it.”</p>
+<p>“It doesn’t matter. We can <code>grep</code> by regexes, too.” Gandalf picked up his
+infamous pipe, and smoked the first grep’s output into a new charm: <code>grep
+suspicious /moria/log | grep -e &quot;mwa\(ha\)*&quot;</code>.</p>
+<p>“The Kleene star operator <code>*</code> we used searches any number of the group before
+it.”</p>
 <p>“And those backslashes?”</p>
-<p>“Escaping. Parentheses are special words in spell charms, you need to use backslashes to prevent them from accidentally burning a Hobbit-subdirectory or something.”</p>
+<p>“Escaping. Parentheses are special words in spell charms, you need to use
+backslashes to prevent them from accidentally burning a Hobbit-subdirectory or
+something.”</p>
 <pre><code>3:12:18 saruman &#39;mwahahahaha!!&#39; suspicious
 3:12:18 azogorc &#39;mwahahaha....&#39; suspicious
 3:12:18 urukhai &#39;mwahahahahaha&#39; suspicious
 </code></pre><p>“Gandalf, I’ve got to hand it to you, you are the greatest—“</p>
-<p>“—no time for that,” interrupted Gandalf, “we’ve got to stop them before they get to Rivendell!”</p>
+<p>“—no time for that,” interrupted Gandalf, “we’ve got to stop them before they
+get to Rivendell!”</p>
 <p>“They’ll never guess the password. We’re safe for a bit.”</p>
 <p>“With all due respect, Elrond, it’s trivial to guess it.”</p>
 <p>Elrond choked. “What?!”</p>
-<p>“Shush. Knowing you, it’s probably not Elvish—you’re too clever for that. It’s probably English.”</p>
-<p>“And knowing your memory, probably not more than a word.” He got up and started pacing.</p>
+<p>“Shush. Knowing you, it’s probably not Elvish—you’re too clever for that. It’s
+probably English.”</p>
+<p>“And knowing your memory, probably not more than a word.” He got up and started
+pacing.</p>
 <p>(<code>cat /usr/share/dict/words</code>, he chanted under his breath.)</p>
 <p>“Gandalf, I swear upon sword, this password was forged by the high elves of—“</p>
 <p>“—and between six and eight characters, I would guess…”</p>
-<p>(<code>grep &quot;^\w\{6,8\}$&quot;</code>, he chanted. “This one’s tricky. <code>^</code> means start of the word, <code>\w</code> means an alphabet, and <code>{6,8}$</code> mean 6-8 of those until the end.”)</p>
-<p>“Now we can be a bit clever. Elvish uses the <code>ui</code> sound a lot, I bet that’s in there. Can’t teach an old orc new tricks.”</p>
+<p>(<code>grep &quot;^\w\{6,8\}$&quot;</code>, he chanted. “This one’s tricky. <code>^</code> means start of the
+word, <code>\w</code> means an alphabet, and <code>{6,8}$</code> mean 6-8 of those until the end.”)</p>
+<p>“Now we can be a bit clever. Elvish uses the <code>ui</code> sound a lot, I bet that’s in
+there. Can’t teach an old orc new tricks.”</p>
 <p>(<code>grep ui</code>, he chanted)</p>
-<p>“Oh, and you’ve always been partial to vowels before words (your kids are Arwen, Aragorn, Elladan and Elrohir)”</p>
-<p>(<code>grep &quot;^\(a\|e\)&quot;</code>, he chanted. “Start-of-word and then a or e. The <code>|</code> means or.”)</p>
-<p>“so that narrows it down to about…” He waved his wand about rapidly. “…Sixty-six.”</p>
-<p>“GANDALF!” Elrond’s ears were turning red. Maybe his hair was, too. “You only get one chance at guessing, though,” he added with a wry smile.</p>
-<p>“Let’s go through that list. Which one fits an Elf-king? It must be… yes…” Gandalf got up and whispered: “Altruism.”</p>
+<p>“Oh, and you’ve always been partial to vowels before words (your kids are
+Arwen, Aragorn, Elladan and Elrohir)”</p>
+<p>(<code>grep &quot;^\(a\|e\)&quot;</code>, he chanted. “Start-of-word and then a or e. The <code>|</code> means
+or.”)</p>
+<p>“so that narrows it down to about…” He waved his wand about rapidly.
+“…Sixty-six.”</p>
+<p>“GANDALF!” Elrond’s ears were turning red. Maybe his hair was, too. “You only
+get one chance at guessing, though,” he added with a wry smile.</p>
+<p>“Let’s go through that list. Which one fits an Elf-king? It must be… yes…”
+Gandalf got up and whispered: “Altruism.”</p>
 <p>To be continued.</p>
 
             <div id="disqus_thread"></div>
