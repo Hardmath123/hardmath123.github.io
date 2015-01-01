@@ -3,6 +3,7 @@
     "author": "Hardmath123",
     "description": "My blog.",
     "url": "http://hardmath123.github.io",
+    "img": "http://hardmath123.github.io/static/avatar.png",
     "templates": {
         "404": "404.html",
         "header": "header.html",

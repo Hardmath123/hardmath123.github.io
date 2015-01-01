@@ -4,8 +4,14 @@
         <title><![CDATA[Comfortably Numbered]]></title>
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
+        <image>
+            <url>http://hardmath123.github.io/static/avatar.png</url>
+            <title>Comfortably Numbered</title>
+            <link>http://hardmath123.github.io</link>
+        </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 01 Jan 2015 19:42:58 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 01 Jan 2015 19:47:55 GMT</lastBuildDate>
+        <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
