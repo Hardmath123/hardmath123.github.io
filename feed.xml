@@ -5,7 +5,7 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 01 Jan 2015 19:22:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 01 Jan 2015 19:24:23 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
@@ -728,37 +728,88 @@ and plaintext representations.</p>
             <title><![CDATA[Some PicoCTF Writeups]]></title>
             <description><![CDATA[In honor of PicoCTF, I wrote this post in pico.
 
-<p>Almost any metric of work I’ve done—homework submitted, emails answered, hours spent playing piano, number of Github commits—show a sharp drop in the past two weeks. I pretty much spent every moment on a computer solving <a href="http://picoctf.com">PicoCTF</a> problems.</p>
-<p>Pico was wonderful. It was an opportunity to do stuff I couldn’t (legally) do before, and learn stuff that many adults would hesitate to teach teenagers. I also got to hang out with cool hackers on their IRC channel, and had an excuse to stay up till 2am hacking.</p>
-<p>I’m planning on putting up some quick writeups of the problems I loved. If you haven’t spent an hour or so with these problems, you won’t have any clue what I’m talking about (and chances are that I myself won’t grok any of this a year from now). Nevertheless, here goes.</p>
+<p>Almost any metric of work I’ve done—homework submitted, emails answered, hours
+spent playing piano, number of Github commits—show a sharp drop in the past
+two weeks. I pretty much spent every moment on a computer solving
+<a href="http://picoctf.com">PicoCTF</a> problems.</p>
+<p>Pico was wonderful. It was an opportunity to do stuff I couldn’t (legally) do
+before, and learn stuff that many adults would hesitate to teach teenagers. I
+also got to hang out with cool hackers on their IRC channel, and had an excuse
+to stay up till 2am hacking.</p>
+<p>I’m planning on putting up some quick writeups of the problems I loved. If you
+haven’t spent an hour or so with these problems, you won’t have any clue what
+I’m talking about (and chances are that I myself won’t grok any of this a year
+from now). Nevertheless, here goes.</p>
 <h3 id="obo">OBO</h3>
 <p>This problem caused too many people too many hours of pain.</p>
-<p>The basic idea is that the programmer used <code>&lt;=</code> instead of <code>&lt;</code> wherever he was iterating, so he has lots of off-by-one errors. In particular, when populating his hex table, he has:</p>
+<p>The basic idea is that the programmer used <code>&lt;=</code> instead of <code>&lt;</code> wherever he was
+iterating, so he has lots of off-by-one errors. In particular, when populating
+his hex table, he has:</p>
 <pre><code class="lang-c">for (i = 0; i &lt;= 6; ++i) {
     hex_table[&#39;a&#39; + i] = 10 + i;
 }
 </code></pre>
 <p>This allows <code>g</code> to be a valid hex character. Yay.</p>
-<p>Now he goes around checking whether or not all the password characters are hex, and he tries to make sure that all hex chars are used at least once by populating the array <code>digits</code>. But we can input <code>g</code> in the password, so we can set <code>digits[16]</code> which overflows into <code>password</code>:</p>
+<p>Now he goes around checking whether or not all the password characters are hex,
+and he tries to make sure that all hex chars are used at least once by
+populating the array <code>digits</code>. But we can input <code>g</code> in the password, so we can
+set <code>digits[16]</code> which overflows into <code>password</code>:</p>
 <pre><code class="lang-c">int digits[16] = {0};
 char password[64];
 </code></pre>
-<p>So far, so good. A <code>char</code> is one byte, and an <code>int</code> (on this setup) is 4 bytes. So when we overflow an <code>int</code> onto <code>password</code>, we set the first four characters of the array to <code>\x01\x00\x00\x00</code> (the bytes are reversed because Endianness!). With that zero byte, we’ve effectively reset <code>password</code> to <code>\x01</code>. So now we can input <code>\x01</code> as the confirmation and cheat the password changer. Yay again.</p>
-<p>Now what? It uses <code>system()</code> to call a Python script. Yuck. On the bright side, it uses a relative file path for the Python file (the author probably didn’t test it in another working directory). So we simply <code>cd</code> into our home directory and make a new Python script with the same name, with contents:</p>
+<p>So far, so good. A <code>char</code> is one byte, and an <code>int</code> (on this setup) is 4 bytes.
+So when we overflow an <code>int</code> onto <code>password</code>, we set the first four characters
+of the array to <code>\x01\x00\x00\x00</code> (the bytes are reversed because
+Endianness!). With that zero byte, we’ve effectively reset <code>password</code> to
+<code>\x01</code>. So now we can input <code>\x01</code> as the confirmation and cheat the password
+changer. Yay again.</p>
+<p>Now what? It uses <code>system()</code> to call a Python script. Yuck. On the bright side,
+it uses a relative file path for the Python file (the author probably didn’t
+test it in another working directory). So we simply <code>cd</code> into our home
+directory and make a new Python script with the same name, with contents:</p>
 <pre><code class="lang-python">print open(&#39;/home/obo/flag.txt&#39;).read()
 </code></pre>
 <p>When we send OBO the overflowed password, it runs this with the right privs and we win.</p>
 <h3 id="make-a-face">Make a Face</h3>
-<p>This was my favorite challenge (I have a thing for web exploitation). My first reaction was “CGI! Shell! This must be Shellshock!” Turns out they’ve patched their Bash, though, so that didn’t work.</p>
-<p>The legitimate solution relies on the fact that Perl’s <code>open()</code> is unsafe: you can call it with a <code>|</code> at the end, and it <em>evaluates the argument in a shell</em>, sending back the result.</p>
-<p>The webpage essentially asks the server to open the file <code>{body part type}{index}</code>, where <code>body part type</code> is one of <code>head</code>, <code>nose</code>, etc. and <code>index</code> looks like <code>1.bmp</code>. So, of course, we can cheat by sending it <code>1.bmp; ls|</code> and instead of a bitmap file, the server gets a directory listing.</p>
-<p>This is pretty easy to try out with <code>curl</code>…but we get back gibberish. It looks like there’s some bitwise melding going on on the server that combines the images. This dies when it gets <code>ls</code> output. So we just send <em>all</em> the body part parameters the same bad index. It bitwise <code>&amp;</code>s them together (i.e. nothing happens) and we get the secret. Simple but beautiful.</p>
+<p>This was my favorite challenge (I have a thing for web exploitation). My first
+reaction was “CGI! Shell! This must be Shellshock!” Turns out they’ve patched
+their Bash, though, so that didn’t work.</p>
+<p>The legitimate solution relies on the fact that Perl’s <code>open()</code> is unsafe: you
+can call it with a <code>|</code> at the end, and it <em>evaluates the argument in a shell</em>,
+sending back the result.</p>
+<p>The webpage essentially asks the server to open the file <code>{body part
+type}{index}</code>, where <code>body part type</code> is one of <code>head</code>, <code>nose</code>, etc. and
+<code>index</code> looks like <code>1.bmp</code>. So, of course, we can cheat by sending it <code>1.bmp;
+ls|</code> and instead of a bitmap file, the server gets a directory listing.</p>
+<p>This is pretty easy to try out with <code>curl</code>…but we get back gibberish. It
+looks like there’s some bitwise melding going on on the server that combines
+the images. This dies when it gets <code>ls</code> output. So we just send <em>all</em> the body
+part parameters the same bad index. It bitwise <code>&amp;</code>s them together (i.e. nothing
+happens) and we get the secret. Simple but beautiful.</p>
 <h3 id="steve-s-list">Steve’s List</h3>
-<p>This was my other favorite challenge, because there were so many different things you needed to simultaneously break to get shell. Also, I just love the way they used CSS3 polyfills to make the <code>blink</code> tag work in non-ancient browsers.</p>
-<p>First, there’s the cookie signing. Steve, in all his wisdom, is authenticating cookies by maintaining a SHA1 signature of the cookie plus some secret nonce. Turns out, this is pretty insecure because of a simple padding message-extension hack. A quick Google search sends us <a href="http://journal.batard.info/post/2011/03/04/exploiting-sha-1-signed-messages">this blog post</a>, and they post some sample Python that gets the job done.</p>
-<p>Though I recommend reading the blog post to actually understand what’s going on, the basic idea is that a SHA1 hash operates on an arbitrary number of blocks. The state of the algorithm at the end of one block is the input to the next block’s hash (the input to the first block’s hash is a well-known constant).</p>
-<p>You don’t need to know the contents of the previous block to add another block. So we manually pad the payload we have (that is, the cookie) and tack on our own block. We can initialize the SHA state with the (known) hash of the first block and then compute valid subsequent hashes without ever knowing the key. Some quick modifications to the Python script given above let us forge arbitrarily long messages.</p>
-<p>And now for something completely different. The server reads each line of the cookie, and unpacks it using PHP’s <code>unserialize</code>:</p>
+<p>This was my other favorite challenge, because there were so many different
+things you needed to simultaneously break to get shell. Also, I just love the
+way they used CSS3 polyfills to make the <code>blink</code> tag work in non-ancient
+browsers.</p>
+<p>First, there’s the cookie signing. Steve, in all his wisdom, is authenticating
+cookies by maintaining a SHA1 signature of the cookie plus some secret nonce.
+Turns out, this is pretty insecure because of a simple padding
+message-extension hack. A quick Google search sends us <a href="http://journal.batard.info/post/2011/03/04/exploiting-sha-1-signed-messages">this blog
+post</a>,
+and they post some sample Python that gets the job done.</p>
+<p>Though I recommend reading the blog post to actually understand what’s going
+on, the basic idea is that a SHA1 hash operates on an arbitrary number of
+blocks. The state of the algorithm at the end of one block is the input to the
+next block’s hash (the input to the first block’s hash is a well-known
+constant).</p>
+<p>You don’t need to know the contents of the previous block to add another block.
+So we manually pad the payload we have (that is, the cookie) and tack on our
+own block. We can initialize the SHA state with the (known) hash of the first
+block and then compute valid subsequent hashes without ever knowing the key.
+Some quick modifications to the Python script given above let us forge
+arbitrarily long messages.</p>
+<p>And now for something completely different. The server reads each line of the
+cookie, and unpacks it using PHP’s <code>unserialize</code>:</p>
 <pre><code class="lang-php">$settings_array = explode(&quot;\n&quot;, $custom_settings);
 $custom_settings = array();
 for ($i = 0; $i &lt; count($settings_array); $i++) {
@@ -767,7 +818,9 @@ for ($i = 0; $i &lt; count($settings_array); $i++) {
     $custom_settings[] = $setting;
 }
 </code></pre>
-<p>With forged objects, we can make it instantiate arbitrary objects at will—PHP’s serialization saves type information. Notice that the <code>Post</code> object defines:</p>
+<p>With forged objects, we can make it instantiate arbitrary objects at
+will—PHP’s serialization saves type information. Notice that the <code>Post</code> object
+defines:</p>
 <pre><code class="lang-php">function __destruct() {
     // debugging stuff
     $s = &quot;&lt;!-- POST &quot; . htmlspecialchars($this-&gt;title);
@@ -779,9 +832,16 @@ for ($i = 0; $i &lt; count($settings_array); $i++) {
     echo $s;
 }
 </code></pre>
-<p>So it will dump its contents in an HTML comment for debugging when it’s destroyed by the GC. Since we can instantiate arbitrary <code>Post</code> objects, we can get their contents printed out at will. We’re very close now.</p>
-<p>We can also create <code>Filter</code>s that act on the <code>Post</code>s. <code>Filter</code>s use PHP’s <code>preg_replace</code>. That’s insecure, because you can use the <code>e</code> flag to <em>evaluate arbitrary code</em> based on the replacement text generated from regex captures. Argh.</p>
-<p>At this point, it was around 2am, my hands felt like rubber, and my eyes felt like mozzerella balls. So I just copied <code>posts/steve.txt</code>, and modified one of the filters to dump the contents of the flag, and went to sleep in peace.</p>
+<p>So it will dump its contents in an HTML comment for debugging when it’s
+destroyed by the GC. Since we can instantiate arbitrary <code>Post</code> objects, we can
+get their contents printed out at will. We’re very close now.</p>
+<p>We can also create <code>Filter</code>s that act on the <code>Post</code>s. <code>Filter</code>s use PHP’s
+<code>preg_replace</code>. That’s insecure, because you can use the <code>e</code> flag to <em>evaluate
+arbitrary code</em> based on the replacement text generated from regex captures.
+Argh.</p>
+<p>At this point, it was around 2am, my hands felt like rubber, and my eyes felt
+like mozzerella balls. So I just copied <code>posts/steve.txt</code>, and modified one of
+the filters to dump the contents of the flag, and went to sleep in peace.</p>
 <p>There are several lessons to be learned here, but the most important are:</p>
 <ol>
 <li>Don’t roll your own crypto.</li>
@@ -789,11 +849,27 @@ for ($i = 0; $i &lt; count($settings_array); $i++) {
 <li>If you do, read the docs.</li>
 </ol>
 <h3 id="block">Block</h3>
-<p>Block uses a Substitution Permutation Network to encrypt the string—but it does it twice. I pretty much brute-forced this one. But I did it tastefully, so it merits a writeuplet.</p>
-<p>We know that the message begins with <code>message:&lt;space&gt;</code>, and we know the first 9 bytes of the output. This lets us mount a known-plaintext attack. Here’s how: we encrypt the plaintext with <em>all</em> possible keys (there are ($2^{24}=16777216$) of them) and we <em>decrypt</em> the ciphertext with all possible keys. Turns out that for the correct pair of keys, we’ll get the exact same result (the intermediate encryption). This is a ‘meet-in-the-middle’ attack (not to be confused with ‘man-in-the-middle’ or ‘Malcolm-in-the-Middle’), and can be read about <a href="http://en.wikipedia.org/wiki/Meet-in-the-middle_attack">on Wikipedia</a>. This is good—now all we need to do is find the intersection of two massive lists.</p>
-<p>Once I’d compiled these lists manually (it took over an hour), I realized that I would be graduating high school by the time a naive Python intersection search finished. Fortunately, Python’s <code>set</code> type has ridiculously fast member-checking, so it took all of 5 minutes to find the keypair, and I was done.</p>
+<p>Block uses a Substitution Permutation Network to encrypt the string—but it
+does it twice. I pretty much brute-forced this one. But I did it tastefully, so
+it merits a writeuplet.</p>
+<p>We know that the message begins with <code>message:&lt;space&gt;</code>, and we know the first 9
+bytes of the output. This lets us mount a known-plaintext attack. Here’s how:
+we encrypt the plaintext with <em>all</em> possible keys (there are
+($2^{24}=16777216$) of them) and we <em>decrypt</em> the ciphertext with all possible
+keys. Turns out that for the correct pair of keys, we’ll get the exact same
+result (the intermediate encryption). This is a ‘meet-in-the-middle’ attack
+(not to be confused with ‘man-in-the-middle’ or ‘Malcolm-in-the-Middle’), and
+can be read about <a href="http://en.wikipedia.org/wiki/Meet-in-the-middle_attack">on
+Wikipedia</a>. This is
+good—now all we need to do is find the intersection of two massive lists.</p>
+<p>Once I’d compiled these lists manually (it took over an hour), I realized that
+I would be graduating high school by the time a naive Python intersection
+search finished. Fortunately, Python’s <code>set</code> type has ridiculously fast
+member-checking, so it took all of 5 minutes to find the keypair, and I was
+done.</p>
 <hr>
-<p>That’s all for now. I’ll probably write a couple more, depending on the amount of homework I need to make up this week&hellip;</p>
+<p>That’s all for now. I’ll probably write a couple more, depending on the amount
+of homework I need to make up this week&hellip;</p>
 ]]></description>
             <link>http://hardmath123.github.io/pico.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/pico.html</guid>
@@ -1227,17 +1303,68 @@ process.stdin.on(&quot;data&quot;, function(buffer) {
             <title><![CDATA[Cryptolegal]]></title>
             <description><![CDATA[A short story I wrote late last night.
 
-<p>The judge banged the gavel. It didn’t help, of course, since there was nobody to hear it. But the lead designer wanted to add a human touch so that the public would be more accepting, and so the gavel banged. 24 other gavels banged, too, throughout the day as the 24 other judges reached various points in their cycles. Hal, the janitor, disapproved of leaving them in the basement; they were truly magnificent; but they need to be kept below freezing to prevent the heat from melting them.</p>
-<p>As Conway Courts opened its doors on Monday morning, there was a bustle in the air, the kind of electric bustle that is distinctly in the air when the biggest hacking incident of the year (maybe even the decade) is about to be put on trial.</p>
-<p>The New York Cryptographic Currency Exchange’s board of directors had some of the best (and most expensive) prosecuting software in the industry. They had enough computational power to brute-force all 21st century cryptography in under three days (though the Seattle Doctrine forbade them from doing so).</p>
-<p>‘Draper’, as he was known, was writing his own defending software, a move which would be widely regarded as suicidal if Draper was not generally accepted as one of the most brilliant programmers of the century.</p>
-<p>Terminals across the world began establishing connections to Conway’s servers, and receiving a live transmission of <code>judge:criminal:a54bfe</code>, popularly known as ‘Judy’. Judy sent viewers copies of all the evidence presented by NYCCE and Draper, cryptographically signed. Viewers could examine this evidence, assured that it was presented by a genuine judge. Free software allowed anyone to compare this evidence to a vast peer-to-peer database of past cases. Highly trained neural networks inside Judy processed this data in real time, trying to derive a solution that optimizes based on the framework set forth by the Third Constitution.</p>
+<p>The judge banged the gavel. It didn’t help, of course, since there was nobody
+to hear it. But the lead designer wanted to add a human touch so that the
+public would be more accepting, and so the gavel banged. 24 other gavels
+banged, too, throughout the day as the 24 other judges reached various points
+in their cycles. Hal, the janitor, disapproved of leaving them in the basement;
+they were truly magnificent; but they need to be kept below freezing to prevent
+the heat from melting them.</p>
+<p>As Conway Courts opened its doors on Monday morning, there was a bustle in the
+air, the kind of electric bustle that is distinctly in the air when the biggest
+hacking incident of the year (maybe even the decade) is about to be put on
+trial.</p>
+<p>The New York Cryptographic Currency Exchange’s board of directors had some of
+the best (and most expensive) prosecuting software in the industry. They had
+enough computational power to brute-force all 21st century cryptography in
+under three days (though the Seattle Doctrine forbade them from doing so).</p>
+<p>‘Draper’, as he was known, was writing his own defending software, a move which
+would be widely regarded as suicidal if Draper was not generally accepted as
+one of the most brilliant programmers of the century.</p>
+<p>Terminals across the world began establishing connections to Conway’s servers,
+and receiving a live transmission of <code>judge:criminal:a54bfe</code>, popularly known
+as ‘Judy’. Judy sent viewers copies of all the evidence presented by NYCCE and
+Draper, cryptographically signed. Viewers could examine this evidence, assured
+that it was presented by a genuine judge. Free software allowed anyone to
+compare this evidence to a vast peer-to-peer database of past cases. Highly
+trained neural networks inside Judy processed this data in real time, trying to
+derive a solution that optimizes based on the framework set forth by the Third
+Constitution.</p>
 <p><code>%nycce connected</code>, broadcast Judy, followed by <code>%draper connected</code>.</p>
-<p>Bits began to screech across the world; <code>nycce</code> presenting evidence in the form of Terabytes of data, and linking it to historic trials. <code>nycce</code>‘s sole purpose was to use data and legal axioms and rules of production defined by the Third Constitution to derive the fact that Draper was guilty of manipulating the cryptocurrency market. <code>draper</code> had to defend himself by presenting evidence to the contrary; disproving <code>nycce</code>‘s chain of reasoning by targeting specific links. If <code>draper</code> can parse the data into a more logical chain of reasoning, leading to his innocence, he wins.</p>
-<p>As the seconds ticked by, <code>nycce</code>‘s logic became stronger. Data supported other data: statistical models of Draper’s online activity over the past year and cutting-edge analyses of economic patterns in the cryptocurrent market were soon correlated in a clear trend. <code>draper</code> was reeling under the intense computational tasks it faced to process those numbers. There were a few, sporadic counterarguments, mostly nonsensical. The world watched Draper tweak his algorithms frantically.</p>
-<p>Judy ceased broadcasting the data for a moment. She needed all her computational resources to weigh both chains of reasoning. <code>nycce</code>‘s argument broke down, in human terms, to the fact that Draper had made a suspicious amount of connections to key financial databases. <code>draper</code> appeared to be trying to decrypt logs of these databases to prove that the connections were innocent.</p>
-<p><code>Guilty.</code> broadcast Judy, to the joy of financial overlords across the country. This case set a legal precedent which future neural networks would doubtless utilize to twist arguments in their favor. The entire legal system depended on previous computation, to optimize large computations and train the neural networks maintained by the government to perform the judging. Once humans were deemed emotionally unfit to decide the fate of citizens, the cryptolegal system was developed and implemented over a decade of research.</p>
-<p>Draper sighed, and took another sip of coffee. Possibly his last as a free man. But possibly not. In the huge outpour of emotion across social networks, a few key packets of data sent from <code>draper</code> eluded the NSA’s monitoring servers. What nobody noticed was that these packets of data cleverly manipulated Judy’s RAM. A small program was seeded, and without a trace, it flipped the bits necessary to reduce Draper’s prison sentence to zero years.</p>
+<p>Bits began to screech across the world; <code>nycce</code> presenting evidence in the form
+of Terabytes of data, and linking it to historic trials. <code>nycce</code>‘s sole purpose
+was to use data and legal axioms and rules of production defined by the Third
+Constitution to derive the fact that Draper was guilty of manipulating the
+cryptocurrency market. <code>draper</code> had to defend himself by presenting evidence to
+the contrary; disproving <code>nycce</code>‘s chain of reasoning by targeting specific
+links. If <code>draper</code> can parse the data into a more logical chain of reasoning,
+leading to his innocence, he wins.</p>
+<p>As the seconds ticked by, <code>nycce</code>‘s logic became stronger. Data supported other
+data: statistical models of Draper’s online activity over the past year and
+cutting-edge analyses of economic patterns in the cryptocurrent market were
+soon correlated in a clear trend. <code>draper</code> was reeling under the intense
+computational tasks it faced to process those numbers. There were a few,
+sporadic counterarguments, mostly nonsensical. The world watched Draper tweak
+his algorithms frantically.</p>
+<p>Judy ceased broadcasting the data for a moment. She needed all her
+computational resources to weigh both chains of reasoning. <code>nycce</code>‘s argument
+broke down, in human terms, to the fact that Draper had made a suspicious
+amount of connections to key financial databases. <code>draper</code> appeared to be
+trying to decrypt logs of these databases to prove that the connections were
+innocent.</p>
+<p><code>Guilty.</code> broadcast Judy, to the joy of financial overlords across the country.
+This case set a legal precedent which future neural networks would doubtless
+utilize to twist arguments in their favor. The entire legal system depended on
+previous computation, to optimize large computations and train the neural
+networks maintained by the government to perform the judging. Once humans were
+deemed emotionally unfit to decide the fate of citizens, the cryptolegal system
+was developed and implemented over a decade of research.</p>
+<p>Draper sighed, and took another sip of coffee. Possibly his last as a free man.
+But possibly not. In the huge outpour of emotion across social networks, a few
+key packets of data sent from <code>draper</code> eluded the NSA’s monitoring servers.
+What nobody noticed was that these packets of data cleverly manipulated Judy’s
+RAM. A small program was seeded, and without a trace, it flipped the bits
+necessary to reduce Draper’s prison sentence to zero years.</p>
 ]]></description>
             <link>http://hardmath123.github.io/cryptolegal.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/cryptolegal.html</guid>
