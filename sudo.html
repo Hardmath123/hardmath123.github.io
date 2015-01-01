@@ -44,52 +44,112 @@
             <h4>Friday, November 29, 2013
             </h4>
             <br/>
-            <p class="dropcap">You should not trust me with matches, knives, expensive cars, and <code>sudo</code>: the command that makes you a god-like user with root powers. I'm the kind of person who accidentally <code>rm -rf</code>'s his <em>Desktop</em> (by the way, the sporadically disappearing icons are both hilarious and mortifying). So whenever I'm asked to <code>sudo</code> something, I get both worried and suspicious. And over the years, I have perfected the art of installing things without <code>sudo</code>. You can follow along this tutorial with just a shell.
+            <p class="dropcap">You should not trust me with matches, knives, expensive
+cars, and <code>sudo</code>: the command that makes you a god-like user with
+root powers. I'm the kind of person who accidentally <code>rm -rf</code>'s his
+<em>Desktop</em> (by the way, the sporadically disappearing icons are both
+hilarious and mortifying). So whenever I'm asked to <code>sudo</code>
+something, I get both worried and suspicious. And over the years, I have
+perfected the art of installing things without <code>sudo</code>. You can
+follow along this tutorial with just a shell.
 
 <h3>Why sudo?</h3>
-<p>The first thing to realize here is that 99% of the time, the only reason we need to use <code>sudo</code> is to make that program accessible to everyone. That's it. When you run a UNIX program, you're saying <q>execute this file</q>; and when you <code>sudo</code> you essentially say <q>everyone can access this file from everywhere</q>.
 
-<p>For example, suppose I want to install a program called <code>easy</code> that acts like the classic Staples Easy Button and executes <code>say that was easy</code> (I actually do have this on my computer, and yes, I use it a lot). It's not too tough:
+<p>The first thing to realize here is that 99% of the time, the only reason we
+need to use <code>sudo</code> is to make that program accessible to everyone.
+That's it. When you run a UNIX program, you're saying <q>execute this file</q>;
+and when you <code>sudo</code> you essentially say <q>everyone can access this
+file from everywhere</q>.
+
+<p>For example, suppose I want to install a program called <code>easy</code>
+that acts like the classic Staples Easy Button and executes <code>say that was
+easy</code> (I actually do have this on my computer, and yes, I use it a lot).
+It's not too tough:
 
 <pre><code>echo "say that was easy" > ~/Desktop/easy # create the file "easy" with our contents
-chmod +x ~/Desktop/easy # tell Bash that it's ok to execute this file
+chmod +x ~/Desktop/easy # tell your computer that it's ok to execute this file
 ~/Desktop/easy # run it!
 </code></pre>
 
-<p>Now I can run my script by typing <code>~/Desktop/easy</code>. But I don't want to have to type that huge thing each time I do something awesome&mdash;I want <code>easy</code> to be one-step executable just like <code>vim</code>. This is where <code>sudo</code> comes in.
+<p>Now I can run my script by typing <code>~/Desktop/easy</code>. But I don't
+want to have to type that huge thing each time I do something awesome&mdash;I
+want <code>easy</code> to be one-step executable just like <code>vim</code>.
+This is where <code>sudo</code> comes in.
 
-<p>Bash reads a variable called <code>$PATH</code>, which contains a list of various directories separated by colons. When you type a command on the shell, Bash searches each of these directories for that file, one by one. You can see this list right now with <code>echo $PATH</code>. These directories contain important system files, and are accessible by everyone. So it makes sense not to let mortals like me to mess with them. When you install a package, most of the time you're just moving the script files to one of these directories so it's easy to run, and Bash asks you for <code>sudo</code> to make sure you know what you're doing.
+<p>Bash reads a variable called <code>$PATH</code>, which contains a list of
+various directories separated by colons. When you type a command on the shell,
+Bash searches each of these directories for that file, one by one. You can see
+this list right now with <code>echo $PATH</code>. These directories contain
+important system files, and are accessible by everyone. So it makes sense not
+to let mortals like me to mess with them. When you install a package, most of
+the time you're just moving the script files to one of these directories so
+it's easy to run, and Bash asks you for <code>sudo</code> to make sure you know
+what you're doing.
 
 <h3>.profile</h3>
 
-<p>If we could tack on our own directory to the <code>$PATH</code>, we could dump our junk in there without messing with anything sudo-ey, right? Right. To modify <code>$PATH</code>, you need another UNIX trick: a file called <code>~/.profile</code>.
+<p>If we could tack on our own directory to the <code>$PATH</code>, we could
+dump our junk in there without messing with anything sudo-ey, right? Right. To
+modify <code>$PATH</code>, you need another UNIX trick: a file called
+<code>~/.profile</code>.
 
-<p><code>.profile</code> is another script file that's executed before your shell loads, so that you can customize it. The dot in front makes it invisible to Finder, so you can only mess with it using a shell. You can do all sorts of neat things with <code>.profile</code>: print a friendly message on top of the Terminal when you start it up, customize your prompt, and mess with your <code>$PATH</code>.
+<p><code>.profile</code> is another script file that's executed before your
+shell loads, so that you can customize it. The dot in front makes it invisible
+to Finder, so you can only mess with it using a shell. You can do all sorts of
+neat things with <code>.profile</code>: print a friendly message on top of the
+Terminal when you start it up, customize your prompt, and mess with your
+<code>$PATH</code>.
 
 <p>Since it's a hidden file, you should create it using the command line:
 
 <pre><code>cd ~/ # go to your home directory
 touch .profile # create the file
 open -a TextEdit .profile # open with TextEdit (you can also use pico/vim/emacs)</code></pre>
-&hellip;and you should have TextEdit open up with a blank <code>.profile</code>. Now we can create our new <code>$PATH</code> by tacking on <code>~/my_bin</code> to it. Add the following to the <code>.profile</code>: <code>export PATH=$PATH:~/my_bin</code>. Save, and quit; and then refresh your Terminal (you can just close this window and open a new one). This forces the profile to be run. If you want a sanity check, try <code>echo $PATH</code> and see if it changed from last time.
 
-<p>We just told Bash that <code>~/my_bin</code> contains executable files. We have <em>not</em> created that directory yet, so let's got do that: <code>mkdir my_bin</code>. And, just for fun, dump <code>easy</code> in there.
+&hellip;and you should have TextEdit open up with a blank
+<code>.profile</code>. Now we can create our new <code>$PATH</code> by tacking
+on <code>~/my_bin</code> to it. Add the following to the <code>.profile</code>:
+<code>export PATH=$PATH:~/my_bin</code>. Save, and quit; and then refresh your
+Terminal (you can just close this window and open a new one). This forces the
+profile to be run. If you want a sanity check, try <code>echo $PATH</code> and
+see if it changed from last time.
 
-<p>Now you can test it out: type <code>easy</code>. If all went well, there shouldn't be any errors. (If something exploded, feel free to drop a comment below.)
+<p>We just told Bash that <code>~/my_bin</code> contains executable files. We
+have <em>not</em> created that directory yet, so let's got do that: <code>mkdir
+my_bin</code>. And, just for fun, dump <code>easy</code> in there.
+
+<p>Now you can test it out: type <code>easy</code>. If all went well, there
+shouldn't be any errors. (If something exploded, feel free to drop a comment
+below.)
 
 <h3>Using your powers.</h3>
 
-<p>That's actually all you need. To install a package, download it and look for its binaries (they will probably in a directory called <code>bin</code>). Alias the commands you care about to <code>~/my_bin</code>. And then have fun.
+<p>That's actually all you need. To install a package, download it and look for
+its binaries (they will probably in a directory called <code>bin</code>). Alias
+the commands you care about to <code>~/my_bin</code>. And then have fun.
 
-<p>If you use Python, you may want to add the following line to your profile: <code>export PYTHONPATH=$PYTHONPATH:~/my_bin/</code>. This lets you simply copy Python modules to your <code>~/my_bin</code>, instead of using <code>pip</code> or something.
+<p>If you use Python, you may want to add the following line to your profile:
+<code>export PYTHONPATH=$PYTHONPATH:~/my_bin/</code>. This lets you simply copy
+Python modules to your <code>~/my_bin</code>. Also take a look at `virtualenv`. 
 
-<p>You're going to have to do some digging to find the binaries; but I assure you that they probably exist. You can find binaries for Node, ffmpeg, Homebrew, and just about anything else you'll ever need.
+<p>On a Mac, it's worth installing Homebrew this way&mdash;almost everything
+works when locally compiled with it.
 
-<p>Some packages need configuration files to work right from a foreign directory. For example, <code>npm</code> needs you to create <code>.npmrc</code> and add a <em>prefix</em>, or the directory which you want to isolate all node stuff in. Mine simply reads <code>prefix = "~/my_bin/node_stuff"</code>.
+<p>Some packages need configuration files to work right from a foreign
+directory. For example, <code>npm</code> needs you to create
+<code>.npmrc</code> and add a <em>prefix</em>, or the directory which you want
+to isolate all node stuff in. Mine simply reads <code>prefix =
+"~/my_bin/node_stuff"</code>.
 
-<p>Finally: if you mess up your profile, you may have unpleasantries with your terminal (what if you accidentally clear your <code>$PATH</code>? Bash won't find any executables whatsoever&hellip;). To fix this, always remember that you can reference a command from its full path. Your last resort should be <code>/bin/rm ~/.profile</code>, which will wipe out the profile file, and let you start fresh.
+<p>Finally: if you mess up your profile, you may have unpleasantries with your
+terminal (what if you accidentally clear your <code>$PATH</code>? Bash won't
+find any executables whatsoever&hellip;). To fix this, always remember that you
+can reference a command from its full path. Your last resort should be
+<code>/usr/bin/rm ~/.profile</code>, which will wipe out the profile file, and let
+you start fresh.
 
 <p>Good luck, and hack on!
+
             <div id="disqus_thread"></div>
             <script type="text/javascript">
                 var disqus_shortname = 'comfortablynumbered';

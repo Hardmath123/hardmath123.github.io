@@ -44,62 +44,133 @@
             <h4>Monday, December 30, 2013
             </h4>
             <br/>
-            <!--
-Blown to Bitcoins
-Bitcoin for Liberal Arts Majors
--->
+            <p>Bitcoin is a hard-core nerd thing. It was built by nerds, and was used by
+nerds&mdash;until recently. <em>Normal</em> people have finally caught on to
+this powerful new alternate currency (it became rather popular in black markets
+when they realized purchases were untracable). And now a caf&eacute; a few
+blocks from my home accepts bitcoins.
 
-<p class="dropcap">Bitcoin is a hard-core nerd thing. It was built by nerds, and was used by nerds&mdash;until recently. <em>Normal</em> people have finally caught on to this powerful new alternate currency (it became rather popular in black markets when they realized purchases were untracable). And now a caf&eacute; a few blocks from my home accepts bitcoins.
+<p>So how do bitcoins work? How can something as fragile as money run
+completely in the cloud? And why should the public trust us nerds, anyway?
+Well, here's a short Bitcoin 101: Bitcoin for Liberal Arts Majors.
 
-<p>So how do bitcoins work? How can something as fragile as money run completely in the cloud? And why should the public trust us nerds, anyway? Well, here's a short Bitcoin 101: Bitcoin for Liberal Arts Majors.
-
-<p>The article is in three parts: how bitcoin transactions work, why it is secure, and how bitcoins come to be in the first place.
+<p>The article is in three parts: how bitcoin transactions work, why it is
+secure, and how bitcoins come to be in the first place.
 
 <h3>The Whiteboard</h3>
 
-<p>Let's assume that we have already, somehow, <q>created</q> some amount of bitcoins, and distributed them among some people. We'll formally establish how bitcoins come into being later. We can model the Bitcoin system as a large whiteboard that anyone can see or write on (but not erase). Suppose Alice wants to send Bob some bitcoins. She just writes an IOU on the whiteboard:
+<p>Let's assume that we have already, somehow, <q>created</q> some amount of
+bitcoins, and distributed them among some people. We'll formally establish how
+bitcoins come into being later. We can model the Bitcoin system as a large
+whiteboard that anyone can see or write on (but not erase). Suppose Alice wants
+to send Bob some bitcoins. She just writes an IOU on the whiteboard:
 
-<blockquote style="font-family:cursive;">I, Alice, agree to send Bob a sum of 2 bitcoins.</blockquote>
+<blockquote style="font-family:cursive;">I, Alice, agree to send Bob a sum of 2
+bitcoins.</blockquote>
 
-<p>Since IOU is kind of childish, we nerds call it a <em>transaction</em>. Now if Bob claims to have 2 bitcoins to pay Charlie, Charlie (or anyone else, really) can take a look at the whiteboard and trace all of Bob's transactions.
+<p>Since IOU is kind of childish, we nerds call it a <em>transaction</em>. Now
+if Bob claims to have 2 bitcoins to pay Charlie, Charlie (or anyone else,
+really) can take a look at the whiteboard and trace all of Bob's transactions.
 
-<p>That's really it&mdash;Bitcoin is a large public whiteboard listing transactions. Nobody keeps track of accounts or balances, because those can be recalculated if needed. In reality, it's a bit more complicated. People all over the world run a <em>Bitcoin Daemon</em>, which is connected to other Bitcoin Daemons over the internet. Each transaction is sent to a daemon, which then forwards it to others. The end result is that the whiteboard isn't centralized, it's distributed across a network. It's more like Alice writes a postcard to the nearest daemon, and the daemon forwards photocopies to its neighbors.
+<p>That's really it&mdash;Bitcoin is a large public whiteboard listing
+transactions. Nobody keeps track of accounts or balances, because those can be
+recalculated if needed. In reality, it's a bit more complicated. People all
+over the world run a <em>Bitcoin Daemon</em>, which is connected to other
+Bitcoin Daemons over the internet. Each transaction is sent to a daemon, which
+then forwards it to others. The end result is that the whiteboard isn't
+centralized, it's distributed across a network. It's more like Alice writes a
+postcard to the nearest daemon, and the daemon forwards photocopies to its
+neighbors.
 
-<p>Compare this to a traditional paper currency system, where you have central banks. Each transaction goes through a bank: the bank deducts money from the sender's account and adds money to the recipient's account, possibly deducting some as a fee. That puts the bank above other people. They can freeze accounts, track people, or delay transactions for as long as they want. Bitcoin bypasses this bank and makes transactions directly between people: <em>peer-to-peer</em>.
+<p>Compare this to a traditional paper currency system, where you have central
+banks. Each transaction goes through a bank: the bank deducts money from the
+sender's account and adds money to the recipient's account, possibly deducting
+some as a fee. That puts the bank above other people. They can freeze accounts,
+track people, or delay transactions for as long as they want. Bitcoin bypasses
+this bank and makes transactions directly between people:
+<em>peer-to-peer</em>.
 
 <h3>The dotted line.</h3>
 
-<p>If you've been paying attention, you may have noticed that since anyone can write to the board, anyone can put up a transaction from Alice to himself. Nobody knows who wrote that message. So Bob can easily write fake transactions and get all of Alice's bitcoins. Which is a problem.
+<p>If you've been paying attention, you may have noticed that since anyone can
+write to the board, anyone can put up a transaction from Alice to himself.
+Nobody knows who wrote that message. So Bob can easily write fake transactions
+and get all of Alice's bitcoins. Which is a problem.
 
-<p>The solution is called <strong>public key cryptography</strong>, a remarkably snazzy trick. It relies on using certain clever mathematical properties of really big numbers to encrypt data. This math is called <strong>RSA</strong>, which are the initials of all three inventors (Rivest, Shamir, and Adleman). We accept RSA as being the most secure option available, but that's only because it hasn't been hacked yet. Conspiracy theorists do talk about how the people at the NSA already have broken it.
+<p>The solution is called <strong>public key cryptography</strong>, a
+remarkably snazzy trick. It relies on using certain clever mathematical
+properties of really big numbers to encrypt data. This math is called
+<strong>RSA</strong>, which are the initials of all three inventors (Rivest,
+Shamir, and Adleman). We accept RSA as being the most secure option available,
+but that's only because it hasn't been hacked yet. Conspiracy theorists do talk
+about how the people at the NSA already have broken it.
 
-<p>To get started, Alice picks a huge number (in practice, this is several hundred digits worth of huge). She does some math with that number to get two new numbers: her <em>public key</em> and <em>private key</em>. As expected, she guards her private key with her life, but she is free to give out her public key. Both of these look a lot like a cat started dancing on your keyboard: long sequences of random-looking numbers and letters.
+<p>To get started, Alice picks a huge number (in practice, this is several
+hundred digits worth of huge). She does some math with that number to get two
+new numbers: her <em>public key</em> and <em>private key</em>. As expected, she
+guards her private key with her life, but she is free to give out her public
+key. Both of these look a lot like a cat started dancing on your keyboard: long
+sequences of random-looking numbers and letters.
 
-<p>Alice can now <em>sign</em> a message (piece of text) by applying some mathematical transformations that depend on knowing her private key. Since Alice keeps her private key a secret, only she can create a signed message. A signed message can then be <em>verified</em> by applying a different set of transformations which depend on the public key. If the message was signed with the correct, matching private key, then the verifying transformations will give a meaningful result.
+<p>Alice can now <em>sign</em> a message (piece of text) by applying some
+mathematical transformations that depend on knowing her private key. Since
+Alice keeps her private key a secret, only she can create a signed message. A
+signed message can then be <em>verified</em> by applying a different set of
+transformations which depend on the public key. If the message was signed with
+the correct, matching private key, then the verifying transformations will give
+a meaningful result.
 
-<p>Let's say Alice wants to send Bob a bitcoin. Now all she has to do is create a public statement which says:
+<p>Let's say Alice wants to send Bob a bitcoin. Now all she has to do is create
+a public statement which says:
 
-<blockquote style="font-family:cursive;">I, [Alice's public key] agree to send [Bob's public key] a sum of 2 bitcoins.</blockquote>
+<blockquote style="font-family:cursive;">I, [Alice's public key] agree to send
+[Bob's public key] a sum of 2 bitcoins.</blockquote>
 
-<p>She now signs this message and puts it up on the whiteboard. Charlie can verify that the transaction is legitimately from Alice by checking it with Alice's public key.
+<p>She now signs this message and puts it up on the whiteboard. Charlie can
+verify that the transaction is legitimately from Alice by checking it with
+Alice's public key.
 
-<p>Notice how this makes Alice and Bob anonymous. Neither Alice nor Bob are mentioned, just their public keys. This is why Bitcoin doesn't need an account or email address or registration. If she wanted to, Alice could make a new public key for each transaction. In fact, Bitcoin encourages that.
+<p>Notice how this makes Alice and Bob anonymous. Neither Alice nor Bob are
+mentioned, just their public keys. This is why Bitcoin doesn't need an account
+or email address or registration. If she wanted to, Alice could make a new
+public key for each transaction. In fact, Bitcoin encourages that.
 
 <h3>Where do bitcoins come from?</h3>
 
-<p>The short answer is that people get paid to run Bitcoin Daemons, because daemons take up a lot of power. One of the more profitable daemons duns in Reykjanesbaer, Iceland where the Arctic prevents the computers from physically <em>melting</em> because of the huge computations (they also have cheap geothermal power there).
+<p>The short answer is that people get paid to run Bitcoin Daemons, because
+daemons take up a lot of power. One of the more profitable daemons duns in
+Reykjanesbaer, Iceland where the Arctic prevents the computers from physically
+<em>melting</em> because of the huge computations (they also have cheap
+geothermal power there).
 
-<p>The long answer is a lot cooler. To really understand how it all works, you need to know what a cryptographic hash function is.
+<p>The long answer is a lot cooler. To really understand how it all works, you
+need to know what a cryptographic hash function is.
 
-<h4>Hashes&mdash;There, but not back again</h4>
+<h3>Hashes&mdash;There, but not back again</h3>
 
-<p>Paint is fun. You mix yellow and blue, and just like that you have green. Kindergarten stuff. But what if you were presented with a brand new color, and asked to name its constituents? You can't, without a lot of experimentation. So mixing paint is a one-way road: it's easy to go from constituents to mixture, but not the other way around.
+<p>Paint is fun. You mix yellow and blue, and just like that you have green.
+Kindergarten stuff. But what if you were presented with a brand new color, and
+asked to name its constituents? You can't, without a lot of experimentation. So
+mixing paint is a one-way road: it's easy to go from constituents to mixture,
+but not the other way around.
 
-<p>In Computer Science, we have something very similar, called <strong>cryptographic hash functions</strong>. That's just a fancy word for some operation that takes a number, and spits out another number, but it is mathematically impossible to go the other way. This may be hard to believe, but one example is taking the sum of the digits of a number: it's easy to find the sum, but impossible to tell the original number given the sum of its digits. Some common hash functions are <code>md5</code>, <code>SHA</code>, and <code>RIPEM-D</code>.
+<p>In Computer Science, we have something very similar, called
+<strong>cryptographic hash functions</strong>. That's just a fancy word for
+some operation that takes a number, and spits out another number, but it is
+mathematically impossible to go the other way. This may be hard to believe, but
+one example is taking the sum of the digits of a number: it's easy to find the
+sum, but impossible to tell the original number given the sum of its digits.
+Some common hash functions are <code>md5</code>, <code>SHA</code>, and
+<code>RIPEM-D</code>.
 
-<p>We already have standards in place to convert text to a large number and a large number back to text using hexadecimal notation. So you can find a hash of any piece of text, or any data (even an image or a video!).
+<p>We already have standards in place to convert text to a large number and a
+large number back to text using hexadecimal notation. So you can find a hash of
+any piece of text, or any data (even an image or a video!).
 
-<p>Hashes have two cool properties: they are unstable (so a small change in the input produces a wildly different hash) and they are fixed-length (so any input will generate a hash of the same size). Here are some hashes (pay attention to the difference between the second and third!):
+<p>Hashes have two cool properties: they are unstable (so a small change in the
+input produces a wildly different hash) and they are fixed-length (so any input
+will generate a hash of the same size). Here are some hashes (pay attention to
+the difference between the second and third!):
 
 <table style="border-spacing: 20px;">
 	<tr><th style="text-align:left;">Input</th><th style="text-align:left;">SHA-256</th></tr>
@@ -108,9 +179,11 @@ Bitcoin for Liberal Arts Majors
 	<tr><td>Hello, World </td><td style="font-family:monospace;">8663bab6d124806b9727f89bb4ab9db4-cbcc3862f6bbf22024dfa7212aa4ab7d</td></tr>
 </table>
 
-<h4>Blocks</h4>
+<h3>Blocks</h3>
 
-<p>Anyway, back to Bitcoin. The giant stack of transactions is broken up into a large number of sections called <strong>blocks</strong> that are chained together. A block contains the following important information:
+<p>Anyway, back to Bitcoin. The giant stack of transactions is broken up into a
+large number of sections called <strong>blocks</strong> that are chained
+together. A block contains the following important information:
 
 <ul>
 	<li>The version of the software being used
@@ -121,23 +194,73 @@ Bitcoin for Liberal Arts Majors
 	<li>A <strong>nonce</strong> (this is a number that has a very specific property)
 </ul>
 
-<p>A completed block has a <em>header</em>, which is a hash of all of these elements smushed together in order. A bitcoin daemon's job is to try to complete the current block by finding a <em>nonce</em> so that the header obtained from the completed hash is less than the <em>target</em> (remember, hashes are just numbers). This process is called <strong>mining bitcoins</strong>.
+<p>A completed block has a <em>header</em>, which is a hash of all of these
+elements smushed together in order. A bitcoin daemon's job is to try to
+complete the current block by finding a <em>nonce</em> so that the header
+obtained from the completed hash is less than the <em>target</em> (remember,
+hashes are just numbers). This process is called <strong>mining
+bitcoins</strong>.
 
-<p>Since hashes are so unstable, it is pretty much impossible to work backwards from the target to get a nonce. Instead, you have to guess a nonce, and see if it works. Furthermore, a lot of transactions happen every second, so the same nonce will return different hashes over time. So you can't really eliminate a nonce either. It's just guessing again and again. More powerful computers clearly have an advantage, which is why people use supercomputers to mine bitcoins.
+<p>Since hashes are so unstable, it is pretty much impossible to work backwards
+from the target to get a nonce. Instead, you have to guess a nonce, and see if
+it works. Furthermore, a lot of transactions happen every second, so the same
+nonce will return different hashes over time. So you can't really eliminate a
+nonce either. It's just guessing again and again. More powerful computers
+clearly have an advantage, which is why people use supercomputers to mine
+bitcoins.
 
-<p>You can find the current target at <a href="http://blockchain.info/q/getdifficulty">BlockChain.info's API</a>. You may find <a href="http://blockchain.info/q/probability">the current probability of a nonce working</a> more interesting. At the time of writing, it is approximately the probability of rolling a die 24 times and getting a 6 every single time. The daemons automatically control the target so that on average, each block is solved in 10 minutes. As computers get more powerful and more people start competing in the bitcoin mining industry, we will be guessing many more hashes per second and so the target will slowly decrease, reducing the number of valid nonces.
+<p>You can find the current target at <a
+href="http://blockchain.info/q/getdifficulty">BlockChain.info's API</a>. You
+may find <a href="http://blockchain.info/q/probability">the current probability
+of a nonce working</a> more interesting. At the time of writing, it is
+approximately the probability of rolling a die 24 times and getting a 6 every
+single time. The daemons automatically control the target so that on average,
+each block is solved in 10 minutes. As computers get more powerful and more
+people start competing in the bitcoin mining industry, we will be guessing many
+more hashes per second and so the target will slowly decrease, reducing the
+number of valid nonces.
 
-<p>When you find a nonce, you get the power to tack on a new transaction that doesn't have a sender, only a recipient. This new transaction adds bitcoins into the system by rewarding the recipient with bitcoins. When bitcoin was first launched, you got 50 bitcoins for solving a block. This number goes down so that it halves every four years&mdash;as of today, it is exactly 25 bitcoins, which would today trade in the market at over $18,000 (you can find the current trading value of bitcoin <a href="http://preev.com">here</a>). This means that eventually, the bitcoin economy will stabilize at around 21,000,000 bitcoins in circulation and the new bitcoins added into the system will be insignificant. The plan is to introduce a transaction fee to keep it going beyond that point.
+<p>When you find a nonce, you get the power to tack on a new transaction that
+doesn't have a sender, only a recipient. This new transaction adds bitcoins
+into the system by rewarding the recipient with bitcoins. When bitcoin was
+first launched, you got 50 bitcoins for solving a block. This number goes down
+so that it halves every four years&mdash;as of today, it is exactly 25
+bitcoins, which would today trade in the market at over $18,000 (you can find
+the current trading value of bitcoin <a href="http://preev.com">here</a>). This
+means that eventually, the bitcoin economy will stabilize at around 21,000,000
+bitcoins in circulation and the new bitcoins added into the system will be
+insignificant. The plan is to introduce a transaction fee to keep it going
+beyond that point.
 
 <h3>Recap!</h3>
 
-<p>You've come a long way. From being an oblivious newbie, you now know the internals of a rising cryptocurrency. You learned how bitcoin is a peer-to-peer system with no central authority, which stores transactions rather than accounts and balances. You learned how we use public key cryptography to verify transactions by digitally signing each message with a private key, and checking the message with the corresponding public key. Finally, you learned how bitcoin mining works, by using the instability of cryptographic hash functions to create a sort of computational lottery. Congratulations!
+<p>You've come a long way. From being an oblivious newbie, you now know the
+internals of a rising cryptocurrency. You learned how bitcoin is a peer-to-peer
+system with no central authority, which stores transactions rather than
+accounts and balances. You learned how we use public key cryptography to verify
+transactions by digitally signing each message with a private key, and checking
+the message with the corresponding public key. Finally, you learned how bitcoin
+mining works, by using the instability of cryptographic hash functions to
+create a sort of computational lottery. Congratulations!
 
-<p>Now you can explore the insides of bitcoin some more by viewing real live data. Check out <a href="http://blockchain.info">blockchain.info</a>. This site provides real-time information on each block. For example, we can <a href="http://blockchain.info/block-index/123456">investigate block #123456</a>: it looks like the nonce was <code>3794651987</code>, which produced a hash of <span style="font-family:monospace;">0000 0000 0000 21a8 34fd 780d bd25 e43a b565 b4e5 7a1f 7df0 435a c88e f982 a737</span>. See all those leading zeros? That shows that the hash is a (relatively) small number (for example, 00029 is clearly less than 42001). Scrolling down, the top transaction says "Newly Generated Coins", and produced 50 bitcoins which went to public key <code>1H54JGkh9TE5myxdamSNvm7zeFHnRWrVes</code>, who solved it.
+<p>Now you can explore the insides of bitcoin some more by viewing real live
+data. Check out <a href="http://blockchain.info">blockchain.info</a>. This site
+provides real-time information on each block. For example, we can <a
+href="http://blockchain.info/block-index/123456">investigate block #123456</a>:
+it looks like the nonce was <code>3794651987</code>, which produced a hash of
+<span style="font-family:monospace;">0000 0000 0000 21a8 34fd 780d bd25 e43a
+b565 b4e5 7a1f 7df0 435a c88e f982 a737</span>. See all those leading zeros?
+That shows that the hash is a (relatively) small number (for example, 00029 is
+clearly less than 42001). Scrolling down, the top transaction says "Newly
+Generated Coins", and produced 50 bitcoins which went to public key
+<code>1H54JGkh9TE5myxdamSNvm7zeFHnRWrVes</code>, who solved it.
 
-<h4>Further reading</h4>
+<h3>Further reading</h3>
 
-<p>I hope I got you excited about Bitcoin. The best thing to do now is to dive right in. <a href="http://bitcoin.org/en/download">Download the "official" Bitcoin Wallet</a> and start using it! Or <a href="https://en.bitcoin.it/wiki/Clients">find another one</a> you may like. You can try sending <code>1HKKK9RX3ZxcJjMSHje1GWbjXyRyez8R36</code> some money. (Ok, that wasn't as subtle as it could have been, but&hellip;)
+<p>I hope I got you excited about Bitcoin. The best thing to do now is to dive
+right in. <a href="http://bitcoin.org/en/download">Download the "official"
+Bitcoin Wallet</a> and start using it! Or <a
+href="https://en.bitcoin.it/wiki/Clients">find another one</a> you may like.
 
 <p>Finally, here are some links for you to keep on learning. See you soon!
 
@@ -150,6 +273,7 @@ Bitcoin for Liberal Arts Majors
 	<li><a href="http://en.wikipedia.org/wiki/Public-key_cryptography">Wikipedia: Public-key cryptography</a>
 	<li><a href="http://en.wikipedia.org/wiki/Cryptographic_hash">Wikipedia: Cryptographic hash functions</a>
 </ul>
+
             <div id="disqus_thread"></div>
             <script type="text/javascript">
                 var disqus_shortname = 'comfortablynumbered';

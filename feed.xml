@@ -5,7 +5,7 @@
         <description><![CDATA[My blog.]]></description>
         <link>http://hardmath123.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 01 Jan 2015 01:02:26 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 01 Jan 2015 18:46:17 GMT</lastBuildDate>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
@@ -1249,41 +1249,112 @@ process.stdin.on(&quot;data&quot;, function(buffer) {
             <title><![CDATA[Why Math is a Sport]]></title>
             <description><![CDATA[And why we should worry.
 
-<p class="dropcap">I am not sure whether math has become more cool or less cool over the past few years; and I'm <em>definitely</em> not sure which one I prefer. Math used to be something people did because they loved math. Now&hellip; not so much.
+<p class="dropcap">I am not sure whether math has become more cool or less cool
+over the past few years; and I'm <em>definitely</em> not sure which one I
+prefer. Math used to be something people did because they loved math.
+Now&hellip; not so much.
 
-<p>The Rubik's started off as a cool puzzling toy that kids would fiddle with. The process of playing with this mechanism, finding patterns, and getting elated when you solve it was invaluable to your development as a person. But then people realized you could get better at it. Fast forward a few years, and people can solve them in 10 seconds flat. There are algorithms that people memorize, they oil their cubes regularly, and they even do hand excercises to warm up. It's crazy. How is being the #1 Cube-solver in the world going to help you in life?
+<p>The Rubik's started off as a cool puzzling toy that kids would fiddle with.
+The process of playing with this mechanism, finding patterns, and getting
+elated when you solve it was invaluable to your development as a person. But
+then people realized you could get better at it. Fast forward a few years, and
+people can solve them in 10 seconds flat. There are algorithms that people
+memorize, they oil their cubes regularly, and they even do hand excercises to
+warm up. It's crazy. How is being the #1 Cube-solver in the world going to help
+you in life?
 
-<p>The same thing's happening to math. A small set of people is emerging who are stretching competition math to its limit, and that's going to be a problem very soon.
+<p>The same thing's happening to math. A small set of people is emerging who
+are stretching competition math to its limit, and that's going to be a problem
+very soon.
 
 <h3>Football for nerds.</h3>
 
-<p>People do competition math for the sake of doing competition math. Which is bad. As a high schooler into competition math, I routinely hear conversations like <q>You got 98%? Sheesh, you're slipping&hellip;</q> and <q>&hellip;so I forgot to divide by two. I'm so dumb, I should move down a grade.</q> I suppose that's as close as I will ever get to trash talk, but it's still rather depressing.
+<p>People do competition math for the sake of doing competition math. Which is
+bad. As a high schooler into competition math, I routinely hear conversations
+like <q>You got 98%? Sheesh, you're slipping&hellip;</q> and <q>&hellip;so I
+forgot to divide by two. I'm so dumb, I should move down a grade.</q> I suppose
+that's as close as I will ever get to trash talk, but it's still rather
+depressing.
 
-<p>But being good at math isn't about acing tests or remembering to divide by two. Math is about taking ideas and exploring; and competition math has slowly shadowed that out. Now being good at math is like being good at solving problems.
+<p>But being good at math isn't about acing tests or remembering to divide by
+two. Math is about taking ideas and exploring; and competition math has slowly
+shadowed that out. Now being good at math is like being good at solving
+problems.
 
-<p>To be good at competition math, you train all year long. You know the tricks that you should know&mdash;there are entire companies focused on collecting problem solving tips and tricks. You slowly learn heaps of techniques and formulae and theorems for all sorts of situations, and eventually you build up a mental index of all the major patterns of problems. You learn which situations merit Stewart's Theorem and when it is fruitful to try to apply the Pigeonhole Principle (answer: if the problem contains the phrase <q>Prove that there exists&hellip;</q>).
+<p>To be good at competition math, you train all year long. You know the tricks
+that you should know&mdash;there are entire companies focused on collecting
+problem solving tips and tricks. You slowly learn heaps of techniques and
+formulae and theorems for all sorts of situations, and eventually you build up
+a mental index of all the major patterns of problems. You learn which
+situations merit Stewart's Theorem and when it is fruitful to try to apply the
+Pigeonhole Principle (answer: if the problem contains the phrase <q>Prove that
+there exists&hellip;</q>).
 
-<p>There are important seasons when the big tests come around: the AMC, AIME, and USAMO. You know the scoring systems for all these perfectly, and you think a lot about what your optimal strategy should be: how many questions you need to get right to make it to the next level, how many you should attempt, and how long you should spend on each problem. You need to do practice tests each day to keep yourself in shape. During the real test, you're nervous. You obsess over your answers, making sure you haven't made a calculation mistake anywhere. You spend far too long filling in the bubbles on the answer sheet. And when the test is over, the serious folk congregate in a circle and compare answers. If you've made a silly mistake somewhere, people look at you disapprovingly.
+<p>There are important seasons when the big tests come around: the AMC, AIME,
+and USAMO. You know the scoring systems for all these perfectly, and you think
+a lot about what your optimal strategy should be: how many questions you need
+to get right to make it to the next level, how many you should attempt, and how
+long you should spend on each problem. You need to do practice tests each day
+to keep yourself in shape. During the real test, you're nervous. You obsess
+over your answers, making sure you haven't made a calculation mistake anywhere.
+You spend far too long filling in the bubbles on the answer sheet. And when the
+test is over, the serious folk congregate in a circle and compare answers. If
+you've made a silly mistake somewhere, people look at you disapprovingly.
 
-<p>If you replace math with football and test with game, this describes a high-school athlete's life rather well. Weren't geeks supposed to hate sports?
+<p>If you replace math with football and test with game, this describes a
+high-school athlete's life rather well. Weren't geeks supposed to hate sports?
 
 <h3>What's wrong.</h3>
 
-<p>I mean, there's even the term 'mathlete'. Mathletes are their own unique culture, who take pride in doing math. You see them doing masochistic things like <q>pi recitation competitions</q>. But that's not what math is! Math is about taking an idea and thinking about it and deducing something surprising from it. Math is about spending days thinking about a problem, not just 30 minutes.
+<p>I mean, there's even the term 'mathlete'. Mathletes are their own unique
+culture, who take pride in doing math. You see them doing masochistic things
+like <q>pi recitation competitions</q>. But that's not what math is! Math is
+about taking an idea and thinking about it and deducing something surprising
+from it. Math is about spending days thinking about a problem, not just 30
+minutes.
 
-<p>My favorite math competition is the USAMTS (USA Math Talent Search). It offers you five problems and 30 days to think about them and submit proofs for your solutions. USAMTS teaches you to think about problems persistently, to try fresh approaches, to research on a subject, and finally explain and justify your answer formally. Compare that to the AMC, which is 75 minutes for 25 multiple-choice problems, the first 18 of which are elementary and the last 7 of which are nontrivial. The AMC doesn't test your math skills, it tests your test-taking skills. And <em>that</em> is definitely bad.
+<p>My favorite math competition is the USAMTS (USA Math Talent Search). It
+offers you five problems and 30 days to think about them and submit proofs for
+your solutions. USAMTS teaches you to think about problems persistently, to try
+fresh approaches, to research on a subject, and finally explain and justify
+your answer formally. Compare that to the AMC, which is 75 minutes for 25
+multiple-choice problems, the first 18 of which are elementary and the last 7
+of which are nontrivial. The AMC doesn't test your math skills, it tests your
+test-taking skills. And <em>that</em> is definitely bad.
 
-<p>Which is not to say that people who do well on these tests are not good at math. Many of them certainly are brilliant kids, and it is fascinating to watch them approach a problem. But I would imagine a substantial portion of AMC high-scorers consist of children who aren't sure they like math at all. They do it as a sport, perhaps because their parents want them to, or perhaps because all their friends are doing it. And the ulterior motivation often isn't even the competition itself. It's college. It's the fact that 'USAMO qualifier' looks stellar on an application that drives a large chunk of math students.
+<p>Which is not to say that people who do well on these tests are not good at
+math. Many of them certainly are brilliant kids, and it is fascinating to watch
+them approach a problem. But I would imagine a substantial portion of AMC
+high-scorers consist of children who aren't sure they like math at all. They do
+it as a sport, perhaps because their parents want them to, or perhaps because
+all their friends are doing it. And the ulterior motivation often isn't even
+the competition itself. It's college. It's the fact that 'USAMO qualifier'
+looks stellar on an application that drives a large chunk of math students.
 
 <h3>Why it's wrong.</h3>
 
-<p>In itself, this isn't horrible. We've invented a game which people compete in. Why do I care?
+<p>In itself, this isn't horrible. We've invented a game which people compete
+in. Why do I care?
 
-<p>Because it's a disaster for anyone who can't bring themselves to be part of the game. For the math lovers who look at their mathlete friends 3 grades ahead and get discouraged. Your math class becomes like a badge, and mathletes try to take the hardest class they can possibly survive. And that hurts the rest of us, because the line between being good at math and being good at competition math fades, and even if you love math you aren't one of them.
+<p>Because it's a disaster for anyone who can't bring themselves to be part of
+the game. For the math lovers who look at their mathlete friends 3 grades ahead
+and get discouraged. Your math class becomes like a badge, and mathletes try to
+take the hardest class they can possibly survive. And that hurts the rest of
+us, because the line between being good at math and being good at competition
+math fades, and even if you love math you aren't one of them.
 
-<p>Competition math is a wonderful thing if you do it for the right reasons. If you do it because you love math, patterns, and puzzles, then it's perfect for you. It gives you an opportunity to see where you stand in the world. You get dozens of beautiful problems every day. You meet smart people. It is probably one of the most fitting hobbies you could have.
+<p>Competition math is a wonderful thing if you do it for the right reasons. If
+you do it because you love math, patterns, and puzzles, then it's perfect for
+you. It gives you an opportunity to see where you stand in the world. You get
+dozens of beautiful problems every day. You meet smart people. It is probably
+one of the most fitting hobbies you could have.
 
-<p>If you do it because it will help your college application, because your friends are doing it, or for any reason that isn't for the love of math, then rethink it. It becomes an obsession. You worry about your scores far more than is reasonable. It bothers you, and it puts you off math for the sake of math. And that's tragic.]]></description>
+<p>If you do it because it will help your college application, because your
+friends are doing it, or for any reason that isn't for the love of math, then
+rethink it. It becomes an obsession. You worry about your scores far more than
+is reasonable. It bothers you, and it puts you off math for the sake of math.
+And that's tragic.
+]]></description>
             <link>http://hardmath123.github.io/math.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/math.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
@@ -1487,62 +1558,133 @@ cipher-like-this solver. We can use it next year!
             <title><![CDATA[Blown to Bitcoins]]></title>
             <description><![CDATA[Bitcoin for Liberal Arts majors.
 
-<!--
-Blown to Bitcoins
-Bitcoin for Liberal Arts Majors
--->
+<p>Bitcoin is a hard-core nerd thing. It was built by nerds, and was used by
+nerds&mdash;until recently. <em>Normal</em> people have finally caught on to
+this powerful new alternate currency (it became rather popular in black markets
+when they realized purchases were untracable). And now a caf&eacute; a few
+blocks from my home accepts bitcoins.
 
-<p class="dropcap">Bitcoin is a hard-core nerd thing. It was built by nerds, and was used by nerds&mdash;until recently. <em>Normal</em> people have finally caught on to this powerful new alternate currency (it became rather popular in black markets when they realized purchases were untracable). And now a caf&eacute; a few blocks from my home accepts bitcoins.
+<p>So how do bitcoins work? How can something as fragile as money run
+completely in the cloud? And why should the public trust us nerds, anyway?
+Well, here's a short Bitcoin 101: Bitcoin for Liberal Arts Majors.
 
-<p>So how do bitcoins work? How can something as fragile as money run completely in the cloud? And why should the public trust us nerds, anyway? Well, here's a short Bitcoin 101: Bitcoin for Liberal Arts Majors.
-
-<p>The article is in three parts: how bitcoin transactions work, why it is secure, and how bitcoins come to be in the first place.
+<p>The article is in three parts: how bitcoin transactions work, why it is
+secure, and how bitcoins come to be in the first place.
 
 <h3>The Whiteboard</h3>
 
-<p>Let's assume that we have already, somehow, <q>created</q> some amount of bitcoins, and distributed them among some people. We'll formally establish how bitcoins come into being later. We can model the Bitcoin system as a large whiteboard that anyone can see or write on (but not erase). Suppose Alice wants to send Bob some bitcoins. She just writes an IOU on the whiteboard:
+<p>Let's assume that we have already, somehow, <q>created</q> some amount of
+bitcoins, and distributed them among some people. We'll formally establish how
+bitcoins come into being later. We can model the Bitcoin system as a large
+whiteboard that anyone can see or write on (but not erase). Suppose Alice wants
+to send Bob some bitcoins. She just writes an IOU on the whiteboard:
 
-<blockquote style="font-family:cursive;">I, Alice, agree to send Bob a sum of 2 bitcoins.</blockquote>
+<blockquote style="font-family:cursive;">I, Alice, agree to send Bob a sum of 2
+bitcoins.</blockquote>
 
-<p>Since IOU is kind of childish, we nerds call it a <em>transaction</em>. Now if Bob claims to have 2 bitcoins to pay Charlie, Charlie (or anyone else, really) can take a look at the whiteboard and trace all of Bob's transactions.
+<p>Since IOU is kind of childish, we nerds call it a <em>transaction</em>. Now
+if Bob claims to have 2 bitcoins to pay Charlie, Charlie (or anyone else,
+really) can take a look at the whiteboard and trace all of Bob's transactions.
 
-<p>That's really it&mdash;Bitcoin is a large public whiteboard listing transactions. Nobody keeps track of accounts or balances, because those can be recalculated if needed. In reality, it's a bit more complicated. People all over the world run a <em>Bitcoin Daemon</em>, which is connected to other Bitcoin Daemons over the internet. Each transaction is sent to a daemon, which then forwards it to others. The end result is that the whiteboard isn't centralized, it's distributed across a network. It's more like Alice writes a postcard to the nearest daemon, and the daemon forwards photocopies to its neighbors.
+<p>That's really it&mdash;Bitcoin is a large public whiteboard listing
+transactions. Nobody keeps track of accounts or balances, because those can be
+recalculated if needed. In reality, it's a bit more complicated. People all
+over the world run a <em>Bitcoin Daemon</em>, which is connected to other
+Bitcoin Daemons over the internet. Each transaction is sent to a daemon, which
+then forwards it to others. The end result is that the whiteboard isn't
+centralized, it's distributed across a network. It's more like Alice writes a
+postcard to the nearest daemon, and the daemon forwards photocopies to its
+neighbors.
 
-<p>Compare this to a traditional paper currency system, where you have central banks. Each transaction goes through a bank: the bank deducts money from the sender's account and adds money to the recipient's account, possibly deducting some as a fee. That puts the bank above other people. They can freeze accounts, track people, or delay transactions for as long as they want. Bitcoin bypasses this bank and makes transactions directly between people: <em>peer-to-peer</em>.
+<p>Compare this to a traditional paper currency system, where you have central
+banks. Each transaction goes through a bank: the bank deducts money from the
+sender's account and adds money to the recipient's account, possibly deducting
+some as a fee. That puts the bank above other people. They can freeze accounts,
+track people, or delay transactions for as long as they want. Bitcoin bypasses
+this bank and makes transactions directly between people:
+<em>peer-to-peer</em>.
 
 <h3>The dotted line.</h3>
 
-<p>If you've been paying attention, you may have noticed that since anyone can write to the board, anyone can put up a transaction from Alice to himself. Nobody knows who wrote that message. So Bob can easily write fake transactions and get all of Alice's bitcoins. Which is a problem.
+<p>If you've been paying attention, you may have noticed that since anyone can
+write to the board, anyone can put up a transaction from Alice to himself.
+Nobody knows who wrote that message. So Bob can easily write fake transactions
+and get all of Alice's bitcoins. Which is a problem.
 
-<p>The solution is called <strong>public key cryptography</strong>, a remarkably snazzy trick. It relies on using certain clever mathematical properties of really big numbers to encrypt data. This math is called <strong>RSA</strong>, which are the initials of all three inventors (Rivest, Shamir, and Adleman). We accept RSA as being the most secure option available, but that's only because it hasn't been hacked yet. Conspiracy theorists do talk about how the people at the NSA already have broken it.
+<p>The solution is called <strong>public key cryptography</strong>, a
+remarkably snazzy trick. It relies on using certain clever mathematical
+properties of really big numbers to encrypt data. This math is called
+<strong>RSA</strong>, which are the initials of all three inventors (Rivest,
+Shamir, and Adleman). We accept RSA as being the most secure option available,
+but that's only because it hasn't been hacked yet. Conspiracy theorists do talk
+about how the people at the NSA already have broken it.
 
-<p>To get started, Alice picks a huge number (in practice, this is several hundred digits worth of huge). She does some math with that number to get two new numbers: her <em>public key</em> and <em>private key</em>. As expected, she guards her private key with her life, but she is free to give out her public key. Both of these look a lot like a cat started dancing on your keyboard: long sequences of random-looking numbers and letters.
+<p>To get started, Alice picks a huge number (in practice, this is several
+hundred digits worth of huge). She does some math with that number to get two
+new numbers: her <em>public key</em> and <em>private key</em>. As expected, she
+guards her private key with her life, but she is free to give out her public
+key. Both of these look a lot like a cat started dancing on your keyboard: long
+sequences of random-looking numbers and letters.
 
-<p>Alice can now <em>sign</em> a message (piece of text) by applying some mathematical transformations that depend on knowing her private key. Since Alice keeps her private key a secret, only she can create a signed message. A signed message can then be <em>verified</em> by applying a different set of transformations which depend on the public key. If the message was signed with the correct, matching private key, then the verifying transformations will give a meaningful result.
+<p>Alice can now <em>sign</em> a message (piece of text) by applying some
+mathematical transformations that depend on knowing her private key. Since
+Alice keeps her private key a secret, only she can create a signed message. A
+signed message can then be <em>verified</em> by applying a different set of
+transformations which depend on the public key. If the message was signed with
+the correct, matching private key, then the verifying transformations will give
+a meaningful result.
 
-<p>Let's say Alice wants to send Bob a bitcoin. Now all she has to do is create a public statement which says:
+<p>Let's say Alice wants to send Bob a bitcoin. Now all she has to do is create
+a public statement which says:
 
-<blockquote style="font-family:cursive;">I, [Alice's public key] agree to send [Bob's public key] a sum of 2 bitcoins.</blockquote>
+<blockquote style="font-family:cursive;">I, [Alice's public key] agree to send
+[Bob's public key] a sum of 2 bitcoins.</blockquote>
 
-<p>She now signs this message and puts it up on the whiteboard. Charlie can verify that the transaction is legitimately from Alice by checking it with Alice's public key.
+<p>She now signs this message and puts it up on the whiteboard. Charlie can
+verify that the transaction is legitimately from Alice by checking it with
+Alice's public key.
 
-<p>Notice how this makes Alice and Bob anonymous. Neither Alice nor Bob are mentioned, just their public keys. This is why Bitcoin doesn't need an account or email address or registration. If she wanted to, Alice could make a new public key for each transaction. In fact, Bitcoin encourages that.
+<p>Notice how this makes Alice and Bob anonymous. Neither Alice nor Bob are
+mentioned, just their public keys. This is why Bitcoin doesn't need an account
+or email address or registration. If she wanted to, Alice could make a new
+public key for each transaction. In fact, Bitcoin encourages that.
 
 <h3>Where do bitcoins come from?</h3>
 
-<p>The short answer is that people get paid to run Bitcoin Daemons, because daemons take up a lot of power. One of the more profitable daemons duns in Reykjanesbaer, Iceland where the Arctic prevents the computers from physically <em>melting</em> because of the huge computations (they also have cheap geothermal power there).
+<p>The short answer is that people get paid to run Bitcoin Daemons, because
+daemons take up a lot of power. One of the more profitable daemons duns in
+Reykjanesbaer, Iceland where the Arctic prevents the computers from physically
+<em>melting</em> because of the huge computations (they also have cheap
+geothermal power there).
 
-<p>The long answer is a lot cooler. To really understand how it all works, you need to know what a cryptographic hash function is.
+<p>The long answer is a lot cooler. To really understand how it all works, you
+need to know what a cryptographic hash function is.
 
-<h4>Hashes&mdash;There, but not back again</h4>
+<h3>Hashes&mdash;There, but not back again</h3>
 
-<p>Paint is fun. You mix yellow and blue, and just like that you have green. Kindergarten stuff. But what if you were presented with a brand new color, and asked to name its constituents? You can't, without a lot of experimentation. So mixing paint is a one-way road: it's easy to go from constituents to mixture, but not the other way around.
+<p>Paint is fun. You mix yellow and blue, and just like that you have green.
+Kindergarten stuff. But what if you were presented with a brand new color, and
+asked to name its constituents? You can't, without a lot of experimentation. So
+mixing paint is a one-way road: it's easy to go from constituents to mixture,
+but not the other way around.
 
-<p>In Computer Science, we have something very similar, called <strong>cryptographic hash functions</strong>. That's just a fancy word for some operation that takes a number, and spits out another number, but it is mathematically impossible to go the other way. This may be hard to believe, but one example is taking the sum of the digits of a number: it's easy to find the sum, but impossible to tell the original number given the sum of its digits. Some common hash functions are <code>md5</code>, <code>SHA</code>, and <code>RIPEM-D</code>.
+<p>In Computer Science, we have something very similar, called
+<strong>cryptographic hash functions</strong>. That's just a fancy word for
+some operation that takes a number, and spits out another number, but it is
+mathematically impossible to go the other way. This may be hard to believe, but
+one example is taking the sum of the digits of a number: it's easy to find the
+sum, but impossible to tell the original number given the sum of its digits.
+Some common hash functions are <code>md5</code>, <code>SHA</code>, and
+<code>RIPEM-D</code>.
 
-<p>We already have standards in place to convert text to a large number and a large number back to text using hexadecimal notation. So you can find a hash of any piece of text, or any data (even an image or a video!).
+<p>We already have standards in place to convert text to a large number and a
+large number back to text using hexadecimal notation. So you can find a hash of
+any piece of text, or any data (even an image or a video!).
 
-<p>Hashes have two cool properties: they are unstable (so a small change in the input produces a wildly different hash) and they are fixed-length (so any input will generate a hash of the same size). Here are some hashes (pay attention to the difference between the second and third!):
+<p>Hashes have two cool properties: they are unstable (so a small change in the
+input produces a wildly different hash) and they are fixed-length (so any input
+will generate a hash of the same size). Here are some hashes (pay attention to
+the difference between the second and third!):
 
 <table style="border-spacing: 20px;">
 	<tr><th style="text-align:left;">Input</th><th style="text-align:left;">SHA-256</th></tr>
@@ -1551,9 +1693,11 @@ Bitcoin for Liberal Arts Majors
 	<tr><td>Hello, World </td><td style="font-family:monospace;">8663bab6d124806b9727f89bb4ab9db4-cbcc3862f6bbf22024dfa7212aa4ab7d</td></tr>
 </table>
 
-<h4>Blocks</h4>
+<h3>Blocks</h3>
 
-<p>Anyway, back to Bitcoin. The giant stack of transactions is broken up into a large number of sections called <strong>blocks</strong> that are chained together. A block contains the following important information:
+<p>Anyway, back to Bitcoin. The giant stack of transactions is broken up into a
+large number of sections called <strong>blocks</strong> that are chained
+together. A block contains the following important information:
 
 <ul>
 	<li>The version of the software being used
@@ -1564,23 +1708,73 @@ Bitcoin for Liberal Arts Majors
 	<li>A <strong>nonce</strong> (this is a number that has a very specific property)
 </ul>
 
-<p>A completed block has a <em>header</em>, which is a hash of all of these elements smushed together in order. A bitcoin daemon's job is to try to complete the current block by finding a <em>nonce</em> so that the header obtained from the completed hash is less than the <em>target</em> (remember, hashes are just numbers). This process is called <strong>mining bitcoins</strong>.
+<p>A completed block has a <em>header</em>, which is a hash of all of these
+elements smushed together in order. A bitcoin daemon's job is to try to
+complete the current block by finding a <em>nonce</em> so that the header
+obtained from the completed hash is less than the <em>target</em> (remember,
+hashes are just numbers). This process is called <strong>mining
+bitcoins</strong>.
 
-<p>Since hashes are so unstable, it is pretty much impossible to work backwards from the target to get a nonce. Instead, you have to guess a nonce, and see if it works. Furthermore, a lot of transactions happen every second, so the same nonce will return different hashes over time. So you can't really eliminate a nonce either. It's just guessing again and again. More powerful computers clearly have an advantage, which is why people use supercomputers to mine bitcoins.
+<p>Since hashes are so unstable, it is pretty much impossible to work backwards
+from the target to get a nonce. Instead, you have to guess a nonce, and see if
+it works. Furthermore, a lot of transactions happen every second, so the same
+nonce will return different hashes over time. So you can't really eliminate a
+nonce either. It's just guessing again and again. More powerful computers
+clearly have an advantage, which is why people use supercomputers to mine
+bitcoins.
 
-<p>You can find the current target at <a href="http://blockchain.info/q/getdifficulty">BlockChain.info's API</a>. You may find <a href="http://blockchain.info/q/probability">the current probability of a nonce working</a> more interesting. At the time of writing, it is approximately the probability of rolling a die 24 times and getting a 6 every single time. The daemons automatically control the target so that on average, each block is solved in 10 minutes. As computers get more powerful and more people start competing in the bitcoin mining industry, we will be guessing many more hashes per second and so the target will slowly decrease, reducing the number of valid nonces.
+<p>You can find the current target at <a
+href="http://blockchain.info/q/getdifficulty">BlockChain.info's API</a>. You
+may find <a href="http://blockchain.info/q/probability">the current probability
+of a nonce working</a> more interesting. At the time of writing, it is
+approximately the probability of rolling a die 24 times and getting a 6 every
+single time. The daemons automatically control the target so that on average,
+each block is solved in 10 minutes. As computers get more powerful and more
+people start competing in the bitcoin mining industry, we will be guessing many
+more hashes per second and so the target will slowly decrease, reducing the
+number of valid nonces.
 
-<p>When you find a nonce, you get the power to tack on a new transaction that doesn't have a sender, only a recipient. This new transaction adds bitcoins into the system by rewarding the recipient with bitcoins. When bitcoin was first launched, you got 50 bitcoins for solving a block. This number goes down so that it halves every four years&mdash;as of today, it is exactly 25 bitcoins, which would today trade in the market at over $18,000 (you can find the current trading value of bitcoin <a href="http://preev.com">here</a>). This means that eventually, the bitcoin economy will stabilize at around 21,000,000 bitcoins in circulation and the new bitcoins added into the system will be insignificant. The plan is to introduce a transaction fee to keep it going beyond that point.
+<p>When you find a nonce, you get the power to tack on a new transaction that
+doesn't have a sender, only a recipient. This new transaction adds bitcoins
+into the system by rewarding the recipient with bitcoins. When bitcoin was
+first launched, you got 50 bitcoins for solving a block. This number goes down
+so that it halves every four years&mdash;as of today, it is exactly 25
+bitcoins, which would today trade in the market at over $18,000 (you can find
+the current trading value of bitcoin <a href="http://preev.com">here</a>). This
+means that eventually, the bitcoin economy will stabilize at around 21,000,000
+bitcoins in circulation and the new bitcoins added into the system will be
+insignificant. The plan is to introduce a transaction fee to keep it going
+beyond that point.
 
 <h3>Recap!</h3>
 
-<p>You've come a long way. From being an oblivious newbie, you now know the internals of a rising cryptocurrency. You learned how bitcoin is a peer-to-peer system with no central authority, which stores transactions rather than accounts and balances. You learned how we use public key cryptography to verify transactions by digitally signing each message with a private key, and checking the message with the corresponding public key. Finally, you learned how bitcoin mining works, by using the instability of cryptographic hash functions to create a sort of computational lottery. Congratulations!
+<p>You've come a long way. From being an oblivious newbie, you now know the
+internals of a rising cryptocurrency. You learned how bitcoin is a peer-to-peer
+system with no central authority, which stores transactions rather than
+accounts and balances. You learned how we use public key cryptography to verify
+transactions by digitally signing each message with a private key, and checking
+the message with the corresponding public key. Finally, you learned how bitcoin
+mining works, by using the instability of cryptographic hash functions to
+create a sort of computational lottery. Congratulations!
 
-<p>Now you can explore the insides of bitcoin some more by viewing real live data. Check out <a href="http://blockchain.info">blockchain.info</a>. This site provides real-time information on each block. For example, we can <a href="http://blockchain.info/block-index/123456">investigate block #123456</a>: it looks like the nonce was <code>3794651987</code>, which produced a hash of <span style="font-family:monospace;">0000 0000 0000 21a8 34fd 780d bd25 e43a b565 b4e5 7a1f 7df0 435a c88e f982 a737</span>. See all those leading zeros? That shows that the hash is a (relatively) small number (for example, 00029 is clearly less than 42001). Scrolling down, the top transaction says "Newly Generated Coins", and produced 50 bitcoins which went to public key <code>1H54JGkh9TE5myxdamSNvm7zeFHnRWrVes</code>, who solved it.
+<p>Now you can explore the insides of bitcoin some more by viewing real live
+data. Check out <a href="http://blockchain.info">blockchain.info</a>. This site
+provides real-time information on each block. For example, we can <a
+href="http://blockchain.info/block-index/123456">investigate block #123456</a>:
+it looks like the nonce was <code>3794651987</code>, which produced a hash of
+<span style="font-family:monospace;">0000 0000 0000 21a8 34fd 780d bd25 e43a
+b565 b4e5 7a1f 7df0 435a c88e f982 a737</span>. See all those leading zeros?
+That shows that the hash is a (relatively) small number (for example, 00029 is
+clearly less than 42001). Scrolling down, the top transaction says "Newly
+Generated Coins", and produced 50 bitcoins which went to public key
+<code>1H54JGkh9TE5myxdamSNvm7zeFHnRWrVes</code>, who solved it.
 
-<h4>Further reading</h4>
+<h3>Further reading</h3>
 
-<p>I hope I got you excited about Bitcoin. The best thing to do now is to dive right in. <a href="http://bitcoin.org/en/download">Download the "official" Bitcoin Wallet</a> and start using it! Or <a href="https://en.bitcoin.it/wiki/Clients">find another one</a> you may like. You can try sending <code>1HKKK9RX3ZxcJjMSHje1GWbjXyRyez8R36</code> some money. (Ok, that wasn't as subtle as it could have been, but&hellip;)
+<p>I hope I got you excited about Bitcoin. The best thing to do now is to dive
+right in. <a href="http://bitcoin.org/en/download">Download the "official"
+Bitcoin Wallet</a> and start using it! Or <a
+href="https://en.bitcoin.it/wiki/Clients">find another one</a> you may like.
 
 <p>Finally, here are some links for you to keep on learning. See you soon!
 
@@ -1592,7 +1786,8 @@ Bitcoin for Liberal Arts Majors
 	<li><a href="http://en.wikipedia.org/wiki/Bitcoin">Wikipedia: Intimidating introduction</a>
 	<li><a href="http://en.wikipedia.org/wiki/Public-key_cryptography">Wikipedia: Public-key cryptography</a>
 	<li><a href="http://en.wikipedia.org/wiki/Cryptographic_hash">Wikipedia: Cryptographic hash functions</a>
-</ul>]]></description>
+</ul>
+]]></description>
             <link>http://hardmath123.github.io/bitcoin.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/bitcoin.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
@@ -1602,67 +1797,123 @@ Bitcoin for Liberal Arts Majors
             <title><![CDATA[Lampshades and Analytic Geometry]]></title>
             <description><![CDATA[Exploring conic sections with lampshades, potatoes, and smoke simulations.
 
-<p class="dropcap">A couple of months ago, I was sitting at the dining table, and I caught myself staring at the lamp. And I had just finished reading about conics, so I immediately saw something awesome. Take a moment to think about it. Do you see it?
+<p class="dropcap">A couple of months ago, I was sitting at the dining table,
+and I caught myself staring at the lamp. And I had just finished reading about
+conics, so I immediately saw something awesome. Take a moment to think about
+it. Do you see it?
 
 <p><img src="static/hyperbolic_lamp.png" width=200 />
 
-<p>I saw that the pattern on the wall was very special. It belongs to a class of curves called <em>hyperbolas</em>. Let's see how that happens.
+<p>I saw that the pattern on the wall was very special. It belongs to a class
+of curves called <em>hyperbolas</em>. Let's see how that happens.
 
-<p>To start off, how does that lamp create a pattern on the wall in the first place? Well, one way to tackle this is to think about where the light is going. What parts does the lampshade actually shade, and where is there light? A clever trick here would be to get a smoke machine to create some smoke around the lamp. You can see where the the light is going in the smoke. It's fun, like a search beam (or the Batman sign).
+<p>To start off, how does that lamp create a pattern on the wall in the first
+place? Well, one way to tackle this is to think about where the light is going.
+What parts does the lampshade actually shade, and where is there light? A
+clever trick here would be to get a smoke machine to create some smoke around
+the lamp. You can see where the the light is going in the smoke. It's fun, like
+a search beam (or the Batman sign).
 
-<p>Unfortunately, they don't sell dry ice to minors (partly because you can do really dangerous things with it, and partly because adults want to keep the fun stuff to themselves), so I did the next best thing: overkill. I created a model in Blender and simulated some smoke.
+<p>Unfortunately, they don't sell dry ice to minors (partly because you can do
+really dangerous things with it, and partly because adults want to keep the fun
+stuff to themselves), so I did the next best thing: overkill. I created a model
+in Blender and simulated some smoke.
 
-<blockquote><em>Sidenote: You haven't had a steep learning curve until you've tried to do something trivial with Blender. All the important functions are hidden away in various keystrokes, and there are all sorts of pitfalls all over the place. It's an amazing technology made with absolutely no consideration for beginners.</em></blockquote>
+<blockquote><em>Sidenote: You haven't had a steep learning curve until you've
+tried to do something trivial with Blender. All the important functions are
+hidden away in various keystrokes, and there are all sorts of pitfalls all over
+the place. It's an amazing technology made with absolutely no consideration for
+beginners.</em></blockquote>
 
-<p>Rants aside, here's my snazzy modern Blender lamp with a funky lampshade and hardwood stem. Pretty, eh? It's just a sliced up cone (called a <em>frustum</em>) with a really bright divinely ethereal halo placed inside. I put a screen behind it to catch the projection.
+<p>Rants aside, here's my snazzy modern Blender lamp with a funky lampshade and
+hardwood stem. Pretty, eh? It's just a sliced up cone (called a
+<em>frustum</em>) with a really bright divinely ethereal halo placed inside. I
+put a screen behind it to catch the projection.
 
 <p><img src="static/conic-1.png"/>
 
-<p>You cen even see our mystery curve! Now let's blow around some smoke (easier said than done; Blender's smoke simulation takes a lot of Googling to get right).
+<p>You can even see our mystery curve! Now let's blow around some smoke (easier
+said than done; Blender's smoke simulation takes a lot of Googling to get
+right).
 
 <p><img src="static/conic-2.png"/>
 
-<p>Hmm, that looks like a cone of light coming out the top&mdash;conics! The cone kind of makes sense if you think about it (if it doesn't, think about how a spotlight works). In fact, there are two cones; one shooting out the top and an upside-down one shooting out the bottom. Together, they make a sort of straight-lined hourglass shape.
+<p>Hmm, that looks like a cone of light coming out the top&mdash;conics! The
+cone kind of makes sense if you think about it (if it doesn't, think about how
+a spotlight works). In fact, there are two cones; one shooting out the top and
+an upside-down one shooting out the bottom. Together, they make a sort of
+straight-lined hourglass shape.
 
-<p>We want to find the nature of that curve, so we want to do some analytic geometry. Let's say our double-cone hourglass of illumination is centered at the origin. What equation describes a cone? Well, a cone is like several circles of increasing (or decreasing) size stacked above each other (like a pile of tires of different radii). For convenience, we can say that each circle's radius is equal to it's height above the origin.
+<p>We want to find the nature of that curve, so we want to do some analytic
+geometry. Let's say our double-cone hourglass of illumination is centered at
+the origin. What equation describes a cone? Well, a cone is like several
+circles of increasing (or decreasing) size stacked above each other (like a
+pile of tires of different radii). For convenience, we can say that each
+circle's radius is equal to it's height above the origin.
 
-<p>The equation of a circle is ($x^2 + y^2 = r^2$), and if ($r = z$), we have ($x^2 + y^2 = z^2$). If we plug that into a graphing application, we get:
+<p>The equation of a circle is ($x^2 + y^2 = r^2$), and if ($r = z$), we have
+($x^2 + y^2 = z^2$). If we plug that into a graphing application, we get:
 
 <p><img src="static/conic-3.png"/>
 
-<p>Note that we're doing several simplifications here, most importantly the width of the cone. We could have picked a narrower cone by squishing or stretching our equation, but this one is easy to deal with.
+<p>Note that we're doing several simplifications here, most importantly the
+width of the cone. We could have picked a narrower cone by squishing or
+stretching our equation, but this one is easy to deal with.
 
-<p>Now the screen: that's just a vertical plane. We describe that with ($x=c$) for some constant ($c$) (let's pick 1 for simplicity).
+<p>Now the screen: that's just a vertical plane. We describe that with ($x=c$)
+for some constant ($c$) (let's pick 1 for simplicity).
 
-<p>And now we can solve for the intersection: just substiture in ($x=1$) into the first equation:
-\[
-1^2 + y^2 = z^2
-\]
-<p>Or, more canonically:
-\[
-z^2 - y^2 = 1
-\]
-<p>Wolfram|Alpha <a href="http://www.wolframalpha.com/input/?i=z%5E2-y%5E2+%3D+1">plots this</a> for us.
+<p>And now we can solve for the intersection: just substiture in ($x=1$) into
+the first equation: \[ 1^2 + y^2 = z^2 \]
 
-<p>That looks perfect. This is indeed the equation of a hyperbola you find in math textbooks (except simplified). So <strong>Result 1: When a vertical plane slices a cone, the result is a <em>hyperbola</em>.</strong>
+<p>Or, more canonically: \[ z^2 - y^2
+= 1 \]
+
+<p>Wolfram|Alpha <a
+href="http://www.wolframalpha.com/input/?i=z%5E2-y%5E2+%3D+1">plots this</a>
+for us.
+
+<p>That looks perfect. This is indeed the equation of a hyperbola you find in
+math textbooks (except simplified). So <strong>Result 1: When a vertical plane
+slices a cone, the result is a <em>hyperbola</em>.</strong>
 
 <h3>Thus emboldened, we experiment</h3>
-<p>Now we get to ask the magic question: <q>what happens if&hellip;?</q>. In particular, what would have happened if I had decided to play with the lamp and knocked it over? When you tilt the lamp, is it still a hyperbola?
+<p>Now we get to ask the magic question: <q>what happens if&hellip;?</q>. In
+particular, what would have happened if I had decided to play with the lamp and
+knocked it over? When you tilt the lamp, is it still a hyperbola?
 
-<p>Turns out, only to a point. Let's see how. When we tilt a plane, we go from ($x=c$) to ($z = mx + c$). Here, ($m$) is the inclination or slope of the plane [insert your own inclined plane joke here], and ($c$) is how far it is from the origin (once more, we'll let this be 1 without loss of generality). When we substitute, we get:
+<p>Turns out, only to a point. Let's see how. When we tilt a plane, we go from
+($x=c$) to ($z = mx + c$). Here, ($m$) is the inclination or slope of the plane
+[insert your own inclined plane joke here], and ($c$) is how far it is from the
+origin (once more, we'll let this be 1 without loss of generality). When we
+substitute, we get:
 
 \[ x^2 + y^2 = (mx+c)^2 = (mx + 1)^2 = m^2x^2 + 2mx + 1 \]
 \[ y^2 + [(1-m^2)x^2 - 2mx] = 1 \]
 
-<p>Now, the quadratic ($x^2$) term can either be positive, negative, or 0. If it's negative, then ($m > 1$). Of course, we get a hyperbola when the ($x^2$) term is negative (just like above). When ($ m > 1 $), the slope is steeper, or closer to vertical.
+<p>Now, the quadratic ($x^2$) term can either be positive, negative, or 0. If
+it's negative, then ($m > 1$). Of course, we get a hyperbola when the ($x^2$)
+term is negative (just like above). When ($ m > 1 $), the slope is steeper, or
+closer to vertical.
 
-<p>If it's positive, then ($m < 1$). We get an <strong>ellipse</strong> when the ($x^2$) term is positive. When ($ m < 1 $), the slope is flatter, or closer to horizontal. Notice how this plane will chop through just one of the cones, but all the way through. So, intuitively, you should get a stretched circle.
+<p>If it's positive, then ($m < 1$). We get an <strong>ellipse</strong> when
+the ($x^2$) term is positive. When ($ m < 1 $), the slope is flatter, or closer
+to horizontal. Notice how this plane will chop through just one of the cones,
+but all the way through. So, intuitively, you should get a stretched circle.
 
-<p>Ellipses show up all over the place. Planets orbit stars in ellipses (though this truth cost some scientists their reputation, and in some cases, lives).
+<p>Ellipses show up all over the place. Planets orbit stars in ellipses (though
+this truth cost some scientists their reputation, and in some cases, lives).
 
-<p>Finally, that term can be 0 if ($m=1$). That means the plane is parallel to the side of the cone. Think about how the intersection would look. It only intersects one of the cones, but the intersection doesn't chop all the way through like an ellipse. Removing that term gives us a quadratic equation, and the resulting curve is called a <strong>parabola</strong>. Parabolas show up when you're throwing things. Baseballs follow parabolic arcs in the air when you throw them.
+<p>Finally, that term can be 0 if ($m=1$). That means the plane is parallel to
+the side of the cone. Think about how the intersection would look. It only
+intersects one of the cones, but the intersection doesn't chop all the way
+through like an ellipse. Removing that term gives us a quadratic equation, and
+the resulting curve is called a <strong>parabola</strong>. Parabolas show up
+when you're throwing things. Baseballs follow parabolic arcs in the air when
+you throw them.
 
-<p>There three curves are called the <em>conic sections</em>, and they are plenty of fun to study.
+<p>There three curves are called the <em>conic sections</em>, and they are
+plenty of fun to study.
 
 <h3>Want more?</h3>
 <ul>
@@ -1672,7 +1923,9 @@ z^2 - y^2 = 1
 	<li>A parabola is the set of all points that are equidistant from a point and a <em>line</em> (the distance from a point to a line is the length of the perpendicular segment from the point to the line). Can you prove this?
 	<li>Without graphing or drawing or anything, try to imagine what happens to a hyperbola as you keep on zooming out. What does it look like?<br/>You get a pair of intersecting lines called the <em>asymptotes</em>. What are the equations of the asymptotes of ($y^2 - x^2 = 1$)?
 </ul>
-<p>P.S. The lesson here wasn't about conic sections. The lesson here was that there is really cool math in <em>everything</em>. Even lampshades. And you gotta grok math to see them.
+<p>P.S. The lesson here wasn't about conic sections. The lesson here was that
+there is really cool math in <em>everything</em>. Even lampshades. And you
+gotta grok math to see them.
 
 <br/><br/>Cheers,<br/>Hardmath123
 ]]></description>
@@ -1685,52 +1938,112 @@ z^2 - y^2 = 1
             <title><![CDATA[Living Without Sudo]]></title>
             <description><![CDATA[UNIX hacking for the faint at heard, or those blessed with mean sysadmins.
 
-<p class="dropcap">You should not trust me with matches, knives, expensive cars, and <code>sudo</code>: the command that makes you a god-like user with root powers. I'm the kind of person who accidentally <code>rm -rf</code>'s his <em>Desktop</em> (by the way, the sporadically disappearing icons are both hilarious and mortifying). So whenever I'm asked to <code>sudo</code> something, I get both worried and suspicious. And over the years, I have perfected the art of installing things without <code>sudo</code>. You can follow along this tutorial with just a shell.
+<p class="dropcap">You should not trust me with matches, knives, expensive
+cars, and <code>sudo</code>: the command that makes you a god-like user with
+root powers. I'm the kind of person who accidentally <code>rm -rf</code>'s his
+<em>Desktop</em> (by the way, the sporadically disappearing icons are both
+hilarious and mortifying). So whenever I'm asked to <code>sudo</code>
+something, I get both worried and suspicious. And over the years, I have
+perfected the art of installing things without <code>sudo</code>. You can
+follow along this tutorial with just a shell.
 
 <h3>Why sudo?</h3>
-<p>The first thing to realize here is that 99% of the time, the only reason we need to use <code>sudo</code> is to make that program accessible to everyone. That's it. When you run a UNIX program, you're saying <q>execute this file</q>; and when you <code>sudo</code> you essentially say <q>everyone can access this file from everywhere</q>.
 
-<p>For example, suppose I want to install a program called <code>easy</code> that acts like the classic Staples Easy Button and executes <code>say that was easy</code> (I actually do have this on my computer, and yes, I use it a lot). It's not too tough:
+<p>The first thing to realize here is that 99% of the time, the only reason we
+need to use <code>sudo</code> is to make that program accessible to everyone.
+That's it. When you run a UNIX program, you're saying <q>execute this file</q>;
+and when you <code>sudo</code> you essentially say <q>everyone can access this
+file from everywhere</q>.
+
+<p>For example, suppose I want to install a program called <code>easy</code>
+that acts like the classic Staples Easy Button and executes <code>say that was
+easy</code> (I actually do have this on my computer, and yes, I use it a lot).
+It's not too tough:
 
 <pre><code>echo "say that was easy" > ~/Desktop/easy # create the file "easy" with our contents
-chmod +x ~/Desktop/easy # tell Bash that it's ok to execute this file
+chmod +x ~/Desktop/easy # tell your computer that it's ok to execute this file
 ~/Desktop/easy # run it!
 </code></pre>
 
-<p>Now I can run my script by typing <code>~/Desktop/easy</code>. But I don't want to have to type that huge thing each time I do something awesome&mdash;I want <code>easy</code> to be one-step executable just like <code>vim</code>. This is where <code>sudo</code> comes in.
+<p>Now I can run my script by typing <code>~/Desktop/easy</code>. But I don't
+want to have to type that huge thing each time I do something awesome&mdash;I
+want <code>easy</code> to be one-step executable just like <code>vim</code>.
+This is where <code>sudo</code> comes in.
 
-<p>Bash reads a variable called <code>$PATH</code>, which contains a list of various directories separated by colons. When you type a command on the shell, Bash searches each of these directories for that file, one by one. You can see this list right now with <code>echo $PATH</code>. These directories contain important system files, and are accessible by everyone. So it makes sense not to let mortals like me to mess with them. When you install a package, most of the time you're just moving the script files to one of these directories so it's easy to run, and Bash asks you for <code>sudo</code> to make sure you know what you're doing.
+<p>Bash reads a variable called <code>$PATH</code>, which contains a list of
+various directories separated by colons. When you type a command on the shell,
+Bash searches each of these directories for that file, one by one. You can see
+this list right now with <code>echo $PATH</code>. These directories contain
+important system files, and are accessible by everyone. So it makes sense not
+to let mortals like me to mess with them. When you install a package, most of
+the time you're just moving the script files to one of these directories so
+it's easy to run, and Bash asks you for <code>sudo</code> to make sure you know
+what you're doing.
 
 <h3>.profile</h3>
 
-<p>If we could tack on our own directory to the <code>$PATH</code>, we could dump our junk in there without messing with anything sudo-ey, right? Right. To modify <code>$PATH</code>, you need another UNIX trick: a file called <code>~/.profile</code>.
+<p>If we could tack on our own directory to the <code>$PATH</code>, we could
+dump our junk in there without messing with anything sudo-ey, right? Right. To
+modify <code>$PATH</code>, you need another UNIX trick: a file called
+<code>~/.profile</code>.
 
-<p><code>.profile</code> is another script file that's executed before your shell loads, so that you can customize it. The dot in front makes it invisible to Finder, so you can only mess with it using a shell. You can do all sorts of neat things with <code>.profile</code>: print a friendly message on top of the Terminal when you start it up, customize your prompt, and mess with your <code>$PATH</code>.
+<p><code>.profile</code> is another script file that's executed before your
+shell loads, so that you can customize it. The dot in front makes it invisible
+to Finder, so you can only mess with it using a shell. You can do all sorts of
+neat things with <code>.profile</code>: print a friendly message on top of the
+Terminal when you start it up, customize your prompt, and mess with your
+<code>$PATH</code>.
 
 <p>Since it's a hidden file, you should create it using the command line:
 
 <pre><code>cd ~/ # go to your home directory
 touch .profile # create the file
 open -a TextEdit .profile # open with TextEdit (you can also use pico/vim/emacs)</code></pre>
-&hellip;and you should have TextEdit open up with a blank <code>.profile</code>. Now we can create our new <code>$PATH</code> by tacking on <code>~/my_bin</code> to it. Add the following to the <code>.profile</code>: <code>export PATH=$PATH:~/my_bin</code>. Save, and quit; and then refresh your Terminal (you can just close this window and open a new one). This forces the profile to be run. If you want a sanity check, try <code>echo $PATH</code> and see if it changed from last time.
 
-<p>We just told Bash that <code>~/my_bin</code> contains executable files. We have <em>not</em> created that directory yet, so let's got do that: <code>mkdir my_bin</code>. And, just for fun, dump <code>easy</code> in there.
+&hellip;and you should have TextEdit open up with a blank
+<code>.profile</code>. Now we can create our new <code>$PATH</code> by tacking
+on <code>~/my_bin</code> to it. Add the following to the <code>.profile</code>:
+<code>export PATH=$PATH:~/my_bin</code>. Save, and quit; and then refresh your
+Terminal (you can just close this window and open a new one). This forces the
+profile to be run. If you want a sanity check, try <code>echo $PATH</code> and
+see if it changed from last time.
 
-<p>Now you can test it out: type <code>easy</code>. If all went well, there shouldn't be any errors. (If something exploded, feel free to drop a comment below.)
+<p>We just told Bash that <code>~/my_bin</code> contains executable files. We
+have <em>not</em> created that directory yet, so let's got do that: <code>mkdir
+my_bin</code>. And, just for fun, dump <code>easy</code> in there.
+
+<p>Now you can test it out: type <code>easy</code>. If all went well, there
+shouldn't be any errors. (If something exploded, feel free to drop a comment
+below.)
 
 <h3>Using your powers.</h3>
 
-<p>That's actually all you need. To install a package, download it and look for its binaries (they will probably in a directory called <code>bin</code>). Alias the commands you care about to <code>~/my_bin</code>. And then have fun.
+<p>That's actually all you need. To install a package, download it and look for
+its binaries (they will probably in a directory called <code>bin</code>). Alias
+the commands you care about to <code>~/my_bin</code>. And then have fun.
 
-<p>If you use Python, you may want to add the following line to your profile: <code>export PYTHONPATH=$PYTHONPATH:~/my_bin/</code>. This lets you simply copy Python modules to your <code>~/my_bin</code>, instead of using <code>pip</code> or something.
+<p>If you use Python, you may want to add the following line to your profile:
+<code>export PYTHONPATH=$PYTHONPATH:~/my_bin/</code>. This lets you simply copy
+Python modules to your <code>~/my_bin</code>. Also take a look at `virtualenv`. 
 
-<p>You're going to have to do some digging to find the binaries; but I assure you that they probably exist. You can find binaries for Node, ffmpeg, Homebrew, and just about anything else you'll ever need.
+<p>On a Mac, it's worth installing Homebrew this way&mdash;almost everything
+works when locally compiled with it.
 
-<p>Some packages need configuration files to work right from a foreign directory. For example, <code>npm</code> needs you to create <code>.npmrc</code> and add a <em>prefix</em>, or the directory which you want to isolate all node stuff in. Mine simply reads <code>prefix = "~/my_bin/node_stuff"</code>.
+<p>Some packages need configuration files to work right from a foreign
+directory. For example, <code>npm</code> needs you to create
+<code>.npmrc</code> and add a <em>prefix</em>, or the directory which you want
+to isolate all node stuff in. Mine simply reads <code>prefix =
+"~/my_bin/node_stuff"</code>.
 
-<p>Finally: if you mess up your profile, you may have unpleasantries with your terminal (what if you accidentally clear your <code>$PATH</code>? Bash won't find any executables whatsoever&hellip;). To fix this, always remember that you can reference a command from its full path. Your last resort should be <code>/bin/rm ~/.profile</code>, which will wipe out the profile file, and let you start fresh.
+<p>Finally: if you mess up your profile, you may have unpleasantries with your
+terminal (what if you accidentally clear your <code>$PATH</code>? Bash won't
+find any executables whatsoever&hellip;). To fix this, always remember that you
+can reference a command from its full path. Your last resort should be
+<code>/usr/bin/rm ~/.profile</code>, which will wipe out the profile file, and let
+you start fresh.
 
-<p>Good luck, and hack on!]]></description>
+<p>Good luck, and hack on!
+]]></description>
             <link>http://hardmath123.github.io/sudo.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/sudo.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
