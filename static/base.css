@@ -191,13 +191,13 @@ h3 {
   color: gray;
 }
 
-@media screen and (min-width: 30em) {
+/*@media screen and (min-width: 30em) {
   #whoami {
      column-count: 2;
      -webkit-column-count: 2;
      -moz-column-count: 2;
   } 
-}
+}*/
 
 
 #whoami h2 {
