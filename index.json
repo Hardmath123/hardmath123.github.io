@@ -197,6 +197,14 @@
             "file": "night-after-christmas.md",
             "date": "12/25/14",
             "markdown": true
+        },
+        {
+            "title": "Array of Hope",
+            "author": "Hardmath123",
+            "description": "Explaining why Scratch Arrays misbehave.",
+            "file": "scratch-splice.md",
+            "date": "1/5/15",
+            "markdown": true
         }
     ]
 }

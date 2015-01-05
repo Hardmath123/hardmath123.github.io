@@ -10,10 +10,158 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 03 Jan 2015 17:01:55 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 05 Jan 2015 23:31:16 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Array of Hope]]></title>
+            <description><![CDATA[Explaining why Scratch Arrays misbehave.
+
+<p>So a notorious Scratch user,
+<a href="http://scratch.mit.edu/users/TheLogFather/">TheLogFather</a>, posted a
+<a href="http://scratch.mit.edu/projects/41196030/">project</a> where he compared two
+different ways to prepend to a list. Here they are, as both an image and as
+a pseudocode.</p>
+<p><img src="/static/scratch-splice.png" alt="The project"></p>
+<pre><code class="lang-python">    mylist = [1,2,3,4,5,6,7,...,20000]
+    def prepend1(n):
+        repeat n times:
+            insert random number at beginning of mylist
+
+    def prepend2(n):
+        temp = new list
+        for each item in list:
+            append item at end of temp
+        delete all of mylist
+        repeat n times:
+            append random number at end of mylist
+        for each item in temp:
+            append item at end of mylist
+</code></pre>
+<p>It should be pretty clear that the two are semantically equivalent, that is,
+that they will have the same net effect. However, notice that <code>prepend2</code> uses
+only <code>append</code> instructions, while <code>prepend1</code> uses the <code>insert</code> instruction.</p>
+<p>Now, from a cursory look, <code>prepend2</code> looks much slower: you are iterating over
+the initial contents of <code>mylist</code> <em>twice</em> when copying it in and out of <code>temp</code>.</p>
+<p>Surprisingly, though, <code>prepend2</code> is significantly faster. A quick speedtest
+on my MacBook Pro says that <code>prepend1</code> takes <strong>4.616</strong> seconds while <code>prepend2</code>
+takes a mere <strong>0.724</strong> seconds for 20,000 items.</p>
+<p>Hopefully the reason why will be clear at the end of this blog post.</p>
+<p>The first thing to do here is dig into the source and find the implementation
+of the <code>insert</code> and <code>add</code> blocks in Scratch. Scratch 2.0 is open-source and
+written in Actionscript. We find it all <a href="https://github.com/LLK/scratch-flash/">on
+Github</a>. A little digging reveals the
+file <code>src/primitives/ListPrims.as</code>. This is where the list blocks are
+implemented. Looking around, we find the important sections:</p>
+<pre><code>protected function listAppend(list:ListWatcher, item:*):void {
+    list.contents.push(item);
+}
+</code></pre><p>and</p>
+<pre><code>protected function listInsert(list:ListWatcher, i:int, item:*):void {
+    list.contents.splice(i - 1, 0, item);
+}
+</code></pre><p>Now, <code>ListWatcher</code> is defined in <code>src/watchers/ListWatcher.as</code>. We see that
+<code>contents</code> is an <code>Array</code>:</p>
+<pre><code>public var contents:Array = [];
+</code></pre><p>Let me say that again: in Scratch, a <strong>List</strong> is actually an <strong>Array</strong>. If this
+doesn’t bother you now, don’t worry, it will bother you soon.</p>
+<p>Anyhow, we’re looking at the difference between <code>Array.splice</code> and
+<code>Array.push</code>. From Adobe’s documentation, we know that <code>Array.splice</code> inserts
+and deletes elements of an array at an arbitrary index, and <code>Array.push</code> tacks
+elements on to the end of an array. Why is this important? To see that, you
+need to know a bit about how memory works.</p>
+<hr>
+<p>ActionScript is an incarnation of ECMAScript, much like JavaScript. There isn’t
+much documentation about ActionScript’s VM, but there’s tons about how JS
+handles <code>Array</code>s. So, though it’s not a completely legitimate assumption, I’m
+going to explain what’s going on based on how JavaScript does things.</p>
+<p>In a computer’s RAM, you can access any memory address in constant-time. That
+means it takes just as long to get the contents of the billionth address as it
+does to get the contents of the first.</p>
+<p>When you run a computer program, at a sufficiently low level, you’re allocating
+some segment of the RAM for the program to access. The program basically treats
+this segment as a really long list, where each element has an upper limit on
+size.</p>
+<p>It’s easy to store an integer (within limits) or a boolean value in memory,
+because it takes up just one cell of memory. But anything larger—a string, a
+list, an image, or a sprite—takes up multiple cells, and so you need a scheme
+by which those cells are allocated in an organized way.</p>
+<p>In low-level programming languages like C, you have the <code>malloc</code> function that
+allocates the given amount of memory as a sequence of contiguous cells and
+returns the address of the first one. However, the catch is that once you’re
+done using that memory, <em>you</em> are responsible for freeing it (with the <code>free</code>
+function). Otherwise future calls to <code>malloc</code> will assume that you’re still
+using those addresses and pick some other addresses to allocate. Eventually
+you’ll run out of memory and things will start dying.</p>
+<p>In higher-level languages (like ActionScript and JavaScript), the interpreter
+manages memory for you. You’re free to run around creating sprites and lists
+and mammoths and cows and whatever, and the interpreter destroys them when it
+notices that you’re done with them. This is called Garbage Collection, and is
+beyond the <em>scope</em> of this article (seasoned CS students will get that joke).</p>
+<p>When you create an <code>Array</code> in JavaScript, the interpreter allocates a block of
+memory for you. If you want to access the 5th element, the interpreter says
+“<code>malloc</code> told me the array starts at address 900, so I want to return the item
+at address 900+5=905”.</p>
+<p>Since RAM has constant lookup time, your Array will also have constant lookup
+time (it’ll just take a hair longer because you need to find the address).</p>
+<hr>
+<p>Now that you know how Arrays work, it should be obvious that inserting an
+element into an array is hard. Why? Well, there’s no space! Think of the RAM as
+people sitting on a bus. The first few seats are full. If you make a fuss and
+insist on sitting in the front seat, you need to first move everyone else down
+one seat.</p>
+<p>If you’re trying to put an item at the beginning of an array with 5000
+elements, you need to move down each of those 5000 elements one cell. This
+takes 5000 operations. This is bad.</p>
+<p>Similarly, deleting is hard because you’ll leave an empty seat, and then you
+need to move everyone up a seat to fill the hole (remember, the fast
+index-lookup only works if the array is contiguous!). If you delete the first
+element of an array with 5000 elements, the remaining 4999 need to be moved up
+a spot, which takes 4999 operations. This is also bad.</p>
+<p>But this is often necessary, and is done all the time in JS or ActionScript
+programs with the <code>splice</code> function.</p>
+<p>You might have already realized how <code>push</code> is better. If you sit at the back of
+the bus, you don’t need to relocate everyone in front of you. So it’s actually
+a constant-time operation.</p>
+<p>Of course, in a computer’s RAM, that cell might be occupied by the beginning of
+another array. If that’s the case, the interpreter needs to move things around.
+It’s unpleasant, but it only happens once in a while. So <code>push</code> occasionally
+takes a long time. But most of the time, it’s blazingly fast.</p>
+<p>And that’s the reason why <code>insert</code> is slower than <code>add</code> in Scratch.</p>
+<hr>
+<p>As an afterword, it’s worth mentioning that if you do lots of inserting and
+deleting, there’s a better way to store a list than an Array. It’s called a
+List. A List in CS is not the same thing as a List in Scratch.</p>
+<p>A List consists of lots of <em>pairs</em>. A <em>pair</em> is a 2-element Array. The first
+element contains some data, and the second element is the address of the next
+pair (we can call this the “address pointer” because it <em>points</em> to the next
+pair).</p>
+<p>For historic reasons, the “value” cell and the “address pointer” cell are
+called the “address register” and “decrement register”, and so old languages
+will provide functions like “contents of address register” (<code>car</code>) and
+“contents of decrement register” (<code>cdr</code>, rhymes with udder). Lisp programmers
+use <code>car</code> and <code>cdr</code> all the time to manipulate pairs. In fact, Lisp’s name
+comes from List Processing.</p>
+<p>The order in which the pairs are stored in memory doesn’t matter. So, when you
+want to insert something, you create a new pair <em>anywhere</em> in the RAM, and then
+change the address pointers to incorporate the new pair.</p>
+<p>To delete something, you <code>free</code> the pair and fix the pointers. Fixing pointers
+is easy (just an assignment), so Lists are easy to mutate.</p>
+<p>Of course, finding the 5000th element of a list would require you to follow
+5000 address pointers (Lispers call it <code>cdr</code>ing down the list), so lookups are
+not constant-time anymore. Choosing the right data structure is important.</p>
+<p>By the way, Snap<em>!</em> is extra-clever: it stores your lists as Lists <em>or</em> Arrays
+depending on how they were created. If you use Array-ey operations on them,
+they get converted to Arrays, and if you use List-ey operations on them, they
+get converted to Lists. If you want to be fast, you need to pick a style and
+stick with it. But that’s good programming practice anyway.</p>
+]]></description>
+            <link>http://hardmath123.github.io/scratch-splice.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/scratch-splice.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Mon, 05 Jan 2015 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[The Nightmare After Christmas]]></title>
             <description><![CDATA[Happy $HOLIDAY
