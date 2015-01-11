@@ -10,10 +10,178 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Mon, 05 Jan 2015 23:31:16 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 11 Jan 2015 04:13:31 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Coding the Mandelbrot Set]]></title>
+            <description><![CDATA[A mirror of a post written a long time ago in a galaxy far away.
+
+<blockquote>
+<p>I wrote this post a long time ago. I had become obsessed with the Mandelbrot
+Set after reading <strong>Professor Stewart’s Cabinet of Mathematical
+Curiosities</strong>, and had spent the better part of a weekend scouring the
+Internet for information on how to plot it. That is, information I could
+understand at that age. Watching the correct Mandelbrot Set appear
+line-by-line over the course of three hours on my mom’s old Mac was one of
+the more exhilerating computer-science experiences I have had.</p>
+<p>The post first appeared <a href="http://scratchforums.blob8108.net/forums/viewtopic.php?id=61381">on the Scratch
+forums</a> on
+April 20, 2011 along with its accompanying Scratch implementation. In the
+interests of documentation and preservation, I decided to post a copy of this
+on my blog. Despite many temptations to change things—grammar, spelling,
+wording, and even some technical details—the text is identical to that
+posted on the forums. The purpose of posting this is not to convey the actual
+content to an audience, but to remind myself of how I sounded in the past and
+to reflect on how I sound now.</p>
+<p>Since I do not, of course, retain a copy of the original BBCode, the text has
+been reformatted in Markdown. Code is left unchanged, though I was tempted to
+rewrite scripts using the wonderful Scratchblocks2 renderer (this post
+predates even the original Scratchblocks). I have also made an effort to
+convert the equations contained herein to MathJax/LaTeX-worthy formats to
+facilitate reading. This is, of course a tradeoff: I lose the original
+formatting of the equations (which was delightful in itself) and make the
+text significantly less legible in its Markdown source. I hope I have made
+the right decision here. The original equations can always be viewed at the
+archive linked above.</p>
+</blockquote>
+<p>This is a guide on plotting the Mandelbrot Set. It’s divided into 3 parts: What
+is the Mandelbrot Set?, Understanding the Algorithm, and Programming the
+algorithm. <a href="http://scratch.mit.edu/projects/Hardmath123/1734070">Here</a> is a
+project on plotting it, if you don’t get it.</p>
+<h3 id="what-is-the-mandelbrot-set-">What is the Mandelbrot Set?</h3>
+<p>The Mandelbrot Set (M-Set in short) is a fractal. It is plotted on the complex
+plane. It is an example of how intricate patterns can be formed from a simple
+math equation. It is entirely self-similar. Within the fractal, there are
+mini-Mandelbrot Sets, which have their own M-Sets, which have their own M-Sets,
+which have their own M-sets, etc.</p>
+<p>Though most representations of the M-Set have color, only the black bit is part
+of the set. The color is to basically show how long it took to prove that that
+point wasn’t in the set. However, these form cool patterns, too.</p>
+<p>Here are some pictures:</p>
+<p>Only the set:</p>
+<p><img src="http://www.olympus.net/personal/dewey/points1.png" alt="Only the set"></p>
+<p>With color:</p>
+<p><img src="http://2.bp.blogspot.com/_c7S0Y3wBP9g/S7kL6nCsBwI/AAAAAAAAB70/gAlP6_tW7g0/s400/Mandelbrot_set.jpg" alt="With color"></p>
+<h3 id="understanding-the-algorithm">Understanding the Algorithm</h3>
+<p>The M-Set is generated using the algorithm:</p>
+<p>\[ Z_{n+1}=z_{n}^2 + C \]</p>
+<p>Here, both ($ Z $) and ($ C $) are complex numbers. What are complex numbers?
+They’re, put simply, square roots of negative numbers. Since negative numbers
+can’t have square roots, we created ‘complex’ or ‘imaginary’ numbers to deal
+with it. ‘($ i $)’ (pronounced iota) is the symbol for ($ \sqrt{-1} $). Complex
+numbers are expressed as multiples of ($ i $), like ($ 3i $). They are graphed
+on a number line perpendicular to the number line we all know. The resultant
+plane is called the complex plane, and is where we will graph the Mandelbrot
+Set.</p>
+<p>The complex plane:</p>
+<pre><code>   1i
+-1  0 +1
+  -1i
+</code></pre><p>Complex numbers are defined as the sum of a real number and an imaginary
+number. Examples are ($ 3i + 1 $) or ($ 4i - 2 $).</p>
+<p>In this expression, C is the complex number for which you are testing whether
+or not it’s in the M-Set (it will define a single point on the complex plane —
+C is a real number plus an imaginary one, remember?). Here’s how you use it:
+You set Z to 0. Then set ($ Z $) to ($ Z^2 + C $). We call this action
+iteration. For example, if C was 3 (I’m using a real number for simplicity), ($
+z $) would be:</p>
+<p>\[ 0 \]
+\[ 0^2 + 3 = 3 \]
+\[ 3^2 + 3 = 12 \]
+\[ 12^2 + 3 = 147 \]</p>
+<p>etc.</p>
+<p>If you did this many, many times, there are two possibilities for ($ Z $) — it
+escapes to infinity, or it doesn’t. If it doesn’t escape, it is in the set.
+This looks hard to calculate—how can we know whether it reaches infinity? For
+all we know at 1000000000 iterations it’ll be a normal, but after 1000000001
+iterations it starts constantly doubling. Fortunately, we know 2 other things:</p>
+<ul>
+<li><p>It has been proved that if Z ever gets higher than 2, it will escape to
+infinity</p>
+</li>
+<li><p>If it does escape, it’ll do so normally within 50 iterations. More will make
+a more accurate picture, but it will slow the script down considerably. 50 is
+a good number.</p>
+</li>
+</ul>
+<p>So now, all we need to do is repeat ($ Z^2 + C $) 50 times and see how high it
+is. Great!</p>
+<h3 id="programming-the-algorithm">Programming the Algorithm</h3>
+<p>That’s all very nice, but there’s a catch (isn’t there always?)—this uses
+complex numbers, and Scratch—make that any programming language—doesn’t allow
+square roots of negative numbers. Try it yourself. You’ll get a red <em>Error!</em>.
+So how do we avoid this? Well, remember how a complex number is a real number
+plus an imaginary number, and an imaginary number is just ($ \sqrt{-1} $)?
+Well, that means we can split any variable, say ($ Q $), into two variables:
+q-Real and q-Complex, or abbreviated, ($ qR $) and ($ qX $). We also know that
+($ qX $) squared is real, because ($ i^2 $) is ($ -1 $) which is real, and the
+coefficient is real anyway (here, coefficient is the 3 in ($ 3i $)). This means
+now we know how to square complex numbers to get real numbers. So, let’s take a
+look at the algorithm:</p>
+<p>\[ Z_{n+1} = Z_{n}^2 + C \]
+\[ =(zR + zX)^2 + cR + cX \]
+\[ =zR^2 + zX^2 + 2zR*zX \left\{\text{by opening the brackets}\right\} + cR + cX \]</p>
+<p>If you think carefully, ($ zX $) can only be represented by its coefficient.
+This is because ($ zX^2 $) is real, and ($ 2*zR*zX + cX $) (all the complex
+terms) can be represented by the coefficient, which is again because ($ zX^2 $)
+is real. So, we never ‘need’ the value of ($ i $), which is a huge relief.  Now
+we can start coding!</p>
+<p>We need a sprite to move through every point on the stage. That’s easy:</p>
+<pre><code>set x to -240
+set y to 180
+repeat 360
+    set x to -240
+    change y by -1
+        repeat 480
+            change x by 1
+            . . . Insert coding here . . .
+        end repeat
+end repeat
+</code></pre><p>See where I put <code>. . . Insert coding here . . .</code>? That’s where we need to code
+our algorithm. From now on, all the coding I show you will be in that segment.
+Starting off,</p>
+<pre><code>set cR to x position/120 {because real numbers are on the horizontal number line. &#39;/120&#39; is to set the magnification.}
+set cX to y position/120 {because imaginary numbers are on the vertical number line. &#39;/120&#39; is to set the magnification.}
+set zR to 0
+set zX to 0
+set r to 0 {r will be the number of repetitions. You&#39;ll se why this will be helpful pretty soon}
+</code></pre><p>This’ll set up all our variables. Great. Now for the hard part.</p>
+<p>For the calculation, we need to set ($ zR $) to ($ zR^2 + (zX^2*-1
+\{\text{because i^2 is -1}\}) + cR $), and set ($ zX $) to ($ 2*zR*zX + cX
+$). We get this just by grouping them on the basis of their complexness.
+Complex values get added into zX, the rest into zR.</p>
+<pre><code>set old_zR to zR {this is because zR will change, and when evaluating zX we&#39;ll get the wrong value of zR}
+set zR to (zR*zR) + -1*(zX*zX) + cR
+set zX to 2*old_zR*zX + cX
+change r by 1 {&#39;cause r counts the repeats}
+</code></pre><p>But, before we put that in, we need to know how many times to iterate. Iterate
+means repeat, so we need to put this into a repeat. We know that by 50
+iterations, we can be pretty sure whether ($ zR $) will ever exceed 2 or not.
+The problem is that it may exceed 2 very early, and approach infinity, causing
+Scratch to freeze because the numbers get out of hand. So, we need a ‘if I’m
+over 2, stop me right away’ repeat. This is exactly why we needed ($ r $).</p>
+<pre><code>repeat until [r &gt; 50] or [zR &gt; 2]
+will do the job. [r &gt; 50] says it repeats 50 times, [zR &gt; 2] says if it&#39;s over 2, stop repeating.
+</code></pre><p>Now, we can finally tell whether the point you chose is in the Mandelbrot Set
+or not. Whew! This part is really simple, so I’m not going to explain it
+(much).</p>
+<pre><code>if zR &gt; 2
+    set pen color to [black]
+    pen down
+    pen up
+else
+    set pen color to [r] {because non-set points are colored based on how long it took to establish C wasn&#39;t part of the M-Set}
+    set pen shade to [50] {because black has a shade of 0, and so all colors will end up black}
+</code></pre><p>And we’re done! Congratulations!</p>
+<p>You can get the whole project <a href="http://scratch.mit.edu/projects/1734070/">here</a>.</p>
+]]></description>
+            <link>http://hardmath123.github.io/scratch-mandelbrot.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/scratch-mandelbrot.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sat, 10 Jan 2015 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Array of Hope]]></title>
             <description><![CDATA[Explaining why Scratch Arrays misbehave.

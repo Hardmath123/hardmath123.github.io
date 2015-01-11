@@ -205,6 +205,14 @@
             "file": "scratch-splice.md",
             "date": "1/5/15",
             "markdown": true
+        },
+        {
+            "title": "Coding the Mandelbrot Set",
+            "author": "Hardmath123",
+            "description": "A mirror of a post written a long time ago in a galaxy far away.",
+            "file": "scratch-mandelbrot.md",
+            "date": "1/10/15",
+            "markdown": true
         }
     ]
 }
