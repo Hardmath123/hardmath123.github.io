@@ -203,12 +203,13 @@ h3 {
   margin-bottom: 2em;
 }
 
-
+/*
 #postcontent > p:first-of-type:first-letter, .dropcap:first-letter {
   font-size: 4em;
   margin-right: 2px;
   font-family: "Didot", "Baskerville", "Garamond", serif;
 }
+*/
 
 #postcontent > p:first-of-type:first-line {
   font-variant: small-caps;
