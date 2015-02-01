@@ -90,6 +90,7 @@ strong.visitedposts a {
 
 #header h1 {
   font-family: "Garamond", "Libre Baskerville", serif;
+  font-variant: small-caps;
   font-weight: 100;
   
   display: inline-block;
@@ -210,11 +211,11 @@ h3 {
   font-family: "Didot", "Baskerville", "Garamond", serif;
 }
 */
-
+/*
 #postcontent > p:first-of-type:first-line {
   font-variant: small-caps;
 }
-
+*/
 strong a {
   color: black;
 }
