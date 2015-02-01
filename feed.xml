@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 01 Feb 2015 20:04:37 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 01 Feb 2015 20:58:36 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -195,7 +195,7 @@ Internet should take a hint from that.</p>
             <link>http://hardmath123.github.io/bower-unlimited-bower.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/bower-unlimited-bower.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sat, 31 Jan 2015 08:00:00 GMT</pubDate>
+            <pubDate>Sun, 01 Feb 2015 08:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Coding the Mandelbrot Set]]></title>
