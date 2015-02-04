@@ -3,7 +3,7 @@
  */
 
 body {
-  font-family: Georgia, Times, serif;
+  font-family: Times, serif;
   background-color: white;
   margin: 0;
   padding: 0;
@@ -41,6 +41,11 @@ strong a {
   text-decoration: none;
   color: black;
   font-size: 1em;
+  font-weight: lighter;
+}
+
+h2 {
+    font-weight: lighter;
 }
 
 strong a:visited {
@@ -73,10 +78,6 @@ a:visited {
 
 a:visited:hover {
   color: #77C;
-}
-
-strong.visitedposts a {
-  color: gray;
 }
 
 #header {
