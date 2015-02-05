@@ -221,6 +221,14 @@
             "file": "bower-unlimited-bower.md",
             "date": "2/1/15",
             "markdown": true
+        },
+        {
+            "title": "Nasty Python Monstrosities",
+            "author": "Hardmath123",
+            "description": "Why I'm not going to distribute any Python ever again.",
+            "file": "nasty-python-monstrosities.md",
+            "date": "2/4/15",
+            "markdown": true
         }
     ]
 }

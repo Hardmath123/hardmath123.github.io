@@ -10,10 +10,124 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 04 Feb 2015 06:04:07 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 05 Feb 2015 01:53:30 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Nasty Python Monstrosities]]></title>
+            <description><![CDATA[Why I'm not going to distribute any Python ever again.
+
+<p><strong>Scenario:</strong> I’ve written a simple Python command-line tool. It consists of
+more than one file, because separation of code is important. It only needs to
+run on UNIX systems and shouldn’t require sudo to install. How do I distribute
+this code in a safe, user-friendly way? How do I teach my intro CS class how to
+proudly share their creations with the world?</p>
+<p><strong>Answer:</strong> You don’t.</p>
+<p>Distributing Python code should be a solved problem. It’s not. Or, rather, it’s
+a <a href="http://xkcd.com/927/">standards problem</a>. There are too many tools out
+there, and there’s no clear roadmap that explains which subset does what. I’m
+talking about Pip, Virtualenv, PyPi, wheels, eggs, distutils, distribute,
+setuptools, easy_install, and twine. Some of these have been incorporated into
+others, and are therefore obsolete. Some of these are endorsed by a PEP.
+(What’s a PEP? Do I care?)</p>
+<p>There is certainly not one obvious way to do it.  Even if you’re Dutch.</p>
+<p>Assuming you have picked out a subset of tools to use, though, there’s no
+guarantee that they will cooperate. A Pip flag, for instance, might work. It
+might not work. It might do stuff that you didn’t expect. It might create files
+without telling you (correction: it’ll be noted cryptically in the Pip log). It
+might pass it on to <code>setup.py</code>, or it might not, or it might reject a valid
+<code>setup.py</code> argument because it doesn’t understand it, or it might pass it on to
+Python erroneously.</p>
+<p>My Pip log contains monstrosities such as:</p>
+<p>(Enumeration of all the things here that make me cry is left as an exercise to
+the reader.)</p>
+<pre><code>Running command /usr/bin/python -c &quot;import setuptools, tokenize;
+__file__=&#39;/path/to/setup.py&#39;; exec(compile(getattr(tokenize, &#39;open&#39;,
+open)(__file__).read().replace(&#39;\r\n&#39;, &#39;\n&#39;), __file__, &#39;exec&#39;))&quot; develop
+--no-deps --user
+</code></pre><p>In short, it might eat your laundry depending on local atmospheric conditions,
+and then it’ll flip a coin to decide whether or not to tell you.</p>
+<hr>
+<p>Let’s talk about publishing. PyPi is the “standard” repository. But it makes you
+host your own tarballs, so essentially all it does is match package names to
+URLs (all other information is duplicated in the tarball itself).</p>
+<p>Uploading to PyPi happens <em>over an insecure connection</em>. <a href="https://packaging.python.org/en/latest/distributing.html#upload-your-distributions">They recognize this
+in the
+docs</a>,
+and recommend installing a <em>separate</em> client that lets you publish over SSL.</p>
+<p>They also keep telling users to use OpenID. The OpenID that <a href="https://developers.google.com/accounts/docs/OpenID#shutdown-timetable">Google is
+deprecating</a>
+in a couple of months. Of course, <a href="https://pypi.python.org/pypi?:action=login&amp;provider=Google">trying to log in with
+Google</a> throws an
+internal server error.</p>
+<p>Apparently, the whole system is so confusing that every time you upload, you
+are encouraged to do a dry run on the test repository just to make sure you
+understand it.</p>
+<p>Now, my Python program was not a module, but a command-line tool. <a href="http://blog.habnab.it/blog/2013/07/21/python-packages-and-you/">The way you
+specify a command-line
+tool</a> in Python
+looks like this:</p>
+<pre><code class="lang-python"># ...
+entry_points={
+    &#39;console_scripts&#39;: [&#39;name_to_link = packagename.submodule:function_name&#39;],
+},
+# ...
+</code></pre>
+<p>Here’s what setuptools does. It parses that monstrous string and extracts
+information. It then creates a <em>new</em> Python script in a <code>$PATH</code>‘d directory.
+That script <em>imports</em> your script as a module, and then calls the function you
+specify. It’s anyone’s guess whether important scriptey things such as
+environment variables or command-line arguments are preserved.</p>
+<p>This is all in complete ignorance of the whole <code>if __name__ == &#39;__main__&#39;</code>
+infrastructure, for whatever reason. Of course, you can <em>also</em> make things
+runnable with <code>python -m packagename.submodule</code> by including a <code>__main__</code> file.
+Yum.</p>
+<p>Even if it did the reasonable thing and symlinked your script directly, it
+would actually <em>modify</em> your file. That’s right. It <a href="https://docs.python.org/2/distutils/setupscript.html#installing-scripts">replaces shebang
+lines</a>
+with the path to the currently-running Python interpreter. Because Explicit Is
+Better Than Implicit (tm).</p>
+<p>There is no reason to do this. UNIX provides a very helpful idiom: using
+<code>#!/usr/bin/env python arguments...</code>. That’ll search the $PATH for the
+right interpreter and use it. No black magic needed, and you can provide flags
+to the python interpreter if you so desire.</p>
+<p>Only God—make that Guido—knows what’ll happen if you’re trying to install a
+Python 3 script using a Python 2.7. Or want to distribute something runnable
+with <code>ipython</code>.</p>
+<hr>
+<p>By the way, if you think <em>installing</em> is bad: you would think uninstalling
+should be a standardized, well-thought-out, documented process, right? You
+wish. There setup.py-installed programs have no fixed uninstallation procedure.
+If you Google around, you are led to <a href="http://stackoverflow.com/a/1550235/3053429">this highly-upvoted StackOverflow
+answer</a>, which suggests using an
+option that lists all generated files, and <em>piping the output</em> to <code>xargs rm
+-rf</code>.</p>
+<p>Let’s hope they don’t have a file with a space in it, or <em>bad</em> things are going
+to happen. Keep in mind that Python is recommended for newbies, the kinds who
+will gladly copy-and-paste shell commands from the Internet.</p>
+<hr>
+<p>Here’s the deal. Flat is <em>not</em> better than nested. Nested is better than flat.
+There’s a reason we use parsers to convert strings to abstract syntax trees.
+There’s a reason LISP is easier to write than x86 assembly. There’s a reason
+for the existence of the term “dependency tree”. They are <em>literally</em> nested
+structures. Importing from a sibling directory should not be the harrowing
+experience it is in Python.</p>
+<p>And that’s why I love npm. Not because it’s written in a beautiful language or
+because it pretends to be easy-to-use, but because it’s simple and elegant and
+it doesn’t do too much or too little. Modules are nested prettily in their
+directories, and the <em>only</em> file npm touches is <code>package.json</code>.</p>
+<p>Scripts are simply linked into npm’s bin folder. Your “script” could be a Bash
+program, for all it cares.</p>
+<p>Installing is one command, uninstalling is one command, publishing is one
+command, and everything is one tool operating on one repository.</p>
+<p>npm is transparent. Python’s plethora of packaging plakavacs are anything but.</p>
+]]></description>
+            <link>http://hardmath123.github.io/nasty-python-monstrosities.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/nasty-python-monstrosities.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Wed, 04 Feb 2015 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Bower! Unlimited Bower!]]></title>
             <description><![CDATA[How not to write a module.
