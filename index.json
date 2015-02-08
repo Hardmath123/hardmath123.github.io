@@ -135,7 +135,7 @@
             "markdown": true
         },
         {
-            "title": "Better Earley then never",
+            "title": "Better Earley than never",
             "author": "Hardmath123",
             "description": "An informal explanation of Earley parsing.",
             "file": "earley.md",

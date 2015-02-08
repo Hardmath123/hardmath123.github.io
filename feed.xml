@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 05 Feb 2015 01:53:30 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 08 Feb 2015 17:45:55 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -1496,7 +1496,7 @@ of homework I need to make up this week&hellip;</p>
             <pubDate>Sat, 08 Nov 2014 08:00:00 GMT</pubDate>
         </item>
         <item>
-            <title><![CDATA[Better Earley then never]]></title>
+            <title><![CDATA[Better Earley than never]]></title>
             <description><![CDATA[An informal explanation of Earley parsing.
 
 <p>I wrote <a href="http://github.com/Hardmath123/nearley">nearley</a> working on course
