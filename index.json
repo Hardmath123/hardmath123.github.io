@@ -229,6 +229,14 @@
             "file": "nasty-python-monstrosities.md",
             "date": "2/4/15",
             "markdown": true
+        },
+        {
+            "title": "Embracing Types",
+            "author": "Hardmath123",
+            "description": "What isn't wrong with static typing.",
+            "file": "embracing-types.md",
+            "date": "2/8/15",
+            "markdown": true
         }
     ]
 }
