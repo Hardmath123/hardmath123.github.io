@@ -33,7 +33,7 @@ by Stephen D. Crocker when he was [assigned the task to document
 ideas](http://www.nytimes.com/2009/04/07/opinion/07crocker.html?_r=2&em&) in
 the early days of the Internet. An RFC is supposed to be a memo; a technical
 note or idea that is published for anyone to read, review, and (ha!) comment
-on. Everyone [can write](http://www.rfc-editor.org/rfc/rfc4846.txt) an RFC.
+on. Anyone [can write](http://www.rfc-editor.org/rfc/rfc4846.txt) an RFC.
 
 This is how standards come about. Once I have published a sensible RFC that
 standardizes some means of sharing files (for instance, the File Transfer
