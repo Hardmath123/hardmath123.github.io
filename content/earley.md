@@ -7,7 +7,7 @@ math-heavy notation and convert them to ideas (and code!).
 There aren't many tutorials about Earley parsing, because Earley parsing has
 been shadowed by the recursive descent or lookahead parsers that everyone uses.
 (The only significant Earley project out there is Marpa; I got some help from
-Marpa's creator, Jefferey Kegler.) But Earley parsers are awesome, because they
+Marpa's creator, Jeffrey Kegler.) But Earley parsers are awesome, because they
 will parse *anything* you give them. Depending on the algorithm specified,
 popular parsers such as lex/yacc, flex/bison, Jison, PEGjs, and Antlr will
 break depending on the grammar you give it. And by break, I mean infinite loops
