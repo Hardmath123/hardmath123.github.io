@@ -2,10 +2,14 @@
  * @import url(http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic);
  */
 
-@import url(http://fonts.googleapis.com/css?family=Halant:400,700,400italic,700italic);
+/*
+ * @import url(http://fonts.googleapis.com/css?family=Halant:400,700,400italic,700italic);
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic);
 
 body {
-  font-family: 'Halant', Times, serif;
+  font-family: 'Crimson Text', Times, serif;
   background-color: white;
   margin: 0;
   padding: 0;
