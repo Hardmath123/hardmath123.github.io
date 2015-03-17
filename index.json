@@ -245,6 +245,14 @@
             "file": "hilbert.md",
             "date": "2/26/15",
             "markdown": true
+        },
+        {
+            "title": "Use Imperfect Tools",
+            "author": "Hardmath123",
+            "description": "A promise to myself.",
+            "file": "use-imperfect-tools.md",
+            "date": "3/17/15",
+            "markdown": true
         }
     ]
 }
