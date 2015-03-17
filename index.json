@@ -253,6 +253,14 @@
             "file": "use-imperfect-tools.md",
             "date": "3/17/15",
             "markdown": true
+        },
+        {
+            "title": "Capture the Hackathon",
+            "author": "Hardmath123",
+            "description": "Why hackathons aren't helping the world, and how CTFs can fix that.",
+            "file": "hackathons-vs-ctfs.md",
+            "date": "3/17/15",
+            "markdown": true
         }
     ]
 }
