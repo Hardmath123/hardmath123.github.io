@@ -261,6 +261,14 @@
             "file": "hackathons-vs-ctfs.md",
             "date": "3/17/15",
             "markdown": true
+        },
+        {
+            "title": "How Random is xkcd?",
+            "author": "Hardmath123",
+            "description": "A blatant abuse of statistics.",
+            "file": "xkcd-random.md",
+            "date": "3/20/15",
+            "markdown": true
         }
     ]
 }

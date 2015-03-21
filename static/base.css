@@ -257,6 +257,14 @@ hr {
 }
 
 
-*[class*="language-"] {
+pre[class*="language-"], code[class*="language-"] {
     text-shadow: none !important;
+}
+
+pre[class*="language-"] *, code[class*="language-"] * {
+    background: inherit !important;
+}
+
+pre {
+    background: inherit !important;
 }
