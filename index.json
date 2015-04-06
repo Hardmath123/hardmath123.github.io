@@ -269,6 +269,14 @@
             "file": "xkcd-random.md",
             "date": "3/20/15",
             "markdown": true
+        },
+        {
+            "title": "Stop Teaching Intro CS",
+            "author": "Hardmath123",
+            "description": "Reflections on a worrying trend.",
+            "file": "stop-teaching-beginners.md",
+            "date": "4/6/15",
+            "markdown": true
         }
     ]
 }
