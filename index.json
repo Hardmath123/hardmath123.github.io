@@ -277,6 +277,14 @@
             "file": "stop-teaching-beginners.md",
             "date": "4/6/15",
             "markdown": true
+        },
+        {
+            "title": "I Believe in Magic",
+            "author": "Hardmath123",
+            "description": "I hope you do, too.",
+            "file": "believe-in-magic.md",
+            "date": "4/14/15",
+            "markdown": true
         }
     ]
 }
