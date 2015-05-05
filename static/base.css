@@ -19,7 +19,7 @@ body {
 }
 
 p, li {
-  line-height: 2.0em;
+  line-height: 1.8em;
   text-rendering: optimizeLegibility;
 }
 
@@ -90,7 +90,7 @@ a:visited:hover {
   padding: 0.5em;
   overflow: hidden;
   margin-bottom: 2em;
-  border-top: solid 0.5em #FFF8E7; /* Fun fact: this color, "Cosmic Latte", is
+  border-top: solid 0.2em #FFF8E7; /* Fun fact: this color, "Cosmic Latte", is
                                       supposed to be the average color of the
                                       universe. */
 }
