@@ -10,21 +10,14 @@
 
 body {
   font-family: 'Crimson Text', Times, serif;
-  background-color: white;
   margin: 0;
   padding: 0;
-  color: black;
-  height: 30px;
   font-size: 18px;
 }
 
 p, li {
   line-height: 1.8em;
   text-rendering: optimizeLegibility;
-}
-
-p {
-  /* text-indent: 0em; */
 }
 
 img {
