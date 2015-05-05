@@ -285,6 +285,14 @@
             "file": "believe-in-magic.md",
             "date": "4/14/15",
             "markdown": true
+        },
+        {
+            "title": "An Elementary Problem",
+            "author": "Hardmath123",
+            "description": "Can you find the Solution?",
+            "file": "elementary.md",
+            "date": "5/3/15",
+            "markdown": true
         }
     ]
 }
