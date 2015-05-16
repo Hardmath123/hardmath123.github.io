@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/prism.css"/>
+        <title>PreTTY Screenshots - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="/static/prism.js"></script>
+        <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+
+        <div id="header">
+    <link rel="stylesheet" href="/octicons/octicons.css">
+    <h1>
+        <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+    </h1>
+    <div id="rightbox">
+        <a href="http://github.com/Hardmath123">
+            <span class="octicon octicon-mark-github"></span></a>
+        &nbsp;&middot;&nbsp;
+        <a href="http://keybase.io/hardmath123">
+            <span class="octicon octicon-lock"></span></a>
+        &nbsp;&middot;&nbsp;
+        <a href="/feed.xml">
+            <span class="octicon octicon-rss"></span></a>
+    </div>
+    <div class="clearer"></div>
+    <!-- You're reading the source to my blog? What do you think?
+
+    Do you have dinner plans? -->
+</div>
+
+
+        <div id="postcontent" class="language-clike centered">
+            <h2>PreTTY Screenshots</h2>
+            <h4>Thursday, May 14, 2015
+            </h4>
+            <br/>
+            <p>Apparently it <a href="https://github.com/tj/n">has</a>
+<a href="https://github.com/madbence/node-drawille">recently</a>
+<a href="https://github.com/paulirish/github-email">become</a>
+<a href="https://github.com/nathan/gistogram">fashionable</a> on Github READMEs to put in
+a screenshot of a tty rather than explain the usage in actual words. There’s
+nothing wrong with them for the most part, but what bothers me is that all
+these screenshots are <em>ugly</em>. The links above are in increasing order of
+beauty.</p>
+<p>It turns out that taking nice screenshots is filled with icky pitfalls and
+undocumented secrets. Here’s how you do it <em>right</em>—on a Mac running a
+relatively recent OSX.</p>
+<h2 id="basic-principles">Basic principles</h2>
+<p>First of all, make sure you really want to use a screenshot. Plaintext is
+generally enough to convey what your project does, and all the text is
+copyable.</p>
+<p>You should only be using a screenshot if your project has some curses-esque
+behavior—messing with colors and drawing and raw mode and all that jazz.</p>
+<p>When taking a screenshot, make sure your terminal profile (custom colors, dark
+background, etc.) doesn’t interfere with anything. Also, make sure your
+terminal prompt (<code>$PS1</code>) is sufficiently normal. Yes, a plain <code>&gt;</code> is
+minimalistic and pretty. But it’s confusing—are you running bash, or is the
+prompt part of your program’s interface?</p>
+<p>Finally: use <em>small</em> windows. It’s hard to read text if you take a screenshot
+of an enormous terminal window and shrink it down.</p>
+<h2 id="key-combos">Key combos</h2>
+<p>Most people know that you can use cmd-shift-4 to enter screenshot mode and
+select part of the screen. A lesser-known trick is that you can press “space”
+to enter <em>window selection mode</em>. This lets you click on a window to take a
+screenshot <em>of that window</em>; and you end up with this (click to enlarge):</p>
+<p><a href="static/terminal-3.png"><img src="static/terminal-1.png" alt="This should be a sample screenshot"></a></p>
+<p>Why is this better than taking a normal screenshot and cropping? Because this
+method has the underlying code actually draw a fresh, high-resolution copy of
+your window—even in full-screen mode. It also includes that pretty shadow
+(which, by the way, is rendered with a translucent PNG alpha channel so it
+looks good on every background).</p>
+<p>It’s also, to be honest, much easier for the lazy.</p>
+<h2 id="command-line-screenshots">Command-line screenshots</h2>
+<p>Surprisingly, this screen capture mechanism has a command-line API.
+Unsurprisingly, it has terrible documentation.</p>
+<p>The command itself is called <code>screencapture(1)</code>. You want to feed it the
+undocumented-in-the-man-page <code>-w</code> option to specify the window ID.</p>
+<p>To get the window ID, you can use AppleScript’s <code>tell app &quot;$APPLICATION&quot; to id
+of window $N</code> command, where <code>$N</code> is the index of the window from “top” to
+“bottom”. You want to set <code>$APPLICATION</code> to <code>Terminal</code> and <code>$N</code> to “1” to get
+the focused window. Putting it together, we have:</p>
+<pre><code>$ screencapture -o -l $(osascript -e &#39;tell app &quot;Terminal&quot; to id of window 1&#39;) screenie.png
+</code></pre><p>This is, of course, terribly un-useful because it’ll take a screenshot of the
+window the moment you type this in. I would suggest prefixing it with <code>sleep
+5;</code>, and running it in a separate window (<em>not</em> a separate tab—that would get
+captured in your output!). This gives you five seconds to switch to your target
+window and get ready for the screenshot.</p>
+<h2 id="animating-with-imagemagick">Animating with Imagemagick</h2>
+<p>Sometimes, you can only really show how your project works with an animated
+GIF.</p>
+<p>In general, it’s good to keep GIFs short and small. They should loop cleanly:
+the easy way to accomplish this is by running “clear” at the end of your
+program so that the terminal state is restored to what it was before you ran
+it.</p>
+<p>To make a GIF, you need to take multiple screenshots by looping
+<code>screencapture(1)</code> (you don’t really need a delay, since the process of
+capturing is so slow):</p>
+<pre><code class="lang-bash">rm screenies/screenie-*.png
+N=0
+while true; do
+    screencapture -l $(osascript -e &#39;tell app &quot;Terminal&quot; to id of window 1&#39;) screenies/screenie-$(printf &quot;%05d&quot; $N).png
+    printf &quot;Created %05d\n&quot; $N
+    let N=$N+1
+done
+</code></pre>
+<p>Then, you can use Imagemagick (<code>brew install imagemagick</code>) to stitch them into
+a GIF using the <code>convert(1)</code> command. Make sure you specify <code>-alpha remove</code> for
+each frame so that the shadows get rasterized properly:</p>
+<pre><code class="lang-bash">convert $(for a in screenies/*; do printf -- &quot;-delay 1x60 -alpha remove %s &quot; $a; done; ) result.gif
+</code></pre>
+<p>This step will take a while and output a monstrously huge GIF, because the PNGs
+are pretty big. You can use Imagemagick <code>-quality</code> and <code>-resize</code> to shrink them
+substantially:</p>
+<pre><code class="lang-bash">mkdir screenies-compressed
+cd screenies
+
+for a in *; do
+    convert -quality 80 -resize 60% $a ../screenies-compressed/$a
+done;
+cd ..
+</code></pre>
+<p><img src="static/terminal-2.gif" alt="This should be a sample screencast"></p>
+<p>If you take screenshots often, it’s probably worth aliasing these commands in
+your <code>~/.profile</code>.</p>
+
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'comfortablynumbered';
+                var disqus_identifier = 'terminal-screenies.md';
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+        <div id="footer">
+    Comfortably Numbered &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS</a>
+    &nbsp;&middot;&nbsp;
+    <a href="/appreciation.html">
+        <span class="octicon octicon-beer"></span></a>
+    <div style="height: 10px;">&nbsp;</div>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+        <img
+            alt="Creative Commons License"
+            src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+    </a>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</div>
+
+    </body>
+</html>

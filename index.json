@@ -293,6 +293,14 @@
             "file": "elementary.md",
             "date": "5/3/15",
             "markdown": true
+        },
+        {
+            "title": "PreTTY Screenshots",
+            "author": "Hardmath123",
+            "description": "How to use the command line for screen capture tricks",
+            "file": "terminal-screenies.md",
+            "date": "5/14/15",
+            "markdown": true
         }
     ]
 }
