@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 16 May 2015 21:36:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 20 May 2015 01:25:08 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -3179,7 +3179,7 @@ many times and compute the average number of cars that can park.</p>
                     (number-of-cars (* (- len 3) (- 1 offset))))))))
 </code></pre>
 <p>Guess what? It’s <em>tree recursion</em>, which is, surprise surprise, a classic ‘CS
-concept’). But your programming mind didn’t think of it as a tree recursion
+concept’. But your programming mind didn’t think of it as a tree recursion
 problem. CS formalizes the idea of tree recursion because it’s so common in
 programming. It gives this idea a name, and lets you use this name when
 communicating with humans. It lets you use someone else’s Tree implementation,
