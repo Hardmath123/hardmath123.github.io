@@ -78,7 +78,7 @@ If you took an awesome CS class, you should have ended up with something like th
 ```
 
 Guess what? It's *tree recursion*, which is, surprise surprise, a classic 'CS
-concept'). But your programming mind didn't think of it as a tree recursion
+concept'. But your programming mind didn't think of it as a tree recursion
 problem. CS formalizes the idea of tree recursion because it's so common in
 programming. It gives this idea a name, and lets you use this name when
 communicating with humans. It lets you use someone else's Tree implementation,
