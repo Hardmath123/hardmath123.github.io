@@ -301,6 +301,14 @@
             "file": "terminal-screenies.md",
             "date": "5/14/15",
             "markdown": true
+        },
+        {
+            "title": "They do it with Mirrors",
+            "author": "Hardmath123",
+            "description": "An idealized transcript of a talk I gave.",
+            "file": "raytracing.md",
+            "date": "6/1/15",
+            "markdown": true
         }
     ]
 }
