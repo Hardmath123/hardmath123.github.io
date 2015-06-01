@@ -268,3 +268,13 @@ pre[class*="language-"] *, code[class*="language-"] * {
 pre {
     background: inherit !important;
 }
+
+li:before {
+    display: inline-block;
+    content: "\2014";
+    margin-left: -1.5em;
+    width: 1.5em;
+}
+li {
+    list-style: none;
+}
