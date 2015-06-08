@@ -309,6 +309,14 @@
             "file": "raytracing.md",
             "date": "6/1/15",
             "markdown": true
+        },
+        {
+            "title": "Indefinite",
+            "author": "Hardmath123",
+            "description": "Reflections on 40,000 words.",
+            "file": "indefinite.md",
+            "date": "6/8/15",
+            "markdown": true
         }
     ]
 }
