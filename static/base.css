@@ -93,6 +93,7 @@ a:visited:hover {
 
 #header h1 {
   font-variant: small-caps;
+  font-family: sans-serif;
   font-weight: 100;
   
   display: inline-block;
