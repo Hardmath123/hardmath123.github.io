@@ -269,12 +269,12 @@ pre {
     background: inherit !important;
 }
 
-li:before {
+ul li:before {
     display: inline-block;
     content: "\2014";
     margin-left: -1.5em;
     width: 1.5em;
 }
-li {
+ul li {
     list-style: none;
 }
