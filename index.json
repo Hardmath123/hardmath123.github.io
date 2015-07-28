@@ -317,6 +317,14 @@
             "file": "indefinite.md",
             "date": "6/8/15",
             "markdown": true
+        },
+        {
+            "title": "To Find Quarrel in a Straw",
+            "author": "Hardmath123",
+            "description": "A pointless exercise.",
+            "file": "straw.md",
+            "date": "7/28/15",
+            "markdown": true
         }
     ]
 }
