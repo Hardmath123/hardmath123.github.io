@@ -219,14 +219,14 @@ h3 {
 }
 
 /*
-#postcontent > p:first-of-type:first-letter, .dropcap:first-letter {
+#postcontent p:first-of-type:first-letter, .dropcap:first-letter {
   font-size: 4em;
   margin-right: 2px;
   font-family: "Didot", "Baskerville", "Garamond", serif;
 }
 */
 /*
-#postcontent > p:first-of-type:first-line {
+#postcontent p:first-of-type:first-line {
   font-variant: small-caps;
 }
 */
