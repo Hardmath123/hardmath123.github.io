@@ -294,3 +294,7 @@ ul li:before {
 ul li {
     list-style: none;
 }
+
+.sc {
+    font-variant: small-caps;
+}
