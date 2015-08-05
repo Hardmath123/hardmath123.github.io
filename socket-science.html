@@ -2,12 +2,10 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="/static/base.css"/>
-        <link rel="stylesheet" type="text/css" href="/static/prism.css"/>
         <title>It&#39;s not socket science: Part I - Comfortably Numbered</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <script src="/static/prism.js"></script>
         <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
@@ -16,32 +14,29 @@
         </script>
     </head>
     <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+            <div id="rightbox">
+                <a href="http://github.com/Hardmath123">
+                    <span class="octicon octicon-mark-github"> Github</span></a>
+                &nbsp;&nbsp;
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss"> Subscribe</span></a>
+            </div>
+            <div class="clearer"></div>
+            <!-- You're reading the source to my blog? What do you think?
 
-        <div id="header">
-    <link rel="stylesheet" href="/octicons/octicons.css">
-    <h1>
-        <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
-    </h1>
-    <div id="rightbox">
-        <a href="http://github.com/Hardmath123">
-            <span class="octicon octicon-mark-github"> Github</span></a>
-        &nbsp;&nbsp;
-        <a href="/feed.xml">
-            <span class="octicon octicon-rss"> Subscribe</span></a>
-    </div>
-    <div class="clearer"></div>
-    <!-- You're reading the source to my blog? What do you think?
+            Do you have dinner plans? -->
+        </header>
 
-    Do you have dinner plans? -->
-</div>
-
-
-        <div id="postcontent" class="language-clike centered">
-            <h2>It&#39;s not socket science: Part I</h2>
-            <h4>Saturday, November 29, 2014 &middot; 6 min read
-            </h4>
-            <br/>
-            <p>I like protocols. The Internet is like being in a party, and trying to have a
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>It&#39;s not socket science: Part I</h2>
+                <h4>Saturday, November 29, 2014 &middot; 6 min read</h4>
+<p>I like protocols. The Internet is like being in a party, and trying to have a
 conversation with the person across the room by passing post-it notes. Except
 you can only fit a couple of words onto a post-it note (of which you have, of
 course, a limited supply). And people take as long as they want to pass along
@@ -191,39 +186,44 @@ established, and why it’s important that it works the way it does right now.</
 exploits, all of which make plenty of sense once you understand protocols: Goto
 Fail, Heartbleed, Shellshock, and POODLE.</p>
 
-            <div id="disqus_thread"></div>
-            <script type="text/javascript">
-                var disqus_shortname = 'comfortablynumbered';
-                var disqus_identifier = 'socket-science.md';
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
+            </section>
+
+            <section>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'comfortablynumbered';
+                    var disqus_identifier = 'socket-science.md';
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+            </section>
+        </article>
+        <footer id="footer">
+            Comfortably Numbered &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/appreciation.html">
+                <span class="octicon octicon-beer"></span></a>
+            <div style="height: 10px;">&nbsp;</div>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                <img
+                    alt="Creative Commons License"
+                    src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+            </a>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
             </script>
-        <div id="footer">
-    Comfortably Numbered &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
-    &nbsp;&middot;&nbsp;
-    <a href="/appreciation.html">
-        <span class="octicon octicon-beer"></span></a>
-    <div style="height: 10px;">&nbsp;</div>
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
-        <img
-            alt="Creative Commons License"
-            src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
-    </a>
-
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-46120535-1', 'hardmath123.github.io');
-        ga('require', 'displayfeatures');
-        ga('send', 'pageview');
-    </script>
-</div>
+        </footer>
 
     </body>
 </html>
