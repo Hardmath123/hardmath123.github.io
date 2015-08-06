@@ -58,6 +58,14 @@ strong a:visited {
 
 a {
   color: #559;
+  text-decoration: none;
+}
+
+p a:after {
+    position: relative;
+    content: "\FEFF°"; margin-left: 0.10em;
+    font-size: 90%;
+    top: -0.10em;
 }
 
 #rightbox a:visited {
@@ -298,3 +306,5 @@ ul li {
 .sc {
     font-variant: small-caps;
 }
+
+
