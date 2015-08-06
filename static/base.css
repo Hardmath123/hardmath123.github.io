@@ -63,7 +63,8 @@ a {
 
 p a:after {
     position: relative;
-    content: "\FEFF°"; margin-left: 0.10em;
+    content: "\FEFF\00B0"; /* zero width no break space + degree symbol */
+    margin-left: 0.10em;
     font-size: 90%;
     top: -0.10em;
 }
