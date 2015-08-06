@@ -257,9 +257,6 @@ blockquote p {
 }
 
 
-code {
-    font-size: 0.8em;
-}
 
 hr {
   width: 50px;
@@ -287,9 +284,12 @@ pre {
     background: inherit !important;
 }*/
 
+code {
+    font-size: 0.7em;
+}
+
 pre {
-    display: block;
-    overflow: scroll;
+    overflow-x: auto;
     margin: 2em;
 }
 
