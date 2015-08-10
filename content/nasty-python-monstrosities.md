@@ -93,7 +93,7 @@ There is no reason to do this. UNIX provides a very helpful idiom: using
 right interpreter and use it. No black magic needed, and you can provide flags
 to the python interpreter if you so desire.
 
-Only God--make that Guido--knows what'll happen if you're trying to install a
+Only God---make that Guido---knows what'll happen if you're trying to install a
 Python 3 script using a Python 2.7. Or want to distribute something runnable
 with `ipython`.
 

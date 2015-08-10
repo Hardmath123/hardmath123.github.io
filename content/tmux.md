@@ -25,7 +25,7 @@ special keypress, `^B`. You type this with the control character and 'B' the
 way you would type `^C` to kill a bash process. We call `^B` the "prefix".
 
 Let's detach from `tmux`! For the dramatic effect, feel free to leave some
-process running--perhaps a Python session or even your IRC client. Type `^B D`
+process running---perhaps a Python session or even your IRC client. Type `^B D`
 (that is, the prefix followed by the `D` character).
 
 You should be back to the old bash. But the process you started is still

@@ -5,7 +5,7 @@ class, but I decided to put it up here because I think it's pretty, uh,
 Perhaps more than the actual problem, I love the bonus problems at the bottom.
 They show how all these "boring" Scheme exercises can be used to do all sorts
 of neat things. They're written to introduce a new idea with lots of
-questions--the solver is expected to explore them both on their own, with
+questions---the solver is expected to explore them both on their own, with
 external resources, and, of course, with other friends.
 
 Finally, it's worth noting that (as the first bonus problem should make amply
@@ -22,7 +22,7 @@ Some names are inherently different from others. For instance, the name Casey
 can be written as a list of element symbols, as Ca-Se-Y
 (Calcium-Selenium-Yttrium). However, Josh cannot be written this way. In this
 project, you get to write a Scheme program to break up a word into
-its--ahem--constituent elements.
+its---ahem---constituent elements.
 
 We begin by defining a list of all the elements. An element's symbol is
 described by a list of Scheme symbols, so Helium is `'(h e)`. As a sanity
@@ -155,7 +155,7 @@ You can use a program called `grep` to test your solutions.
 (Non-aqueous) Solutions to the tests above:
 
     java (0)
-    ()  -- Java is *clearly* not an awesome name. Try Lisp instead.
+    ()  --- Java is *clearly* not an awesome name. Try Lisp instead.
 
     is (1)
     (((i) (s)))
@@ -170,6 +170,6 @@ You can use a program called `grep` to test your solutions.
 program](https://gist.github.com/Hardmath123/7862258) I wrote in December 2013.
 The only modification is that it was originally distributed as a Scheme source
 file where all the text was commented out, and method stubs were left for
-students to fill in. I have also added a couple of bonus problems--only 1-3
+students to fill in. I have also added a couple of bonus problems---only 1-3
 were in the original source. Please contact me directly if you'd like the
 original file, along with its solution file.)

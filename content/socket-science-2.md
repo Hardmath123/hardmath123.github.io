@@ -45,7 +45,7 @@ so your FTP server and my FTP client would cooperate.
 
 Notice how this is decentralized. It's not Google saying "Ok, folks, this is
 how we're going to transfer files. Deal with it." RFCs specify the consensus of
-many experts--when you see an RFC describing a protocol that has many
+many experts---when you see an RFC describing a protocol that has many
 implementations, you know that many people agree that that's the best way of
 doing things (and even if it isn't, it's a reasonable compromise).
 
@@ -106,7 +106,7 @@ Your normal IRC client should show that `an-irc-explorer` joined.
 To say things, use `PRIVMSG #bots :Hello, world.` (The colon is a
 separator character, not part of the actual text that will be displayed on a
 client. Its purpose is to allow the last argument to contain spaces,
-which--unsurprisingly--show up quite a lot in chat messages.)
+which---unsurprisingly---show up quite a lot in chat messages.)
 
 If you say something from your client, you should get some scary text like this:
 

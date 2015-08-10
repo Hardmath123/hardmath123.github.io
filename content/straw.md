@@ -101,7 +101,7 @@ So many questions!
 
 ---
 
-To be honest, this post isn't about straws--as interesting as they are. It's
+To be honest, this post isn't about straws---as interesting as they are. It's
 about looking around and finding exciting things. It's about ignoring the
 grown-ups who think straws are unexciting. Because we're surrounded by exciting
 things. Everywhere. Like happiness and magic and diatomic nitrogen. It's *your*

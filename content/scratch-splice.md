@@ -84,8 +84,8 @@ this segment as a really long list, where each element has an upper limit on
 size.
 
 It's easy to store an integer (within limits) or a boolean value in memory,
-because it takes up just one cell of memory. But anything larger--a string, a
-list, an image, or a sprite--takes up multiple cells, and so you need a scheme
+because it takes up just one cell of memory. But anything larger---a string, a
+list, an image, or a sprite---takes up multiple cells, and so you need a scheme
 by which those cells are allocated in an organized way.
 
 In low-level programming languages like C, you have the `malloc` function that

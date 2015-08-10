@@ -8,7 +8,7 @@ exact form that the composer wrote.
 > imagination; the more they can discover what exactly he had in mind, the more
 > they are helped.
 
-> -- Eric Taylor, *The AB [Associated Board] Guide to Music Theory*
+> --- Eric Taylor, *The AB [Associated Board] Guide to Music Theory*
 
 Perhaps this is a way to honor the genius of great composers of the past. But
 nevertheless, classical performers, therefore, are just that. Performers.

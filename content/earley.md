@@ -142,8 +142,8 @@ entry in column 2, this represents the parsing.
 Nearley parses using the above algorithm, but giving each entry
 "baggage", namely the parsed data as a tree structure. When we finish an entry
 (and are about to process it with rule 3), we apply the postprocessor function
-to the baggage. Once we determine a parsing, we can reveal--with a
-flourish--the postprocessed data to be used by the user.
+to the baggage. Once we determine a parsing, we can reveal---with a
+flourish---the postprocessed data to be used by the user.
 
 ###Parting words
 If we had multiple entries that worked in the end, there would be multiple

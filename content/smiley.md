@@ -5,7 +5,7 @@
 
 "Yes, bingo."
 
-"Like, the--"
+"Like, the---"
 
 "Yes, Mr. Smiley, bingo."
 
@@ -17,7 +17,7 @@ Some involved bears. Mr. Smiley was the school custodian.
 
 ---
 
-"Alright, everyone, quiet down. *Shhh!* Come up--ONE BY ONE!--and get your boards."
+"Alright, everyone, quiet down. *Shhh!* Come up---ONE BY ONE!---and get your boards."
 
 It was a rainy day. The grown-ups intended to herd us into the art room. Mrs. J
 (I never knew her real name, and after the third year it became too awkward to

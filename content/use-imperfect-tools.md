@@ -96,12 +96,12 @@ leads to clean, maintainable code. It minimizes the amount of refactoring
 drudgery.
 
 But I think all those things are secondary to actually having a working
-prototype. Yes, you're going to run into painful distribution issues--it's
+prototype. Yes, you're going to run into painful distribution issues---it's
 happened to me, and it was annoying enough to make me give up on the project.
 But the open-source world came to the rescue, and someone forked and continued
 it. What matters is that I put my idea into code and gave it to the world.
 
-So my promise to myself--as of publishing this post--is to spend less time
+So my promise to myself---as of publishing this post---is to spend less time
 debating tools and more time using them. This means forcing myself to
 consciously use imperfect tools, which might cause mild internal bleeding.
 Let's see how long I survive.

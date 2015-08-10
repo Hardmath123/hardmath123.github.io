@@ -23,7 +23,7 @@ duplicate code *anyway*.
 [XMLHttpRequest](http://dojotoolkit.org/reference-guide/1.10/dojo/xhr.html)
 [API](http://www.w3.org/TR/XMLHttpRequest/). Each reimplementation of XHR is
 basically the same thing, with slightly different method names or argument
-conventions. As a developer, I would rather know the Real API--I can use it
+conventions. As a developer, I would rather know the Real API---I can use it
 anywhere I want, and I have unrestricted access to the entire API (so I'm not
 at the mercy of someone who doesn't think PUT requests are worth implementing).
 
@@ -63,7 +63,7 @@ writing patches to tide over important features marked "TODO" on Github. You
 end up writing glue code, which is far worse than "the drudgery of
 boilerplate".
 
-Which isn't to say you shouldn't be using--or writing--JavaScript libraries.
+Which isn't to say you shouldn't be using---or writing---JavaScript libraries.
 But you should be writing small, self-contained modules that provide a clean
 interface that is optimized for communicating with other programs. You should
 be using conventional vocabulary and idioms everywhere (even if those idioms

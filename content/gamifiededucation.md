@@ -49,8 +49,8 @@ to learn for pleasure, you're being pushed through an objective, rigid
 
 This happened, for instance, in my AP Computer Science class last year. Almost
 every student there was far above average, and exceeding all expectations at
-school. It was the perfect environment for them to learn freely--and our
-teacher encouraged this--but they had to spend hours studying for the AP CS
+school. It was the perfect environment for them to learn freely---and our
+teacher encouraged this---but they had to spend hours studying for the AP CS
 test.
 
 Honestly, studying for the AP CS test isn't very different from studying for
@@ -62,11 +62,11 @@ students with teachers, who guide them in their learning. There is no
 curriculum.
 
 The inspiration for this comes from my adventures trying to teach myself
-computer science--often, the hardest part is to choose something to study, and
+computer science---often, the hardest part is to choose something to study, and
 to decide how much detail to study it in. When a student is paired with a
 competent expert in a field, he has someone to ask for guidance.
 
-Again, this program would only work in certain districts--those with the
+Again, this program would only work in certain districts---those with the
 resources, interested and capable students, and competent teachers. Almost
 every school has much higher priorities, bringing every student to a strong
 level in core subjects. But for those few schools with a large mass of

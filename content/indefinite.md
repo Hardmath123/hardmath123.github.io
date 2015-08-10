@@ -1,4 +1,4 @@
-I have published over 40,000 words of writing now--more than *The Lion, the
+I have published over 40,000 words of writing now---more than *The Lion, the
 Witch, and the Wardrobe* and *Hamlet*. Not that word count matters, of course.
 Words, like people, are meaningless on their own.
 
@@ -6,8 +6,8 @@ And every time I sit down to write a new post, I wonder why I do it.
 
 Readership in itself is hardly a goal. Unread words are just as meaningful.
 
-Communication, on the other hand, is a goal. Every person who agrees--or
-disagrees--with my ideas; every person who is inspired to write something of
+Communication, on the other hand, is a goal. Every person who agrees---or
+disagrees---with my ideas; every person who is inspired to write something of
 their own; every person who shares a discovery with me or (dare I hope) learns
 something from me: each one of you inspires me to write. You know who you are.
 
@@ -18,7 +18,7 @@ target. I have 2,000 words worth of material worth sharing every month and I'm
 proud of every sentence.
 
 That, of course, is not easy for me to say. If you have been with me from the
-very beginning--and some of you have--you have seen pieces with questionable
+very beginning---and some of you have---you have seen pieces with questionable
 claims and controversial ideas. You have seen opinions any self-respecting
 person would disagree with. You have seen typography that may have left you
 with permanently impaired vision.
@@ -26,7 +26,7 @@ with permanently impaired vision.
 In most cases, I agree with you wholeheartedly. I am thankful for both the
 feedback you offered and the criticism you kept to yourself.
 
-But--you can check this yourself--these pieces can still be seen in their full,
+But---you can check this yourself---these pieces can still be seen in their full,
 unmodified glory.
 
 Their persistence is not a reflection of any dogmatic sentiments regarding

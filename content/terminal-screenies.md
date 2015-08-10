@@ -8,7 +8,7 @@ these screenshots are *ugly*. The links above are in increasing order of
 beauty.
 
 It turns out that taking nice screenshots is filled with icky pitfalls and
-undocumented secrets. Here's how you do it *right*--on a Mac running a
+undocumented secrets. Here's how you do it *right*---on a Mac running a
 relatively recent OSX.
 
 ## Basic principles
@@ -18,12 +18,12 @@ generally enough to convey what your project does, and all the text is
 copyable.
 
 You should only be using a screenshot if your project has some curses-esque
-behavior--messing with colors and drawing and raw mode and all that jazz.
+behavior---messing with colors and drawing and raw mode and all that jazz.
 
 When taking a screenshot, make sure your terminal profile (custom colors, dark
 background, etc.) doesn't interfere with anything. Also, make sure your
 terminal prompt (`$PS1`) is sufficiently normal. Yes, a plain `>` is
-minimalistic and pretty. But it's confusing--are you running bash, or is the
+minimalistic and pretty. But it's confusing---are you running bash, or is the
 prompt part of your program's interface?
 
 Finally: use *small* windows. It's hard to read text if you take a screenshot
@@ -40,7 +40,7 @@ screenshot *of that window*; and you end up with this (click to enlarge):
 
 Why is this better than taking a normal screenshot and cropping? Because this
 method has the underlying code actually draw a fresh, high-resolution copy of
-your window--even in full-screen mode. It also includes that pretty shadow
+your window---even in full-screen mode. It also includes that pretty shadow
 (which, by the way, is rendered with a translucent PNG alpha channel so it
 looks good on every background).
 
@@ -63,7 +63,7 @@ the focused window. Putting it together, we have:
 
 This is, of course, terribly un-useful because it'll take a screenshot of the
 window the moment you type this in. I would suggest prefixing it with `sleep
-5;`, and running it in a separate window (*not* a separate tab--that would get
+5;`, and running it in a separate window (*not* a separate tab---that would get
 captured in your output!). This gives you five seconds to switch to your target
 window and get ready for the screenshot.
 

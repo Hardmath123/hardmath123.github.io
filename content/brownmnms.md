@@ -92,7 +92,7 @@ Everyone has their own Brown M&Ms. We're presented so much information on a
 daily basis, that we need Brown M&Ms to decide what matters and what doesn't. I
 will probably put off an email whose subject line is misspelled. Or close a
 webpage with a pop-up. Or disregard pull requests that mess up whitespace. It's
-*ok* to have Brown M&Ms--and it's ok for them to be as obscure as you want--but
+*ok* to have Brown M&Ms---and it's ok for them to be as obscure as you want---but
 it's not ok to foist them upon others.
 
 The next time you see a newbie modify the `Array` prototype directly, *please*
