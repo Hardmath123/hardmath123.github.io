@@ -52,7 +52,7 @@ have your permission to use this vault? It's a harmless procedure, really."
 "Need I remind you that I am the Chief Warlock of the Wizengamot?"
 
 "You need not," seethed a very reluctant goblin, adding (under his breath)
-"Albus Dumbledore pulling rank--what is the world coming to?"
+"Albus Dumbledore pulling rank---what is the world coming to?"
 
 "Very well then. *Presto-incremento!*" For a sliver of a second, Vault 713 of
 the Gringotts Bank glowed a pale electric blue. Then, with a gentle rumble, the
@@ -69,8 +69,8 @@ transported to Vault 714."
 "Impossible! Vault 714 contains statues of gold; you cannot fit a mountain of
 galleons in there!"
 
-"Patience. The statues of Vault 714 have been moved to Vault 715. And--before
-you get started again--the contents of Vault 715 have been moved to Vault 716."
+"Patience. The statues of Vault 714 have been moved to Vault 715. And---before
+you get started again---the contents of Vault 715 have been moved to Vault 716."
 
 "Excuse me?"
 
@@ -86,7 +86,7 @@ the change?"
 
 "It may interest you to know, Mr. Bertok, that the Ministry happens to have a
 fleet consisting of an infinite number of owls. They've been quite useful: just
-last week we used them to--ahem--*persuade* a Muggle family to send their
+last week we used them to---ahem---*persuade* a Muggle family to send their
 nephew to Hogwarts."
 
 And with those words, Professor Albus Dumbledore dropped a small grubby bag
@@ -101,7 +101,7 @@ long bus. These were restless passengers who wanted their magically-created
 Gringotts vaults and would not leave without them.
 
 Owing to the lack of space and general stuffiness that was developing in the
-Gringotts lobby--and the inevitable threat being posed to his employment--Mr.
+Gringotts lobby---and the inevitable threat being posed to his employment---Mr.
 Bertok decided to do something about it. After the first 50 new clients,
 though, he began coming to the realization that making all of these accounts
 would take an infinite amount of time.
@@ -277,7 +277,7 @@ an early retirement from bus-driving and instead perhaps go herd a finite
 number of goats in Mongolia. Fortunately, a pair of psychiatrists, Calkin and
 Wilf, convinced him that he can fit all the rational people in the world onto
 his bus. Though he tried hard, he never really got the hang of it, and one day
-his bus was found--destroyed--with an infinitely large tree growing out of the
+his bus was found---destroyed---with an infinitely large tree growing out of the
 windshield.
 
 ---

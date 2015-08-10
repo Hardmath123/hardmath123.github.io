@@ -20,7 +20,7 @@ friend. We went to see *Cloudy With a Chance of Meatballs*.
 
 ![ ](static/slides/cloudy.jpg)
 
-I loved it. Not just the story--the pictures. I loved how everything was so
+I loved it. Not just the story---the pictures. I loved how everything was so
 realistic. I mean, I was told that these movies are computer-generated, but I
 felt that I could reach out and touch those hair, or poke the huge mound of
 Jell-O.
@@ -61,8 +61,8 @@ used it if you took a CS class here.
 
 ![ ](static/slides/14scratch.png)
 
-I loved Scratch. Over then next two years, I made games, stories, and--most
-importantly--friends I still talk to today.
+I loved Scratch. Over then next two years, I made games, stories, and---most
+importantly---friends I still talk to today.
 
 I, of course, forgot this whole 3D movie thing completely.
 
@@ -140,14 +140,14 @@ taking a test.
 Something about this bothered me. And when I got home, I finally realized it.
 
 
-These lines of code are--unaltered--from my raytracer.
+These lines of code are---unaltered---from my raytracer.
 
 ![ ](static/slides/direction.png)
 
 Looks familiar? It's the cross product!
 
 I wrote those lines of code in seventh grade. I had no idea what a vector was.
-I don't know how I got those equations--I just remember doing lots of algebra
+I don't know how I got those equations---I just remember doing lots of algebra
 on paper and somehow getting them.
 
 And suddenly it all made sense to me. All this math we're learning? It's

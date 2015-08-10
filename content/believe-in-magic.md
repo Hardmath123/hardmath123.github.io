@@ -34,7 +34,7 @@ I'm entranced by the fact that you can draw a regular 17-gon with just a
 compass and a straightedge. I'm amazed by the fact that you can find the sum of
 the factors of a hundred million million million fast, without a calculator.
 
-I like the math that lets you do magic--*real* magic--with just a bit of
+I like the math that lets you do magic---*real* magic---with just a bit of
 thought. I like proofs whose results I don't believe (c'mon, there's no *way*
 the ant reaches the end of the rubber rope). Proofs that give you an edge over
 everyone else, even though everyone else could have come up with them on their
@@ -52,7 +52,7 @@ And I'm content with this appreciation, because it gives me something to wonder
 and marvel at, which is all you really need to be happy. Perhaps I'm incapable
 of appreciating the intrinsic beauty of the existence of certain mathematical
 truths. But I am certainly capable of appreciating the wizardry required to
-discover--rather, create--them.
+discover---rather, create---them.
 
 To me, magic is the ability to take something impossible and make it possible.
 And I believe in magic.

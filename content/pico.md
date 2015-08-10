@@ -1,5 +1,5 @@
-Almost any metric of work I've done--homework submitted, emails answered, hours
-spent playing piano, number of Github commits--show a sharp drop in the past
+Almost any metric of work I've done---homework submitted, emails answered, hours
+spent playing piano, number of Github commits---show a sharp drop in the past
 two weeks. I pretty much spent every moment on a computer solving
 [PicoCTF](http://picoctf.com) problems.
 
@@ -119,7 +119,7 @@ for ($i = 0; $i < count($settings_array); $i++) {
 ```
 
 With forged objects, we can make it instantiate arbitrary objects at
-will--PHP's serialization saves type information. Notice that the `Post` object
+will---PHP's serialization saves type information. Notice that the `Post` object
 defines:
 
 ```php
@@ -156,7 +156,7 @@ There are several lessons to be learned here, but the most important are:
 
 ### Block
 
-Block uses a Substitution Permutation Network to encrypt the string--but it
+Block uses a Substitution Permutation Network to encrypt the string---but it
 does it twice. I pretty much brute-forced this one. But I did it tastefully, so
 it merits a writeuplet.
 
@@ -169,7 +169,7 @@ result (the intermediate encryption). This is a 'meet-in-the-middle' attack
 (not to be confused with 'man-in-the-middle' or 'Malcolm-in-the-Middle'), and
 can be read about [on
 Wikipedia](http://en.wikipedia.org/wiki/Meet-in-the-middle_attack). This is
-good--now all we need to do is find the intersection of two massive lists.
+good---now all we need to do is find the intersection of two massive lists.
 
 Once I'd compiled these lists manually (it took over an hour), I realized that
 I would be graduating high school by the time a naive Python intersection

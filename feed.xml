@@ -10,13 +10,14 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 06 Aug 2015 04:08:01 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 10 Aug 2015 19:43:29 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
             <title><![CDATA[To Find Quarrel in a Straw]]></title>
-            <description><![CDATA[A pointless exercise.
+            <description><![CDATA[<p>A pointless exercise.</p>
+
 
 <blockquote>
 <p>To all the friends I made this summer. Thanks for all the memories.
@@ -113,7 +114,8 @@ Dahlke.</a>)</p>
         </item>
         <item>
             <title><![CDATA[Indefinite]]></title>
-            <description><![CDATA[Reflections on 40,000 words.
+            <description><![CDATA[<p>Reflections on 40,000 words.</p>
+
 
 <p>I have published over 40,000 words of writing now—more than <em>The Lion, the
 Witch, and the Wardrobe</em> and <em>Hamlet</em>. Not that word count matters, of course.
@@ -166,7 +168,8 @@ aren’t your fault.  Things that, for better or for worse, are constant.</p>
         </item>
         <item>
             <title><![CDATA[They do it with Mirrors]]></title>
-            <description><![CDATA[An idealized transcript of a talk I gave.
+            <description><![CDATA[<p>An idealized transcript of a talk I gave.</p>
+
 
 <blockquote>
 <p>This is an idealized transcript of a talk I gave a couple weeks ago at our
@@ -290,7 +293,8 @@ you’re “ready”, and go build something.</p>
         </item>
         <item>
             <title><![CDATA[PreTTY Screenshots]]></title>
-            <description><![CDATA[How to use the command line for screen capture tricks
+            <description><![CDATA[<p>How to use the command line for screen capture tricks</p>
+
 
 <p>Apparently it <a href="https://github.com/tj/n">has</a>
 <a href="https://github.com/madbence/node-drawille">recently</a>
@@ -388,7 +392,8 @@ your <code>~/.profile</code>.</p>
         </item>
         <item>
             <title><![CDATA[An Elementary Problem]]></title>
-            <description><![CDATA[Can you find the Solution?
+            <description><![CDATA[<p>Can you find the Solution?</p>
+
 
 <p>This is The Awesome Elements Problem. I wrote it for my AP Computer Science
 class, but I decided to put it up here because I think it’s pretty, uh,
@@ -513,7 +518,7 @@ previous two questions is easier, and why?</p>
 <hr>
 <p>(Non-aqueous) Solutions to the tests above:</p>
 <pre><code>java (0)
-()  -- Java is *clearly* not an awesome name. Try Lisp instead.
+()  --- Java is *clearly* not an awesome name. Try Lisp instead.
 
 is (1)
 (((i) (s)))
@@ -537,7 +542,8 @@ original file, along with its solution file.)</p>
         </item>
         <item>
             <title><![CDATA[I Believe in Magic]]></title>
-            <description><![CDATA[I hope you do, too.
+            <description><![CDATA[<p>I hope you do, too.</p>
+
 
 <p>Ever since I was a little kid, I loved magic.</p>
 <p>I didn’t love rabbits coming out of top hats, or various deceptions with
@@ -606,7 +612,8 @@ them possible.</p>
         </item>
         <item>
             <title><![CDATA[Stop Teaching Intro CS]]></title>
-            <description><![CDATA[Reflections on a worrying trend.
+            <description><![CDATA[<p>Reflections on a worrying trend.</p>
+
 
 <p>One of the reasons I love computer science is that in a good community,
 everyone is a teacher. You don’t need to attain some degree of credibility
@@ -690,7 +697,8 @@ of learning.</p>
         </item>
         <item>
             <title><![CDATA[How Random is xkcd?]]></title>
-            <description><![CDATA[A blatant abuse of statistics.
+            <description><![CDATA[<p>A blatant abuse of statistics.</p>
+
 
 <p>Apparently Randall Munroe gets a lot of messages saying that the “random”
 button on xkcd is biased.</p>
@@ -874,7 +882,8 @@ dump of my dataset, leave a comment below and I’ll send it to you.</p>
         </item>
         <item>
             <title><![CDATA[Capture the Hackathon]]></title>
-            <description><![CDATA[Why hackathons aren't helping the world, and how CTFs can fix that.
+            <description><![CDATA[<p>Why hackathons aren’t helping the world, and how CTFs can fix that.</p>
+
 
 <p>If you’ve been following my blog, you know that I’m not a fan of competitions.
 One of the few exceptions to this is CTFs. CTFs, or Capture-The-Flag
@@ -953,7 +962,8 @@ not selfish—but I think that’s a topic for a whole new post.</p>
         </item>
         <item>
             <title><![CDATA[Use Imperfect Tools]]></title>
-            <description><![CDATA[A promise to myself.
+            <description><![CDATA[<p>A promise to myself.</p>
+
 
 <p>As I look back on programs I’ve written, I almost always notice that the most
 successful are the hacks. The ones whose source code is spaghetti, the ones
@@ -1050,7 +1060,8 @@ Let’s see how long I survive.</p>
         </item>
         <item>
             <title><![CDATA[Harry Potter and the Diagon(alization) Alley]]></title>
-            <description><![CDATA[My attempt at "Harry Potter"/"Über eine Eigenschaft des Inbegriffes aller reellen algebraischen Zahlen" crossover fanfiction.
+            <description><![CDATA[<p>My attempt at “Harry Potter”/“Über eine Eigenschaft des Inbegriffes aller reellen algebraischen Zahlen” crossover fanfiction.</p>
+
 
 <p>It is a well-known fact among wizarding circles that the Gringotts Wizarding
 Bank has an infinite number of vaults, numbered from 1 onwards. Equally
@@ -1260,7 +1271,8 @@ of Mathematical Curiosities</em>.</p>
         </item>
         <item>
             <title><![CDATA[Embracing Types]]></title>
-            <description><![CDATA[What isn't wrong with static typing.
+            <description><![CDATA[<p>What isn’t wrong with static typing.</p>
+
 
 <p>A lot of script kiddies, myself included, take a lot of pride in loathing
 statically typed languages and being “purists”. But I’ve been doing some
@@ -1343,7 +1355,8 @@ also suffer a defeat.</p>
         </item>
         <item>
             <title><![CDATA[Nasty Python Monstrosities]]></title>
-            <description><![CDATA[Why I'm not going to distribute any Python ever again.
+            <description><![CDATA[<p>Why I’m not going to distribute any Python ever again.</p>
+
 
 <p><strong>Scenario:</strong> I’ve written a simple Python command-line tool. It consists of
 more than one file, because separation of code is important. It only needs to
@@ -1457,7 +1470,8 @@ command, and everything is one tool operating on one repository.</p>
         </item>
         <item>
             <title><![CDATA[Bower! Unlimited Bower!]]></title>
-            <description><![CDATA[How not to write a module.
+            <description><![CDATA[<p>How not to write a module.</p>
+
 
 <p>Bower. RequireJS. JamJS. Browserify. JQuery, Underscore, Lodash, and did I
 mention JQuery? Angular, D3, Polymer, Flux, Ember.js, Backbone, React, Dojo,
@@ -1640,7 +1654,8 @@ Internet should take a hint from that.</p>
         </item>
         <item>
             <title><![CDATA[Coding the Mandelbrot Set]]></title>
-            <description><![CDATA[A mirror of a post written a long time ago in a galaxy far away.
+            <description><![CDATA[<p>A mirror of a post written a long time ago in a galaxy far away.</p>
+
 
 <blockquote>
 <p>I wrote this post a long time ago. I had become obsessed with the Mandelbrot
@@ -1674,7 +1689,7 @@ archive linked above.</p>
 is the Mandelbrot Set?, Understanding the Algorithm, and Programming the
 algorithm. <a href="http://scratch.mit.edu/projects/Hardmath123/1734070">Here</a> is a
 project on plotting it, if you don’t get it.</p>
-<h3 id="what-is-the-mandelbrot-set-">What is the Mandelbrot Set?</h3>
+<p>###What is the Mandelbrot Set?</p>
 <p>The Mandelbrot Set (M-Set in short) is a fractal. It is plotted on the complex
 plane. It is an example of how intricate patterns can be formed from a simple
 math equation. It is entirely self-similar. Within the fractal, there are
@@ -1808,7 +1823,8 @@ else
         </item>
         <item>
             <title><![CDATA[Array of Hope]]></title>
-            <description><![CDATA[Explaining why Scratch Arrays misbehave.
+            <description><![CDATA[<p>Explaining why Scratch Arrays misbehave.</p>
+
 
 <p>So a notorious Scratch user,
 <a href="http://scratch.mit.edu/users/TheLogFather/">TheLogFather</a>, posted a
@@ -1956,7 +1972,8 @@ stick with it. But that’s good programming practice anyway.</p>
         </item>
         <item>
             <title><![CDATA[The Nightmare After Christmas]]></title>
-            <description><![CDATA[Happy $HOLIDAY
+            <description><![CDATA[<p>Happy $HOLIDAY</p>
+
 
 <p>‘Twas the night after Christmas in the Clause house,<br>And all you could hear was the click of a mouse,<br>Or the drop of a pin, or the sneeze of a louse,<br>Until he called out for his dear spouse.</p>
 <p>“Mrs. Clause,” he cried, “I think it’s broken!”<br>“What?” she bellowed, annoyed to be woken.<br>“I’m locked out,” he said, regretting having spoken,<br>“I seem to have lost my login token.”</p>
@@ -1977,7 +1994,8 @@ stick with it. But that’s good programming practice anyway.</p>
         </item>
         <item>
             <title><![CDATA[It's not socket science: Part II]]></title>
-            <description><![CDATA[In which we invade a chatroom.
+            <description><![CDATA[<p>In which we invade a chatroom.</p>
+
 
 <p>A quick recap: in <a href="socket-science.html">Part I</a>, we learned about how protocols
 are really awesome, and how they stack onto each other to build abstractions.
@@ -2102,7 +2120,7 @@ since that’s what W. Richard Stevens does in his book, that’s what I’ll do
 here.</p>
 </blockquote>
 <p><code>SOCK_STREAM</code> means <code>TCP</code>. The alternative is <code>SOCK_DGRAM</code>, which means
-<code>UDP</code>—User <em>Datagram</em> Protocol. There’s also <code>SOCK_RAW</code>, which requires root
+<code>UDP</code>–User <em>Datagram</em> Protocol. There’s also <code>SOCK_RAW</code>, which requires root
 privileges and makes (you guessed it) a raw IP socket. We discussed these in
 the previous installment.</p>
 <p>The <code>connect</code> line, of course, connects to a remote socket somewhere in the
@@ -2250,7 +2268,8 @@ definitely worth learning how these things work.</p>
         </item>
         <item>
             <title><![CDATA[Dear Hollywood]]></title>
-            <description><![CDATA[A rant about technobabble.
+            <description><![CDATA[<p>A rant about technobabble.</p>
+
 
 <p>Dear famous producers, scriptwriters, authors, and publishers:</p>
 <p>On behalf of the programming community, I would like to bring up a rather sore
@@ -2341,7 +2360,8 @@ hacker.</p>
         </item>
         <item>
             <title><![CDATA[Don your tmuxedo]]></title>
-            <description><![CDATA[A tmux quickstart.
+            <description><![CDATA[<p>A tmux quickstart.</p>
+
 
 <p><a href="http://tmux.sourceforge.net">tmux</a> is a <em>terminal multiplexor</em>, which is
 nerdspeak for a program that runs multiple processes simultaneously within a
@@ -2399,7 +2419,8 @@ perpetually.</p>
         </item>
         <item>
             <title><![CDATA[It's not socket science: Part I]]></title>
-            <description><![CDATA[A hands-on introduction to networking.
+            <description><![CDATA[<p>A hands-on introduction to networking.</p>
+
 
 <p>I like protocols. The Internet is like being in a party, and trying to have a
 conversation with the person across the room by passing post-it notes. Except
@@ -2558,7 +2579,8 @@ Fail, Heartbleed, Shellshock, and POODLE.</p>
         </item>
         <item>
             <title><![CDATA[Notes on Binary Strings]]></title>
-            <description><![CDATA[A memory dump of useful functions
+            <description><![CDATA[<p>A memory dump of useful functions</p>
+
 
 <p>One of the things I had to do for PicoCTF was learn how to wrangle binary
 strings in various languages. The idea is that you think of a string as an
@@ -2672,7 +2694,8 @@ and plaintext representations.</p>
         </item>
         <item>
             <title><![CDATA[Some PicoCTF Writeups]]></title>
-            <description><![CDATA[In honor of PicoCTF, I wrote this post in pico.
+            <description><![CDATA[<p>In honor of PicoCTF, I wrote this post in pico.</p>
+
 
 <p>Almost any metric of work I’ve done—homework submitted, emails answered, hours
 spent playing piano, number of Github commits—show a sharp drop in the past
@@ -2824,7 +2847,8 @@ of homework I need to make up this week&hellip;</p>
         </item>
         <item>
             <title><![CDATA[Better Earley than never]]></title>
-            <description><![CDATA[An informal explanation of Earley parsing.
+            <description><![CDATA[<p>An informal explanation of Earley parsing.</p>
+
 
 <p>I wrote <a href="http://github.com/Hardmath123/nearley">nearley</a> working on course
 materials for a Berkeley CS course, but it quickly spiralled into a pretty big
@@ -2938,14 +2962,14 @@ have:</p>
 that are complete and created from an entry in column 0. (That means we have a
 parsing from the beginning of the string to the end). Since we have such an
 entry in column 2, this represents the parsing.</p>
-<h3 id="finale">Finale</h3>
-<p>Nearley parses using the above algorithm, but giving each entry
+<p>###Finale
+Nearley parses using the above algorithm, but giving each entry
 “baggage”, namely the parsed data as a tree structure. When we finish an entry
 (and are about to process it with rule 3), we apply the postprocessor function
 to the baggage. Once we determine a parsing, we can reveal—with a
 flourish—the postprocessed data to be used by the user.</p>
-<h3 id="parting-words">Parting words</h3>
-<p>If we had multiple entries that worked in the end, there would be multiple
+<p>###Parting words
+If we had multiple entries that worked in the end, there would be multiple
 parsings of the grammar. This means the grammar is <strong>ambiguous</strong>, and this is
 generally a very bad sign. It can lead to messy programming bugs, or
 exponentially slow parsing.</p>
@@ -2963,7 +2987,8 @@ Nolan won’t be, probably.)</p>
         </item>
         <item>
             <title><![CDATA[Detech Your Classroom]]></title>
-            <description><![CDATA[Technology isn't helping.
+            <description><![CDATA[<p>Technology isn’t helping.</p>
+
 
 <p>I go to a tech-savvy school. And it’s getting out of hand.</p>
 <p>On a daily basis, I navigate through several websites just to <em>find</em> my
@@ -3072,7 +3097,8 @@ enough to write down on paper and bring to school).</p>
         </item>
         <item>
             <title><![CDATA[Bingo is Boring]]></title>
-            <description><![CDATA[Memories of elementary school
+            <description><![CDATA[<p>Memories of elementary school</p>
+
 
 <blockquote>
 <p><em>I completely rewrote this story for an English assignment. Once it’s graded,
@@ -3140,7 +3166,8 @@ you’re all famous to find you again.)</p>
         </item>
         <item>
             <title><![CDATA[Brown M&Ms]]></title>
-            <description><![CDATA[A request.
+            <description><![CDATA[<p>A request.</p>
+
 
 <p>David finally convinced me why we use MLA format. This is a story that involves
 Van Halen, and the existence of a clause in their contract that demanded a bowl
@@ -3235,7 +3262,8 @@ rant. It’s a favor.</p>
         </item>
         <item>
             <title><![CDATA[GamifiEd]]></title>
-            <description><![CDATA[The pitfalls of quantifying learning.
+            <description><![CDATA[<p>The pitfalls of quantifying learning.</p>
+
 
 <p>I have gone to a lot of schools. I have gone to schools where you can ace an
 English writing test be memorizing an essay the teacher gives you, and
@@ -3306,7 +3334,8 @@ accomplished students, I feel gamified education is not the right answer.</p>
         </item>
         <item>
             <title><![CDATA[ANSIble]]></title>
-            <description><![CDATA[Using ANSI escape codes for more interactive CLI interfaces
+            <description><![CDATA[<p>Using ANSI escape codes for more interactive CLI interfaces</p>
+
 
 <p>Have you ever wondered how to print color to terminals? Or why on some CLI
 interfaces, the arrow keys print out mysterious sequences like <code>^[[A</code>? Or why
@@ -3386,7 +3415,8 @@ pardon typos.</p>
         </item>
         <item>
             <title><![CDATA[Programming is not math]]></title>
-            <description><![CDATA[My two cents on a couple of blog posts.
+            <description><![CDATA[<p>My two cents on a couple of blog posts.</p>
+
 
 <p>So recently, Sarah Mei blogged that <a href="http://www.sarahmei.com/blog/2014/07/15/programming-is-not-math/">programming is not
 math</a>. Jeremy
@@ -3526,7 +3556,8 @@ question!</p>
         </item>
         <item>
             <title><![CDATA[Cryptolegal]]></title>
-            <description><![CDATA[A short story I wrote late last night.
+            <description><![CDATA[<p>A short story I wrote late last night.</p>
+
 
 <p>The judge banged the gavel. It didn’t help, of course, since there was nobody
 to hear it. But the lead designer wanted to add a human touch so that the
@@ -3598,7 +3629,8 @@ necessary to reduce Draper’s prison sentence to zero years.</p>
         </item>
         <item>
             <title><![CDATA[Jazz is Open Source]]></title>
-            <description><![CDATA[Why jazz embodies the hacker spirit.
+            <description><![CDATA[<p>Why jazz embodies the hacker spirit.</p>
+
 
 <p>People who sound like they’re in charge of things—such as the <em>Associated Board
 of the Royal Schools of Music</em>—agree that the role of the classical performer
@@ -3673,7 +3705,8 @@ think, is one of the key elements of the hacker culture.</p>
         </item>
         <item>
             <title><![CDATA[Lord of the Strings]]></title>
-            <description><![CDATA[String Theory for hackers.
+            <description><![CDATA[<p>String Theory for hackers.</p>
+
 
 <blockquote>
 <p>It all began with the forging of the great rings of protection…<br>The third ring for the user scripts, written on the fly.<br>The second for superusers, to let them <code>sudo chown</code>.<br>The first for system calls, in the CLI.<br>The zeroth for the kernel, where the hardware’s shown.<br>In the land of MULTICS, where the hackers lie,<br>One ring to rule them all, one ring to find them.<br>One ring to bring them all, and in the darkness bind them.<br>In the land of MULTICS, where the hackers lie.  </p>
@@ -3767,7 +3800,8 @@ Gandalf got up and whispered: “Altruism.”</p>
         </item>
         <item>
             <title><![CDATA[Well, well, well, we meet again.]]></title>
-            <description><![CDATA[A new beginning?
+            <description><![CDATA[<p>A new beginning?</p>
+
 
 <p>I’m back.</p>
 <p>The new Comfortably Numbered runs on a new state-of-the art blogging platform,
@@ -3814,7 +3848,8 @@ disallow a user from doing anything.</p>
         </item>
         <item>
             <title><![CDATA[Why Math is a Sport]]></title>
-            <description><![CDATA[And why we should worry.
+            <description><![CDATA[<p>And why we should worry.</p>
+
 
 <p class="dropcap">I am not sure whether math has become more cool or less cool
 over the past few years; and I'm <em>definitely</em> not sure which one I
@@ -3929,7 +3964,8 @@ And that's tragic.
         </item>
         <item>
             <title><![CDATA[How Newbies Codebreak]]></title>
-            <description><![CDATA[A story of codebreaking using Python, Google, and common sense.
+            <description><![CDATA[<p>A story of codebreaking using Python, Google, and common sense.</p>
+
 
 <div style="font-style:italic; text-align:center; padding:20px;">Special thanks
 to Tim, Nathan, and the Water Bottle Stealer (you know who you are). I probably
@@ -4123,7 +4159,8 @@ cipher-like-this solver. We can use it next year!
         </item>
         <item>
             <title><![CDATA[Blown to Bitcoins]]></title>
-            <description><![CDATA[Bitcoin for Liberal Arts majors.
+            <description><![CDATA[<p>Bitcoin for Liberal Arts majors.</p>
+
 
 <p>Bitcoin is a hard-core nerd thing. It was built by nerds, and was used by
 nerds&mdash;until recently. <em>Normal</em> people have finally caught on to
@@ -4362,7 +4399,8 @@ href="https://en.bitcoin.it/wiki/Clients">find another one</a> you may like.
         </item>
         <item>
             <title><![CDATA[Lampshades and Analytic Geometry]]></title>
-            <description><![CDATA[Exploring conic sections with lampshades, potatoes, and smoke simulations.
+            <description><![CDATA[<p>Exploring conic sections with lampshades, potatoes, and smoke simulations.</p>
+
 
 <p class="dropcap">A couple of months ago, I was sitting at the dining table,
 and I caught myself staring at the lamp. And I had just finished reading about
@@ -4503,7 +4541,8 @@ gotta grok math to see them.
         </item>
         <item>
             <title><![CDATA[Living Without Sudo]]></title>
-            <description><![CDATA[UNIX hacking for the faint at heard, or those blessed with mean sysadmins.
+            <description><![CDATA[<p>UNIX hacking for the faint at heard, or those blessed with mean sysadmins.</p>
+
 
 <p class="dropcap">You should not trust me with matches, knives, expensive
 cars, and <code>sudo</code>: the command that makes you a god-like user with
@@ -4618,7 +4657,8 @@ you start fresh.
         </item>
         <item>
             <title><![CDATA[Hello, World!]]></title>
-            <description><![CDATA[Welcoming myself to my blog.
+            <description><![CDATA[<p>Welcoming myself to my blog.</p>
+
 
 <p class="dropcap">I started on Comfortably Numbered a couple of months ago,
 because I needed a blog. I needed a blog to dump interesting thoughts and I

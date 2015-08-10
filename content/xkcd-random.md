@@ -184,7 +184,7 @@ birthday.
 The birthday "paradox" turns out to be important in cryptography, especially
 when looking for hash collisions. The number of hashes you need to generate
 before you hit a collision is similar to the number of people you need at a
-party before some pair shares a birthday--much smaller than what you would
+party before some pair shares a birthday---much smaller than what you would
 expect.
 
 In terms of xkcd-surfing, this helps answer the question "how many times will I
@@ -192,7 +192,7 @@ hit random before I see a repeat?".
 
 There are plenty of good explanations for the math behind the birthday problem
 online ([Wolfram Mathworld](http://mathworld.wolfram.com/BirthdayProblem.html)
-and [Wikipedia](http://en.wikipedia.org/wiki/Birthday_problem))--but if you
+and [Wikipedia](http://en.wikipedia.org/wiki/Birthday_problem))---but if you
 don't believe the number 23 quoted above, it's worth spending some time trying
 to solve it yourself just to understand what's really going on (it's not hard).
 I'm just going to dump the formula here without any explanation.

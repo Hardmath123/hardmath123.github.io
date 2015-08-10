@@ -48,7 +48,7 @@ This, I think, is why many people find programming easier than pure math.
 > CS. Programming itself is seen as rather pedestrian, a sort of exercise left
 > to the reader.
 >
-> -- Sarah Wei
+> --- Sarah Wei
 
 I thought this was rather interesting. I have seen this idea in a lot of
 places, but I have the opposite viewpoint.
@@ -92,7 +92,7 @@ do math on it.
 > because they wanted to learn how to make websites. Because of those
 > motivations, the curriculum had virtually no math.
 >
-> -- Sarah Wei
+> --- Sarah Wei
 
 Ah, this brings up the topic of a really interesting discussion I had with some
 friends a while ago. Here's a summary:
@@ -113,7 +113,7 @@ the algorithmic beauty alongside the more practical day-to-day skills.
 > Specifically, learning to program is more like learning a new language than
 > it is like doing math problems.
 >
-> -- Sarah Wei
+> --- Sarah Wei
 
 A lot of people talk about CS as math and language, but I've always felt that
 it's more like building a tower with LEGOs. Programming isn't about the
@@ -130,7 +130,7 @@ Text is just a medium to communicate the idea.
 > teach graph coloring for register allocation, linear algebra and vector
 > calculus for graphics, combinatorics for algorithms.
 >
-> -- Jeremy Kun
+> --- Jeremy Kun
 
 Programming isn't about math you *implement*.
 

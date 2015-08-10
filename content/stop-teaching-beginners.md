@@ -1,6 +1,6 @@
 One of the reasons I love computer science is that in a good community,
 everyone is a teacher. You don't need to attain some degree of credibility
-before you can go around helping others--you just need to have information and
+before you can go around helping others---you just need to have information and
 the will to share it. That's why I can write informative blog posts and help
 people debug Python issues. It's why StackOverflow exists and thrives.
 
@@ -10,8 +10,8 @@ at the very top are researchers, people blazing new trails and discovering new
 computer science.
 
 In a way, this is *better* than the classical model of those at the top of the
-mountain pulling us all up. Someone who has just understood an idea--recursion,
-the Y combinator, type theory, whatever--is better-equipped to teach it than
+mountain pulling us all up. Someone who has just understood an idea---recursion,
+the Y combinator, type theory, whatever---is better-equipped to teach it than
 someone who takes it for granted having worked with that idea for ages.
 
 ...except it doesn't quite work out like that. The problem is, somewhere near
@@ -28,7 +28,7 @@ base of the mountain running "Learn Python in Two Weeks" workshops.
 Why do we put so much time, money, and energy into teaching newbies computer
 science?
 
-Part of it--and it's hard to admit--is that it looks *really* good. Teaching
+Part of it---and it's hard to admit---is that it looks *really* good. Teaching
 intro CS looks like community service. For institutions, it's a great selling
 point. For students, it's r&eacute;sum&eacute; material.
 

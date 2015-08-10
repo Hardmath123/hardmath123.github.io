@@ -6,7 +6,7 @@ alphabet-number correspondence is an established table. Look up
 [ASCII](http://wikipedia.org/wiki/ASCII).
 
 Each number is a byte (aka an `unsigned char`), so it ranges from 0 to 255.
-This means it's convenient to express them in hex notation--each number is two
+This means it's convenient to express them in hex notation---each number is two
 hex digits, so `0xff` is 256.
 
 Using this, we can turn strings into hex sequences (by doubling the number of

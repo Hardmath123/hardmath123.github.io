@@ -10,8 +10,8 @@
 > forums](http://scratchforums.blob8108.net/forums/viewtopic.php?id=61381) on
 > April 20, 2011 along with its accompanying Scratch implementation. In the
 > interests of documentation and preservation, I decided to post a copy of this
-> on my blog. Despite many temptations to change things--grammar, spelling,
-> wording, and even some technical details--the text is identical to that
+> on my blog. Despite many temptations to change things---grammar, spelling,
+> wording, and even some technical details---the text is identical to that
 > posted on the forums. The purpose of posting this is not to convey the actual
 > content to an audience, but to remind myself of how I sounded in the past and
 > to reflect on how I sound now.
@@ -94,9 +94,9 @@ z $) would be:
 
 etc.
 
-If you did this many, many times, there are two possibilities for ($ Z $) -- it
+If you did this many, many times, there are two possibilities for ($ Z $) --- it
 escapes to infinity, or it doesn't. If it doesn't escape, it is in the set.
-This looks hard to calculate--how can we know whether it reaches infinity? For
+This looks hard to calculate---how can we know whether it reaches infinity? For
 all we know at 1000000000 iterations it'll be a normal, but after 1000000001
 iterations it starts constantly doubling. Fortunately, we know 2 other things:
 
@@ -114,8 +114,8 @@ is. Great!
 
 ### Programming the Algorithm
 
-That's all very nice, but there's a catch (isn't there always?)--this uses
-complex numbers, and Scratch--make that any programming language--doesn't allow
+That's all very nice, but there's a catch (isn't there always?)---this uses
+complex numbers, and Scratch---make that any programming language---doesn't allow
 square roots of negative numbers. Try it yourself. You'll get a red *Error!*.
 So how do we avoid this? Well, remember how a complex number is a real number
 plus an imaginary number, and an imaginary number is just ($ \sqrt{-1} $)?

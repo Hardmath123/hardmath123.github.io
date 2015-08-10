@@ -4,7 +4,7 @@ competitions, are computer security challenges where the organizers host a few
 vulnerable servers and you need to "hack" them to find secret keys. CTFs are,
 to be very honest, a lot of fun.
 
-But I'm not here to advertise CTFs--I've already done that in another post--I'm
+But I'm not here to advertise CTFs---I've already done that in another post---I'm
 here to talk about how CTFs should be replacing Hackathons.
 
 Hackathons are great. You hang out all night long, eat junk food, listen to
@@ -25,7 +25,7 @@ from "authors are capable of making an exciting, buzzword-heavy pitch about,"
 the latter generally being the sole criterion in determining winners.
 Hackathon veterans largely agree that hackathon-code is rarely touched after
 the demo, because it's usually written as just enough to create a demo. You
-aren't supposed to pay heed to petty things like maintainability--you're
+aren't supposed to pay heed to petty things like maintainability---you're
 hackers! And so your efforts over 24 sleep-deprived zombie hours all go to
 /dev/null.
 
@@ -65,13 +65,13 @@ share large wealths of information, refute or build upon each others' ideas,
 and ask hard questions, and do all of that while making puns and inside jokes.
 
 As far as I'm concerned, a CTF is much more valuable than a hackathon for a
-casual programmer--mildly experienced script kiddies and ninja rockstars alike.
+casual programmer---mildly experienced script kiddies and ninja rockstars alike.
 
 But more importantly, I can envision CTFs for beginners, too. Solving the
 problems in an introductory CS textbook is far more appealing when put in the
 context of hacking into someone's server. I'm sure an elegantly crafted
 sequence of problems can Socratically teach someone enough basic Python to, for
-instance, compute large Fibonacci numbers recursively--for the right people,
+instance, compute large Fibonacci numbers recursively---for the right people,
 that should be enough to make them fall in love with computer science.
 
 CTFs have a lot of potential: it's a shame we're instead promoting
@@ -83,4 +83,4 @@ P.S. It would be an even bigger shame if this post comes true in the wrong way,
 and CTFs go the same route as competition math. As much as I love the idea,
 some part of me wants to keep the CTF world a secret so that the people who
 ruined competition math can't get their hands on CTFs as well. I hope that's
-not selfish--but I think that's a topic for a whole new post.
+not selfish---but I think that's a topic for a whole new post.

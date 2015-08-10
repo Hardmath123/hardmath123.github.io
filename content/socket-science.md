@@ -7,7 +7,7 @@ notes, others may replace your notes with their own. And the person across the
 room only speaks Finnish.
 
 Despite these hostile conditions, the Internet works. It works because we have
-protocols--rules that computers in a network obey so that they can all get
+protocols---rules that computers in a network obey so that they can all get
 along.
 
 And you can understand these protocols. It's not rocket science: it's socket
@@ -55,7 +55,7 @@ the "method", you can also POST, PUT, or DELETE (or even
 
 `/index.html` is the path (the stuff you would type after `www.google.com` in
 the address bar), and `HTTP/1.1` is the protocol (you could, in theory, have
-another protocol running--HTTP 2.0 is being drafted as I write this).
+another protocol running---HTTP 2.0 is being drafted as I write this).
 
 Let's do it. Open up a shell and try `nc google.com 80`. You're now connected
 to Google. Try sending it `GET /index.html HTTP/1.1`. You'll need to hit
@@ -94,7 +94,7 @@ instance, you get the date, you get the content type (`text/html`), etc.
 
 The Cookie headers instruct the browser to save those values in a local file.
 When the web browser sends further requests, the protocol instructs it to send
-the saved cookies as a part of the request. This lets websites track you--and
+the saved cookies as a part of the request. This lets websites track you---and
 is the reason Gmail keeps you logged in even when you close the window.
 
 So far, so good. One thing that may have bothered you was the `80` you typed
@@ -158,7 +158,7 @@ you surf the web. You'll need to be an administrator to run it, but if you
 think about it, that's probably a good thing.
 
 Anyhow, back to HTTPS: it's just HTTP, except sitting on top of another
-protocol called SSL (or TLS--it's sort of complicated). SSL handles finding an
+protocol called SSL (or TLS---it's sort of complicated). SSL handles finding an
 encryption that both you and your connection agree is secure, negotiating a
 shared secret key, and then sending encrypted messages. It also lets you
 authenticate people by passing around certificates that are cryptographically

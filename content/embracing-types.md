@@ -88,4 +88,4 @@ ideas as you can, even if you don't agree with all of them.
 > If you know yourself but not the enemy, for every victory gained you will
 > also suffer a defeat.
 >
-> -- Sun Tzu, *The Art of War*, III-18.
+> --- Sun Tzu, *The Art of War*, III-18.
