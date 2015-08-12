@@ -138,14 +138,14 @@ that are complete and created from an entry in column 0. (That means we have a
 parsing from the beginning of the string to the end). Since we have such an
 entry in column 2, this represents the parsing.
 
-###Finale
+### Finale
 Nearley parses using the above algorithm, but giving each entry
 "baggage", namely the parsed data as a tree structure. When we finish an entry
 (and are about to process it with rule 3), we apply the postprocessor function
 to the baggage. Once we determine a parsing, we can reveal---with a
 flourish---the postprocessed data to be used by the user.
 
-###Parting words
+### Parting words
 If we had multiple entries that worked in the end, there would be multiple
 parsings of the grammar. This means the grammar is **ambiguous**, and this is
 generally a very bad sign. It can lead to messy programming bugs, or

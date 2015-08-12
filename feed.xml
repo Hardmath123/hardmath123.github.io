@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Mon, 10 Aug 2015 19:47:17 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 12 Aug 2015 05:24:29 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -1689,7 +1689,7 @@ archive linked above.</p>
 is the Mandelbrot Set?, Understanding the Algorithm, and Programming the
 algorithm. <a href="http://scratch.mit.edu/projects/Hardmath123/1734070">Here</a> is a
 project on plotting it, if you don’t get it.</p>
-<p>###What is the Mandelbrot Set?</p>
+<h3 id="what-is-the-mandelbrot-set-">What is the Mandelbrot Set?</h3>
 <p>The Mandelbrot Set (M-Set in short) is a fractal. It is plotted on the complex
 plane. It is an example of how intricate patterns can be formed from a simple
 math equation. It is entirely self-similar. Within the fractal, there are
@@ -2962,14 +2962,14 @@ have:</p>
 that are complete and created from an entry in column 0. (That means we have a
 parsing from the beginning of the string to the end). Since we have such an
 entry in column 2, this represents the parsing.</p>
-<p>###Finale
-Nearley parses using the above algorithm, but giving each entry
+<h3 id="finale">Finale</h3>
+<p>Nearley parses using the above algorithm, but giving each entry
 “baggage”, namely the parsed data as a tree structure. When we finish an entry
 (and are about to process it with rule 3), we apply the postprocessor function
 to the baggage. Once we determine a parsing, we can reveal—with a
 flourish—the postprocessed data to be used by the user.</p>
-<p>###Parting words
-If we had multiple entries that worked in the end, there would be multiple
+<h3 id="parting-words">Parting words</h3>
+<p>If we had multiple entries that worked in the end, there would be multiple
 parsings of the grammar. This means the grammar is <strong>ambiguous</strong>, and this is
 generally a very bad sign. It can lead to messy programming bugs, or
 exponentially slow parsing.</p>
