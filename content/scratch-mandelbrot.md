@@ -32,7 +32,7 @@ is the Mandelbrot Set?, Understanding the Algorithm, and Programming the
 algorithm. [Here](http://scratch.mit.edu/projects/Hardmath123/1734070) is a
 project on plotting it, if you don't get it.
 
-###What is the Mandelbrot Set?
+### What is the Mandelbrot Set?
 
 The Mandelbrot Set (M-Set in short) is a fractal. It is plotted on the complex
 plane. It is an example of how intricate patterns can be formed from a simple
