@@ -325,6 +325,14 @@
             "file": "straw.md",
             "date": "7/28/15",
             "markdown": true
+        },
+        {
+            "title": "A Suspicion of Plausible Answers",
+            "author": "Hardmath123",
+            "description": "Investigating the physics of *Rendezvous with Rama*",
+            "file": "rendezvous.md",
+            "date": "8/14/15",
+            "markdown": true
         }
     ]
 }
