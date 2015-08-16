@@ -61,7 +61,7 @@ a {
   text-decoration: none;
 }
 
-p a:after {
+p a:after, li a:after {
     position: relative;
     content: "\FEFF\00B0"; /* zero width no break space + degree symbol */
     margin-left: 0.10em;
@@ -302,6 +302,10 @@ ul li:before {
 }
 ul li {
     list-style: none;
+}
+
+li p {
+    display: inline;
 }
 
 .sc {
