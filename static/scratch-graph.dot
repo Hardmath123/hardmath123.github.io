@@ -1,0 +1,89 @@
+digraph Language {
+    node [fontname="sans-serif",fontsize=12];
+    edge [fontname="sans-serif",fontsize=12];
+    graph [splines="ortho"];
+    edge [arrowhead=odot];
+
+    subgraph languages {
+        node [shape="rectangle",style="rounded,filled",color="#F7BC05",fillcolor="#F7BC05"];
+
+        snap [label="Snap!"];
+        scheme [label="Scheme"];
+        python [label="Python"];
+        javascript [label="JavaScript (with HTML/CSS)"];
+        haskell [label="Haskell"];
+        c [label="C"];
+        java [label="Java"];
+        objc [label="Objective-C"];
+    }
+
+    subgraph decisions {
+        node [shape=rectangle,style="filled",color="#83D6DE",fillcolor="#83D6DE"];
+        powerful [label="Scratch isn't enough because&hellip;"];
+        rules [label="Rules are&hellip;"];
+        images [label="I still like blocks and sprites\nand Scratch-like things."];
+        create [label="I want to learn so I can&hellip;"];
+        create_apcs_sure [label="Are you sure?\nYou won't learn as much\nas you think you will."];
+        create_app_os [label="What's your target\nplatform?"];
+    }
+
+    subgraph choices {
+        node [shape=none];
+        powerful_yes [label="It doesn't have \"advanced\"\nCS features like lambda."];
+        powerful_no  [label="It doesn't let you program\nthe \"real world\" (create files,\ndo networking, graphics, etc.)"];
+
+        rules_good [label="The fabric of society,\nallowing fallible humans to coexist."];
+        rules_bad  [label="Meant to be broken!"];
+
+        images_good [label="Yeah! Sprites are the\nhottest thing since\nsliced bread."];
+        images_bad [label="I'm ready to move on to\ntext-based things."];
+
+        create_website [label="Design websites,\nweb apps, etc."];
+        create_backend [label="Program servers and databases"];
+        create_games   [label="Make a web game like Flappy Bird."];
+        create_apps    [label="Make a million-dollar app\nand get acquired by Google."];
+        create_science [label="Do science, statistics,\ndata analysis"];
+        create_apcs    [label="Take the AP Computer\nScience exam"];
+        create_unix    [label="Learn how my\ncomputer works."];
+        create_apcs_sure_yes [label="Yeah, it'll look good\non college apps."];
+        create_apcs_sure_no  [label="Hmm, I do want\nto learn a lot."];
+        
+        os_android [label="Android"];
+        os_ios     [label="iOS"];
+        os_all     [label="Everything at once"];
+    }
+
+    // decisions
+    start [fontname="ScratchFont",fontsize=30,label="I know Scratch!",shape="underline"];
+
+    // flow
+    start -> powerful;
+    powerful -> {powerful_yes, powerful_no};
+    powerful_no -> create;
+
+    create -> {create_website, create_games, create_apps, create_backend, create_unix, create_science, create_apcs};
+    create_website -> javascript;
+    create_backend -> python;
+    create_games -> javascript;
+    create_science -> python;
+    create_apcs -> create_apcs_sure;
+    create_apcs_sure ->  create_apcs_sure_yes;
+    create_apps -> create_app_os;
+    create_apcs_sure -> create_apcs_sure_no;
+    create_apcs_sure_yes -> java;
+    create_apcs_sure_no  -> images;
+    create_unix -> c;
+
+    create_app_os -> {os_android, os_ios, os_all};
+    os_android -> java;
+    os_ios -> objc;
+    os_all -> {python, javascript};
+
+    powerful_yes -> images;
+    images -> {images_good, images_bad};
+    images_good -> snap;
+    images_bad -> rules;
+    rules -> {rules_good, rules_bad};
+    rules_good -> haskell;
+    rules_bad  -> scheme;
+}

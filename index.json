@@ -333,6 +333,14 @@
             "file": "rendezvous.md",
             "date": "8/14/15",
             "markdown": true
+        },
+        {
+            "title": "The Seasoned Scratcher",
+            "author": "technoboy10 and Hardmath123",
+            "description": "What to learn after Scratch: a definitive guide.",
+            "file": "after-scratch.md",
+            "date": "8/16/15",
+            "markdown": true
         }
     ]
 }
