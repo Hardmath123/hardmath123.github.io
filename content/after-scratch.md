@@ -246,7 +246,6 @@ Here are some languages you shouldn't care about:
   only time the authors use PHP these days is when trying to exploit
   badly-written PHP code in computer security competitions.
   
-  
 - **Perl, Ruby, Lua:** Perl has essentially been replaced with Python in most
   places: a good knowledge of the command line and Python are far more useful
   to you. We haven't seen any new exciting software written in Perl in a while.
