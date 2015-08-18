@@ -9,15 +9,29 @@
 @import url(http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic);
 
 body {
-  font-family: 'Crimson Text', Times, serif;
+  font-family: 'Baskerville', 'Crimson Text', Times, serif;
   margin: 0;
   padding: 0;
   font-size: 21px;
+  border-top: solid 0.5em #FFF8E7; /* Fun fact: this color, "Cosmic Latte", is
+                                      supposed to be the average color of the
+                                      universe. */
+  border-bottom: solid 0.5em #FFF8E7; /* Fun fact: this color, "Cosmic Latte", is
+                                      supposed to be the average color of the
+                                      universe. */
+  color: #222;
+  background-color: white;
 }
 
 p, li {
-  line-height: 1.8em;
+  line-height: 1.6em;
   text-rendering: optimizeLegibility;
+  text-align: justify;
+
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
 }
 
 img {
@@ -69,11 +83,10 @@ p a:after, li a:after {
     top: -0.10em;
 }
 
-#rightbox a:visited {
-  color: #559;
-}
-#rightbox a:visited:hover {
-  color: #77A;
+
+
+#header h1 a, #rightbox > a, #rightbox > a:visited, #rightbox > a:visited:hover {
+  color: black;
 }
 
 a:hover {
@@ -97,9 +110,6 @@ a:visited:hover {
   padding: 0.5em;
   overflow: hidden;
   margin-bottom: 2em;
-  border-top: solid 0.2em #FFF8E7; /* Fun fact: this color, "Cosmic Latte", is
-                                      supposed to be the average color of the
-                                      universe. */
 }
 
 #header h1 {
@@ -121,13 +131,6 @@ a:visited:hover {
   text-decoration: none;
 }
 
-#header .left-word, #header .left-word:visited {
-  color: #77A;
-}
-#header .right-word, #header .right-word:visited {
-  color: #777;
-}
-
 #header h1:hover {
   cursor: pointer;
 }
@@ -141,14 +144,14 @@ a:visited:hover {
 
 
 h2 {
-  margin-bottom: 2px;
-  padding-bottom: 2px;
+  margin-bottom: 0.1em;
+  padding-bottom: 0.1em;
 }
 
 h4 {
-  margin-top: 10px;
-  margin-bottom: 30px;
-  color: #666;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  font-variant: small-caps;
   font-size: 0.8em;
   font-weight: lighter;
 }
@@ -172,7 +175,7 @@ h2 {
 h3 {
   font-size: 1.5em;
   font-weight: lighter;
-  margin-bottom: 5px;
+  margin-bottom: 0.5em;
 }
 
 #footer {
@@ -184,17 +187,19 @@ h3 {
 }
 
 .centered, #postlist {
-  padding: 30px;
+  padding: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
   width: 100%;
-  max-width: 35em;
+  max-width: 30em;
   margin-left: auto;
   margin-right: auto;
 }
 
 
 #postlist p {
-    margin-bottom: 50px;
-    text-indent: 0px;
+    margin-bottom: 2em;
+    text-indent: 0;
     color: #666;
     font-size: 0.8em;
 }
@@ -205,21 +210,8 @@ h3 {
 
 
 #whoami {
-  text-align: justify;
-  margin-top: 50px;
-  width: 100%;
-  max-width: 35em;
   font-size: 0.9em;
 }
-
-/*@media screen and (min-width: 30em) {
-  #whoami {
-     column-count: 2;
-     -webkit-column-count: 2;
-     -moz-column-count: 2;
-  } 
-}*/
-
 
 #whoami h2 {
   font-size: 1.2em;
@@ -254,18 +246,25 @@ blockquote {
 }
 
 blockquote p {
-    text-indent:0px;
+  text-indent:0;
 }
 
 
 
 hr {
-  width: 50px;
+  width: 2em;
   border: none;
-  height: 1px;
+  height: 0;
   background-color: gray;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+hr:after {
+    content: "\2767"; /* &#10087; a fleuron */
+    display: block;
+    text-align: center;
+    position: relative; top: -0.7em;
 }
 
 
@@ -313,3 +312,8 @@ li p {
 }
 
 
+#comment-breaker {
+  margin-top: 5em;
+  margin-bottom: 5em;
+  text-align: center;
+}
