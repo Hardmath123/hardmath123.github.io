@@ -295,7 +295,7 @@ pre {
 
 ul li:before {
     display: inline-block;
-    content: "\2014";
+    content: "\00bb"; /* a right guillimet for a bullet (abuse) */
     margin-left: -1.5em;
     width: 1.5em;
 }
