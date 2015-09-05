@@ -74,13 +74,13 @@ language and isn't used by anyone anymore. However, its legacy lives on: much
 of its syntax and some of its ideas are evident in Objective-C, the language in
 which you write iOS and OSX apps.
 
-Smalltalk preached *prototyping*, a special kind of object-oriented programming
-where objects come out of "factories" called prototypes. You literally make a
-copy of the prototype when you make a new object. Smalltalk let you treat
-prototypes as objects themselves. It was very meta. This tradition lives on in
-JavaScript's object-oriented style. JavaScript is the programming language of
-the web: originally designed for making webpages interactive, but now used for
-desktop software as well using Node.js.
+Another OOP language, Self, preached *prototyping*: a special kind of
+object-oriented programming where objects come out of "factories" called
+prototypes. You literally make a copy of the prototype when you make a new
+object. Self let you treat prototypes as objects themselves. It was very meta.
+This tradition lives on in JavaScript's object-oriented style. JavaScript is
+the programming language of the web: originally designed for making webpages
+interactive, but now used for desktop software as well using Node.js.
 
 The other kind of object-oriented programming is based on *classes*, which are
 pre-defined kinds of objects. Your program is a list of definitions for

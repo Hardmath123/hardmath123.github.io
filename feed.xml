@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 21 Aug 2015 03:23:30 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 05 Sep 2015 04:17:43 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -79,13 +79,13 @@ the Scratch 1.4 source code, you were writing in Smalltalk. Smalltalk is an old
 language and isn’t used by anyone anymore. However, its legacy lives on: much
 of its syntax and some of its ideas are evident in Objective-C, the language in
 which you write iOS and OSX apps.</p>
-<p>Smalltalk preached <em>prototyping</em>, a special kind of object-oriented programming
-where objects come out of “factories” called prototypes. You literally make a
-copy of the prototype when you make a new object. Smalltalk let you treat
-prototypes as objects themselves. It was very meta. This tradition lives on in
-JavaScript’s object-oriented style. JavaScript is the programming language of
-the web: originally designed for making webpages interactive, but now used for
-desktop software as well using Node.js.</p>
+<p>Another OOP language, Self, preached <em>prototyping</em>: a special kind of
+object-oriented programming where objects come out of “factories” called
+prototypes. You literally make a copy of the prototype when you make a new
+object. Self let you treat prototypes as objects themselves. It was very meta.
+This tradition lives on in JavaScript’s object-oriented style. JavaScript is
+the programming language of the web: originally designed for making webpages
+interactive, but now used for desktop software as well using Node.js.</p>
 <p>The other kind of object-oriented programming is based on <em>classes</em>, which are
 pre-defined kinds of objects. Your program is a list of definitions for
 classes, and right at the end you create some instances of the classes to get
