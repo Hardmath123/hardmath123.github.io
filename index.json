@@ -341,6 +341,14 @@
             "file": "after-scratch.md",
             "date": "8/16/15",
             "markdown": true
+        },
+        {
+            "title": "Wake Up, Sheeple: Falcon 9 Edition",
+            "author": "Hardmath123",
+            "description": "We're missing the point.",
+            "file": "falcon-lander.md",
+            "date": "9/17/15",
+            "markdown": true
         }
     ]
 }
