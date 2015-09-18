@@ -19,7 +19,7 @@ SpaceX's recruitment strategy.
 
 But, as usual, everyone is missing the point:
 
-### *SpaceX Falcon 9 Lander* was written by a kid.
+### *SpaceX Falcon 9 Lander* was probably written by a kid.
 
 *Popular Science* parenthetically remarks that the game is not affiliated with
 SpaceX. *The Verge* mentions that it was made with "software born out of the
@@ -29,7 +29,7 @@ Lab".
 
 In their rush to sensationalize every little bit of news, all of these websites
 missed perhaps the most exciting bit of information. *SpaceX Falcon 9 Lander*
-was written by a kid. Probably a middle schooler.
+was probably written by a kid.
 
 [Scratch](http://scratch.mit.edu), you see, is a programming language designed
 by researchers at MIT, intended to teach children how to program. I wrote some
