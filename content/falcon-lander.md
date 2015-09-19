@@ -4,7 +4,7 @@ SpaceX's Falcon 9 Lander.
 
 [Gizmodo](http://gizmodo.com/try-landing-the-spacex-falcon-9-yourself-with-this-flas-1731352484)
 says the game "will frustrate you no end".
-[GameStop](http://www.gamespot.com/articles/try-to-land-elon-musks-spacex-rocket-in-this-chall/1100-6430668/),
+[GameSpot](http://www.gamespot.com/articles/try-to-land-elon-musks-spacex-rocket-in-this-chall/1100-6430668/),
 [TechCrunch](http://techcrunch.com/2015/09/17/this-spacex-falcon-9-rocket-isnt-going-to-land-itself/),
 [EnGadget](http://www.engadget.com/2015/09/17/web-game-landing-falcon-9-pretty-much-impossible/),
 [Popular
