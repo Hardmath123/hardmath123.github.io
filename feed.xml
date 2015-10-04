@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 19 Sep 2015 20:32:16 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 04 Oct 2015 15:43:04 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -1812,6 +1812,75 @@ of Mathematical Curiosities</em>.</p>
             <guid isPermaLink="true">http://hardmath123.github.io/hilbert.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Thu, 26 Feb 2015 08:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Nondeterministic]]></title>
+            <description><![CDATA[<p>Be wrong on the Internet.</p>
+
+
+<blockquote>
+<p>I wrote this post to inaugurate a friend’s blog a while back and decided to
+preserve it here. Though dated February 2015, I added it to
+<em>ComfortablyNumbered</em> in early October.</p>
+</blockquote>
+<p>Communication. It’s what separates a painter from an artist and a performer
+from a musician. It turns a mob into an army and a fight into a debate. It’s
+what separates coexistence and civilization.</p>
+<p>In the world of computer science, we have a fictitious creation called the
+Nondeterministic Computer. The Nondeterministic Computer, given a problem,
+tests every possible solution of the problem instantanteously, and reports the
+correct answers. The Nondeterministic Computer, were it to be realized, would
+revolutionize computer science, data science, protein folding research, and of
+course cryptography.</p>
+<p>Guess what? You have the functional equivalent of a Nondeterministic Computer
+right now. You have, to put it lightly, millions of brilliant minds at your
+disposal. Combined, you have millions of years of experience, instinct,
+opinion, and innovation at your command.</p>
+<p>Because just as wonderful as Nondeterministic Computing is Nondeterministic
+<em>Communication</em>. Of perhaps the 2,000 people that will read this post in the
+next couple of months, some will agree. Some will disagree. Some will be
+affected by what I say, and some will make it a mission to prove me wrong. The
+vast majority will ignore it, spending less than 5 seconds on the page, and
+only skimming a few words.</p>
+<p>For all practical purposes, I am running my thoughts through a vast
+supercomputer and getting a decent representation of humanity’s views on them.
+I can do this anonymously, and I can do this for free.</p>
+<p>In the scientific and academic world, communication happens through papers.
+Progress happens when Darwin must publish his research before Wallace, when
+Einstein refutes Newton, when Watson and Crick race Franklin’s lab, when Shamir
+writes a paper breaking a cryptosystem Merkle and Hellman thought was secure.</p>
+<p>In the tech world, progress happens when someone—a high schooler, an employee
+at a startup, or the creator of Linux—leaves a vitriolic comeback on a blog
+post.</p>
+<p>Blog posts are what truly reflect us: our opinions, our rants, our tutorials,
+and our reviews document, piece by piece, the world we have created. And the
+comments document what we think of it.</p>
+<p>In other words: <em>you</em> are responsible for the canon in this world. For
+perpetuating knowledge. For inciting discussion. For starting arguments. For
+causing change.</p>
+<p>So write! Write controversial things! Express unpopular opinions, and do so
+vehemently! Hate on something everyone adores! Use strongly-worded phrases. Use
+exclamation points. Make noise, be mean. Get harsh feedback, <em>it’s what you
+want</em>.</p>
+<p>Be wrong once in a while. Say stuff you’ll cringe at in a year (because, to be
+honest, you’ll cringe at everything you wrote a year back). Do what it takes to
+put your opinions out there, because <em>they matter</em>. As a culture, we’re
+fallible, and someone needs to call us out on it.</p>
+<p>Your words are elegant weapons; use them to create a more civilized age.</p>
+<p>And don’t be afraid to put your thoughts through a nondeterminisic computer
+just because it’ll reject 99.99% of them. That’s what nondeterministic
+computers do.</p>
+<blockquote>
+<p>This post <a href="http://blog.pdgn.co/general/2015/02/10/hello-world.html">first appeared on
+Pdgn</a>.</p>
+<p>(Speaking of which, I hope they write more on their seemingly-dead blog. They
+have good things to say. Everyone does.)</p>
+</blockquote>
+]]></description>
+            <link>http://hardmath123.github.io/nondeterministic.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/nondeterministic.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Tue, 10 Feb 2015 08:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Embracing Types]]></title>

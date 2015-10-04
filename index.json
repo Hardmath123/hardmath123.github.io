@@ -349,6 +349,14 @@
             "file": "falcon-lander.md",
             "date": "9/17/15",
             "markdown": true
+        },
+        {
+            "title": "Nondeterministic",
+            "author": "Hardmath123",
+            "description": "Be wrong on the Internet.",
+            "file": "nondeterministic.md",
+            "date": "2/10/15",
+            "markdown": true
         }
     ]
 }

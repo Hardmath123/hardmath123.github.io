@@ -245,6 +245,10 @@ blockquote {
   font-style: italic;
 }
 
+blockquote em {
+  font-style: normal;
+}
+
 blockquote p {
   text-indent:0;
 }
