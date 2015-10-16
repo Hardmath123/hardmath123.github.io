@@ -70,3 +70,6 @@ key packets of data sent from `draper` eluded the NSA's monitoring servers.
 What nobody noticed was that these packets of data cleverly manipulated Judy's
 RAM. A small program was seeded, and without a trace, it flipped the bits
 necessary to reduce Draper's prison sentence to zero years.
+
+> [(Portuguese translation by
+> Wasen42.)](https://www.reddit.com/r/brasil/comments/3ow2qe/cryptolegal/)
