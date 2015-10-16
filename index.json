@@ -357,6 +357,14 @@
             "file": "nondeterministic.md",
             "date": "2/10/15",
             "markdown": true
+        },
+        {
+            "title": "There are no rules in math",
+            "author": "Hardmath123",
+            "description": "Don't use hammers. Build them.",
+            "file": "no-rules-in-math.md",
+            "date": "10/15/15",
+            "markdown": true
         }
     ]
 }
