@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Meet the Robinson - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header" class="centered">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+            <div id="rightbox">
+                <a href="http://github.com/Hardmath123">
+                    <span class="octicon octicon-mark-github"> Github</span></a>
+                &nbsp;&nbsp;
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss"> Subscribe</span></a>
+            </div>
+            <div class="clearer"></div>
+            <!-- You're reading the source to my blog? What do you think?
+
+            Do you have dinner plans? -->
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>Meet the Robinson</h2>
+                <h4>Sunday, October 18, 2015 &middot; 8 min read</h4>
+<p>On October 10, 1996, a program called EQP solved a problem that had bothered
+mathematicians since 1933, almost 60 years ago. Using a powerful algorithm, EQP
+constructed a proof of a theorem on its own.</p>
+<p>The theorem was known as <a href="https://en.wikipedia.org/wiki/Robbins_algebra">Robbins’
+conjecture</a>; a simple question
+about whether a set of equations is equivalent to the boolean algebra.</p>
+<p>You read more background <a href="https://www.cs.unm.edu/~mccune/papers/robbins/">here</a>
+or on the <a href="http://www.nytimes.com/library/cyber/week/1210math.html"><em>New York Times</em>
+archives</a>. You can
+also view the computer-generated proof
+<a href="https://www.cs.unm.edu/~mccune/papers/robbins/eqp-theorem.proof.txt">here</a>.</p>
+<p>This article (or series of articles) will shed some light on how EQP worked:
+the fascinating world of <strong>automatic theorem proving</strong>.</p>
+<hr>
+<p>Along the way, we’ll explore ideas that have spanned millennia: formal logic,
+G&ouml;del’s (In)completeness theorem, parsing, Chapter 4.4 of <em>The Structure
+and Interpretation of Computer Programs</em>, P=NP?, type theory, middle school
+geometry, Prolog, and philosophy. Over time, we’ll build up the tools needed to
+express a powerful theorem-proving algorithm: Robinson’s Resolution.</p>
+<p>This isn’t meant to be very notation-heavy. I’ve avoided using dense notation
+in favor of sentences, hoping it will be easier for people to jump right in.</p>
+<p>Exercises are provided for you to think about interesting questions. Most of
+them can be answered without a pencil or paper, just some thought. Some of them
+are introductions to big ideas you can go explore on your own. So really, don’t
+think of the exercises as exercises, but as the Socratic part of the Socratic
+dialogue.</p>
+<ul>
+<li>Exercises will be formatted the way this sentence is.</li>
+</ul>
+<p>If you want a formal education in all this, consult Russell and Norvig’s
+textbook, <em>Artificial Intelligence: A Modern Approach</em>.</p>
+<hr>
+<p>To prove theorems, we really need to nail down what word like “prove” and
+“theorems” mean. This turns out to be kind of tricky, so the first post will be
+devoted to building up some <strong>formal logic</strong>: mainly vocabulary and big ideas.</p>
+<p>Logic begins with <strong>propositions</strong>. Propositions are sentences that can be true
+or false, like <em>“Charlie is a basketball player.”</em> or <em>“Two plus two is
+five.”</em>.</p>
+<p>Except, we don’t necessarily know whether a proposition is true or false. Do
+<em>you</em> know whether Charlie is a basketball player? I don’t.</p>
+<p>Then again, there are certain propositions that <em>everyone</em> knows are true.
+Propositions like <em>“Either it is raining or it is not raining.”</em>.</p>
+<p>How do we know that that’s always true? One way is to list out all
+possibilities and see what happens:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">It is raining.</th>
+<th style="text-align:left">It is not raining.</th>
+<th style="text-align:right">Either it is raining or it is not raining.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">True</td>
+<td style="text-align:left">True</td>
+<td style="text-align:right">True</td>
+</tr>
+<tr>
+<td style="text-align:left">False</td>
+<td style="text-align:left">True</td>
+<td style="text-align:right">True</td>
+</tr>
+<tr>
+<td style="text-align:left">True</td>
+<td style="text-align:left">False</td>
+<td style="text-align:right">True</td>
+</tr>
+<tr>
+<td style="text-align:left">False</td>
+<td style="text-align:left">False</td>
+<td style="text-align:right">True</td>
+</tr>
+</tbody>
+</table>
+<p>This sort of listing is called a <strong>truth table</strong>, and it assigns a truth value
+for each proposition. Each row is called a <strong>model</strong>.</p>
+<p>Statements like these are called <strong>tautologies</strong>, and they seem to be pretty
+meaningless (like “no news is no news” or “if you don’t get it, you don’t get
+it”). We’re also going to refer to them as <strong>valid</strong> statements.</p>
+<p>A statement could also be <em>never</em> true. These are called <em>invalid</em> statements.</p>
+<p>Finally, a statement could <em>possibly</em> be true: these are called <em>satisfiable</em>.
+A satisfiable sentence is a sentence that could be true if certain propositions
+are true and others are false. Here’s an example:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">It is raining.</th>
+<th style="text-align:left">Mark is strong.</th>
+<th style="text-align:right">It is raining and Mark is strong.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">True</td>
+<td style="text-align:left">True</td>
+<td style="text-align:right"><strong>True</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">True</td>
+<td style="text-align:left">False</td>
+<td style="text-align:right">False</td>
+</tr>
+<tr>
+<td style="text-align:left">False</td>
+<td style="text-align:left">True</td>
+<td style="text-align:right">False</td>
+</tr>
+<tr>
+<td style="text-align:left">False</td>
+<td style="text-align:left">False</td>
+<td style="text-align:right">False</td>
+</tr>
+</tbody>
+</table>
+<p>As we get into more complicated stuff, it’ll be annoying to write out these
+propositions in full. Also, sometimes we will want to talk about an arbitrary
+proposition, like a variable. So, we’re going to use capital letters to denote
+propositions. For example, I might say “let P be the proposition ‘It is
+raining.’”. You can then replace all instances of P with that proposition.</p>
+<ul>
+<li>If a statement is not <em>invalid</em> then it is (choose one:
+<em>valid</em>/<em>satisfiable</em>). </li>
+<li>Relate the above statement to why the opposite of “everyone came to the
+party” <em>isn’t</em> “nobody came to the party”. State the correct opposite.</li>
+<li>Relate the above to De Morgan’s Laws, if you’ve heard of those.</li>
+</ul>
+<hr>
+<p>So I cheated a bit above; I made up sentences like <em>“It is raining and Mark is
+strong.”</em> without talking about what “and” really means.</p>
+<p>Logicians generally use three main ‘operators’: “and”, “or”, “not”. You can use
+them to modify or join propositions and form bigger propositions (called
+<strong>sentences</strong> or <strong>formulas</strong>).</p>
+<ul>
+<li>Explain why having both “and” and “or” is redundant. Explain why we have
+them anyway.</li>
+</ul>
+<p>We have symbols to denote these: we use &not;A for “not A”, A&and;B for “A and
+B”, and A&or;B for “A or B”. It’s easy to get those last two confused at first;
+a nice mnemonic is that &or; looks like a <em>branching</em> tree, which relates to
+choice (“or”).</p>
+<ul>
+<li>Explain how &or; relates to &cup; and &and; relates to &cap; in set theory.
+Use a Venn diagram.</li>
+<li>For some fun trivia, look up the difference between a Venn diagram and
+Euler diagram. Which mathematician came first?</li>
+</ul>
+<p>Another operator is <strong>implication</strong>. We say “A implies B” if B is true whenever
+A is true. We denote this in symbols with “A &rArr; B”.</p>
+<ul>
+<li>Draw an Euler diagram for A &rArr; B.</li>
+<li>Rewrite A &rArr; B in terms of “or” and “not”. Use your Euler diagram to
+help you figure this one out.</li>
+</ul>
+<p>That last exercise was a little tricky. How did you know your answer was
+correct? The foolproof way is to write out a truth table for A and B. But, as
+you can imagine, that gets tedious as you add more and more propositions.</p>
+<ul>
+<li>Prove De Morgan’s Laws by showing that the truth tables of both expressions
+are identical.</li>
+<li>How many rows are in a truth table of an expression with 10 propositions?</li>
+</ul>
+<p>And it gets <em>worse</em>. What if you have an infinite number of propositions? Like
+<em>“1 is a positive number”</em> and <em>“2 is a positive number”</em> and so on <em>ad
+infinitum</em>? Infinitely long truth tables sound gnarly. Clearly, we need a
+better way to deal with this.</p>
+<hr>
+<p>The better way is to think in terms of <strong>rules of inference</strong>. Rules of
+inference are ways to transform expressions.</p>
+<p>A rule of inference you’ve probably used is <strong>modus ponens</strong>, which states that
+if you have “P is true, and P implies Q” then you can deduce that “Q is true”.</p>
+<p>For example, if Rover is a dog, then Rover is an animal. Since Rover is a dog,
+we can deduce that Rover is an animal.</p>
+<ul>
+<li>Rewrite “P is true, and P implies Q” in terms of the operators introduced
+above.</li>
+<li>Create a truth table for that where the columns are “P”, “Q”, and “P is
+true and P implies Q”.</li>
+<li>Circle all the rows where the last column is “True”, and check to see that
+“Q” is true in those rows.</li>
+<li>Prove, with a truth table, that ((P&rArr;Q)&and;P)&rArr;Q is a tautology.</li>
+</ul>
+<p>Rules of inference are often written as fractions where the preconditions (also
+called <em>antecedents</em> or <em>premises</em>) are written as numerators and the results
+(also called <em>consequents</em> or <em>conclusion</em>) are written as denominators:</p>
+<p>\[
+\frac{P,\; P\implies Q}{Q}
+\]</p>
+<p>Note that sometimes we elide the “and” from a series of premises.</p>
+<ul>
+<li>Write a pair of inference rules that correspond to De Morgan’s Laws.</li>
+<li>Why are rules of inference written as fractions? Come up with a
+“cancellation” rule that allows you to chain inference rules where one’s
+conclusion is the other’s premise.</li>
+<li>Are rules of inference reversible? Write a reversible and irreversible rule
+of inference.</li>
+<li>In the rule of inference written above, “P” and “Q” don’t represent
+specific propositions. What do they represent? Write an English sentence that
+expresses what they represent. Explain why they are called <strong>metavariables</strong>.
+Explain how this relates to pattern-matching.</li>
+<li>Explain how this allow us to use a finite truth table to say things about a
+potentially infinite set of propositions.</li>
+</ul>
+<p>A rule of inference is <strong>valid</strong> if its conclusions are true in all models
+where its premises are true.</p>
+<ul>
+<li>Write an invalid rule of inference.</li>
+<li>Write an invalid rule of inference that looks valid at first glance by
+modifying <em>modus ponens</em>. Look up <em>modus tollens</em>, <em>affirming the
+consequent</em>, and <em>denying the antecedent</em>. For extra credit, use one of these
+fallacies in your homework and see if your teacher notices.</li>
+</ul>
+<p>A rule of inference should also be <strong>consistent</strong>, which means you shouldn’t
+ever be able to use that rule of inference to prove both A and not-A.</p>
+<ul>
+<li>Write an inconsistent rule of inference.</li>
+</ul>
+<hr>
+<p>Now, finally, we have the tools to talk about proofs. In a “logical system”,
+you pick certain axioms, which are propositions that seem true. Then you use
+your rules of inference to show that those axioms imply other exciting things.
+Theorems are propositions that you can prove in this way, and proofs are chains
+of these rules of inference. A statement that has a proof is a <strong>theorem</strong>.</p>
+<ul>
+<li>Explain how you can represent parsing as a logical system. In particular,
+come up with an explicit connection between (1) production rules and rules of
+inference, and (2) theorems and strings that match a grammar.</li>
+<li>We talk about <em>parse trees</em>, not <em>parse chains</em>. Should we talk about proofs
+in terms of trees of inference rules, rather than chains of inference rules?</li>
+</ul>
+<p>One of the first logical systems was Euclid’s postulates. With a handful of
+simple axioms that anyone would agree with, Euclid built up all of geometry.
+While other philosophers (like Thales) had come up with the same results Euclid
+had centuries before him, Euclid put all that machinery on a solid, rigorous
+foundation. In a future episode, we might even go ahead and encode Euclid’s
+axioms in formal logic.</p>
+<p>Meanwhile, in the early 20th century, a crisis was brewing. People were coming
+up with all sorts of messy paradoxical results. The biggest one was <strong>Russell’s
+Paradox</strong>, which went somewhat like this:</p>
+<p>Imagine the set of all sets that <em>don’t</em> contain themselves. So, for example,
+the set {1} is in that set, while the set of all sets is not in that set
+(because it contains itself). Does this weird set contain itself?</p>
+<ul>
+<li>Wrap your head around that by coming up with an explanation for why it does
+and doesn’t contain itself.</li>
+<li>Explain how this relates to the <em>Liar’s Paradox</em>, “This statement is
+false.”</li>
+</ul>
+<p>With these messy loopholes popping up all over the place, Alfred North
+Whitehead and Bertrand Russell decided it was a good idea to take matters into
+their own hands and put math on solid foundations like Euclid did centuries
+before.</p>
+<p>The result was the <em>Principia Mathematica</em>*, a treatise that stated a set of
+axioms and rules of inference for <em>set theory</em>, and then built up arithmetic
+and the rest of math from that.</p>
+<p><img src="/static/principia-mathematica.png" alt="A proof from the Principia."></p>
+<p>The <em>Principia</em> was careful to avoid any sets that contained themselves, and
+so Russell’s Paradox and the Liar’s Paradox could be avoided.</p>
+<ul>
+<li>How does the Liar’s Paradox relate to sets that contain themselves?</li>
+</ul>
+<p>It seemed like a sweet deal, until Kurt G&ouml;del came along and broke
+everything.</p>
+<p>(*We stopped using the <em>Principia</em>, by the way. Most mathematicians use the
+axioms of <strong>Zermelo–Fraenkel set theory</strong>, abbreviated ZF. But it still has the
+problems G&ouml;del discovered.)</p>
+<hr>
+<p><em>Modus ponens</em> isn’t a magic bullet.</p>
+<ul>
+<li>Given <em>“A and B”</em>, can you use just <em>modus ponens</em> to prove <em>“A or B”</em>? Does
+that mean <em>“A or B”</em> is false?</li>
+<li>Come up with another statement that cannot be proved under <em>modus ponens</em>.</li>
+</ul>
+<p>This is really bad, if you think about it. It means that there are statements
+that can be true according to our axioms, but impossible to prove in our
+logical system. This is what is referred to as <em>incompleteness</em>—the subject
+of G&ouml;del’s <em>Incompleteness Theorem</em>.</p>
+<p>The <em>Incompleteness Theorem</em> says that if your logical system can be used to
+represent arithmetic, then you can come up with a statement that you can
+neither prove nor disprove.</p>
+<p>This is <em>horrible</em>. It means that there are statements we can’t prove in
+<em>math</em>. There are questions without answers!</p>
+<p>Here’s a question without an answer: those of you who have read <a href="http://hardmath123.github.io/hilbert.html"><em>Harry Potter
+and the Diagon(alization) Alley</em></a>
+might remember that there are more real numbers than integers. The <strong>Continuum
+Hypothesis</strong> states that there isn’t a set of numbers that is “bigger” than the
+integers but “smaller” than the real numbers. It turns out that <em>we can’t prove
+that</em>. The Continuum Hypothesis is <strong>independent</strong> of the ZF axioms.</p>
+<p>If that sounds a bit abstract, here’s another one: Euclid’s <em>parallel
+postulate</em>, which says something really obvious about parallel lines, turns out
+to be independent of his other axioms.</p>
+<blockquote>
+<p>If a line segment intersects two straight lines forming two interior angles
+on the same side that sum to less than two right angles, then the two lines,
+if extended indefinitely, meet on that side on which the angles sum to less
+than two right angles.</p>
+</blockquote>
+<p>Finally, the <strong>axiom of choice</strong> is pretty controversial. Most mathematicians
+accept it as true, even though it leads to all sorts of weird results. The
+weirdest one is the <strong>Banach-Tarski Paradox</strong>, which shows how you can take a
+sphere, cut it up into five pieces, and reassemble them to get <em>two</em> spheres.</p>
+<p>When we talk about ZF with the axiom of choice, we call it ZFC.</p>
+<ul>
+<li>Relate independent statements to the notion of undecidable problems in
+computer science, such as the <strong>halting problem</strong> or computing <strong>Kolmogorov
+complexity</strong>.  Do the proofs of these require some sort of self-referential
+argument?</li>
+</ul>
+<hr>
+<p>As exciting as the Incompleteness Theorems are, there’s a much less celebrated
+result of G&ouml;del’s called, oddly enough, the <strong>Completeness Theorem</strong>,
+published in 1929. It says that there is a rule of inference that is complete
+(every true statement is provable) for propositional logic.</p>
+<p>G&ouml;del did <em>not</em>, however, show what this rule was: we had to wait until
+1965 for it. In the next post, we will discover this magical rule of inference,
+prove its completeness, and show how to use it to write an automatic theorem
+prover. And we’re going to find out why the title of this post makes sense.</p>
+<ul>
+<li>This post had very few external links. Find a topic you didn’t understand or
+something you want to learn more about, and look it up.</li>
+<li>Pick 3 things you liked about this post, and 3 things that could be
+improved. Tell me these things.</li>
+</ul>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+            <section>
+                <center>(<a id="comment-toggle" href="#comment-toggle">Click to load comments&hellip;</a>)</center>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'comfortablynumbered';
+                    var disqus_identifier = 'meet-the-robinson.md';
+
+                    window.addEventListener(
+                        'load',
+                        (function() {
+                            document.getElementById('comment-toggle').addEventListener('click',
+                                (function() {
+                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                }),
+                            true);
+                        }),
+                        true
+                    );
+                </script>
+            </section>
+        </article>
+        <footer id="footer">
+            <span class="sc">ComfortablyNumbered</span> &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/appreciation.html">
+                <span class="octicon octicon-beer"></span></a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                <img
+                    alt="Creative Commons License"
+                    src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+            </a>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>

@@ -365,6 +365,14 @@
             "file": "no-rules-in-math.md",
             "date": "10/15/15",
             "markdown": true
+        },
+        {
+            "title": "Meet the Robinson",
+            "author": "Hardmath123",
+            "description": "An introduction to automatic theorem proving.",
+            "file": "meet-the-robinson.md",
+            "date": "10/18/15",
+            "markdown": true
         }
     ]
 }
