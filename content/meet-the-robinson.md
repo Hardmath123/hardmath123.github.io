@@ -78,7 +78,7 @@ are true and others are false. Here's an example:
 
 | It is raining. | Mark is strong. | It is raining and Mark is strong. |
 |:---------------|:----------------|----------------------------------:|
-| True           | True            | **True**                          |
+| True           | True            | *True*                            |
 | True           | False           | False                             |
 | False          | True            | False                             |
 | False          | False           | False                             |
@@ -112,10 +112,16 @@ B", and A&or;B for "A or B". It's easy to get those last two confused at first;
 a nice mnemonic is that &or; looks like a *branching* tree, which relates to
 choice ("or").
 
+In practice, this lets you turn sentences like *"Either I am dreaming, or the
+world is ending and we do not have much time left."* into something like:
+
+> D &or; (W &and; &not; T)
+
 - Explain how &or; relates to &cup; and &and; relates to &cap; in set theory.
 Use a Venn diagram.
 - For some fun trivia, look up the difference between a Venn diagram and
-Euler diagram. Which mathematician came first?
+and **Euler diagram**. Which mathematician came first? I'm going to refer to
+Euler diagrams instead of Venn diagrams in the rest of this post.
 
 Another operator is **implication**. We say "A implies B" if B is true whenever
 A is true. We denote this in symbols with "A &rArr; B".
@@ -167,9 +173,9 @@ called *antecedents* or *premises*) are written as numerators and the results
 
 Note that sometimes we elide the "and" from a series of premises.
 
-- Write a pair of inference rules that correspond to De Morgan's Laws.
+- Write a pair of rules of inference that correspond to De Morgan's Laws.
 - Why are rules of inference written as fractions? Come up with a
-"cancellation" rule that allows you to chain inference rules where one's
+"cancellation" rule that allows you to chain rules of inference where one's
 conclusion is the other's premise.
 - Are rules of inference reversible? Write a reversible and irreversible rule
 of inference.
@@ -206,7 +212,8 @@ of these rules of inference. A statement that has a proof is a **theorem**.
 come up with an explicit connection between (1) production rules and rules of
 inference, and (2) theorems and strings that match a grammar.
 - We talk about *parse trees*, not *parse chains*. Should we talk about proofs
-in terms of trees of inference rules, rather than chains of inference rules?
+in terms of trees of rules of inference, rather than chains of rules of
+inference?
 
 One of the first logical systems was Euclid's postulates. With a handful of
 simple axioms that anyone would agree with, Euclid built up all of geometry.
