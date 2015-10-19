@@ -102,7 +102,7 @@ strong."* without talking about what "and" really means.
 
 Logicians generally use three main 'operators': "and", "or", "not". You can use
 them to modify or join propositions and form bigger propositions (called
-**sentences** or **formulas**).
+**sentences** or **formulas** or **expressions**).
 
 - Explain why having both "and" and "or" is redundant. Explain why we have
 them anyway.
