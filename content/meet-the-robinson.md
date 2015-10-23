@@ -35,7 +35,9 @@ dialogue.
 - Exercises will be formatted the way this sentence is.
 
 If you want a formal education in all this, consult Russell and Norvig's
-textbook, *Artificial Intelligence: A Modern Approach*.
+textbook, *Artificial Intelligence: A Modern Approach*. All I'm writing here I
+learned on my adventures writing my own theorem prover, lovingly named
+[Eddie](http://github.com/Hardmath123/eddie).
 
 ---
 
