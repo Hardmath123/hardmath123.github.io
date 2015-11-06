@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Meet the Robinson: 2 - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header" class="centered">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+            <div id="rightbox">
+                <a href="http://github.com/Hardmath123">
+                    <span class="octicon octicon-mark-github"> Github</span></a>
+                &nbsp;&nbsp;
+                <a href="/feed.xml">
+                    <span class="octicon octicon-rss"> Subscribe</span></a>
+            </div>
+            <div class="clearer"></div>
+            <!-- You're reading the source to my blog? What do you think?
+
+            Do you have dinner plans? -->
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>Meet the Robinson: 2</h2>
+                <h4>Sunday, October 25, 2015 &middot; 6 min read</h4>
+<p>Welcome back.</p>
+<p>In the <a href="meet-the-robinson.html">previous article</a>, we learned how <strong>rules of
+inference</strong> allow us to prove theorems. We also learned that a rule of
+inference is not necessarily <strong>complete</strong>: it might be impossible to prove a
+true sentence with a valid rule of inference.</p>
+<p>Today’s article is about a complete rule of inference.</p>
+<p>Before you get excited, though, let’s talk about what we really mean by
+“complete” in this case.</p>
+<ol>
+<li>If a statement <em>must</em> be true given some axioms, then the rule of inference
+can construct a proof for the statment.</li>
+<li>If a statement is false given some axioms, then the rule of inference will
+not construct a proof. It is not guaranteed to even terminate in this case.</li>
+<li><p>If a statement could either be true or false given some axioms, then the
+rule of inference will not construct a proof. It is not guaranteed to even
+terminate in this case.</p>
+</li>
+<li><p>Prove that “Robert is a frog” given “It rained on Monday” and “Seven is a
+prime number”.</p>
+</li>
+<li>Prove that “Robert is not a frog” given “It rained on Monday” and “Seven is a
+prime number”.</li>
+<li>Explain what we mean by statements that could either be true or false, and
+connect this to the discussion of undecidable problems (or independent
+statements) in the previous article. These statements are (choose one)
+<em>satisfiable/valid</em> but not <em>satisfiable/valid</em>.</li>
+<li>How can you use this rule of inference to prove that something is false?</li>
+<li>How can you use this rule of inference to discover whether a statement is
+true or false, given that it is necessarily either valid or invalid? (Hint:
+you’re allowed to fork two processes and kill them if needed.)</li>
+</ol>
+<p>For the purposes of this article, we can assume that the algorithm will
+terminate. Later, though, we will generalize to higher forms of logic where
+termination is not guaranteed.</p>
+<hr>
+<p>The rule of inference we are going to use is called <strong>resolution</strong>, first used
+practically by John Alan Robinson in 1965. It goes like this:</p>
+<p>\[
+\frac{(P \vee \neg Q), (Q \vee R)}{P \vee R}
+\]</p>
+<ul>
+<li>Prove, with a truth table, that this rule is valid.</li>
+<li>Convert both premises of the rule to <strong>Kowalski Normal Form</strong>, which means
+they should both be in the form “A implies B”.</li>
+<li>Use your expressions above to explain how resolution is really the same thing
+as “P implies Q, Q implies R together mean P implies R”.</li>
+</ul>
+<p>Resolution proofs rely on the idea of <strong>refutation</strong> or <em>reductio ad absurdum</em>,
+which is more commonly known as <strong>proof by contradiction</strong>.</p>
+<p>Refutation relies on the idea that if not-S causes a contradiction with your
+axioms and rules of inference, then not-S is invalid, so S must be valid.</p>
+<ul>
+<li>What do we mean by “contradiction”?</li>
+</ul>
+<p>To use the resolution-refutation scheme to prove S given some axioms, we can
+repeatedly apply resolution to pairs of sentences taken from the axioms and
+not-S. If you end up deriving a contradiction, you have proven S.</p>
+<p>The rest of this post will be dedicated to proving that this scheme actually
+works.</p>
+<hr>
+<p>Resolution operates on <strong>clauses</strong>, which is just a set of propositions that
+are joined with “or”s. These propositions can be negated.</p>
+<ul>
+<li>Which one of the following three sentences is a clause?<ol>
+<li>A &or; (B &and; C)</li>
+<li>&not; (A &and; B) &or; C</li>
+<li>&not; A &or; &not; B &or; C</li>
+</ol>
+</li>
+</ul>
+<p>Sentences are in <strong>clausal-normal form (CNF)</strong> if they are a set of clauses
+that are joined with “and”s.</p>
+<ul>
+<li>Which of the following three sentences is in CNF?<ol>
+<li>A &or; (B &and; C)</li>
+<li>A &and; (B &or; &not;C) &and; D</li>
+<li>&not; (A &and; B)</li>
+</ol>
+</li>
+</ul>
+<p>It turns out that any sentence can be written in CNF. To do this, you can
+repeatedly apply the following rules:</p>
+<ol>
+<li>Remove implication using the expression for “A &rArr; B” you’ve already
+found.</li>
+<li>Use De Morgan’s laws to move “not” inwards:<ul>
+<li>What is &not; &not; A?</li>
+<li>What is &not; (A &and; B)?</li>
+<li>What is &not; (A &or; B)?</li>
+</ul>
+</li>
+<li>Distribute &or; over &and; by replacing A &or; (B &and; C) with (A &or; B)
+&and; (A &or; C).<ul>
+<li>Prove that this is true with a truth table.</li>
+</ul>
+</li>
+</ol>
+<p>You can use induction to show that applying these rules again and again will
+eventually turn your sentence into CNF.</p>
+<ul>
+<li>Show that none of these rules apply to a sentence already in CNF.</li>
+</ul>
+<p>Why do we care so much about sentences in CNF? We can now extend the resolution
+rule to sentences in CNF:</p>
+<p>\[
+\frac{(P_1 \vee \dots \vee P_{i} \vee \neg X), (Q_1 \vee \dots \vee Q_{i} \vee X)}{P_1 \vee \dots \vee P_{i} \vee Q_1 \vee \dots \vee Q_{i}}
+\]</p>
+<ul>
+<li>Convince yourself that that’s a reasonable thing to do, using the concept of
+associativity.</li>
+</ul>
+<p>In short, if a proposition appears in both positive and negative polarities in
+two clauses, you can join the clauses and remove that proposition.</p>
+<ul>
+<li>Is the singleton clause “P” technically in CNF?</li>
+<li>Use clause-resolution on “P” and “not-P” to find out whether the empty clause
+is true or false (hint: is “P &and; &not;P” invalid?).</li>
+<li>Is the empty conjunction true? The empty disjunction? Explain what a vacuous
+truth is.</li>
+<li>Use resolution-refutation to prove <em>modus ponens</em>. If you only do one
+exercise in this article, do this one. (Hint: use the inference rule twice.) </li>
+<li>Ryan Marcus has a nice article on propositional resolution
+<a href="http://rmarcus.info/blog/2015/09/02/vulcan.html">here</a>, which includes an
+interactive demo. Play with that demo.</li>
+</ul>
+<hr>
+<p>We’re now going to prove if you have an unsatisfiable set of clauses, then you
+can repeatedly resolve them to derive the empty clause. This provides a model
+for us to have a terminating theorem-proving algorithm!</p>
+<p>This proof is taken almost directly from Russell and Norvig’s textbook, though
+I tried to cut down on the notation.</p>
+<p>Imagine we’ve already applied resolution to each pair of clauses,
+and recursively resolved the results, and so on to obtain an (infinite?) set
+of clauses. We call this the resolution <em>closure</em> of these clauses.</p>
+<p>Suppose also that the set of clauses was unsatisfiable, but this set of
+resolved clauses does not contain the empty clause. We’re going to show that
+you can, in fact, satisfy the clauses, leading to a contradiction.</p>
+<p>To satisfy the clauses, follow the following algorithm:</p>
+<ol>
+<li>Number your propositions from 1 to <em>k</em>.</li>
+<li>For the <em>i</em>th proposition P[i]:<ol>
+<li>If one of the clauses in the set contains &not;P[i], and all other
+propositions in that clause are false based on the values assigned to
+P[1], P[2], …, P[i-1], then set P[i] to <em>false</em>. This is basically
+clauses that look like (<em>false</em> &or; <em>false</em> &or; … &or; &not; P[i]).</li>
+<li>Otherwise, set P[i] to <em>true</em>.</li>
+</ol>
+</li>
+</ol>
+<p>The claim is that this procedure will always work, that is, none of these
+assignments will make a clause false. To see this, suppose assigning P[i] did,
+in fact, cause a clause to be false. Specifically, no clauses were falsified
+by any of the previous assignments. Then the following could happen:</p>
+<ol>
+<li>That clause was empty from the beginning, and thus always false. We can
+ignore this case because we’re assuming the set of resolved clauses does <em>not</em>
+contain the empty clause.</li>
+<li>The clause was of the form (<em>false</em> &or; <em>false</em> &or; … &or; P[i]) and we
+assigned P[i] to <em>false</em>. (Why is this the only other case?)</li>
+</ol>
+<p>If the latter case occurs, then we must also have (<em>false</em> &or; <em>false</em> &or;
+… &or; &not; P[i]), because that’s the only situation in which P[i] is
+assigned false.</p>
+<p>Now, here’s the crucial bit: these two clauses resolve! Since they contain P[i]
+and &not;P[i], respectively, we resolve them to obtain a clause that has only
+false values in it. This contradicts our assumption that no clauses were
+falsified by any of the previous assignments.</p>
+<p>So, we know that if the empty clause is not part of the set of resolved
+clauses, then the clauses are satisfiable. By contrapositive, it follows that
+you can always resolve some set of them to get the empty clause. Q.E.D. &#9632;</p>
+<hr>
+<p>There’s another argument that explains this: an inductive one which you can
+read <a href="http://www.mathcs.duq.edu/simon/Fall04/notes-6-20/node3.html">here</a>. In
+short, it inducts on the total number of propositions, where the base case is
+that if you have only one literal per clause, then either it’s satisfiable, or
+it’s unsatisfiable and you can resolve to get the empty clause.</p>
+<ul>
+<li>Convince yourself that this base case is true.</li>
+</ul>
+<hr>
+<p>So where are we? We have an algorithm that will definitely terminate on a valid
+statement, though we have not yet said anything about what happens when it is
+given anything else.</p>
+<p>The resolution method should feel extremely powerful. Of course, as the number
+of propositions increases, it will get exponentially slower (boolean
+satisfiability was actually one of the first problems to be proved as
+NP-complete—and, in fact, constraint solving algorithms like DPLL correspond
+pretty much to resolution-refutation).</p>
+<p>But that’s okay! It works!</p>
+<p>One question you should have is, “What can I prove with propositional logic?”</p>
+<ul>
+<li>Can you use propositional logic to reason about the integers? Why or why not?</li>
+</ul>
+<p>Propositional logic is bound to a <em>finite</em> number of propositions. That means
+you can’t say things like “1 is an integer”, “2 is an integer”, “3 is an
+integer”, etc.</p>
+<p>In the next article, we will extend propositional logic to a much richer form
+that supports an infinite number of propositions, and show that
+resolution-refutation still works.</p>
+<ul>
+<li>Write your own resolution theorem prover so that you can experiment with
+some large proofs. It’s not hard; you can think of this as a code golf
+challenge if you’re like.</li>
+<li>Find three more things you liked and three more things that could be
+improved about this article series, and report them to me.</li>
+</ul>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+            <section>
+                <center>(<a id="comment-toggle" href="#comment-toggle">Click to load comments&hellip;</a>)</center>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'comfortablynumbered';
+                    var disqus_identifier = 'meet-the-robinson-2.md';
+
+                    window.addEventListener(
+                        'load',
+                        (function() {
+                            document.getElementById('comment-toggle').addEventListener('click',
+                                (function() {
+                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                }),
+                            true);
+                        }),
+                        true
+                    );
+                </script>
+            </section>
+        </article>
+        <footer id="footer">
+            <span class="sc">ComfortablyNumbered</span> &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/appreciation.html">
+                <span class="octicon octicon-beer"></span></a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                <img
+                    alt="Creative Commons License"
+                    src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+            </a>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>

@@ -316,9 +316,10 @@ published in 1929. It says that there is a rule of inference that is complete
 (every true statement is provable) for propositional logic.
 
 G&ouml;del did *not*, however, show what this rule was: we had to wait until
-1965 for it. In the next post, we will discover this magical rule of inference,
-prove its completeness, and show how to use it to write an automatic theorem
-prover. And we're going to find out why the title of this post makes sense.
+1965 for it. In the [next post](meet-the-robinson-2.html), we will discover
+this magical rule of inference, prove its completeness, and show how to use it
+to write an automatic theorem prover. And we're going to find out why the title
+of this post makes sense.
 
 - This post had very few external links. Find a topic you didn't understand or
 something you want to learn more about, and look it up.
