@@ -215,6 +215,6 @@ resolution-refutation still works.
 
 - Write your own resolution theorem prover so that you can experiment with
 some large proofs. It's not hard; you can think of this as a code golf
-challenge if you're like.
+challenge if you'd like.
 - Find three more things you liked and three more things that could be
 improved about this article series, and report them to me.
