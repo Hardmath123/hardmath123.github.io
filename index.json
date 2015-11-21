@@ -381,6 +381,14 @@
             "file": "meet-the-robinson-2.md",
             "date": "11/5/15",
             "markdown": true
+        },
+        {
+            "title": "A Balance of Powers",
+            "author": "Hardmath123",
+            "description": "A hunt for number-theoretic coincidences.",
+            "file": "a-balance-of-powers.md",
+            "date": "11/19/15",
+            "markdown": true
         }
     ]
 }

@@ -10,10 +10,225 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 06 Nov 2015 00:58:59 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 21 Nov 2015 22:43:11 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[A Balance of Powers]]></title>
+            <description><![CDATA[<p>A hunt for number-theoretic coincidences.</p>
+
+
+<p>Wikipedia has an amusing article on <a href="https://en.wikipedia.org/wiki/Mathematical_coincidence">“mathematical
+coincidence”</a>, where
+they say that it’s a “coincidence” that ($ 2^{10} $) is very close to 1000
+(it’s actually 1024). This is why it’s occasionally confusing whether you mean
+1000 or 1024 bytes when you say
+<a href="https://en.wikipedia.org/wiki/Kilobyte#Definitions_and_usage">“kilobyte”</a>.</p>
+<p>I’m not sure whether this is something to get excited about, but you know what
+we say about coincidence…</p>
+<p><img src="static/coincidence.gif" alt="The universe is rarely so lazy."></p>
+<p>Here are some fun facts to inspire today’s post:</p>
+<ul>
+<li><p>($ 2^{12864326} \approx 10^{3872548} $) <a href="http://www.wolframalpha.com/input/?i=2%5E12864326">to within
+0.0001%</a>, which means it
+begins with the digits “10000000…”.</p>
+</li>
+<li><p>($ 1337^{47168026} \approx \pi\cdot10^{147453447}$) <a href="http://www.wolframalpha.com/input/?i=1337%5E47168026">to within
+0.00000001%</a>. It begins
+with the digits “31415926…”.</p>
+</li>
+<li><p>The hex expansion of ($ e^{19709930078} $) is around 10 billion digits long,
+and it begins with the digits <code>deadbeef...</code>.</p>
+</li>
+</ul>
+<p>There is definitely something going on here. It’s time to investigate!</p>
+<hr>
+<p>Let’s go back to powers of two. It really comes down to the fact that we’re
+trying to solve equations that look somewhat like this one</p>
+<p>\[
+2^{\alpha} = \delta10^{\beta}
+\]</p>
+<p>for integers, where we can make ($ \delta $) as close to 1 as we want.</p>
+<p>It should feel intuitive to take logs of both sides at this point. So let’s go
+ahead and do that:</p>
+<p>\[
+\alpha \ln(2) = \ln(\delta) + \beta\ln(10)
+\]</p>
+<p>Since ($ \delta $) is close to 1, its natural log is close to 0. So this
+equation reduces to finding a very close <a href="https://en.wikipedia.org/wiki/Diophantine_approximation">rational
+approximations</a> of the
+ratio of the natural logs of 2 and 10.</p>
+<p>Rational approximation, also called <em>Diophantine</em> approximation, is the “art”
+of finding rational numbers very close to real numbers. Since the rationals are
+dense in the reals, we can find a rational number arbitrarily close to any real
+number. The na&iuml;ve way to do this is to simply take the decimal expansion
+to as many digits as we want. So, for example, we can find rational
+approximations of pi such as 3/1, 31/10, 314/100, etc.</p>
+<p>So, it follows that we can find arbitrarily precise rational approximations of
+($ \ln(10) / \ln(2) $), which is what we’re looking for! The numerator gives
+the power of 2 and the denominator gives the power of 10.</p>
+<p>That ratio is around 3.321928094, so 2<sup>3321928094</sup> should be
+really close to a power of 10, right?</p>
+<p><a href="http://www.wolframalpha.com/input/?i=2%5E3321928094">…wrong.</a> The power of
+10 is spot-on, but our first digit is completely off. This is tragic! We’re
+close, but not close enough.</p>
+<p>How can we fix this?</p>
+<p>We could add more digits, but eventually WolframAlpha stops doing those
+calculations for us. (There’s a nice online calculator
+<a href="http://www.ttmath.org/online_calculator">here</a> that seems to handle much
+bigger problems, but loses precision eventually.)</p>
+<p>The problem is that even though we’re close, we’re not close <em>enough</em>. Remember
+that our worst-case scenario with the decimal-truncation strategy is that we’re
+off by ($1/\beta$). That is, we have</p>
+<p>\[
+\left| \frac{\alpha}{\beta} - \frac{\ln(10)}{\ln(2)} \right| = \frac{1}{\beta}
+\]</p>
+<p>Rearranging this a little bit, we have:</p>
+<p>\[
+\alpha \ln(2) = \ln(2) + \beta\ln(10) 
+\]</p>
+<p>In other words, we have:</p>
+<p>\[
+2^\alpha = 2\times10^\beta
+\]</p>
+<p>We could be off by up to a factor of two! That means that even though our
+rational approximation is getting closer, our first digit could still vary
+pretty randomly.</p>
+<p>What’s an easy fix here? We could start by rounding rather than truncating.
+This means our worst-case scenario drops to ($ 1/(2\beta) $) (why?), which
+corresponds to being off by up to a factor of the square root of two (around
+1.4).</p>
+<p>If we round the example above, we get 2<sup>3321928095</sup>, which is
+<a href="http://www.wolframalpha.com/input/?i=2%5E3321928095">better</a>. But
+percent-error wise, we’re still doing <em>worse</em> than 2<sup>10</sup>. We need to
+take more drastic measures.</p>
+<hr>
+<p>It turns out that there is a way to find the <em>best</em> rational approximation of
+a number for a given denominator. This is a beautiful field of number theory
+that relates images like the one below to computing GCDs efficiently.</p>
+<p><img src="static/ford-circle.png" alt="Ford circle, from Wikipedia Commons."></p>
+<p>I’ll leave it to you to discover the math on your own, but the result we seek
+is <a href="https://en.wikipedia.org/wiki/Dirichlet%27s_approximation_theorem">Dirichlet’s approximation
+theorem</a>,
+which states that we can always find a rational approximation which is within
+($ 1/(\beta^2) $) of the target. In fact, there are an <em>infinite</em> number of
+such rational approximations, which means ($ \beta $) can get as large as we
+want (why?).</p>
+<p>Since we have a ($ \beta^2 $) term in the denominator, the error decreases
+<em>faster</em> than the denominator. This means we can get within ($ 2^{(1/\beta)}
+$) of a power of 10. Since there’s a factor of ($ \beta $) in that expression,
+we can make it as large as we want to get as close to a power of 10 as we want!
+Win!</p>
+<hr>
+<p>How do we compute these best rational approximations? The trick is to express
+our target number as a <a href="https://en.wikipedia.org/wiki/Continued_fraction#Best_rational_approximations">continued
+fraction</a>,
+and then to simplify those continued fractions.</p>
+<p>It’s not hard to write code to do this quickly. WolframAlpha and Mathematica
+come with a built-in function <code>Rationalize</code> that does exactly what we want.
+With a little twiddling of the “delta” parameter, we <a href="http://www.wolframalpha.com/input/?i=Rationalize%5Bln%2810%29%2Fln%282%29%2C+%28log_2%281.00001%29%29%5E2%5D">can
+get</a>
+approximations within whatever interval we want, and they
+<a href="http://www.wolframalpha.com/input/?i=2%5E254370">work</a>!</p>
+<p>Pushing this gives us lovely results, like 2<sup>44699994</sup>, which is
+around ($ 9.9999997\times10^{13456038} $), <a href="http://www.wolframalpha.com/input/?i=2%5E44699994">within
+0.0000003%</a> of a power of
+ten. Wonderful.</p>
+<hr>
+<p>The natural question to ask now is whether we can do <em>even</em> better. Can we get
+an <em>arbitrary</em> sequence of digits at the beginning of the result? It turns out
+we can. By manipulating Euclidean algorithm a bit, we can generate any
+remainder, not necessarily one that is close to zero. Since the remainder
+controls the first few digits, we need to find an approximation with error ($
+\ln(\delta) $).</p>
+<p>The trick is to use a “secondary” version of the Euclidean Algorithm where we
+approximate ($ \ln(\delta) $) by adding together the errors of successively
+more precise approximations.</p>
+<p>Here’s an example. Suppose we compute a series of rational approximations of a
+number and we get the following two rows:</p>
+<table>
+<thead>
+<tr>
+<th>Numerator</th>
+<th>Denominator</th>
+<th>Error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>0.0131</td>
+</tr>
+<tr>
+<td>175</td>
+<td>87</td>
+<td>0.0028</td>
+</tr>
+</tbody>
+</table>
+<p>Adding these two rows gives us a new row:</p>
+<table>
+<thead>
+<tr>
+<th>Numerator</th>
+<th>Denominator</th>
+<th>Error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>177</td>
+<td>88</td>
+<td>0.0159</td>
+</tr>
+</tbody>
+</table>
+<p>(Why does this work?)</p>
+<p>This gives us an approximation with error 0.0159. We can keep doing this in a
+method that resembles a cross between Gaussian elimination in matrices and the
+Euclidean algorithm for integers, and get as close as we want to any target
+“error”.</p>
+<hr>
+<p>You can download a Python program I wrote to generate these expressions
+<a href="static/power-approx.py">here</a> (or read the source on this <a href="https://gist.github.com/Hardmath123/12671c88058970dbd496">Github
+Gist</a>). It uses the
+lovely <a href="http://mpmath.org"><code>mpmath</code></a> library. A sample session with it, used to
+compute one of the examples above:</p>
+<pre><code>$ !!
+Prefix? --&gt; 0xdeadbeef
+Base? ----&gt; e
+Radix? ---&gt; 16
+Accurate to 4 digits:
+2.71828182845905^16311 ~~ 3735928559*16e+5875
+Accurate to 5 digits:
+2.71828182845905^4407903 ~~ 3735928559*16e+1589807
+Accurate to 7 digits:
+2.71828182845905^1044698524 ~~ 3735928559*16e+376795337
+Accurate to 7 digits:
+2.71828182845905^1044698524 ~~ 3735928559*16e+376795337
+Accurate to 7 digits:
+2.71828182845905^5021368668 ~~ 3735928559*16e+1811075911
+Accurate to 7 digits:
+2.71828182845905^5021368668 ~~ 3735928559*16e+1811075911
+Accurate to 8 digits:
+2.71828182845905^19709930078 ~~ 3735928559*16e+7108854587
+</code></pre><hr>
+<p>If you enjoyed that journey, here are some exploration questions:</p>
+<ul>
+<li>What happens when your base is 2 and your radix is 16? Why?</li>
+<li>How is this related to <a href="https://en.wikipedia.org/wiki/Euclid%27s_orchard">Euclid’s
+Orchard</a>? Does exploring
+Euclid’s orchard give a natural way to prove Dirichlet’s approximation theorem?
+As a hint, what principle is named after Dirichlet?</li>
+</ul>
+]]></description>
+            <link>http://hardmath123.github.io/a-balance-of-powers.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/a-balance-of-powers.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Thu, 19 Nov 2015 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Meet the Robinson: 2]]></title>
             <description><![CDATA[<p>Continuing on our quest to build an automatic theorem-prover.</p>
@@ -2112,86 +2327,6 @@ dump of my dataset, leave a comment below and I’ll send it to you.</p>
             <pubDate>Fri, 20 Mar 2015 07:00:00 GMT</pubDate>
         </item>
         <item>
-            <title><![CDATA[Capture the Hackathon]]></title>
-            <description><![CDATA[<p>Why hackathons aren’t helping the world, and how CTFs can fix that.</p>
-
-
-<p>If you’ve been following my blog, you know that I’m not a fan of competitions.
-One of the few exceptions to this is CTFs. CTFs, or Capture-The-Flag
-competitions, are computer security challenges where the organizers host a few
-vulnerable servers and you need to “hack” them to find secret keys. CTFs are,
-to be very honest, a lot of fun.</p>
-<p>But I’m not here to advertise CTFs—I’ve already done that in another post—I’m
-here to talk about how CTFs should be replacing Hackathons.</p>
-<p>Hackathons are great. You hang out all night long, eat junk food, listen to
-music, and get all sorts of swag from the riches companies in Silicon Valley.
-You get to meet successful people who have their own start-ups.</p>
-<p>But that’s all.</p>
-<p>Respectable hackathons advertise themselves as educational: if you know how to
-code, you get a chunk of time to work on a project and learn a new skill. If
-you don’t know how to code, we’ll teach you.</p>
-<p>The truth is, neither actually works out in the real world.</p>
-<p>I know of exactly zero pieces of hackathon-code that the authors are
-legitimately proud of. “Authors are legitimately proud of” differs strongly
-from “authors are capable of making an exciting, buzzword-heavy pitch about,”
-the latter generally being the sole criterion in determining winners.
-Hackathon veterans largely agree that hackathon-code is rarely touched after
-the demo, because it’s usually written as just enough to create a demo. You
-aren’t supposed to pay heed to petty things like maintainability—you’re
-hackers! And so your efforts over 24 sleep-deprived zombie hours all go to
-/dev/null.</p>
-<p>At the other extreme are the brave souls who walk into a hackathon cold: no
-programming experience whatsoever. From what I can tell, they’re generally
-persuaded to come by their nerdfriends, with the prospect of free food. In any
-case, I have yet to meet someone who actually fell in love with programming at
-a hackathon. Yes, the rich Silicon Valley startup culture is appetizing, but
-you can’t just show up at a hackathon and found a company. You need to put in
-the effort to learn the basics and fall in love with programming, and that is
-<em>not</em> something you can do in 24 continuous hours. You can’t put on a concert
-in 24 hours having never touched an instrument.</p>
-<p>So, what are hackathons good for? They’re great for networking: making friends,
-and even getting internships or jobs. They’re great for getting T-shirts,
-playing games, and having awesome conversations. They’re great for hearing
-talks that make you feel good about yourself for being a “hacker”, “innovator”,
-“creator”, “developer”, etc. They are, in short, what the humble party has
-evolved into to suit Silicon Valley.</p>
-<hr>
-<p>Enter CTFs. CTFs are hardcore. To do well in one, you need to be really clever.
-You need oodles of esoteric knowledge about all sorts of computer science. You
-need to be good at math, algorithms, general-purpose problem solving, and of
-course programming. A single CTF problem can teach you far more than an entire
-hackathon can ever hope to.</p>
-<p>(You do <em>not</em>, by the way, need to be good at making a pitch in front of a
-panel of judges.)</p>
-<p>I posit that a CTF is also as social as a hackathon: perhaps a majority of my
-best friends are folks I’ve met CTFing, either because they were my teammates,
-or because I ran into them on a CTF’s IRC channel. The conversations you have
-with your teammates while trying to solve a CTF problem are fantastic: you
-share large wealths of information, refute or build upon each others’ ideas,
-and ask hard questions, and do all of that while making puns and inside jokes.</p>
-<p>As far as I’m concerned, a CTF is much more valuable than a hackathon for a
-casual programmer—mildly experienced script kiddies and ninja rockstars alike.</p>
-<p>But more importantly, I can envision CTFs for beginners, too. Solving the
-problems in an introductory CS textbook is far more appealing when put in the
-context of hacking into someone’s server. I’m sure an elegantly crafted
-sequence of problems can Socratically teach someone enough basic Python to, for
-instance, compute large Fibonacci numbers recursively—for the right people,
-that should be enough to make them fall in love with computer science.</p>
-<p>CTFs have a lot of potential: it’s a shame we’re instead promoting
-hackathon-parties as “CS education events”.</p>
-<hr>
-<p>P.S. It would be an even bigger shame if this post comes true in the wrong way,
-and CTFs go the same route as competition math. As much as I love the idea,
-some part of me wants to keep the CTF world a secret so that the people who
-ruined competition math can’t get their hands on CTFs as well. I hope that’s
-not selfish—but I think that’s a topic for a whole new post.</p>
-]]></description>
-            <link>http://hardmath123.github.io/hackathons-vs-ctfs.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/hackathons-vs-ctfs.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 17 Mar 2015 07:00:00 GMT</pubDate>
-        </item>
-        <item>
             <title><![CDATA[Use Imperfect Tools]]></title>
             <description><![CDATA[<p>A promise to myself.</p>
 
@@ -2286,6 +2421,86 @@ Let’s see how long I survive.</p>
 ]]></description>
             <link>http://hardmath123.github.io/use-imperfect-tools.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/use-imperfect-tools.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Tue, 17 Mar 2015 07:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Capture the Hackathon]]></title>
+            <description><![CDATA[<p>Why hackathons aren’t helping the world, and how CTFs can fix that.</p>
+
+
+<p>If you’ve been following my blog, you know that I’m not a fan of competitions.
+One of the few exceptions to this is CTFs. CTFs, or Capture-The-Flag
+competitions, are computer security challenges where the organizers host a few
+vulnerable servers and you need to “hack” them to find secret keys. CTFs are,
+to be very honest, a lot of fun.</p>
+<p>But I’m not here to advertise CTFs—I’ve already done that in another post—I’m
+here to talk about how CTFs should be replacing Hackathons.</p>
+<p>Hackathons are great. You hang out all night long, eat junk food, listen to
+music, and get all sorts of swag from the riches companies in Silicon Valley.
+You get to meet successful people who have their own start-ups.</p>
+<p>But that’s all.</p>
+<p>Respectable hackathons advertise themselves as educational: if you know how to
+code, you get a chunk of time to work on a project and learn a new skill. If
+you don’t know how to code, we’ll teach you.</p>
+<p>The truth is, neither actually works out in the real world.</p>
+<p>I know of exactly zero pieces of hackathon-code that the authors are
+legitimately proud of. “Authors are legitimately proud of” differs strongly
+from “authors are capable of making an exciting, buzzword-heavy pitch about,”
+the latter generally being the sole criterion in determining winners.
+Hackathon veterans largely agree that hackathon-code is rarely touched after
+the demo, because it’s usually written as just enough to create a demo. You
+aren’t supposed to pay heed to petty things like maintainability—you’re
+hackers! And so your efforts over 24 sleep-deprived zombie hours all go to
+/dev/null.</p>
+<p>At the other extreme are the brave souls who walk into a hackathon cold: no
+programming experience whatsoever. From what I can tell, they’re generally
+persuaded to come by their nerdfriends, with the prospect of free food. In any
+case, I have yet to meet someone who actually fell in love with programming at
+a hackathon. Yes, the rich Silicon Valley startup culture is appetizing, but
+you can’t just show up at a hackathon and found a company. You need to put in
+the effort to learn the basics and fall in love with programming, and that is
+<em>not</em> something you can do in 24 continuous hours. You can’t put on a concert
+in 24 hours having never touched an instrument.</p>
+<p>So, what are hackathons good for? They’re great for networking: making friends,
+and even getting internships or jobs. They’re great for getting T-shirts,
+playing games, and having awesome conversations. They’re great for hearing
+talks that make you feel good about yourself for being a “hacker”, “innovator”,
+“creator”, “developer”, etc. They are, in short, what the humble party has
+evolved into to suit Silicon Valley.</p>
+<hr>
+<p>Enter CTFs. CTFs are hardcore. To do well in one, you need to be really clever.
+You need oodles of esoteric knowledge about all sorts of computer science. You
+need to be good at math, algorithms, general-purpose problem solving, and of
+course programming. A single CTF problem can teach you far more than an entire
+hackathon can ever hope to.</p>
+<p>(You do <em>not</em>, by the way, need to be good at making a pitch in front of a
+panel of judges.)</p>
+<p>I posit that a CTF is also as social as a hackathon: perhaps a majority of my
+best friends are folks I’ve met CTFing, either because they were my teammates,
+or because I ran into them on a CTF’s IRC channel. The conversations you have
+with your teammates while trying to solve a CTF problem are fantastic: you
+share large wealths of information, refute or build upon each others’ ideas,
+and ask hard questions, and do all of that while making puns and inside jokes.</p>
+<p>As far as I’m concerned, a CTF is much more valuable than a hackathon for a
+casual programmer—mildly experienced script kiddies and ninja rockstars alike.</p>
+<p>But more importantly, I can envision CTFs for beginners, too. Solving the
+problems in an introductory CS textbook is far more appealing when put in the
+context of hacking into someone’s server. I’m sure an elegantly crafted
+sequence of problems can Socratically teach someone enough basic Python to, for
+instance, compute large Fibonacci numbers recursively—for the right people,
+that should be enough to make them fall in love with computer science.</p>
+<p>CTFs have a lot of potential: it’s a shame we’re instead promoting
+hackathon-parties as “CS education events”.</p>
+<hr>
+<p>P.S. It would be an even bigger shame if this post comes true in the wrong way,
+and CTFs go the same route as competition math. As much as I love the idea,
+some part of me wants to keep the CTF world a secret so that the people who
+ruined competition math can’t get their hands on CTFs as well. I hope that’s
+not selfish—but I think that’s a topic for a whole new post.</p>
+]]></description>
+            <link>http://hardmath123.github.io/hackathons-vs-ctfs.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/hackathons-vs-ctfs.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Tue, 17 Mar 2015 07:00:00 GMT</pubDate>
         </item>
