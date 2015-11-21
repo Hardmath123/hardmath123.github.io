@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 21 Nov 2015 23:08:24 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 21 Nov 2015 23:22:48 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -152,19 +152,19 @@ number and we get the following two rows:</p>
 <tr>
 <th>Numerator</th>
 <th>Denominator</th>
-<th>Error</th>
+<th style="text-align:right">Error</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>2</td>
 <td>1</td>
-<td>0.0131</td>
+<td style="text-align:right">0.0131</td>
 </tr>
 <tr>
 <td>175</td>
 <td>87</td>
-<td>0.0028</td>
+<td style="text-align:right">0.0028</td>
 </tr>
 </tbody>
 </table>
@@ -174,14 +174,14 @@ number and we get the following two rows:</p>
 <tr>
 <th>Numerator</th>
 <th>Denominator</th>
-<th>Error</th>
+<th style="text-align:right">Error</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>177</td>
 <td>88</td>
-<td>0.0159</td>
+<td style="text-align:right">0.0159</td>
 </tr>
 </tbody>
 </table>
