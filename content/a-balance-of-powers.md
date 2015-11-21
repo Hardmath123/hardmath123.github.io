@@ -166,14 +166,14 @@ Here's an example. Suppose we compute a series of rational approximations of a
 number and we get the following two rows:
 
 | Numerator | Denominator | Error  |
-|-----------|-------------|--------|
+|-----------|-------------|-------:|
 | 2         | 1           | 0.0131 |
 | 175       | 87          | 0.0028 |
 
 Adding these two rows gives us a new row:
 
 | Numerator | Denominator | Error  |
-|-----------|-------------|--------|
+|-----------|-------------|-------:|
 | 177       | 88          | 0.0159 |
 
 (Why does this work?)
