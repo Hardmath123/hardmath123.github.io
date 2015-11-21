@@ -60,8 +60,8 @@ So, it follows that we can find arbitrarily precise rational approximations of
 ($ \\ln(10) / \\ln(2) $), which is what we're looking for! The numerator gives
 the power of 2 and the denominator gives the power of 10.
 
-That ratio is around 3.321928094, so 2<sup>3321928094</sup> should be
-really close to a power of 10, right?
+That ratio is around 3.321928094, so ($ 2^{3321928094} $) should be really
+close to a power of 10, right?
 
 [...wrong.](http://www.wolframalpha.com/input/?i=2%5E3321928094) The power of
 10 is spot-on, but our first digit is completely off. This is tragic! We're
@@ -103,9 +103,9 @@ This means our worst-case scenario drops to ($ 1/(2\\beta) $) (why?), which
 corresponds to being off by up to a factor of the square root of two (around
 1.4).
 
-If we round the example above, we get 2<sup>3321928095</sup>, which is
+If we round the example above, we get ($ 2^{3321928095} $), which is
 [better](http://www.wolframalpha.com/input/?i=2%5E3321928095). But
-percent-error wise, we're still doing *worse* than 2<sup>10</sup>. We need to
+percent-error wise, we're still doing *worse* than ($ 2^{10} $). We need to
 take more drastic measures.
 
 ---
@@ -144,8 +144,8 @@ get](http://www.wolframalpha.com/input/?i=Rationalize%5Bln%2810%29%2Fln%282%29%2
 approximations within whatever interval we want, and they
 [work](http://www.wolframalpha.com/input/?i=2%5E254370)!
 
-Pushing this gives us lovely results, like 2<sup>44699994</sup>, which is
-around ($ 9.9999997\\times10^{13456038} $), [within
+Pushing this gives us lovely results, like ($ 2^{44699994} $), which is around
+($ 9.9999997\\times10^{13456038} $), [within
 0.0000003%](http://www.wolframalpha.com/input/?i=2%5E44699994) of a power of
 ten. Wonderful.
 
@@ -186,9 +186,8 @@ Euclidean algorithm for integers, and get as close as we want to any target
 ---
 
 You can download a Python program I wrote to generate these expressions
-[here](static/power-approx.py) (or read the source on this [Github
-Gist](https://gist.github.com/Hardmath123/12671c88058970dbd496)). It uses the
-lovely [`mpmath`](http://mpmath.org) library. A sample session with it, used to
+[here](static/power-approx.py). It uses the lovely
+[`mpmath`](http://mpmath.org) library. A sample session with it, used to
 compute one of the examples above:
 
 ```

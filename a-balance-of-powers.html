@@ -85,8 +85,8 @@ approximations of pi such as 3/1, 31/10, 314/100, etc.</p>
 <p>So, it follows that we can find arbitrarily precise rational approximations of
 ($ \ln(10) / \ln(2) $), which is what we’re looking for! The numerator gives
 the power of 2 and the denominator gives the power of 10.</p>
-<p>That ratio is around 3.321928094, so 2<sup>3321928094</sup> should be
-really close to a power of 10, right?</p>
+<p>That ratio is around 3.321928094, so ($ 2^{3321928094} $) should be really
+close to a power of 10, right?</p>
 <p><a href="http://www.wolframalpha.com/input/?i=2%5E3321928094">…wrong.</a> The power of
 10 is spot-on, but our first digit is completely off. This is tragic! We’re
 close, but not close enough.</p>
@@ -116,9 +116,9 @@ pretty randomly.</p>
 This means our worst-case scenario drops to ($ 1/(2\beta) $) (why?), which
 corresponds to being off by up to a factor of the square root of two (around
 1.4).</p>
-<p>If we round the example above, we get 2<sup>3321928095</sup>, which is
+<p>If we round the example above, we get ($ 2^{3321928095} $), which is
 <a href="http://www.wolframalpha.com/input/?i=2%5E3321928095">better</a>. But
-percent-error wise, we’re still doing <em>worse</em> than 2<sup>10</sup>. We need to
+percent-error wise, we’re still doing <em>worse</em> than ($ 2^{10} $). We need to
 take more drastic measures.</p>
 <hr>
 <p>It turns out that there is a way to find the <em>best</em> rational approximation of
@@ -148,8 +148,8 @@ With a little twiddling of the “delta” parameter, we <a href="http://www.wol
 get</a>
 approximations within whatever interval we want, and they
 <a href="http://www.wolframalpha.com/input/?i=2%5E254370">work</a>!</p>
-<p>Pushing this gives us lovely results, like 2<sup>44699994</sup>, which is
-around ($ 9.9999997\times10^{13456038} $), <a href="http://www.wolframalpha.com/input/?i=2%5E44699994">within
+<p>Pushing this gives us lovely results, like ($ 2^{44699994} $), which is around
+($ 9.9999997\times10^{13456038} $), <a href="http://www.wolframalpha.com/input/?i=2%5E44699994">within
 0.0000003%</a> of a power of
 ten. Wonderful.</p>
 <hr>
@@ -209,9 +209,8 @@ Euclidean algorithm for integers, and get as close as we want to any target
 “error”.</p>
 <hr>
 <p>You can download a Python program I wrote to generate these expressions
-<a href="static/power-approx.py">here</a> (or read the source on this <a href="https://gist.github.com/Hardmath123/12671c88058970dbd496">Github
-Gist</a>). It uses the
-lovely <a href="http://mpmath.org"><code>mpmath</code></a> library. A sample session with it, used to
+<a href="static/power-approx.py">here</a>. It uses the lovely
+<a href="http://mpmath.org"><code>mpmath</code></a> library. A sample session with it, used to
 compute one of the examples above:</p>
 <pre><code>$ !!
 Prefix? --&gt; 0xdeadbeef
