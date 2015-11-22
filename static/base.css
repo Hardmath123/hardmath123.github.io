@@ -37,7 +37,7 @@ p, li {
   -ms-hyphens: auto;
 }
 
-@media screen and (min-width 500px) {
+@media screen and (min-width: 500px) {
     p, li {
         text-align: justify;
     }
