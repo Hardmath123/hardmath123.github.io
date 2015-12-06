@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 21 Nov 2015 23:42:02 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 06 Dec 2015 04:44:27 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -6059,7 +6059,7 @@ gotta grok math to see them.
         </item>
         <item>
             <title><![CDATA[Living Without Sudo]]></title>
-            <description><![CDATA[<p>UNIX hacking for the faint at heard, or those blessed with mean sysadmins.</p>
+            <description><![CDATA[<p>UNIX hacking for the faint at heart, or those blessed with mean sysadmins.</p>
 
 
 <p class="dropcap">You should not trust me with matches, knives, expensive
