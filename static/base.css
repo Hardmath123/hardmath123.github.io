@@ -3,10 +3,10 @@ body {
   margin: 0;
   padding: 0;
   font-size: 20px;
-  border-top: solid 0.5em #FFF8E7; /* Fun fact: this color, "Cosmic Latte", is
+  border-top: solid 0.2em #c90426; /*#FFF8E7; /* Fun fact: this color, "Cosmic Latte", is
                                       supposed to be the average color of the
                                       universe. */
-  border-bottom: solid 0.5em #FFF8E7;
+  border-bottom: solid 0.2em #c90426;
   color: #222;
   background-color: white;
 }
@@ -76,9 +76,6 @@ p a:after, li a:after {
 */
 
 
-#header h1 a, #rightbox > a, #rightbox > a:visited, #rightbox > a:visited:hover {
-  color: black;
-}
 
 a:hover {
   color: #77A;
@@ -98,14 +95,22 @@ a:visited:hover {
 }
 
 #header {
-  padding: 0.5em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  border-bottom: 1px solid #eee;
   overflow: hidden;
-  margin-bottom: 2em;
+  margin-bottom: 5em;
+  --background-color: #FFF8E7;
+}
+
+#header a {
+  color: black;
 }
 
 #header h1 {
   font-variant: small-caps;
   font-family: sans-serif;
+  letter-spacing: 0.3em;
   font-weight: 100;
   
   display: inline-block;
@@ -116,9 +121,20 @@ a:visited:hover {
   font-size: 1em;
   height: 1em;
   white-space: nowrap;
+
+  width: 100%;
+  text-align: center;
+}
+#header h1 a {
+  transition: text-shadow 0.5s ease;
+  text-shadow: 0 0 0.2em rgba(255, 0, 0, 0);
+}
+#header h1 a:hover {
+  transition: text-shadow 0.5s ease;
+  text-shadow: 0 0 0.2em rgba(255, 0, 0, 1);
 }
 
-#header h1 a, #header h1 a:visited {
+#header h1 a, #header h1 a:visited, #footer a, #footer a:visited {
   text-decoration: none;
 }
 
@@ -126,12 +142,6 @@ a:visited:hover {
   cursor: pointer;
 }
 
-#rightbox {
-  line-height: 1em;
-  float: right;
-  height: 1em;
-  font-weight: lighter;
-}
 
 
 h2 {
@@ -170,11 +180,44 @@ h3 {
 }
 
 #footer {
-  text-align: center;
-  padding: 2em;
-  padding-top: 5em;
-  font-size: 0.7em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  font-size: 0.6em;
+  margin-top: 5em;
   color: gray;
+  border-top: 1px solid #ddd;
+}
+#footer div {
+  max-width: 50em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 500px) {
+  #footer div {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+  }
+}
+#footer ul {
+  margin-top: 0;
+}
+#footer a, #footer a:visited {
+  color: gray;
+}
+#footer a:hover {
+  color: red;
+}
+#footer div ul li {
+  -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+  page-break-inside: avoid; /* Firefox */
+  break-inside: avoid; /* IE 10+ */
+  list-style: none !important;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: lighter;
+  font-family: sans-serif;
 }
 
 .centered, #postlist {
@@ -288,13 +331,13 @@ pre {
     margin: 2em;
 }
 
-ul li:before {
+#postcontent ul li:before {
     display: inline-block;
     content: "\00bb"; /* a right guillimet for a bullet (abuse) */
     margin-left: -1.5em;
     width: 1.5em;
 }
-ul li {
+#postcontent ul li {
     list-style: none;
 }
 
