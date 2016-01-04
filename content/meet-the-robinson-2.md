@@ -209,9 +209,9 @@ Propositional logic is bound to a *finite* number of propositions. That means
 you can't say things like "1 is an integer", "2 is an integer", "3 is an
 integer", etc.
 
-In the next article, we will extend propositional logic to a much richer form
-that supports an infinite number of propositions, and show that
-resolution-refutation still works.
+In the [next article](meet-the-robinson-3.html), we will extend propositional
+logic to a much richer form that supports an infinite number of propositions,
+and show that resolution-refutation still works.
 
 - Write your own resolution theorem prover so that you can experiment with
 some large proofs. It's not hard; you can think of this as a code golf

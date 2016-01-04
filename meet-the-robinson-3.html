@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Meet the Robinson: 3 - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+            <!-- You're reading the source to my blog? What do you think?
+
+            Do you have dinner plans? -->
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>Meet the Robinson: 3</h2>
+                <h4>Sunday, January 3, 2016 &middot; 11 min read</h4>
+<p>Welcome to today’s edition of <em>Meet the Robinson</em>.</p>
+<p>We left off the <a href="meet-the-robinson-2.html">previous article</a> wondering if
+there’s any way to handle an infinite number of propositions with our
+resolution-refutation scheme. It turns out that there is—we can “tame the
+infinite” using <strong>first-order logic</strong>.</p>
+<p>First-order logic is based on two ideas: predicates and quantifiers.</p>
+<p><em>Predicates</em> are just what your English teacher said they were, but (like most
+things) they make more sense when you think about them in terms of computer
+science. Predicates questions you can ask about the subject of a sentence.
+They are, in a way, functions that return boolean values.</p>
+<p>Here’s an example. The predicate of <em>“Eeyore is feeling blue.”</em> is <em>“is feeling
+blue”</em>. We can use this to ask the question <em>“Is Eeyore feeling blue?”</em>. The
+boolean function version is the function that takes an input (such as “Eeyore”)
+and tells you whether that input is feeling blue or not.</p>
+<ul>
+<li>You try it! What is the predicate in the sentence <em>“I walk this empty street
+on the Boulevard of Broken Dreams.”</em>?</li>
+<li>Use the predicate to ask a question.</li>
+</ul>
+<p>The standard notation for predicates is, unfortunately, similar to that for
+functions: we would write <code>isFeelingBlue(Eeyore)</code> to denote that predicate.
+This turns out to cause some confusion, because first-order logic also has
+<em>real</em> functions (more on that later). In this article, I’m going to use square
+brackets for predicates and round ones for functions: <code>isFeelingBlue[Eeyore]</code>.
+<em>Nobody else does this,</em> so don’t blame me if this causes you any issues later
+on in life. You have been warned.</p>
+<p>Predicates are the propositions of first-order logic. So, we can join them just
+like we joined propositions earlier: <code>smart[Alice]</code> &and; <code>funny[Alice]</code>. You
+can have “empty” predicates such as <code>maryHadALittleLamb[]</code>, which correspond
+directly to propositions. Predicates can also have multiple inputs, such as
+<code>killed[Macbeth, Duncan]</code>.</p>
+<ul>
+<li>Show that everything we have so far can be modeled purely in propositional
+logic, and that we can therefore reduce such sentences to CNF.</li>
+</ul>
+<p>Predicates can operate on either “concrete” inputs like “Eeyore” (which we call
+“constants”) or “variable” inputs. Variable inputs are <em>quantified
+generalizations</em>, which means that when you use a variable, you say that that
+variable can be replaced by any constant and the statement would hold.</p>
+<p>For example, the sentence “&not; (&forall; <code>X</code>) (<code>gold[X]</code> &rArr;
+<code>glitters[X]</code>)” is read as “it is not true that all that is gold must glitter”.
+The symbol “&forall;” is read as “for all”, and it <em>binds</em> the variable X. Why
+do we need it? Depending on where the binding quantifier is placed, the
+sentence can actually have a different meaning.</p>
+<ul>
+<li>Explain how the statement “(&forall; <code>X</code>) &not; (<code>gold[X]</code> &rArr;
+<code>glitters[X]</code>)” has a subtly different meaning from what we had above.</li>
+<li>Which of the following is true: “Not all fingers are thumbs.” and “All
+fingers are not thumbs.”?</li>
+<li>Why does the placement of the quantifier matter?</li>
+<li>Write a sentence in first-order logic that means “All fingers are thumbs” and
+one that means “Not all thumbs are fingers”.</li>
+</ul>
+<hr>
+<p>The best way to think about quantifiers is not in terms of variables and
+substitutions. Think about quantifiers as a way to select a subset of
+predicates from an infinite set of predicates, and then apply some operation on
+them. For example, “(&forall; <code>X</code>) <code>Foo[X]</code>“ selects all predicates that “look
+like” <code>Foo[_]</code> and then “ands” them together (we’ll revisit the idea of “looks
+like” in more detail later).</p>
+<p>This isn’t a rigorous definition, really, mainly because it’s kind of tricky to
+talk about “and-ing” together an infinite number of statements (why infinite?).
+You also need to introduce the concept of a “domain of discourse”, which
+basically means “what can I fill into the hole?”.</p>
+<ul>
+<li>Explain why the “and-ing” together means the same as “for all”.</li>
+<li>What would be the English translation if we “or-ed” them together instead of
+“and-ing” them together? We’ll revisit this question later.</li>
+</ul>
+<hr>
+<p>First-order logic also has <em>functions</em>, which have a misleading name because
+you don’t want to think of them as functions. Functions in first-order logic
+are really more like prepositional phrases. For instance, <code>father(Luke)</code> means
+“the father <em>of Luke</em>&rdquo;. You don’t have to “define” these functions. They
+are just ways of transforming data by adding structure.</p>
+<p>Functions can be used anywhere variables and concrete values can. Together,
+functions, variables, and constants are called <em>terms</em>.</p>
+<ul>
+<li>Explain how functions that take no inputs (niladic functions) are the same
+as constants.</li>
+</ul>
+<p>And example using functions is “(&forall; <code>X</code>) <code>winner[X]</code> &rArr;
+<code>proud[parents(X)]</code>.”</p>
+<ul>
+<li>Name one statement you can conclude from the above given that
+<code>proud[parents(parents(Amy))]]</code>.</li>
+</ul>
+<hr>
+<p>First-order logic is pretty powerful. We can express a great deal in it. To let
+it sink in, we’re going to quickly describe arithmetic in first-order logic,
+using the <em>Dedekind-Peano axioms</em>:</p>
+<ol>
+<li>“<code>isNaturalNumber[zero()]</code>&rdquo; says that 0 is a natural number.</li>
+<li>The next three axioms describe what “equality” means (we will return to this
+later):<ul>
+<li>&forall; <code>X</code> <code>Equal[X, X]</code></li>
+<li>&forall; <code>X</code> &forall; <code>Y</code> &forall; <code>Z</code> (<code>Equal[X, Y]</code> &and; <code>Equal[Y, Z]</code>)
+&rArr; <code>Equal[X, Z]</code></li>
+<li>&forall; <code>X</code> &forall; <code>Y</code> <code>Equal[X, Y]</code> &rArr; <code>Equal[Y, X]</code></li>
+<li>(These axioms are “reflexivity”, “transitivity”, and “symmetry”,
+respectively. Techincally, these aren’t exactly right because these
+axioms are meant to only hold if each variable <code>isNaturalNumber</code>. But
+this version is simpler.)</li>
+</ul>
+</li>
+<li>“&forall; <code>X</code> <code>isNaturalNumber[X]</code> &rArr;
+<code>isNaturalNumber[Successor(X)]</code>&rdquo; says that the successor of all natural
+numbers is also a natural number.</li>
+<li>“&forall; <code>X</code> &forall; <code>Y</code> <code>Equal[X, Y]</code> &hArr; <code>Equal[Successor(X),
+Successor(Y)]</code>&rdquo; says that the successor function is injective.</li>
+<li>“&forall; <code>X</code> &not;<code>Equal[Successor(X), zero()]</code>&rdquo; says that no natural
+number is before zero.</li>
+</ol>
+<p>Peano had one more axiom, which represents <em>induction</em>.</p>
+<ul>
+<li>Explain why you can’t do induction in first-order logic because you can’t
+quantify <em>predicates</em> (there <em>is</em> a kind of logic, called second-order logic,
+that allows you to quantify over predicates…). The Peano Axioms without
+induction are called the “Robinson arithmetic”.</li>
+<li>To deal with such axioms, we use <em>axiom schemas</em>, which you can think of as
+“preprocessors” that generate an axiom for each predicate. If you don’t need
+any axiom schemas, your logic is <em>finitely axiomatizable</em>.</li>
+<li>Axiomatize addition within the Peano axioms.</li>
+</ul>
+<p>Perhaps you’re unimpressed with this. Another powerful result of first-order
+logic is Tarski’s axiomatization of plane geometry (elementary Euclidean
+geometry). Using a bit of magic (called “quantifier elimination” which does
+exactly what you guessed), he showed that there exists an algorithm that can
+prove any statement about plane geometry.</p>
+<p>This <em>should</em> be impressive, because humanity has been tinkering with geometry
+for at least two thousand years now. Suddenly being given a magic algorithm to
+answer any question you’d like about geometry is amazing.</p>
+<p>(What’s the catch, you ask? The algorithm is <em>slow</em>. Impractically slow. As in,
+two-raised-to-two-raised-to-n slow, also known as
+will-not-terminate-in-your-lifetime.)</p>
+<hr>
+<p>If you’ve read SICP (<em>The Structure and Interpretation of Computer Programs</em> by
+Abelson and Sussman, <a href="https://mitpress.mit.edu/sicp/full-text/book/book.html">free
+online</a> and often
+called the “Wizard Book”), you might be having flashbacks to their section on
+logic programming: <a href="https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-29.html#%_sec_4.4">section
+4.4</a>.
+This section describes a <em>logic</em> programming language, like Prolog. Prolog-like
+languages operate on first-order logic and allow you to ask questions.</p>
+<p>Here’s an example of a rule in Prolog:</p>
+<pre><code>male(charles).
+parent(charles, martha).
+parent(martha, agnes).
+grandfather(X,Y) :- male(X),
+                    parent(X,Somebody),
+                    parent(Somebody,Y).
+</code></pre><p>Prolog allows you to then make queries such as <code>grandfather(charles, X)</code>, and
+Prolog would go along and discovered that <code>X = agnes</code> is a valid solution.
+This should remind you of database querying and nondeterministic programming
+and a whole host of exciting ideas which are fun to explore. </p>
+<ul>
+<li>Translate the above Prolog program to first-order logic statements (you may
+need to read a bit about Prolog syntax).</li>
+</ul>
+<hr>
+<p>Now that you’re a first-order logic expert…</p>
+<p>Remember G&ouml;del’s Completeness Theorem? It said that all true statements
+are provable in propositional logic. Turns out I lied. It’s doesn’t just hold
+for propositional logic; it also holds for first-order logic. The rest of this
+post will explain how that works.</p>
+<p>“But hang on!” you say, “We just saw some arithmetic modeled in first-order
+logic though, and arithmetic implies G&ouml;del’s Incompleteness Theorem. How
+can the Completeness and Incompleteness theorems live together peacefully?”</p>
+<p>Good question. Turns out there are models besides the natural numbers that
+satisfy the Peano Axioms, and so there are statements that are undecidable
+because their truth value depends on which model is being considered. In other
+words, the Completeness theorem applies only to sentences that are
+<em>necessarily</em> true, while the Incompleteness theorem applies to sentences that
+could be either true <em>or</em> false. Don’t let the related names confuse you.</p>
+<p>We haven’t talked about proofs in first-order logic yet. For propositional
+logic, our proofs had two components: reducing to CNF and resolution. It turns
+out that we can extend each of these components to first-order logic.</p>
+<p>The conversion of first-order logic sentences to CNF should be simple enough.
+The only real complication comes from quantifiers.</p>
+<ul>
+<li>Recall the steps to convert a propositional logic sentence to CNF.</li>
+<li>Explain how quantifiers are only an issue in the part where you move negation
+inwards.</li>
+<li>Extend De Morgan’s laws to support quantifiers by introducing a new
+quantifier:<ul>
+<li>What does &not; &forall; <code>X</code> <code>P[X]</code> really mean? What does “not
+everybody” went to the dance mean?</li>
+<li>Explain how &not; &forall; <code>X</code> <code>P[X]</code> is equivalent to saying that there
+exists an <code>X</code> such that &not; <code>P[X]</code>.</li>
+<li>We write “there exists and <code>X</code> such that <code>P[X]</code> holds” as “(&exist; <code>X</code>)
+<code>P[X]</code>&rdquo; Think back to above when we thought of &forall; as
+“and-ing” together everything that matches a pattern. Explain how &exist;
+is like “or-ing” them together.</li>
+<li>What is &not;(&exist; <code>X</code>) <code>P[X]</code> in terms of De Morgan’s Laws?</li>
+</ul>
+</li>
+<li>Show that after the De Morgan’s law step, you can safely pull all the
+quantifiers to the very outside of the sentence. That is, “<code>A[]</code> &and;
+(&forall; <code>X</code>) <code>B[X]</code>&rdquo; is equivalent to “(&forall; <code>X</code>) <code>A[]</code> &and;
+<code>B[X]</code>&rdquo;.</li>
+<li>Show that you need to be careful if you have naming conflicts if the same
+variable is quantified in different places in the same sentence.</li>
+</ul>
+<p>There’s a nice little trick that lets us get rid of all the existential
+quantifiers (&exist;). Once the quantifiers have been moved outside, you can
+replace all instances of existentially quantified variables with a constant!</p>
+<ul>
+<li>Show that “&exist;<code>X</code> <code>P[X]</code>&rdquo; is equivalent to “<code>P[x()]</code>&rdquo;,
+assuming the function <code>x()</code> isn’t used anywhere else.</li>
+<li>What if you have “&forall;<code>X</code> &exist;<code>Y</code> <code>P[Y]</code>&rdquo;? Show that the right
+thing to do is “&forall;<code>X</code> <code>P[y(X)]</code>&rdquo; instead of “&forall;<code>X</code>
+<code>P[y()]</code>&rdquo;.  What is the difference between these two sentences?</li>
+</ul>
+<p>This process is called <em>Skolemization</em> (or, sometimes, <em>Skolemnization</em>). The
+functions are called <em>Skolem functions</em> (some textbooks also say “Skolem
+constants”, but we know that constants are just special functions!).</p>
+<ul>
+<li>Explain where in the CNF conversion procedure Skolemization is most
+appropriate.</li>
+<li>Write Skolemization as a rule of inference using the “fraction” notation.</li>
+<li>Explain how we can drop the universal quantifiers (&forall;) after
+Skolemization and implicitly have all variables be universally quantified. From
+here on out, all variables will be implicitly universally quantified. All
+constants will be written as niladic functions. So <code>P[X, f()]</code> is a predicate
+applied to a universally-quantified variable <code>X</code> and a constant <code>f</code>.</li>
+</ul>
+<p>Sentences in this final form are said to be in <em>prenex form</em>.</p>
+<hr>
+<p>Let’s talk about <em>Herbrand’s Theorem</em>, which states that a sentence is
+unsatisfiable in first-order logic if and only if there is a finite subset of
+ground instances that is unsatisfiable in propositional logic.</p>
+<p>A <em>ground instance</em> is simply a version of a sentence where all variables have
+been substituted so there are no variables left. For example, <code>P[a()]</code> is a
+ground instance of <code>P[X]</code>.</p>
+<ul>
+<li>What is a ground instance of <code>P[a(), b(X, Y), Z]</code>?</li>
+<li>Show that a ground instance is “basically a proposition” in propositional
+logic.</li>
+</ul>
+<p>In other words, if you replace all variables with valid substitutions (“valid”
+as in <code>X</code> has the same substitution everywhere) and a finite subset of the
+resulting propositional logic statements are unsatisfiable, then the
+first-order logic statements are unsatisfiable as well. This is perhaps
+unsurprising, but, more excitingly, Herbrand’s theorem guarantees that the same
+holds in reverse: if it’s unsatisfiable, then you must be able to find such a
+finite set of substitutions. This shouldn’t sound <em>too</em> trivial, since there
+are an infinite number of substitutions and so guaranteeing that one exists is
+something “interesting”.</p>
+<ul>
+<li>What substitution makes an unsatisfiable ground instance of <code>P[X]</code> &and;
+&not; <code>P[Y]</code>? Use this substitution to show that the first-order sentence is
+unsatisfiable.</li>
+<li>Clearly, <code>P[X, Y]</code> &and; &not;<code>P[X, Z]</code> is unsatisfiable. Herbrand’s theorem
+guarantees an unsatisfiable ground instance. Find such a ground instance.</li>
+</ul>
+<p>One way of thinking about why this is true is by looking at the “saturation” of
+the sentences, which is what you get when you take all predicates and apply all
+possible concrete inputs to them. Each predicate in the saturation is
+practically a proposition because it has no quantified variables (as we
+discussed above), and is a logical consequence of the first-order sentences
+that were saturated (why?).</p>
+<ul>
+<li>Explain how the (infinite) set of sentences you get when saturating the
+first-order sentences “mean” the same thing.</li>
+</ul>
+<p>The argument then goes something like this:</p>
+<p>Suppose the sentences of the saturation were satisfiable. Then we can assign a
+truth value to each predicate in the first-order world by finding the truth
+value of the corresponding ground instances. For example, if we had a model for
+the saturation where <code>P[a()]</code> was true and <code>P[b()]</code> was false, then in the
+first-order case, <code>P[X]</code> is true if <code>X</code>=<code>a()</code> and false if <code>X</code>=<code>b()</code>.</p>
+<ul>
+<li>Convince yourself that this makes sense. We didn’t really talk about models
+for first-order sentences.</li>
+</ul>
+<p>It turns out that this is the contrapositive of the “unobvious” direction of
+Herbrand’s theorem, that is, that if the first-order sentences are
+unsatisfiable then the saturation is unsatisfiable in propositional logic.
+A satisfiable saturation in propositional logic implies, almost “by
+definition”, that the first-order sentences are satisfiable.</p>
+<ul>
+<li>Why is the other direction “obvious”? The other direction states that if the
+saturation is unsatisfiable, then the first-order sentences are unsatisfiable
+as well.</li>
+</ul>
+<p>The “finiteness” guarantee that Herbrand’s theorem makes comes from a theorem
+called the <em>compactness theorem</em>.</p>
+<ul>
+<li>Why is this important? Explain how without this guarantee, we might have
+infinitely long proofs. Must all proofs be finite?</li>
+</ul>
+<p>The compactness theorem says that in propositional logic, if all finite subsets
+of sentences are satisfiable, then the entire set of sentences is also
+satisfiable. Equivalently, if a (potentially infinite) set of sentences is
+unsatisfiable, then there must be a finite unsatisfiable subset.</p>
+<p>Just for fun, here’s a proof sketch:</p>
+<p>Suppose you have a finitely satisfiable set of sentences. First, you extract
+all of the propositions and list them out. Number all your propositions from 1
+onwards (axiom of choice alert!). Now, we do an inductive proof, where at each
+step we assign the next proposition a truth-value. By showing that each
+assignment preserves the “finitely satisfiable” property, we basically describe
+an algorithm that gives you the truth-value of any particular proposition,
+which is practically a model. Since we can find a model, the set of sentences
+must be satisfiable.</p>
+<p>The base case of the inductive proof is to show that if you assign no
+propositions any truth-values, then the set of sentences is finitely
+satisfiable. This was the assumption of the theorem, so we’re good.</p>
+<p>For the inductive step, assume that you have truth-values of the first <em>k</em>
+propositions, and the sentences are finitely satisfiable under these
+truth-values.</p>
+<ul>
+<li>What does “finitely satisfiable under these truth values” mean? Come up with
+two definitions: one involving replacing propositions with truth-values, and
+the other involving introducing a fixed set of new sentences to each
+satisfiable subset and asserting that they are <em>still</em> satisfiable.</li>
+</ul>
+<p>Now, let’s look at the <em>(k+1)</em>th proposition. If the set of sentences is
+finitely satisfiable when that proposition is <em>false</em>, then simply assign that
+sentence to false and move on. Otherwise, we will show that you <em>must</em> be able
+to assign that proposition <em>true</em> and maintain the finite-satisfiability of the
+set of sentences.</p>
+<p>If you are forced to assign the <em>(k+1)</em>th proposition <em>true</em>, then there must
+be a subset of sentences that is unsatisfiable if the <em>(k+1)</em>th proposition is
+<em>false</em> (and all the previous <em>k</em> propositions are assigned their respective
+truth-values as well!). Let’s call this set of sentences <em>A</em>. Now, we will show
+that <em>any</em> finite subset of sentences <em>B</em> is satisfiable if the <em>(k+1)</em>th
+proposition is <em>true</em>. Thus, the set of sentences is still finitely satisfiable
+and we can move on.</p>
+<p>The idea is to look at the union of <em>A</em> and <em>B</em>. Since a union of two finite
+sets is still finite, the union is also finite, and so it is satisfiable. Thus,
+the <em>(k+1)</em>th proposition is either <em>true</em> or <em>false</em>. If it is <em>false</em>, then
+set <em>A</em> of sentences will be unsatisfiable, and so the union of <em>A</em> and <em>B</em>
+will also be unsatisfiable (why?). Thus, the <em>(k+1)</em>th has to be <em>true</em>. Since
+this holds for all subsets <em>B</em>, setting that proposition to <em>true</em> maintains
+finite satisfiability.</p>
+<p>This completes the inductive proof of the compactness theorem.</p>
+<ul>
+<li>Explain why you can switch <em>true</em> and <em>false</em> in the above proof.</li>
+</ul>
+<p>Another proof of Herbrand’s theorem relies on so-called <em>semantic trees</em>, which
+are trees where each node is a ground instance of a predicate and the left and
+right branches represent the world if that predicate were true or false,
+respectively. You end up making some simple arguments related to whether or not
+you can find an infinitely long path by traversing the tree.</p>
+<hr>
+<p>With Herbrand’s theorem, we can construct a first-order theorem-proving
+algorithm! This algorithm does resolution by generating <em>all</em> ground instances
+of the first-order sentences (i.e. the “saturation”). Ground instances are
+“recursively enumerable”, which means you can list them out one by one and
+eventually list each one (the real numbers, for example, are <em>not</em> recursively
+enumerable because you can’t list them because they have a higher cardinality
+than the rationals).</p>
+<ul>
+<li>Come up with an algorithm to generate ground instances given a list of
+functions and arities (<em>arity</em> means how many inputs that function takes). Use
+a breadth-first search and explain why a depth-first search is incorrect, even
+though neither algorithm will terminate.</li>
+</ul>
+<p>Since each ground instance in the list is a propositional logic formula, you
+can simply resolution-refutation on it. So, the algorithm is:</p>
+<ol>
+<li>Convert your sentences to prenex form (Skolemized CNF).</li>
+<li>For each ground instance…<ul>
+<li>Do resolution-refutation. If it finds a proof, terminate and report the
+proof.</li>
+</ul>
+</li>
+</ol>
+<p>Davis and Putnam came up with this algorithm in 1960… and their work was an
+improvement on Gilmore’s method which was published even earlier. But we
+associate <em>Robinson</em> with the magical resolution-refutation stuff. Why?
+Robinson was the first one to do it <em>practically</em>.</p>
+<p>Listing out all the ground instances of the sentences is <em>slow!</em> There’s a sort
+of combinatorial “explosion” where every time you have a new variable it makes
+things many times slower, because you need to generate substitutions for that
+variable as well. While the algorithm works, it’s too slow to be practical.</p>
+<p>To talk about Robinson’s optimization, we need to discuss a whole new kind of
+algorithm. But more about that in the next installment of this, uh, ex-trilogy.
+For now, rejoice in the knowledge of a complete—albeit slow—theorem-proving
+algorithm that “tames the infinite”.</p>
+<ul>
+<li>Should a four-part series be called a tetralogy?</li>
+<li>Look up the origin of the phrase “taming the infinite” and read something by
+my favorite popular math author.</li>
+</ul>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+            <section>
+                <center>(<a id="comment-toggle" href="#comment-toggle">Click to load comments&hellip;</a>)</center>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'comfortablynumbered';
+                    var disqus_identifier = 'meet-the-robinson-3.md';
+
+                    window.addEventListener(
+                        'load',
+                        (function() {
+                            document.getElementById('comment-toggle').addEventListener('click',
+                                (function() {
+                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                }),
+                            true);
+                        }),
+                        true
+                    );
+                </script>
+            </section>
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="http://github.com/Hardmath123">
+                        <span class="octicon octicon-mark-github"></span>
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        <span class="octicon octicon-rss"></span>
+                        Subscribe (RSS)</a></li>
+                    <li><a href="https://github.com/Hardmath123/hardmath123.github.io/issues/new?title=Hi&body=How's%20it%20going%3F">
+                        <span class="octicon octicon-comment-discussion"></span>
+                        Feedback</a></li>
+                    <li><a href="mailto:contact-at-comfortablynumbered-dot-appspotmail-dot-com">
+                        <span class="octicon octicon-mail-read"></span>
+                        Email me</a></li>
+                    <li><a href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        <span class="octicon octicon-law"></span>
+                        CC BY-NC 3.0</a></li>
+                    <li><a href="appreciation.html">
+                        <span class="octicon octicon-beer"></span>
+                        Other</a></li>
+                </ul>
+            </div>
+
+            <!--
+            <span class="sc">ComfortablyNumbered</span> &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/appreciation.html">
+                <span class="octicon octicon-beer"></span></a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                <img
+                    alt="Creative Commons License"
+                    src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+            </a>
+            -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
