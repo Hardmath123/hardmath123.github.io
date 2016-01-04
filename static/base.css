@@ -322,10 +322,6 @@ pre {
     background: inherit !important;
 }*/
 
-code {
-    font-size: 0.7em;
-}
-
 pre {
     overflow-x: auto;
     margin: 2em;
