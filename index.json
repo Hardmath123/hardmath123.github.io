@@ -397,6 +397,14 @@
             "file": "meet-the-robinson-3.md",
             "date": "1/4/16",
             "markdown": true
+        },
+        {
+            "title": "Meet the Robinson: 4",
+            "author": "Hardmath123",
+            "description": "Unification, equality and <s>harmony</s> heuristics: the grand finale.",
+            "file": "meet-the-robinson-4.md",
+            "date": "1/11/16",
+            "markdown": true
         }
     ]
 }

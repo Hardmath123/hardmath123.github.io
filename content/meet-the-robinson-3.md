@@ -408,8 +408,9 @@ things many times slower, because you need to generate substitutions for that
 variable as well. While the algorithm works, it's too slow to be practical.
 
 To talk about Robinson's optimization, we need to discuss a whole new kind of
-algorithm. But more about that in the next installment of this, uh, ex-trilogy.
-For now, rejoice in the knowledge of a complete---albeit slow---theorem-proving
+algorithm. But more about that in the [next
+installment](meet-the-robinson-4.html) of this, uh, ex-trilogy.  For now,
+rejoice in the knowledge of a complete---albeit slow---theorem-proving
 algorithm that "tames the infinite".
 
 - Should a four-part series be called a tetralogy?

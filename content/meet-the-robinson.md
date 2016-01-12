@@ -1,6 +1,7 @@
 On October 10, 1996, a program called EQP solved a problem that had bothered
 mathematicians since 1933, almost 60 years ago. Using a powerful algorithm, EQP
-constructed a proof of a theorem on its own.
+constructed a proof of a theorem on its own. EQP ran for around 8 days and used
+about 30 Mb of memory.
 
 The theorem was known as [Robbins'
 conjecture](https://en.wikipedia.org/wiki/Robbins_algebra); a simple question
