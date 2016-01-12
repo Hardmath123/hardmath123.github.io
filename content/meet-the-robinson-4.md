@@ -243,16 +243,20 @@ theorems if your knowledge base doesn't have any equality statements in it.
 
 ...and that's it. That's actually all there is. Combining resolution,
 unification, and paramodulation let us build the theorem prover that Robinson
-used to prove the Robbins conjecture.
+used to prove the Robbins conjecture. You can check out my own implementation
+[here](https://github.com/Hardmath123/eddie). It's lovingly named Eddie, after
+the shipboard computer aboard the *Heart of Gold* which froze when asked for a
+cup of tea by Arthur Dent.
 
-So I guess now it's time for me to summarize.
+---
 
-If you've stayed with me on this journey, you've learned the basics of formal
-logic, model theory, and proof theory. You've explored several famous theorems
-in each field and seen (human-generated!) proofs of them. You've discovered how
-math is rigorized. And, finally, you've seen some of the rich history of logic
-and how it connects not just to various branches of math, but also to
-subjects as abstract as philosophy and as practical as computer science.
+**Epilogue:** If you've stayed with me on this journey, you've learned the
+basics of formal logic, model theory, and proof theory. You've explored several
+famous theorems in each field and seen (human-generated!) proofs of them.
+You've discovered how math is rigorized. And, finally, you've seen some of the
+rich history of logic and how it connects not just to various branches of math,
+but also to subjects as abstract as philosophy and as practical as computer
+science.
 
 - In what "universe" did the proofs covered in this series live? For example,
 can the proof of the propositional compactness theorem be encoded in
@@ -261,12 +265,10 @@ is it a bad case of "turtles all the way down"? Do we need to take something on
 faith at some point, or are there fundamental mathematical truths somewhere?
 What does this have to do with *cogito ergo sum*?
 
----
-
-**Epilogue:** In a way, this isn't about having a machine that can prove
-theorems. Like many things in life---marathons, pie-eating contests, and bank
-robberies---I think the pleasure is more in knowing that you *can* do it than
-in actually doing it.
+Yet, in a way, this isn't about having a machine that can prove theorems. Like
+many things in life---marathons, pie-eating contests, and bank robberies---I
+think the pleasure is more in knowing that you *can* do it than in actually
+doing it.
 
 Why? Because contrary to Rényi, mathematics is not about turning coffee into
 theorems. An oracle that just tells you whether or not a statement is true is
