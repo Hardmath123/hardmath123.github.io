@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Meet the Robinson: 4 - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+            <!-- You're reading the source to my blog? What do you think?
+
+            Do you have dinner plans? -->
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>Meet the Robinson: 4</h2>
+                <h4>Monday, January 11, 2016 &middot; 9 min read</h4>
+<p>Welcome to the final installment of <em>Meet the Robinson</em>.</p>
+<p>We left off <a href="meet-the-robinson-3.html">last time</a> with a complete but slow
+theorem-proving algorithm for first-order logic, as well as a promise of a
+faster algorithm. The faster algorithm depends on a concept called
+“unification”, so let’s talk about that first.</p>
+<ul>
+<li>No, this has nothing to do with Otto von Bismarck. Nevertheless, try to come
+up with a good Germany pun here if you can.</li>
+</ul>
+<hr>
+<p>Propositional resolution involved finding a pair of identical propositions in
+opposite polarities (one in “positive” and one in “negated” polarity). In
+first-order logic, though, we can do better. We can find pairs that have the
+same “shape”.</p>
+<ul>
+<li>Explain how <code>Wrote[X, hamlet()]</code> and <code>Wrote[shakespeare(), Y]</code> are the same
+“shape”.</li>
+<li>Come up with a rigorous definition of “same shape” which involves replacing
+some (universally quantified) variables to make the predicates identical.</li>
+</ul>
+<p>The process of substituting variables to make two predicates identical is
+called <em>unification</em>. If you’ve worked with Hindley-Milner type inference, you
+know what unification is—it’s the stage where you figure out what the type
+variables you spawned expand to.</p>
+<p>The unification algorithm isn’t hard to implement at all. It tells you whether
+two predicates unify or not, and if they do unify, it comes up with a
+substitution for each variable that can be applied to make them identical.
+Substitutions replace a variable with either a function or another variable.
+People talk about unification in terms of “solving equations” of functions and
+variables, if that makes more sense to you.</p>
+<p>In particular, unification algorithms come up with the <em>most general</em> such
+unifier, so variables that don’t need to be substituted are left as-is.</p>
+<ul>
+<li>Which variables are left unsubstituted in the unification of <code>P[X, Y]</code> and
+<code>P[X, f(Z)]</code>?</li>
+</ul>
+<p>Unification algorithms are covered in detail in
+<a href="https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-29.html#%_sec_4.4.2">SICP</a>.
+Most people use the algorithm by Martelli and Montanari. Peter Norvig has
+published a correction to the algorithm. His paper actually has a very succinct
+and clear description of the algorithm, and can be found on his site
+<a href="http://norvig.com/unify-bug.pdf">here</a>.</p>
+<ul>
+<li>Explain why <code>P[X]</code> and <code>P[f(X)]</code> don’t unify (why do we need the “occurs
+check”?). Come up with a way to relate this to (1) the Y combinator, and (2)
+finding the roots of a polynomial.</li>
+</ul>
+<hr>
+<p>And now back to theorem-proving.</p>
+<p>Unification allowed Robinson to prove the <em>lifting lemma</em>, which says that if
+we have a valid resolution step at the propositional level (with ground
+clauses), then we <em>must</em> have a valid resolution at the first-order level. For
+example, we can unify <code>P[a(), b()]</code> and &not;<code>P[a(), b()]</code>. Since the former is
+a ground instance of <code>P[X, Y]</code> and the latter is an instance of &not;<code>P[a(),
+Y]</code>, we deduce that there must be a resolvent of <code>P[X, Y]</code> and &not;<code>P[a(),
+Y]</code>. One such resolvent is <code>P[a(), Y]</code>.</p>
+<p>The lifting lemma also guarantees that the resolvent of the ground instances is
+an instance of the resolvent of the first-order clauses. In this example, note
+that <code>P[a(), b()]</code> is an instance of <code>P[a(), Y]</code> because if you substitute
+<code>b()</code> for <code>Y</code> in the latter you get the former.</p>
+<ul>
+<li>Use the lifting lemma to show that <code>P[a(), b(X), Z]</code> and &not;<code>P[X, b(Y),
+c(X)]</code> have a resolvent. Find the ground instance and the first-order resolvent
+and show that the ground instance is an instance of the first-order resolvent.</li>
+<li>Convince yourself the lifting lemma is true using what you know about
+unification.</li>
+</ul>
+<p>The lifting lemma lets us “lift” propositional resolution to first-order
+resolution. Instead of checking if two terms are equal as in propositional
+resolution, we check if they unify, and if they do, we apply the substitution
+to the resolvent. Thus, we end up “iteratively” building up the ground instance
+at each resolution step. This is much more efficient than the Davis-Putnam
+algorithm, which had to guess the ground instance out of the blue.</p>
+<p>Here’s an example. Suppose we had (<code>P[a(), Y]</code> &or; &not; <code>A[X]</code>) and (<code>A[X]</code>
+&or; &not;<code>P[X, b()]</code>). First, we note that <code>P[a(), Y]</code> and <code>P[X, b()]</code> appear
+in opposite polarities in the two clauses, and that they unify. The
+substitution is <code>X</code> becomes <code>a()</code> and <code>Y</code> becomes <code>b()</code>. Applying this
+substition yields (<code>P[a(), b()]</code> &or; &not; <code>A[a()]</code>) and (<code>A[a()]</code> &or;
+&not;<code>P[a(), b()]</code>). Resolving out that term, we have <code>A[a()]</code> and
+&not;<code>A[a()]</code> which clearly resolve to the empty clause, which completes the
+proof.</p>
+<ul>
+<li>Use first-order resolution to prove that if (&forall; <code>X</code>) <code>P[X]</code> then
+(&exist; <code>Y</code>) <code>P[Y]</code>. Then, translate your proof to English.</li>
+<li>If we try to prove something that is false, then the set of sentences
+(knowledge base and negated goal) is satisfiable—it is impossible to find a
+resolution-style contradiction because there are no contradiction. In this
+case, is the resolution-refutation procedure guaranteed to terminate? What
+about if we were still using propositional logic?</li>
+</ul>
+<p>Hilbert’s <em>Entscheidungsproblem</em>, posed in 1928, asked whether there was an
+algorithm that would tell you whether a first-order set of sentences was valid
+or not (he believed that there was!). Alonzo Church used the lambda calculus to
+prove that there was not, in fact, such an algorithm. That same year, Turing
+used Turing machines to prove the same thing by reducing the halting problem to
+the Entscheidungsproblem. That is, they found a way to encode programs as
+statements in first-order logic such that asking whether the statements are
+provable is the same as asking whether the programs terminate.</p>
+<ul>
+<li>Say “Entscheidungsproblem” out loud three times.</li>
+<li>Very carefully clarify the difference between G&ouml;del’s Completeness
+Theorem and the Church-Turing Thesis (i.e. answer to Entscheidungsproblem).</li>
+<li>Look up the approximate timeframe of these discoveries. Then, look up when
+the first Turing complete computer was built. Peter Landin was one of the first
+people to realize that the lambda-calculus was useful in computer
+programming—over thirty years after Church first posed the lambda-calculus.</li>
+<li>Give two reasons why a lot of information on these subjects can be found on
+online philosophy encyclopedias.</li>
+</ul>
+<hr>
+<p>A classic logic puzzle goes as follows:</p>
+<blockquote>
+<p>Anyone who owns a dog is an animal lover. No animal lovers kill cats. Either
+Jack (who owns a dog) or Curiosity killed the cat. Who killed the cat?</p>
+</blockquote>
+<p>This isn’t a “proof” as such, it’s a question. It turns out that the same
+tricks work for answering questions (or “querying”).</p>
+<p>Suppose we are asking for an <code>X</code> such that <code>Killed[X, cat()]</code>. If we were
+trying to prove something, we would negate our goal and add it to the knowledge
+base. Since we’re querying, we need to make a small modification. We add this
+sentence to the knowledge base: <code>Answer[X]</code> &or; &not;<code>Killed[X, cat()]</code>. Now,
+rather than looking for empty clauses, we look for clauses which only contain
+one predicate, which is <code>Answer[*]</code>.</p>
+<p>Once we extract the <code>X</code> from the <code>Answer[*]</code> predicate, it’s easy to see why
+it must be the answer. Simply re-run the theorem prover asking it to prove that
+<code>Killed[X, cat()]</code> (but substitute in the actual value of <code>X</code> you got). Since
+the proof is basically the same as above (ignoring the <code>Answer[*]</code> predicate),
+it must succeed. So, we know that our answer must be “correct” (in the sense
+that it is consistent with the knowledge base).</p>
+<p>Let’s work through a small example. Suppose we have <code>Wet[water()]</code> and we want
+to query for an <code>X</code> such that <code>Wet[X]</code>. We construct the answer clause
+<code>Answer[X]</code> &or; &not;<code>Wet[X]</code>. Then, we resolve against <code>Wet[water()]</code>,
+unifying so that <code>X</code> is <code>water()</code> to get <code>Answer[water()]</code>.</p>
+<ul>
+<li>Could you have multiple “correct” answers? Come up with a knowledge base
+where a query has multiple possible correct responses. How do you know which
+response the algorithm will output?</li>
+<li>Solve the Curiosity puzzle above using first-order resolution with an answer
+predicate.</li>
+<li>Here’s another such puzzle:<blockquote>
+<p>Animal lovers love all animals. At least one person loves every animal lover.
+Nobody loves a person who has killed an animal. Either Jack (who loves all
+animals) or Curiosity killed Tuna, who is an animal. Who killed Tuna?</p>
+</blockquote>
+</li>
+<li>Reason through it in English and figure out who killed Tuna. Write down your
+reasoning somewhere.</li>
+<li>Translate each fact into first-order logic.</li>
+<li>Resolution-refute to find out who killed Tuna.</li>
+<li>Translate your refutation procedure into English.</li>
+<li>Compare this reasoning with the one you did earlier.</li>
+</ul>
+<hr>
+<p>All texts on resolution theorem proving talk about heuristics, so I guess I
+will too. But I won’t spend too much time on it. There are a few ways to be
+“clever” about how to pick which clauses to try to resolve. The first one is
+<em>unit preference</em>, which simply says clauses that have a single predicate are
+a good choice because if the resolution <em>does</em> work, you’re done. You probably
+use this heuristic without even knowing it: you’re likelier to try to resolve
+shorter clauses because it “feels” like a reasonable choice.</p>
+<p>The second one is the <em>set of support</em>, which says that you can divide up your
+clauses into the axioms (which are supposed to be consistent within themselves)
+and the stuff to be proved (which should have a contradiction with the axioms).
+Then, you make sure you always use a sentence from the latter set when you
+resolve, because if you use two statements from the set of axioms, you won’t
+get a contradiction because they’re supposed to be consistent among themselves.</p>
+<p>In other words, this is the heuristic form of “if you’re stuck, check to see if
+you have used all the information in the problem”. If you’re too aggressive
+with the set-of-support strategy, you might miss an important resolution and so
+the algorithm might become incomplete. Use responsibly at your own peril.</p>
+<p>The last is called <em>subsumption</em>, which is basically spring cleaning. Every
+once in a while, clean out duplicate clauses. Be clever, so if one clause
+“subsumes” another (i.e. one is a ground instance of a more general clause)
+then delete the more specific one. Fewer clauses means faster resolution, but
+subsumption itself can get kind of slow.</p>
+<ul>
+<li>How can you detect if one clause subsumes another? Come up with a specific,
+rigorous definition.</li>
+</ul>
+<p>And that’s it. I don’t know why this is such a big deal, but these three things
+always show up on every piece of literature on resolution-refutation theorem
+proving. Maybe it’s because Russell and Norvig covered them in their textbook
+and everyone else thought they were really important.</p>
+<hr>
+<p>One last thing we need to talk about: equality.</p>
+<blockquote>
+<p>Euclid’s first common notion is this: Things which are equal to the same
+things are equal to each other. That’s a rule of mathematical reasoning and
+its true because it works - has done and always will do. In his book Euclid
+says this is self evident. You see there it is even in that 2000 year old
+book of mechanical law it is the self evident truth that things which are
+equal to the same things are equal to each other.
+– <em>Lincoln</em> (2012)</p>
+</blockquote>
+<p>Our theorem prover doesn’t support equality out-of-the-box. That is, we can’t
+tell it that <code>father(father(X))</code> is the same as <code>grandfather(X)</code>, and so those
+two functions are interchangeable.</p>
+<p>We can, of course, write our own equality axioms (as we did for the Peano
+arithmetic above).</p>
+<p>The issue is that we then need to also define the “replacement” axiom for every
+single predicate: <code>Equal[A, B]</code>&and;<code>P[A]</code> &rArr; <code>P[B]</code>.</p>
+<ul>
+<li>Relate this to why we can’t do induction in first-order logic.</li>
+</ul>
+<p>The solution is to use the <em>paramodulation rule</em>, which is an additional
+inference rule just like resolution is. It says that if you have a clause with
+a term that contains some subterm <code>t</code> and you also have a clause that contains
+<code>T</code>=<code>U</code> where <code>T</code> and <code>t</code> unify, then you can replace <code>t</code> with <code>U</code>, apply the
+substitution from the unification to <em>both</em> clauses, and then join them
+together, taking out the equality statement.</p>
+<p>For example, given <code>P[g(f(X))]</code> &or; <code>Q[X]</code> and <code>f(g(b()))</code>=<code>a()</code> &or;
+<code>R[g(c)]</code>, we can derive <code>P[g(a())]</code> &or; <code>Q[g(b())]]</code> &or; <code>R[g(c())]</code>.</p>
+<ul>
+<li>What was the unification here? What was the resultant substitution?</li>
+<li>Convince yourself that the paramodulation rule is true.</li>
+<li>Write the paramodulation rule in “fraction form”.</li>
+<li>Do we still need the equality axioms (which we talked about when discussing
+the Peano axioms)?</li>
+</ul>
+<p>In his thesis, Herbrand showed that you don’t need equality axioms to prove
+theorems if your knowledge base doesn’t have any equality statements in it.</p>
+<hr>
+<p>…and that’s it. That’s actually all there is. Combining resolution,
+unification, and paramodulation let us build the theorem prover that Robinson
+used to prove the Robbins conjecture.</p>
+<p>So I guess now it’s time for me to summarize.</p>
+<p>If you’ve stayed with me on this journey, you’ve learned the basics of formal
+logic, model theory, and proof theory. You’ve explored several famous theorems
+in each field and seen (human-generated!) proofs of them. You’ve discovered how
+math is rigorized. And, finally, you’ve seen some of the rich history of logic
+and how it connects not just to various branches of math, but also to
+subjects as abstract as philosophy and as practical as computer science.</p>
+<ul>
+<li>In what “universe” did the proofs covered in this series live? For example,
+can the proof of the propositional compactness theorem be encoded in
+first-order logic? Is it even legal to talk about a logic within that logic? Or
+is it a bad case of “turtles all the way down”? Do we need to take something on
+faith at some point, or are there fundamental mathematical truths somewhere?
+What does this have to do with <em>cogito ergo sum</em>?</li>
+</ul>
+<hr>
+<p><strong>Epilogue:</strong> In a way, this isn’t about having a machine that can prove
+theorems. Like many things in life—marathons, pie-eating contests, and bank
+robberies—I think the pleasure is more in knowing that you <em>can</em> do it than
+in actually doing it.</p>
+<p>Why? Because contrary to Rényi, mathematics is not about turning coffee into
+theorems. An oracle that just tells you whether or not a statement is true is
+useless; the real beauty is in understanding <em>why</em> it’s true. A world where
+math is an endless stream of abstract, intuition-less symbol-shunting is bleak.
+Resolution-refutation proofs have no insight or motivation. They are completely
+mechanical.</p>
+<p>But then again, maybe that’s exactly what we were going for.</p>
+<hr>
+<p>I’ve admittedly been extremely lazy about citing my sources when writing these
+articles. I have, however, diligently kept a list of links to resources I found
+helpful. It feels appropriate to give them the last word here, so, in no
+particular order, here they are:</p>
+<ul>
+<li><a href="http://www.ki.informatik.uni-frankfurt.de/persons/panitz/paper/russian.ps">http://www.ki.informatik.uni-frankfurt.de/persons/panitz/paper/russian.ps</a> (on
+Haskell, a “Russian Room” analogy)</li>
+<li><a href="http://src.seereason.com/chiou-prover/report.ps">http://src.seereason.com/chiou-prover/report.ps</a> (more Haskell)</li>
+<li><a href="http://www.cs.nott.ac.uk/~led/papers/led_bsc_dissertation.pdf">http://www.cs.nott.ac.uk/~led/papers/led_bsc_dissertation.pdf</a> (yet more
+Haskell)</li>
+<li><a href="http://www.cs.toronto.edu/~sheila/384/w11/Lectures/csc384w11-KR-tutorial.pdf">http://www.cs.toronto.edu/~sheila/384/w11/Lectures/csc384w11-KR-tutorial.pdf</a>
+(on Skolemization and answering queries)</li>
+<li><a href="http://www.mathcs.duq.edu/simon/Fall04/notes-6-20/node3.html">http://www.mathcs.duq.edu/simon/Fall04/notes-6-20/node3.html</a> (inductive
+proof of completeness of propositional resolution)</li>
+<li><a href="http://www.doc.ic.ac.uk/~sgc/teaching/pre2012/v231/lecture9.html">http://www.doc.ic.ac.uk/~sgc/teaching/pre2012/v231/lecture9.html</a> (an inside
+look at the people of automated theorem-proving; change the “9” in the URL for
+more information on AI)</li>
+<li><a href="http://rmarcus.info/blog/2015/09/02/vulcan.html">http://rmarcus.info/blog/2015/09/02/vulcan.html</a> (Vulcan: the post that
+started it all for me)</li>
+<li><a href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/lecture-notes/Lecture9Final.pdf">http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-825-techniques-in-artificial-intelligence-sma-5504-fall-2002/lecture-notes/Lecture9Final.pdf</a> (on
+paramodulation and semidecidability)</li>
+<li><a href="https://books.google.com/books?id=xwBDylHhJhYC&amp;pg=PA42&amp;lpg=PA42&amp;dq=demodulation+rule&amp;source=bl&amp;ots=WSHLneBzT0&amp;sig=L-EuivNrxiG5GQjRRO40kiARO7o&amp;hl=en&amp;sa=X&amp;ved=0CEYQ6AEwBmoVChMIydKL19K4yAIVCd9jCh1F6A9T#v=onepage&amp;q=demodulation%20rule&amp;f=false">https://books.google.com/books?id=xwBDylHhJhYC&amp;pg=PA42&amp;lpg=PA42&amp;dq=demodulation+rule&amp;source=bl&amp;ots=WSHLneBzT0&amp;sig=L-EuivNrxiG5GQjRRO40kiARO7o&amp;hl=en&amp;sa=X&amp;ved=0CEYQ6AEwBmoVChMIydKL19K4yAIVCd9jCh1F6A9T#v=onepage&amp;q=demodulation%20rule&amp;f=false</a> (more paramodulation)</li>
+<li><a href="http://www.cs.cmu.edu/~fp/courses/99-atp/lectures/lecture29.html">http://www.cs.cmu.edu/~fp/courses/99-atp/lectures/lecture29.html</a> (yet more on
+paramodulation)</li>
+<li><a href="http://www.sciencedirect.com/science/book/9780444508133">http://www.sciencedirect.com/science/book/9780444508133</a> (a book)</li>
+<li><a href="https://drive.google.com/file/d/0B3DOH8_Gko0GRlRLek9ZZzlyOFk/edit">https://drive.google.com/file/d/0B3DOH8_Gko0GRlRLek9ZZzlyOFk/edit</a> (another
+book)</li>
+<li><a href="http://profs.sci.univr.it/~farinelli/courses/ar/slides/paramodulation.pdf">http://profs.sci.univr.it/~farinelli/courses/ar/slides/paramodulation.pdf</a>
+(even more paramodulation)</li>
+<li><a href="http://www.cs.toronto.edu/~toni/Courses/438/Mynotes/page39.pdf">http://www.cs.toronto.edu/~toni/Courses/438/Mynotes/page39.pdf</a> (notes on
+Herbrand’s theorem)</li>
+<li><a href="http://costa.ls.fi.upm.es/~damiano/teaching/emcl/cl_08_09/slides/05herbrand.pdf">http://costa.ls.fi.upm.es/~damiano/teaching/emcl/cl_08_09/slides/05herbrand.pdf</a>
+(semantic trees and Herbrand’s theorem)</li>
+<li><a href="http://people.mpi-inf.mpg.de/~sofronie/lecture-ar-09/slides/lecture-4-june.pdf">http://people.mpi-inf.mpg.de/~sofronie/lecture-ar-09/slides/lecture-4-june.pdf</a>
+(Herbrand’s theorem and the lifting lemma)</li>
+<li><a href="https://en.wikibooks.org/wiki/Logic_for_Computer_Scientists/Predicate_Logic/Resolution#Lemma_5_.28Lifting_lemma.29">https://en.wikibooks.org/wiki/Logic_for_Computer_Scientists/Predicate_Logic/Resolution#Lemma_5_.28Lifting_lemma.29</a> (on the lifting lemma)</li>
+<li><a href="http://lara.epfl.ch/w/sav08:compactness_theorem">http://lara.epfl.ch/w/sav08:compactness_theorem</a> (nice proof of propositional
+compactness)</li>
+<li><a href="https://terrytao.wordpress.com/2009/04/10/the-completeness-and-compactness-theorems-of-first-order-logic/">https://terrytao.wordpress.com/2009/04/10/the-completeness-and-compactness-theorems-of-first-order-logic/</a> (on first-order completeness)</li>
+<li><a href="http://aima.cs.berkeley.edu">http://aima.cs.berkeley.edu</a> (Russell and Norvig’s textbook <em>Artificial
+Intelligence: A Modern Approach</em>)</li>
+</ul>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+            <section>
+                <center>(<a id="comment-toggle" href="#comment-toggle">Click to load comments&hellip;</a>)</center>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'comfortablynumbered';
+                    var disqus_identifier = 'meet-the-robinson-4.md';
+
+                    window.addEventListener(
+                        'load',
+                        (function() {
+                            document.getElementById('comment-toggle').addEventListener('click',
+                                (function() {
+                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                }),
+                            true);
+                        }),
+                        true
+                    );
+                </script>
+            </section>
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="http://github.com/Hardmath123">
+                        <span class="octicon octicon-mark-github"></span>
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        <span class="octicon octicon-rss"></span>
+                        Subscribe (RSS)</a></li>
+                    <li><a href="https://github.com/Hardmath123/hardmath123.github.io/issues/new?title=Hi&body=How's%20it%20going%3F">
+                        <span class="octicon octicon-comment-discussion"></span>
+                        Feedback</a></li>
+                    <li><a href="mailto:contact-at-comfortablynumbered-dot-appspotmail-dot-com">
+                        <span class="octicon octicon-mail-read"></span>
+                        Email me</a></li>
+                    <li><a href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        <span class="octicon octicon-law"></span>
+                        CC BY-NC 3.0</a></li>
+                    <li><a href="appreciation.html">
+                        <span class="octicon octicon-beer"></span>
+                        Other</a></li>
+                </ul>
+            </div>
+
+            <!--
+            <span class="sc">ComfortablyNumbered</span> &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/appreciation.html">
+                <span class="octicon octicon-beer"></span></a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                <img
+                    alt="Creative Commons License"
+                    src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+            </a>
+            -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
