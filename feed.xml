@@ -10,10 +10,83 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Tue, 12 Jan 2016 03:43:58 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 24 Jan 2016 02:41:28 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[A Moiety of Reminiscence]]></title>
+            <description><![CDATA[<p>Fifty ways the web has changed</p>
+
+
+<blockquote>
+<p>I’m not old, but I’m not young either. There are some little details about
+the last decade’s websites that bring me a moiety of reminiscence. Some
+things have gotten better, some have gotten worse, and some are just
+different: but all of them bring back memories of being a curious middle
+schooler exploring the secrets of the Web.</p>
+<p>Here are fifty things that remind me how far we’ve come and how far we still
+have to go.</p>
+</blockquote>
+<p>When I was young…</p>
+<ol>
+<li>…you could learn HTML by clicking “view source”.</li>
+<li>…you wrote your own CSS, by hand.</li>
+<li>…responsive web design was still emerging, and needed copious JavaScript.</li>
+<li>…all languages that compiled to JavaScript were listed on Esolangs.org.</li>
+<li>…flat design hadn’t taken over. Skeuomorphism was the pretty stuff.</li>
+<li>…nobody minded using the browser’s default styles for input elements.</li>
+<li>…tables often had black double borders.</li>
+<li>…people used the <code>&lt;FONT&gt;</code> element and the <code>BGCOLOR</code> attribute.</li>
+<li>…there were two serious libraries: Underscore and MooTools.</li>
+<li>…IIFE was a newfangled trend.</li>
+<li>…Figuring out which key was pressed was a struggle.</li>
+<li>…cross-browser compatibility was harder. Polyfills were cleverer.</li>
+<li>…the best GUI editor was Sublime Text. The vim/emacs war was just as bad.</li>
+<li>…&ldquo;front-end framework” was synonymous with “jQuery”.</li>
+<li>…you could right-click all images to save them.</li>
+<li>…many people wrote HTML elements and attributes in ALL CAPS.</li>
+<li>…people learned web programming from w3schools.</li>
+<li>…you either proudly supported IE or proudly didn’t.</li>
+<li>…too many sites had nested pull-down-on-hover menus.</li>
+<li>…links you’d already clicked appeared purple on most sites.</li>
+<li>…people started serious projects in PHP. On purpose.</li>
+<li>…your CSS used floats and event handlers, not flexbox or <code>@media</code> queries.</li>
+<li>…only Google minified and obfuscated JavaScript.</li>
+<li>…colors were bolder, undiluted by today’s weak (uh, subtle) pastel colors.</li>
+<li>…xkcd references were a lot 1337er.</li>
+<li>…userscripts and userstyles were a much bigger deal.</li>
+<li>…URLs had more question marks and ampersands and file extensions in them.</li>
+<li>…the OSX “close”, “minimize”, and “maximize” buttons were bigger.</li>
+<li>…there was no Node. Using <code>jsc</code> for command-line JS was a nifty hack.</li>
+<li>…long polling was a thing. No WebSockets.</li>
+<li>…developer tools were basically just ‘inspect element’ and a JS console.</li>
+<li>…your average developer knew how to manipulate the DOM without frameworks.</li>
+<li>…the hot tech projects had .com domains, not .io domains.</li>
+<li>…people set the <code>LANGUAGE</code> attribute on their <code>&lt;script&gt;</code> tags.</li>
+<li>…&ldquo;mobile site” meant “annoying overlay prompting to install app”.</li>
+<li>…we used BBCode instead of Markdown.</li>
+<li>…you couldn’t search from the Safari address bar. There was a search bar.</li>
+<li>…there was more URL <em>before</em> the <code>#</code> than <em>after</em>.</li>
+<li>…we used screenshots of LaTeX documents for math; there was no MathJaX.</li>
+<li>…gradients. Enough said.</li>
+<li>…every website had some sort of sidebar.</li>
+<li>…rounded rectangles might have outnumbered cornered rectangles.</li>
+<li>…DOCTYPEs were gnarly beasts longer than Gettysburg Address.</li>
+<li>…the Google logo had serifs and a shadow. Google Doodles didn’t move.</li>
+<li>…most sites actually had <code>www</code> in their canonical URLs.</li>
+<li>…plenty of respectable projects had homepages on SourceForge.</li>
+<li>…image-based view counters were pretty hot.</li>
+<li>…everything was beginning to look like Bootstrap.</li>
+<li>…there were a lot more pop-ups.</li>
+<li>…table layouts were beginning to go out of fashion.</li>
+</ol>
+]]></description>
+            <link>http://hardmath123.github.io/moiety-of-reminiscence.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/moiety-of-reminiscence.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sat, 23 Jan 2016 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Meet the Robinson: 4]]></title>
             <description><![CDATA[<p>Unification, equality and <s>harmony</s> heuristics: the grand finale.</p>
