@@ -405,6 +405,14 @@
             "file": "meet-the-robinson-4.md",
             "date": "1/11/16",
             "markdown": true
+        },
+        {
+            "title": "A Moiety of Reminiscence",
+            "author": "Hardmath123",
+            "description": "Fifty ways the web has changed",
+            "file": "moiety-of-reminiscence.md",
+            "date": "1/23/16",
+            "markdown": true
         }
     ]
 }
