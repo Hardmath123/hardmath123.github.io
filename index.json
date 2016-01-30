@@ -413,6 +413,14 @@
             "file": "moiety-of-reminiscence.md",
             "date": "1/23/16",
             "markdown": true
+        },
+        {
+            "title": "Armchair Philosophy",
+            "author": "Hardmath123",
+            "description": "An allegory.",
+            "file": "armchair-philosophy.md",
+            "date": "1/29/16",
+            "markdown": true
         }
     ]
 }
