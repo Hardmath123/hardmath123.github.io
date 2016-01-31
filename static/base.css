@@ -107,7 +107,15 @@ a:visited:hover {
   color: black;
 }
 
+#header canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #header h1 {
+  position: relative;
+  z-index: 2;
   font-variant: small-caps;
   font-family: sans-serif;
   letter-spacing: 0.3em;
