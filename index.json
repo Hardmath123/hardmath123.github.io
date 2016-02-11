@@ -421,6 +421,14 @@
             "file": "armchair-philosophy.md",
             "date": "1/29/16",
             "markdown": true
+        },
+        {
+            "title": "Mary Had a Little Spam",
+            "author": "Hardmath123",
+            "description": "Suriving the aftermath of the PSAT",
+            "file": "psat-spam.md",
+            "date": "2/11/16",
+            "markdown": true
         }
     ]
 }

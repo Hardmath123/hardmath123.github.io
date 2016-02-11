@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Mary Had a Little Spam - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <script src="static/cheet.js" charset="utf-8"></script>
+            <script src="static/main.js"></script>
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+            <!-- You're reading the source to my blog? What do you think?
+
+            Do you have dinner plans? -->
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>Mary Had a Little Spam</h2>
+                <h4>Thursday, February 11, 2016 &middot; 3 min read</h4>
+<p>I didn’t check the little box that allows colleges to send me promotional
+materials on the PSAT. I didn’t even <em>enter</em> an email address. But I still get
+dozens of mail—both physical and electronic—every day. It’s almost
+flattering.</p>
+<p>All this email is a dataset, and so as a dutiful data nerd, I felt compelled to
+do something with it. Here’s the result, for the impatient:</p>
+<p><a href="static/college-wordcloud/college-wordcloud.svg"><img src="static/college-wordcloud/college-wordcloud.png" alt="The college word
+cloud"></a></p>
+<p>An SVG is <a href="static/college-wordcloud/wordcloud.svg">here</a> if you want to make a
+printout or poster or album cover or pillow cover or whatever with this.</p>
+<hr>
+<p>I feel compelled to say more about how to make this kind of image, lest I
+forget in the future.</p>
+<p>The first step is to collate all the college spam and export it somehow. So, it
+all begins with a Gmail inbox search. Fortunately, <em>I</em> had the foresight to
+move all of my college spam to the “Promotions” category as it came in, and I
+get hardly any other promotional mail. So it was simply a matter of searching
+my inbox for messages delivered <em>after</em> the PSAT.</p>
+<p><img src="static/college-wordcloud/gmail-grep.png" alt="The search"></p>
+<p>Your mileage may vary.</p>
+<p>Next, you select all conversations by hitting the checkbox on top:</p>
+<p><img src="static/college-wordcloud/select-all-conversations.png" alt="The selection"></p>
+<p>Now, you attach a “label” to them. I called my label <code>college-spam</code>:</p>
+<p><img src="static/college-wordcloud/create-new-label.png" alt="The labeling"></p>
+<p>Finally, you head over to <a href="http://takeout.google.com">Google Takeout</a> to export
+your email. Select just that label to expedite the process (you can select more
+than one if needed):</p>
+<p><img src="static/college-wordcloud/takeout-labels.png" alt="The taking-out"></p>
+<p>You should get an email in a couple of minutes with a link to download the
+archive.</p>
+<p><img src="static/college-wordcloud/download-email.png" alt="The downloading"></p>
+<p>If you download and unzip it, you get a <code>Mail/</code> directory containing an <code>mbox</code>
+file whose name is the label you selected. Excellent.</p>
+<hr>
+<p>The next step is to parse the <code>mbox</code> file. Python, as usual, has a module for
+that, and before you can say “Beautiful Soup”, it can parse out the body of
+each email in the archive, prune out style and script tags, extract the
+plaintext, and print it out:</p>
+<pre><code class="lang-python">import mailbox
+import bs4
+
+mbox = mailbox.mbox(&#39;college-spam.mbox&#39;)
+
+
+text = &#39;&#39;
+
+def handle(s):
+    global text
+    soup = bs4.BeautifulSoup(s, &#39;html.parser&#39;)
+    for elem in soup.findAll([&#39;script&#39;, &#39;style&#39;]):
+        elem.extract()
+    text = text + &#39;\n&#39; + soup.get_text()
+
+for msg in mbox:
+    pyl = msg.get_payload(decode=True)
+    if pyl is None:
+        pyl = msg.get_payload()
+    if type(pyl) == list:
+        p = pyl[0]
+        q = p.get_payload(decode=True)
+        if q is not None:
+            handle(q)
+        else:
+            r = p.get_payload()
+            if type(r) == list:
+                handle(str(r[0]))
+            else:
+                handle(r)
+    else:
+        handle(pyl)
+        pass
+
+print text.encode(&#39;utf8&#39;)
+</code></pre>
+<p>Email formats are complicated, and you’ll probably have to tweak the code above
+if the colleges that target you decide to use more obscure features.</p>
+<p>Until then, the plan is to copy all that text:</p>
+<pre><code>$ python extract_words.py | pbcopy
+</code></pre><p>and paste it into <a href="https://www.jasondavies.com/wordcloud/">Jason Davies’ wonderful wordcloud
+workshop</a>.</p>
+<p>Ta-da!</p>
+<hr>
+<p>P.S. Jacob Harris writes, <a href="http://www.niemanlab.org/2011/10/word-clouds-considered-harmful/">“word clouds considered
+harmful”</a>. I
+agree. This whole exercise isn’t really <em>meant</em> to be insightful—though if it
+leads you to an insight anyway, please do share!</p>
+<p>P.S.S. I ran some markov chain generation on the corpus of text. Some
+highlights:</p>
+<blockquote>
+<p>I received your contact information from the Student Search Service of the
+Milky Way.</p>
+<p>You are cordially invited to take our online quiz, which can be tough.</p>
+<p>Powered by hydrogen fuel cells, it sailed down the path of some of our
+financial aid program.</p>
+<p>What are the factors that make you stand out from your iPhone or iPad?</p>
+<p>During football games, you can see the future.</p>
+</blockquote>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+            <section>
+                <center>(<a id="comment-toggle" href="#comment-toggle">Click to load comments&hellip;</a>)</center>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'comfortablynumbered';
+                    var disqus_identifier = 'psat-spam.md';
+
+                    window.addEventListener(
+                        'load',
+                        (function() {
+                            document.getElementById('comment-toggle').addEventListener('click',
+                                (function() {
+                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                }),
+                            true);
+                        }),
+                        true
+                    );
+                </script>
+            </section>
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="http://github.com/Hardmath123">
+                        <span class="octicon octicon-mark-github"></span>
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        <span class="octicon octicon-rss"></span>
+                        Subscribe (RSS)</a></li>
+                    <li><a href="https://github.com/Hardmath123/hardmath123.github.io/issues/new?title=Hi&body=How's%20it%20going%3F">
+                        <span class="octicon octicon-comment-discussion"></span>
+                        Feedback</a></li>
+                    <li><a href="mailto:contact-at-comfortablynumbered-dot-appspotmail-dot-com">
+                        <span class="octicon octicon-mail-read"></span>
+                        Email me</a></li>
+                    <li><a href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        <span class="octicon octicon-law"></span>
+                        CC BY-NC 3.0</a></li>
+                    <li><a href="appreciation.html">
+                        <span class="octicon octicon-beer"></span>
+                        Other</a></li>
+                </ul>
+            </div>
+
+            <!--
+            <span class="sc">ComfortablyNumbered</span> &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/appreciation.html">
+                <span class="octicon octicon-beer"></span></a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                <img
+                    alt="Creative Commons License"
+                    src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+            </a>
+            -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
