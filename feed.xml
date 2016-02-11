@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 11 Feb 2016 19:30:49 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 11 Feb 2016 20:25:33 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -27,8 +27,8 @@ flattering.</p>
 do something with it. Here’s the result, for the impatient:</p>
 <p><a href="static/college-wordcloud/college-wordcloud.svg"><img src="static/college-wordcloud/college-wordcloud.png" alt="The college word
 cloud"></a></p>
-<p>An SVG is <a href="static/college-wordcloud/wordcloud.svg">here</a> if you want to make a
-printout or poster or album cover or pillow cover or whatever with this.</p>
+<p>An SVG is <a href="static/college-wordcloud/college-wordcloud.svg">here</a> if you want to
+make a printout or poster or album cover or pillow cover or whatever with this.</p>
 <hr>
 <p>I feel compelled to say more about how to make this kind of image, lest I
 forget in the future.</p>

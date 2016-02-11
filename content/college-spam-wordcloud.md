@@ -9,8 +9,8 @@ do something with it. Here's the result, for the impatient:
 [![The college word
 cloud](static/college-wordcloud/college-wordcloud.png)](static/college-wordcloud/college-wordcloud.svg)
 
-An SVG is [here](static/college-wordcloud/wordcloud.svg) if you want to make a
-printout or poster or album cover or pillow cover or whatever with this.
+An SVG is [here](static/college-wordcloud/college-wordcloud.svg) if you want to
+make a printout or poster or album cover or pillow cover or whatever with this.
 
 ---
 
