@@ -63,7 +63,7 @@ a {
   /* text-decoration: none; */
 }
 
-/*
+/* Weird degree symbol after anchor thingy
 p a:after, li a:after {
     position: relative;
     content: "\FEFF\00B0"; / * zero width no break space + degree symbol * /
