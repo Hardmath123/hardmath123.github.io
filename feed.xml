@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 14 Feb 2016 17:58:39 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 14 Feb 2016 18:06:37 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -35,7 +35,10 @@ core language is so small that the entire
 <a href="http://www.schemers.org/Documents/Standards/R5RS/r5rs.pdf">standard</a> fits on
 about 50 pages (<a href="https://docs.oracle.com/javase/specs/jls/se7/jls7.pdf">Java’s
 specification</a> fits on
-644). It’s not nebulous, it’s simply minimalist. This is why Scheme is more of
+644). Additional helpful features are included in “Scheme Requests for
+Implementation” or SRFIs, which are not a part of the standard but are useful
+for programmers—things like common list operations.</p>
+<p>It’s not nebulous, it’s simply minimalist. This is why Scheme is more of
 an idea than a language.</p>
 <p>As a result, implementing a Scheme compiler gives you a lot more freedom in how
 you want your language to look, while still calling it a “Scheme dialect”. You
@@ -76,7 +79,8 @@ Scribble). Racket is also a “language lab”: it gives you the tools to create
 your own programming languages built on top of Racket infrastructure (for
 example, Typed Racket, the type-safe dialect of Racket, is written in Racket).</p>
 <p>Racket has a nice community and mailing list archives/StackOverflow answers for
-help.</p>
+help. It’s also the recommended Scheme dialect to use if you’re learning or
+teaching Scheme/SICP.</p>
 <p>If you’re still lost at the end of this article, stop thinking and go with
 Racket and you will be fine.</p>
 <h3 id="chicken">Chicken</h3>
@@ -138,7 +142,8 @@ VimScript if you use Vim.</p>
 to make sure it really does offer something more than the dialects I listed
 above. Make sure it has an active community that can help you when you run
 into problems, and make sure you can find code written by other people in that
-dialect of Scheme. Then, hack away.</p>
+dialect of Scheme. A good quality test is to see if it implements any SRFIs.</p>
+<p>Then, hack away.</p>
 <hr>
 <p>And now, a brief word on the proliferation of Scheme dialects.</p>
 <p>Part of the problem is that one you pick a Scheme implementation, you’re almost
