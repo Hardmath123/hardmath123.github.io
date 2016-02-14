@@ -10,10 +10,161 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 11 Feb 2016 20:25:33 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 14 Feb 2016 17:58:39 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Perchance to Scheme]]></title>
+            <description><![CDATA[<p>A field guide to the menagerie of Scheme dialects</p>
+
+
+<p>Scheme, they say, is an idea rather than a language. But what does that mean?
+Is Java an idea or a language? C?</p>
+<p>When you write code in <em>Java</em> or <em>C</em>, you expect it to work, more or less, even
+if you use a different compiler. <code>gcc</code> and <code>clang</code> are generally compatible.
+Similarly, you can run a Java program in Hotspot, JRockit, Kaffe, or J9 and it
+should be fine. You can compile the Java program with <code>javac</code> or <code>gcj</code> and it
+should work the same (one might be slower than the other, though).</p>
+<p>This is because C and Java have <em>specifications</em>. There are long documents
+describing <em>exactly</em> what the languages should do, and someone writing a
+compiler needs to follow those specifications. The implementation details—how
+a feature works—is up to them, but not any of the actual language design.</p>
+<p>Scheme, on the other hand, is very loosely specified. This is a good thing: the
+core language is so small that the entire
+<a href="http://www.schemers.org/Documents/Standards/R5RS/r5rs.pdf">standard</a> fits on
+about 50 pages (<a href="https://docs.oracle.com/javase/specs/jls/se7/jls7.pdf">Java’s
+specification</a> fits on
+644). It’s not nebulous, it’s simply minimalist. This is why Scheme is more of
+an idea than a language.</p>
+<p>As a result, implementing a Scheme compiler gives you a lot more freedom in how
+you want your language to look, while still calling it a “Scheme dialect”. You
+can choose to make square brackets legal delimiters, or you could choose not
+to. You almost always have to supply your own I/O primitives like “prompt for
+input” or “open a socket”.  Module systems and importing are up to you.</p>
+<p>And so Scheme programs are usually <em>not</em> compatible across implementations.
+With so many hundreds of Scheme dialects out there, it’s kind of overwhelming
+for a first-time Scheme programmer to pick a dialect and actually get started.</p>
+<p>I’m a Scheme dialect nerd. I probably have more Scheme dialects installed than
+most people have games on their phone. Here are my opinions on which Scheme
+dialect to use. Rather than grouping by use-case, as guides such as <a href="https://wingolog.org/archives/2013/01/07/an-opinionated-guide-to-scheme-implementations">this
+one</a>
+do, I grouped by language.</p>
+<h3 id="racket">Racket</h3>
+<p><a href="http://racket-lang.org">Racket</a> is, in a word, academic. It started off as
+<em>PLT Scheme</em>, which was essentially a research group that happened to produce a
+really good pedagogical Scheme dialect which they used for a lot of their
+research.</p>
+<p>Racket has an impressive standard library and a decent module system. Its POSIX
+interface is a bit wanting, though. For example, you can’t send a signal to a
+process yet (technically, I have a PR open for this
+<a href="https://github.com/racket/racket/pull/961">here</a>). This is partly because
+Racket aims to be generally platform-independent, and so doesn’t necessarily
+want to implement a whole bunch of Unix-specific features in order to appeal to
+Windows users. This is either a good thing or a bad thing, depending on your
+use-case.</p>
+<p>Racket’s FFI is iffy. Writing C extensions is kind of tricky.</p>
+<p>There are a couple ways to distribute your Racket program: you can have users
+install Racket and download the source, or you can use <code>raco</code> to compile an
+executable that bundles Racket’s runtime system with compiled bytecode. Neither
+way seems perfect to me, but, well, they work.</p>
+<p>Racket comes with a lot of frills. There’s a GUI engine, an IDE (which isn’t
+great, but isn’t awful either), and primitives for manipulating images and web
+servers and whatnot. It also has copious amounts of documentation, and it ships
+with its own documentation tool called Scribble (which is documented in
+Scribble). Racket is also a “language lab”: it gives you the tools to create
+your own programming languages built on top of Racket infrastructure (for
+example, Typed Racket, the type-safe dialect of Racket, is written in Racket).</p>
+<p>Racket has a nice community and mailing list archives/StackOverflow answers for
+help.</p>
+<p>If you’re still lost at the end of this article, stop thinking and go with
+Racket and you will be fine.</p>
+<h3 id="chicken">Chicken</h3>
+<p><a href="http://call-cc.org">Chicken</a> is sort of the opposite of Racket. It’s small
+(R5RS only), but it has a fantastic POSIX API. Chicken implements the R5RS
+Scheme standard, which stands for the <em>Revised Revised Revised Revised Revised
+Report on the Algorithmic Language Scheme</em>.</p>
+<p>Its website is <code>call-cc.org</code> because the Chicken devs are super-proud of how
+Chicken handles continuations: it uses the amazingly-named <a href="http://www.pipeline.com/~hbaker1/CheneyMTA.html">Cheney on the
+MTA</a> strategy.</p>
+<p>Continuations, by the way, are one of the
+<a href="http://matt.might.net/articles/programming-with-continuations--exceptions-backtracking-search-threads-generators-coroutines/">coolest</a>
+Scheme features.</p>
+<p>Chicken has a decent number of libraries, and it’s really easy to turn a C
+module into a Chicken module.</p>
+<p>Chicken compiles to C, so to distribute, you can either distribute binaries or
+C sources which the user can build without installing Chicken. Super-easy.</p>
+<h3 id="clojure-script-">Clojure(Script)</h3>
+<p>ClojureScript is a compiler from <a href="http://clojure.org">Clojure</a> to JavaScript
+(Clojure originally targeted Java). It is <em>not</em> a Scheme dialect, not does it
+feel like one. It’s a LISP dialect.
+<a href="http://c2.com/cgi/wiki?LispSchemeDifferences">Here</a> are some differences
+between LISP and Scheme, if that interests you.</p>
+<p>Personally, I don’t like it on a matter of principle: I don’t like things that
+compile to JavaScript. It doesn’t seem like anything you really need to write
+better code. They say JavaScript is Scheme in C’s clothing, anyway, and I do
+agree with that to some extent.</p>
+<p>Same holds for BiwaScheme, Spock (written by the Chicken developer), the
+(unmaintained) WhaleSong Racket-to-JS compiler, and anything on
+<a href="https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS#lisp-scheme">this</a>
+list.</p>
+<h3 id="chez-scheme">Chez Scheme</h3>
+<p>The <a href="http://www.scheme.com">Chez Scheme</a> compiler isn’t free, and its website
+lives on a COM domain. Take from that what you will.</p>
+<p>That being said, it’s reputed to be ridiculously fast. I have never met a Chez
+Scheme user, but maybe I’m in the wrong crowd.</p>
+<h3 id="guile-scheme">Guile Scheme</h3>
+<p><a href="http://www.gnu.org/software/guile/">Guile</a> is a GNU project, which means it
+has all sorts of ideals and mission statements and declarations that make it
+seem like the paragon of freedom.</p>
+<p>In short, Guile is the Scheme you want to use in “embedded” form. That is, you
+can stick a Guile interpreter in a C application in order to control it without
+having to deal with C. One of the canonical examples of this is the <a href="http://www.gnu.org/software/guile/docs/guile-tut/tutorial.html">turtle
+graphics
+example</a>, in
+which you write a graphics display in C, and then let the user control it with
+Scheme, which is easier. Similarly, the WeeChat IRC chat client lets you write
+extensions in Guile (for example, an extension that automatically URL-shortens
+long URLs before you send them).</p>
+<p>Guile can both interpret and compile Scheme, it has good documentation, and
+it’s backed by GNU so you can expect maintained code (Guile is used by other
+mature GNU projects such as <code>gdb</code>, so they’re invested). Also, Guile is written
+in Guile, and the LilyPond music formatting program is written in Guile.</p>
+<h3 id="emacs-lisp">Emacs Lisp</h3>
+<p>You only use Emacs Lisp if you, well, use Emacs, just like how you only use
+VimScript if you use Vim.</p>
+<h3 id="anything-else">Anything else</h3>
+<p>Before choosing any other Scheme implementation, it’s probably worth your time
+to make sure it really does offer something more than the dialects I listed
+above. Make sure it has an active community that can help you when you run
+into problems, and make sure you can find code written by other people in that
+dialect of Scheme. Then, hack away.</p>
+<hr>
+<p>And now, a brief word on the proliferation of Scheme dialects.</p>
+<p>Part of the problem is that one you pick a Scheme implementation, you’re almost
+always “locked in”: you can’t easily migrate to another. So people tend to just
+build their own Scheme environment that they can control.</p>
+<p>Another part is that every CS student and their pet dog has probably written
+some approximation of a Scheme interpreter (possibly as a course project), so
+the Babel effect kicks in and creates a plethora of implementations of choose
+from. I’m guilty of this.</p>
+<p>It’s just so <em>easy</em> to write a Scheme implementation. In a way, Scheme is a
+virus… but that’s the subject of a future post (or you could just read <em>Snow
+Crash</em> by Neal Stephenson and stick “programming” before every instance of
+“language”).</p>
+<p>An upside of this, though, is that as the Scheme virus infects the programming
+language community, it injects the Functional Programming DNA everywhere. Once
+you’re immune to Scheme (by reading SICP), you’ll thrive in any such
+environment, be it JavaScript, Scala, Haskell, or Ruby.</p>
+<p>Oh, and one last thing. I feel it’s obligatory at this point for me to say,
+please don’t spend too much time researching Scheme dialects. Just pick Racket
+and start coding.</p>
+]]></description>
+            <link>http://hardmath123.github.io/perchance-to-scheme.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/perchance-to-scheme.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sun, 14 Feb 2016 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Mary Had a Little Spam]]></title>
             <description><![CDATA[<p>Suriving the aftermath of the PSAT</p>
