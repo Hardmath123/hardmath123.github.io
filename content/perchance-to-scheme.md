@@ -40,6 +40,8 @@ dialect to use. Rather than grouping by use-case, as guides such as [this
 one](https://wingolog.org/archives/2013/01/07/an-opinionated-guide-to-scheme-implementations)
 do, I grouped by language.
 
+---
+
 ### Racket
 
 [Racket](http://racket-lang.org) is, in a word, academic. It started off as
