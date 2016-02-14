@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 14 Feb 2016 18:06:37 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 14 Feb 2016 18:10:54 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -53,6 +53,7 @@ most people have games on their phone. Here are my opinions on which Scheme
 dialect to use. Rather than grouping by use-case, as guides such as <a href="https://wingolog.org/archives/2013/01/07/an-opinionated-guide-to-scheme-implementations">this
 one</a>
 do, I grouped by language.</p>
+<hr>
 <h3 id="racket">Racket</h3>
 <p><a href="http://racket-lang.org">Racket</a> is, in a word, academic. It started off as
 <em>PLT Scheme</em>, which was essentially a research group that happened to produce a
