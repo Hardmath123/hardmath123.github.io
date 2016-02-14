@@ -17,7 +17,11 @@ core language is so small that the entire
 [standard](http://www.schemers.org/Documents/Standards/R5RS/r5rs.pdf) fits on
 about 50 pages ([Java's
 specification](https://docs.oracle.com/javase/specs/jls/se7/jls7.pdf) fits on
-644). It's not nebulous, it's simply minimalist. This is why Scheme is more of
+644). Additional helpful features are included in "Scheme Requests for
+Implementation" or SRFIs, which are not a part of the standard but are useful
+for programmers---things like common list operations.
+
+It's not nebulous, it's simply minimalist. This is why Scheme is more of
 an idea than a language.
 
 As a result, implementing a Scheme compiler gives you a lot more freedom in how
@@ -68,7 +72,8 @@ your own programming languages built on top of Racket infrastructure (for
 example, Typed Racket, the type-safe dialect of Racket, is written in Racket).
 
 Racket has a nice community and mailing list archives/StackOverflow answers for
-help.
+help. It's also the recommended Scheme dialect to use if you're learning or
+teaching Scheme/SICP.
 
 If you're still lost at the end of this article, stop thinking and go with
 Racket and you will be fine.
@@ -152,7 +157,9 @@ Before choosing any other Scheme implementation, it's probably worth your time
 to make sure it really does offer something more than the dialects I listed
 above. Make sure it has an active community that can help you when you run
 into problems, and make sure you can find code written by other people in that
-dialect of Scheme. Then, hack away.
+dialect of Scheme. A good quality test is to see if it implements any SRFIs.
+
+Then, hack away.
 
 ---
 
