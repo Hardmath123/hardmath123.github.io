@@ -429,6 +429,14 @@
             "file": "college-spam-wordcloud.md",
             "date": "2/11/16",
             "markdown": true
+        },
+        {
+            "title": "Perchance to Scheme",
+            "author": "Hardmath123",
+            "description": "A field guide to the menagerie of Scheme dialects",
+            "file": "perchance-to-scheme.md",
+            "date": "2/14/16",
+            "markdown": true
         }
     ]
 }
