@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 14 Feb 2016 18:10:54 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 14 Feb 2016 21:25:53 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -170,115 +170,6 @@ and start coding.</p>
             <guid isPermaLink="true">http://hardmath123.github.io/perchance-to-scheme.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Sun, 14 Feb 2016 08:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[Mary Had a Little Spam]]></title>
-            <description><![CDATA[<p>Suriving the aftermath of the PSAT</p>
-
-
-<p>I didn’t check the little box that allows colleges to send me promotional
-materials on the PSAT. I didn’t even <em>enter</em> an email address. But I still get
-dozens of mail—both physical and electronic—every day. It’s almost
-flattering.</p>
-<p>All this email is a dataset, and so as a dutiful data nerd, I felt compelled to
-do something with it. Here’s the result, for the impatient:</p>
-<p><a href="static/college-wordcloud/college-wordcloud.svg"><img src="static/college-wordcloud/college-wordcloud.png" alt="The college word
-cloud"></a></p>
-<p>An SVG is <a href="static/college-wordcloud/college-wordcloud.svg">here</a> if you want to
-make a printout or poster or album cover or pillow cover or whatever with this.</p>
-<hr>
-<p>I feel compelled to say more about how to make this kind of image, lest I
-forget in the future.</p>
-<p>The first step is to collate all the college spam and export it somehow. So, it
-all begins with a Gmail inbox search. Fortunately, <em>I</em> had the foresight to
-move all of my college spam to the “Promotions” category as it came in, and I
-get hardly any other promotional mail. So it was simply a matter of searching
-my inbox for messages delivered <em>after</em> the PSAT.</p>
-<p><img src="static/college-wordcloud/gmail-grep.png" alt="The search"></p>
-<p>Your mileage may vary.</p>
-<p>Next, you select all conversations by hitting the checkbox on top:</p>
-<p><img src="static/college-wordcloud/select-all-conversations.png" alt="The selection"></p>
-<p>Now, you attach a “label” to them. I called my label <code>college-spam</code>:</p>
-<p><img src="static/college-wordcloud/create-new-label.png" alt="The labeling"></p>
-<p>Finally, you head over to <a href="http://takeout.google.com">Google Takeout</a> to export
-your email. Select just that label to expedite the process (you can select more
-than one if needed):</p>
-<p><img src="static/college-wordcloud/takeout-labels.png" alt="The taking-out"></p>
-<p>You should get an email in a couple of minutes with a link to download the
-archive.</p>
-<p><img src="static/college-wordcloud/download-email.png" alt="The downloading"></p>
-<p>If you download and unzip it, you get a <code>Mail/</code> directory containing an <code>mbox</code>
-file whose name is the label you selected. Excellent.</p>
-<hr>
-<p>The next step is to parse the <code>mbox</code> file. Python, as usual, has a module for
-that, and before you can say “Beautiful Soup”, it can parse out the body of
-each email in the archive, prune out style and script tags, extract the
-plaintext, and print it out:</p>
-<pre><code class="lang-python">import mailbox
-import bs4
-
-mbox = mailbox.mbox(&#39;college-spam.mbox&#39;)
-
-
-text = &#39;&#39;
-
-def handle(s):
-    global text
-    soup = bs4.BeautifulSoup(s, &#39;html.parser&#39;)
-    for elem in soup.findAll([&#39;script&#39;, &#39;style&#39;]):
-        elem.extract()
-    text = text + &#39;\n&#39; + soup.get_text()
-
-for msg in mbox:
-    pyl = msg.get_payload(decode=True)
-    if pyl is None:
-        pyl = msg.get_payload()
-    if type(pyl) == list:
-        p = pyl[0]
-        q = p.get_payload(decode=True)
-        if q is not None:
-            handle(q)
-        else:
-            r = p.get_payload()
-            if type(r) == list:
-                handle(str(r[0]))
-            else:
-                handle(r)
-    else:
-        handle(pyl)
-        pass
-
-print text.encode(&#39;utf8&#39;)
-</code></pre>
-<p>Email formats are complicated, and you’ll probably have to tweak the code above
-if the colleges that target you decide to use more obscure features.</p>
-<p>Until then, the plan is to copy all that text:</p>
-<pre><code>$ python extract_words.py | pbcopy
-</code></pre><p>and paste it into <a href="https://www.jasondavies.com/wordcloud/">Jason Davies’ wonderful wordcloud
-workshop</a>.</p>
-<p>Ta-da!</p>
-<hr>
-<p>P.S. Jacob Harris writes, <a href="http://www.niemanlab.org/2011/10/word-clouds-considered-harmful/">“word clouds considered
-harmful”</a>. I
-agree. This whole exercise isn’t really <em>meant</em> to be insightful—though if it
-leads you to an insight anyway, please do share!</p>
-<p>P.S.S. I ran some markov chain generation on the corpus of text. Some
-highlights:</p>
-<blockquote>
-<p>I received your contact information from the Student Search Service of the
-Milky Way.</p>
-<p>You are cordially invited to take our online quiz, which can be tough.</p>
-<p>Powered by hydrogen fuel cells, it sailed down the path of some of our
-financial aid program.</p>
-<p>What are the factors that make you stand out from your iPhone or iPad?</p>
-<p>During football games, you can see the future.</p>
-</blockquote>
-<p>P.S.S.S. I got four more college emails while typing out this post. Sigh.</p>
-]]></description>
-            <link>http://hardmath123.github.io/college-spam-wordcloud.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/college-spam-wordcloud.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Thu, 11 Feb 2016 08:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Armchair Philosophy]]></title>

@@ -423,14 +423,6 @@
             "markdown": true
         },
         {
-            "title": "Mary Had a Little Spam",
-            "author": "Hardmath123",
-            "description": "Suriving the aftermath of the PSAT",
-            "file": "college-spam-wordcloud.md",
-            "date": "2/11/16",
-            "markdown": true
-        },
-        {
             "title": "Perchance to Scheme",
             "author": "Hardmath123",
             "description": "A field guide to the menagerie of Scheme dialects",
