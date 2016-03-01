@@ -3,3 +3,7 @@ drafts/*
 drafts/
 *.swp
 content/stats.sh
+
+index.html
+index.json
+feed.xml
