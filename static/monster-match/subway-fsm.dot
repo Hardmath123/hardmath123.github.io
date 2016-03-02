@@ -1,0 +1,12 @@
+digraph G {
+    node[shape=circle];
+    Start[shape=none];
+    Haymarket [peripheries=2];
+    Start    -> Kendall;
+    Kendall  -> Charles   [label="B"];
+    Charles  -> Park      [label="A"];
+    Park     -> Downtown  [label="N"];
+    Park     -> Boylston  [label="C"];
+    Park     -> Haymarket [label="!"];
+    Downtown -> Park      [label="A"];
+}

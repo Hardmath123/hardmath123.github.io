@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>They did the MONSTER match! - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <script src="static/cheet.js" charset="utf-8"></script>
+            <script src="static/main.js"></script>
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+            <!-- You're reading the source to my blog? What do you think?
+
+            Do you have dinner plans? -->
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>They did the MONSTER match!</h2>
+                <h4>Monday, February 29, 2016 &middot; 6 min read</h4>
+<p>I needed a fun little project to tinker with while exploring
+<a href="http://tjvr.org/secret-project/">tosh</a>, and I settled on implementing regexes
+in Scratch. Because that’s clearly a very practical idea with no problems at
+all.</p>
+<p>Regular expressions are <a href="string1.html">like
+magic</a>. If you haven’t come across
+them yet, you soon will. They’re a way to match text against patterns, and you
+can use a regex to teach a computer what, for example, an email address “looks
+like”. I’m going to assume that if you’re reading this, you have some idea of
+how to use regexes; but if you don’t, perhaps the aforementioned link could
+help you get up to speed.</p>
+<p>Since regexes are like magic, they’re also one of those things that many people
+know how to use, but fewer people know how to implement, and even fewer people
+know how to implement efficiently. Hopefully by the end of this article, we’ll
+be part of that last group.</p>
+<p>But first, something fun for you to play with: check out
+<a href="https://scratch.mit.edu/projects/97121677/">this</a> Scratch project for a live
+demo.</p>
+<hr>
+<p>Let’s talk about finite-state machines. Finite-state machines are kind of like
+a subway system. Suppose you’re heading back home after visiting the Scratch
+Team at MIT, and so you’re at Kendall Station on the MTA. Maybe you want to get
+to Haymarket.</p>
+<p>(I promise this gets relevant to regexes soon.)</p>
+<p>You could head north towards Alewife or south towards Braintree.  Let’s head
+south. You pass Charles/MGH and then you’re at Park St. Now you have a choice:
+you can either continue on the red line towards Harvard, or you can switch over
+to the Green Line and go to west to Boylston or east to Haymarket (which is
+your destination).</p>
+<p><img src="static/monster-match/subway-spider.jpg" alt="The MTBA subway map."></p>
+<p>Now imagine each little stretch of subway between two stations has a letter
+associated with it. So, maybe Kendall to Charles is “B” and Charles to Park St.
+is “A”, and so on. But, to be clear, the letters belong to the tracks joining
+two stations, <em>not</em> to the stations themselves. You go take a ride on the
+subway and read off the letter at each stretch.</p>
+<p>You have now re-enacted what we call a “finite-state machine”. Instead of
+subway stations, we have <em>states</em>, and instead of stretches of tracks, we have
+<em>edges</em>.</p>
+<p>Some details: the edges need to be <em>directed</em>, so you can’t go both ways on an
+edge. This makes sense with the subway analogy—each individual track only
+heads in one direction (otherwise the trains would collide!). To keep track of
+this, we draw them with arrows rather than lines.</p>
+<p>Here’s a simpler picture of a small part of the T that we care about, then:</p>
+<p><img src="static/monster-match/subway-fsm.png" alt="FSM diagram"></p>
+<p>A few things to notice here: “letters” don’t need to be from the alphabet (“!”
+is a valid “letter”). You can use the same letter on multiple edges. And,
+finally, placement doesn’t matter. Haymarket isn’t actually west of Downtown.</p>
+<p>Haymarket is double-circled because it’s the final destination.</p>
+<p>Now, the question is, if you get from Kendall (start) to Haymarket (finish),
+what words can you form by reading off the letters in order? Well, you need to
+read off “B” and “A” to get to Park. But then you have a choice: you could go
+directly to Haymarket and read off a “!”, or you could go to Downtown and back
+and read off “N” followed by “A”. You can’t go to Boylston because there’s no
+way to get back to Haymarket from there.</p>
+<p>And so some sequences you could read off are “BA!”, “BANA!”, “BANANA!”, and…
+you might have already guessed that this matches the regex <code>BA(NA)*!</code>.</p>
+<p>Interesting.</p>
+<hr>
+<p>So it turns out that you can turn any finite state machine into a regular
+expression, and, more importantly, vice-versa. If you think of finite state
+machines in terms of the <em>set of words they admit</em> and regular expressions in
+terms of the <em>set of words they match</em>, then each FSM can be paired with an
+equivalent regex (but that regex isn’t necessarily unique!).</p>
+<p>So to match a string against a regex, you really just need to match it against
+an equivalent FSM, which seems like a much easier thing to do since they’re so
+much more visual.</p>
+<p>The way to match an FSM is to start with a coin on the start state (Kendall).
+Then, you read off the letters from the string you’re trying to match. For each
+letter, you look at <em>all</em> the coins on the FSM. For each coin, you either move
+it to an adjacent state if they’re connected by an edge with that letter, or
+you remove it from the FSM if there is no such edge (if there are <em>multiple</em>
+edges with the same letter, then you have to “clone” the coin and put a copy on
+each edge’s target—this is called a <em>nondeterministic</em> FSM, and more on this
+later).</p>
+<p>If, when you’re done reading the string, a coin ends up in your final
+(“accepting”, double-circled) state then you win. That coin represents a way to
+travel the subway so that you read off that exact string, so your string must
+clearly be accepted by the FSM (and therefore the regex it’s equivalent to).</p>
+<p>I suggest trying this process yourself with the “BANANA!” example.</p>
+<hr>
+<p>And so this leaves one more question: how do you turn a regex into an FSM? This
+turns out to be pretty easy.
+<a href="https://en.wikipedia.org/wiki/Thompson%27s_construction">Thompson</a> gives an
+algorithm to do this, but it’s really simple and I urge you to try and figure
+it out yourself. The best way is to take each of the regex primitives like <code>*</code>
+and <code>|</code> and <code>()</code> and figure out how you can compile each one down individually.
+It’s a fun exercise, though there are some annoying subtleties with the empty
+string that you might have to deal with.</p>
+<p>You should also think about how you can turn other regex features like <code>+</code> and
+charsets into simpler regexes that just involve the above-mentioned 3 things.
+Can you compile down backreferences? Lookaheads?</p>
+<p>Anyway, there’s also a way to turn the resulting nondeterministic FSM into a
+<em>deterministic</em> one (i.e. no coin-cloning) using what’s called the <a href="https://en.wikipedia.org/wiki/Powerset_construction">powerset
+construction</a>. This
+creates a whole lot of new states, though, so it’s usually better to just make
+peace with coin-cloning. And there’s a <a href="https://en.wikipedia.org/wiki/DFA_minimization">host of
+algorithms</a> to make
+deterministic FSMs smaller.</p>
+<p>And that’s basically how my Scratch project works! There’s a small JavaScript
+program that takes a regex and outputs an FSM as a data structure. A second
+program then “flattens” the FSM into something that looks kind of like assembly
+(you could call this the “link” phase of the compilation). The assembly-ish
+stuff is just a flat, linear representation of the FSM in a Scratch list, where
+instead of arrows, I have the address of the state the arrow points to. Then a
+simple Scratch program written with Tosh goes and interprets that assembly
+using the coin-shunting technique. The whole process is very much like
+compiling a C program and running it on a processor, in fact.</p>
+<hr>
+<p>Now that we know a fair bit about how to implement regexes, I want to talk
+about a cool application of FSM theory: in particular, a nice little result
+that says that you <em>cannot</em> write a regular expression to match nested
+parentheses (so <code>[]</code>, <code>[[]]</code>, <code>[[[]]]</code> all match but <code>][[]</code> doesn’t).</p>
+<p>First, go ahead and try to write such a regex to convince yourself that you
+can’t. No “cheating” using fancy stuff like backreferences and whatnot: I’m
+talking about “pure” regexes involving only <code>*</code> and <code>|</code> and <code>()</code>.</p>
+<p>Convinced? Good.</p>
+<p>We’re going to <em>prove</em> that you can’t do this.</p>
+<p>Recall that any regex can be turned into an FSM. So let’s suppose we had a
+regex for matched parentheses, and we turned it into an FSM. Now, remember how
+FSM stands for “finite-state machine”? That means it, uh, has a finite number
+of states. Which means, if it has 100 states and you give that FSM the sequence
+of 51 <code>(</code>s and 51 <code>)</code>s (for a total of 102 characters), then you <em>must</em> visit
+some state twice. It’s the same argument as if you have 102 pigeons and 100
+holes, you must have a hole with more than one pigeon in it.</p>
+<p>And so if you loop back to a state, you can clearly loop back to that state
+<em>again</em>! So there must be some subsequence in your string that can be repeated
+while still matching the FSM. For example, in “BANANA!”, you can repeat the
+“NA” as many times as you want. This fact is called the <a href="https://en.wikipedia.org/wiki/Pumping_lemma_for_regular_languages">pumping
+lemma</a> (not
+to be confused with the pumping llama, which is a fuzzy weightlifting camelid).</p>
+<p><img src="static/monster-match/llama.png" alt="A pumping llama."></p>
+<blockquote>
+<p>Image by Kimberly Do.</p>
+</blockquote>
+<p>Now, let’s think about the <code>()</code> language (called the <a href="https://en.wikipedia.org/wiki/Dyck_language">Dyck
+language</a>). What part of it can
+you repeat? If you repeat the <code>(</code>s then you have too many <code>(</code>s. If you repeat
+the <code>)</code>s you have too many <code>)</code>s. And if you repeat something with both <code>(</code>s and
+<code>)</code>s, you clearly don’t follow the <code>(...(())...)</code> structure anymore.</p>
+<p>So… no such regex can exist.</p>
+<p>Isn’t that a great argument? I think it’s very cool.</p>
+<hr>
+<p>So, let’s recap. Regular expressions correspond to finite-state machines, which
+are souped-up subway systems. You can implement finite-state machines as a kind
+of automatic board game which also somehow involves cloning currency. Finally,
+the finite-ness of finite-state machines lets us prove a <s>llama</s> lemma
+which lets you show all sorts of interesting facts about regexes.</p>
+<p>Perhaps a deeper lesson here is that regexes, and to a lesser extent the rest
+of computer science, might seem like magic. But it’s magic that you’re entirely
+capable of learning. In the words of my hero <a href="http://blog.jamisbuck.org">Basil
+Smockwhitener</a>,</p>
+<blockquote>
+<p>You don’t understand how powerful you are. You can learn anything. Anything
+at all. But you have to be willing to balance the scale with effort.</p>
+</blockquote>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+            <section>
+                <center>(<a id="comment-toggle" href="#comment-toggle">Click to load comments&hellip;</a>)</center>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'comfortablynumbered';
+                    var disqus_identifier = 'monster-match.md';
+
+                    window.addEventListener(
+                        'load',
+                        (function() {
+                            document.getElementById('comment-toggle').addEventListener('click',
+                                (function() {
+                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                }),
+                            true);
+                        }),
+                        true
+                    );
+                </script>
+            </section>
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="http://github.com/Hardmath123">
+                        <span class="octicon octicon-mark-github"></span>
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        <span class="octicon octicon-rss"></span>
+                        Subscribe (RSS)</a></li>
+                    <li><a href="https://github.com/Hardmath123/hardmath123.github.io/issues/new?title=Hi&body=How's%20it%20going%3F">
+                        <span class="octicon octicon-comment-discussion"></span>
+                        Feedback</a></li>
+                    <li><a href="mailto:contact-at-comfortablynumbered-dot-appspotmail-dot-com">
+                        <span class="octicon octicon-mail-read"></span>
+                        Email me</a></li>
+                    <li><a href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        <span class="octicon octicon-law"></span>
+                        CC BY-NC 3.0</a></li>
+                    <li><a href="appreciation.html">
+                        <span class="octicon octicon-beer"></span>
+                        Other</a></li>
+                </ul>
+            </div>
+
+            <!--
+            <span class="sc">ComfortablyNumbered</span> &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/appreciation.html">
+                <span class="octicon octicon-beer"></span></a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                <img
+                    alt="Creative Commons License"
+                    src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+            </a>
+            -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
