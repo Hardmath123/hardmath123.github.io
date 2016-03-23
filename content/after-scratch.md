@@ -260,7 +260,9 @@ Here are some languages you shouldn't care about:
 - **Esoteric languages:** these are written as jokes. You should be creating
   new ones, not programming in existing ones!
 
-Still confused? Here's a flowchart to help you out (click for a large SVG):
+Still confused? Here's a flowchart to help you out (click for a large SVG, or
+try Tim's [interactive Scratch
+project](https://scratch.mit.edu/projects/102723127/)):
 
 [![Flowchart](static/scratch-graph.png)](static/scratch-graph.svg)
 
