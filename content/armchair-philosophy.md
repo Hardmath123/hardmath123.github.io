@@ -137,7 +137,7 @@ perfection. Programmers don't need to carve their fortresses out of rocky
 cliffs; they can find solace in editors, shells, browsers, and personal
 websites.
 
-They key is in *customization*.
+The key is in *customization*.
 
 Yet *even though* we spend hours making our tools "our own" with color schemes,
 macros, and key bindings, we *still* choose to publish our dotfiles as
