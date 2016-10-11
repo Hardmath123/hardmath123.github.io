@@ -423,11 +423,52 @@
             "markdown": true
         },
         {
+            "title": "Mary Had a Little Spam",
+            "author": "Hardmath123",
+            "description": "Suriving the aftermath of the PSAT",
+            "file": "college-spam-wordcloud.md",
+            "date": "2/11/16",
+            "markdown": true,
+            "draft": true
+        },
+        {
             "title": "Perchance to Scheme",
             "author": "Hardmath123",
             "description": "A field guide to the menagerie of Scheme dialects",
             "file": "perchance-to-scheme.md",
             "date": "2/14/16",
+            "markdown": true
+        },
+        {
+            "title": "They did the MONSTER match!",
+            "author": "Hardmath123",
+            "description": "Implementing regular expressions in Scratch using subway systems and coins.",
+            "file": "monster-match.md",
+            "date": "2/29/16",
+            "markdown": true
+        },
+        {
+            "title": "A Case Against Calculus",
+            "author": "Hardmath123",
+            "description": "Challenging the linearity of high school mathematics.",
+            "file": "a-case-against-calculus.md",
+            "date": "4/5/16",
+            "markdown": true
+        },
+        {
+            "title": "Carnival of Mathematics 134",
+            "author": "Hardmath123",
+            "description": "In which I have the honor of hosting an edition of a roving blog.",
+            "file": "carnival-of-mathematics-134.md",
+            "date": "5/15/16",
+            "markdown": true
+        },
+        {
+            "title": "TJCTF 2016 Writeups",
+            "author": "Hardmath123",
+            "description": "In which we hack our way to second place.",
+            "file": "tjctf-2016.md",
+            "date": "10/11/16",
             "markdown": true
         }
     ]
