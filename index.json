@@ -469,8 +469,15 @@
             "author": "Hardmath123",
             "description": "In which we hack our way to second place.",
             "file": "tjctf-2016.md",
-            "date": "10/11/16",
+            "date": "6/10/16",
             "markdown": true
+        },
+        {
+            "title": "Dimensional Analysis: a worksheet",
+            "author": "Hardmath123",
+            "description": "An article with absolute significance",
+            "file": "dimensional-analysis.html",
+            "date": "10/11/16"
         }
     ]
 }

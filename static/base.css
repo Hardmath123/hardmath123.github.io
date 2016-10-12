@@ -9,7 +9,7 @@ body {
   background-color: white;
 }
 
-p, li {
+p, li, dd {
   line-height: 1.6em;
   text-rendering: optimizeLegibility;
 
