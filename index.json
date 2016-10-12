@@ -453,7 +453,8 @@
             "description": "Challenging the linearity of high school mathematics.",
             "file": "a-case-against-calculus.md",
             "date": "4/5/16",
-            "markdown": true
+            "markdown": true,
+            "draft": true
         },
         {
             "title": "Carnival of Mathematics 134",
