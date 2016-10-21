@@ -478,6 +478,14 @@
             "description": "An article with absolute significance",
             "file": "dimensional-analysis.html",
             "date": "10/11/16"
+        },
+        {
+            "title": "Nineteen",
+            "author": "Hardmath123",
+            "description": "Explaining xenotonality with number-theoretic music theory",
+            "file": "19-notes.md",
+            "date": "10/21/16",
+            "markdown": true
         }
     ]
 }
