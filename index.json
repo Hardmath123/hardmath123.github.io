@@ -494,6 +494,22 @@
             "file": "semantic-sieve.md",
             "date": "11/13/16",
             "markdown": true
+        },
+        {
+            "title": "Abandon All Scope, Ye Who Enter Here",
+            "author": "Hardmath123",
+            "description": "Adding dynamic scoping to JavaScript, for fun and profit, because that is definitely a good idea that cannot possibly backfire at all.",
+            "file": "abandon-all-scope.md",
+            "date": "12/4/16",
+            "markdown": true
+        },
+        {
+            "title": "The FACADE Protocol",
+            "author": "Hardmath123",
+            "description": "A cryptographic primitive for plausibly-deniable collusion.",
+            "file": "facade.md",
+            "date": "1/4/17",
+            "markdown": true
         }
     ]
 }
