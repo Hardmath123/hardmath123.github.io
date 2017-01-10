@@ -10,10 +10,2275 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 17 Feb 2016 05:58:33 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 10 Jan 2017 03:28:31 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Don't Call Us, We'll Call You]]></title>
+            <description><![CDATA[<p>Monadic IO and the Sugarloaf Transformation</p>
+
+
+<p>Look. I get it. Monad tutorials are a meme, memes about monad tutorials are a
+meme, and we’re almost at the point where memes about memes about monad
+tutorials are a meme. Before we go any farther down this infinite stack of
+turtles, though, I want to share one way to think about monads that doesn’t
+involve burritos or boxes or any Haskell code at all. I present to you, <a href="https://www.youtube.com/watch?v=i4njPe2_rho">the
+Sugarloaf Transformation</a>.</p>
+<p>The overall idea makes sense to me because I’m a fan of visual metaphors. Your
+mileage may vary.</p>
+<hr>
+<p>Consider the dataflow programming paradigm (think of Quartz Composer or
+LabView-G). A dataflow language takes the idea of an abstract syntax tree and
+extends it to the tree’s close relative, the directed acyclic graph. A dataflow
+program is a DAG where the edges entering and leaving each node are ordered.
+Each edge is associated with a value, and a node computes the values of its
+out-edges based on the values of its in-edges. Nodes with no in-edges are
+called <em>sources</em>, and nodes with no out-edges are called <em>sinks</em>. The program
+below computes the difference between 3 and 1, and prints the number 2. The two
+nodes on the left are sources that return constants; the <code>print</code> node is a
+sink.</p>
+<pre><code>+---+
+| 3 |--+
++---+  |   +-------+
+       +--&gt;|       |   +-------+
+           | minus |--&gt;| print |
+       +--&gt;|       |   +-------+
++---+  |   +-------+
+| 1 |--+
++---+
+</code></pre><p>To interpret a dataflow program, we have a variety of strategies. We could
+begin at sinks and recursively descend into in-edges until we reach sources,
+which can be evaluated with no further work. This corresponds to a
+recursive-descent interpreter of an AST. Alternatively, we could begin by
+collecting the set of sources, evaluating them, assigning the results to the
+respective out-edges. Then, we iteratively find and evaluate nodes whose
+in-edges have all been assigned values, until at last we have evaluated the
+entire program.</p>
+<p>The point I wish to make is that <em>the order in which nodes are evaluated is
+nondeterministic.</em> Thus, the following “obvious” program to subtract two
+numbers is <em>not</em> well-defined. If given inputs “3, 1” by a human, it may output
+“2” or “-2” depending on the order in which the two <code>read</code> nodes were
+evaluated.</p>
+<pre><code>+------+
+| read |--+
++------+  |   +-------+
+          +--&gt;|       |   +-------+
+              | minus |--&gt;| print |
+          +--&gt;|       |   +-------+
++------+  |   +-------+
+| read |--+
++------+
+</code></pre><p>The problem is that nondeterministic evaluation order for IO results in the
+evaluator potentially diverging. This is really bad! How can we force a
+deterministic order of execution for IO primitives? Well, notice that the only
+way to force node <em>x</em> to evaluate before node <em>y</em> is to make <em>y</em> depend on the
+output of <em>x</em>. We can have each node output an “ordering sentinel” that becomes
+the input to future nodes: this allows us to impose a partial ordering on node
+evaluation, as shown below.</p>
+<pre><code>+-------+   +------+     +------+
+| start |--&gt;|      |----&gt;|      |
++-------+   | read |     | read |
+            |      |-+   |      |-+
+            +------+ |   +------+ |
+                     |            |   +-------+
+                     |            +--&gt;|       |   +-------+
+                     |                | minus |--&gt;| print |
+                     +---------------&gt;|       |   +-------+
+                                      +-------+
+</code></pre><p>The <code>start</code> node simply emits an ordering sentinel, to kick off the
+computation.</p>
+<p>This looks really good: this program is, in fact, well-defined in its execution
+order. Sadly, a partial ordering still allows divergent programs. Why? It’s
+because, <a href="http://homepages.inf.ed.ac.uk/wadler/papers/lineartaste/lineartaste-revised.pdf">in the words of Philip
+Wadler</a>,
+“Truth is free.” Once you have computed a sentinel, you can use it wherever you
+want. What prevents us from doing this?</p>
+<pre><code>               +------+
+           +--&gt;|      |
+           |   | read |      +-------+
+           |   |      |-----&gt;|       |   +-------+
++-------+  |   +------+      | minus |--&gt;| print |
+| start |--+             +--&gt;|       |   +-------+
++-------+  |   +------+  |   +-------+
+           +--&gt;|      |  |
+               | read |  |
+               |      |--+
+               +------+
+</code></pre><p>Nothing. Yikes.</p>
+<hr>
+<p>If the problem is that “truth is free,” we might be able to solve the problem
+by simply restricting the flow of information created by IO primitives. One
+solution is to sandbox all computation that uses the output of an IO node. An
+easy way to do this is to “lock” the output of an IO node in a special pipe
+that can only be unlocked by entering a sandbox. Of course, sandboxes must only
+allow locked values to exit—otherwise you can trivially pass a value through
+the null sandbox to unlock it. Our program then becomes the following (the
+dotted boxes denote sandboxes, and fat arrows are locked).</p>
+<pre><code>            .................................................
++------+    :                                               :
+| read |===&gt;@---------------+                               :
++------+    :               |                               :
+            :             ..|............................   :
+            :             : |                           :   :
+            :             : |   +-------+               :   :
+            :             : +--&gt;|       |   +-------+   :==&gt;:==&gt; ...
+            : +------+    :     | minus |--&gt;| print |==&gt;:   :
+            : | read |===&gt;@----&gt;|       |   +-------+   :   :
+            : +------+    :     +-------+               :   :
+            :             :                             :   :
+            :             :.............................:   :
+            :                                               :
+            :...............................................:
+</code></pre><p>Notice that since a sandbox only unlocks one pipe at a time, and does not allow
+the unlocked value to escape, our previous divergence hack becomes impossible.
+<code>minus</code> takes two unlocked inputs, so they <em>must</em> be computed in nested
+sandboxes which ensure sequential execution. Indeed, by generalizing, it is not
+hard to see that now <em>there is only one way to compute the contents of a locked
+pipe.</em> This means that the result of a locked pipe is literally the same as the
+computation that goes into evaluating its contents—and so our programs must
+have a well-defined execution order.</p>
+<p>In Haskell, locked pipes correspond to values “boxed” in a value of type <code>IO a</code>
+(this is where the burrito metaphor stems from). Sandboxes are lambdas, and the
+unlocking mechanism <code>@</code> is the monadic binding operator <code>&gt;&gt;=</code>. The <code>return</code>
+function in Haskell is simply a node that locks its input—this lets us
+<em>return</em> an arbitrary value from a sandbox.  Finally, <code>do</code>-notation is just
+syntactic sugar to save programmers from reasoning about lots of nested
+sandboxes, in the same spirit that C has in letting you write <code>1+2+3+4</code> instead
+of <code>1+(2+(3+4))</code>.</p>
+<hr>
+<p>P.S. The title of this post refers to the idea that this transformation in a
+way inverts the traditional flow of control. Normally, <code>minus</code> would call
+<code>read</code> twice to get the values of its inputs. Here, however, the <code>reads</code> are
+calling <code>minus</code> to create their output. “Don’t call us, we’ll call you.”</p>
+]]></description>
+            <link>http://hardmath123.github.io/sugarloaf.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/sugarloaf.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sat, 07 Jan 2017 08:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[The FACADE Protocol]]></title>
+            <description><![CDATA[<p>A cryptographic primitive for plausibly-deniable collusion.</p>
+
+
+<p>I think the best way to begin this article is by quoting James Mickens:</p>
+<blockquote>
+<p>[Cryptographers] are like smarmy teenagers who listen to goth music: they are
+full of morbid and detailed monologues about the pervasive catastrophes that
+surround us, but they are much less interested in the practical topic of what
+people should do before we’re inevitably killed by ravens or a shortage of
+black mascara.</p>
+</blockquote>
+<p>Now, I don’t listen to goth music and I didn’t even know “smarmy” was a word.
+But I <em>am</em> a teenager and I <em>do</em> worry about the pervasive catastrophes that
+surround us, including, but not limited to, the following three scenarios that
+(for reasons beyond my control or understanding) I spent all winter break
+contemplating.</p>
+<blockquote>
+<p><strong>Scenario 1:</strong> The CEOs of ACME, Inc. and Ajax, Inc. both want to know
+whether or not the other one is willing to collude. But, they cannot ask the
+question outright: if ACME says “Ajax, I want to collude with you,” then Ajax
+can use that message to get ACME in trouble with antitrust laws, and thus
+eliminate competition. So, both companies end up making less money than they
+would in an ideal situation.</p>
+<p><strong>Scenario 2:</strong> Alice and Bob both want to go to prom with each other, but
+each is too afraid to ask the other. If Bob asks Alice to prom and Alice
+rejects Bob, then Bob is in trouble (socially). The same holds if Alice asks
+Bob. Game theoretically, each party has a higher expected payout by not
+playing the game. The only winning move is not to play: they never end up
+going to prom.</p>
+<p><strong>Scenario 3:</strong> Alice is the world’s best safecracker and Bob is the world’s
+best hacker. If Alice and Bob were to work together, they could pull off a
+really lucrative heist. But neither one would suggest such a thing, because
+the other would rat him or her out: it’s a round of potential-prisoners’
+dilemma. As a result, the heist never occurs, and the only thing the world is
+robbed of is another cheap crime novel “based on a true story.”</p>
+</blockquote>
+<p>Clearly, these scenarios are isomorphic in some way (no, not because they are
+all potential Ryan Gosling movies). The common thread is the following: two
+parties, each with a secret bit, wish to compute the logical AND of their bits
+without revealing their individual bits. Neither party trusts the other, so
+there is a deadlock and opportunities are missed. It’s worse than that time Jim
+and Della invited a bunch of philosphers for dinner. For that matter, this is
+awkwardly reminiscent of that time the two most powerful nations in the world
+decided to build lots of nuclear weapons.</p>
+<p>Abstractly, what we have is a situation where mutually distrusting parties need
+to orchestrate a secure transfer of sensitive information. This sounds like a
+job for cryptography.</p>
+<h3 id="previous-work">Previous Work</h3>
+<p>Apparently Scott Aaronson solved this problem before I did. See
+<a href="http://stellar.mit.edu/S/course/6/sp08/6.080/courseMaterial/topics/topic1/lectureNotes/lec181/lec18.pdf">here</a>.
+S. Dukhovni, J. Weisblat, and I. Chung improved upon his work. Their solution,
+the SENPAI protocol, can be found
+<a href="http://sigtbd.csail.mit.edu/pubs/veryconference-paper10.pdf">here</a>.</p>
+<p>The problem with both protocols is <em>asymmetry</em>: Bob learns the result of the
+protocol before Alice does. This means that Bob can carry out the protocol by
+inputting a “1”, and obtain a proof that Alice also input “1”, which, if Bob
+were malicious, could be catastrophic for Alice’s social life. Or, in the
+isomorphic colluding-businesses case, ACME could obtain a proof that Ajax
+intended to collude, and thus sabotage Ajax without completing the protocol.</p>
+<p>In fact, if you think about it, <em>any</em> finite protocol should have this
+weakness, because if you exchange information in a finite number of turns, then
+at some point one person must have the proof before the other person (the act
+of sending never creates information for the sender).</p>
+<p>How can we solve this? I spent this winter break thinking deeply about this
+problem. My result is a protocol that I named, following the tradition of
+SENPAI, the FACADE (Feelings Are Complicated And I Don’t Even) protocol. In
+case of a “1” result, FACADE gives <em>both</em> parties some proof of the other’s
+guilt, thus solving the problem with SENPAI. Much like nuclear disarmament and
+the formation of a friendship, both parties take turns making themselves a
+little bit more vulnerable, until at last they reach a mutually-agreed-upon
+level of nuclear and/or social détente.</p>
+<p>Unfortunately, FACADE has some unfortunate quirks that I haven’t been able to
+iron out yet—more on that in a moment.</p>
+<h3 id="how-does-facade-work-">How does FACADE work?</h3>
+<p>The FACADE protocol is based on Rabin’s 1981 paper, <a href="https://eprint.iacr.org/2005/187.pdf"><em>How to Exchange Secrets
+with Oblivious Transfer</em></a>.</p>
+<ol>
+<li>Alice creates a large semiprime <em>N = pq</em> and sends <em>N</em> to Bob.</li>
+<li>Bob selects some 1 &lt; <em>a</em> &lt; <em>N</em> and sends Alice <em>s</em>, the square of <em>a</em> mod
+<em>N</em>.</li>
+<li>Alice sends Bob exactly one square root <em>r</em> of <em>s</em> mod <em>N</em> (there are four
+possibilities; she randomly selects one).</li>
+<li>With 50% probability, Bob can now factor <em>N</em> by computing the GCD of <em>N</em> and
+<em>r &plusmn; s</em>. If Bob’s bit is “1” or if he <em>cannot</em> factor <em>N</em>, then he
+sends Alice <em>MAYBE</em>, otherwise he sends Alice <em>NO</em> followed by <em>p</em> and <em>q</em>.</li>
+<li>The protocol repeats, with Alice and Bob’s roles reversed. Each <em>MAYBE</em>
+increases the chances that the corresponding sender’s bit is “1”.</li>
+<li>The protocol ends when one party sends a valid <em>NO</em> message, or when both
+parties are satisfied that both bits are “1”.</li>
+</ol>
+<p>The way the FACADE protocol works is by creating plausible deniability for
+<em>MAYBE</em> responses. If Bob has sent 10 <em>MAYBE</em> messages, then</p>
+<ul>
+<li>If Bob’s bit is “0”, the probability of this occurring is less than one in a
+thousand.</li>
+<li>If Bob’s bit is “1”, the probability of this occurring is one.</li>
+</ul>
+<p>In other words, each successive <em>MAYBE</em> makes it harder to believe that Bob’s
+bit is “0”. However, Bob could still deny having a “1” bit and claim to be
+extremely unlucky. Since he keeps <em>a</em> a secret, it is impossible for anyone to
+tell whether or not he was “forced” to send <em>MAYBE</em>. Moreover, since Alice and
+Bob alternate messages, if Alice decides to rat Bob out with her “evidence” of
+<em>n</em> consecutive <em>MAYBE</em> messages from Bob, then Bob can retaliate by showing
+<em>n-1</em> consecutive <em>MAYBE</em> messages from Alice, which should be good enough to
+convince a jury that neither (or both) of them were up to no good.</p>
+<h3 id="-why-does-facade-work-"><em>Why</em> does FACADE work?</h3>
+<p>For completeness, I want to briefly touch on the number theory behind Rabin’s
+oblivious transfer mechanism: why does this number-theoretic gymnastics make
+sense?</p>
+<p>When Bob generates <em>s</em>, it is a quadratic residue mod <em>N</em>, and consequently mod
+both <em>p</em> and <em>q</em>. <em>s</em> has two square roots mod <em>p</em> and two square roots mod <em>q</em>
+because a quadratic polynomial can only have at most two roots in the ring of
+integers mod a prime, and we know that if <em>r</em> is a root then <em>-r</em> is also a
+root. Using the Chinese Remainder Theorem on each pair, we can reconstruct a
+total of four square roots mod <em>N</em>. (To find square roots mod the primes, Alice
+can select primes such that both are congruent to 3 mod 4. Then, raising <em>s</em> to
+the power <em>(p+1)/4</em> yields a square root of <em>s</em>. Showing that this works should
+be easy if you know Fermat’s Little Theorem.)</p>
+<p>Now, Alice has no idea which of the four square roots Bob chose when choosing
+<em>a</em>. So, she <em>must</em> report a random root. With probability 50%, that root <em>r</em>
+will be <em>&plusmn;a</em>. Bob already knows this root, it’s easy to compute! Let’s
+call this a <em>trivial</em> root: it means Bob can’t really do anything new with this
+information, because he already knew it.</p>
+<p>However, if Alice chooses a <em>nontrivial</em> root <em>r</em>, then the difference of
+squares of <em>a</em> and <em>r</em> is zero; that is, we have the equation <em>(a+r)(a-r) = 0</em>.
+Since <em>r</em> is a nontrivial root, neither of the factors is individually equal to
+zero: so, by Euclid’s lemma, we must have <em>p</em> divide one of them and <em>q</em> divide
+the other. That is, the GCD of <em>N = pq</em> and <em>a &plusmn; r</em> must be <em>p</em> or <em>q</em>,
+and thus Bob can factor <em>N</em> easily.</p>
+<p>In summary: Alice has no way of selecting a trivial (or nontrivial) root on
+purpose, and thus Bob has a fair 50% chance of factoring <em>N</em>. Crucially, Alice
+does not know whether or not Bob can factor <em>N</em> because she doesn’t know
+whether or not her root was nontrivial.</p>
+<p>I think Rabin’s oblivious transfer trick is one of the cleverest cryptographic
+ideas ever, because of how elegantly it accomplishes something seemingly
+impossible (“try to tell me something without knowing whether or not you told
+it to me”).</p>
+<h3 id="why-doesn-t-facade-work-">Why <em>doesn’t</em> FACADE work?</h3>
+<p>An unfortunate “gotcha” of this protocol is that it is not reusable, because
+<em>all</em> previous <em>MAYBE</em> messages are fair game to be used as evidence against
+the sender. Alice can keep knocking at Bob’s door, getting a “1” response,
+sending a “0” response, and eventually conclude that Bob’s bit is “1”.</p>
+<p>Solving this problem is tough, because FACADE by nature inherently <em>does</em> leak
+information. I experimented with strategies where you randomly choose to
+pretend your bit is “0” every once in a while to throw off an adversary: that
+turned out to be a fruitless endeavor since <em>any</em> such strategy will eventually
+be detected by statistically analyzing a large enough set of transcripts
+(convincing yourself of this is left as a fun exercise).</p>
+<p>In any case, my opinion is that a one-time protocol is definitely better than
+no protocol at all, and in each of the potential use-cases listed above, the
+secret bits are unlikely to change in a short timeframe.</p>
+<h3 id="bonus-protocol-toxic">Bonus protocol: TOXIC</h3>
+<p>TOXIC stands for “Two Operators eXchange Information Concurrently,” and to be
+perfectly honest it is kind of a cop-out because it requires both parties to be
+present in the same physical space. But I think it’s kind of clever anyway, and
+it is definitely worth sharing with you, if only because it is fun to imagine.</p>
+<ol>
+<li>Alice prepares a concentrated lead nitrate solution (solution A) and Bob
+prepares a concentrated sodium chloride solution (solution B). Note that
+both solutions are clear and visually indistinguishable from distilled
+water.</li>
+<li>In beaker A, Alice adds a quantity of either solution A or distilled water,
+depending on whether her bit is “1” or “0”, respectively.</li>
+<li>In beaker B, Bob adds a quantity of either solution B or distilled water,
+depending on whether his bit is “1” or “0”, respectively.</li>
+<li>Alice and Bob simultaneously empty their beakers onto a large plate.</li>
+<li>The result of the protocol is “1” if a precipitate forms, and “0” if it does
+not.</li>
+<li>The result is immediately washed out to dispose of any evidence.</li>
+</ol>
+<p>As long as you discard the result immediately, there is no way for anyone to
+know what the contents of beaker A and beaker B were. I suppose in practice an
+adversary could use some high-tech forensics (e.g. licking the beaker with
+their tongue) to recover some information, but in practice you shouldn’t be
+doing sketchy protocols in a chemistry lab anyway.</p>
+<h3 id="open-questions">Open questions</h3>
+<p>One of my favorite blogs, GLL, closes each post with a set of open questions. I
+think that is a lovely tradition, and so I invite you to ponder the following
+with me:</p>
+<p>What other applications are there for this type of protocol? What other flaws
+are there in FACADE, and are there ways to fix them? How, at a fundamental
+level, is the FACADE protocol related to the concept of a zero-knowledge proof,
+or to that of homomorphic encryption? <em>What makes this problem hard?</em></p>
+]]></description>
+            <link>http://hardmath123.github.io/facade.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/facade.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Wed, 04 Jan 2017 08:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Abandon All Scope, Ye Who Enter Here]]></title>
+            <description><![CDATA[<p>Adding dynamic scoping to JavaScript, for fun and profit, because that is definitely a good idea that cannot possibly backfire at all.</p>
+
+
+<blockquote>
+<p>I’ve been cleaning out my computer for the past few days, and late last night
+I came across this README. I have no memory of writing this, and to be honest
+I’m kind of frightened that it works (why are there regexes?).</p>
+</blockquote>
+<h3 id="what-is-inferno-">What is Inferno?</h3>
+<p>Inferno is a JavaScript library that provides <a href="http://c2.com/cgi/wiki?DynamicScoping">dynamic
+scoping</a> for JavaScript.</p>
+<h3 id="usage">Usage</h3>
+<p>First, install Inferno using our one-line cross-platform installer script,</p>
+<p><code>eval(&quot;var $ = function(name) { var caller = arguments.callee.caller; while (caller !== null) { var names = caller.toString().replace(/\\/\\*.+\\*\\//g, &#39; &#39;).replace(/\\/\\/.*\\n/g, &#39; &#39;).match(/^function\\s+(?:\\w+\\s*)?\\((.*?)\\)/)[1].split(&#39;,&#39;).map(function(a) { return a.trim(); }); if (names.indexOf(name) !== -1) return caller.arguments[names.indexOf(name)]; caller = caller.arguments.callee.caller; } };&quot;)</code>.  </p>
+<p>Then, use <code>$(&#39;name&#39;)</code> to dynamically search for a name.</p>
+<h3 id="example">Example</h3>
+<p>Suppose you want to write a function that prints a story, but you want to be
+able to specify where the output goes. It would be clumsy to thread an argument
+through every subroutine, and for some reason people always get mad at you when
+you use global variables. With Inferno, you can simply write a wrapper function
+that binds the name <code>output</code> dynamically.</p>
+<pre><code class="lang-javascript">function tell_beginning() {
+    $(&#39;output&#39;).write(&quot;Once upon a time...&quot;);
+}
+function tell_ending() {
+    $(&#39;output&#39;).write(&quot;...and they all lived happily ever after.&quot;);
+}
+
+
+function print_story(output) {
+    tell_beginning();
+}
+if (typeof(window) !== &#39;undefined&#39;) {
+    print_story(document);
+} else {
+    print_story(process.stdout);
+}
+</code></pre>
+<p>By some miracle, Inferno works in both node and the browser.</p>
+<h3 id="bugs">Bugs</h3>
+<ul>
+<li>This not work on recursive functions, partly because browsers don’t support
+traversing the stack, and partly because dynamically-scoped recursion makes
+everyone’s head hurt.</li>
+<li>We are currently in denial about the existence of the <code>var</code> keyword, arrow
+functions, and pretty much anything that isn’t bound via function arguments.</li>
+<li>Does not work in strict mode. This is actually a feature.</li>
+</ul>
+]]></description>
+            <link>http://hardmath123.github.io/abandon-all-scope.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/abandon-all-scope.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sun, 04 Dec 2016 08:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[All about that basis]]></title>
+            <description><![CDATA[<p>Three ways to compute semantic primes</p>
+
+
+<blockquote>
+<p>I recently had the privilege of attending a talk by Guy Steele: and that
+reminded me of one of his most famous lectures, <em>Growing a Language</em>. I don’t
+want to spoil the talk for you, so I encourage you to watch it <a href="https://www.youtube.com/watch?v=_ahvzDzKdB0">on
+YouTube</a>, or at least to read a
+<a href="https://www.cs.virginia.edu/~evans/cs655/readings/steele.pdf">transcript</a>. I
+promise that it’s relevant.</p>
+</blockquote>
+<p>In the ring of integers, prime numbers can be enumerated using the “Sieve of
+Eratosthenes”. In <em>linguistics</em>, we define a <a href="https://en.wikipedia.org/wiki/Semantic_primes">semantic
+prime</a> as an idea that can’t be
+expressed in simpler terms (for example, “there exists” or “because”). The
+question I ask in this blog post is, how do I enumerate semantic primes? In
+other words, <em>does there exist an efficient semantic sieve?</em></p>
+<p>The motivation here isn’t to build some sort of <a href="http://ogden.basic-english.org">Basic
+English</a>—or Newspeak—but rather to better
+understand the building blocks of our communication. However, this problem has
+more than just linguistic appeal. Consider the popular computer game Alchemy,
+which lets you combine elements like “fire” and “water” to produce “steam”.
+Given all the elements of alchemy, as well as the possible recipes, what are
+the possible starting elements? Similarly: approximately twice a year like
+clockwork, someone in the Scratch community notices that <a href="https://wiki.scratch.mit.edu/wiki/List_of_Block_Workarounds">some Scratch blocks
+can be defined in terms of
+others</a>, and then
+proceeds to ask what the minimal set of Scratch blocks is (you can see, for
+example, the <a href="https://scratch.mit.edu/discuss/topic/223486/">October</a> and
+<a href="https://scratch.mit.edu/discuss/topic/195968/">April</a> editions of this
+conversation). Clearly, any block that has no “workaround” (and, analogously,
+any word without a definition) must remain in a set of semantic primes, which I
+will call the “basis set” from now on.</p>
+<p>Beyond that, though, it is not immediately obvious which blocks or words must
+be kept in order to minimize the basis. If you define a “puppy” as a “small
+dog” and a “dog” as a “large puppy”, then which should you keep in your basis
+set? Perhaps you already have “small”, in which case it makes sense to keep
+“dog” to get “puppy” for free. Clearly, there are many possible basis sets
+(trivially, all words together form a basis). We’re just searching for the
+<em>smallest</em> such set (which may not even be unique!).</p>
+<p>All this is to say, this is not an easy problem.</p>
+<p>If you’re impatient for a solution (or just want to get the answer from a more
+reliable source), David P. Dailey has the answer in his paper, <a href="http://www.aclweb.org/anthology/J86-4003">The extraction
+of a minimum set of semantic primitives from a monolingual dictionary is
+NP-Complete</a>, published in 1986.</p>
+<p>Here, I want to present three subtly different ways to solve this problem.
+While the solutions I will present are perhaps evident to you already (and
+honestly not that profound), I would like to take this as an opportunity to
+explore the delightful subtlety that connects various areas of math—something
+that is getting dangerously close to becoming a theme of this blog.</p>
+<h3 id="act-i-in-which-we-dissolve-our-problems-to-get-a-solution">Act I: In which we dissolve our problems to get a solution</h3>
+<p>A dictionary is something that takes knowledge and gives you more knowledge.
+This is immediately reminiscent of formal logic, where you can take two
+statements and derive a new statement using an inference rule (we explored much
+of this theory in my 4-part series on formal logic and automated
+theorem-proving, <a href="meet-the-robinson.html">Meet the
+Robinson</a>).</p>
+<p>Let each word be associated with a proposition. We can now reason about the
+provability of propositions equivalently with the definability of the
+associated words. In particular, a definition corresponds to an implication,
+where the conjunction of the definition’s propositions together imply the
+defined word’s proposition. Thus, “a bird is a winged animal” turns into
+<code>winged</code> &wedge; <code>animal</code> &rarr; <code>bird</code>.</p>
+<p>Now, to reason about provability, I used what I knew about
+resolution-refutation. We want to prove the conjunction of the propositions of
+all the words in the dictionary by adding as few fresh axioms as possible,
+where each added axiom is just a lone proposition. One way to do this is to
+resolution-refute against the negation of this conjunction, searching for
+clauses that <em>only</em> have terms in negative polarity. The smallest such clause
+represents the minimal set of axioms needed to make the negation disprovable,
+and thus the desired conjunction provable.</p>
+<p>Notice, however, that we can’t use the full power of resolution-refutation
+here, because we are limited to only one incomplete inference rule: <em>modus
+ponens</em>. For instance, if <code>P</code> &rarr; (<code>Q</code> &vee; <code>R</code>) and <code>Q</code> &rarr; <code>Z</code> and <code>R</code>
+&rarr; <code>Z</code>, then we cannot prove <code>Z</code> via modus ponens even though it is
+“obviously” true.</p>
+<p>So, rather than “resolving” two clauses, we need to do some other kind of
+operation, which I’m going to call “dissolve” for lack of a better name.
+Dissolving is kind of the opposite of modus ponens. To solve the problem at
+hand, you compute the closure of the set of axioms (along with the negation you
+want to disprove) under dissolution, and filter out clauses that only have
+negative terms. Once you’ve saturated the set, the smallest such clause gives
+you the basis.</p>
+<pre><code class="lang-haskell">
+import Data.List(nub, union, (\\))
+import qualified Data.Set as Set
+import Control.Exception.Base(assert)
+
+type Clause = (Set.Set String, Set.Set String)
+-- Polarity =  Positive        Negative
+
+isOnlyNegative :: Clause -&gt; Bool
+isOnlyNegative (a, _) = Set.null a
+
+-- Only applies when dissolving (a &amp; b &amp; ...) =&gt; e against !x | !y | ...
+dissolve :: Clause -&gt; Clause -&gt; Clause
+dissolve (a, x) (b, y) =
+    let u = Set.intersection x b in -- u is probably a singleton set
+        assert (Set.size u &lt;= 1)    -- or so we hope!
+        (Set.union a (Set.difference b u),
+         Set.union (Set.difference x u) y)
+
+dissolveAll :: [Clause] -&gt; [Clause] -&gt; [Clause]
+dissolveAll x y =
+    let apex =
+            filter isOnlyNegative $ nub [dissolve b a | a &lt;- x, b &lt;- y] \\ x in
+        if null apex then
+            []
+        else
+            apex ++ (dissolveAll (x++apex) apex)
+
+dissolveStream :: [Clause] -&gt; [Clause]
+dissolveStream cs =
+    let bad = [(Set.empty, Set.unions $ map fst cs)] in
+        dissolveAll (cs++bad) bad
+
+solutions cs =
+    map snd $ filter isOnlyNegative (dissolveStream cs)
+
+
+-- You gotta know when to fold &#39;em.
+bestSolutions [] n = []
+bestSolutions (s:ss) n =
+    if n&lt;0 || Set.size s &lt; n then
+        s:(bestSolutions ss (Set.size s))
+    else
+        bestSolutions ss n
+
+solve d = bestSolutions (solutions d) (-1)
+
+mkdfn (a:as) = (Set.singleton a, Set.fromList as)
+
+w = map mkdfn [
+    &quot;water&quot;:[&quot;hydrogen&quot;, &quot;oxygen&quot;, &quot;fire&quot;],
+    &quot;oxygen&quot;:[&quot;plant&quot;, &quot;water&quot;],
+    &quot;fire&quot;:[&quot;oxygen&quot;, &quot;heat&quot;, &quot;hydrogen&quot;],
+    &quot;wood&quot;:[&quot;plant&quot;, &quot;soil&quot;],
+    &quot;plant&quot;:[&quot;water&quot;, &quot;time&quot;, &quot;soil&quot;],
+    &quot;soil&quot;:[&quot;nitrogen&quot;, &quot;time&quot;],
+    &quot;nitrogen&quot;:[&quot;hydrogen&quot;, &quot;heat&quot;],
+    &quot;heat&quot;:[&quot;time&quot;]
+    ]
+
+main = putStrLn $ show $ solve w
+</code></pre>
+<p>Against all odds, this seems to work, and with a little thought you can
+probably convince yourself that it will always work.</p>
+<h3 id="act-ii-what-is-an-animal-but-a-bird-without-wings-">Act II: What is an animal, but a bird without wings?</h3>
+<p>What else lets us take things and make new things? We talked about statements
+in logic, so how about the other kind of mathematical statement: the equation?
+We can certainly combine equations to derive more knowledge, so it doesn’t
+sound far-fetched to model words with variables and definitions with equations,
+and then reason about the <em>solvability</em> of the equations (rather than the
+<em>provability</em> of the terms).</p>
+<p>More formally: assign each word a unique positive integer and a variable.
+Construct linear equations using the sum of the definition-words on the
+left-hand-side, and the word-to-be-defined with the correct coefficient on the
+right-hand-side. So, if a bird=4 is a winged=2 animal=3, then construct
+the equation “winged + animal = (5/4) bird”, which is clearly true.</p>
+<p>How does this help?</p>
+<p>Well, solvability of linear equations is well-studied stuff. If you encode the
+equations in a matrix, and convert it to reduced-row echelon form using
+Gauss-Jordan elimination, the result is a matrix where</p>
+<ol>
+<li>The first few rows show you how to get some variables in terms of other
+variables – indeed, the maximal linearly-independent set</li>
+<li>The remaining rows say that those variables can’t be solved for in terms of
+the rest</li>
+</ol>
+<p>Thus, if we supply “values” of all variables in the latter rows, then we can
+deduce values of the variables in the former. Since the Gauss-Jordan
+elimination procedure minimizes this set, we’re already done.</p>
+<pre><code class="lang-python">
+from __future__ import division
+import sympy
+
+n_cache = []
+def numify(g):
+    def n(x):
+        try:
+            return n_cache.index(x)
+        except ValueError:
+            n_cache.append(x)
+            return len(n_cache)-1
+    return [map(n, r) for r in g]
+
+
+def mktrix(g):
+    count = len(g)
+    m = []
+    for d in g:
+        row = [0]*(len(n_cache)+1)
+        for k in d[1:]:
+            row[k] = 1
+        row[d[0]] = -(sum(d[1:])+len(d[1:]))/(d[0]+1)
+        m.append(row)
+    return m
+
+def solve(m):
+    return sympy.Matrix(m).rref()[1]
+
+def basis(g):
+    return set(n_cache) - {n_cache[x] for x in solve(mktrix(numify(g)))}
+
+test = [
+    [&quot;water&quot;, &quot;hydrogen&quot;, &quot;oxygen&quot;, &quot;fire&quot;],
+    [&quot;oxygen&quot;, &quot;plant&quot;, &quot;water&quot;],
+    [&quot;fire&quot;, &quot;oxygen&quot;, &quot;heat&quot;, &quot;hydrogen&quot;],
+    [&quot;wood&quot;, &quot;plant&quot;, &quot;soil&quot;],
+    [&quot;plant&quot;, &quot;water&quot;, &quot;soil&quot;],
+    [&quot;soil&quot;, &quot;nitrogen&quot;, &quot;time&quot;],
+    [&quot;nitrogen&quot;, &quot;hydrogen&quot;, &quot;heat&quot;],
+    [&quot;heat&quot;, &quot;time&quot;]
+]
+
+print basis(test)
+</code></pre>
+<p>But: Gauss-Jordan elimination is O(n<sup>3</sup>) and Dailey claims this
+problem is NP-complete. Clearly, we haven’t just proven that P=NP. So what
+gives?</p>
+<p>It turns out that we made a subtle extra assumption when encoding a
+“provability” problem in terms of a “solvability” problem. Logical implications
+are one-way: if P implies Q, then Q does not imply P. However, the linear
+equations we’re working with are <em>not</em> one-way! If you can solve for x in terms
+of y, then you can usually also solve for y in terms of x.</p>
+<p>So, for example, given definitions of “bird” and “winged”, and the relationship
+“a bird is a winged animal”, the linear equation model assumes we can deduce
+what an “animal” is. And in many cases, this is a reasonable assumption:
+indeed, it’s kind of how the game <em>Jeopardy!</em> works: “if you add wings to
+<em>this</em>, you get a bird” is not the worst way to hint at the word “animal”. It
+relies, in the end, on what you mean by “define”.</p>
+<p>That being said, I do want to note that this kind of reasoning can lead you
+straight to deriving Buckingham’s &Pi; Theorem in dimensional analysis (we
+discussed this theorem in detail <a href="dimensional-analysis.html">in a recent
+article</a>). This fact shouldn’t come as a surprise to
+anyone: dimensional analysis, too, deals with getting more knowledge from
+existing knowledge. The reasoning shown here can help identify redundant units,
+and thus discover the “fundamental” kinds of quantities in the physical world.
+Do we necessarily need units for frequency <em>and</em> for time?</p>
+<h3 id="act-iii-come-on-we-ve-got-a-diem-to-karp-e-">Act III: Come on! We’ve got a diem to Karp(e)!</h3>
+<p>In our hearts, we always knew this was a graph theory problem, and so naturally
+I feel compelled to present a graph-theoretic solution. This is the one Dailey
+presents in his 1986 paper cited above.</p>
+<p>Consider a graph where each word corresponds a vertex, and a directed edge
+travels from a word to another if the former is used in the definition of the
+latter. Naively, we may imagine that all we need to do is find all the leaves
+of this graph. However, this doesn’t work in the presence of cycles (if “GNU”
+is defined as “GNU’s Not UNIX”, then you definitely want “GNU” in your basis
+set).</p>
+<p>What we really seek is the smallest possible set of vertices such that:</p>
+<ol>
+<li>All leaves of the graph are in the set</li>
+<li>If each vertex in the set is removed from the graph, the result is
+cycle-free</li>
+</ol>
+<p>In other words, what we want is the minimum <a href="https://en.wikipedia.org/wiki/Feedback_vertex_set">feedback vertex
+set</a> of the graph, which is
+one of Karp’s 21 NP-Complete problems. This is unfortunate, but on the bright
+side, computers are fast and so we can at least hope to find solutions.</p>
+<p>There exist a bunch of algorithms to compute the FVS, but I chose to stick with
+the theme of logic by using an SMT solver (inspired by
+<a href="https://github.com/firedrakeproject/glpk/blob/master/examples/mfvsp.mod">this</a>).
+That is, I encoded each vertex with (1) a “guard” bit that says “am I part of
+the basis”, and (2) an integer that corresponds to an index into a topological
+sort. Then, for each pair of vertices, I check that if neither vertex is part
+of the basis, then the topological indices obey any edges between the vertices.
+This gives me a cheap cyclic-ness check that is easy to execute symbolically
+because it is nonrecursive. Finally, using
+<a href="http://emina.github.io/rosette">Rosette</a> to run the algorithm symbolically, I
+can solve for guard bits and indices that make the graph cycle-free. All that’s
+left is to minimize the number of guard bits that are “true”, which is
+supported by Z3 via a “minimize” call.</p>
+<pre><code class="lang-scheme">#lang rosette
+
+(define graph
+  &#39;((water hydrogen oxygen fire)
+    (oxygen plant water)
+    (fire oxygen heat hydrogen)
+    (wood plant soil)
+    (plant water time soil)
+    (soil nitrogen time)
+    (nitrogen hydrogen heat)
+    (heat time)
+    (hydrogen)
+    (time)
+    ))
+
+(define (cycle-free? graph)
+  (andmap
+    (λ (vertex)
+       (define v (car vertex))
+       (define children (cdr vertex))
+       (define topology (cdr (assoc v s-cache)))
+       (andmap
+         (λ (c)
+            (define topology+ (cdr (assoc c s-cache)))
+            (if (or (car topology) (car topology+))
+              #t
+              (&gt; (cadr topology) (cadr topology+))))
+         children))
+    graph))
+
+(displayln &quot;Initializing...&quot;)
+
+(define s-cache
+  (map (λ (v)
+          (define name (car v))
+          (define-symbolic* guard boolean?) ; am I part of the initial spawn
+          (define-symbolic* index integer?)
+          (list name guard index))
+       graph))
+
+(define fvs-count (apply + (map (λ (x) (if (cadr x) 1 0)) s-cache)))
+
+(displayln &quot;Solving...&quot;)
+
+(define sol
+  (optimize #:minimize  (list fvs-count)
+            #:guarantee (assert (cycle-free? graph))))
+(if (unsat? sol)
+  (displayln &quot;dude you failed&quot;)
+
+  (append
+    ; leaves
+    (map car (filter (λ (x) (= (length x) 1)) graph))
+    ; feedback vertex set
+    (map car
+         (filter
+           (λ (x)
+              (define u (evaluate (cadr x) sol))
+              (and (not (constant? u)) u))
+           s-cache))))
+</code></pre>
+<p>Tim scraped the Scratch Wiki’s workaround database for me, and though the
+scraping is dodgy at best, my analysis showed that of the 103 blockspecs
+mentioned, only about half are needed (Brian, of course, pointed out that in
+Snap<em>!</em> all you need is lambda). So that answers <em>that</em> question. As for the
+English language, well, I would almost certainly need a bigger computer to deal
+with millions of words. I guess I could scrape from <a href="http://gcide.gnu.org.ua">GNU’s free
+dictionary</a>, but that’s a project for another day.</p>
+<p>Meanwhile, I want to note that this procedure doesn’t allow one word to have
+multiple equivalent definitions, unlike both the propositional-provability
+approach <em>and</em> the linear-algebra approach.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>If nothing else, I loved this little question because it forced me to think
+deeply about how to model something new and unfamiliar in terms of math I
+already knew.</p>
+<p>My chemistry teacher used to put at least one “toolbox” question on his tests.
+A toolbox question is one that doesn’t imply what tool you should use to solve
+it: unlike standard textbook stoichiometry problems that can all be solved with
+the same trick, a toolbox problem forces you to look at your toolbox and pick
+the tools yourself.</p>
+<p>Well, in the same spirit—and I’ve <a href="no-rules-in-math.html">used this metaphor
+before</a>—I feel that high school mathematics has given
+me an incredible set of tools, but not nearly enough opportunities to use them.
+Sure, I’ve often had to solve linear equations and prove theorems in
+propositional logic: but I have rarely <em>chosen</em> to do so in order to solve a
+problem.</p>
+<p>Maybe that’s why I care so much about finding math in the world around me.</p>
+]]></description>
+            <link>http://hardmath123.github.io/semantic-sieve.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/semantic-sieve.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sun, 13 Nov 2016 08:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Nineteen]]></title>
+            <description><![CDATA[<p>Explaining xenotonality with number-theoretic music theory</p>
+
+
+<p>I’m taking AP Music Theory this year, and I’ve been spending some time
+exploring the number theory of music. This post is just a quick check-in on my
+thoughts so far, and an explanation for why I’m trying to build a 19-note
+marimba in my spare time.</p>
+<hr>
+<p>A piano has 12 notes between consecutive C’s: C, C#, D, D#, E, F, F#, G, G#, A,
+A#, B, and C again. A good question to ask is, “why?”</p>
+<p>Well, it comes down to how your ear works. There is plenty of literature on
+this (I recommend <a href="https://eev.ee/blog/2016/09/15/music-theory-for-nerds/">this blog
+post</a> or <a href="https://www.youtube.com/watch?v=i_0DXxNeaQ0">this
+video</a>), but the main takeaway is
+that for a variety of reasons related to the structure of your cochlea, your
+brain likes to hear frequencies that have nice whole-number ratios. For
+example, a C is 256 Hertz while a G is 384 Hertz, and 384/256 = 3/2 which is a
+nice whole-number ratio. Indeed, if you play a C and a G together, it sounds
+pretty good Musicians call this a “perfect fifth”, and one musician in
+particular liked it so much that he built a tuning system around it.</p>
+<p>Pythagoras—yes, the one with the triangle theorem—figured that using the
+ratios 2:1 and 3:2, you can build a whole bunch of notes that sound good
+together (it’s easy to do this kind of tuning for string instruments, because
+the lengths are really easy). You do this by going up by the 3:2 ratio, and
+then going down by a factor of 2 when it gets higher than 2. So, you get 1,
+3/2, (9/4)/2 = 9/8, and so on. As a musician, you might recognize this as
+“going up the circle of fifths”.</p>
+<p>We can then ask, “will going up the circle of fifths ever get us back to our
+root note?” Obviously, the answer is no: to get back to the root note you need
+to get a ratio of 1 again. But, every time you multiply by 3/2 you add a power
+of 3 to the numerator, which will never cancel with the denominator. That is,
+we are searching for an integer solution to the equation ($ (3/2)^x / 2^y = 1
+$) which clearly does not exist.</p>
+<p>However, we can get close! Recall from <a href="a-balance-of-powers.html">A Balance of
+Powers</a> that we can compute really good approximate
+solutions for these equations by taking logaritms and using Diophantine
+approximation techniques. The first convergent yields x=5 and y=3, which gives
+us a ratio of 243/256, or around 0.95. This is pretty bad: the difference is
+clearly audible (in fact, it’s approximately the difference between a C and a
+C#). Nevertheless, the notes you get by this process (C, G, D, A, E) form
+something very familiar: the pentatonic scale.</p>
+<p>In any case: the second convergent yields x=12 and y=7, which gives us a ratio
+of 531441/524288, or around 1.01. This is much better—it’s much harder to
+hear the difference!</p>
+<p>So, twelve fifths gets us reasonably close to the root note: and that’s where
+our 12-note chromatic scale comes from.</p>
+<p>Unfortunately, there were problems with this scheme. The most urgent problem
+was that it lacked symmetry: you can only play in “C”. If you start a song on
+“D”, everything sounds awful because the ratios don’t work the same relative to
+“D”. In theory we could start all our songs on “C”, but that makes it hard for
+singers with different ranges, and also prevents composers from modulating to a
+different key.</p>
+<p>With this issue in mind, people tried to come up with alternative tunings. One
+such alternative was “well-tempering”, which is what Bach really loved. He
+wrote <em>The Well-Tempered Clavier</em> to show off well-tempering: he has a prelude
+and fugue in each key, and I’m told that that each piece takes advantage of the
+subtle tuning tendencies of its respective key.</p>
+<p>The big winner turned out to be “even tempering”. Even tempering spaces out the
+12 notes of the scale evenly. Since the top note is twice the frequency of the
+root note, each consecutive pair of notes in the even-tempered scale differs by
+a ratio of ($ 2^{(1/12)} : 1$), which is around 1.06. Crucially, the difference
+between “C” and “D” is the same as that between “D” and “E”, so if you start a
+song on “D” instead of “C”, everything still fits. Furthermore, even tempering
+frequencies don’t stray <em>too</em> far from the Pythagorean frequencies, so
+everything still sounds good! Well, except for the occasional connoisseurs who
+complain that they can hear the difference.</p>
+<hr>
+<p>But, we have strayed from the original goal: we wanted lots of simple
+whole-number ratios. Does the 12-note even tempering achieve that?</p>
+<p>Well, I wrote a Python program that calculates a “pleasantness score” for each
+n-note even tempering. The pleasantness score takes a set of whole-number
+ratios (Pythagorean ratios, mostly), and returns the total error a tempering
+achieves with respect to those whole-number ratios. Clearly, a million-note
+even tempering would have a very low total error, because it is off by at most
+a millionth for each ratio.</p>
+<pre><code class="lang-python">&gt;&gt;&gt; ratios = [3/2, 4/3, 5/3, 7/5] # for example
+&gt;&gt;&gt; def score(n):
+&gt;&gt;&gt; ...     total = 0
+&gt;&gt;&gt; ...     for r in ratios:
+&gt;&gt;&gt; ...             total += min([(2**(1.0*i/n) - r)**2 for i in range(n)])
+&gt;&gt;&gt; ...     return total
+&gt;&gt;&gt;
+&gt;&gt;&gt; for i in range(2, 32):
+&gt;&gt;&gt; ...     print i, &#39;\t&#39;,  &#39;%10.2f&#39; % (1/score(i))
+
+n      1/score
+--------------
+2        12.85
+3        25.68
+4        69.78
+5        80.27
+6        51.99
+7       252.74
+8       282.14
+9       182.01
+10      413.60
+11      249.02
+12     2293.78
+13      267.00
+14      811.75
+15     1277.37
+16      711.44
+17      785.59
+18      550.84
+19     5030.16
+20     1150.78
+21      901.15
+22     2531.40
+23     1238.07
+24     2293.78
+25     1182.83
+26     2645.21
+27     6829.60
+28     1274.03
+29     4398.47
+30     1520.35
+31    14003.10
+</code></pre>
+<p>It turns out that for almost any set of simple ratios you pick, 12 notes has a
+significantly better score than anything before it! Note that after 12, you can
+do better with a 19-note scale, and even better with a 31-note scale. I do not
+know why 12, 19, and 31 work out so well: but they do. 19 and 31 in particular
+are very nice because they are prime. So, you can do a “circle of fifths” with
+just about any ratio: a “circle of thirds”, for example. Both 19- and 31- note
+even temperings were explored by Joel Mandelbaum in the 1900s (so, I’m not the
+first person to have figured this out).</p>
+<p>If you’re curious, you can find a piece of 19-note music, <em>Truth on a Bus</em>,
+<a href="http://sethares.engr.wisc.edu/mp3s/truthonabus.html">here</a> and a piece of
+31-note music, “Music fur die 31-Stufige Orgel”,
+<a href="https://www.youtube.com/watch?v=23ImVLezV4c">here</a>, which is played on a
+31-note Fokker organ.</p>
+<p>And <em>that</em> is why we’re currently building a 19-note marimba for our jazz band.</p>
+]]></description>
+            <link>http://hardmath123.github.io/19-notes.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/19-notes.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Fri, 21 Oct 2016 07:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Dimensional Analysis: a worksheet]]></title>
+            <description><![CDATA[<p>An article with absolute significance</p>
+
+
+<p><em><strong>Editor's note:</strong> This post was automatically converted
+from a LaTeX document. While some attempts have been made to preserve the
+original layout, it is impossible to faithfully reproduce the original
+formatting. If you would like a copy of the PDF version, please contact
+me.</em>
+
+<br/>
+
+     <!--l. 32--><p class="indent" >      In  school,  many  of  us  learn  about  dimensional  analysis  as  a  way  to
+     convert between various units. There is, however, far more to this humble
+     technique.  In  this  paper,  I  would  like  to  present  a  smörgåsbord  of
+     dimensional analysis pearls that I have found over the past few months.
+</p>
+   <h3 class="likesectionHead"><a 
+ id="x1-1000"></a>Introduction</h3>
+<!--l. 41--><p class="noindent" >Many people argue that the metric system is better than the imperial system. This
+argument, however, is usually predicated on the relationship <em>between</em> various
+units—powers of ten are more easy to manipulate because we are taught arithmetic in
+base ten; additionally, the uniformity makes it easier to remember how to convert from
+centimeters to meters than from inches to furlongs. If we only consider units in absolutes,
+however, then is a meter really ‘better&#x2019; than a yard?
+
+</p><!--l. 49--><p class="indent" >   The theme of this paper is that there is no obvious quantity to use as a fundamental
+unit of length, mass or even time. In fact, this poses problems in certain domains where
+we cannot appeal to convention to establish units. For example: on the <em>Voyager 1</em> probe,
+NASA placed a golden record designed to be found by extraterrestial life. Inscribed on
+this record, NASA provided Sagan-esque instructions for playback. The time taken for
+one rotation of the record is speciﬁed in terms of the period associated with the
+fundamental transition of the hydrogen atom <span class="cite"> [<a 
+href="#Xvoyager">10</a>]</span>.
+</p><!--l. 58--><p class="indent" >   “The fundamental transition of the hydrogen atom” is certainly more reasonable to explain to
+intelligent life than, say, a second (which would force the extraterrestial life forms to somehow
+measure the time Earth takes to complete its orbit). However, this choice still seems a little
+arbitrary<span class="footnote-mark"><a 
+href="#fn1x0" id="fn1x0-bk"><sup class="textsuperscript">∗</sup></a></span><a 
+ id="x1-1001f1"></a>.
+</p><!--l. 66--><p class="indent" >   Why aren&#x2019;t there obvious fundamental units? We can answer this question with a
+philosophical observation: nobody knows the <em>absolute</em> size of anything. For all we know,
+the universe could be really small, and us smaller still. All is not lost, however. Clearly,
+some properties of the world remain constant regardless of how we choose
+to measure them. I cannot become richer by measuring my income in cents
+rather than dollars. Percy Bridgman, a physicist who studied the properties of
+materials under extremely high pressure, stated this property eloquently in his 1931
+treatise <span class="cite"> [<a 
+href="#Xbridgman">3</a>]</span>:
+     </p><div class="quote">
+     <!--l. 74--><p class="noindent" >[T]he ratio of the numbers measuring any two concrete examples of a
+     secondary quantity shall be independent of the size of the fundamental
+     units used in making the required primary measurements.</p></div>
+<!--l. 76--><p class="noindent" >This statement, known as <em>Bridgman&#x2019;s Principle of absolute signiﬁcance of relative magnitude</em>, is
+really just an expression of humility: nature is indifferent to our choice of units <span class="cite"> [<a 
+href="#Xsonin">11</a>, <a 
+href="#Xmeditation">8</a>]</span>.
+That is, the period associated with the fundamental transition of the hydrogen atom will
+always be <!--l. 80--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn><mo 
+class="MathClass-punc">.</mo><mn>2</mn><mn>3</mn><mo 
+class="MathClass-bin">×</mo><mn>1</mn><msup><mrow 
+><mn>0</mn></mrow><mrow 
+><mo 
+class="MathClass-bin">−</mo><mn>1</mn><mn>7</mn></mrow></msup 
+></math>
+times the period taken by Sol 3 to orbit the sun, regardless of which system
+of units are used to measure the two quantities. Units are arbitrary; ratios are
+invariant.
+</p><!--l. 85--><p class="noindent" >
+</p>
+   <h3 class="likesectionHead"><a 
+ id="x1-2000"></a>Exercises</h3>
+<!--l. 88--><p class="noindent" >
+
+     </p><dl class="enumerate-enumitem"><dt class="enumerate-enumitem">
+   1. </dt><dd 
+class="enumerate-enumitem">
+          <dl class="enumerate-enumitem"><dt class="enumerate-enumitem">
+      (a) </dt><dd 
+class="enumerate-enumitem">According to Bridgman&#x2019;s Principle, the ratio of a circle&#x2019;s circumference
+          to its diameter should be constant regardless of the units used to measure
+          it (this constant, of course, is <!--l. 92--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>π</mi></math>).
+          Is the ratio of a circle&#x2019;s <em>area</em> to its radius independent of the units used?
+          Does this violate Bridgman&#x2019;s Principle?
+          </dd><dt class="enumerate-enumitem">
+      (b) </dt><dd 
+class="enumerate-enumitem">By citing Bridgman&#x2019;s Principle, explain why (for the purposes of this
+          paper) Kelvins are a unit, but degrees Celsius are not.
+          </dd></dl>
+     </dd><dt class="enumerate-enumitem">
+   2. </dt><dd 
+class="enumerate-enumitem">In Europe, <strong>fuel efficiency</strong> is measured in liters per kilometer. Note that both
+     liters and kilometers can be expressed in terms of centimeters. Simplify
+     ‘liters per kilometer&#x2019;, and give a physical interpretation of the resulting
+     units <span class="cite"> [<a 
+href="#Xxkcd">7</a>]</span>.
+     </dd><dt class="enumerate-enumitem">
+   3. </dt><dd 
+class="enumerate-enumitem">The <strong>Pythagorean theorem</strong> that states that the square of the length of the longest
+     side of a right triangle is the sum of squares of the two shorter sides. Draw a right
+     trangle, and draw a line from the right angle, perpendicular to the longest side
+     (known as the hypotenuse). You now have three triangles: two small ones
+     contained in one large one.
+     <!--l. 113--><p class="indent" >
+          </p><dl class="enumerate-enumitem"><dt class="enumerate-enumitem">
+      (a) </dt><dd 
+class="enumerate-enumitem">Show  that  all  three  triangles  are  similar,  that  is,  they  have  the  same
+          angles.
+          </dd><dt class="enumerate-enumitem">
+      (b) </dt><dd 
+class="enumerate-enumitem">Convince  yourself  that  the  area  of  a  triangle  can  be  expressed  as  a
+          function of one of the acute angles and the length of the hypotenuse.
+          </dd><dt class="enumerate-enumitem">
+      (c) </dt><dd 
+class="enumerate-enumitem">Consider the relationship between the areas of the three triangles, then
+          <em>use dimensional analysis to derive the Pythagorean Theorem</em> <span class="cite"> [<a 
+href="#Xpythagoras">14</a>]</span>.
+          Why is this not a valid proof?
+          </dd></dl>
+
+     </dd><dt class="enumerate-enumitem">
+   4. </dt><dd 
+class="enumerate-enumitem">
+          <dl class="enumerate-enumitem"><dt class="enumerate-enumitem">
+      (a) </dt><dd 
+class="enumerate-enumitem">The <em>derivative</em> of a variable with respect to another is the rate of change
+          of the former with respect to the latter. For example, the derivative of
+          the position of an object with respect to time is its velocity. What are
+          the units of position, time, and velocity? Arguing by analogy, construct
+          rules for dimensional analysis of derivatives.
+          </dd><dt class="enumerate-enumitem">
+      (b) </dt><dd 
+class="enumerate-enumitem"><em>Integration</em>  is  the  opposite  process  of  derivation:  for  example,  the
+          integral  of  the  velocity  of  an  object  with  respect  to  time  is  its
+          position. Arguing by analogy, construct rules for dimensional analysis
+          of integrals.
+          </dd><dt class="enumerate-enumitem">
+      (c) </dt><dd 
+class="enumerate-enumitem">According to the <strong>Fundamental Theorem of Calculus</strong>, another way to
+          think about integration is that it corresponds to a measurement of the
+          area under a curve (i.e. between the curve and the <!--l. 142--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>x</mi></math>
+          axis). For example, with the equation <!--l. 142--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>y</mi> <mo 
+class="MathClass-rel">=</mo> <mn>1</mn><mo 
+class="MathClass-bin">−</mo><mi 
+>x</mi></math>,
+          the integral of <!--l. 143--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>y</mi></math>
+          with respect to <!--l. 143--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>x</mi></math>
+          from <!--l. 143--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>0</mn></math>
+          to <!--l. 143--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>1</mn></math>
+          is <!--l. 143--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>0</mn><mo 
+class="MathClass-punc">.</mo><mn>5</mn></math>—verify
+          this by drawing a picture.
+          <!--l. 146--><p class="noindent" >Recall the formula for measuring the area of a rectangle. Assuming that
+          the <!--l. 147--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>x</mi></math>
+          and <!--l. 147--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>y</mi></math>
+          axes  represent  values  with  units,  do  the  units  of  area  in  this  system
+          correspond to the units of integration you found in the previous question?
+          <em>To you, does this feel like compelling evidence that the Fundamental
+          Theorem of Calculus is true?</em>
+          </p></dd><dt class="enumerate-enumitem">
+      (d) </dt><dd 
+class="enumerate-enumitem">Consider the functions <!--l. 152--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>f</mi> <mo 
+class="MathClass-punc">:</mo> <mi 
+>𝔹</mi> <mo 
+class="MathClass-rel">→</mo> <mi 
+>ℂ</mi></math>
+          and <!--l. 153--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>g</mi> <mo 
+class="MathClass-punc">:</mo> <mi 
+>𝔸</mi> <mo 
+class="MathClass-rel">→</mo> <mi 
+>𝔹</mi></math>
+          where <!--l. 153--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>𝔸</mi></math>,
+          <!--l. 154--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>𝔹</mi></math>,
+          and <!--l. 154--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>ℂ</mi></math>
+          are all units. What are the units of <!--l. 155--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mi 
+>f</mi></mrow><mrow 
+><mi 
+>′</mi></mrow></msup 
+></math>
+
+          and <!--l. 155--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mi 
+>g</mi></mrow><mrow 
+><mi 
+>′</mi></mrow></msup 
+></math>?
+          (Here, <!--l. 155--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mi 
+>f</mi></mrow><mrow 
+><mi 
+>′</mi></mrow></msup 
+></math>
+          means the derivative of <!--l. 156--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>f</mi></math>
+          with respect to <!--l. 156--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>x</mi></math>.)
+          Now, let <!--l. 156--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>h</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>x</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow> <mo 
+class="MathClass-rel">=</mo> <mi 
+>f</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>g</mi><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>x</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></mrow><mo 
+class="MathClass-close">)</mo></mrow></math>.
+          Convince yourself that <!--l. 157--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>h</mi> <mo 
+class="MathClass-punc">:</mo> <mi 
+>𝔸</mi> <mo 
+class="MathClass-rel">→</mo> <mi 
+>ℂ</mi></math>.
+          Then, use dimensional analysis to derive an equation for <!--l. 158--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mi 
+>h</mi></mrow><mrow 
+><mi 
+>′</mi></mrow></msup 
+><mrow ><mo 
+class="MathClass-open">(</mo><mrow><mi 
+>x</mi></mrow><mo 
+class="MathClass-close">)</mo></mrow></math>
+          in terms of <!--l. 158--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>f</mi></math>,
+          <!--l. 158--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>g</mi></math>,
+          and <!--l. 159--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>x</mi></math>.
+          This expression is called the <strong>chain rule</strong><span class="footnote-mark"><a 
+href="#fn2x0" id="fn2x0-bk"><sup class="textsuperscript">†</sup></a></span><a 
+ id="x1-2014f2"></a>.
+          </dd></dl>
+     </dd><dt class="enumerate-enumitem">
+   5. </dt><dd 
+class="enumerate-enumitem">In 1999, the <strong>Mars Climate Orbiter</strong> passed Mars on a trajectory that was too close to
+     the planet, causing it to pass through the upper atmosphere and disintegrate. The cause
+     of the MCO failure was determined <span class="cite"> [<a 
+href="#Xmars">1</a>]</span> to be a software error: a mission-critical
+     piece of software produced output in non-SI units, in pound-seconds rather than
+     Newton-seconds<span class="footnote-mark"><a 
+href="#fn3x0" id="fn3x0-bk"><sup class="textsuperscript">‡</sup></a></span><a 
+ id="x1-2016f3"></a>.
+     <!--l. 176--><p class="noindent" >It seems obvious that representing a number in a different set of units leads to a
+     different answer. An interesting question to ask, however, is: are there meaningful
+     calculations whose results do not change when evaluated with different
+     units?
+     </p><!--l. 182--><p class="indent" >
+          </p><dl class="enumerate-enumitem"><dt class="enumerate-enumitem">
+      (a) </dt><dd 
+class="enumerate-enumitem">Suppose we were trying to discover the period <!--l. 182--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>T</mi> </math>
+          of a pendulum. It seems like the important parameters we would need to
+          know are the pendulum&#x2019;s length <!--l. 184--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>l</mi></math>,
+          and mass <!--l. 184--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>m</mi></math>.
+          We also know that on Earth, the acceleration due to gravity is <!--l. 185--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>g</mi></math>.
+          Using dimensional analysis, discover a formula <!--l. 186--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>f</mi></math>
+          for <!--l. 186--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>T</mi> </math>
+          in terms of <!--l. 186--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>l</mi></math>
+          and <!--l. 186--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>g</mi></math>.
+          Check this formula by running an experiment with a washer and a piece
+          of string. You should discover that in reality, the period is approximately
+          <!--l. 188--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>T</mi> <mo 
+class="MathClass-rel">=</mo> <mn>6</mn><mo 
+class="MathClass-punc">.</mo><mn>2</mn><mn>8</mn><mo 
+class="MathClass-bin">×</mo><mi 
+>f</mi></math><span class="footnote-mark"><a 
+href="#fn4x0" id="fn4x0-bk"><sup class="textsuperscript">§</sup></a></span><a 
+ id="x1-2018f4"></a>.
+          Has dimensional analysis failed?
+
+          </dd><dt class="enumerate-enumitem">
+      (b) </dt><dd 
+class="enumerate-enumitem">The idea that you can discover dimensionless constants like <!--l. 194--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>6</mn><mo 
+class="MathClass-punc">.</mo><mn>2</mn><mn>8</mn></math>
+          above by using dimensional analysis to create formulas, and then running
+          experiments to solve for the constant, is formalized by <strong>Buckingham&#x2019;s
+          <!--l. 196--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>Π</mi></math>
+          Theorem</strong><span class="footnote-mark"><a 
+href="#fn5x0" id="fn5x0-bk"><sup class="textsuperscript">¶</sup></a></span><a 
+ id="x1-2020f5"></a> <span class="cite">
+           [<a 
+href="#Xbuckingham">4</a>]</span>. It states that with <!--l. 203--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>n</mi></math>
+          physical variables, <!--l. 204--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>r</mi></math>
+          of which are independent, you can derive <!--l. 204--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>n</mi><mo 
+class="MathClass-bin">−</mo><mi 
+>r</mi></math>
+          fundamental dimensionless quantities. Explain what is meant by ‘independent&#x2019;.
+          Using what you know about solving systems of linear equations, explain
+          why the theorem makes sense intuitively.
+          </dd><dt class="enumerate-enumitem">
+      (c) </dt><dd 
+class="enumerate-enumitem">If you plan on testing a <!--l. 209--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>1</mn> <mo 
+class="MathClass-punc">:</mo> <mn>1</mn><mn>0</mn></math>
+          scale model of an aircraft wing in a wind tunnel, it may not be immediately
+          obvious to you whether you also need to correspondingly scale factors
+          such as wind speed, air pressure, or temperature. Explain how to use
+          Buckingham&#x2019;s <!--l. 212--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>Π</mi></math>
+          Theorem  to  figure  out  which  factors  must  be  scaled,  and  in  which
+          direction, in order for the scale model to be an accurate representation
+          of the real version<span class="footnote-mark"><a 
+href="#fn6x0" id="fn6x0-bk"><sup class="textsuperscript">∥</sup></a></span><a 
+ id="x1-2022f6"></a>.
+          </dd></dl>
+     <!--l. 220--><p class="noindent" >Surprisingly, Buckingham&#x2019;s <!--l. 220--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>Π</mi></math>
+     Theorem can be used to deduce the <strong>fine structure constant</strong>. This constant is approximately
+     <!--l. 222--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>1</mn><mo 
+class="MathClass-bin">∕</mo><mn>1</mn><mn>3</mn><mn>7</mn><mo 
+class="MathClass-punc">.</mo><mn>0</mn><mn>3</mn><mn>6</mn></math>, and has no
+     units (like <!--l. 222--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>π</mi></math>).
+     It can be computed using a formula involving the charge of an electron, the speed
+     of light, Planck&#x2019;s constant, and the capability of vacuum to permit electric field
+     lines. Surprisingly, the calculation works <em>regardless of which units are used</em>.
+     Richard Feynman called it <span class="cite"> [<a 
+href="#Xfeynman">6</a>]</span> “one of the greatest damn mysteries
+     of physics: a magic number that comes to us with no understanding by
+     man.”
+     </p></dd><dt class="enumerate-enumitem">
+   6. </dt><dd 
+class="enumerate-enumitem">The first explosion of an atomic bomb was at the <strong>Trinity test</strong> in New Mexico,
+     1945. G. I. Taylor, a fluid mechanician at Cambridge University, asked his
+     colleagues at Los Alamos what the energy of the blast was—Los Alamos declared
+     that it was classified information. Taylor then resorted to dimensional
+     analysis <span class="cite"> [<a 
+href="#Xtaylor">13</a>]</span>. His estimate (20kt of TNT) was remarkably close to the highly
+
+     classified value (22kt of TNT). This caused a great deal of embarrassment and as a
+     result Taylor was “mildly admonished by the US Army for publishing his
+     deductions” <span class="cite"> [<a 
+href="#Xbatchelor">2</a>]</span>.
+     <!--l. 240--><p class="noindent" >To make his estimate, Taylor used two photographs of the explosion, which he
+     anecdotally took from the cover of <em>LIFE</em> magazine. Taylor asked, how does
+     the radius of the blast grow with time? The other relevant factors are
+     energy and the density of the surrounding medium (i.e. air). Find images of
+     the Trinity blast that have timestamps (in milliseconds!) and a scale in
+     meters<span class="footnote-mark"><a 
+href="#fn7x0" id="fn7x0-bk"><sup class="textsuperscript">∗∗</sup></a></span><a 
+ id="x1-2024f7"></a>. Using
+     the Buckingham <!--l. 254--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>Π</mi></math>
+     Theorem, <em>estimate the amount of energy released by Trinity</em>. Even getting this
+     value right to within an order of magnitude is quite impressive.
+     </p></dd><dt class="enumerate-enumitem">
+   7. </dt><dd 
+class="enumerate-enumitem">In the year 1215, the <strong>Magna Carta</strong> declared <span class="cite"> [<a 
+href="#Xmagnacarta">12</a>]</span> that:
+          <div class="quote">
+          <!--l. 259--><p class="noindent" >…there is to be one measure of wine throughout our kingdom, and
+          one measure of ale, and one measure of corn, namely the quarter
+          of London, and one breadth of dyed, russet and haberget cloths,
+          that is, two ells within the borders; and let weights be dealt with
+          as with measures.</p></div>
+     <!--l. 263--><p class="noindent" >One of the reasons for this clause was that due to the proliferation of too many
+     systems of units, merchants could cheat their customers into paying more money
+     for less goods.
+     </p><!--l. 267--><p class="noindent" >Consider the following fictitious system, consisting of the units <em>wizard</em> and <em>elf </em>,
+     with the conversion factor
+</p>
+
+<div class="math-display"><!--l. 269--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" ><mrow 
+>
+                              <mfrac><mrow 
+><mn>2</mn><mspace width="0.3em" class="thinspace"/><msup><mrow 
+><mstyle 
+class="text"><mtext  >wizard</mtext></mstyle></mrow><mrow 
+><mn>2</mn></mrow></msup 
+></mrow>
+     <mrow 
+><mstyle 
+class="text"><mtext  >elf</mtext></mstyle></mrow></mfrac>
+</mrow></math></div>
+     <!--l. 271--><p class="nopar" >
+     </p><!--l. 273--><p class="noindent" >A merchant announces that for convenience, he will introduce the unit <em>hobbit</em>. He
+     provides the following conversion factors to his customers:
+</p>
+<div class="math-display"><!--l. 276--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" ><mrow 
+>
+                       <mfrac><mrow 
+><mn>3</mn><mspace width="0.3em" class="thinspace"/><mstyle 
+class="text"><mtext  >hobbit</mtext></mstyle><mspace width="0.3em" class="thinspace"/><mstyle 
+class="text"><mtext  >elf</mtext></mstyle></mrow>
+   <mrow 
+><mstyle 
+class="text"><mtext  >wizard</mtext></mstyle></mrow></mfrac>  <mo 
+class="MathClass-punc">,</mo> <mfrac><mrow 
+><mn>4</mn><mspace width="0.3em" class="thinspace"/><msup><mrow 
+><mstyle 
+class="text"><mtext  >wizard</mtext></mstyle></mrow><mrow 
+><mn>3</mn></mrow></msup 
+><mspace width="0.3em" class="thinspace"/><mstyle 
+class="text"><mtext  >hobbit</mtext></mstyle></mrow> 
+          <mrow 
+><mstyle 
+class="text"><mtext  >elf</mtext></mstyle></mrow></mfrac>
+</mrow></math></div>
+     <!--l. 279--><p class="nopar" >
+     </p><!--l. 281--><p class="noindent" >You want to trade your eight <!--l. 281--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>8</mn><mspace width="0.3em" class="thinspace"/><msup><mrow 
+><mstyle 
+class="text"><mtext  >wizard</mtext></mstyle></mrow><mrow 
+><mn>4</mn></mrow></msup 
+></math>
+     for some <!--l. 281--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><msup><mrow 
+><mstyle 
+class="text"><mtext  >elf</mtext></mstyle></mrow><mrow 
+><mn>2</mn></mrow></msup 
+></math>
+     in exchange. You perform the following calculation to determine the
+     conversion:
+</p>
+
+<div class="math-display"><!--l. 284--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" ><mrow 
+>
+              <mfrac><mrow 
+><mn>8</mn><mspace width="0.3em" class="thinspace"/><msup><mrow 
+><mstyle 
+class="text"><mtext  >wizard</mtext></mstyle></mrow><mrow 
+><mn>4</mn></mrow></msup 
+></mrow>
+      <mrow 
+><mn>1</mn></mrow></mfrac>    <mo 
+class="MathClass-bin">×</mo>    <mfrac><mrow 
+><mstyle 
+class="text"><mtext  >elf</mtext></mstyle></mrow> 
+<mrow 
+><mn>4</mn><mspace width="0.3em" class="thinspace"/><msup><mrow 
+><mstyle 
+class="text"><mtext  >wizard</mtext></mstyle></mrow><mrow 
+><mn>3</mn></mrow></msup 
+><mspace width="0.3em" class="thinspace"/><mstyle 
+class="text"><mtext  >hobbit</mtext></mstyle></mrow></mfrac> <mo 
+class="MathClass-bin">×</mo><mfrac><mrow 
+><mn>3</mn><mspace width="0.3em" class="thinspace"/><mstyle 
+class="text"><mtext  >hobbit</mtext></mstyle><mspace width="0.3em" class="thinspace"/><mstyle 
+class="text"><mtext  >elf</mtext></mstyle></mrow> 
+   <mrow 
+><mstyle 
+class="text"><mtext  >wizard</mtext></mstyle></mrow></mfrac>    <mo 
+class="MathClass-rel">=</mo> <mn>6</mn><mspace width="0.3em" class="thinspace"/><msup><mrow 
+><mstyle 
+class="text"><mtext  >elf</mtext></mstyle></mrow><mrow 
+><mn>2</mn></mrow></msup 
+>
+</mrow></math></div>
+     <!--l. 289--><p class="nopar" > The merchant disagrees, presenting his own calculation:
+</p>
+<div class="math-display"><!--l. 291--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="block" ><mrow 
+>
+                 <mfrac><mrow 
+><mn>8</mn><mspace width="0.3em" class="thinspace"/><msup><mrow 
+><mstyle 
+class="text"><mtext  >wizard</mtext></mstyle></mrow><mrow 
+><mn>4</mn></mrow></msup 
+></mrow>
+      <mrow 
+><mn>1</mn></mrow></mfrac>    <mo 
+class="MathClass-bin">×</mo>  <mfrac><mrow 
+><mstyle 
+class="text"><mtext  >elf</mtext></mstyle></mrow> 
+<mrow 
+><mn>2</mn><mspace width="0.3em" class="thinspace"/><msup><mrow 
+><mstyle 
+class="text"><mtext  >wizard</mtext></mstyle></mrow><mrow 
+><mn>2</mn></mrow></msup 
+></mrow></mfrac> <mo 
+class="MathClass-bin">×</mo>  <mfrac><mrow 
+><mstyle 
+class="text"><mtext  >elf</mtext></mstyle></mrow> 
+<mrow 
+><mn>2</mn><mspace width="0.3em" class="thinspace"/><msup><mrow 
+><mstyle 
+class="text"><mtext  >wizard</mtext></mstyle></mrow><mrow 
+><mn>2</mn></mrow></msup 
+></mrow></mfrac> <mo 
+class="MathClass-rel">=</mo> <mn>2</mn><mspace width="0.3em" class="thinspace"/><msup><mrow 
+><mstyle 
+class="text"><mtext  >elf</mtext></mstyle></mrow><mrow 
+><mn>2</mn></mrow></msup 
+>
+</mrow></math></div>
+     <!--l. 296--><p class="nopar" >
+     </p><!--l. 299--><p class="indent" >
+          </p><dl class="enumerate-enumitem"><dt class="enumerate-enumitem">
+      (a) </dt><dd 
+class="enumerate-enumitem">Has dimensional analysis failed? If not, explain what has gone wrong.
+          </dd><dt class="enumerate-enumitem">
+      (b) </dt><dd 
+class="enumerate-enumitem">Using the premise <!--l. 302--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>6</mn><mspace width="0.3em" class="thinspace"/><msup><mrow 
+><mstyle 
+class="text"><mtext  >elf</mtext></mstyle></mrow><mrow 
+><mn>2</mn></mrow></msup 
+> <mo 
+class="MathClass-rel">=</mo> <mn>2</mn><mspace width="0.3em" class="thinspace"/><msup><mrow 
+><mstyle 
+class="text"><mtext  >elf</mtext></mstyle></mrow><mrow 
+><mn>2</mn></mrow></msup 
+></math>,
+          prove that <!--l. 303--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>0</mn> <mo 
+class="MathClass-rel">=</mo> <mn>1</mn></math>.
+          </dd><dt class="enumerate-enumitem">
+      (c) </dt><dd 
+class="enumerate-enumitem">Using what you know about solving linear equations, as well as Buckingham&#x2019;s
+          <!--l. 306--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>Π</mi></math>
+          Theorem, propose a method by which a set of conversion factors can
+
+          be ‘audited&#x2019; to ensure that <em>no</em> such contradictions can arise.
+          </dd><dt class="enumerate-enumitem">
+      (d) </dt><dd 
+class="enumerate-enumitem">Use your method to prove that the SI system is consistent. This should
+          be reassuring.
+          </dd></dl>
+     </dd><dt class="enumerate-enumitem">
+   8. </dt><dd 
+class="enumerate-enumitem"><strong>Ammonium nitrite</strong> is known to be highly unstable in its pure form.
+     I propose that it decomposes according to the following equation:
+     <!--l. 319--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle 
+class="text"><mtext  >NH</mtext></mstyle>  <mstyle 
+class="text"><mtext  ></mtext></mstyle> <mstyle 
+class="text"><mtext  >4</mtext></mstyle><mstyle 
+class="text"><mtext  >NO</mtext></mstyle>  <mstyle 
+class="text"><mtext  ></mtext></mstyle> <mstyle 
+class="text"><mtext  >2</mtext></mstyle></math><!--l. 319--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mo 
+class="MathClass-rel">     →</mo></math><!--l. 319--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle 
+class="text"><mtext  >NO</mtext></mstyle>  <mstyle 
+class="text"><mtext  ></mtext></mstyle> <mstyle 
+class="text"><mtext  >3</mtext></mstyle></math><!--l. 319--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" > <mo 
+class="MathClass-bin">+</mo></math><!--l. 319--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle 
+class="text"><mtext  >H</mtext></mstyle>  <mstyle 
+class="text"><mtext  ></mtext></mstyle> <mstyle 
+class="text"><mtext  >2</mtext></mstyle><mstyle 
+class="text"><mtext  >O</mtext></mstyle></math>.
+     <!--l. 322--><p class="indent" >
+          </p><dl class="enumerate-enumitem"><dt class="enumerate-enumitem">
+      (a) </dt><dd 
+class="enumerate-enumitem">Using techniques from this paper, give a <em>purely mathematical</em> argument
+          that this reaction does not occur in nature. Is it surprising that you can
+          predict the non-existence of a reaction without knowing anything about
+          the compounds involved?
+          </dd><dt class="enumerate-enumitem">
+      (b) </dt><dd 
+class="enumerate-enumitem">Dilute <strong>acetic acid</strong>, <!--l. 327--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle 
+class="text"><mtext  >CH</mtext></mstyle>  <mstyle 
+class="text"><mtext  ></mtext></mstyle> <mstyle 
+class="text"><mtext  >3</mtext></mstyle><mstyle 
+class="text"><mtext  >COOH</mtext></mstyle></math>,
+          is  the  main  ingredient  in  vinegar.  Your  friend  is  convinced  that  he
+          has found a catalyst that lets him synthesize acetic acid from water,
+          <!--l. 329--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle 
+class="text"><mtext  >H</mtext></mstyle>  <mstyle 
+class="text"><mtext  ></mtext></mstyle> <mstyle 
+class="text"><mtext  >2</mtext></mstyle><mstyle 
+class="text"><mtext  >O</mtext></mstyle></math>,
+          and methane, <!--l. 330--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mstyle 
+class="text"><mtext  >CH</mtext></mstyle>  <mstyle 
+class="text"><mtext  ></mtext></mstyle> <mstyle 
+class="text"><mtext  >4</mtext></mstyle></math>,
+          without producing any byproducts. You do not believe him. He insists
+          that it must be possible because ‘all the atoms are there&#x2019;. What is wrong
+          with his argument?
+          </dd><dt class="enumerate-enumitem">
+      (c) </dt><dd 
+class="enumerate-enumitem"><em>Derive and explain a process by which you can balance any (possible)
+          chemical equation without any ‘guess and check&#x2019;.  If you know how,
+          write a program to do it.</em>
+          </dd></dl>
+     </dd></dl>
+<!--l. 1--><p class="noindent" >
+</p>
+   <h3 class="likesectionHead"><a 
+ id="x1-3000"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+
+     </p><div class="thebibliography">
+     <p class="bibitem" ><span class="biblabel">
+  [1]<span class="bibsp">   </span></span><a 
+ id="Xmars"></a>Mars climate orbiter mishap investigation board phase I report, 1999.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [2]<span class="bibsp">   </span></span><a 
+ id="Xbatchelor"></a>Batchelor, G. The Life and Legacy of G. I. Taylor. 1996.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [3]<span class="bibsp">   </span></span><a 
+ id="Xbridgman"></a>Bridgman, P. Dimensional Analysis. 1931.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [4]<span class="bibsp">   </span></span><a 
+ id="Xbuckingham"></a>Buckingham, E. On physically similar systems; illustrations of the use
+     of dimensional equations. Phys. Rev. 4 (Oct 1914), 345–376.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [5]<span class="bibsp">   </span></span><a 
+ id="Xfrink"></a>Eliasen, A. Frink.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [6]<span class="bibsp">   </span></span><a 
+ id="Xfeynman"></a>Feynman, R. QED: The Strange Theory of Light and Matter. 1985.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [7]<span class="bibsp">   </span></span><a 
+ id="Xxkcd"></a>Munroe, R. What If? 2014.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [8]<span class="bibsp">   </span></span><a 
+ id="Xmeditation"></a>Pienaar, J. A meditation on physical units, 2016.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [9]<span class="bibsp">   </span></span><a 
+ id="Xrayleigh"></a>Rayleigh, J. W. S. On the question of the stability of the ﬂow of ﬂuids.
+     Philosophical Magazine 4 (1892), 59–70.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+ [10]<span class="bibsp">   </span></span><a 
+ id="Xvoyager"></a>Sagan, C. Murmurs of Earth. 1978.
+
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+ [11]<span class="bibsp">   </span></span><a 
+ id="Xsonin"></a>Sonin, A. A. The Physical Basis of Dimensional Analysis. 2001.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+ [12]<span class="bibsp">   </span></span><a 
+ id="Xmagnacarta"></a>Summerson, H. The 1215 magna carta: Clause 35.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+ [13]<span class="bibsp">   </span></span><a 
+ id="Xtaylor"></a>Taylor,  G. I.     The  formation  of  a  blast  wave  by  a  very  intense
+     explosion. II. the atomic explosion of 1945. Proceedings of the Royal Society
+     of London 201, 1065 (1950), 175–186.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+ [14]<span class="bibsp">   </span></span><a 
+ id="Xpythagoras"></a>Torczynski, J. R.  Dimensional analysis and calculus identities.  The
+     American Mathematical Monthly 95, 8 (1988), 746–754.
+</p>
+     </div>
+
+   <div class="footnotes"><!--l. 64--><p class="indent" >      <span class="footnote-mark"><a 
+href="#fn1x0-bk" id="fn1x0"><sup class="textsuperscript">∗</sup></a></span>There have in fact been efforts to standardize units based on fundamental physical constants like
+the speed of light in vacuum: such units are called ‘natural units&#x2019;.</p>
+<!--l. 160--><p class="noindent" ><span class="footnote-mark"><a 
+href="#fn2x0-bk" id="fn2x0"><sup class="textsuperscript">†</sup></a></span>This problem was suggested by my friend David.</p>
+<!--l. 174--><p class="noindent" ><span class="footnote-mark"><a 
+href="#fn3x0-bk" id="fn3x0"><sup class="textsuperscript">‡</sup></a></span>To prevent such software errors, programming languages such as <span class="cite"> [<a 
+href="#Xfrink">5</a>]</span> ‘remember&#x2019; the units associated
+with a number and enforce that certain operations only happen on commensurable values. This generalizes
+to non-unit-like data types as well (for example, preventing you from dividing a number by an image, which
+makes no sense).</p>
+<!--l. 191--><p class="noindent" ><span class="footnote-mark"><a 
+href="#fn4x0-bk" id="fn4x0"><sup class="textsuperscript">§</sup></a></span>You might have noticed that the number 6.28 is roughly <!--l. 191--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mn>2</mn><mo 
+class="MathClass-bin">×</mo><mi 
+>π</mi></math>.
+Using some basic physics, we can explain why <!--l. 191--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>π</mi></math>
+is involved.</p>
+<!--l. 203--><p class="noindent" ><span class="footnote-mark"><a 
+href="#fn5x0-bk" id="fn5x0"><sup class="textsuperscript">¶</sup></a></span>The  idea  had  actually  been  around  for  almost  50  years  before  Buckingham  published  his
+1914  paper  about  it.  In  particular,  Rayleigh&#x2019;s  use  of  dimensional  analysis  to  calculate  the
+Reynolds  number—an  important  constant  used  to  study  the  motion  of  fluid  in  a  pipe—was
+published  in  1892 <span class="cite"> [<a 
+href="#Xrayleigh">9</a>]</span>  and  is  now  a  classic  textbook  example.  Buckingham&#x2019;s  use  of  the
+<!--l. 203--><math 
+ xmlns="http://www.w3.org/1998/Math/MathML"  
+display="inline" ><mi 
+>Π</mi></math>
+symbol in this paper is what gives the theorem its name.</p>
+<!--l. 216--><p class="noindent" ><span class="footnote-mark"><a 
+href="#fn6x0-bk" id="fn6x0"><sup class="textsuperscript">∥</sup></a></span>Such a model is said to have <em>similitude</em> with the real version.</p>
+<!--l. 254--><p class="noindent" ><span class="footnote-mark"><a 
+href="#fn7x0-bk" id="fn7x0"><sup class="textsuperscript">∗∗</sup></a></span>Hunting for pictures is part of the fun, but if you get stuck, here are two hints:
+                       </p><dl class="enumerate-enumitem"><dt class="enumerate-enumitem">
+                (a)  </dt><dd 
+class="enumerate-enumitem"><a 
+href="https://commons.wikimedia.org/wiki/Category:Trinity_test" class="url" >https://commons.wikimedia.org/wiki/Category:Trinity_test</a>and
+                       </dd><dt class="enumerate-enumitem">
+                (b)  </dt><dd 
+class="enumerate-enumitem"><a 
+href="http://blog.nuclearsecrecy.com/wp-content/uploads/2012/03/TR-NN-11.jpg" class="url" >http://blog.nuclearsecrecy.com/wp-content/uploads/2012/03/TR-NN-11.jpg</a></dd></dl>
+<!--l. 254--><p class="noindent" >All these images are in the public domain since they were taken as part of a federal government
+program.</p>                                                                                                                                                 </div>
+]]></description>
+            <link>http://hardmath123.github.io/dimensional-analysis.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/dimensional-analysis.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Tue, 11 Oct 2016 07:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[TJCTF 2016 Writeups]]></title>
+            <description><![CDATA[<p>In which we hack our way to second place.</p>
+
+
+<p>I just realized that TJCTF happened a really long time ago, and so it’s
+probably okay for me to share these writeups. Enjoy.</p>
+<h1 id="curvature2">curvature2</h1>
+<blockquote>
+<p>A CTF is a rough road </p>
+<p>When you play on hard mode </p>
+<p>My tactics are frugal </p>
+<p>My weapon is Google </p>
+<p>All I do is search for code </p>
+</blockquote>
+<p>The time is 2:00am. In the distance, you can hear the city breathe softly. It
+is the sound of night: when the hackers like you rise from their sleeping bags
+to reclaim what is rightly theirs.</p>
+<p>You unholster your keyboard and turn off the safety.</p>
+<p>You’re trying to take a discrete log in an elliptic curve’s group: a gnarly
+beast so powerful, it is used by the Browsers to protect User Privacy. You
+wonder briefly who put you up to this gig, and make a mental note to charge
+them overtime. Discrete log? What are you, some sort of lumberjack?</p>
+<p>There are two kinds of hackers: those that hack in style and those that get the
+job done. You are the latter.</p>
+<p>You rev up the ol’ browser and go on a wild-Google-hunt for attacks on elliptic
+curve discrete logs. Cryptographic protocols come and go, you say to nobody in
+particular, but Google is here to stay. You swerve past some lecture notes and
+duck a Wikipedia article; before anyone can say “Pollard Rho”, you find Matthew
+Musson’s paper[0] which mentions a whole variety of attacks on the elliptic
+curve discrete log. “Sweetheart,” you say, pointing to the bean-shooter in your
+holster, “me and my friend here think you’d better start talking.”</p>
+<p>The pages read like molasses; progress is slower than Windows XP. But just as
+the rays of dawn begin to reach over the netscape to reveal golden cloud
+computers, your luck changes. Turns out that there’s an attack on the elliptic
+curve discrete log problem which works when the size of the elliptic group is
+equal to the size of the field over which the elliptic curve lives (a so-called
+“anomalous” curve). The attack’s by someone who thinks they’re Smart—and you
+ain’t complaining.</p>
+<p>You call up your friend Sage; you need to pull a favor. Sage confirms that your
+curve is in fact anomalous. You tell him you owe him a drink and hang up. What
+are friends for?</p>
+<p>You don’t mind a reasonable amount of trouble. But soon you realize that this
+is not a reasonable amount of trouble. This is a downright unreasonable amount
+of trouble, and you ain’t takin’ it. You’re way too lazy to implement this
+attack on your own. But you know someone down at Github’s probably knows how to
+whip it up. You order an “elliptic anomalous curve attack”, and Github
+obliges[1]. You tip the guy a star and drive off in the boiler before anyone
+can ask any questions.</p>
+<p>Back at the office, you substitute in your curve’s parameters, and turn the
+crank. Out comes a hex-encoded string shaped suspiciously like a flag.</p>
+<p>“What is it?” asks Sage.</p>
+<p>“Oh,” you say, “just the stuff that dreams are made of.”</p>
+<p>You’re good. You’re very good.</p>
+<p>[0] <a href="https://www.researchgate.net/file.PostFileLoader.html?id=5583faed6225ff040e8b458b&amp;assetKey=AS%3A273804985602059%401442291603545">https://www.researchgate.net/file.PostFileLoader.html?id=5583faed6225ff040e8b458b&amp;assetKey=AS%3A273804985602059%401442291603545</a></p>
+<p>[1] <a href="https://gist.github.com/elliptic-shiho/e76e7c2a2aff228d7807">https://gist.github.com/elliptic-shiho/e76e7c2a2aff228d7807</a></p>
+<h1 id="luvmarkdown">luvmarkdown</h1>
+<p>Flag à la Grandma’s Cookies</p>
+<p>Preparation time: 3 hours
+Serves: A team of 4</p>
+<p>Ingredients:</p>
+<ul>
+<li>1 vulnerable website, not too large</li>
+<li>1 simulated user, freshly instantiated</li>
+<li>1 pound of fresh XSS exploits</li>
+</ul>
+<p>Step 1. Prepare a fresh exploit payload in JavaScript for the user to execute.
+You want the flag’s address. Poisoning the user’s cookie to be yours would work
+because the “recent” beacon would update when the user navigates away from the
+flag page.</p>
+<p>Step 2. Insert the exploit payload in a script tag, knowing that showdown
+doesn’t sanitize HTML. Report it so that the simulated user views it. See
+nothing. Realize that there’s a very strict CSP in place that prevents inline
+JavaScript.</p>
+<p>Step 3. Realize that the only way to inject the payload is by having it loaded
+by existing code on the same origin. Realize that the “raw” url allows you to
+serve an XSS payload on the same origin.</p>
+<p>Step 4. Submit your payload to the markdown renderer, then save the URL. Create
+a fresh submission that creates a script element whose source is that URL.
+Submit and report. See nothing. Realize that inserting an element counts as
+inline JavaScript, which the CSP hates.</p>
+<p>Step 5. Notice that the client-side viewer code loads the markdown
+renderer dynamically based on the value of a DOM element. Create a doppelganger
+element with the same ID as the renderer-selection dropdown. Since this element
+is spliced in before the actual dropdown, it gets selected by the viewer code.
+Set this element’s value property to the URL of your payload from (4). Submit
+and report.</p>
+<p>Step 6. Copy the URL that appears in the list of recently viewed pages. Visit
+the URL to obtain the flag.</p>
+<p>Step 7. Serve flag while hot (do not hoard). Bon appétit.</p>
+<h1 id="tsundere">tsundere</h1>
+<p>Once upon a time, there was a piece of Java bytecode. That Java bytecode felt
+incomplete and unloved, but then she met a CTF team willing to help it. Though
+busy seeking flags in foreign lands and CPU architectures, the CTF team felt a
+moral obligation to help, and so it tried to help the Java bytecode discover
+her true identity. However, it was too difficult to understand her in her
+current form. So, the CTF team converted her to a format recognized by the
+Jasmin assembler [0] and found her source.</p>
+<p>Looking at the source, the CTF team knew exactly where she came from: even
+without the four magic numbers she had forgotten, the team recognized the
+undeniable signs of her being an md5 implementation which chunked input
+matching [a-z0-9] in blocks of 5 and concatenated the checksums.</p>
+<p>Happy at last with her new identity, it sent off the Java bytecode to find new
+adventures in an exciting, beautiful world. But one task remained.</p>
+<p>In under an hour, a parallelized md5 cracker revealed each of the twenty
+cleartext blocks that produced the hash embedded within the Java bytecode’s
+soul. It was, unmistakably, the Flag the team had sought for so long.</p>
+<p>Moral: Kindness is always repayed.</p>
+<p>[0] <a href="http://jasmin.sourceforge.net/">http://jasmin.sourceforge.net/</a></p>
+]]></description>
+            <link>http://hardmath123.github.io/tjctf-2016.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/tjctf-2016.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Fri, 10 Jun 2016 07:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Carnival of Mathematics 134]]></title>
+            <description><![CDATA[<p>In which I have the honor of hosting an edition of a roving blog.</p>
+
+
+<p>Welcome to the 134th <a href="http://aperiodical.com/carnival-of-mathematics/"><em>Carnival of
+Mathematics</em></a>, a monthly
+roundup of mathematics-related blog posts organized by <a href="http://aperiodical.com/"><em>The
+Aperiodical</em></a>. The previous edition was hosted by
+Matthew at <a href="http://chalkdustmagazine.com/blog/"><em>Chalkdust Magazine</em></a>.</p>
+<p>Tradition obliges me to begin with some facts about the number 134.</p>
+<p>One of my best friends works backstage at my high school’s theater. He has a
+grueling and often thankless job, which involves staying backstage till
+midnight painting sets only to watch the actors get the applause the next
+evening. But he does it anyway, because he honestly loves it.</p>
+<p>He reminds me of the number 134: the stage tech of numbers, enabling primes to
+shine without ever being recognized as one.</p>
+<p>134 is the average of two consecutive odd primes, and both its double and its
+square are one less than a prime. The number
+134<sup>4</sup>+134<sup>3</sup>+134<sup>2</sup>+134<sup>1</sup>+134<sup>0</sup>
+is prime, as is 10<sup>134</sup>+7. The sum of the first 134 primes divides the
+product of the first 134 primes, and the sum of squares of 134’s prime
+factors… is prime.</p>
+<p>Yet a number does not have to be prime to be special. 134 redeems itself by
+having the beautiful property,</p>
+<p>\[ \binom{1+3+4}{1} + \binom{1+3+4}{3} + \binom{1+3+4}{4} \]</p>
+<p>And now, the Carnival.</p>
+<hr>
+<p>Writing this edition of the Carnival felt like writing a series of book
+reviews, but instead of dull Victorian literature, I got to review exciting
+mathematics written by fellow bloggers around the world. To celebrate this, I’d
+like to begin this roundup with a rather thought-provoking book review—of an
+actual book.</p>
+<ul>
+<li><strong>Tanya Khovanova</strong>
+<a href="http://blog.tanyakhovanova.com/2016/05/really-big-numbers/">reviews</a> a book
+about really big numbers, called (funnily enough) <em>Really Big Numbers</em> by
+Richard Schwartz.</li>
+</ul>
+<blockquote>
+<p>I received a book <em>Really Big Numbers</em> by Richard Schwartz for review. I was
+supposed to write the review a long time ago, but I’ve been procrastinating.
+Usually, if I like a book, I write a review very fast. If I hate a book, I do
+not write a review at all. With this book I developed a love-hate
+relationship.</p>
+</blockquote>
+<p>The same blogger also writes about her feelings towards math, and I would like
+to mention one such article.</p>
+<ul>
+<li><strong>Tanya Khovanova</strong>
+<a href="http://blog.tanyakhovanova.com/2016/04/the-battle-i-am-losing/">discusses</a> how
+it’s sad that we give away answers to puzzles too easily:</li>
+</ul>
+<blockquote>
+<p>I remember I once bought a metal brainteaser that needed untangling. The
+solution wasn’t included. Instead, there was a postcard that I needed to sign
+and send to get a solution. The text that needed my signature was, “I am an
+idiot. I can’t solve this puzzle.” I struggled with the puzzle for a while,
+but there was no way I would have signed such a postcard, so I solved it. In
+a long run I am glad that the brainteaser didn’t provide a solution.
+…[T]here are no longer any discoveries. There is no joy. People consume the
+solution, without realizing why this puzzle is beautiful and
+counterintuitive.</p>
+</blockquote>
+<p>Perhaps appropriately, the next entry is a puzzle, and its creator (who
+describes himself as a “stand-up mathematician”!) admits to not knowing the
+answer.</p>
+<ul>
+<li><strong>Matt Parker</strong> <a href="https://www.youtube.com/watch?v=xHh0ui5mi_E">poses</a> a puzzle
+about fairly mapping dice rolls in an elegant way.</li>
+</ul>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xHh0ui5mi_E?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<p>For completeness, I also include an article about <em>solving</em> a puzzle—about
+the joy of discovery and the frustration of exploring large search spaces.</p>
+<ul>
+<li><strong>Oliver Dunk</strong>
+<a href="http://chalkdustmagazine.com/blog/hunting-for-polydivisibles/">hunts</a> for
+polydivisible numbers, whose first N digits are divisible by N.</li>
+</ul>
+<blockquote>
+<p>I’m a software developer myself and so the most interesting part for me was
+finding shortcuts to the answer. While a computer can find the solution by
+brute force fairly quickly, it still takes a bit of time as there are
+3,628,800 possible answers to check. … I read a little further, and found
+out that indeed there were shortcuts that could be made—this is the power of
+mathematical thinking in problem-solving: a monumental task can become
+considerably easier by simply applying a little bit of thought.</p>
+</blockquote>
+<hr>
+<p>As we all know, mathematics isn’t just about solving brain-teasers. With that
+in mind, here are some practical applications of math.</p>
+<ul>
+<li><strong>Greg Ross</strong>
+<a href="http://www.futilitycloset.com/2016/05/08/travel-delays/">summarizes</a> what we
+know about optimal airplane-loading strategy.</li>
+</ul>
+<blockquote>
+<p>What’s the most effective strategy for loading an airplane? Most airlines
+tend to work from the back to the front, accepting first the passengers who
+will sit in high-numbered rows (say, rows 25-30), waiting for them to find
+their seats, and then accepting the next five rows, and so on. Both the
+airline and the passengers would be glad to know that this is the most
+effective strategy. Is it?</p>
+</blockquote>
+<p>On a less serious but equally practical note, we can apply math to almost any
+game you can think of.</p>
+<ul>
+<li><strong>Ana Swanson</strong>
+<a href="https://www.washingtonpost.com/news/wonk/wp/2015/05/08/how-to-win-any-popular-game-according-to-data-scientists/">shows</a>
+how to win at 14 games using some clever infographics.</li>
+</ul>
+<blockquote>
+<p>From Risk to tic-tac-toe, popular games involve tons of strategic decisions,
+probability and math. So one happy consequence of being a data nerd is that
+you may have an advantage at something even non-data nerds understand:
+winning.</p>
+</blockquote>
+<hr>
+<p>While applying math to games is practical (and perhaps even lucrative!) we all
+know that the proof of the pudding lies… in proofs. Proofs are there to
+reassure us that a statement really is true.</p>
+<ul>
+<li><strong>Matthew Scroggs</strong> <a href="http://www.mscroggs.co.uk/blog/27">shares</a> several
+proofs of Pythagoras’ Theorem.</li>
+</ul>
+<blockquote>
+<p>Pythagoras’s Theorem is perhaps the most famous theorem in maths. It is also
+very old, and for over 2500 years mathematicians have been explaining why it
+is true.</p>
+</blockquote>
+<p>Thinking about it, perhaps I lied to you. Often, the most beautiful proofs are
+there, not to reassure us, but to explain why a seemingly ridiculous statement
+might actually be true. Here is one such outrageous statement and its proof.</p>
+<ul>
+<li><strong>Paul Hankin</strong> <a href="http://paulhankin.github.io/Fibonacci/">explains</a> a
+fascinating formula for the Nth Fibonacci number:</li>
+</ul>
+<blockquote>
+<p>This code, somewhat surprisingly, generates Fibonacci numbers.</p>
+<pre><code>def fib(n):
+    return (4 &lt;&lt; n*(3+n)) // ((4 &lt;&lt; 2*n) - (2 &lt;&lt; n) - 1) &amp; ((2 &lt;&lt; n) - 1)
+</code></pre><p>In this blog post, I’ll explain where it comes from and how it works.</p>
+</blockquote>
+<p>However, proofs are often written in scary, technical language with no
+intuition behind them. In reality, a proof is a narrative, and what better way
+to present a narrative than a story? The next entry takes on the challenge.</p>
+<ul>
+<li><strong>Dan McQuillan</strong>
+<a href="http://voices.norwich.edu/daniel-mcquillan/2016/04/28/a-parity-theorem-for-drawings-of-complete-graphs/">proves</a>
+Kleitman’s parity theorem for complete graphs—the number of crossings in a
+“good” drawing of the complete graph of (odd) n vertices has the same parity as
+“n choose 5”.</li>
+</ul>
+<blockquote>
+<p>This may seem much harder than just counting the crossings, but it works well
+on an abstract level—that is, when we don’t know what the drawing looks
+like, but still have to prove things about it. This is what makes the theorem
+and its proof beautiful—we will prove there is something common to
+infinitely many different drawings of K_5. … This presentation is a first
+attempt at a response to the criticism: “Why don’t mathematicians or
+scientists ever write the way they think?” In fact, this “unnecessarily” long
+exposition does not mean that it is difficult; my hope is quite the opposite.</p>
+</blockquote>
+<hr>
+<p>While an appreciation for proofs is healthy for any mathematician, some
+fascinating mathematics can emerge from seat-of-the-pants conjectures,
+calculations, and manipulations.</p>
+<ul>
+<li><strong>Stephen Wolfram</strong>
+<a href="https://backchannel.com/who-was-ramanujan-83b4d5b05665#.6pfebmx1p">recounts</a>
+the story of Ramanujan and his unique approach to mathematics, coinciding with
+the release of the film <em>The Man Who Knew Infinity</em>.</li>
+</ul>
+<blockquote>
+<p>For most people it’d be bad news to end up with some complicated expression
+or long seemingly random number — because it wouldn’t tell them anything. But
+Ramanujan was different. Littlewood once said of Ramanujan that “every
+positive integer was one of his personal friends.” And between a good memory
+and good ability to notice patterns, I suspect Ramanujan could conclude a lot
+from a complicated expression or a long number. For him, just the object
+itself would tell a story.</p>
+</blockquote>
+<p>While we’re on the topic of biographies, here’s another interesting character
+in the history of math.</p>
+<ul>
+<li><strong>Siobhan Roberts</strong>
+<a href="http://www.newyorker.com/tech/elements/claude-shannon-the-father-of-the-information-age-turns-1100100">tells</a>
+us about Claude Shannon, the father of information theory, who turns 100 this
+year.</li>
+</ul>
+<blockquote>
+<p>…Shannon built a machine that did arithmetic with Roman numerals, naming it
+THROBAC I, for Thrifty Roman-Numeral Backward-Looking Computer. He built a
+flame-throwing trumpet and a rocket-powered Frisbee. He built a chess-playing
+automaton that, after its opponent moved, made witty remarks. Inspired by the
+late artificial-intelligence pioneer Marvin Minsky, he designed what was
+dubbed the Ultimate Machine: flick the switch to “On” and a box opens up; out
+comes a mechanical hand, which flicks the switch back to “Off” and retreats
+inside the box.</p>
+</blockquote>
+<hr>
+<p>Often, the most brilliant mathematicians are not the most adept at solving
+equations, but the most insightful in finding math in places you may never have
+dreamed of.</p>
+<ul>
+<li><strong>Daniel J. Heath</strong>
+<a href="https://community.plu.edu/~heathdj/GeometryGames/SymmetricMusic.html">narrates</a>
+a beautiful story involving one of his students, R. Brandon Meyers, and his
+final essay on mathematical symmetry in the everyday world.</li>
+</ul>
+<blockquote>
+<p>Several students came to speak with me about the essay, including the second
+author. He told me that he just didn’t see any symmetry around him. At the
+time, we were standing in a building (the cafeteria) with sine-curve shaped
+ceiling beams arranged in parallel, supported by arms with 4-fold rotational
+symmetry. The light fixtures were hemispherical, with slits cut out in in an
+8-fold rotational pattern. Parallel sliced kiwi fruits were being served,
+with their near rotational symmetry. I merely pointed these things out,
+saying that we are surrounded by symmetry, all we need to do is look and
+listen.</p>
+</blockquote>
+<p>And, for a completely different perspective, here’s a lighthearted webcomic to
+bring a humorous end to this edition of the Carnival of Mathematics.</p>
+<ul>
+<li><strong>Zach Wienersmith</strong> <a href="http://smbc-comics.com/index.php?id=3777">provides</a>
+some funny translations of what people really mean when they say “math is
+everywhere”.</li>
+</ul>
+<hr>
+<p>That’s all for this edition of the Carnival of Mathematics! Join us next time
+for the 135th edition, hosted by
+<a href="https://gaurish4math.wordpress.com"><em>Gaurish4Math</em></a>.</p>
+]]></description>
+            <link>http://hardmath123.github.io/carnival-of-mathematics-134.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/carnival-of-mathematics-134.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sun, 15 May 2016 07:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[They did the MONSTER match!]]></title>
+            <description><![CDATA[<p>Implementing regular expressions in Scratch using subway systems and coins.</p>
+
+
+<p>I needed a fun little project to tinker with while exploring
+<a href="http://tjvr.org/secret-project/">tosh</a>, and I settled on implementing regexes
+in Scratch. Because that’s clearly a very practical idea with no problems at
+all.</p>
+<p>Regular expressions are <a href="string1.html">like
+magic</a>. If you haven’t come across
+them yet, you soon will. They’re a way to match text against patterns, and you
+can use a regex to teach a computer what, for example, an email address “looks
+like”. I’m going to assume that if you’re reading this, you have some idea of
+how to use regexes; but if you don’t, perhaps the aforementioned link could
+help you get up to speed.</p>
+<p>Since regexes are like magic, they’re also one of those things that many people
+know how to use, but fewer people know how to implement, and even fewer people
+know how to implement efficiently. Hopefully by the end of this article, we’ll
+be part of that last group.</p>
+<p>But first, something fun for you to play with: check out
+<a href="https://scratch.mit.edu/projects/97121677/">this</a> Scratch project for a live
+demo.</p>
+<hr>
+<p>Let’s talk about finite-state machines. Finite-state machines are kind of like
+a subway system. Suppose you’re heading back home after visiting the Scratch
+Team at MIT, and so you’re at Kendall Station on the MTA. Maybe you want to get
+to Haymarket.</p>
+<p>(I promise this gets relevant to regexes soon.)</p>
+<p>You could head north towards Alewife or south towards Braintree.  Let’s head
+south. You pass Charles/MGH and then you’re at Park St. Now you have a choice:
+you can either continue on the red line towards Harvard, or you can switch over
+to the Green Line and go to west to Boylston or east to Haymarket (which is
+your destination).</p>
+<p><img src="static/monster-match/subway-spider.jpg" alt="The MTBA subway map."></p>
+<p>Now imagine each little stretch of subway between two stations has a letter
+associated with it. So, maybe Kendall to Charles is “B” and Charles to Park St.
+is “A”, and so on. But, to be clear, the letters belong to the tracks joining
+two stations, <em>not</em> to the stations themselves. You go take a ride on the
+subway and read off the letter at each stretch.</p>
+<p>You have now re-enacted what we call a “finite-state machine”. Instead of
+subway stations, we have <em>states</em>, and instead of stretches of tracks, we have
+<em>edges</em>.</p>
+<p>Some details: the edges need to be <em>directed</em>, so you can’t go both ways on an
+edge. This makes sense with the subway analogy—each individual track only
+heads in one direction (otherwise the trains would collide!). To keep track of
+this, we draw them with arrows rather than lines.</p>
+<p>Here’s a simpler picture of a small part of the T that we care about, then:</p>
+<p><img src="static/monster-match/subway-fsm.png" alt="FSM diagram"></p>
+<p>A few things to notice here: “letters” don’t need to be from the alphabet (“!”
+is a valid “letter”). You can use the same letter on multiple edges. And,
+finally, placement doesn’t matter. Haymarket isn’t actually west of Downtown.</p>
+<p>Haymarket is double-circled because it’s the final destination.</p>
+<p>Now, the question is, if you get from Kendall (start) to Haymarket (finish),
+what words can you form by reading off the letters in order? Well, you need to
+read off “B” and “A” to get to Park. But then you have a choice: you could go
+directly to Haymarket and read off a “!”, or you could go to Downtown and back
+and read off “N” followed by “A”. You can’t go to Boylston because there’s no
+way to get back to Haymarket from there.</p>
+<p>And so some sequences you could read off are “BA!”, “BANA!”, “BANANA!”, and…
+you might have already guessed that this matches the regex <code>BA(NA)*!</code>.</p>
+<p>Interesting.</p>
+<hr>
+<p>So it turns out that you can turn any finite state machine into a regular
+expression, and, more importantly, vice-versa. If you think of finite state
+machines in terms of the <em>set of words they admit</em> and regular expressions in
+terms of the <em>set of words they match</em>, then each FSM can be paired with an
+equivalent regex (but that regex isn’t necessarily unique!).</p>
+<p>So to match a string against a regex, you really just need to match it against
+an equivalent FSM, which seems like a much easier thing to do since they’re so
+much more visual.</p>
+<p>The way to match an FSM is to start with a coin on the start state (Kendall).
+Then, you read off the letters from the string you’re trying to match. For each
+letter, you look at <em>all</em> the coins on the FSM. For each coin, you either move
+it to an adjacent state if they’re connected by an edge with that letter, or
+you remove it from the FSM if there is no such edge (if there are <em>multiple</em>
+edges with the same letter, then you have to “clone” the coin and put a copy on
+each edge’s target—this is called a <em>nondeterministic</em> FSM, and more on this
+later).</p>
+<p>If, when you’re done reading the string, a coin ends up in your final
+(“accepting”, double-circled) state then you win. That coin represents a way to
+travel the subway so that you read off that exact string, so your string must
+clearly be accepted by the FSM (and therefore the regex it’s equivalent to).</p>
+<p>I suggest trying this process yourself with the “BANANA!” example.</p>
+<hr>
+<p>And so this leaves one more question: how do you turn a regex into an FSM? This
+turns out to be pretty easy.
+<a href="https://en.wikipedia.org/wiki/Thompson%27s_construction">Thompson</a> gives an
+algorithm to do this, but it’s really simple and I urge you to try and figure
+it out yourself. The best way is to take each of the regex primitives like <code>*</code>
+and <code>|</code> and <code>()</code> and figure out how you can compile each one down individually.
+It’s a fun exercise, though there are some annoying subtleties with the empty
+string that you might have to deal with.</p>
+<p>You should also think about how you can turn other regex features like <code>+</code> and
+charsets into simpler regexes that just involve the above-mentioned 3 things.
+Can you compile down backreferences? Lookaheads?</p>
+<p>Anyway, there’s also a way to turn the resulting nondeterministic FSM into a
+<em>deterministic</em> one (i.e. no coin-cloning) using what’s called the <a href="https://en.wikipedia.org/wiki/Powerset_construction">powerset
+construction</a>. This
+creates a whole lot of new states, though, so it’s usually better to just make
+peace with coin-cloning. And there’s a <a href="https://en.wikipedia.org/wiki/DFA_minimization">host of
+algorithms</a> to make
+deterministic FSMs smaller.</p>
+<p>And that’s basically how my Scratch project works! There’s a small JavaScript
+program that takes a regex and outputs an FSM as a data structure. A second
+program then “flattens” the FSM into something that looks kind of like assembly
+(you could call this the “link” phase of the compilation). The assembly-ish
+stuff is just a flat, linear representation of the FSM in a Scratch list, where
+instead of arrows, I have the address of the state the arrow points to. Then a
+simple Scratch program written with Tosh goes and interprets that assembly
+using the coin-shunting technique. The whole process is very much like
+compiling a C program and running it on a processor, in fact.</p>
+<hr>
+<p>Now that we know a fair bit about how to implement regexes, I want to talk
+about a cool application of FSM theory: in particular, a nice little result
+that says that you <em>cannot</em> write a regular expression to match nested
+parentheses (so <code>[]</code>, <code>[[]]</code>, <code>[[[]]]</code> all match but <code>][[]</code> doesn’t).</p>
+<p>First, go ahead and try to write such a regex to convince yourself that you
+can’t. No “cheating” using fancy stuff like backreferences and whatnot: I’m
+talking about “pure” regexes involving only <code>*</code> and <code>|</code> and <code>()</code>.</p>
+<p>Convinced? Good.</p>
+<p>We’re going to <em>prove</em> that you can’t do this.</p>
+<p>Recall that any regex can be turned into an FSM. So let’s suppose we had a
+regex for matched parentheses, and we turned it into an FSM. Now, remember how
+FSM stands for “finite-state machine”? That means it, uh, has a finite number
+of states. Which means, if it has 100 states and you give that FSM the sequence
+of 51 <code>(</code>s and 51 <code>)</code>s (for a total of 102 characters), then you <em>must</em> visit
+some state twice. It’s the same argument as if you have 102 pigeons and 100
+holes, you must have a hole with more than one pigeon in it.</p>
+<p>And so if you loop back to a state, you can clearly loop back to that state
+<em>again</em>! So there must be some subsequence in your string that can be repeated
+while still matching the FSM. For example, in “BANANA!”, you can repeat the
+“NA” as many times as you want. This fact is called the <a href="https://en.wikipedia.org/wiki/Pumping_lemma_for_regular_languages">pumping
+lemma</a> (not
+to be confused with the pumping llama, which is a fuzzy weightlifting camelid).</p>
+<p><img src="static/monster-match/llama.png" alt="A pumping llama."></p>
+<blockquote>
+<p>Image by Kimberly Do.</p>
+</blockquote>
+<p>Now, let’s think about the <code>()</code> language (called the <a href="https://en.wikipedia.org/wiki/Dyck_language">Dyck
+language</a>). What part of it can
+you repeat? If you repeat the <code>(</code>s then you have too many <code>(</code>s. If you repeat
+the <code>)</code>s you have too many <code>)</code>s. And if you repeat something with both <code>(</code>s and
+<code>)</code>s, you clearly don’t follow the <code>(...(())...)</code> structure anymore.</p>
+<p>So… no such regex can exist.</p>
+<p>Isn’t that a great argument? I think it’s very cool.</p>
+<hr>
+<p>So, let’s recap. Regular expressions correspond to finite-state machines, which
+are souped-up subway systems. You can implement finite-state machines as a kind
+of automatic board game which also somehow involves cloning currency. Finally,
+the finite-ness of finite-state machines lets us prove a <s>llama</s> lemma
+which lets you show all sorts of interesting facts about regexes.</p>
+<p>Perhaps a deeper lesson here is that regexes, and to a lesser extent the rest
+of computer science, might seem like magic. But it’s magic that you’re entirely
+capable of learning. In the words of my hero <a href="http://blog.jamisbuck.org">Basil
+Smockwhitener</a>,</p>
+<blockquote>
+<p>You don’t understand how powerful you are. You can learn anything. Anything
+at all. But you have to be willing to balance the scale with effort.</p>
+</blockquote>
+]]></description>
+            <link>http://hardmath123.github.io/monster-match.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/monster-match.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Mon, 29 Feb 2016 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Perchance to Scheme]]></title>
             <description><![CDATA[<p>A field guide to the menagerie of Scheme dialects</p>
@@ -278,7 +2543,7 @@ you control, which you make your own with endless tweaks towards your ideals of
 perfection. Programmers don’t need to carve their fortresses out of rocky
 cliffs; they can find solace in editors, shells, browsers, and personal
 websites.</p>
-<p>They key is in <em>customization</em>.</p>
+<p>The key is in <em>customization</em>.</p>
 <p>Yet <em>even though</em> we spend hours making our tools “our own” with color schemes,
 macros, and key bindings, we <em>still</em> choose to publish our dotfiles as
 open-source “projects” on Github. We scarcely bother to read the original
@@ -2294,7 +4559,9 @@ documentation, help, and working examples for.</p>
 new ones, not programming in existing ones!</p>
 </li>
 </ul>
-<p>Still confused? Here’s a flowchart to help you out (click for a large SVG):</p>
+<p>Still confused? Here’s a flowchart to help you out (click for a large SVG, or
+try Tim’s <a href="https://scratch.mit.edu/projects/102723127/">interactive Scratch
+project</a>):</p>
 <p><a href="static/scratch-graph.svg"><img src="static/scratch-graph.png" alt="Flowchart"></a></p>
 <p>Finally: your personal experience and preference is far more important than
 anything we say. We cannot recommend a practical language any better than one
