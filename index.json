@@ -510,6 +510,14 @@
             "file": "facade.md",
             "date": "1/4/17",
             "markdown": true
+        },
+        {
+            "title": "Don't Call Us, We'll Call You",
+            "author": "Hardmath123",
+            "description": "Monadic IO and the Sugarloaf Transformation",
+            "file": "sugarloaf.md",
+            "date": "1/7/17",
+            "markdown": true
         }
     ]
 }
