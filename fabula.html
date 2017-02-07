@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Fabulous Fabula - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <script src="static/cheet.js" charset="utf-8"></script>
+            <script src="static/main.js"></script>
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+            <!-- You're reading the source to my blog? What do you think?
+
+            Do you have dinner plans? -->
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>Fabulous Fabula</h2>
+                <h4>Sunday, February 5, 2017 &middot; 5 min read</h4>
+<p>Ivan Sutherland says, “It’s not an idea until you write it down.” With that in
+mind, here is a series of thoughts I have recently been thinking.</p>
+<hr>
+<p>How do you feel when you walk through a library? Perhaps you feel relaxed by
+the silence, comforted by the presence of books at your side. Perhaps you feel
+awed by the pages that surround you, or inspired by the wonderful tales you
+know they contain.</p>
+<p>I feel all these emotions, but I also feel a little despair. A library has
+thousands and thousands of books. Surely I will never make it through even a
+small fraction of them — no matter how hard I try, even if I read constantly
+for years, there will always be books remaining, books I might have loved and
+cherished if only I had decided to read them. It is more than despair: the
+state of mind is perhaps best described as preemptive regret.</p>
+<p>Such is life. But as I walk between the bookshelves at my local library, it
+nevertheless seems natural — even prudent — to wonder: is there any end in
+sight? Will writers ever run out of stories to tell? Of distinctive plots, of
+clever endings, of engaging characters? Surely there are a finite number of
+words, a finite number of ways to meaningfully combine those words, and thus
+eventually one must reach a limit on the number of stories those words can
+tell. What happens if we tell them all, if we saturate our own Library of
+Babel? What then?</p>
+<p>In 2004, Christopher Booker published a book called <em>The Seven Basic Plots: Why
+We Tell Stories</em>. He argued that all stories fall into one of seven categories,
+such as “Rags to Riches” (<em>Cinderella</em> and <em>Jane Eyre</em>) or “Overcoming the
+Monster” (<em>Beowulf</em> and <em>Harry Potter</em>). Though harshly received by critics,
+Booker’s idea serves well to introduce the thesis of this blog post: that it is
+not the story, but rather its <em>telling</em>, that matters.</p>
+<p>What is the difference between a story and its telling? For that, let us borrow
+a pair of words from the Russian formalists, who began the modern tradition of
+narratology. The Russian formalists made a distinction between the <em>fabula</em> and
+the <em>syuzhet</em> of a story. The fabula is the actual story as it would be written
+in a history textbook: the real sequence of events, in their chronological
+order, the — to appeal to Kant — the noumenal, <em>das-Ding-an-sich</em> view of a
+tale. The syuzhet is the way the story is told: the organization of scenes, the
+development of characters, the surprise ending, the — to once more appeal to
+Kant — the phenomenal. The former is a <em>story</em>, the latter is a <em>plot</em>. If
+fabula is the theory of differential calculus, syuzhet is a well-delivered
+lecture on the subject. If fabula is a prism, syuzhet is a rainbow. If fabula
+is a galaxy, syuzhet is a telescope.</p>
+<p>The thesis of this post is therefore that to the art of storytelling, the
+syuzhet matters much more than the fabula. Booker’s seven basic plots attempt
+to restrict the possible fabulae, but an infinitude of syuzhets leave us with
+generations of thought-provoking literature. The <em>Odyssey</em> and <em>The Wizard of
+Oz</em> both narrate Booker’s “Voyage and Return” Fabula, but the syzhets are
+different enough for the stories to have vastly different meanings and impacts
+on our minds. The stories teach us different lessons, make us laugh and cry in
+different places, and make us empathize with different characters.
+Nevertheless, they both follow a very predictable order of events. It seems,
+therefore, that the work of a writer is to create syuzhet, not fabula.</p>
+<p>And so, as computer scientists, we must ask ourselves, “can we automate the
+creation of fabula?”</p>
+<hr>
+<p>I want to first clarify that I am not talking about creating some sort of Great
+Automatic Grammatizer. And I certainly am not trying to reduce literature to a
+series of theorems. Rather, I want to use computation as a lens to explore
+stories in a new way. The purpose, therefore, is not to generate a novel
+automatically — that sounds horrifying — but rather to generate the
+<em>framework</em> of a novel automatically. A writer can then focus on expressing
+herself without worrying about crafting a compelling storyline through which to
+do so. After all, a writer with a fascinating character, setting, or parable in
+mind still requires a medium for those elements to occupy. A readymade fabula
+provides a starting point, and above all, assurance that the story is going
+<em>somewhere</em>. A fabula protects you from the prospect of a contrived
+deus-ex-machina ending.</p>
+<p>Perhaps the best work on the computational generation of fabula comes from
+Chris Martens’ thesis, in which she reveals <a href="https://www.cs.cmu.edu/~cmartens/thesis/">a wonderful
+connection</a> between stories and
+Girard’s linear logic. (For a taste of linear logic, a good reference paper is
+<a href="http://homepages.inf.ed.ac.uk/wadler/papers/lineartaste/lineartaste-revised.pdf">this</a>
+set of lecture notes by Philip Wadler.) Briefly, Martens’ work allows you to
+create rules by which propositions change over time. These rules are much like
+algebraic manipulations; indeed, in a way, her idea equates <em>stories</em> with
+<em>proofs</em>. Ceptre, a proof-of-concept implementation of this work, lets you
+create rich interactive narratives as well as complete stories.</p>
+<p>(Further related work is covered by
+<a href="https://graphics.tudelft.nl/Publications-new/2016/KB16/Survey.pdf">this</a>
+survey paper. Of particular interest is the incredibly-well-named <a href="https://nil.cs.uno.edu/publications/">Narrative
+Intelligence Lab</a> at the University of
+New Orleans, which publishes papers like <a href="https://nil.cs.uno.edu/publications/papers/ware2014conflict.pdf"><em>A Computational Model of Plan-Based
+Narrative Conflict at the Fabula
+Level</em></a>.)</p>
+<p>But while Martens’ work creates a <em>logical</em> story effectively (which is very
+useful for interactive fiction), what we seek here is a <em>powerful</em> story. We
+want stories that make us <em>feel</em> rather than <em>think</em>. For that, we need new
+tools.</p>
+<p>Having said that, I must now admit that I have little to say about what such
+tools might actually <em>be</em>. I have been thinking about it for many months now,
+and have yet to make any progress.</p>
+<p>Some ideas stand out. Surely, the heart of fabula is conflict, and in
+particular, conflict of morals. Hamlet conflicts between revenge and
+self-preservation; Brutus between friendship and freedom; Juliet between love
+and family. Perhaps there is a way to take an arbitrary pair of values, and, by
+some nondeterministic process, construct a situation that forces a character to
+choose between them. Rather than Ceptre’s forward-chaining proof strategy, we
+might instead appeal to a form of resolution-refutation to generate interesting
+situations.</p>
+<p>Another part of fabula must be the asymmetry of information: there is
+distinction between the knowledge of each character (not to mention the reader
+and even the narrator). The function of information asymmetry is usually
+obvious. Consider, for example the classic murder mystery: Poirot’s stories
+rely on the murderer knowing what Poirot doesn’t, of Poirot knowing what the
+murderer doesn’t, of Hastings — a proxy for the reader — not knowing much
+in general. Yet information asymmetry is present in far more than just murder
+mysteries. Even <em>Romeo and Juliet</em> relies on a sequence of misunderstandings at
+the end.</p>
+<p>Fate, too, has its role in narrative, as do its counterparts, intention and
+motive. And what of irony? Does irony belong in fabula or syuzhet? <em>The Gift of
+the Magi</em> relies on irony for its fabula, whereas Shakespeare uses irony to
+enrich the syuzhet of <em>Hamlet</em>.</p>
+<p>Searching for the fundamental building blocks of effective fabula — the
+<em>narremes</em> that build up the <em>narratives</em> — is an exercise left for you to
+ponder along with me. As you read novels and short stories over the next few
+weeks, I invite you to try to distill the fabula from the syuzhet, and then to
+decide what exactly makes the fabula compelling. As with all fascinating
+questions, the answers may not be to our liking — or they may be too complex
+for us to mold into tractable generalizations — or they may be disappointing
+in their simplicity.</p>
+<p>But then, what’s an adventure without a little danger?</p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+            <section>
+                <center>(<a id="comment-toggle" href="#comment-toggle">Click to load comments&hellip;</a>)</center>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'comfortablynumbered';
+                    var disqus_identifier = 'fabula.md';
+
+                    window.addEventListener(
+                        'load',
+                        (function() {
+                            document.getElementById('comment-toggle').addEventListener('click',
+                                (function() {
+                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                }),
+                            true);
+                        }),
+                        true
+                    );
+                </script>
+            </section>
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="http://github.com/Hardmath123">
+                        <span class="octicon octicon-mark-github"></span>
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        <span class="octicon octicon-rss"></span>
+                        Subscribe (RSS)</a></li>
+                    <li><a href="https://github.com/Hardmath123/hardmath123.github.io/issues/new?title=Hi&body=How's%20it%20going%3F">
+                        <span class="octicon octicon-comment-discussion"></span>
+                        Feedback</a></li>
+                    <li><a href="mailto:contact-at-comfortablynumbered-dot-appspotmail-dot-com">
+                        <span class="octicon octicon-mail-read"></span>
+                        Email me</a></li>
+                    <li><a href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        <span class="octicon octicon-law"></span>
+                        CC BY-NC 3.0</a></li>
+                    <li><a href="appreciation.html">
+                        <span class="octicon octicon-beer"></span>
+                        Other</a></li>
+                </ul>
+            </div>
+
+            <!--
+            <span class="sc">ComfortablyNumbered</span> &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/appreciation.html">
+                <span class="octicon octicon-beer"></span></a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                <img
+                    alt="Creative Commons License"
+                    src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+            </a>
+            -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>

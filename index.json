@@ -518,6 +518,14 @@
             "file": "sugarloaf.md",
             "date": "1/7/17",
             "markdown": true
+        },
+        {
+            "title": "Fabulous Fabula",
+            "author": "Hardmath123",
+            "description": "Some thoughts on the artificial synthesis of stories",
+            "file": "fabula.md",
+            "date": "2/5/17",
+            "markdown": true
         }
     ]
 }
