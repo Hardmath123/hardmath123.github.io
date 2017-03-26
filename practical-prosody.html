@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Practical Prosody - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <script src="static/cheet.js" charset="utf-8"></script>
+            <script src="static/main.js"></script>
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+            <!-- You're reading the source to my blog? What do you think?
+
+            Do you have dinner plans? -->
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>Practical Prosody</h2>
+                <h4>Sunday, March 26, 2017 &middot; 2 min read</h4>
+<p>In a desparate attempt to learn a little more about the brilliant, strange,
+confusing, mystifying world we all live in, I have spent the past few weeks
+reading about it. About camelids and Cavendish, about 17th-century piracy and
+21st-century photography, about Betsy Ross and clause learning, about metric
+structure and morse code.</p>
+<p>Those last two subjects — metric structure and morse code — were Friday
+night’s reading, and as I read, I felt that familiar sensation you feel when
+you notice big ideas intersecting. It’s a tremendously exciting sensation, one
+that invites you to think just a little harder about each idea, to probe just a
+little more aggressively at their boundaries, until at last you can dig out the
+connection from your intuition.</p>
+<p>The connection in this case turned out to be simple: many morse code signs
+correspond to <a href="https://en.wikipedia.org/wiki/Foot_%28prosody%29">metric feet</a>.
+“A” or <code>.-</code> is an <em>iamb</em> (“To be or not to be”), “D” or <code>-..</code> is a <em>dactyl</em>
+(“Merrily, merrily, merrily, merrily”), “U” or <code>..-</code> is an <em>anapest</em> (“There
+was once an old man in Peru…”), “M” or <code>--</code> is a <em>spondee</em> (“Rage, rage”),
+and so on.</p>
+<p>A practical result of this fact is that we can come up with nice metric
+mnemonics for Morse code, and indeed <a href="https://en.wikipedia.org/wiki/Morse_code_mnemonics">Wikipedians have already done
+so</a>. By remembering the
+syllable stress patterns for such mnemonics, you can remember the dot-and-dash
+pattern for the associated letter.</p>
+<p>The real question, of course, is whether or not we can <em>automate</em> the search
+for such mnemonics.</p>
+<p>Armed with the <a href="https://github.com/aparrish/pronouncingpy">pronouncing</a> Python
+library (which feeds off of the <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronouncing
+Dictionary</a>), I decided to make
+my own set of Morse code mnemonics. This set is optimized for CS students, and
+was generated with the assistance of a simple computer program I named
+<em>versificator</em>. Here it is — enjoy!</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Letter</th>
+<th>Morse</th>
+<th>Mnemonics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><code>.-</code></td>
+<td>assert</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>array</td>
+</tr>
+<tr>
+<td>B</td>
+<td><code>-...</code></td>
+<td>bcrypt hashing</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>base64</td>
+</tr>
+<tr>
+<td>C</td>
+<td><code>-.-.</code></td>
+<td>computation</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>CS major</td>
+</tr>
+<tr>
+<td>D</td>
+<td><code>-..</code></td>
+<td>digital</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>dithering</td>
+</tr>
+<tr>
+<td>E</td>
+<td><code>.</code></td>
+<td>eh?</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>err…</td>
+</tr>
+<tr>
+<td>F</td>
+<td><code>..-.</code></td>
+<td>Futamura</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>fs_usage</td>
+</tr>
+<tr>
+<td>G</td>
+<td><code>--.</code></td>
+<td>GNU emacs</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>git checkout</td>
+</tr>
+<tr>
+<td>H</td>
+<td><code>....</code></td>
+<td>hullabaloo</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Hewlett-Packard</td>
+</tr>
+<tr>
+<td>I</td>
+<td><code>..</code></td>
+<td>IP</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>id</td>
+</tr>
+<tr>
+<td>J</td>
+<td><code>.---</code></td>
+<td>JS? How sad!</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>moar jQuery</td>
+</tr>
+<tr>
+<td>K</td>
+<td><code>-.-</code></td>
+<td>kilobyte</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>kangaroo</td>
+</tr>
+<tr>
+<td>L</td>
+<td><code>.-..</code></td>
+<td>linguistics course</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>legitimate</td>
+</tr>
+<tr>
+<td>M</td>
+<td><code>--</code></td>
+<td>malware</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Markov</td>
+</tr>
+<tr>
+<td>N</td>
+<td><code>-.</code></td>
+<td>Nyquist</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>nearley</td>
+</tr>
+<tr>
+<td>O</td>
+<td><code>---</code></td>
+<td>oh my zsh</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>output file</td>
+</tr>
+<tr>
+<td>P</td>
+<td><code>.--.</code></td>
+<td>prevent errors</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>prometheus</td>
+</tr>
+<tr>
+<td>Q</td>
+<td><code>--.-</code></td>
+<td>QuickTime has crashed</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>quad-core machine</td>
+</tr>
+<tr>
+<td>R</td>
+<td><code>.-.</code></td>
+<td>recursion</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>rotation</td>
+</tr>
+<tr>
+<td>S</td>
+<td><code>...</code></td>
+<td>sudoer</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>scp</td>
+</tr>
+<tr>
+<td>T</td>
+<td><code>-</code></td>
+<td>type</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>tree</td>
+</tr>
+<tr>
+<td>U</td>
+<td><code>..-</code></td>
+<td>unsubscribe</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>undeclared</td>
+</tr>
+<tr>
+<td>V</td>
+<td><code>...-</code></td>
+<td>video game</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>visual mode</td>
+</tr>
+<tr>
+<td>W</td>
+<td><code>.--</code></td>
+<td>wget it</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Wilensky</td>
+</tr>
+<tr>
+<td>X</td>
+<td><code>-..-</code></td>
+<td>LaTeX by Knuth</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Xcode is slow</td>
+</tr>
+<tr>
+<td>Y</td>
+<td><code>-.--</code></td>
+<td>combinator</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Yukihiro</td>
+</tr>
+<tr>
+<td>Z</td>
+<td><code>--..</code></td>
+<td>Z3 solver</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>zip archiver</td>
+</tr>
+</tbody>
+</table>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+            <section>
+                <center>(<a id="comment-toggle" href="#comment-toggle">Click to load comments&hellip;</a>)</center>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'comfortablynumbered';
+                    var disqus_identifier = 'practical-prosody.md';
+
+                    window.addEventListener(
+                        'load',
+                        (function() {
+                            document.getElementById('comment-toggle').addEventListener('click',
+                                (function() {
+                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                }),
+                            true);
+                        }),
+                        true
+                    );
+                </script>
+            </section>
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="http://github.com/Hardmath123">
+                        <span class="octicon octicon-mark-github"></span>
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        <span class="octicon octicon-rss"></span>
+                        Subscribe (RSS)</a></li>
+                    <li><a href="https://github.com/Hardmath123/hardmath123.github.io/issues/new?title=Hi&body=How's%20it%20going%3F">
+                        <span class="octicon octicon-comment-discussion"></span>
+                        Feedback</a></li>
+                    <li><a href="mailto:contact-at-comfortablynumbered-dot-appspotmail-dot-com">
+                        <span class="octicon octicon-mail-read"></span>
+                        Email me</a></li>
+                    <li><a href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        <span class="octicon octicon-law"></span>
+                        CC BY-NC 3.0</a></li>
+                    <li><a href="appreciation.html">
+                        <span class="octicon octicon-beer"></span>
+                        Other</a></li>
+                </ul>
+            </div>
+
+            <!--
+            <span class="sc">ComfortablyNumbered</span> &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/appreciation.html">
+                <span class="octicon octicon-beer"></span></a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                <img
+                    alt="Creative Commons License"
+                    src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+            </a>
+            -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>

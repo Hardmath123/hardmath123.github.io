@@ -10,13 +10,326 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Tue, 07 Feb 2017 17:24:43 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 26 Mar 2017 21:05:22 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
+            <title><![CDATA[Practical Prosody]]></title>
+            <description><![CDATA[<p>Amphibrachs, telegraphs, and fifty-two words I will never forget.</p>
+
+
+<p>In a desparate attempt to learn a little more about the brilliant, strange,
+confusing, mystifying world we all live in, I have spent the past few weeks
+reading about it. About camelids and Cavendish, about 17th-century piracy and
+21st-century photography, about Betsy Ross and clause learning, about metric
+structure and morse code.</p>
+<p>Those last two subjects — metric structure and morse code — were Friday
+night’s reading, and as I read, I felt that familiar sensation you feel when
+you notice big ideas intersecting. It’s a tremendously exciting sensation, one
+that invites you to think just a little harder about each idea, to probe just a
+little more aggressively at their boundaries, until at last you can dig out the
+connection from your intuition.</p>
+<p>The connection in this case turned out to be simple: many morse code signs
+correspond to <a href="https://en.wikipedia.org/wiki/Foot_%28prosody%29">metric feet</a>.
+“A” or <code>.-</code> is an <em>iamb</em> (“To be or not to be”), “D” or <code>-..</code> is a <em>dactyl</em>
+(“Merrily, merrily, merrily, merrily”), “U” or <code>..-</code> is an <em>anapest</em> (“There
+was once an old man in Peru…”), “M” or <code>--</code> is a <em>spondee</em> (“Rage, rage”),
+and so on.</p>
+<p>A practical result of this fact is that we can come up with nice metric
+mnemonics for Morse code, and indeed <a href="https://en.wikipedia.org/wiki/Morse_code_mnemonics">Wikipedians have already done
+so</a>. By remembering the
+syllable stress patterns for such mnemonics, you can remember the dot-and-dash
+pattern for the associated letter.</p>
+<p>The real question, of course, is whether or not we can <em>automate</em> the search
+for such mnemonics.</p>
+<p>Armed with the <a href="https://github.com/aparrish/pronouncingpy">pronouncing</a> Python
+library (which feeds off of the <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronouncing
+Dictionary</a>), I decided to make
+my own set of Morse code mnemonics. This set is optimized for CS students, and
+was generated with the assistance of a simple computer program I named
+<em>versificator</em>. Here it is — enjoy!</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Letter</th>
+<th>Morse</th>
+<th>Mnemonics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><code>.-</code></td>
+<td>assert</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>array</td>
+</tr>
+<tr>
+<td>B</td>
+<td><code>-...</code></td>
+<td>bcrypt hashing</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>base64</td>
+</tr>
+<tr>
+<td>C</td>
+<td><code>-.-.</code></td>
+<td>computation</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>CS major</td>
+</tr>
+<tr>
+<td>D</td>
+<td><code>-..</code></td>
+<td>digital</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>dithering</td>
+</tr>
+<tr>
+<td>E</td>
+<td><code>.</code></td>
+<td>eh?</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>err…</td>
+</tr>
+<tr>
+<td>F</td>
+<td><code>..-.</code></td>
+<td>Futamura</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>fs_usage</td>
+</tr>
+<tr>
+<td>G</td>
+<td><code>--.</code></td>
+<td>GNU emacs</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>git checkout</td>
+</tr>
+<tr>
+<td>H</td>
+<td><code>....</code></td>
+<td>hullabaloo</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Hewlett-Packard</td>
+</tr>
+<tr>
+<td>I</td>
+<td><code>..</code></td>
+<td>IP</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>id</td>
+</tr>
+<tr>
+<td>J</td>
+<td><code>.---</code></td>
+<td>JS? How sad!</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>moar jQuery</td>
+</tr>
+<tr>
+<td>K</td>
+<td><code>-.-</code></td>
+<td>kilobyte</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>kangaroo</td>
+</tr>
+<tr>
+<td>L</td>
+<td><code>.-..</code></td>
+<td>linguistics course</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>legitimate</td>
+</tr>
+<tr>
+<td>M</td>
+<td><code>--</code></td>
+<td>malware</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Markov</td>
+</tr>
+<tr>
+<td>N</td>
+<td><code>-.</code></td>
+<td>Nyquist</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>nearley</td>
+</tr>
+<tr>
+<td>O</td>
+<td><code>---</code></td>
+<td>oh my zsh</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>output file</td>
+</tr>
+<tr>
+<td>P</td>
+<td><code>.--.</code></td>
+<td>prevent errors</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>prometheus</td>
+</tr>
+<tr>
+<td>Q</td>
+<td><code>--.-</code></td>
+<td>QuickTime has crashed</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>quad-core machine</td>
+</tr>
+<tr>
+<td>R</td>
+<td><code>.-.</code></td>
+<td>recursion</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>rotation</td>
+</tr>
+<tr>
+<td>S</td>
+<td><code>...</code></td>
+<td>sudoer</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>scp</td>
+</tr>
+<tr>
+<td>T</td>
+<td><code>-</code></td>
+<td>type</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>tree</td>
+</tr>
+<tr>
+<td>U</td>
+<td><code>..-</code></td>
+<td>unsubscribe</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>undeclared</td>
+</tr>
+<tr>
+<td>V</td>
+<td><code>...-</code></td>
+<td>video game</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>visual mode</td>
+</tr>
+<tr>
+<td>W</td>
+<td><code>.--</code></td>
+<td>wget it</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Wilensky</td>
+</tr>
+<tr>
+<td>X</td>
+<td><code>-..-</code></td>
+<td>LaTeX by Knuth</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Xcode is slow</td>
+</tr>
+<tr>
+<td>Y</td>
+<td><code>-.--</code></td>
+<td>combinator</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Yukihiro</td>
+</tr>
+<tr>
+<td>Z</td>
+<td><code>--..</code></td>
+<td>Z3 solver</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>zip archiver</td>
+</tr>
+</tbody>
+</table>
+]]></description>
+            <link>http://hardmath123.github.io/practical-prosody.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/practical-prosody.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sun, 26 Mar 2017 07:00:00 GMT</pubDate>
+        </item>
+        <item>
             <title><![CDATA[Fabulous Fabula]]></title>
-            <description><![CDATA[<p>Thoughts on the artificial synthesis of narrative</p>
+            <description><![CDATA[<p>Some thoughts on the artificial synthesis of stories</p>
 
 
 <p>Ivan Sutherland says, “It’s not an idea until you write it down.” With that in
@@ -5785,86 +6098,6 @@ dump of my dataset, leave a comment below and I’ll send it to you.</p>
             <pubDate>Fri, 20 Mar 2015 07:00:00 GMT</pubDate>
         </item>
         <item>
-            <title><![CDATA[Capture the Hackathon]]></title>
-            <description><![CDATA[<p>Why hackathons aren’t helping the world, and how CTFs can fix that.</p>
-
-
-<p>If you’ve been following my blog, you know that I’m not a fan of competitions.
-One of the few exceptions to this is CTFs. CTFs, or Capture-The-Flag
-competitions, are computer security challenges where the organizers host a few
-vulnerable servers and you need to “hack” them to find secret keys. CTFs are,
-to be very honest, a lot of fun.</p>
-<p>But I’m not here to advertise CTFs—I’ve already done that in another post—I’m
-here to talk about how CTFs should be replacing Hackathons.</p>
-<p>Hackathons are great. You hang out all night long, eat junk food, listen to
-music, and get all sorts of swag from the riches companies in Silicon Valley.
-You get to meet successful people who have their own start-ups.</p>
-<p>But that’s all.</p>
-<p>Respectable hackathons advertise themselves as educational: if you know how to
-code, you get a chunk of time to work on a project and learn a new skill. If
-you don’t know how to code, we’ll teach you.</p>
-<p>The truth is, neither actually works out in the real world.</p>
-<p>I know of exactly zero pieces of hackathon-code that the authors are
-legitimately proud of. “Authors are legitimately proud of” differs strongly
-from “authors are capable of making an exciting, buzzword-heavy pitch about,”
-the latter generally being the sole criterion in determining winners.
-Hackathon veterans largely agree that hackathon-code is rarely touched after
-the demo, because it’s usually written as just enough to create a demo. You
-aren’t supposed to pay heed to petty things like maintainability—you’re
-hackers! And so your efforts over 24 sleep-deprived zombie hours all go to
-/dev/null.</p>
-<p>At the other extreme are the brave souls who walk into a hackathon cold: no
-programming experience whatsoever. From what I can tell, they’re generally
-persuaded to come by their nerdfriends, with the prospect of free food. In any
-case, I have yet to meet someone who actually fell in love with programming at
-a hackathon. Yes, the rich Silicon Valley startup culture is appetizing, but
-you can’t just show up at a hackathon and found a company. You need to put in
-the effort to learn the basics and fall in love with programming, and that is
-<em>not</em> something you can do in 24 continuous hours. You can’t put on a concert
-in 24 hours having never touched an instrument.</p>
-<p>So, what are hackathons good for? They’re great for networking: making friends,
-and even getting internships or jobs. They’re great for getting T-shirts,
-playing games, and having awesome conversations. They’re great for hearing
-talks that make you feel good about yourself for being a “hacker”, “innovator”,
-“creator”, “developer”, etc. They are, in short, what the humble party has
-evolved into to suit Silicon Valley.</p>
-<hr>
-<p>Enter CTFs. CTFs are hardcore. To do well in one, you need to be really clever.
-You need oodles of esoteric knowledge about all sorts of computer science. You
-need to be good at math, algorithms, general-purpose problem solving, and of
-course programming. A single CTF problem can teach you far more than an entire
-hackathon can ever hope to.</p>
-<p>(You do <em>not</em>, by the way, need to be good at making a pitch in front of a
-panel of judges.)</p>
-<p>I posit that a CTF is also as social as a hackathon: perhaps a majority of my
-best friends are folks I’ve met CTFing, either because they were my teammates,
-or because I ran into them on a CTF’s IRC channel. The conversations you have
-with your teammates while trying to solve a CTF problem are fantastic: you
-share large wealths of information, refute or build upon each others’ ideas,
-and ask hard questions, and do all of that while making puns and inside jokes.</p>
-<p>As far as I’m concerned, a CTF is much more valuable than a hackathon for a
-casual programmer—mildly experienced script kiddies and ninja rockstars alike.</p>
-<p>But more importantly, I can envision CTFs for beginners, too. Solving the
-problems in an introductory CS textbook is far more appealing when put in the
-context of hacking into someone’s server. I’m sure an elegantly crafted
-sequence of problems can Socratically teach someone enough basic Python to, for
-instance, compute large Fibonacci numbers recursively—for the right people,
-that should be enough to make them fall in love with computer science.</p>
-<p>CTFs have a lot of potential: it’s a shame we’re instead promoting
-hackathon-parties as “CS education events”.</p>
-<hr>
-<p>P.S. It would be an even bigger shame if this post comes true in the wrong way,
-and CTFs go the same route as competition math. As much as I love the idea,
-some part of me wants to keep the CTF world a secret so that the people who
-ruined competition math can’t get their hands on CTFs as well. I hope that’s
-not selfish—but I think that’s a topic for a whole new post.</p>
-]]></description>
-            <link>http://hardmath123.github.io/hackathons-vs-ctfs.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/hackathons-vs-ctfs.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 17 Mar 2015 07:00:00 GMT</pubDate>
-        </item>
-        <item>
             <title><![CDATA[Use Imperfect Tools]]></title>
             <description><![CDATA[<p>A promise to myself.</p>
 
@@ -5959,6 +6192,86 @@ Let’s see how long I survive.</p>
 ]]></description>
             <link>http://hardmath123.github.io/use-imperfect-tools.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/use-imperfect-tools.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Tue, 17 Mar 2015 07:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Capture the Hackathon]]></title>
+            <description><![CDATA[<p>Why hackathons aren’t helping the world, and how CTFs can fix that.</p>
+
+
+<p>If you’ve been following my blog, you know that I’m not a fan of competitions.
+One of the few exceptions to this is CTFs. CTFs, or Capture-The-Flag
+competitions, are computer security challenges where the organizers host a few
+vulnerable servers and you need to “hack” them to find secret keys. CTFs are,
+to be very honest, a lot of fun.</p>
+<p>But I’m not here to advertise CTFs—I’ve already done that in another post—I’m
+here to talk about how CTFs should be replacing Hackathons.</p>
+<p>Hackathons are great. You hang out all night long, eat junk food, listen to
+music, and get all sorts of swag from the riches companies in Silicon Valley.
+You get to meet successful people who have their own start-ups.</p>
+<p>But that’s all.</p>
+<p>Respectable hackathons advertise themselves as educational: if you know how to
+code, you get a chunk of time to work on a project and learn a new skill. If
+you don’t know how to code, we’ll teach you.</p>
+<p>The truth is, neither actually works out in the real world.</p>
+<p>I know of exactly zero pieces of hackathon-code that the authors are
+legitimately proud of. “Authors are legitimately proud of” differs strongly
+from “authors are capable of making an exciting, buzzword-heavy pitch about,”
+the latter generally being the sole criterion in determining winners.
+Hackathon veterans largely agree that hackathon-code is rarely touched after
+the demo, because it’s usually written as just enough to create a demo. You
+aren’t supposed to pay heed to petty things like maintainability—you’re
+hackers! And so your efforts over 24 sleep-deprived zombie hours all go to
+/dev/null.</p>
+<p>At the other extreme are the brave souls who walk into a hackathon cold: no
+programming experience whatsoever. From what I can tell, they’re generally
+persuaded to come by their nerdfriends, with the prospect of free food. In any
+case, I have yet to meet someone who actually fell in love with programming at
+a hackathon. Yes, the rich Silicon Valley startup culture is appetizing, but
+you can’t just show up at a hackathon and found a company. You need to put in
+the effort to learn the basics and fall in love with programming, and that is
+<em>not</em> something you can do in 24 continuous hours. You can’t put on a concert
+in 24 hours having never touched an instrument.</p>
+<p>So, what are hackathons good for? They’re great for networking: making friends,
+and even getting internships or jobs. They’re great for getting T-shirts,
+playing games, and having awesome conversations. They’re great for hearing
+talks that make you feel good about yourself for being a “hacker”, “innovator”,
+“creator”, “developer”, etc. They are, in short, what the humble party has
+evolved into to suit Silicon Valley.</p>
+<hr>
+<p>Enter CTFs. CTFs are hardcore. To do well in one, you need to be really clever.
+You need oodles of esoteric knowledge about all sorts of computer science. You
+need to be good at math, algorithms, general-purpose problem solving, and of
+course programming. A single CTF problem can teach you far more than an entire
+hackathon can ever hope to.</p>
+<p>(You do <em>not</em>, by the way, need to be good at making a pitch in front of a
+panel of judges.)</p>
+<p>I posit that a CTF is also as social as a hackathon: perhaps a majority of my
+best friends are folks I’ve met CTFing, either because they were my teammates,
+or because I ran into them on a CTF’s IRC channel. The conversations you have
+with your teammates while trying to solve a CTF problem are fantastic: you
+share large wealths of information, refute or build upon each others’ ideas,
+and ask hard questions, and do all of that while making puns and inside jokes.</p>
+<p>As far as I’m concerned, a CTF is much more valuable than a hackathon for a
+casual programmer—mildly experienced script kiddies and ninja rockstars alike.</p>
+<p>But more importantly, I can envision CTFs for beginners, too. Solving the
+problems in an introductory CS textbook is far more appealing when put in the
+context of hacking into someone’s server. I’m sure an elegantly crafted
+sequence of problems can Socratically teach someone enough basic Python to, for
+instance, compute large Fibonacci numbers recursively—for the right people,
+that should be enough to make them fall in love with computer science.</p>
+<p>CTFs have a lot of potential: it’s a shame we’re instead promoting
+hackathon-parties as “CS education events”.</p>
+<hr>
+<p>P.S. It would be an even bigger shame if this post comes true in the wrong way,
+and CTFs go the same route as competition math. As much as I love the idea,
+some part of me wants to keep the CTF world a secret so that the people who
+ruined competition math can’t get their hands on CTFs as well. I hope that’s
+not selfish—but I think that’s a topic for a whole new post.</p>
+]]></description>
+            <link>http://hardmath123.github.io/hackathons-vs-ctfs.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/hackathons-vs-ctfs.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Tue, 17 Mar 2015 07:00:00 GMT</pubDate>
         </item>

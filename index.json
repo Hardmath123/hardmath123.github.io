@@ -526,6 +526,14 @@
             "file": "fabula.md",
             "date": "2/5/17",
             "markdown": true
+        },
+        {
+            "title": "Practical Prosody",
+            "author": "Hardmath123",
+            "description": "Amphibrachs, telegraphs, and fifty-two words I will never forget.",
+            "file": "practical-prosody.md",
+            "date": "3/26/17",
+            "markdown": true
         }
     ]
 }
