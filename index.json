@@ -534,6 +534,14 @@
             "file": "practical-prosody.md",
             "date": "3/26/17",
             "markdown": true
+        },
+        {
+            "title": "A Fishy Function",
+            "author": "Hardmath123",
+            "description": "The Hitchhiker's Guide to Patience, or, How To Use Earthquakes To Calculate Compound Interest",
+            "file": "poisson.md",
+            "date": "7/16/17",
+            "markdown": true
         }
     ]
 }

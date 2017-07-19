@@ -10,10 +10,493 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 27 May 2017 17:41:46 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 19 Jul 2017 03:19:54 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[A Fishy Function]]></title>
+            <description><![CDATA[<p>The Hitchhiker’s Guide to Patience, or, How To Use Earthquakes To Calculate Compound Interest</p>
+
+
+<blockquote>
+<p>I started thinking about these ideas in late May, but haven’t gotten a chance
+to write about them until now…</p>
+</blockquote>
+<p>If you want to take a boat from the Puget Sound to Lake Washington, you need to
+go across the <em>Ballard Locks</em>, which separate the Pacific Ocean’s saltwater
+from the freshwater lakes. The locks are an artificial barrier, built in the
+early 1900s to facilitate shipping.</p>
+<p>Today, the locks have a secondary function: they are a picnic spot. A while
+back, I visited the locks on a sunny and warm day. A band was playing in the
+park by the water, and there were booths with lemonade and carnival games.
+Every few minutes, a boat would enter the locks, be raised or lowered, and
+continue on its way.</p>
+<p>If you walk across the locks, you can check out the <em>fish ladder</em>, a series of
+raised steps designed to help fish — in this case, salmon — migrate, since
+the locks cut off their natural path between the water bodies. There is usually
+a crowd around the fish ladder. Around once a minute, a salmon leaps out of the
+water and goes up a step; the children gasp and cheer as they watch over the
+railing.</p>
+<p>This is the idyllic scene that we will soon destroy with the heavy hammer of
+mathematical statistics. You see, it turns out that a little bit of thought
+about these salmon can give us a way to use historical earthquake data to
+approximate ($ e $).</p>
+<p>But I’m getting ahead of myself. Let’s start at the beginning.</p>
+<hr>
+<p>What is the probability that a fish jumps out of the water <em>right now?</em> This is
+a tricky question to answer. Suppose there’s a 10% chance that a fish jumps out
+of the water right now. That means the probability that a fish <em>doesn’t</em> jump
+is 90%. In the next instant of time, there’s again a 10% chance that the fish
+jumps. So, the laws of probability tell us that over the course of ($ n $)
+instants, there’s a ($ 0.90^n $) probability that <em>no</em> fish-jumps occur.</p>
+<p>But there’s an <em>infinite</em> number of instants in every second! Time is
+continuous: you can subdivide it as much as you want. So the probability that
+no fish-jumps occur in a one-second period is ($ 0.90^\infty $), which is…
+zero! Following this reasoning, a fish must jump <em>at least</em> every second. And
+this is clearly a lie: empirically, the average time between fish-jumps is
+closer to a minute.</p>
+<p>Okay, so “probability that a fish jumps <em>right now</em>“ is a slippery thing to
+define. What can we do instead? Since the problem seems to be the “right now”
+part of the definition, let’s try to specify a time <em>interval</em> instead of an
+<em>instant</em>. For example, what is the probability that we will observe ($ n $)
+fish-jumps in the next ($ t $) seconds?</p>
+<p>Well, we’re going to need some assumptions. For simplicity, I’m going to assume
+from now on that fish jump independently, that is, if one fish jumps, then it
+does not affect the behavior of any other fish. I don’t know enough about
+piscine psychology to know whether or not this is a valid assumption, but it
+doesn’t sound too far-fetched.</p>
+<hr>
+<p>While we’re on the subject of far-fetchedness: the math that follows is going
+to involve a lot of handwaving and flying-by-the-seat-of-your-pants. We’re
+going to guess at functions, introduce constants whenever we feel like it,
+evaluate things that may or may not converge, and, throwing caution and
+continuity to the wind, take derivatives of things that might be better left
+underived.</p>
+<p>I think it’s more fun this way.</p>
+<p>Yes, we <em>could</em> take the time to formalize the ideas with lots of definitions
+and theorems and whatnot. There’s a lot to be said about mathematical rigor,
+and it’s really important for you, the reader, to be extremely skeptical of
+anything I say. In fact, I <em>encourage</em> you to look for mistakes: the reasoning
+I’m about to show you is entirely my own, and probably has some bugs here and
+there. (The <em>conclusions</em>, for the record, match what various textbooks say;
+they just derive them in a slightly different way.)</p>
+<p>A couple of lemmas here and there might make the arguments here much more
+convincing. But they will also make this post tedious and uninspiring, and I
+don’t want to go down that road. If you’re curious, you can look up the gnarly
+details in a book. Until then, well, we’ve got bigger fish to fry!</p>
+<hr>
+<p>Okay, back to math. We can model the probability we’re talking about with a
+function that takes ($ n $) and ($ t $) as inputs and tells you the
+probability, ($ P(n, t) $), that you see ($ n $) fish-jumps in the time period
+($ t $). What are some things we know about ($ P $)?</p>
+<p>Well, for starters, ($ P(n, 0) = 0 $), since in <em>no</em> time, there’s no way
+anything can happen.</p>
+<p>What about ($ P(n, a + b) $)? That’s the probability that there are ($ n $)
+fish-jumps in ($ a + b $) seconds. We can decompose this based on how many of
+the fish-jumps occurred in the “($ a $)” and “($ b $)” periods:</p>
+<p>\begin{align}
+P(n, a+b)   &amp; = P(0, a)P(n, b) \\
+            &amp; + P(1, a)P(n-1, b) \\
+            &amp; + \ldots \\
+            &amp; + P(n, a)P(0, b)
+\end{align}</p>
+<p>Hmm. This looks familiar… perhaps…</p>
+<p>Yes! Isn’t this what you do to the coefficients of polynomials when you
+multiply them? The coefficient of ($ x^n $) in ($ a(x)b(x) $) is a similar
+product, in terms of the coefficients of ($ x^i $) and ($ x^{n-i} $) in ($ a(x)
+$) and ($ b(x) $), respectively.</p>
+<p>This can’t be a coincidence. In fact, it feels appropriate to break out this
+gif again:</p>
+<p><img src="static/coincidence.gif" alt="Benedict Cumberbatch being awesome"></p>
+<p>Let’s try to force things into polynomial form and see what happens. Let ($
+p_t(x) $) be a polynomial where the coefficient of ($ x^n $) is the
+probability that ($ n $) fish-jumps occur in time ($ t $):</p>
+<p>\begin{align}
+p_t(x) &amp;= P(0, t)x^0 + P(1, t)x^1 + \ldots \\
+        &amp;= \sum_{n=0}^\infty P(n, t)x^n
+\end{align}</p>
+<p>(Yes, fine, since ($ n $) can be arbitrarily large, it’s <em>technically</em> a “power
+series”, which is just an infinitely long polynomial. Even more technically,
+it’s a <em>generating function</em>.)</p>
+<p>We know that ($ p_0(x) = 1 $), because nothing happens in no time, i.e. the
+probability of zero fish-jumps is “1” and the probability of any other number
+of fish-jumps is “0”. So ($ p_0(x) = 1x^0 + 0x^1 + \ldots $), which is equal
+to just “1”.</p>
+<p>What else do we know? It should make sense that ($ p_t(1) = 1 $), since if you
+plug in “1”, you just add up the coefficients of each term of the polynomial.
+Since the coefficients are the probabilities, they have to add up to “1” as
+well.</p>
+<p>Now, taking a leap of faith, let’s say that ($ p_{a+b}(x) = p_a(x)p_b(x) $),
+because when the coefficients multiply, they work the same way as when we
+decomposed the probabilities above.</p>
+<p>Why is this property interesting,? We’re turning a property about addition into
+a property about multiplication. That sounds awfully like something <em>else</em>
+we’re used to:  logarithms!  Forgetting for a moment that ($ p $) is a power
+series, maybe we can “solve” for the function ($ p_t(x) $) by messing around
+with something like this:</p>
+<p>\[
+p_t(x) = e^{tx}
+\]</p>
+<p>Okay, ($ e^{tx} $) doesn’t quite work because we want ($ p_t(1) = 1 $). Maybe
+($ e^{t(x-1)} $) will work? It seems to have all the properties we want…</p>
+<hr>
+<p>Let’s take a moment to stop and think. At this point, it’s not even clear what
+we’re <em>doing</em>. The whole point of defining ($ p_t(x) $) was to look at the
+coefficients, but when we “simplify” it into ($ e^{t(x-1)} $) we no longer have
+a power series.</p>
+<p>Or do we?</p>
+<p>Recall from calculus class that you can expand out some functions using their
+<em>Taylor Series</em> approximation, which is a power series. In particular, you can
+show using some Fancy Math that</p>
+<p>\begin{align}
+e^x &amp;= \frac{x^0}{0!} + \frac{x^1}{1!} + \frac{x^2}{2!} + \ldots \\
+    &amp;= \sum_{n=0}^\infty \frac{x^n}{n!}
+\end{align}</p>
+<p>If you haven’t taken calculus class yet, I promise this isn’t black magic. It’s
+not even plain magic. It’s just a result of a clever observation about what
+happens to ($ e^x $) when you increase ($ x $) by a little bit.</p>
+<p>If you <em>have</em> taken calculus, bet you didn’t think this “series approximation”
+stuff would ever be useful! But it <em>is</em>, because a quick transformation gives
+us the series representation for ($ p_t(x) $):</p>
+<p>\[
+e^{t(x-1)} = e^{tx}/e^t = \sum_{n=0}^\infty \frac{(tx)^n}{n!e^t}
+\]</p>
+<p>and so the coefficient of ($ x^n $) gives us ($ P(n, t) = t^n/(e^t n!) $).</p>
+<hr>
+<p>Now we have a <em>new</em> problem: this formula doesn’t depend <em>at all</em> on the type
+of events we’re observing. In particular, the formula doesn’t “know” that the
+salmon at Lake Washington jump around once a minute. We never told it! Fish at
+<em>other</em> lakes might jump more or less frequently, but the formula gives the
+same results. So the formula must be wrong. Sad.</p>
+<p>But it might be salvageable! Let’s go back and see if we can add a new constant
+to represent the lake we’re in. Perhaps we can call it ($ \lambda $), the
+Greek letter “L” for lake. Where could we slip this constant in?</p>
+<p>Our solution for ($ p_t(x) $) was:</p>
+<p>\[
+p_t(x) = e^{t(x-1)}
+\]</p>
+<p>but in retrospect, the base ($ e $) was pretty arbitrarily chosen. We could
+make the base ($ \lambda $) instead of ($ e $), but that would mess up the
+Taylor Series, which only works with base ($ e $). That would be inconvenient.</p>
+<p>However, we know that we can “turn” ($ e $) into any number by raising it to a
+power, since ($ e^{\log b} = b $). If we want base ($ b $), we can replace ($
+e $) with ($ e^{\log b} $). This suggests that ($ \lambda = \log b $) could
+work, making our equation:</p>
+<p>\[
+p_t(x) = \left(e^\lambda\right)^{t(x-1)} = e^{(\lambda t) (x-1)}
+\]</p>
+<p>This seems to fit the properties we wanted above (you can check them if you
+want). Going back to our Taylor Series expansion, we can just replace ($ t $)
+with ($ \lambda t $) to get:</p>
+<p>\[
+P(n, t) = \frac{\left(\lambda t\right)^n}{e^{\lambda t} n!}
+\]</p>
+<hr>
+<p>Let’s step back and think about what we’re claiming. Knowing <em>only</em> that fish
+jump randomly, and roughly independently, we claim to have an expression for
+the probability that ($ n $) fish-jumps occur in a time interval ($ t $).</p>
+<p>“Okay, hold up,” you say, “something smells fishy about this. This is pretty
+bold: we know nothing about how fish think, or fluid dynamics, or whatever
+other factors could influence a fish’s decision to jump.  And yet we have this
+scary-looking expression with ($ e $) and a factorial in there!”</p>
+<p>That’s a fair point. I’m just as skeptical as you are. It would be good to back
+up these claims with some data. Sadly, I <em>didn’t</em> spend my time in Seattle
+recording fish-jumping times. But, in a few more sections, I promise there will
+be some empirical evidence to assuage your worries. Until then, let’s press on,
+and see what else we can say about fish.</p>
+<hr>
+<p>We have a way to get the probability of some number of fish-jumps in some
+amount of time. What’s next?</p>
+<p>One thing we can do is compute the <em>average</em> number of fish-jumps in that time
+interval, using expected value. Recall that to find expected value, you
+multiply the probabilities with the values. In this case, we want to find:</p>
+<p>\[
+E_t[n] = \sum_{n=0}^\infty P(n, t)n
+\]</p>
+<p>This looks hard… but also oddly familiar. Remember that</p>
+<p>\[
+p_t(x) = \sum_{n=0}^\infty P(n, t)x^n
+\]</p>
+<p>because, y’know, that’s how we defined it. Using some more Fancy Math (“taking
+the derivative”), this means that</p>
+<p>\[
+\frac{dp_t(x)}{dx} = \sum_{n=0}^\infty P(n, t)nx^{n-1}
+\]</p>
+<p>and so ($ E_t[n] = p^\prime_t(1) $).</p>
+<p>That… still looks hard. Derivatives of infinite sums are no fun. But remember
+from the last section that we also have a <em>finite</em> way to represent ($ p_t(x)
+$): what happens if we take <em>its</em> derivative?</p>
+<p>\begin{align}
+p_t(x)         &amp;= e^{(\lambda t) (x-1)} \\
+p^\prime_t(x) &amp;= (\lambda t)e^{(\lambda t) (x-1)} \\
+p^\prime_t(1) &amp;= E_t[n] = \lambda t
+\end{align}</p>
+<p>Aha! The average number of fish-jumps in time ($ t $) is ($ \lambda t $). If
+($ t $) has units of time and ($ \lambda t $) has units of fish-jumps, this
+means that ($ \lambda $) has units of fish-jumps-per-time. In other words, ($
+\lambda $) is just the <em>rate</em> of fish-jumps in that particular lake! For Lake
+Washington, ($ \lambda_w = 1/60 \approx 0.0167 $) fish-jumps-per-second,
+which means that the probability of seeing two fish-jumps in the next thirty
+seconds is:</p>
+<p>\[
+p_{30}(2) = \frac{(0.0167\times30)^2}{e^{0.0167\times30}2!} \approx 0.076
+\]</p>
+<p>I think that’s pretty neat.</p>
+<hr>
+<p>What about the <em>standard deviation</em> of the number of fish-jumps? That sounds
+ambitious. But things have been working out pretty well so far, so let’s go for
+it.</p>
+<p><em>Standard deviation</em>, or ($ \sigma $), the Greek letter “sigma”, is a measure
+of “how far, on average, are we from the mean?” and as such seems easy to
+define:</p>
+<p>\[
+\sigma = E[n-\lambda t]
+\]</p>
+<p>Well, this isn’t hard to evaluate. Knowing that expected values add up, we can
+do some quick math:</p>
+<p>\begin{align}
+\sigma &amp;= E[n] - E[\lambda t] \\
+        &amp;= \lambda t - \lambda t = 0
+\end{align}</p>
+<p>Oops. We’re <em>definitely</em> off by a <em>little bit</em> on average, so there’s <em>no way</em>
+that the standard deviation is 0. What went wrong?</p>
+<p>Well, ($ n - \lambda t $) is negative if ($ n $) is <em>lower</em> than expected!
+When you add the negative values to the positive ones, they cancel out.</p>
+<p>This is annoying. But there’s an easy way to turn negative numbers positive: we
+can square them. Let’s try that.</p>
+<p>\begin{align}
+\sigma^2 &amp;= E[(n-\lambda t)^2] \\
+          &amp;= E[n^2 - 2n\lambda t + (\lambda t)^2]
+\end{align}</p>
+<p>Now what? We don’t know anything about how ($ E[n^2] $) behaves.</p>
+<p>Let’s go back to how we figured out ($ E[n] $) for inspiration. The big idea
+was that</p>
+<p>\[
+\frac{dp_t(x)}{dx} = \sum_{n=0}^\infty P(n, t)nx^{n-1}
+\]</p>
+<p>Hmm. What if we take another derivative?</p>
+<p>\[
+\frac{d^2p_t(x)}{dx^2} = \sum_{n=0}^\infty P(n, t)n(n-1)x^{n-2}
+\]</p>
+<p>We get an ($ n(n-1) $) term, which isn’t <em>quite</em> ($ n^2 $), but it’s
+degree-two. Let’s roll with it. Following what we did last time,</p>
+<p>\begin{align}
+p_t(x) &amp;= e^{(\lambda t)(x - 1)} \\
+p^\prime_t(x) &amp;= (\lambda t)e^{(\lambda t)(x - 1)} \\
+p^{\prime\prime}_t(x) &amp;= (\lambda t)(\lambda t)e^{(\lambda t)(x - 1)} \\
+E[n(n-1)] &amp;= p^{\prime\prime}_t(1) \\
+          &amp;= (\lambda t)^2
+\end{align}</p>
+<p>And now we have to do some sketchy algebra to make things work out:</p>
+<p>\begin{align}
+\sigma^2 &amp;= E[(n-\lambda t)^2] \\
+          &amp;= E[n^2 - 2n\lambda t + (\lambda t)^2] \\
+          &amp;= E[n^2 - n - 2n\lambda t + n + (\lambda t)^2] \\
+          &amp;= E[(n^2 - n) - 2n\lambda t + n + (\lambda t)^2] \\
+          &amp;= E[n^2 - n] - E[2n\lambda t] + E[n] + E[(\lambda t)^2] \\
+          &amp;= (\lambda t)^2 - 2(\lambda t)(\lambda t) + \lambda t + (\lambda t)^2 \\
+          &amp;= \lambda t
+\end{align}</p>
+<p>…which means ($ \sigma = \sqrt{\lambda t} $).</p>
+<p>Seems like magic.</p>
+<hr>
+<p>Okay, fine, we have this fancy function to model these very specific
+probabilities about fish-jump-counts over time intervals. But the kids watching
+the fish ladder don’t care! They want to know what’s <em>important:</em> “how long do
+I need to wait until the next fish jumps?”</p>
+<p>Little do they know, this question opens up a whole new can of worms…</p>
+<p>Until now, we’ve been playing with ($ n $) as our random variable, with  ($ t
+$) fixed. Now, we need to start exploring what happens if ($ t $) is the random
+variable. This needs some new ideas.</p>
+<p>Let’s start with an easier question to answer. What is the probability that you
+need to wait longer than five minutes (300 seconds) to see a fish-jump? (Five
+minutes is <em>way</em> longer than <em>my</em> attention span when looking at fish. But
+whatever.)</p>
+<p>It turns out that we already know how to answer that question. We know the
+probability that <em>no</em> fish jump in five minutes: that’s equal to ($ p_{300}(0)
+$). Why? Well, when we plug in ($ x = 0 $), all the ($ x $) terms go away in
+the series representation, and we’re only left with (the coefficient of) the ($
+x^0 $) term, which is what we want.</p>
+<p>Long story short, the probability that you need to wait longer than five
+minutes is ($ e^{0.0167\times300(0-1)} = 0.00674 $). This means that the
+probability that you <em>will</em> see a fish-jump in the next five minutes is ($ 1 -
+e^{0.0167\times300(0-1)} $), which is around 0.9932. This is the probability
+that you have to wait <em>less</em> than five minutes to see a fish-jump. For an
+arbitrary time interval ($ T $), we have ($ P(t&lt;T) = 1 - e^{-\lambda T} $),
+where ($ t $) is the actual time you have to wait.</p>
+<p>Sanity check time! This gets close to 1 as ($ T $) gets higher, which sounds
+about right: the longer you’re willing to wait, the likelier it is that you’ll
+see a fish jump.  Similarly, if fish jump at a higher rate, ($ \lambda $) goes
+up, and the probability gets closer to 1, which makes sense.</p>
+<p>Now things are going to get a bit hairy. What is the probability that you have
+to wait <em>exactly</em> ($ T $), that is, ($ P(t = T) $)? This should be zero:
+nothing happens in no time. But let’s be reasonable: when we say “exactly” ($
+T $), we really mean a tiny window between, say, ($ T $) and ($ T + dT $) where
+($ dt $) is a small amount of time, say, a millisecond.</p>
+<p>The question then is, what is ($ P(T &lt; t &lt; T + dt) $), which isn’t too hard to
+answer: it’s just ($ P(t &lt; T + dt) - P(t &lt; T) $), that is, you need to wait
+<em>more</em> than ($ T $) but <em>less</em> than ($ T + dT $). In other words,</p>
+<p>\[
+P(t \approx T, dT) = P(t &lt; T+dT) - P(t &lt; T)
+\]</p>
+<p>where ($ dt $) is an “acceptable margin of error”.</p>
+<p>This looks <em>awfully</em> like a derivative! We’re expressing the <em>change</em> in
+probability as a function of <em>change</em> in time: if I wait ($ dT $) longer, how
+much likelier am I to see a fish-jump?</p>
+<p>Let’s rewrite our above equation to take advantage of the derivativey-ness of
+this situation.</p>
+<p>\begin{align}
+P(t \approx T, dT) &amp;= \left(\frac{P(t &lt; T+dT) - P(t &lt; T)}{dT}\right)dT\\
+                    &amp;= \left(\frac{d P(t &lt; T)}{dT}\right)dT \\
+                    &amp;= \left(\frac{d (1-e^{-\lambda T})}{dT}\right)dT \\
+                    &amp;= \lambda e^{-\lambda T} dT
+\end{align}</p>
+<p>By the way, this might give a simpler-but-slightly-less-satisfying answer to
+our initial question, “what is the probability that a fish jumps out <em>right
+now?</em>“ If we set ($ T $) to 0, then we get ($ P(t \approx 0, dT) = \lambda dT
+$). In other words, if fish jump out of the water at a rate ($ \lambda $),
+then for a tiny period of time ($ dT $), the probability of seeing a fish jump
+in that time is ($ \lambda dT $). This is one of those facts that seems really
+straightforward one day, and completely mindblowing the next day.</p>
+<p>Anyway. Now that we have an approximation for the probability that you need to
+wait a specific time ($ T $), we can find an expected value for ($ t $) by
+taking the sum over discrete increments of ($ dt $):</p>
+<p>\[
+E[t] = \sum^\infty_{k=0} P(t \approx T, dT) \times T
+\]</p>
+<p>where ($ T = k\times dT $). Since we’re talking about the limit as ($ dT $)
+gets smaller and smaller, it seems reasonable to assume that this thing turns
+into</p>
+<p>\begin{align}
+E[t] &amp;= \int^\infty_0 P(t \approx T, dT) \times T \\
+     &amp;= \int^\infty_0 \lambda e^{-\lambda T} dT \times T
+\end{align}</p>
+<p>You can integrate that by parts, or just use WolframAlpha, which tells you that
+($ E[t] = \lambda^{-1} $).</p>
+<hr>
+<p>…which is kind of obvious, isn’t it? Remember that ($ \lambda $) was the
+rate at which our fish jumped. If fish jump once a minute, shouldn’t we expect
+to have to wait a minute to see a fish jump? Isn’t this similar to the way
+wavelength and frequency are related?</p>
+<p>The answer is, “yes and no”. “Yes”, the value ($ \lambda^{-1} $) is indeed
+pretty sensible in retrospect. A simpler way to derive it might have been to
+note that for any time period ($ T $), the expected number of fish-jumps is ($
+\lambda T $) (as we found out above), and so the <em>average</em> time interval
+<em>between</em> fish-jumps would be ($ T / (\lambda T) = \lambda^{-1} $). The fact
+that the average interval between fish-jumps corresponds to the the expected
+interval is captured by the surprisingly well-known acronym “PASTA”: Poisson
+Arrivals See Time Averages (I’m not making this up!).</p>
+<p>But “no”, it’s not “obvious” that you should have to <em>wait</em> the average
+inter-fish time!</p>
+<p>Suppose you, like Rip Van Winkle, you woke up after a very long sleep, and you
+wanted to know “how much longer until Monday morning?”</p>
+<p>Well, Monday mornings happen every 7 days, and so if you set ($ \lambda = 1/7
+$), you should expect to have to wait 7 days until Monday.</p>
+<p>But that’s silly! You <em>definitely</em> need to wait fewer than 7 days on average!
+In fact, most people would intuitively say that you need to wait 7/2 = 3.5 days
+on average: and they would be right. (The intuition is that on average, you’d
+wake up halfway between two Monday mornings.)</p>
+<p>This is the so-called “Hitchhiker’s Paradox”: if cars on a highway through the
+desert appear roughly once an hour, how long does a hitchhiker who just woke up
+need to wait until he sees a car? It seems reasonable to say “half an hour”,
+since on average, you’d wake up halfway between two cars. On the other hand,
+with ($ \lambda = 1 $), you’d expect to wait an hour until you see a car.</p>
+<p>So which one is right? And why are the answers different?</p>
+<p>Well, the “Rip Van Winkle” interpretation assumes that cars on a desert highway
+— like Mondays — come at <em>regular</em> intervals. In reality, cars on a desert
+highway — like the salmon of Seattle — are usually independent. They might
+come in a cluster a few minutes after you wake up, or a lone car might come the
+next day. Crucially, the next car doesn’t “know” anything about previous cars,
+and so it doesn’t matter <em>when</em> you wake up: we call this property
+“memorylessness”.</p>
+<p>It turns out that since there’s a nonzero probability of having to wait a
+<em>very</em> long time for a car, the average gets pulled up from half an hour. With
+that in mind, it’s really quite surprising that the true mean turns out to be
+exactly ($ 1/\lambda $).</p>
+<hr>
+<p>And now, the aftermath.</p>
+<p>Very little of the above discussion was fish-specific. The only properties of
+salmon that mattered here were that salmon jump randomly and independently of
+each other, at some rate ($ \lambda $). But our calculations work for <em>any</em>
+such process (let’s call such processes <em>Poisson processes</em>).</p>
+<p>Poisson processes were studied as early as 1711 by de Moivre, who came up with
+the cool theorem about complex numbers. However, they’re named after Siméon
+Denis Poisson, who in 1837 studied (not fish, but) the number of wrongful
+convictions in court cases.</p>
+<p>Today, Poisson processes model all sorts of things. Managers use it to model
+customers arriving at a grocery checkout. Programmers use it to model packets
+coming into a network. Both of these are examples of <em>queueing theory</em>, wherein
+Little’s Law relates ($ \lambda $) to how long things have to wait in queues.
+You could probably use a Poisson process to model how frequently bad things
+happen to good people, and use that to create a statistical model of how unfair
+the world is.</p>
+<p>The upshot is this: even though I didn’t record any fish-jumping data back in
+Seattle, we can definitely try out these ideas on other “sporadic” processes.
+Wikipedia, it turns out, maintains <a href="https://en.wikipedia.org/wiki/List_of_21st-century_earthquakes">a list of earthquakes that happened in the
+21st century</a>.
+Earthquakes are pretty sporadic, so let’s play with that dataset.</p>
+<p>I <a href="static/poisson/earthquakes.txt">scraped</a> the date of each earthquake, and
+wrote a small <a href="static/poisson/earthquakes.py">script</a> to count the the number
+of earthquakes in each month-long interval. That is, ($ t $) is 2,592,000
+seconds. By “binning” my data by month, I got lots of samples of ($ n $). This
+gives an easy way to compute ($ P(n, t) $) “empirically”.</p>
+<p>On the other hand, taking the total number of earthquakes and dividing by the
+total time range (around 17 years, since we’re in 2017) gives us the rate ($
+\lambda $), which in this case works out to about ($ 1.06\times10^{-6} $)
+earthquakes per second. This gives a way to compute ($ P(n, t) $)
+“theoretically” by using our fancy formula with the factorial and whatnot.</p>
+<p>\[
+P(n, t) = \frac{\left(\lambda t\right)^n}{e^{\lambda t} n!}
+\]</p>
+<p>Comparing the results gives us this pretty plot!</p>
+<p><img src="static/poisson/earthquakes.png" alt="Earthquake poisson process"></p>
+<p>They match up surprisingly well.</p>
+<p>What else can we say? Well, the average inter-earthquake time works out to ($
+1/\lambda $), or around 940,000 seconds. That’s about eleven days. On average,
+a reader of this blog post can expect to wait eleven days until the next
+earthquake of magnitude 7 or above hits.</p>
+<p>And for those of you who have been wondering, “can we do these calculations in
+reverse to approximate ($ e $)?” the answer is, <em>yes!</em> We just solve the above
+equation for ($ e $).</p>
+<p>\[
+e\approx\left(\frac{P(n, t)n!}{(\lambda t)^n}\right)^{-(\lambda t)^{-1}}
+\]</p>
+<p>In my case, using earthquake data for ($ n = 1 $), I got ($ e \approx 2.75 $).
+I’d say that’s pretty good for an algorithm that relies on <em>geology</em> for
+accuracy (in reality, ($ e $) is around 2.718).</p>
+<hr>
+<p>In many ways, it is quite incredible that the Poisson process conditions —
+randomness, independence, constant rate — are <em>all</em> you need to derive
+conclusions for <em>any</em> Poisson process. Knowing roughly that customers at a
+burger place are random, act independently, and arrive around once a minute at
+lunchtime — and knowing nothing else — we can predict the probability that
+four customers arrive in the next three minutes. And, magically, this
+probability will have ($ e $) and a factorial in it.</p>
+<p>Humans don’t evaluate expressions involving ($ e $) and factorials when they
+decide when to get a burger. They are subject to the immense complexity of
+human life, much like how salmon are subject to the immense complexity of the
+fluid mechanics that govern Lake Washington, much like how earthquakes are
+subject to the immense complexity of plate tectonics.</p>
+<p>And yet, somehow statistics unites these vastly different complexities, finding
+order and meaning in what is otherwise little more than chaos.</p>
+<p>Isn’t that exciting?</p>
+<p>~ Fin. ~</p>
+<hr>
+<p>Assorted references below.</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Poisson_distribution">https://en.wikipedia.org/wiki/Poisson_distribution</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Exponential_field">https://en.wikipedia.org/wiki/Exponential_field</a></li>
+<li><a href="https://www.stat.auckland.ac.nz/~fewster/325/notes/ch4.pdf">https://www.stat.auckland.ac.nz/~fewster/325/notes/ch4.pdf</a></li>
+<li><a href="http://pages.cs.wisc.edu/~dsmyers/cs547/lecture_11_pasta.pdf">http://pages.cs.wisc.edu/~dsmyers/cs547/lecture_11_pasta.pdf</a></li>
+<li><a href="https://www.netlab.tkk.fi/opetus/s383143/kalvot/E_poisson.pdf">https://www.netlab.tkk.fi/opetus/s383143/kalvot/E_poisson.pdf</a></li>
+</ul>
+]]></description>
+            <link>http://hardmath123.github.io/poisson.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/poisson.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sun, 16 Jul 2017 07:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Practical Prosody]]></title>
             <description><![CDATA[<p>Amphibrachs, telegraphs, and fifty-two words I will never forget.</p>
@@ -6098,6 +6581,86 @@ dump of my dataset, leave a comment below and I’ll send it to you.</p>
             <pubDate>Fri, 20 Mar 2015 07:00:00 GMT</pubDate>
         </item>
         <item>
+            <title><![CDATA[Capture the Hackathon]]></title>
+            <description><![CDATA[<p>Why hackathons aren’t helping the world, and how CTFs can fix that.</p>
+
+
+<p>If you’ve been following my blog, you know that I’m not a fan of competitions.
+One of the few exceptions to this is CTFs. CTFs, or Capture-The-Flag
+competitions, are computer security challenges where the organizers host a few
+vulnerable servers and you need to “hack” them to find secret keys. CTFs are,
+to be very honest, a lot of fun.</p>
+<p>But I’m not here to advertise CTFs—I’ve already done that in another post—I’m
+here to talk about how CTFs should be replacing Hackathons.</p>
+<p>Hackathons are great. You hang out all night long, eat junk food, listen to
+music, and get all sorts of swag from the riches companies in Silicon Valley.
+You get to meet successful people who have their own start-ups.</p>
+<p>But that’s all.</p>
+<p>Respectable hackathons advertise themselves as educational: if you know how to
+code, you get a chunk of time to work on a project and learn a new skill. If
+you don’t know how to code, we’ll teach you.</p>
+<p>The truth is, neither actually works out in the real world.</p>
+<p>I know of exactly zero pieces of hackathon-code that the authors are
+legitimately proud of. “Authors are legitimately proud of” differs strongly
+from “authors are capable of making an exciting, buzzword-heavy pitch about,”
+the latter generally being the sole criterion in determining winners.
+Hackathon veterans largely agree that hackathon-code is rarely touched after
+the demo, because it’s usually written as just enough to create a demo. You
+aren’t supposed to pay heed to petty things like maintainability—you’re
+hackers! And so your efforts over 24 sleep-deprived zombie hours all go to
+/dev/null.</p>
+<p>At the other extreme are the brave souls who walk into a hackathon cold: no
+programming experience whatsoever. From what I can tell, they’re generally
+persuaded to come by their nerdfriends, with the prospect of free food. In any
+case, I have yet to meet someone who actually fell in love with programming at
+a hackathon. Yes, the rich Silicon Valley startup culture is appetizing, but
+you can’t just show up at a hackathon and found a company. You need to put in
+the effort to learn the basics and fall in love with programming, and that is
+<em>not</em> something you can do in 24 continuous hours. You can’t put on a concert
+in 24 hours having never touched an instrument.</p>
+<p>So, what are hackathons good for? They’re great for networking: making friends,
+and even getting internships or jobs. They’re great for getting T-shirts,
+playing games, and having awesome conversations. They’re great for hearing
+talks that make you feel good about yourself for being a “hacker”, “innovator”,
+“creator”, “developer”, etc. They are, in short, what the humble party has
+evolved into to suit Silicon Valley.</p>
+<hr>
+<p>Enter CTFs. CTFs are hardcore. To do well in one, you need to be really clever.
+You need oodles of esoteric knowledge about all sorts of computer science. You
+need to be good at math, algorithms, general-purpose problem solving, and of
+course programming. A single CTF problem can teach you far more than an entire
+hackathon can ever hope to.</p>
+<p>(You do <em>not</em>, by the way, need to be good at making a pitch in front of a
+panel of judges.)</p>
+<p>I posit that a CTF is also as social as a hackathon: perhaps a majority of my
+best friends are folks I’ve met CTFing, either because they were my teammates,
+or because I ran into them on a CTF’s IRC channel. The conversations you have
+with your teammates while trying to solve a CTF problem are fantastic: you
+share large wealths of information, refute or build upon each others’ ideas,
+and ask hard questions, and do all of that while making puns and inside jokes.</p>
+<p>As far as I’m concerned, a CTF is much more valuable than a hackathon for a
+casual programmer—mildly experienced script kiddies and ninja rockstars alike.</p>
+<p>But more importantly, I can envision CTFs for beginners, too. Solving the
+problems in an introductory CS textbook is far more appealing when put in the
+context of hacking into someone’s server. I’m sure an elegantly crafted
+sequence of problems can Socratically teach someone enough basic Python to, for
+instance, compute large Fibonacci numbers recursively—for the right people,
+that should be enough to make them fall in love with computer science.</p>
+<p>CTFs have a lot of potential: it’s a shame we’re instead promoting
+hackathon-parties as “CS education events”.</p>
+<hr>
+<p>P.S. It would be an even bigger shame if this post comes true in the wrong way,
+and CTFs go the same route as competition math. As much as I love the idea,
+some part of me wants to keep the CTF world a secret so that the people who
+ruined competition math can’t get their hands on CTFs as well. I hope that’s
+not selfish—but I think that’s a topic for a whole new post.</p>
+]]></description>
+            <link>http://hardmath123.github.io/hackathons-vs-ctfs.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/hackathons-vs-ctfs.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Tue, 17 Mar 2015 07:00:00 GMT</pubDate>
+        </item>
+        <item>
             <title><![CDATA[Use Imperfect Tools]]></title>
             <description><![CDATA[<p>A promise to myself.</p>
 
@@ -6192,86 +6755,6 @@ Let’s see how long I survive.</p>
 ]]></description>
             <link>http://hardmath123.github.io/use-imperfect-tools.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/use-imperfect-tools.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 17 Mar 2015 07:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[Capture the Hackathon]]></title>
-            <description><![CDATA[<p>Why hackathons aren’t helping the world, and how CTFs can fix that.</p>
-
-
-<p>If you’ve been following my blog, you know that I’m not a fan of competitions.
-One of the few exceptions to this is CTFs. CTFs, or Capture-The-Flag
-competitions, are computer security challenges where the organizers host a few
-vulnerable servers and you need to “hack” them to find secret keys. CTFs are,
-to be very honest, a lot of fun.</p>
-<p>But I’m not here to advertise CTFs—I’ve already done that in another post—I’m
-here to talk about how CTFs should be replacing Hackathons.</p>
-<p>Hackathons are great. You hang out all night long, eat junk food, listen to
-music, and get all sorts of swag from the riches companies in Silicon Valley.
-You get to meet successful people who have their own start-ups.</p>
-<p>But that’s all.</p>
-<p>Respectable hackathons advertise themselves as educational: if you know how to
-code, you get a chunk of time to work on a project and learn a new skill. If
-you don’t know how to code, we’ll teach you.</p>
-<p>The truth is, neither actually works out in the real world.</p>
-<p>I know of exactly zero pieces of hackathon-code that the authors are
-legitimately proud of. “Authors are legitimately proud of” differs strongly
-from “authors are capable of making an exciting, buzzword-heavy pitch about,”
-the latter generally being the sole criterion in determining winners.
-Hackathon veterans largely agree that hackathon-code is rarely touched after
-the demo, because it’s usually written as just enough to create a demo. You
-aren’t supposed to pay heed to petty things like maintainability—you’re
-hackers! And so your efforts over 24 sleep-deprived zombie hours all go to
-/dev/null.</p>
-<p>At the other extreme are the brave souls who walk into a hackathon cold: no
-programming experience whatsoever. From what I can tell, they’re generally
-persuaded to come by their nerdfriends, with the prospect of free food. In any
-case, I have yet to meet someone who actually fell in love with programming at
-a hackathon. Yes, the rich Silicon Valley startup culture is appetizing, but
-you can’t just show up at a hackathon and found a company. You need to put in
-the effort to learn the basics and fall in love with programming, and that is
-<em>not</em> something you can do in 24 continuous hours. You can’t put on a concert
-in 24 hours having never touched an instrument.</p>
-<p>So, what are hackathons good for? They’re great for networking: making friends,
-and even getting internships or jobs. They’re great for getting T-shirts,
-playing games, and having awesome conversations. They’re great for hearing
-talks that make you feel good about yourself for being a “hacker”, “innovator”,
-“creator”, “developer”, etc. They are, in short, what the humble party has
-evolved into to suit Silicon Valley.</p>
-<hr>
-<p>Enter CTFs. CTFs are hardcore. To do well in one, you need to be really clever.
-You need oodles of esoteric knowledge about all sorts of computer science. You
-need to be good at math, algorithms, general-purpose problem solving, and of
-course programming. A single CTF problem can teach you far more than an entire
-hackathon can ever hope to.</p>
-<p>(You do <em>not</em>, by the way, need to be good at making a pitch in front of a
-panel of judges.)</p>
-<p>I posit that a CTF is also as social as a hackathon: perhaps a majority of my
-best friends are folks I’ve met CTFing, either because they were my teammates,
-or because I ran into them on a CTF’s IRC channel. The conversations you have
-with your teammates while trying to solve a CTF problem are fantastic: you
-share large wealths of information, refute or build upon each others’ ideas,
-and ask hard questions, and do all of that while making puns and inside jokes.</p>
-<p>As far as I’m concerned, a CTF is much more valuable than a hackathon for a
-casual programmer—mildly experienced script kiddies and ninja rockstars alike.</p>
-<p>But more importantly, I can envision CTFs for beginners, too. Solving the
-problems in an introductory CS textbook is far more appealing when put in the
-context of hacking into someone’s server. I’m sure an elegantly crafted
-sequence of problems can Socratically teach someone enough basic Python to, for
-instance, compute large Fibonacci numbers recursively—for the right people,
-that should be enough to make them fall in love with computer science.</p>
-<p>CTFs have a lot of potential: it’s a shame we’re instead promoting
-hackathon-parties as “CS education events”.</p>
-<hr>
-<p>P.S. It would be an even bigger shame if this post comes true in the wrong way,
-and CTFs go the same route as competition math. As much as I love the idea,
-some part of me wants to keep the CTF world a secret so that the people who
-ruined competition math can’t get their hands on CTFs as well. I hope that’s
-not selfish—but I think that’s a topic for a whole new post.</p>
-]]></description>
-            <link>http://hardmath123.github.io/hackathons-vs-ctfs.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/hackathons-vs-ctfs.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Tue, 17 Mar 2015 07:00:00 GMT</pubDate>
         </item>
