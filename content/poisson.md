@@ -616,3 +616,82 @@ Assorted references below.
 - https://www.stat.auckland.ac.nz/~fewster/325/notes/ch4.pdf
 - http://pages.cs.wisc.edu/~dsmyers/cs547/lecture_11_pasta.pdf
 - https://www.netlab.tkk.fi/opetus/s383143/kalvot/E_poisson.pdf
+
+---
+
+**Postscript, two weeks later.** This morning at the coffee shop I realized
+that the Poisson distribution is a lot like the binomial distribution with a
+*lot* of trials: the idea is that you have lots of little increments of time,
+and a fish either jumps or doesn't jump in each increment --- this is called a
+Bernoulli process. Presumably, over a long period of time, this should even out
+to a Poisson process...
+
+Recall that the probability of a fish-jump happening in some small time period
+($ dt $) turned out to be ($ \lambda dt $) for our definition of ($ \lambda $)
+as the *rate* of fish-jumps. Can we go the other way, and show that if the
+probability of something happening is ($ \lambda dt $) for a small period of
+time ($ dt $), then it happens at a rate of ($ \lambda $)?
+
+Turns out, yes!
+
+The *binomial distribution* is a way to figure out, say, what the probability
+is that if I flip 100 counts, then exactly 29 of them land "heads" (a coin toss
+is another example of a Bernoulli process). More abstractly, the binomial
+distribution gives you the probability ($ B(N, k) $) that if something has
+probability ($ p $) of happening, then it happens ($ k $) times out of ($ N $)
+trials.
+
+The formula for ($ B(N, k) $) can be derived pretty easily, and you can find
+very good explanations in a lot of high-school textbooks. So, if you don't
+mind, I'm just going to give it to you for the sake of brevity:
+
+\\[
+B(N, k) = \\binom{N}{k} p^k (1-p)^{N-k}
+\\]
+
+Now, can we apply this to a Poisson process? Well, let's say ($ k = n $), the
+number of times our event happens in time ($ t $). Then we have
+
+\\[
+\\binom{N}{n} p^n (1-p)^{N-n}
+\\]
+
+What next? We know that ($ p = \lambda dt $). Also, for time period ($ t $),
+there are ($ t / dt $) intervals of ($ dt $), so ($ N = t / dt $). That means
+we can substitute ($ dt = t / N $), and thus ($ p = \lambda (t / N) $). This
+gives us
+
+\\[
+\\binom{N}{n} (\lambda t / N)^n (1-\lambda t / N)^{N-n}
+\\]
+
+Oh, and of course to approximate a Poisson process, this is the limit as ($ N
+$) approaches infinity:
+
+\\[
+\\lim_{N\to\infty} \\binom{N}{n} (\lambda t / N)^n (1-\lambda t / N)^{N-n}
+\\]
+
+This isn't a hard limit to take if we break apart the product.
+
+\\[
+\\lim\_{N\\to\\infty} \\frac{N! (\lambda t)^n}{n!(N-n)! N^n}
+\\lim\_{N\\to\\infty}(1-\lambda (t / N))^{N-n}
+\\]
+
+The right half is surprisingly enough the definition of ($ e^{-\\lambda t} $),
+since the ($ - n $) in the exponent doesn't really matter. The left half is
+trickier: it turns out that ($ N! / (N-n)! $) is the product ($
+N(N-1)\ldots(N-n+1) $). As a polynomial, it is degree ($ n $), and the leading
+term is ($ N^n $). But look!  In the denominator, we have an ($ N^n $) term as
+well, so in the limit, those both go away.
+
+We're left with what simplifies to our expression for the Poisson distribution.
+
+\begin{align}
+\\lim\_{dt\to 0} B(N=t/dt, p=\\lambda dt) &= \\frac{(\lambda t)^n}{n!}e^{-\\lambda t} \\\\
+                                          &= \\frac{(\lambda t)^n}{e^{\\lambda t}n!} \\\\
+                                          &= P(\\lambda, t)
+\end{align}
+
+which I think is literally magic.
