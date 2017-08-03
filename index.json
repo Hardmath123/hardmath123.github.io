@@ -542,6 +542,14 @@
             "file": "poisson.md",
             "date": "7/16/17",
             "markdown": true
+        },
+        {
+            "title": "Carnival of Mathematics 148",
+            "author": "Hardmath123",
+            "description": "I had so much fun the first time, I volunteered to host it again!",
+            "file": "carnival-of-mathematics-148.md",
+            "date": "7/31/17",
+            "markdown": true
         }
     ]
 }
