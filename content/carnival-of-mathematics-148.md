@@ -56,7 +56,7 @@ involved, but fortunately for us, her video is a magnificent timelapse.
 > learning curve.
 
 Rachel Traylor
-[extends](http://www.theresearchcortex.com/2017/06/21/the-rigor-of-fuzzy-sets/)
+[extends](http://www.themathcitadel.com/2017/06/21/the-rigor-of-fuzzy-sets/)
 sets to "fuzzy" sets, which are just like normal sets, but, well, fuzzy!
 
 > What if we relax the requirement that you either be in or out? Here or there?
