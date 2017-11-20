@@ -1,0 +1,161 @@
+Earlier this month, Frederick Koh, a Singaporean math tutor, invited me to
+write a guest post for his [website](http://www.whitegroupmaths.com). Of course
+I accepted --- blogging is, after all, a conversation.
+
+But what could I write about?
+
+I spent the month of November on the lookout for an idea worth sharing, and
+last week I found one. I follow a lot of math-educator blogs (blogging is,
+after all, a conversation!), and one of my favorites is that of Dan Meyers.
+Recently, Dan posted a rather provocatively-titled piece, "[Dismantling the
+Privilege of the Mathematical
+1%](http://blog.mrmeyer.com/2017/dismantling-the-privilege-of-the-mathematical-1/)".
+He makes the case that those with a mathematical education --- those who are
+mathematically *privileged* --- those who make up the mathematical 1% --- they
+are the ones with the responsibility to define what mathematics *is*. Dan says,
+eloquently as always, that "through our action or inaction we create systems
+that preserve our status as the knowers and doers of mathematics."
+
+Dan's post made me think deeply about where I myself fit into his spectrum: I'm
+hardly one of the 1% --- and certainly won't graduate with a math degree ---
+but at the same time, I love math, both as an activity and as a set of truths.
+
+And I realized that this gives *me* a privileged position, one where I can
+comment on mathematical topics from a somewhat neutral perspective. I am
+neither the person who barely scraped through high school calculus, nor the
+person who skipped high school calculus because it was too easy. So, trapped
+between "math people" and "not a math person people", I wish to use this post
+to explore what exactly creates this divide --- or, rather, explore it in a way
+slightly different from what you have probably heard a dozen times already.
+
+---
+
+It is almost universally acknowledged that "education is good." More education,
+says society, will lead to a happier, more prosperous world. Educate everyone,
+says society.
+
+I agree, of course.
+
+And yet, paradoxically, we are so attached to the notion that education ---
+college, in my case, grad school or high school for others --- is a means to
+distinguish oneself from one's peers. A degree, we argue, makes us stand out in
+both the workplace and in society. The more competitive the institution, the
+more valuable the degree.
+
+Less enthusiastically, I agree with this as well: reality forces me to concede
+the point. Why else would college admissions be so competitive? Why else would
+classes be graded on curves? Why else would we even have grades in the first
+place? As disturbed as I am by it, society cares very much about my academic
+performance, *especially* in relation to others.
+
+And therein lies the rub. Reader, are these not contradictory notions? If the
+purpose of an education for an individual is to separate him or her from the
+general populace, then what follows is the absurd notion that universal
+education is self-defeating: that the more people we educate, the less an
+education is worth to the individual.
+
+How does one reconcile this? Can education in the limit benefit both the
+individual and the society? As an optimist, I wish it could. And in fact I
+believe it *can*, but only if we rethink what education means to the
+individual.
+
+---
+
+Here is what I think. I believe that too often, we conceive education to be a
+ladder that lifts us --- above others, if we're fast enough --- rung by rung.
+The more you climb, the higher you get.
+
+But too often, we forget that you can also climb *down* a ladder. That an
+education can also lower the arrogant to humility and place them alongside the
+less privileged, on common ground. That education builds capacity for empathy
+and communication, empowering the individual but also society at large to have
+a dialogue. That this view resolves the paradox of the previous section,
+because both individuals *and* society benefit from the capacity for having
+that dialogue.
+
+What do I mean by this? Let's return to mathematics for a moment.
+
+If you are reading this blog, you most likely have been at a gathering of
+mathematicians at some point in your lives. It is quite a marvellous thing to
+behold: a congregation of brilliant minds sharing ideas. Mathematics as a
+community has its own folklore, its own in-jokes, and its own language. You
+need only to glance at sites like [The Art of Problem
+Solving](https://artofproblemsolving.com/community) or
+[mathmo.org](http://www.mathmo.org/test/mathmotest.html) to see this community
+in all its glory.
+
+I love it. There is charm to the way mathematicians celebrate their field,
+unlike any other profession I have come across.
+
+And yet, imagine being an outsider for a moment. Imagine being part of the
+mathematical 99%. How would you feel if someone responded to a question of
+yours with a grin, saying "left as an exercise to the reader"? Or if someone
+made you use this [weird software
+package](http://www.danielallington.net/2016/09/the-latex-fetish/) with lots of
+backslashes to write up your homework? Or if someone went off on a tangent
+about why their coffee mug said "donut" on it? Or if someone makes an
+arithmetic mistake and then says "it's true in base 12" before you even notice
+the error? Or if someone claimed a very unobvious-to-you solution was
+"trivial"?
+
+These phrases aren't meant to be exclusionary. Some are common inside jokes.
+Others are part of the mathematical vocabulary. The word "trivial," after all,
+has a very specific mathematical meaning --- think of the "trivial group" with
+one element, for example. I
+[use](https://www.google.com/search?client=safari&rls=en&q=trivial+site:hardmath123.github.io&ie=UTF-8&oe=UTF-8)
+it all the time.
+
+Yet to an outsider, they make the mathematical community seem simply
+impenetrable. How am I ever going to understand all this? I can't think that
+fast!
+
+"Math people" tend to be remarkably self-selecting, and I believe this is one
+of the reasons why: there is a divide between the initiated and the
+uninitiated, and far too few resources for the latter.
+
+---
+
+Education, I believe, should be tasked with *bridging* this divide --- rather
+than exacerbating it as it does now. Education should give the 99% the
+opportunity to join the magical world of mathematics, but education should
+*also* show the 1% how to open up the world to new members. It should teach
+students to write about mathematics, finding a middle ground between dense
+manuscripts weighed down by Greek-letter jargon, and airy puff-pieces that
+contain nothing of substance. Where will future Ian Stewarts, Martin Gardners,
+and Brian Hayes come from? I myself would almost certainly be very firmly a
+"not a math person" person were it not for an Ian Stewart book in my dad's
+bookshelf that taught me about Fermat's Last Theorem and the Mandelbrot Set
+when I was very young.
+
+Education should also encourage the next generation of professors to move away
+from lessons that consist of the copying of lecture notes onto a chalkboard,
+and provide them with the tools they need to create engaging, interactive
+lessons that appeal not only to those whom we believe are pre-ordained to be
+mathematicians, but to artists, musicians, writers, and athletes. It should
+teach students about the bigger picture of where their mathematics fits into
+society, about who produces and who consumes mathematics, and why.
+
+At the same time, it should explain to the mathematical 99% what exactly those
+math people are on about all the time. It should teach them the mathematical
+canon, help them learn the language, and help them discover the beauty that the
+1% have already found.
+
+Yes, such an education will produce a more diverse generation of
+mathematicians, not only in terms of demographics, but also in terms of ways of
+thinking. It will produce a generation that writes not only more effective
+grant proposals, but also clearer papers. That's what the individuals get out
+of it.
+
+But it will also inspire the mathematical community to rise up against the
+tyrrany of Alice-gives-Bob-three-bananas standardized tests, to use their
+passion for mathematics and their perception of its beauty to guide the
+development of curriculums and lesson plans. Not to reject non-math-people as
+heretics who refuse to see the light, but rather to see them as evidence of a
+broken education system that failed to convey the beauty of mathematics.
+
+To redefine mathematics to be the way *they* see it, because, whether or not
+they realize it, the way the mathematical 1% sees mathematics --- as the
+pursuit of beautiful truth --- is far from what the mathematical 99% sees it as
+--- the painfully rushed manipulation of symbols on a midterm. To *care*.
+
+That's what society gets out of it.
