@@ -550,6 +550,14 @@
             "file": "carnival-of-mathematics-148.md",
             "date": "7/31/17",
             "markdown": true
+        },
+        {
+            "title": "Ladders Go Both Ways",
+            "author": "Hardmath123",
+            "description": "A guest post for White Group Mathematics",
+            "file": "ladders.md",
+            "date": "11/20/17",
+            "markdown": true
         }
     ]
 }
