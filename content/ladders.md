@@ -159,3 +159,6 @@ pursuit of beautiful truth --- is far from what the mathematical 99% sees it as
 --- the painfully rushed manipulation of symbols on a midterm. To *care*.
 
 That's what society gets out of it.
+
+> This post first appeared on [White Group
+> Maths](http://www.whitegroupmaths.com/2017/11/guest-post-ladders-go-both-ways.html).
