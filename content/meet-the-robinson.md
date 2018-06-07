@@ -42,7 +42,7 @@ learned on my adventures writing my own theorem prover, lovingly named
 
 ---
 
-To prove theorems, we really need to nail down what word like "prove" and
+To prove theorems, we really need to nail down what words like "prove" and
 "theorems" mean. This turns out to be kind of tricky, so the first post will be
 devoted to building up some **formal logic**: mainly vocabulary and big ideas.
 
