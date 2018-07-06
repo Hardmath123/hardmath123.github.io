@@ -558,6 +558,14 @@
             "file": "ladders.md",
             "date": "11/20/17",
             "markdown": true
+        },
+        {
+            "title": "Carnival of Mathematics 159",
+            "author": "Hardmath123",
+            "description": "Another fine math I've gotten myself into.",
+            "file": "carnival-of-mathematics-159.md",
+            "date": "7/6/18",
+            "markdown": true
         }
     ]
 }
