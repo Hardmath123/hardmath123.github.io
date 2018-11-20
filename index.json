@@ -566,6 +566,14 @@
             "file": "carnival-of-mathematics-159.md",
             "date": "7/6/18",
             "markdown": true
+        },
+        {
+            "title": "Tuning a Typewriter",
+            "author": "Hardmath123",
+            "description": "A Markovian adventure in optimizing historical typewriter layouts",
+            "file": "crown-typewriter.md",
+            "date": "11/20/18",
+            "markdown": true
         }
     ]
 }
