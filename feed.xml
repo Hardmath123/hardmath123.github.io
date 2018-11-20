@@ -10,10 +10,78 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 06 Jul 2018 18:02:02 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 20 Nov 2018 08:35:42 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Tuning a Typewriter]]></title>
+            <description><![CDATA[<p>A Markovian adventure in optimizing historical typewriter layouts</p>
+
+
+<p>I recently read this <a href="https://www.theatlantic.com/technology/archive/2016/11/chinese-computers/504851/">Atlantic
+piece</a>
+on input methods for computers, and it reminded me of a mathematical adventure
+I had this summer that I should have blogged about at the time.</p>
+<p>Back in July, I was exploring the City Museum of New York when I came across
+this lovely Crown typewriter from the late 1800s. By our modern standards, it
+uses a rather clunky input mechanism: you manually shift the pointer to the
+character you want to type, press the button, rinse, repeat.</p>
+<p><img src="static/crown-typewriter/crown-typewriter.png" alt="Crown Typewriter"></p>
+<p>“What a waste of time,” you say. Ah, but even in the late 19th centure time was
+the essential ingredient, and in the modern world there was no time. Notice,
+then, that the designers of the Crown typewriter did not place the letters in
+alphabetical order. Instead, the they placed commonly-together letters near
+each other. You can type “AND” and “THE” rather quickly with just 2 shifts
+apiece; “GIG,” on the other hand, takes 15 shifts from the G to the I, and 15
+shifts back to the G.</p>
+<p>The question, then, begs to be asked: is this the <em>most efficient</em> permutation
+of letters? For example, Q and U are on opposite ends of the typewriter; surely
+it would be better to put them together?</p>
+<p>I have a doubly disappointing answer to this question: first, this is <em>not</em> the
+most efficient permutation of letters (based on my digraph frequency map), but
+I also don’t <em>know</em> what the most efficient permutation is! That is, I’ve found
+permutations that are more efficient, but cannot prove that they are optimal
+— after all, exploring all 26-factorial permutations is not an option.</p>
+<p>My “cost” metric here is defined as “Ignoring non-alphabetic characters, how
+many shifts does it take to type all of <em>Pride and Prejudice</em> followed by all
+of <em>The Time Traveller</em> followed by all of <em>The Adventures of Sherlock
+Holmes</em>?” (All three are classic 19th-century novels available from Project
+Gutenberg.)</p>
+<p>By this metric, the naive alphabetical order (<code>ABCDEFGHIJKLMNOPQRSTUVWXYZ</code>)
+requires a whopping 9,630,941 shifts. In comparison, the Crown Typewriter
+(<code>XQKGBPMCOFLANDTHERISUWYJVZ</code>) requires only 6,283,692 shifts. But the
+ComfortablyNumbered typewriter (<code>ZKVGWCDNIAHTESROLUMFYBPXJQ</code>) requires a mere
+5,499,341 shifts. This means we can save nearly one in eight shifts from the
+Crown typewriter!</p>
+<p>I found this permutation with the following algorithm: start with a random
+permutation, then “optimize” it by repeatedly swapping characters such that the
+post-swap permutation has a lower cost than the pre-swap permutation. Continue
+“optimizing” until no further swaps can be made. Now, do this procedure for a
+large number of random starting permutations, and pick the lowest-cost
+optimized permutation.</p>
+<p>Encouragingly, it turns out that many different random starts get optimized to
+my solution. What do I mean by that? Well, the graph below shows two datasets:
+the costs of 1,000 random permutations and the costs of those permutations once
+optimized. Clearly, optimization is doing great good.</p>
+<p><img src="static/crown-typewriter/typewriter-graph-1.png" alt="First graph"></p>
+<p>But let’s zoom in on the optimized permutations. Notice that the two
+lowest-cost bars are almost an order of magnitude more frequent than the
+remaining bars. In fact, the lower-cost bar’s “bucket” in the histogram is
+populated <em>only</em> with permutations of cost 5499341! This suggests that 5499341
+is a “hard ceiling” for my optimizer, rather than the furthest point on the tip
+of a long tail that my optimizer samples from.</p>
+<p><img src="static/crown-typewriter/typewriter-graph-2.png" alt="Second graph"></p>
+<p>Of course, this is no proof: there might be a single highly-efficient
+permutation that is hard to reach by optimizing a random permutation. But that
+<em>feels</em> unlikely!</p>
+<p>So: I leave this as an open problem for readers to explore.</p>
+]]></description>
+            <link>http://hardmath123.github.io/crown-typewriter.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/crown-typewriter.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Mon, 19 Nov 2018 18:30:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Carnival of Mathematics 159]]></title>
             <description><![CDATA[<p>Another fine math I’ve gotten myself into.</p>
@@ -138,7 +206,7 @@ Carnival of Mathematics!</p>
             <link>http://hardmath123.github.io/carnival-of-mathematics-159.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/carnival-of-mathematics-159.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 06 Jul 2018 04:00:00 GMT</pubDate>
+            <pubDate>Thu, 05 Jul 2018 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Ladders Go Both Ways]]></title>
@@ -285,7 +353,7 @@ Maths</a>.</p>
             <link>http://hardmath123.github.io/ladders.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/ladders.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 20 Nov 2017 05:00:00 GMT</pubDate>
+            <pubDate>Sun, 19 Nov 2017 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Carnival of Mathematics 148]]></title>
@@ -495,7 +563,7 @@ the 149th!</p>
             <link>http://hardmath123.github.io/carnival-of-mathematics-148.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/carnival-of-mathematics-148.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 31 Jul 2017 04:00:00 GMT</pubDate>
+            <pubDate>Sun, 30 Jul 2017 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[A Fishy Function]]></title>
@@ -1040,7 +1108,7 @@ well, so in the limit, those both go away.</p>
             <link>http://hardmath123.github.io/poisson.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/poisson.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 16 Jul 2017 04:00:00 GMT</pubDate>
+            <pubDate>Sat, 15 Jul 2017 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Practical Prosody]]></title>
@@ -1353,7 +1421,7 @@ was generated with the assistance of a simple computer program I named
             <link>http://hardmath123.github.io/practical-prosody.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/practical-prosody.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 26 Mar 2017 04:00:00 GMT</pubDate>
+            <pubDate>Sat, 25 Mar 2017 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Fabulous Fabula]]></title>
@@ -1482,7 +1550,7 @@ in their simplicity.</p>
             <link>http://hardmath123.github.io/fabula.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/fabula.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 05 Feb 2017 05:00:00 GMT</pubDate>
+            <pubDate>Sat, 04 Feb 2017 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Don't Call Us, We'll Call You]]></title>
@@ -1625,7 +1693,7 @@ calling <code>minus</code> to create their output. “Don’t call us, we’ll c
             <link>http://hardmath123.github.io/sugarloaf.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/sugarloaf.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sat, 07 Jan 2017 05:00:00 GMT</pubDate>
+            <pubDate>Fri, 06 Jan 2017 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[The FACADE Protocol]]></title>
@@ -1816,7 +1884,7 @@ or to that of homomorphic encryption? <em>What makes this problem hard?</em></p>
             <link>http://hardmath123.github.io/facade.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/facade.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Wed, 04 Jan 2017 05:00:00 GMT</pubDate>
+            <pubDate>Tue, 03 Jan 2017 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Abandon All Scope, Ye Who Enter Here]]></title>
@@ -1872,7 +1940,7 @@ functions, and pretty much anything that isn’t bound via function arguments.</
             <link>http://hardmath123.github.io/abandon-all-scope.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/abandon-all-scope.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 04 Dec 2016 05:00:00 GMT</pubDate>
+            <pubDate>Sat, 03 Dec 2016 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[All about that basis]]></title>
@@ -2239,7 +2307,7 @@ problem.</p>
             <link>http://hardmath123.github.io/semantic-sieve.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/semantic-sieve.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 13 Nov 2016 05:00:00 GMT</pubDate>
+            <pubDate>Sat, 12 Nov 2016 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Nineteen]]></title>
@@ -2379,7 +2447,7 @@ first person to have figured this out).</p>
             <link>http://hardmath123.github.io/19-notes.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/19-notes.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 21 Oct 2016 04:00:00 GMT</pubDate>
+            <pubDate>Thu, 20 Oct 2016 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Dimensional Analysis: a worksheet]]></title>
@@ -3227,7 +3295,7 @@ program.</p>                                                                    
             <link>http://hardmath123.github.io/dimensional-analysis.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/dimensional-analysis.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 11 Oct 2016 04:00:00 GMT</pubDate>
+            <pubDate>Mon, 10 Oct 2016 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[TJCTF 2016 Writeups]]></title>
@@ -3342,7 +3410,7 @@ soul. It was, unmistakably, the Flag the team had sought for so long.</p>
             <link>http://hardmath123.github.io/tjctf-2016.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/tjctf-2016.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 10 Jun 2016 04:00:00 GMT</pubDate>
+            <pubDate>Thu, 09 Jun 2016 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Carnival of Mathematics 134]]></title>
@@ -3581,7 +3649,7 @@ for the 135th edition, hosted by
             <link>http://hardmath123.github.io/carnival-of-mathematics-134.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/carnival-of-mathematics-134.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 15 May 2016 04:00:00 GMT</pubDate>
+            <pubDate>Sat, 14 May 2016 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[They did the MONSTER match!]]></title>
@@ -3747,7 +3815,7 @@ at all. But you have to be willing to balance the scale with effort.</p>
             <link>http://hardmath123.github.io/monster-match.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/monster-match.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 29 Feb 2016 05:00:00 GMT</pubDate>
+            <pubDate>Sun, 28 Feb 2016 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Perchance to Scheme]]></title>
@@ -3904,7 +3972,7 @@ and start coding.</p>
             <link>http://hardmath123.github.io/perchance-to-scheme.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/perchance-to-scheme.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 14 Feb 2016 05:00:00 GMT</pubDate>
+            <pubDate>Sat, 13 Feb 2016 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Armchair Philosophy]]></title>
@@ -4030,7 +4098,7 @@ fortress made of cotton candy.</p>
             <link>http://hardmath123.github.io/armchair-philosophy.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/armchair-philosophy.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 29 Jan 2016 05:00:00 GMT</pubDate>
+            <pubDate>Thu, 28 Jan 2016 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[A Moiety of Reminiscence]]></title>
@@ -4103,7 +4171,7 @@ have to go.</p>
             <link>http://hardmath123.github.io/moiety-of-reminiscence.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/moiety-of-reminiscence.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sat, 23 Jan 2016 05:00:00 GMT</pubDate>
+            <pubDate>Fri, 22 Jan 2016 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Meet the Robinson: 4]]></title>
@@ -4412,7 +4480,7 @@ Intelligence: A Modern Approach</em>)</li>
             <link>http://hardmath123.github.io/meet-the-robinson-4.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/meet-the-robinson-4.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 11 Jan 2016 05:00:00 GMT</pubDate>
+            <pubDate>Sun, 10 Jan 2016 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Meet the Robinson: 3]]></title>
@@ -4809,7 +4877,7 @@ my favorite popular math author.</li>
             <link>http://hardmath123.github.io/meet-the-robinson-3.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/meet-the-robinson-3.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 04 Jan 2016 05:00:00 GMT</pubDate>
+            <pubDate>Sun, 03 Jan 2016 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[A Balance of Powers]]></title>
@@ -5023,7 +5091,7 @@ As a hint, what principle is named after Dirichlet?</li>
             <link>http://hardmath123.github.io/a-balance-of-powers.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/a-balance-of-powers.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Thu, 19 Nov 2015 05:00:00 GMT</pubDate>
+            <pubDate>Wed, 18 Nov 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Meet the Robinson: 2]]></title>
@@ -5240,7 +5308,7 @@ improved about this article series, and report them to me.</li>
             <link>http://hardmath123.github.io/meet-the-robinson-2.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/meet-the-robinson-2.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Thu, 05 Nov 2015 05:00:00 GMT</pubDate>
+            <pubDate>Wed, 04 Nov 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Meet the Robinson]]></title>
@@ -5585,7 +5653,7 @@ improved. Tell me these things.</li>
             <link>http://hardmath123.github.io/meet-the-robinson.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/meet-the-robinson.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 18 Oct 2015 04:00:00 GMT</pubDate>
+            <pubDate>Sat, 17 Oct 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[There are no rules in math]]></title>
@@ -5711,7 +5779,7 @@ should square both sides of the equation.</p>
             <link>http://hardmath123.github.io/no-rules-in-math.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/no-rules-in-math.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Thu, 15 Oct 2015 04:00:00 GMT</pubDate>
+            <pubDate>Wed, 14 Oct 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Wake Up, Sheeple: Falcon 9 Edition]]></title>
@@ -5787,7 +5855,7 @@ what makes it tick.</p>
             <link>http://hardmath123.github.io/falcon-lander.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/falcon-lander.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Thu, 17 Sep 2015 04:00:00 GMT</pubDate>
+            <pubDate>Wed, 16 Sep 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[The Seasoned Scratcher]]></title>
@@ -6154,7 +6222,7 @@ be alright no matter what text editor you use or which language you learn.</p>
             <link>http://hardmath123.github.io/after-scratch.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/after-scratch.html</guid>
             <dc:creator><![CDATA[technoboy10 and Hardmath123]]></dc:creator>
-            <pubDate>Sun, 16 Aug 2015 04:00:00 GMT</pubDate>
+            <pubDate>Sat, 15 Aug 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[A Suspicion of Plausible Answers]]></title>
@@ -6257,7 +6325,7 @@ something. Let me know if you make some discoveries.</p>
             <link>http://hardmath123.github.io/rendezvous.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/rendezvous.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 14 Aug 2015 04:00:00 GMT</pubDate>
+            <pubDate>Thu, 13 Aug 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[To Find Quarrel in a Straw]]></title>
@@ -6355,7 +6423,7 @@ Dahlke.</a>)</p>
             <link>http://hardmath123.github.io/straw.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/straw.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 28 Jul 2015 04:00:00 GMT</pubDate>
+            <pubDate>Mon, 27 Jul 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Indefinite]]></title>
@@ -6409,7 +6477,7 @@ aren’t your fault.  Things that, for better or for worse, are constant.</p>
             <link>http://hardmath123.github.io/indefinite.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/indefinite.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 08 Jun 2015 04:00:00 GMT</pubDate>
+            <pubDate>Sun, 07 Jun 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[They do it with Mirrors]]></title>
@@ -6534,7 +6602,7 @@ you’re “ready”, and go build something.</p>
             <link>http://hardmath123.github.io/raytracing.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/raytracing.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 01 Jun 2015 04:00:00 GMT</pubDate>
+            <pubDate>Sun, 31 May 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[PreTTY Screenshots]]></title>
@@ -6633,7 +6701,7 @@ your <code>~/.profile</code>.</p>
             <link>http://hardmath123.github.io/terminal-screenies.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/terminal-screenies.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Thu, 14 May 2015 04:00:00 GMT</pubDate>
+            <pubDate>Wed, 13 May 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[An Elementary Problem]]></title>
@@ -6783,7 +6851,7 @@ original file, along with its solution file.)</p>
             <link>http://hardmath123.github.io/elementary.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/elementary.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 03 May 2015 04:00:00 GMT</pubDate>
+            <pubDate>Sat, 02 May 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[I Believe in Magic]]></title>
@@ -6853,7 +6921,7 @@ them possible.</p>
             <link>http://hardmath123.github.io/believe-in-magic.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/believe-in-magic.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 14 Apr 2015 04:00:00 GMT</pubDate>
+            <pubDate>Mon, 13 Apr 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Stop Teaching Intro CS]]></title>
@@ -6938,7 +7006,7 @@ of learning.</p>
             <link>http://hardmath123.github.io/stop-teaching-beginners.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/stop-teaching-beginners.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 06 Apr 2015 04:00:00 GMT</pubDate>
+            <pubDate>Sun, 05 Apr 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[How Random is xkcd?]]></title>
@@ -7123,7 +7191,7 @@ dump of my dataset, leave a comment below and I’ll send it to you.</p>
             <link>http://hardmath123.github.io/xkcd-random.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/xkcd-random.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 20 Mar 2015 04:00:00 GMT</pubDate>
+            <pubDate>Thu, 19 Mar 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Capture the Hackathon]]></title>
@@ -7203,7 +7271,7 @@ not selfish—but I think that’s a topic for a whole new post.</p>
             <link>http://hardmath123.github.io/hackathons-vs-ctfs.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/hackathons-vs-ctfs.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 17 Mar 2015 04:00:00 GMT</pubDate>
+            <pubDate>Mon, 16 Mar 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Use Imperfect Tools]]></title>
@@ -7301,7 +7369,7 @@ Let’s see how long I survive.</p>
             <link>http://hardmath123.github.io/use-imperfect-tools.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/use-imperfect-tools.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 17 Mar 2015 04:00:00 GMT</pubDate>
+            <pubDate>Mon, 16 Mar 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Harry Potter and the Diagon(alization) Alley]]></title>
@@ -7512,7 +7580,7 @@ of Mathematical Curiosities</em>.</p>
             <link>http://hardmath123.github.io/hilbert.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/hilbert.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Thu, 26 Feb 2015 05:00:00 GMT</pubDate>
+            <pubDate>Wed, 25 Feb 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Nondeterministic]]></title>
@@ -7581,7 +7649,7 @@ have good things to say. Everyone does.)</p>
             <link>http://hardmath123.github.io/nondeterministic.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/nondeterministic.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 10 Feb 2015 05:00:00 GMT</pubDate>
+            <pubDate>Mon, 09 Feb 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Embracing Types]]></title>
@@ -7665,7 +7733,7 @@ also suffer a defeat.</p>
             <link>http://hardmath123.github.io/embracing-types.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/embracing-types.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 08 Feb 2015 05:00:00 GMT</pubDate>
+            <pubDate>Sat, 07 Feb 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Nasty Python Monstrosities]]></title>
@@ -7780,7 +7848,7 @@ command, and everything is one tool operating on one repository.</p>
             <link>http://hardmath123.github.io/nasty-python-monstrosities.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/nasty-python-monstrosities.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Wed, 04 Feb 2015 05:00:00 GMT</pubDate>
+            <pubDate>Tue, 03 Feb 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Bower! Unlimited Bower!]]></title>
@@ -7964,7 +8032,7 @@ Internet should take a hint from that.</p>
             <link>http://hardmath123.github.io/bower-unlimited-bower.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/bower-unlimited-bower.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 01 Feb 2015 05:00:00 GMT</pubDate>
+            <pubDate>Sat, 31 Jan 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Coding the Mandelbrot Set]]></title>
@@ -8133,7 +8201,7 @@ else
             <link>http://hardmath123.github.io/scratch-mandelbrot.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/scratch-mandelbrot.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sat, 10 Jan 2015 05:00:00 GMT</pubDate>
+            <pubDate>Fri, 09 Jan 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Array of Hope]]></title>
@@ -8282,7 +8350,7 @@ stick with it. But that’s good programming practice anyway.</p>
             <link>http://hardmath123.github.io/scratch-splice.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/scratch-splice.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 05 Jan 2015 05:00:00 GMT</pubDate>
+            <pubDate>Sun, 04 Jan 2015 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[The Nightmare After Christmas]]></title>
@@ -8304,7 +8372,7 @@ stick with it. But that’s good programming practice anyway.</p>
             <link>http://hardmath123.github.io/night-after-christmas.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/night-after-christmas.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Thu, 25 Dec 2014 05:00:00 GMT</pubDate>
+            <pubDate>Wed, 24 Dec 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[It's not socket science: Part II]]></title>
@@ -8578,7 +8646,7 @@ definitely worth learning how these things work.</p>
             <link>http://hardmath123.github.io/socket-science-2.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/socket-science-2.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Wed, 17 Dec 2014 05:00:00 GMT</pubDate>
+            <pubDate>Tue, 16 Dec 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Dear Hollywood]]></title>
@@ -8670,7 +8738,7 @@ hacker.</p>
             <link>http://hardmath123.github.io/dear-hollywood.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/dear-hollywood.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 12 Dec 2014 05:00:00 GMT</pubDate>
+            <pubDate>Thu, 11 Dec 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Don your tmuxedo]]></title>
@@ -8729,7 +8797,7 @@ perpetually.</p>
             <link>http://hardmath123.github.io/tmux.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/tmux.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 07 Dec 2014 05:00:00 GMT</pubDate>
+            <pubDate>Sat, 06 Dec 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[It's not socket science: Part I]]></title>
@@ -8889,7 +8957,7 @@ Fail, Heartbleed, Shellshock, and POODLE.</p>
             <link>http://hardmath123.github.io/socket-science.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/socket-science.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sat, 29 Nov 2014 05:00:00 GMT</pubDate>
+            <pubDate>Fri, 28 Nov 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Notes on Binary Strings]]></title>
@@ -9004,7 +9072,7 @@ and plaintext representations.</p>
             <link>http://hardmath123.github.io/binarystrings.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/binarystrings.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Thu, 13 Nov 2014 05:00:00 GMT</pubDate>
+            <pubDate>Wed, 12 Nov 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Some PicoCTF Writeups]]></title>
@@ -9157,7 +9225,7 @@ of homework I need to make up this week&hellip;</p>
             <link>http://hardmath123.github.io/pico.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/pico.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sat, 08 Nov 2014 05:00:00 GMT</pubDate>
+            <pubDate>Fri, 07 Nov 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Better Earley than never]]></title>
@@ -9297,7 +9365,7 @@ Nolan won’t be, probably.)</p>
             <link>http://hardmath123.github.io/earley.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/earley.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sat, 25 Oct 2014 04:00:00 GMT</pubDate>
+            <pubDate>Fri, 24 Oct 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Detech Your Classroom]]></title>
@@ -9407,7 +9475,7 @@ enough to write down on paper and bring to school).</p>
             <link>http://hardmath123.github.io/tech-in-education.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/tech-in-education.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 10 Oct 2014 04:00:00 GMT</pubDate>
+            <pubDate>Thu, 09 Oct 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Bingo is Boring]]></title>
@@ -9476,7 +9544,7 @@ you’re all famous to find you again.)</p>
             <link>http://hardmath123.github.io/smiley.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/smiley.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Thu, 02 Oct 2014 04:00:00 GMT</pubDate>
+            <pubDate>Wed, 01 Oct 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Brown M&Ms]]></title>
@@ -9572,7 +9640,7 @@ rant. It’s a favor.</p>
             <link>http://hardmath123.github.io/brownmnms.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/brownmnms.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sat, 06 Sep 2014 04:00:00 GMT</pubDate>
+            <pubDate>Fri, 05 Sep 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[GamifiEd]]></title>
@@ -9644,7 +9712,7 @@ accomplished students, I feel gamified education is not the right answer.</p>
             <link>http://hardmath123.github.io/gamifiededucation.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/gamifiededucation.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 31 Aug 2014 04:00:00 GMT</pubDate>
+            <pubDate>Sat, 30 Aug 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[ANSIble]]></title>
@@ -9725,7 +9793,7 @@ pardon typos.</p>
             <link>http://hardmath123.github.io/ansiescape.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/ansiescape.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Wed, 06 Aug 2014 04:00:00 GMT</pubDate>
+            <pubDate>Tue, 05 Aug 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Programming is not math]]></title>
@@ -9866,7 +9934,7 @@ question!</p>
             <link>http://hardmath123.github.io/isprogrammingmath.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/isprogrammingmath.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Thu, 24 Jul 2014 04:00:00 GMT</pubDate>
+            <pubDate>Wed, 23 Jul 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Cryptolegal]]></title>
@@ -9943,7 +10011,7 @@ Wasen42.)</a></p>
             <link>http://hardmath123.github.io/cryptolegal.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/cryptolegal.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 18 Jul 2014 04:00:00 GMT</pubDate>
+            <pubDate>Thu, 17 Jul 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Jazz is Open Source]]></title>
@@ -10019,7 +10087,7 @@ think, is one of the key elements of the hacker culture.</p>
             <link>http://hardmath123.github.io/jazz.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/jazz.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 01 Jul 2014 04:00:00 GMT</pubDate>
+            <pubDate>Mon, 30 Jun 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Lord of the Strings]]></title>
@@ -10114,7 +10182,7 @@ Gandalf got up and whispered: “Altruism.”</p>
             <link>http://hardmath123.github.io/string1.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/string1.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sat, 14 Jun 2014 04:00:00 GMT</pubDate>
+            <pubDate>Fri, 13 Jun 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Well, well, well, we meet again.]]></title>
@@ -10162,7 +10230,7 @@ disallow a user from doing anything.</p>
             <link>http://hardmath123.github.io/helloagain.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/helloagain.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Wed, 11 Jun 2014 04:00:00 GMT</pubDate>
+            <pubDate>Tue, 10 Jun 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Why Math is a Sport]]></title>
@@ -10278,7 +10346,7 @@ And that's tragic.
             <link>http://hardmath123.github.io/math.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/math.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 23 Mar 2014 04:00:00 GMT</pubDate>
+            <pubDate>Sat, 22 Mar 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[How Newbies Codebreak]]></title>
@@ -10473,7 +10541,7 @@ cipher-like-this solver. We can use it next year!
             <link>http://hardmath123.github.io/crypto.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/crypto.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sat, 08 Feb 2014 05:00:00 GMT</pubDate>
+            <pubDate>Fri, 07 Feb 2014 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Blown to Bitcoins]]></title>
@@ -10713,7 +10781,7 @@ href="https://en.bitcoin.it/wiki/Clients">find another one</a> you may like.
             <link>http://hardmath123.github.io/bitcoin.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/bitcoin.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 30 Dec 2013 05:00:00 GMT</pubDate>
+            <pubDate>Sun, 29 Dec 2013 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Lampshades and Analytic Geometry]]></title>
@@ -10855,7 +10923,7 @@ gotta grok math to see them.
             <link>http://hardmath123.github.io/conics.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/conics.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 08 Dec 2013 05:00:00 GMT</pubDate>
+            <pubDate>Sat, 07 Dec 2013 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Living Without Sudo]]></title>
@@ -10971,7 +11039,7 @@ you start fresh.
             <link>http://hardmath123.github.io/sudo.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/sudo.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 29 Nov 2013 05:00:00 GMT</pubDate>
+            <pubDate>Thu, 28 Nov 2013 18:30:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Hello, World!]]></title>
@@ -11400,7 +11468,7 @@ KTHXBYE</code></pre>
             <link>http://hardmath123.github.io/hw.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/hw.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Wed, 27 Nov 2013 05:00:00 GMT</pubDate>
+            <pubDate>Tue, 26 Nov 2013 18:30:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
