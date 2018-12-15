@@ -69,3 +69,11 @@ permutation that is hard to reach by optimizing a random permutation. But that
 _feels_ unlikely!
 
 So: I leave this as an open problem for readers to explore.
+
+> Update (Dec 15): I found this [blog
+> post](https://yurichev.com/blog/cabling_Z3/) by Dennis Yurichev that tackles
+> the same problem, but restated as "in what order do I mount these devices on
+> a rack if I want to minimize the total length of cables between them"? Dennis
+> finds an optimal solution for 8 devices with Z3... perhaps the solution
+> scales to 26 "devices"? Intriguingly, his post was published just weeks
+> before my visit to the City Museum!
