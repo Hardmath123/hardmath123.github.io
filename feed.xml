@@ -10,7 +10,7 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 06 Jan 2019 01:55:04 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 28 Jan 2019 08:03:56 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -370,6 +370,9 @@ a rack if I want to minimize the total length of cables between them”? Dennis
 finds an optimal solution for 8 devices with Z3… perhaps the solution
 scales to 26 “devices”? Intriguingly, his post was published just weeks
 before my visit to the City Museum!</p>
+<p>Update (Jan 28): @rjp on Github has posted a <a href="http://rjp.is/blogging/posts/2019/01/linear-typewriters/">blog
+post</a> with
+<em>several</em> new approaches to this problem!</p>
 </blockquote>
 ]]></description>
             <link>http://hardmath123.github.io/crown-typewriter.html</link>

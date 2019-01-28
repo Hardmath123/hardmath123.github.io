@@ -77,3 +77,7 @@ So: I leave this as an open problem for readers to explore.
 > finds an optimal solution for 8 devices with Z3... perhaps the solution
 > scales to 26 "devices"? Intriguingly, his post was published just weeks
 > before my visit to the City Museum!
+
+> Update (Jan 28): @rjp on Github has posted a [blog
+> post](http://rjp.is/blogging/posts/2019/01/linear-typewriters/) with
+> _several_ new approaches to this problem!
