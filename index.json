@@ -582,6 +582,14 @@
             "file": "envelope.md",
             "date": "1/4/19",
             "markdown": true
+        },
+        {
+            "title": "Windmills on my Mind",
+            "author": "Hardmath123",
+            "description": "Some fast recreational physics",
+            "file": "windmills.md",
+            "date": "3/27/19",
+            "markdown": true
         }
     ]
 }

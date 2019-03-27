@@ -10,10 +10,49 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Mon, 28 Jan 2019 08:03:56 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 27 Mar 2019 23:01:20 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Windmills on my Mind]]></title>
+            <description><![CDATA[<p>Some fast recreational physics</p>
+
+
+<p>Quick back-of-the-envelope analysis of a windmill, just for fun.</p>
+<p>According to <a href="https://www.wind-watch.org/faq-size.php">National Wind Watch</a> a
+typical windmill is a GE 1.5-megawatt model which has 116-ft blades.</p>
+<p>Let’s say the wind speed is ($ v $), which is typically 10-15 m/s on a good
+day. Then in time ($ t $) the volume of air that passes across the windmill is
+a cylinder of height ($ tv $) and area ($ \pi r^2$). Air’s density, ($ \rho $),
+is around 1.225 kilograms per cubic meter. This gives a total mass of ($ M =
+\rho tv\pi r^2 $). Taking ($ v $) to be a modest 10 m/s, this works out to 48
+metric <em>tons</em> of air per <em>second</em>.</p>
+<p>Now let’s apply conservation of energy on this mass of air. Initial energy is
+($ Mv^2 / 2 $) and final energy is ($ Mw^2/2 $), and the difference is on the
+order of the energy output, which is a function of the power output and ($ t $)
+assuming reasonable efficiency in the turbine.</p>
+<p>So, we have ($ \rho tv\pi r^2 v^2 / 2 - \rho tv\pi r^2 w^2 /2 = Pt $). Time
+cancels, which is comforting since this is a continuous process. The equation
+that’s left suggests that power output of a windmill is proportional to the
+<em>cube</em> of the wind speed!</p>
+<p>Another thing to think about is how much the wind slows down by. Solving for ($
+w $) and taking ($ P $) to be 1.5 MW, we have ($ w = \sqrt{ \frac{2P/\rho \pi
+r^2 - v^3 }{-v}} $). For 15 m/s winds, this means wind slows down by around 10%
+because of the windmill.</p>
+<p>Actually this wasn’t “just for fun,” it was to show off initial progress on my
+side-project. :-)</p>
+<p><img src="static/windmill-math.png" alt="screenshot"></p>
+<p>Oh, and an unresolved question: because air is coming into the windmill faster
+than it’s going out, the momentum flux across the plane of the windmill is net
+negative.  Applying Gauss’ law, we would expect a buildup of air in the
+windmill, which obviously doesn’t happen. What’s wrong?</p>
+]]></description>
+            <link>http://hardmath123.github.io/windmills.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/windmills.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Wed, 27 Mar 2019 07:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Caustics and Casinos on the I-5]]></title>
             <description><![CDATA[<p>An analytical analysis of an anomalous advertisement</p>

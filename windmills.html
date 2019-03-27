@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Windmills on my Mind - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <script src="static/cheet.js" charset="utf-8"></script>
+            <script src="static/main.js"></script>
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+            <!-- You're reading the source to my blog? What do you think?
+
+            Do you have dinner plans? -->
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>Windmills on my Mind</h2>
+                <h4>Wednesday, March 27, 2019 &middot; 2 min read</h4>
+<p>Quick back-of-the-envelope analysis of a windmill, just for fun.</p>
+<p>According to <a href="https://www.wind-watch.org/faq-size.php">National Wind Watch</a> a
+typical windmill is a GE 1.5-megawatt model which has 116-ft blades.</p>
+<p>Let’s say the wind speed is ($ v $), which is typically 10-15 m/s on a good
+day. Then in time ($ t $) the volume of air that passes across the windmill is
+a cylinder of height ($ tv $) and area ($ \pi r^2$). Air’s density, ($ \rho $),
+is around 1.225 kilograms per cubic meter. This gives a total mass of ($ M =
+\rho tv\pi r^2 $). Taking ($ v $) to be a modest 10 m/s, this works out to 48
+metric <em>tons</em> of air per <em>second</em>.</p>
+<p>Now let’s apply conservation of energy on this mass of air. Initial energy is
+($ Mv^2 / 2 $) and final energy is ($ Mw^2/2 $), and the difference is on the
+order of the energy output, which is a function of the power output and ($ t $)
+assuming reasonable efficiency in the turbine.</p>
+<p>So, we have ($ \rho tv\pi r^2 v^2 / 2 - \rho tv\pi r^2 w^2 /2 = Pt $). Time
+cancels, which is comforting since this is a continuous process. The equation
+that’s left suggests that power output of a windmill is proportional to the
+<em>cube</em> of the wind speed!</p>
+<p>Another thing to think about is how much the wind slows down by. Solving for ($
+w $) and taking ($ P $) to be 1.5 MW, we have ($ w = \sqrt{ \frac{2P/\rho \pi
+r^2 - v^3 }{-v}} $). For 15 m/s winds, this means wind slows down by around 10%
+because of the windmill.</p>
+<p>Actually this wasn’t “just for fun,” it was to show off initial progress on my
+side-project. :-)</p>
+<p><img src="static/windmill-math.png" alt="screenshot"></p>
+<p>Oh, and an unresolved question: because air is coming into the windmill faster
+than it’s going out, the momentum flux across the plane of the windmill is net
+negative.  Applying Gauss’ law, we would expect a buildup of air in the
+windmill, which obviously doesn’t happen. What’s wrong?</p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+<!--
+            <section>
+                <center>(<a id="comment-toggle" href="#comment-toggle">Click to load comments&hellip;</a>)</center>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'comfortablynumbered';
+                    var disqus_identifier = 'windmills.md';
+
+                    window.addEventListener(
+                        'load',
+                        (function() {
+                            document.getElementById('comment-toggle').addEventListener('click',
+                                (function() {
+                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                }),
+                            true);
+                        }),
+                        true
+                    );
+                </script>
+            </section>
+-->
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="http://github.com/Hardmath123">
+                        <span class="octicon octicon-mark-github"></span>
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        <span class="octicon octicon-rss"></span>
+                        Subscribe (RSS)</a></li>
+                    <li><a href="https://github.com/Hardmath123/hardmath123.github.io/issues/new?title=Hi&body=How's%20it%20going%3F">
+                        <span class="octicon octicon-comment-discussion"></span>
+                        Feedback</a></li>
+                    <li><a href="mailto:contact-at-comfortablynumbered-dot-appspotmail-dot-com">
+                        <span class="octicon octicon-mail-read"></span>
+                        Email me</a></li>
+                    <li><a href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        <span class="octicon octicon-law"></span>
+                        CC BY-NC 3.0</a></li>
+                    <li><a href="appreciation.html">
+                        <span class="octicon octicon-beer"></span>
+                        Other</a></li>
+                </ul>
+            </div>
+
+            <!--
+            <span class="sc">ComfortablyNumbered</span> &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/appreciation.html">
+                <span class="octicon octicon-beer"></span></a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                <img
+                    alt="Creative Commons License"
+                    src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+            </a>
+            -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
