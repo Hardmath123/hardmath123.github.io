@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Buffering the Sock Stream - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <script src="static/cheet.js" charset="utf-8"></script>
+            <script src="static/main.js"></script>
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+            <!-- You're reading the source to my blog? What do you think?
+
+            Do you have dinner plans? -->
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>Buffering the Sock Stream</h2>
+                <h4>Saturday, April 13, 2019 &middot; 2 min read</h4>
+<p>It’s the end of week 4 of the quarter and you’ve decided it’s finally time to
+do some laundry. You somehow transport the massive mound of clothing in your
+closet to the laundry room, occupy all three machines and also the dishwasher,
+and finally transport the now-slightly-less-smelly mound of clothing back up
+the stairs to your room. Then you turn on your favorite Pink Floyd album and
+begin folding…</p>
+<p>You pull out items of clothing from the heap one by one. Shirts and pants you
+can fold immediately, but socks pose some difficulty: you can’t put them away
+until they have been paired. So you put them aside on your bedside table to be
+processed later. Soon, however, the pile of socks on your bedside table grows
+too large, and the table can only fit so much sock on it.</p>
+<p>So you decide to try and manage the situation by eagerly pairing up socks. If
+you pull a sock out of the heap of clothes and see its partner on the bedside
+table, you pair them up and put them away. Otherwise, you put the unpaired sock
+on the bedside table.</p>
+<p>Suppose you own an infinite number of socks, each of which is uniformly one of
+($ k $) colors. How big does your bedside table need to be? Let’s call the pile
+of clean clothes the “stream,” and the bedside table the “buffer.” Then the
+question is, what is the distribution of the buffer size over time as a
+function of ($ k $)?</p>
+<p>Here is one way to think about this: if ($ k = 1 $) then the buffer size is 0
+half the time and 1 half the time; the distribution is normal at mean 0.5 and
+variance 0.25. For larger ($ k $), we can think of this as just a superposition
+of multiple buffers, one for each ($ k $). The means and variances add, so we
+expect the distribution to be normal with mean ($ k/2 $) and standard deviation
+($ \sqrt{k}/2 $).</p>
+<p>Here is another way to think about this: we have a Markov process where the
+transition from state ($ i $) to ($ i + 1 $) is with probability ($ (k - i)/k
+$) and to ($ i - 1 $) is with probability ($ i/k $) for ($ 0 \leq i \leq k $).
+We can create a matrix representing this transition system; then, eigenvectors
+of this matrix (with eigenvalue 1, and normalized to sum 1) represent
+equilibrium probability distributions.</p>
+<p>So, incredibly, we’ve shown that the coordinates of the ($ \lambda=1 $)
+eigenvector for this matrix can be computed using the normal CDF. What a
+fascinating correspondence!</p>
+<p>If you don’t believe it, the graph below shows the normal-CDF predictions
+(orange line) and the elements of the eigenvector (blue dots) for ($ k = 100
+$). The IPython notebook that generated this graph is
+<a href="static/sock-graph.ipynb">here</a>.</p>
+<p><img src="static/sock-graph.png" alt="sock graph"></p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+<!--
+            <section>
+                <center>(<a id="comment-toggle" href="#comment-toggle">Click to load comments&hellip;</a>)</center>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'comfortablynumbered';
+                    var disqus_identifier = 'sock-buffer.md';
+
+                    window.addEventListener(
+                        'load',
+                        (function() {
+                            document.getElementById('comment-toggle').addEventListener('click',
+                                (function() {
+                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                }),
+                            true);
+                        }),
+                        true
+                    );
+                </script>
+            </section>
+-->
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="http://github.com/Hardmath123">
+                        <span class="octicon octicon-mark-github"></span>
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        <span class="octicon octicon-rss"></span>
+                        Subscribe (RSS)</a></li>
+                    <li><a href="https://github.com/Hardmath123/hardmath123.github.io/issues/new?title=Hi&body=How's%20it%20going%3F">
+                        <span class="octicon octicon-comment-discussion"></span>
+                        Feedback</a></li>
+                    <li><a href="mailto:contact-at-comfortablynumbered-dot-appspotmail-dot-com">
+                        <span class="octicon octicon-mail-read"></span>
+                        Email me</a></li>
+                    <li><a href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        <span class="octicon octicon-law"></span>
+                        CC BY-NC 3.0</a></li>
+                    <li><a href="appreciation.html">
+                        <span class="octicon octicon-beer"></span>
+                        Other</a></li>
+                </ul>
+            </div>
+
+            <!--
+            <span class="sc">ComfortablyNumbered</span> &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/appreciation.html">
+                <span class="octicon octicon-beer"></span></a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                <img
+                    alt="Creative Commons License"
+                    src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+            </a>
+            -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
