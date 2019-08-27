@@ -598,6 +598,14 @@
             "file": "sock-buffer.md",
             "date": "4/13/19",
             "markdown": true
+        },
+        {
+            "title": "Words that do Handstands",
+            "author": "Hardmath123",
+            "description": "Dreaming ambigrams by gradient descent",
+            "file": "ambigrams.md",
+            "date": "8/26/19",
+            "markdown": true
         }
     ]
 }

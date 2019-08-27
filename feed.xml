@@ -10,10 +10,94 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 14 Apr 2019 04:35:33 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 27 Aug 2019 03:21:02 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Words that do Handstands]]></title>
+            <description><![CDATA[<p>Dreaming ambigrams by gradient descent</p>
+
+
+<p>The other day I ordered a book on art history from Amazon… which reminded me
+of the movie <em>Angels and Demons</em>, which reminded me of ambigrams. Ambigrams are
+those stylized words that look the same when you turn them upside down. Here is
+the classic, <a href="http://www.johnlangdon.net/works/angels-demons/">by John
+Langdon</a>.</p>
+<p><img src="static/ambigrams/langdon.png" alt="earth air fire water"></p>
+<p>I’ve been thinking a lot about the absurd power of gradient descent these days,
+and so almost immediately I felt the need to try and synthesize ambigrams
+on-demand by gradient descent.</p>
+<p>It turns out that this isn’t too hard to implement. Let’s start with just
+single-character ambigrams. Here’s the plan: first, we train some sort of
+neural net to recognize characters. This training is by gradient descent on the
+weights / convolution filter / whatnot; specifically, we imagine a function of
+the weights that outputs some loss and take its derivative <em>with respect to the
+weights</em> to do gradient descent. Once the neural net is trained, however, we
+can just treat it as a single function from tensors (input image) to tensors (a
+one-hot encoding of the classification… or some softmaxed approximation).
+Taking that one-hot output and converting it into a cross-entropy loss against
+some desired output, we can now do gradient descent to minimize this loss <em>with
+respect to the input image</em> (keeping the weights constant). This process lets
+us “dream” of images representing whichever characters we want.</p>
+<p>Similarly, we can do the same thing but with the tensor turned upside-down, to
+dream images of upside-down characters. Okay, so now we can just combine these
+two processes — literally, by adding the loss functions — to dream an image
+that matches one character right-side-up and another character upside-down.
+That’s it! Now we let it run all day to generate an image for each alphanumeric
+character pair (36^2 = 1296) and we start to get a nice little “ambigram font”:</p>
+<p><img src="static/ambigrams/grid.png" alt="grid"></p>
+<p>Combining letters from this “font” lets us make arbitrary ambigrams.</p>
+<p>This was a low-effort operation, hacked together over an evening and a morning,
+plus a full day of “training.” I’m sure it’s possible to do better. Here are
+some technical notes for anyone who wants to have a go at it. My code is all
+online, <a href="https://github.com/kach/neural-ambigrams">here</a>.</p>
+<ul>
+<li>It’s all written in PyTorch. The neural net itself is literally PyTorch’s
+built-in <a href="https://github.com/pytorch/examples/tree/master/mnist">MNIST
+example</a>.</li>
+<li>I used the <a href="https://www.nist.gov/node/1298471/emnist-dataset">EMNIST</a>
+dataset, which is MNIST that also adds in the alphabets from the NIST
+database (and comes with PyTorch). I used the “balanced” split.</li>
+<li>I added an L1 regularizer to force the output images to be sparse, i.e.
+mostly “blank paper” with some “ink.” Without this, you get very dark images.</li>
+</ul>
+<p>Okay, now time for some pictures. Some turned out better than others, and there
+is plenty of scope for improvement…</p>
+<p>P.S. Depending on your browser, images in this post may or may not flip
+upside-down automatically if you hover over them.</p>
+<style>
+img {
+  transform: rotate(0deg);
+  transition: transform 0.5s;
+}
+
+img:hover {
+  transform: rotate(180deg);
+  transition: transform 0.5s;
+}
+</style>
+
+<h2 id="angel-and-demon">ANGEL AND DEMON</h2>
+<p><img src="static/ambigrams/angel-and-demon.png" alt="ANGEL AND DEMON"></p>
+<h2 id="banana">BANANA</h2>
+<p><img src="static/ambigrams/banana.png" alt="BANANA"></p>
+<h2 id="year-2016">YEAR, 2016</h2>
+<p><img src="static/ambigrams/year-2016.png" alt="YEAR, 2016"></p>
+<h2 id="good-evil">GOOD, EVIL</h2>
+<p><img src="static/ambigrams/good-evil.png" alt="GOOD, EVIL"></p>
+<h2 id="teamwork">TEAMWORK</h2>
+<p><img src="static/ambigrams/teamwork.png" alt="TEAMWORK"></p>
+<h2 id="blues-skate">BLUES, SKATE</h2>
+<p><img src="static/ambigrams/blues-skate.png" alt="BLUES, SKATE"></p>
+<h2 id="dream-world">DREAM, WORLD</h2>
+<p><img src="static/ambigrams/dream-world.png" alt="DREAM, WORLD"></p>
+]]></description>
+            <link>http://hardmath123.github.io/ambigrams.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/ambigrams.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Mon, 26 Aug 2019 07:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Buffering the Sock Stream]]></title>
             <description><![CDATA[<p>How much space do I need to do my laundry?</p>
