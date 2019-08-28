@@ -10,10 +10,103 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Tue, 27 Aug 2019 03:21:02 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 28 Aug 2019 02:52:36 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Unraveling the Un-unravelable]]></title>
+            <description><![CDATA[<p>And some observations about the associativity of English affixes</p>
+
+
+<p>Say what you will about <em>The Big Bang Theory</em>, it has its moments, and this is
+one of my favorites (watch it to the end of the clip!):</p>
+<iframe width="560" height="315"
+src="https://www.youtube-nocookie.com/embed/MsawieizDeE?start=210"
+frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;
+picture-in-picture" allowfullscreen></iframe>
+
+<p>Putting aside the wonderful meta-dramatic irony of this moment, the word
+“un-unravelable” is the kind of thing you can sit and think about for hours. I
+know because I have.</p>
+<p>See, you might think that the “un-“ prefixes cancel, such that “un-unravelable”
+means the same thing as “ravelable.” This is kind of like how
+“un-unforgettable” probably means “ordinary.” And indeed, <a href="https://en.wiktionary.org/wiki/un-unravelable">Wiktionary
+agrees</a> with this assessment,
+suggesting instead “ravelable” as the “simpler and more immediately logical
+choice.”</p>
+<p>But clearly that’s not what Dr. Cooper meant in this case! “Ravelable” means
+<em>can be raveled</em> whereas Dr. Cooper meant <em>cannot be unraveled</em>, which are at
+least intuitively separate concepts. So what’s going on?</p>
+<p>First of all, we need to figure out what “ravel” means: it
+<a href="https://www.websters1913.com/words/Ravel">means</a> to entangle. Something that
+is “raveled” is entangled and knotted like the HDMI cords behind your cable
+box. The sleep that Macbeth murders is the “sleep that knits up the raveled
+sleeve of care” (2.2.37). Actually, that’s not the full story. “Ravel” <em>also</em>
+means to <em>disentangle</em>, making the word a so-called “Janus word” (read more at
+<a href="https://www.merriam-webster.com/words-at-play/words-own-opposites">Merriam-Webster</a>).
+But let’s stick with the former definition for the moment.</p>
+<p>Okay, so now we can start tacking on prefixes and suffixes. But we have to be
+careful!  The dynamics of affixes are tricky — the order in which we tack
+them on matters.</p>
+<p>For example, “ravel-able” would mean <em>can be entangled,</em> so spaghetti is
+ravelable. Then “un-ravelable” could mean <em>cannot be entangled,</em> so ravioli is
+unravelable.</p>
+<p>On the other hand, “un-ravel” would mean <em>to disentangle,</em> so Sherlock unravels
+mysteries. Then “unravel-able” could mean <em>disentanglable,</em> so the mysteries
+Sherlock solves are unravelable (by him, at least).</p>
+<p>To summarize:</p>
+<ul>
+<li>un+(ravel+able): there is <em>no</em> way to ravel it</li>
+<li>(un+ravel)+able: there <em>is</em> a way to unravel it</li>
+</ul>
+<p>Alas! The associative property has broken down! This means we need to examine
+each of the five possible paranthesisifications of “un+un+ravel+able”
+separately (<a href="https://en.wikipedia.org/wiki/Catalan_number">why five?</a>).</p>
+<p>Here they are:</p>
+<ol>
+<li><strong>(un+un)+(ravel+able)</strong> and</li>
+<li><strong>((un+un)+ravel)+able</strong> are easy: neither of them typecheck, because
+“un+un” is meaningless.</li>
+<li><strong>un+(un+(ravel+able)):</strong> “ravelable” means <em>can be entangled,</em> so
+“un-ravelable” means <em>cannot be entangled,</em> and thus “un-unravelable”
+means <em>is not such that it cannot be entangled,</em> i.e. <em>can be
+entangled.</em> For example, your new favorite organizational scheme might seem
+perfect at first, but after a few weeks you will find that no scheme can
+fend off the entropic tendencies of the universe, and that your files are by
+nature un-un-ravelable.</li>
+<li><strong>(un+(un+ravel))+able:</strong> “unravel” means <em>disentangle,</em> so “un-unravel”
+means <em>re-entangle</em> (by analogy to “un-undo” meaning “redo”) and thus
+“ununravel-able” means <em>re-entanglable.</em> For example, a jigsaw puzzle that
+you mix up again after solving is ununravel-able.</li>
+<li><strong>un+((un+ravel)+able):</strong> “unravel” means <em>disentangle,</em> so “unravel-able”
+means <em>can be disentangled,</em> and thus “un-unravelable” means <em>cannot be
+disentangled.</em> For example, Dr. Cooper’s web of lies is un-unravelable.</li>
+</ol>
+<p>So what’s really going on here is that the prefix <em>un-</em> has many faces (a Janus
+prefix?); it reverses verbs and negates adjectives. Perhaps this is clearer in
+the language of first-order logic, where <em>-able</em> introduces an existential
+quantifier over <em>a way to do the thing</em> (and thus do(w, x) does w to x).</p>
+<ol>
+<li>N/A</li>
+<li>N/A</li>
+<li><strong>(un+(un+(ravel+able)))(x)</strong> means &not;&not;&exist;w. raveled(do(w, x))</li>
+<li><strong>((un+(un+ravel))+able)(x)</strong> means &exist;w. &not;&not;raveled(do(w, x))</li>
+<li><strong>(un+((un+ravel)+able))(x)</strong> means &not;&exist;w. &not;raveled(do(w, x))</li>
+</ol>
+<p>Only (5) puts an odd number of negations outside the existential quantifier,
+flipping it to a universal quantifier, and expressing that you <em>cannot</em> unravel
+whatever needs unraveling.</p>
+<p>Why doesn’t this effect happen with “un-unforgettable”? It’s because “unforget”
+isn’t a common word, and so we reach for interpretation (3) rather than (5).
+Though now that I think about it, “unforget” is an excellent replacement for
+“remember.”</p>
+]]></description>
+            <link>http://hardmath123.github.io/un-unravelable.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/un-unravelable.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Tue, 27 Aug 2019 07:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Words that do Handstands]]></title>
             <description><![CDATA[<p>Dreaming ambigrams by gradient descent</p>
