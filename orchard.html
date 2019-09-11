@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Dancing Orchards on the I-5 - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <script src="static/cheet.js" charset="utf-8"></script>
+            <script src="static/main.js"></script>
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+            <!-- You're reading the source to my blog? What do you think?
+
+            Do you have dinner plans? -->
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>Dancing Orchards on the I-5</h2>
+                <h4>Tuesday, September 10, 2019 &middot; 3 min read</h4>
+<p>The last time I spent a long time on I-5, I started thinking about
+<a href="envelope.html">envelopes</a>. This time, I started thinking about orchards. As
+you drive along the central valley highway, you can see thousands and thousands
+of perfect rows of trees. You can actually see them from the top on Google’s
+<a href="https://www.google.com/maps/@36.6590095,-120.643549,2656a,35y,236.91h/data=!3m1!1e3">satellite
+imagery</a>;
+try zooming in slowly on that point, it’s really quite beautiful.</p>
+<p>When you drive by them, you see the side view rather than the top view. In
+fact, you see the side view <em>in motion</em> – the trees look like they’re dancing
+an elaborate dance, continuously lining up into different formations to form
+different rows in different angles. Really, of course, it is you who is moving;
+the trees are still but by viewing them from different angles you can see
+different “alignments” of the grid.</p>
+<p>The effect is most pronounced with freshly-planted trees (or perhaps those are
+markers?), where there is no foliage blocking the horizon.</p>
+<p><img src="static/orchard.png" alt="orchard"></p>
+<p>I didn’t think to make a video at the time, but you can imagine that as the car
+moves forwards a little bit, the pattern re-aligns in an incredibly satisfying
+way.</p>
+<p>I’m intrigued by the multiple “vanishing points” you can see in that picture.
+The trees are regularly spaced in a square grid, but somehow there are multiple
+(!) irregularly-spaced (!!) points along the horizon to which rows of trees
+appear to converge. What’s going on here — is there a pattern to the
+patterns? You could either stop reading here to have food for thought on your
+next road trip, or you could keep reading for my ideas.</p>
+<hr>
+<p>The I-5 trees are a variation on a well-known theme: a theme called <em>Euclid’s
+orchard</em> (<a href="https://en.wikipedia.org/wiki/Euclid%27s_orchard">Wikipedia</a>,
+<a href="http://mathworld.wolfram.com/EuclidsOrchard.html">MathWorld</a>). You stand at
+the origin of the plane, and at every integer point there is a line segment
+(“tree”) extending one unit upwards perpendicular to the plane. What you see
+from your vantage point is Euclid’s orchard. Try to imagine what it looks like;
+then, play with a JavaScript simulation of it
+<a href="https://www.khanacademy.org/computer-programming/euclids-orchard/5282060266635264">here</a>.</p>
+<p>The main idea of Euclid’s orchard is that trees at integer points (x, y)
+occlude trees at any integer multiples of that point (nx, ny), so you don’t see
+anything behind them. Also, nearby trees appear taller than farther-away trees
+because that’s how perspective works. So there is a “horizon” where in each
+direction you either see (1) a tree if the direction’s slope is rational, and
+the tree is shorter if its denominator is larger; (2) nothing if the
+direction’s slope is irrational. All sorts of fun can be had with this: see for
+example a <a href="https://mathlesstraveled.com/2017/07/22/a-few-words-about-pww-20/">nice connection to the Fibonacci
+numbers</a>.</p>
+<p>The I-5 orchard in the picture is similar, but now we look upon it from some
+height. Imagine mapping each point on the horizon to the direction in which I
+would have to point my camera to look directly at that point. The “vanishing
+points” have lots of trees along those directions, giving the illusion of
+“rows.” What does this mean? It means that if you walked along that ray in
+Euclid’s orchard, you would run into trees more frequently than other rays. In
+other words, those rays represent directions whose slopes are rational with
+small denominators.</p>
+<p>Hmm… rational with small denominators… where have I blogged about that
+before…? Right — around four years ago, when we
+<a href="a-balance-of-powers.html">showed</a> that 2^12864326 begins with the digits
+“10000000…” (and other number-theoretic shenanigans).  I wasn’t kidding,
+rational approximation really is one of my favorite topics!</p>
+<p>At the time I showed you this picture with little explanation.</p>
+<p><img src="static/ford-circle.png" alt="Ford circle"></p>
+<p>Here is a little more explanation of its significance: as you start filling in
+circles to some level, you generate a sequence of fractions called the <a href="https://en.wikipedia.org/wiki/Farey_sequence">“Farey
+sequence”</a> by listing the points
+of tangency of the circle and the X axis. The Farey sequence is the list of
+completely reduced fractions whose denominators are smaller than some bound.
+Putting those two facts together: the points of tangency of the circles
+represent points that are “rational with small denominators” — exactly what
+we thought our I-9 orchard’s “vanishing points” were!</p>
+<p>Looking back at the image, this is somewhat believable. We see a couple of
+“strong” vanishing points, and then “weaker” vanishing points in between the
+strong ones, and then <em>even</em> “weaker” vanishing points between the strong and
+the weak vanishing points, and so on.</p>
+<p>There are a number of cool implications of this. For example, the “least
+patterned” regions of the horizon would correspond to regions that are “hard to
+rationally approximate”; so, you’d expect them at plus-or-minus the golden
+ratio’s slope from your line of sight.</p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+<!--
+            <section>
+                <center>(<a id="comment-toggle" href="#comment-toggle">Click to load comments&hellip;</a>)</center>
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = 'comfortablynumbered';
+                    var disqus_identifier = 'orchard.md';
+
+                    window.addEventListener(
+                        'load',
+                        (function() {
+                            document.getElementById('comment-toggle').addEventListener('click',
+                                (function() {
+                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                }),
+                            true);
+                        }),
+                        true
+                    );
+                </script>
+            </section>
+-->
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="http://github.com/Hardmath123">
+                        <span class="octicon octicon-mark-github"></span>
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        <span class="octicon octicon-rss"></span>
+                        Subscribe (RSS)</a></li>
+                    <li><a href="https://github.com/Hardmath123/hardmath123.github.io/issues/new?title=Hi&body=How's%20it%20going%3F">
+                        <span class="octicon octicon-comment-discussion"></span>
+                        Feedback</a></li>
+                    <li><a href="mailto:contact-at-comfortablynumbered-dot-appspotmail-dot-com">
+                        <span class="octicon octicon-mail-read"></span>
+                        Email me</a></li>
+                    <li><a href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        <span class="octicon octicon-law"></span>
+                        CC BY-NC 3.0</a></li>
+                    <li><a href="appreciation.html">
+                        <span class="octicon octicon-beer"></span>
+                        Other</a></li>
+                </ul>
+            </div>
+
+            <!--
+            <span class="sc">ComfortablyNumbered</span> &middot; Hardmath123 (2013) &middot; <a href="feed.xml">RSS Feed</a>
+            &nbsp;&middot;&nbsp;
+            <a href="/appreciation.html">
+                <span class="octicon octicon-beer"></span></a>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                <img
+                    alt="Creative Commons License"
+                    src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png"/>
+            </a>
+            -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
