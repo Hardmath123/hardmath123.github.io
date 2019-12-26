@@ -622,6 +622,14 @@
             "file": "orchard.md",
             "date": "9/10/19",
             "markdown": true
+        },
+        {
+            "title": "Dendrological Dexterity",
+            "author": "Hardmath123",
+            "description": "Thoughts on the chirality of the wood grain in eucalyptus trees",
+            "file": "eucalyptus.md",
+            "date": "12/25/19",
+            "markdown": true
         }
     ]
 }

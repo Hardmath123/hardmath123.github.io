@@ -10,10 +10,106 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 13 Sep 2019 14:36:52 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 26 Dec 2019 06:02:07 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Dendrological Dexterity]]></title>
+            <description><![CDATA[<p>Thoughts on the chirality of the wood grain in eucalyptus trees</p>
+
+
+<p>It’s Christmastime, shall we talk about trees?</p>
+<p>I was reading about Knuth’s <a href="https://www-cs-faculty.stanford.edu/~knuth/fant.html">Fantasia
+Apocalypta</a>, and his
+description of the “style” he wrote it in contains the wonderfully Knuthian
+line “And of course a musical work on the Apocalypse should also contain
+calypso.” Naturally I had to look up whether or not this was a linguistic
+coincidence, and — in an odd turn of events, since these things usually tend
+to work out — it turns out that <em>apocalypse</em> and <em>calypso</em> are <em>not</em>
+etymologically related.  <em>Apocalypse</em> comes from the Greek root <em>kaluptein,</em>
+“to cover,” and so the <em>apocalypse</em> is the “uncovering” or “revelation” (the
+root <em>kel</em> is related to <em>hell</em>). The word <em>calypso</em> is of unknown origin, but
+from the West Indies (this is distinct from <em>Calypso,</em> the Greek mythological
+nymph, whose name is indeed related to “covered,” or “concealing”).</p>
+<p>I shared this with a good friend of mine and she immediately pointed out that
+we should check out the word <em>eucalyptus</em>. She was right: <em>eucalyptus</em> means
+“well-covered,” referring (not ironically to the bark as I originally thought
+but rather) to the calyx, which <a href="http://www.microscopy-uk.org.uk/mag/indexmag.html?http://www.microscopy-uk.org.uk/mag/artoct07/bj-eucalyptus.html">forms a lid over flowers when in
+bud</a>.</p>
+<p>That got me thinking about eucalyptuses…</p>
+<hr>
+<p>Lately I’ve spent a lot of time around the eucalyptuses in <a href="https://trees.stanford.edu/ENCYC/EUCnotes.htm">Toyon and Arboretum
+Groves</a> at Stanford and I’ve
+noticed that the peeling bark of what I’m 80% sure is the <a href="https://trees.stanford.edu/ENCYC/EUCglo.htm"><em>Eucalyptus
+globulus</em></a> (Tasmanian Blue Gum)
+seems to climb up the tree in a whirling, helical pattern. I didn’t have the
+presence of mind to take a picture at the time but here’s a picture <a href="https://commons.wikimedia.org/wiki/Eucalyptus_globulus#/media/File:Starr_031002-0027_Eucalyptus_globulus.jpg">from
+Wikimedia
+Commons</a>
+taken in Maui.</p>
+<p><img src="static/eucalyptus-grove.jpg" alt="lots of whooshing eucalyptuses"></p>
+<p>Really it’s just beautiful to me, the whorl reaching aspirationally towards the
+sky. I’m reminded of Correggio’s <em>Ganymede Abducted by the Eagle</em>, the way the
+dog and the tree stump look up together, moving, turning even while frozen in
+the painting.</p>
+<p><img src="static/correggio.jpg" alt="correggio&#39;s abduction of ganymede"></p>
+<p>This much would be believable, just another quirk of nature. But here’s the
+truly odd thing: most of the trees seem to grow according to a thumbs-up
+right-hand rule; if you were to try and screw them into the ground you would
+turn them righty-tighty. <em>So eucalyptuses have some kind of chirality?</em> I
+rubbed my eyes, I thought I was dreaming.</p>
+<p>But indeed, some hours of study later, I learned that the “spiral grain” is a
+real thing in the study of wood formation.</p>
+<hr>
+<p>In the Real World of economics spiral grain is considered a defect because it
+reduces the structural quality of wood. But let us set that aside for a moment
+and marvel at the phenomenon itself. I turn to Dr. John Maddern Harris’
+wonderfully comprehensive 1989 text <em>Spiral Grain and Wave Phenomena in Wood
+Formation</em> (thanks Chandler for finding me a copy!) for details. Harris, citing
+confusion about the convention in prior work, carefully defines LH (left-handed
+“sinistral”) and RH (right-handed “dextral”) spirals (I wonder if he was aware
+of the right-hand-rule convention from E&amp;M, which would simplify matters here).
+Perhaps more entertainingly Harris introduces the German words as well:</p>
+<blockquote>
+<p>Numerous other expressions have been used to describe spiral direction,
+reflecting no doubt the notorious difficulty of so doing without waving of
+arms and twisting of wrists. In the German literature the terms “sonnig” and
+“wider- sonnig” are frequently encountered. Their meaning is “with the sun”
+and “against the sun”, and hence (in the Northern Hemisphere!) they relate to
+LH and RH spiral grain respectively.</p>
+</blockquote>
+<p>Here’s a picture of a eucalyptus from Harris’ book.</p>
+<p><img src="static/eucalyptus-spiral.png" alt="spiral-grained eucalyptus"></p>
+<p>Certain species do indeed show predilections for certain handednesses.
+Furthermore, certain species <em>change</em> handedness over the course of their
+lives. In Harald Säll 2002 doctoral thesis <a href="https://www.diva-portal.org/smash/get/diva2:206846/FULLTEXT01.pdf">Spiral Grain in Norway
+Spruce</a> I
+learned the remarkable fact that the Norway Spruce begins life as a left-handed
+spiral grain, but over the decades transitions to a right-handed spiral grain.
+The drawing below is from his thesis:</p>
+<p><img src="static/spruce-spiral.png" alt="spiral grain reversal in spruce trees"></p>
+<p><a href="https://www.conifers.org/topics/spiral_grain.php">We don’t fully understand why trees
+spiral</a>, much less how they
+pick a direction. The most fanciful explanation I’ve come across — the one I
+would like to believe — is that there is some kind of Coriolis effect at
+work. But I will admit that both handednesses have been observed in both
+hemispheres, which weakens that theory.</p>
+<p>At the moment I’m on a quest to find a (translated, ideally) copy of Meyer’s
+1949 article <em>Sprachliche und literarische Bemerkungen zum Problem “Drehwuchs”</em>
+published in <em>Mitt Schweiz Centralanst Forst Veruschswes</em> (26:331-347) to learn
+more about the linguistic history of chirality in relation to spiral grains.
+Until then…</p>
+<p><strong>Open question:</strong> What’s going on here, why are eucalyptuses right-handed?</p>
+<p><strong>Further reading:</strong> Noah Rosenberg’s
+<a href="https://xtrees.sites.stanford.edu/tree-gallery">Xtrees</a> site about Stanford
+trees — I found this while reading about eucalyptuses!</p>
+]]></description>
+            <link>http://hardmath123.github.io/eucalyptus.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/eucalyptus.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Wed, 25 Dec 2019 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Dancing Orchards on the I-5]]></title>
             <description><![CDATA[<p>Investigating number-theoretic patterns in large grids of trees</p>
@@ -1004,216 +1100,6 @@ Maths</a>.</p>
             <guid isPermaLink="true">http://hardmath123.github.io/ladders.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Mon, 20 Nov 2017 08:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[Carnival of Mathematics 148]]></title>
-            <description><![CDATA[<p>I had so much fun the first time, I volunteered to host it again!</p>
-
-
-<blockquote>
-<p>Welcome to this month’s edition of the <a href="http://aperiodical.com/carnival-of-mathematics/">Aperiodical Carnival of
-Mathematics</a>! The Carnival
-is a monthly roundup of exciting mathematical blog posts. Last month, it was
-hosted by Lucy at <a href="http://www.cambridgemaths.org/news/view/carnival-of-maths-147/">Cambridge
-Maths</a>. This
-month, it is my honor to host it here at Comfortably Numbered. But first: a
-story…</p>
-</blockquote>
-<hr>
-<p>A long time ago, there lived a great and powerful king. His kingdom was rich
-and his subjects content; ambassadors from afar would often come to his palace
-gates to offer presents from their distant homes. One day, such a traveler
-approached the king and challenged him to a game of chess. The king, always
-welcoming to his guests, accepted the challenge. He sent a minister to fetch a
-chessboard and pieces for the game. Soon, they were playing an intense game;
-the court watched in a hushed silence as the great king and the foreign
-traveler concentrated on the board. At last, the king won.</p>
-<p>Now, this particular traveler was quite an arrogant young man. Outraged that
-anyone could defeat him, he rose and smashed the chessboard with his fist. The
-carved wood shattered into a number of pieces, splitting at the delicate joints
-between the black and white squares. The pieces clattered noisily on the marble
-floor.</p>
-<p>Normally, such behavior would be punishable by death. But this king was a
-merciful king: he understood the insecurities of youth, and he believed in the
-healing powers of recreational math. So, he decided to give the traveler a
-second chance. He said,</p>
-<p>“Young man, do you notice anything about the shattered pieces of the
-chessboard?”</p>
-<p>The traveler, embarrassed, paused before answering,</p>
-<p>“Your majesty, each piece seems to be a perfect square: there are three 4-by-4
-squares, twelve 1-by-1 squares, and one 2-by-2 square.”</p>
-<p>“Very good,” replies the king, “very good indeed. Now, if you can tell me <em>how
-many ways there are</em> to break a chessboard into (indistinguishable) square
-pieces, I shall spare your life.”</p>
-<p>The next day, the traveler returned to the palace, escorted by guards. Standing
-before the throne, he handed the king a card upon which was written his answer:
-148, which coincidentally happens to be this month’s Aperiodical Carnival of
-Mathematics!</p>
-<hr>
-<p>Ayliean MacDonald <a href="https://www.youtube.com/watch?v=sjO6XhXijDQ">entrances us</a>
-by drawing a giant dragon curve! She says there was a bit of a <em>learning curve</em>
-involved, but fortunately for us, her video is a magnificent timelapse.</p>
-<blockquote>
-<p>I love dragon curves, so I drew a gigantic one. I regretted starting it
-almost immediately. Let’s just say this was my first attempt and its a
-learning curve.</p>
-</blockquote>
-<p>Rachel Traylor
-<a href="http://www.themathcitadel.com/2017/06/21/the-rigor-of-fuzzy-sets/">extends</a>
-sets to “fuzzy” sets, which are just like normal sets, but, well, fuzzy!</p>
-<blockquote>
-<p>What if we relax the requirement that you either be in or out? Here or there?
-Yes or no? What if I allow “shades of grey” to use a colloquialism? Then we
-extend classical sets to fuzzy sets.</p>
-</blockquote>
-<p>Dr. Nira Chamberlain
-<a href="http://nirachamberlain.com/mathematical-modelling-unlimited/">explains</a> how
-important mathematical modeling is, and in particular, uses an extension of the
-gambler’s ruin problem to show how a model’s assumptions and limitations are
-related.</p>
-<blockquote>
-<p>To me, mathematical modelling is about looking into the real world;
-translating it into mathematics, solving that mathematics and then applying
-that solution back into the real world.</p>
-</blockquote>
-<p>Edmund Harriss
-<a href="https://maxwelldemon.com/2017/07/18/functional-drawing-at-c/">exploits</a> Desmos
-to draw some fantastic images.</p>
-<blockquote>
-<p>One of my courses was to use Desmos to help develop thinking on functions and
-start to get to some of the ideas of calculus (without the need for the
-algebra). Here are the example calculators that I set up for the course.</p>
-</blockquote>
-<p>David H. Bailey
-<a href="http://mathscholar.org/pi-and-the-collapse-of-peer-review">examines</a> a
-surprisingly large collection of published papers that assert (incorrect!)
-values of pi.</p>
-<blockquote>
-<p>Aren’t we glad we live in the 21st century, with iPhones, Teslas, CRISPR
-gene-editing technology, and supercomputers that can analyze the most complex
-physical, biological and environmental phenomena? and where our extensive
-international system of peer-reviewed journals produces an ever-growing body
-of reliable scientific knowledge? Surely incidents such as the Indiana pi
-episode are well behind us?</p>
-</blockquote>
-<p>Jeremy Kun
-<a href="https://jeremykun.com/2017/07/24/boolean-logic-in-quadratic-polynomials/">embeds</a>
-Boolean logic in polynomials, thus revealing why finding the roots of
-multivariate polynomials is NP-hard.</p>
-<blockquote>
-<p>This trick is used all over CS theory to embed boolean logic within
-polynomials, and it makes the name “boolean algebra” obvious, because it’s
-just a subset of normal algebra.</p>
-</blockquote>
-<p>Ben Orlin
-<a href="https://mathwithbaddrawings.com/2017/07/26/never-buy-two-lottery-tickets/">evaluates</a>
-whether or not you should ever buy <em>two</em> lottery tickets.</p>
-<blockquote>
-<p>Gambling advice from mathematicians is usually pretty simple. In fact, it’s
-rarely longer than one word: Don’t! My advice is gentler…</p>
-</blockquote>
-<p>Jimmy Soni and Rob Goodman
-<a href="https://blogs.scientificamerican.com/voices/betty-shannon-unsung-mathematical-genius/">emphasize</a>
-that Claude Shannon’s wife Betty Shannon was a brilliant mathematician herself,
-and in fact instrumental in many of his successes.</p>
-<blockquote>
-<p>Shannon valued the help. Though his ideas were very much his own, Betty
-turned them into publishable work. Shannon was prone to thinking in leaps—to
-solving problems in his mind before addressing all the intermediary steps on
-paper. Like many an intuitive mind before him, he loathed showing his work.
-So Betty filled in the gaps.</p>
-</blockquote>
-<p>Peter Cameron <a href="https://cameroncounts.wordpress.com/2017/07/25/all-kinds-of-mathematics-1/">elaborates
-on</a>
-the conference held in honor of his 70th birthday, in Lisbon.</p>
-<blockquote>
-<p>There is far too much, and far too diverse, mathematics going on here for me
-to describe all or even most of it. Nine plenary lectures on the first day!
-… I didn’t mention the film that the organisers have made about me (based
-mostly on old photographs). I am really not used to being in the spotlight to
-this extent!</p>
-</blockquote>
-<p>Patrick Honner <a href="http://mrhonner.com/archives/17698">elucidates</a> an erroneous
-exam question, and along the way tells us the story of a 16-year-old student
-who exposed the error and started a Change.org petition in response.</p>
-<blockquote>
-<p>So, this high-stakes exam question has no correct answer. And despite the
-Change.org petition started by a 16-year-old student that made national news,
-the New York State Education Department refuses to issue a correction.</p>
-</blockquote>
-<p>Danesh Forouhari
-<a href="https://twitter.com/dforouhari/status/828341250164088833">extracts</a> a
-fantastic math problem from properties of the factorization of 2016.</p>
-<blockquote>
-<p>As we were approaching end of 2016, I was wondering if I could come up with a
-math puzzle which ties up 2016 &amp; 2017, hence this puzzle.</p>
-</blockquote>
-<p>Rachael Horsman
-<a href="http://www.cambridgemaths.org/news/view/learning-to-measure-pacing-off/">extrapolates</a>
-a lesson about measuring to explain the entire number line!</p>
-<blockquote>
-<p>As we write the framework, activities such as pacing off form critical
-junctions between various areas in mathematics … Making these explicit to
-teachers and pupils helps cultivate their understanding of the connections
-that make up mathematics.</p>
-</blockquote>
-<p>Vijay Kathotia <a href="http://www.cambridgemaths.org/news/view/what-is-the-roman-numeral-for-ten/">enlightens
-us</a>
-by revealing where the roman numeral for “10” might have come from.</p>
-<blockquote>
-<p>What is the Roman numeral for ten? If you answered ‘the letter X’, it may not
-be quite right. It may well be what you write – but do you know why? There
-are at least two stories for explaining how X came to represent ten.</p>
-</blockquote>
-<p>Lucy Rycroft-Smith
-<a href="http://www.cambridgemaths.org/news/view/intersections-mathematics-and-the-artist/">engages</a>
-UK-based artist MJ Forster in an interview about how math influences his art.</p>
-<blockquote>
-<p>His latest series of paintings seem inherently mathematical; but just how
-explicit is the mathematics in his art, and how does he feel about the
-subject?</p>
-</blockquote>
-<p>Brian Hayes <a href="http://bit-player.org/2017/approximately-yours">estimates</a> pi
-using rational numbers and an HP-41C calculator!</p>
-<blockquote>
-<p>Today, I’m told, is Rational Approximation Day. It’s 22/7 (for those who
-write dates in little-endian format), which differs from pi by about 0.04
-percent. (The big-endians among us are welcome to approximate 1/pi.)</p>
-</blockquote>
-<hr>
-<p>Finally, the world <strong>expresses its sorrow:</strong> Fields medalist Maryam Mirzakhani
-<a href="http://news.stanford.edu/2017/07/15/maryam-mirzakhani-stanford-mathematician-and-fields-medal-winner-dies/">passed away this
-July</a>
-after a long battle with cancer. In keeping with the Carnival’s tradition, I
-offer you two blog posts from the mathematical community.</p>
-<p><a href="https://rjlipton.wordpress.com/2017/07/28/maryam-mirzakhani-1977-2017/">Ken
-Regan:</a>
-on the significance and brilliance of her work</p>
-<blockquote>
-<p>She made several breakthroughs in the geometric understanding of dynamical
-systems. Who knows what other great results she would have found if she had
-lived: we will never know. Besides her research she also was the first woman
-and the first Iranian to win the Fields Medal.</p>
-</blockquote>
-<p><a href="https://terrytao.wordpress.com/2017/07/15/maryam-mirzakhani/">Terence Tao:</a> a
-more personal perspective</p>
-<blockquote>
-<p>Maryam was an amazing mathematician and also a wonderful and humble human
-being, who was at the peak of her powers. Today was a huge loss for Maryam’s
-family and friends, as well as for mathematics.</p>
-</blockquote>
-<p>If you would like to learn more about her life and work, I encourage you to
-read some of the articles and watch the video on <a href="http://www.ams.org/profession/mirzakhani">the AMS’ tribute to Maryam
-Mirzakhani</a>.</p>
-<hr>
-<p>This concludes the 148th edition of the Carnival of Mathematics. Please do join
-us next time, when Mel from <a href="http://justmaths.co.uk/blog/">Just Maths</a> hosts
-the 149th!</p>
-]]></description>
-            <link>http://hardmath123.github.io/carnival-of-mathematics-148.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/carnival-of-mathematics-148.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 31 Jul 2017 07:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
