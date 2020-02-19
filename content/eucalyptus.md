@@ -102,3 +102,26 @@ Until then...
 **Further reading:** Noah Rosenberg's
 [Xtrees](https://xtrees.sites.stanford.edu/tree-gallery) site about Stanford
 trees --- I found this while reading about eucalyptuses!
+
+Edited to add (2/19/2020):
+
+> "DNA normally forms a right-handed spiral (although a rare left-handed
+> variant can occur). In other words, it twists like a conventional screw.
+> That, though, has not stopped it being reproduced wrongly in hundreds of
+> places. Dr. Tom Schneider has a website where he has collected hundreds of
+> examples of incorrectly drawn 'left-handed DNA', most being found in
+> scientific journals. Many are in advertisements, so we may perhaps charitably
+> suggest the final copy was never seen by a scientist, but that doesn't quite
+> explain them all. Certainly not the editorial comment in Nature, the place
+> where DNA's structure was first described, which in 2000 mentioned the clues
+> that 'led Watson and Crick to deduce the left-handed double helical structure
+> of DNA.' Watson, in fact, has been particularly badly served, his 1978
+> textbook, Molecular Biology of the Gene, having six different illustrations
+> with left-handed DNA, and in 1990 the American journal Science quoting Watson
+> as saying, 'I have to read SCIENCE every week,' this being illustrated with
+> left-handed DNA. Perhaps worst of all, a 1998 reprint of Watson's The Double
+> Helix was illustrated on the front and back with left-handed DNA. Perhaps it
+> is not a coincidence that Watson is left-handed."
+> 
+> --- Chris McManus, in Right Hand, Left Hand: The Origins of Asymmetry in
+> Brains, Bodies, Atoms and Cultures. 2002.
