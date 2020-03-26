@@ -630,6 +630,14 @@
             "file": "eucalyptus.md",
             "date": "12/25/19",
             "markdown": true
+        },
+        {
+            "title": "Spaghetti's Shadows are Spirali-Shaped",
+            "author": "Hardmath123",
+            "description": "Reasoning about the PCA projections of trajectories in high-dimensional spaces",
+            "file": "spaghetti-shadows.md",
+            "date": "3/26/20",
+            "markdown": true
         }
     ]
 }

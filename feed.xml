@@ -10,10 +10,138 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 19 Feb 2020 19:10:23 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 26 Mar 2020 20:40:43 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Spaghetti's Shadows are Spirali-Shaped]]></title>
+            <description><![CDATA[<p>Reasoning about the PCA projections of trajectories in high-dimensional spaces</p>
+
+
+<p>Suppose you took a walk in a high-dimensional vector space, leaving behind
+breadcrumbs. If you wanted to visualize your route, you might consider
+projecting the breadcrumbs down to a lower-dimensional space.</p>
+<p>One way to do this is to project the breadcrumbs onto three randomly-chosen
+vectors. Then you might get something like this.</p>
+<p><img src="static/spaghetti-shadows/spaghetti.png" alt="spaghetti"></p>
+<p>But perhaps a better way to choose the projection is to do PCA on the
+breadcrumbs as if they were any other point cloud. If you do this, you will
+find that your walk was extremely loopy and spirally. Here’s an example of the
+same trajectory, projected down to 3D with PCA (this data is taken from my
+research work, but even a random walk will show the phenomena I discuss in this
+post).</p>
+<p><img src="static/spaghetti-shadows/loopy.png" alt="loops"></p>
+<p>Looking at this, you might be concerned that you are walking in circles.</p>
+<p>This, for example, was the situation with a <a href="https://icmlviz.github.io/icmlviz2016/assets/papers/24.pdf">2016 ICML
+paper</a>,
+“Visualizing Deep Network Training Trajectories,” that tried to visualize the
+trajectory of neural network parameters over the course of training by doing
+exactly what I described: PCA on “breadcrumb” snapshots of the parameters. The
+author found some strange, hard-to-explain oscillatory behavior; even Lissajous
+curves.</p>
+<p><img src="static/spaghetti-shadows/nn.png" alt="loops with NNs"></p>
+<p>A similar thing, by the way, happened with a 1994 text on genetics, “The
+History and Geography of Human Genes” by Cavalli-Sforza et al, which applied
+PCA to genetic data and found periodic effects.</p>
+<p>It turns out however that there’s something deeper going on here, something
+independent of the individual datasets: these loopy patterns seem to be “just
+what happens” when you do PCA on such data. A <a href="https://arxiv.org/pdf/1806.08805.pdf">2018 NeurIPS
+paper</a>, “PCA of high dimensional random
+walks with comparison to neural network training” by Antognini and
+Sohl-Dickstein, explains what’s going on with the neural networks. A <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3989108/">2008
+paper</a>, “Interpreting
+principal component analyses of spatial population genetic variation” by
+Novembre and Stephens, explains what’s going on with genetics.</p>
+<p>Here’s my understanding of the story, reconstructed in part from <a href="https://math.stackexchange.com/questions/1391701/principal-component-analysis-pca-results-in-sinusoids-what-is-the-underlying/1392332">this Stack
+Exchange
+answer</a>.</p>
+<p>Recall how PCA works: it tries to come up with orthogonal axes that eat up as
+much of the variance of the data as possible. One way to think about this is
+that it tries to come up with a rotation (“orthogonal transformation”) of the
+data that de-correlates the variance over each axis. In other words, it finds a
+way to diagonalize the covariance matrix of the dataset.</p>
+<p>Okay, in symbols: if ($ X $) is the matrix whose rows are data points and
+columns are fields, and if your data is “centered” at the origin, then ($ X^TX
+$) is the covariance matrix whose entries give the covariance between pairs of
+fields. If ($ E $) is the transformation, then the goal is to select ($ E $)
+such that ($ (XE)^T(XE) = E^T(X^TX)E $) is a diagonal matrix; that is, ($ E $)
+diagonalizes ($ X^TX $). Having done that, our projected path will be the
+(first few columns of) the matrix ($ XE $).</p>
+<p>It turns out that ($ XE $) diagonalizes ($ X X^T $). You can see that by just
+writing it out: ($ (XE)^T XX^T (XE) = E^T (X^TX)^2 E $). Of course an
+eigenvalue of ($ A $) is also an eigenvalue of ($ A^2 $) and therefore ($ E $)
+diagonalizes ($ (X^TX)^2 $) as desired. So, it suffices to study the
+eigenvalues of ($ XX^T $) to learn what the projected path will look like.</p>
+<p>Now let’s look carefully at ($ X X^T$), which is the “covariance” for each step
+rather than for each field. The claim is that this matrix is more-or-less
+<em>Toeplitz</em>, which means each row is the previous row but shifted by one spot to
+the right. The reason for this is that adjacent data points are spatially
+nearby and should have similar correlations. One way to think about this is
+that the covariances are just dot-products of pairs of points, and the dot
+product of points 1 and 2 should be about the same as the dot product of points
+2 and 3 if your steps are approximately evenly-spaced.</p>
+<p>Indeed this seems to be the case for the loopy path I showed above:</p>
+<p><img src="static/spaghetti-shadows/toeplitz.png" alt="Toeplitz matrix"></p>
+<p>If the matrix is truly approximately <em>Toeplitz</em>, then multiplying by it is a
+convolution by the first row (just look at its structure!). But as we were all
+taught in signal-processing class, convolution is the same as pointwise
+multiplication in the Fourier domain. Okay, so what are the “eigenvectors” of
+pointwise multiplication?  One-hot vectors, of course! (Unless your convolution
+happens to have two frequencies with exactly the same amplitude, in which case
+you can get some mixing.) Finally, taking the inverse Fourier transform of
+these one-hot vectors, we recover sinusoidal eigenvectors. Here’s a plot of the
+top 3 eigenvectors for my running example:</p>
+<p><img src="static/spaghetti-shadows/eig.png" alt="eigenvectors"></p>
+<p>To recap: beware of periodic structures in PCA projections! PCA on
+high-dimensional trajectories gives loopy projections because their covariance
+matrices tend to be Toeplitz, yielding sinusoidal eigenvectors. Or,
+high-dimensional spaghetti casts spirali-shaped shadows!</p>
+<hr>
+<p>Here’s a bit of Python code to explore this phenomenon further on a random
+walk of 200 steps in 1024-dimensional space.</p>
+<pre><code>import numpy as np
+from matplotlib import pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# build a path and center it
+position = np.zeros(1024)
+X = []
+for i in range(200):
+    position = position + np.random.randn(1024)
+    X.append(position)
+X = np.array(X)
+scaler = StandardScaler(copy=False)
+scaler.fit(X)
+X = scaler.transform(X)
+
+# plot the PCA projection on some components
+p = PCA(n_components=5)
+p.fit(X)
+fig = plt.figure()
+ax = fig.add_subplot(111, projection=&#39;3d&#39;)
+ax.plot(
+    p.transform(X)[:, 0],
+    p.transform(X)[:, 3],
+    p.transform(X)[:, 4]
+)
+
+# plot the Toeplitz matrix
+plt.figure()
+plt.imshow(np.dot(X, X.transpose()))
+
+# plot the eigenvalues of the Toeplitz matrix
+plt.figure()
+plt.plot(np.linalg.eig(np.cov(X))[1][:, :4])
+</code></pre>]]></description>
+            <link>http://hardmath123.github.io/spaghetti-shadows.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/spaghetti-shadows.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Thu, 26 Mar 2020 07:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Dendrological Dexterity]]></title>
             <description><![CDATA[<p>Thoughts on the chirality of the wood grain in eucalyptus trees</p>
@@ -388,6 +516,10 @@ img:hover {
 <p><img src="static/ambigrams/blues-skate.png" alt="BLUES, SKATE"></p>
 <h2 id="dream-world">DREAM, WORLD</h2>
 <p><img src="static/ambigrams/dream-world.png" alt="DREAM, WORLD"></p>
+<hr>
+<p>Update (3/26/20): Alex Pietrow created <a href="https://makeambigrams.com/ambigram-generator/">a
+website</a> that lets you use this
+font to build your own ambigrams (along with more ambigram fun).</p>
 ]]></description>
             <link>http://hardmath123.github.io/ambigrams.html</link>
             <guid isPermaLink="true">http://hardmath123.github.io/ambigrams.html</guid>
@@ -975,153 +1107,6 @@ Carnival of Mathematics!</p>
             <guid isPermaLink="true">http://hardmath123.github.io/carnival-of-mathematics-159.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Fri, 06 Jul 2018 07:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[Ladders Go Both Ways]]></title>
-            <description><![CDATA[<p>A guest post for White Group Mathematics</p>
-
-
-<p>Earlier this month, Frederick Koh, a Singaporean math tutor, invited me to
-write a guest post for his <a href="http://www.whitegroupmaths.com">website</a>. Of course
-I accepted — blogging is, after all, a conversation.</p>
-<p>But what could I write about?</p>
-<p>I spent the month of November on the lookout for an idea worth sharing, and
-last week I found one. I follow a lot of math-educator blogs (blogging is,
-after all, a conversation!), and one of my favorites is that of Dan Meyers.
-Recently, Dan posted a rather provocatively-titled piece, “<a href="http://blog.mrmeyer.com/2017/dismantling-the-privilege-of-the-mathematical-1/">Dismantling the
-Privilege of the Mathematical
-1%</a>“.
-He makes the case that those with a mathematical education — those who are
-mathematically <em>privileged</em> — those who make up the mathematical 1% — they
-are the ones with the responsibility to define what mathematics <em>is</em>. Dan says,
-eloquently as always, that “through our action or inaction we create systems
-that preserve our status as the knowers and doers of mathematics.”</p>
-<p>Dan’s post made me think deeply about where I myself fit into his spectrum: I’m
-hardly one of the 1% — and certainly won’t graduate with a math degree —
-but at the same time, I love math, both as an activity and as a set of truths.</p>
-<p>And I realized that this gives <em>me</em> a privileged position, one where I can
-comment on mathematical topics from a somewhat neutral perspective. I am
-neither the person who barely scraped through high school calculus, nor the
-person who skipped high school calculus because it was too easy. So, trapped
-between “math people” and “not a math person people”, I wish to use this post
-to explore what exactly creates this divide — or, rather, explore it in a way
-slightly different from what you have probably heard a dozen times already.</p>
-<hr>
-<p>It is almost universally acknowledged that “education is good.” More education,
-says society, will lead to a happier, more prosperous world. Educate everyone,
-says society.</p>
-<p>I agree, of course.</p>
-<p>And yet, paradoxically, we are so attached to the notion that education —
-college, in my case, grad school or high school for others — is a means to
-distinguish oneself from one’s peers. A degree, we argue, makes us stand out in
-both the workplace and in society. The more competitive the institution, the
-more valuable the degree.</p>
-<p>Less enthusiastically, I agree with this as well: reality forces me to concede
-the point. Why else would college admissions be so competitive? Why else would
-classes be graded on curves? Why else would we even have grades in the first
-place? As disturbed as I am by it, society cares very much about my academic
-performance, <em>especially</em> in relation to others.</p>
-<p>And therein lies the rub. Reader, are these not contradictory notions? If the
-purpose of an education for an individual is to separate him or her from the
-general populace, then what follows is the absurd notion that universal
-education is self-defeating: that the more people we educate, the less an
-education is worth to the individual.</p>
-<p>How does one reconcile this? Can education in the limit benefit both the
-individual and the society? As an optimist, I wish it could. And in fact I
-believe it <em>can</em>, but only if we rethink what education means to the
-individual.</p>
-<hr>
-<p>Here is what I think. I believe that too often, we conceive education to be a
-ladder that lifts us — above others, if we’re fast enough — rung by rung.
-The more you climb, the higher you get.</p>
-<p>But too often, we forget that you can also climb <em>down</em> a ladder. That an
-education can also lower the arrogant to humility and place them alongside the
-less privileged, on common ground. That education builds capacity for empathy
-and communication, empowering the individual but also society at large to have
-a dialogue. That this view resolves the paradox of the previous section,
-because both individuals <em>and</em> society benefit from the capacity for having
-that dialogue.</p>
-<p>What do I mean by this? Let’s return to mathematics for a moment.</p>
-<p>If you are reading this blog, you most likely have been at a gathering of
-mathematicians at some point in your lives. It is quite a marvellous thing to
-behold: a congregation of brilliant minds sharing ideas. Mathematics as a
-community has its own folklore, its own in-jokes, and its own language. You
-need only to glance at sites like <a href="https://artofproblemsolving.com/community">The Art of Problem
-Solving</a> or
-<a href="http://www.mathmo.org/test/mathmotest.html">mathmo.org</a> to see this community
-in all its glory.</p>
-<p>I love it. There is charm to the way mathematicians celebrate their field,
-unlike any other profession I have come across.</p>
-<p>And yet, imagine being an outsider for a moment. Imagine being part of the
-mathematical 99%. How would you feel if someone responded to a question of
-yours with a grin, saying “left as an exercise to the reader”? Or if someone
-made you use this <a href="http://www.danielallington.net/2016/09/the-latex-fetish/">weird software
-package</a> with lots of
-backslashes to write up your homework? Or if someone went off on a tangent
-about why their coffee mug said “donut” on it? Or if someone makes an
-arithmetic mistake and then says “it’s true in base 12” before you even notice
-the error? Or if someone claimed a very unobvious-to-you solution was
-“trivial”?</p>
-<p>These phrases aren’t meant to be exclusionary. Some are common inside jokes.
-Others are part of the mathematical vocabulary. The word “trivial,” after all,
-has a very specific mathematical meaning — think of the “trivial group” with
-one element, for example. I
-<a href="https://www.google.com/search?client=safari&amp;rls=en&amp;q=trivial+site:hardmath123.github.io&amp;ie=UTF-8&amp;oe=UTF-8">use</a>
-it all the time.</p>
-<p>Yet to an outsider, they make the mathematical community seem simply
-impenetrable. How am I ever going to understand all this? I can’t think that
-fast!</p>
-<p>“Math people” tend to be remarkably self-selecting, and I believe this is one
-of the reasons why: there is a divide between the initiated and the
-uninitiated, and far too few resources for the latter.</p>
-<hr>
-<p>Education, I believe, should be tasked with <em>bridging</em> this divide — rather
-than exacerbating it as it does now. Education should give the 99% the
-opportunity to join the magical world of mathematics, but education should
-<em>also</em> show the 1% how to open up the world to new members. It should teach
-students to write about mathematics, finding a middle ground between dense
-manuscripts weighed down by Greek-letter jargon, and airy puff-pieces that
-contain nothing of substance. Where will future Ian Stewarts, Martin Gardners,
-and Brian Hayes come from? I myself would almost certainly be very firmly a
-“not a math person” person were it not for an Ian Stewart book in my dad’s
-bookshelf that taught me about Fermat’s Last Theorem and the Mandelbrot Set
-when I was very young.</p>
-<p>Education should also encourage the next generation of professors to move away
-from lessons that consist of the copying of lecture notes onto a chalkboard,
-and provide them with the tools they need to create engaging, interactive
-lessons that appeal not only to those whom we believe are pre-ordained to be
-mathematicians, but to artists, musicians, writers, and athletes. It should
-teach students about the bigger picture of where their mathematics fits into
-society, about who produces and who consumes mathematics, and why.</p>
-<p>At the same time, it should explain to the mathematical 99% what exactly those
-math people are on about all the time. It should teach them the mathematical
-canon, help them learn the language, and help them discover the beauty that the
-1% have already found.</p>
-<p>Yes, such an education will produce a more diverse generation of
-mathematicians, not only in terms of demographics, but also in terms of ways of
-thinking. It will produce a generation that writes not only more effective
-grant proposals, but also clearer papers. That’s what the individuals get out
-of it.</p>
-<p>But it will also inspire the mathematical community to rise up against the
-tyrrany of Alice-gives-Bob-three-bananas standardized tests, to use their
-passion for mathematics and their perception of its beauty to guide the
-development of curriculums and lesson plans. Not to reject non-math-people as
-heretics who refuse to see the light, but rather to see them as evidence of a
-broken education system that failed to convey the beauty of mathematics.</p>
-<p>To redefine mathematics to be the way <em>they</em> see it, because, whether or not
-they realize it, the way the mathematical 1% sees mathematics — as the
-pursuit of beautiful truth — is far from what the mathematical 99% sees it as
-— the painfully rushed manipulation of symbols on a midterm. To <em>care</em>.</p>
-<p>That’s what society gets out of it.</p>
-<blockquote>
-<p>This post first appeared on <a href="http://www.whitegroupmaths.com/2017/11/guest-post-ladders-go-both-ways.html">White Group
-Maths</a>.</p>
-</blockquote>
-]]></description>
-            <link>http://hardmath123.github.io/ladders.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/ladders.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 20 Nov 2017 08:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Spaghetti&#39;s Shadows are Spirali-Shaped - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <script src="static/cheet.js" charset="utf-8"></script>
+            <script src="static/main.js"></script>
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>Spaghetti&#39;s Shadows are Spirali-Shaped</h2>
+                <h4>Thursday, March 26, 2020 &middot; 4 min read</h4>
+<p>Suppose you took a walk in a high-dimensional vector space, leaving behind
+breadcrumbs. If you wanted to visualize your route, you might consider
+projecting the breadcrumbs down to a lower-dimensional space.</p>
+<p>One way to do this is to project the breadcrumbs onto three randomly-chosen
+vectors. Then you might get something like this.</p>
+<p><img src="static/spaghetti-shadows/spaghetti.png" alt="spaghetti"></p>
+<p>But perhaps a better way to choose the projection is to do PCA on the
+breadcrumbs as if they were any other point cloud. If you do this, you will
+find that your walk was extremely loopy and spirally. Here’s an example of the
+same trajectory, projected down to 3D with PCA (this data is taken from my
+research work, but even a random walk will show the phenomena I discuss in this
+post).</p>
+<p><img src="static/spaghetti-shadows/loopy.png" alt="loops"></p>
+<p>Looking at this, you might be concerned that you are walking in circles.</p>
+<p>This, for example, was the situation with a <a href="https://icmlviz.github.io/icmlviz2016/assets/papers/24.pdf">2016 ICML
+paper</a>,
+“Visualizing Deep Network Training Trajectories,” that tried to visualize the
+trajectory of neural network parameters over the course of training by doing
+exactly what I described: PCA on “breadcrumb” snapshots of the parameters. The
+author found some strange, hard-to-explain oscillatory behavior; even Lissajous
+curves.</p>
+<p><img src="static/spaghetti-shadows/nn.png" alt="loops with NNs"></p>
+<p>A similar thing, by the way, happened with a 1994 text on genetics, “The
+History and Geography of Human Genes” by Cavalli-Sforza et al, which applied
+PCA to genetic data and found periodic effects.</p>
+<p>It turns out however that there’s something deeper going on here, something
+independent of the individual datasets: these loopy patterns seem to be “just
+what happens” when you do PCA on such data. A <a href="https://arxiv.org/pdf/1806.08805.pdf">2018 NeurIPS
+paper</a>, “PCA of high dimensional random
+walks with comparison to neural network training” by Antognini and
+Sohl-Dickstein, explains what’s going on with the neural networks. A <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3989108/">2008
+paper</a>, “Interpreting
+principal component analyses of spatial population genetic variation” by
+Novembre and Stephens, explains what’s going on with genetics.</p>
+<p>Here’s my understanding of the story, reconstructed in part from <a href="https://math.stackexchange.com/questions/1391701/principal-component-analysis-pca-results-in-sinusoids-what-is-the-underlying/1392332">this Stack
+Exchange
+answer</a>.</p>
+<p>Recall how PCA works: it tries to come up with orthogonal axes that eat up as
+much of the variance of the data as possible. One way to think about this is
+that it tries to come up with a rotation (“orthogonal transformation”) of the
+data that de-correlates the variance over each axis. In other words, it finds a
+way to diagonalize the covariance matrix of the dataset.</p>
+<p>Okay, in symbols: if ($ X $) is the matrix whose rows are data points and
+columns are fields, and if your data is “centered” at the origin, then ($ X^TX
+$) is the covariance matrix whose entries give the covariance between pairs of
+fields. If ($ E $) is the transformation, then the goal is to select ($ E $)
+such that ($ (XE)^T(XE) = E^T(X^TX)E $) is a diagonal matrix; that is, ($ E $)
+diagonalizes ($ X^TX $). Having done that, our projected path will be the
+(first few columns of) the matrix ($ XE $).</p>
+<p>It turns out that ($ XE $) diagonalizes ($ X X^T $). You can see that by just
+writing it out: ($ (XE)^T XX^T (XE) = E^T (X^TX)^2 E $). Of course an
+eigenvalue of ($ A $) is also an eigenvalue of ($ A^2 $) and therefore ($ E $)
+diagonalizes ($ (X^TX)^2 $) as desired. So, it suffices to study the
+eigenvalues of ($ XX^T $) to learn what the projected path will look like.</p>
+<p>Now let’s look carefully at ($ X X^T$), which is the “covariance” for each step
+rather than for each field. The claim is that this matrix is more-or-less
+<em>Toeplitz</em>, which means each row is the previous row but shifted by one spot to
+the right. The reason for this is that adjacent data points are spatially
+nearby and should have similar correlations. One way to think about this is
+that the covariances are just dot-products of pairs of points, and the dot
+product of points 1 and 2 should be about the same as the dot product of points
+2 and 3 if your steps are approximately evenly-spaced.</p>
+<p>Indeed this seems to be the case for the loopy path I showed above:</p>
+<p><img src="static/spaghetti-shadows/toeplitz.png" alt="Toeplitz matrix"></p>
+<p>If the matrix is truly approximately <em>Toeplitz</em>, then multiplying by it is a
+convolution by the first row (just look at its structure!). But as we were all
+taught in signal-processing class, convolution is the same as pointwise
+multiplication in the Fourier domain. Okay, so what are the “eigenvectors” of
+pointwise multiplication?  One-hot vectors, of course! (Unless your convolution
+happens to have two frequencies with exactly the same amplitude, in which case
+you can get some mixing.) Finally, taking the inverse Fourier transform of
+these one-hot vectors, we recover sinusoidal eigenvectors. Here’s a plot of the
+top 3 eigenvectors for my running example:</p>
+<p><img src="static/spaghetti-shadows/eig.png" alt="eigenvectors"></p>
+<p>To recap: beware of periodic structures in PCA projections! PCA on
+high-dimensional trajectories gives loopy projections because their covariance
+matrices tend to be Toeplitz, yielding sinusoidal eigenvectors. Or,
+high-dimensional spaghetti casts spirali-shaped shadows!</p>
+<hr>
+<p>Here’s a bit of Python code to explore this phenomenon further on a random
+walk of 200 steps in 1024-dimensional space.</p>
+<pre><code>import numpy as np
+from matplotlib import pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# build a path and center it
+position = np.zeros(1024)
+X = []
+for i in range(200):
+    position = position + np.random.randn(1024)
+    X.append(position)
+X = np.array(X)
+scaler = StandardScaler(copy=False)
+scaler.fit(X)
+X = scaler.transform(X)
+
+# plot the PCA projection on some components
+p = PCA(n_components=5)
+p.fit(X)
+fig = plt.figure()
+ax = fig.add_subplot(111, projection=&#39;3d&#39;)
+ax.plot(
+    p.transform(X)[:, 0],
+    p.transform(X)[:, 3],
+    p.transform(X)[:, 4]
+)
+
+# plot the Toeplitz matrix
+plt.figure()
+plt.imshow(np.dot(X, X.transpose()))
+
+# plot the eigenvalues of the Toeplitz matrix
+plt.figure()
+plt.plot(np.linalg.eig(np.cov(X))[1][:, :4])
+</code></pre>
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="http://github.com/Hardmath123">
+                        <span class="octicon octicon-mark-github"></span>
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        <span class="octicon octicon-rss"></span>
+                        Subscribe (RSS)</a></li>
+                    <li><a href="https://github.com/Hardmath123/hardmath123.github.io/issues/new?title=Hi&body=How's%20it%20going%3F">
+                        <span class="octicon octicon-comment-discussion"></span>
+                        Feedback</a></li>
+                    <li><a href="mailto:contact-at-comfortablynumbered-dot-appspotmail-dot-com">
+                        <span class="octicon octicon-mail-read"></span>
+                        Email me</a></li>
+                    <li><a href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        <span class="octicon octicon-law"></span>
+                        CC BY-NC 3.0</a></li>
+                    <li><a href="appreciation.html">
+                        <span class="octicon octicon-beer"></span>
+                        Other</a></li>
+                </ul>
+            </div>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
