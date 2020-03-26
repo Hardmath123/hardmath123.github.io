@@ -92,3 +92,9 @@ img:hover {
 ## DREAM, WORLD
 
 ![DREAM, WORLD](static/ambigrams/dream-world.png)
+
+---
+
+Update (3/26/20): Alex Pietrow created [a
+website](https://makeambigrams.com/ambigram-generator/) that lets you use this
+font to build your own ambigrams (along with more ambigram fun).
