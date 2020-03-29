@@ -9,7 +9,8 @@
         "header": "header.html",
         "footer": "footer.html",
         "postpage": "post.html",
-        "home": "home.html"
+        "home": "home.html",
+        "archive": "archive.html"
     },
     "posts": [
         {

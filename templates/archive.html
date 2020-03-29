@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Comfortably Numbered</title>
+        <meta name="description" content="Hardmath123's blog."/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+    </head>
+
+    <body>
+        {{{ header }}}
+        
+        <ul id="postlist">
+            <h2>Archive</h2>
+            <p>This site has ~100,000 words spread across around ~80 posts.
+            They were written over the past ~7 years, during which I have grown
+            tremendously.</p>
+
+            {{ #posts }}
+            <li style="display: inline-block; margin: 1em;"><a href="{{ file }}" style="text-decoration: none;">{{ date }}</a>
+            {{ /posts }}
+        </ul>
+
+        {{{ footer }}}
+    </body>
+</html>
