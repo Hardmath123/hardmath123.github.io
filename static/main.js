@@ -1,5 +1,4 @@
-cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
-    document.getElementById("contactemail").href = "mail" + "to" + ":" + "contact" + "@" + "comfortablynumbered.appspotmail.com";
+(function () {
     var box = document.getElementById('header');
     var can = document.createElement('canvas');
     can.width = box.clientWidth;
@@ -57,4 +56,4 @@ cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
          (function(x) {setInterval(x, 1000/60); }))(loop);
     };
     loop();
-});
+})();
