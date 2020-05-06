@@ -10,10 +10,118 @@
             <link>http://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 05 Apr 2020 04:45:50 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 06 May 2020 06:33:26 GMT</lastBuildDate>
         <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Conway's Gradient of Life]]></title>
+            <description><![CDATA[<p>Approximate Atavising with Differentiable Automata</p>
+
+
+<p>And now, a magic trick. Before you is a 239-by-200 Conway’s Game of Life board:</p>
+<p><img src="static/conways-gradient/conway-out.png" alt="a life config"></p>
+<p>What happens if we start from this configuration and take a single step of the
+game? Here is a snapshot of the next generation:</p>
+<p><img src="static/conways-gradient/conway-out-step.png" alt="a life config, stepped"></p>
+<p>Amazing! It’s a <a href="https://mancala.fandom.com/wiki/John_Horton_Conway">portrait</a>
+of John Conway! (Squint!)</p>
+<hr>
+<p>How does this trick work? (It’s not a hoax — you can try it yourself at
+<a href="https://copy.sh/life/">copy.sh/life</a> using <a href="static/conways-gradient/conway.rle">this RLE
+file</a>.)</p>
+<p>Well, let’s start with how it <em>doesn’t</em> work. Reversing Life configurations
+exactly — the art of “atavising” — is <a href="https://nbickford.wordpress.com/2012/04/15/reversing-the-game-of-life-for-fun-and-profit/">a hard search
+problem</a>,
+and doing it at this scale would be computationally infeasible. Imagine
+searching through ($ 2^{239\times200} $) possible configurations! Surely that
+is hopeless… indeed, the talk I linked shares some clever algorithms that
+nonetheless take a full 10 minutes to find a predecessor for a tiny 10-by-10
+board.</p>
+<p>But it turns out that <em>approximately</em> reversing a Life configuration is much
+easier — instead of a tricky discrete search problem, we have an easy
+<em>continuous optimization</em> problem for which we can use our favorite algorithm,
+gradient descent.</p>
+<p>Here is the idea: Start with a random board configuration ($ b $) and compute
+($ b^\prime $), the result after one step of Life. Now, for some target image
+($ t $) compute the derivative ($ \frac{\partial}{\partial b} \sum|b^\prime-t|
+$), which tells us how to change ($ b $) to make ($ b^\prime $) closer to ($ t
+$). Then take a step of gradient descent, and rinse and repeat!</p>
+<p>Okay, okay, I know what you’re thinking: <em>Life isn’t differentiable!</em> You’re
+right. Life is played on a grid of bools, and there is no way the map ($ b
+\mapsto b^\prime $) is continuous, let alone differentiable.</p>
+<p>But suppose we could make a “best effort” differentiable analogue? Let us play
+Life on a grid of real numbers that are 0 for “dead” cells and 1 for “live”
+cells. Can we “implement” a step of Life using only differentiable operations?
+Let’s try.</p>
+<p>We will look at each cell ($ c $) individually. The first step is to count our
+live neighbors. Well, if “live” cells are 1 and “dead” cells are 0, then we can
+simply add up the values of all 8 of our neighbors to get our live neighbor
+count ($ n $). Indeed, if we wanted to be clever, we could implement this
+efficiently as a convolution with this kernel:</p>
+<p>\[
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 \\
+1 &amp; 0 &amp; 1 \\
+1 &amp; 1 &amp; 1
+\end{bmatrix}
+\]</p>
+<p>Good, so we know ($ n $) and of course our own 0/1 value ($ c $). The next step
+is to figure out whether this cell will be alive in the next generation. Here
+are the rules:</p>
+<ol>
+<li>If the cell is alive, ($ c = 1 $), then it stays alive if and only if ($ n =
+2 $) or ($ n = 3 $).</li>
+<li>If the cell is dead, ($ c = 0 $), then it comes to life if and only if ($ n
+= 3 $).</li>
+</ol>
+<p>Let us approach (2) first. What function is 1 when ($ n = 3 $) and 0 otherwise?
+The “spike-at-3” function, of course. That’s not differentiable, but a narrow
+Gaussian centered at 3 is <em>almost</em> the same thing! If scaled appropriately, the
+Gaussian is one at input 3, and <em>almost</em> zero everywhere else. See this graph:</p>
+<p><img src="static/conways-gradient/approx-graph.png" alt="approximating a spike with a less spiky
+spike"></p>
+<p>Similarly, for (1) an appropriately-scaled Gaussian centered at 2.5 gets the
+job done. Finally, we can mux these two cases under gate ($ c $) by simple
+linear interpolation. Because ($ c \approx 0 $) or ($ c \approx 1 $), we know
+that ($ ca + (1-c)b $) is just like writing <code>if c then a else b</code>.</p>
+<p>That’s it! We now have a differentiable function, which looks like this:</p>
+<p><img src="static/conways-gradient/approx-map.png" alt="the same, in 2d"></p>
+<p>Note that it’s worth “clamping” the output of that function to 0 or 1 using,
+say, the tanh function. That way cell values always end up close to 0 or 1.</p>
+<p>Okay, great! Now all that’s left to do is to write this in PyTorch and call
+.backward()…</p>
+<p>…and it begins to learn, within seconds! Here is a GIF of ($ b $) at every
+100 steps of gradient descent.</p>
+<p><img src="static/conways-gradient/learn.gif" alt="gif of it learning"></p>
+<p>(Note: This GIF is where the target image ($ t $) is an all-white rectangle; my
+janky PyTorch gradient descent finds sparse configurations that give birth to
+an “overpopulated” field where nearly 90% of cells are alive.)</p>
+<hr>
+<p>Looking at that GIF, the beautiful labyrinthine patterns reminded me of
+something seemingly unrelated: the skin of a giant pufferfish. Here’s a picture
+from Wikipedia:</p>
+<p><img src="static/conways-gradient/pufferfish.jpg" alt="pufferfish"></p>
+<p>And here’s a zoomed-in 100-by-100 section of the finished product from above:</p>
+<p><img src="static/conways-gradient/seed.png" alt="pufferfish in Life?"></p>
+<p>Patterns like the one on the pufferfish come about as a result of
+“symmetry-breaking,” when small perturbations disturb an unstable homogeneous
+state. The ideas were first described by Alan Turing (and thus the patterns are
+called <a href="https://en.wikipedia.org/wiki/Turing_pattern">Turing Patterns</a>). Here’s
+his <a href="http://www.dna.caltech.edu/courses/cs191/paperscs191/turing.pdf">1952
+paper</a>.</p>
+<p>I can’t help but wonder if there’s a reaction-diffusion-model-esque effect at
+work here as well, the symmetry being broken by the random initialization of ($
+b $). If that’s the case, it would create quite a wonderful connection between
+cells, cellular automata, Turing-completeness, and Turing patterns…</p>
+<p>(Curious? <a href="static/conways-gradient/atavise.py">Here</a> is the Python program I
+used to play these games. Enjoy!)</p>
+]]></description>
+            <link>http://hardmath123.github.io/conways-gradient.html</link>
+            <guid isPermaLink="true">http://hardmath123.github.io/conways-gradient.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Tue, 05 May 2020 07:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Spaghetti's Shadows are Spirali-Shaped]]></title>
             <description><![CDATA[<p>Reasoning about the PCA projections of trajectories in high-dimensional spaces</p>
@@ -981,132 +1089,6 @@ post</a> with
             <guid isPermaLink="true">http://hardmath123.github.io/crown-typewriter.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Tue, 20 Nov 2018 08:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[Carnival of Mathematics 159]]></title>
-            <description><![CDATA[<p>Another fine math I’ve gotten myself into.</p>
-
-
-<blockquote>
-<p>Welcome to this month’s edition of the <a href="https://aperiodical.com/carnival-of-mathematics/">Aperiodical Carnival of
-Mathematics</a>!
-The Carnival is a monthly roundup of exciting mathematical blog posts. Last
-month, it was hosted by <a href="http://www.aperiodical.com/">Paul at the
-Aperiodical</a>. This month, it is my honor
-to host it here at Comfortably Numbered. But first…</p>
-</blockquote>
-<p><strong>Let’s play a game</strong>, shall we?</p>
-<p>Pick a number. Not too large, though! You’re about to do some quick math on it.
-(I’ll play along with 4.)</p>
-<p>Okay. Ready? Good.</p>
-<p>Now take your number and square it. (4 squared is 16.) Then, add your original
-number to the square. (16 plus 4 is 20.) Finally, add forty-one. (20 plus 41 is
-61.)</p>
-<p>And now – your result – is it prime? Ha! I thought so. (61 certainly is.)</p>
-<p>This little trick is due to Euler, who pointed out in 1772 that the polynomial
-($ f(x) = x^2 + x + 41$) returns prime numbers for small integers — indeed,
-all nonnegative integers up to and including 39. Since then, the quest for
-other such “prime-generating” polynomials has fascinated number theorists from
-around the world. As a little exercise, you may try convincing yourself that
-there is no <em>perfect</em> prime-generating polynomial; that is, that there will
-always be at least one integer input that gives a composite output.</p>
-<p>But I digress. Here is what matters: The integers ($ x $) for which ($ f(x) $)
-is composite are the deviants, the rebels, the ones who refuse to play along
-with Euler’s little game.</p>
-<p>Forty is the first such integer.</p>
-<p>One hundred fifty-nine is another.</p>
-<p>Welcome to the 159th Carnival of Mathematics.</p>
-<hr>
-<p>The Carnival always has a special place in its heart for clever ways to teach
-children various math concepts. And this one’s no exception. In <a href="http://mathmisery.com/wp/2018/06/14/set-theory-for-second-grade/">Set Theory for
-Second
-Grade</a>, Manan
-talks about how he designed an engaging lesson on set theory (and common
-multiples!) for second graders. A quote from his students: “Can you hang this
-in the hall so that everyone can see the college math we did?” </p>
-<blockquote>
-<p>What an amazing moment — new symbols, new concepts, no problems! At this
-point, I made sure to remind them that what they are learning right now is no
-different from what I would teach in college. And that if today, here in
-second grade they could do college math, then in third grade they can do
-third grade math, in fourth grade they can do fourth grade math, and that
-they can always do math! More than a few students’ faces lit up.</p>
-</blockquote>
-<p>In <a href="https://cameroncounts.wordpress.com/2018/06/14/british-mathematical-colloquium-days-3-and-4/">British Mathematical Colloquium, days 3 and
-4</a>,
-Peter Cameron recounts in excellent detail the last couple days of the
-Colloquium (it reads like a mini-Carnival!). Days 1 and 2 are linked within.</p>
-<blockquote>
-<p>An induced subgraph of a graph is obtained by throwing away some vertices and
-the edges incident with them; you are not allowed to throw away an edge
-within the set of vertices you are keeping. Paul began with the general
-problem: given a graph H, can you determine the structure of graphs G
-containing no induced copy of H? … The answer is known in embarrassingly
-few cases … Not even for a 4-cycle is the answer known!</p>
-</blockquote>
-<p>In <a href="https://pballew.blogspot.com/2018/06/sum-of-cubes-is-square-of-sum-and-more.html">Sum of Cubes is Square of Sum… And
-More!</a>,
-Pat Ballew begins with a fact that most high-schoolers are taught, and then
-rather suddenly finds himself deep in a fascinating rabbit hole. (Editor’s
-note: I encourage you to read the author’s <em>On This Day in Math</em> series; I
-would list all thirty of the past month if I could…)</p>
-<blockquote>
-<p>Like many teachers at the upper level high school math classes, over the
-years I’ve presented the sum of the Cubes of the natural numbers formula
-above many dozens of times.  Then, perhaps like many others, I would point
-out how nice it is that it turns out to be the square of the nth triangular
-number, a happy coincidence that would make it easier to remember.  Usually
-then, we would challenge them to extend the idea to fourth powers and see if
-they could do the induction proof, even though there was no really nice
-simplification (to my knowledge) of the sums of fourth powers.</p>
-<p>But then I reread a book that has been in my library for about six years, and
-realized that many of those teachers may have known a different approach to
-sums of cubes equaling square of sums that I had been completely unaware of.
-In case there are other teachers who somehow also didn’t know, I share my
-newfound ancient knowledge.</p>
-</blockquote>
-<p>In <a href="http://voices.norwich.edu/daniel-mcquillan/2018/06/29/thinking-about-the-law-of-quadratic-reciprocity/">Thinking about the Law of Quadratic
-Reciprocity</a>,
-Dan McQuillan gives a fast-paced overview of one of my personal favorite
-theorems in number theory.</p>
-<blockquote>
-<p>Mathematics, the way it is currently written, can be difficult to read.
-Sometimes it helps to see how people think about a topic or theorem before
-(or after, or during) the reading of a proper treatment or rigorous proof.
-The purpose of this post is to provide such a view regarding the proof of the
-famous law of quadratic reciprocity. There are many details missing, on
-purpose, and the hope is that it reads like a good story that’s both
-interesting, believable and easily verifiable.</p>
-</blockquote>
-<hr>
-<p><em>Just for fun!</em></p>
-<p>In <a href="https://www.johndcook.com/blog/2018/06/16/magical-learning/">Magical
-Learning</a>, John
-Cook reports the results from an informal Twitter poll he conducted: “If a
-genie offered to give you a thorough understanding of one theorem, what theorem
-would you choose?”</p>
-<p>In case you missed it, Christian at the Aperiodical is running <a href="http://aperiodical.com/2018/06/announcing-the-big-internet-math-off/">The Big
-Internet
-Math-Off</a>.
-It may not have the intense moment-by-moment drama of the World Cup, but the
-daily tidbits of math are definitely worth subscribing for.</p>
-<p>In <a href="https://mathwithbaddrawings.com/2018/06/20/math-explained-through-anagrams-2/">Math Explained through
-Anagrams</a>,
-Ben Orlin constructs a frankly impressive amount of anagrams for various parts
-of math. And they’re all illustrated! (Editor’s note: I also enjoyed <a href="https://mathwithbaddrawings.com/2018/06/27/powers-great-and-small/">this
-piece</a> by
-the same author. I don’t want to spoil it, but here is a wonderful quotation:
-“I sometimes think that there are no puddles in math;” says Orlin, “there are
-only oceans in disguise.”)</p>
-<hr>
-<p>That’s all I have for you this month! Come back next time when Robin at
-<a href="http://www.theoremoftheday.org/">Theorem of the Day</a> will host the 160th
-Carnival of Mathematics!</p>
-]]></description>
-            <link>http://hardmath123.github.io/carnival-of-mathematics-159.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/carnival-of-mathematics-159.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 06 Jul 2018 07:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>

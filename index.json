@@ -639,6 +639,14 @@
             "file": "spaghetti-shadows.md",
             "date": "3/26/20",
             "markdown": true
+        },
+        {
+            "title": "Conway's Gradient of Life",
+            "author": "Hardmath123",
+            "description": "Approximate Atavising with Differentiable Automata",
+            "file": "conways-gradient.md",
+            "date": "5/5/20",
+            "markdown": true
         }
     ]
 }
