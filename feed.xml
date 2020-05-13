@@ -3,15 +3,15 @@
     <channel>
         <title><![CDATA[Comfortably Numbered]]></title>
         <description><![CDATA[My blog.]]></description>
-        <link>http://hardmath123.github.io</link>
+        <link>https://hardmath123.github.io</link>
         <image>
-            <url>http://hardmath123.github.io/static/avatar.png</url>
+            <url>https://hardmath123.github.io/static/avatar.png</url>
             <title>Comfortably Numbered</title>
-            <link>http://hardmath123.github.io</link>
+            <link>https://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 06 May 2020 06:38:58 GMT</lastBuildDate>
-        <atom:link href="http://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+        <lastBuildDate>Wed, 13 May 2020 05:02:57 GMT</lastBuildDate>
+        <atom:link href="https://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
@@ -117,8 +117,8 @@ cells, cellular automata, Turing-completeness, and Turing patterns…</p>
 <p>(Curious? <a href="static/conways-gradient/atavise.py">Here</a> is the Python program I
 used to play these games. Enjoy!)</p>
 ]]></description>
-            <link>http://hardmath123.github.io/conways-gradient.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/conways-gradient.html</guid>
+            <link>https://hardmath123.github.io/conways-gradient.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/conways-gradient.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Tue, 05 May 2020 07:00:00 GMT</pubDate>
         </item>
@@ -245,8 +245,8 @@ plt.imshow(np.dot(X, X.transpose()))
 plt.figure()
 plt.plot(np.linalg.eig(np.cov(X))[1][:, :4])
 </code></pre>]]></description>
-            <link>http://hardmath123.github.io/spaghetti-shadows.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/spaghetti-shadows.html</guid>
+            <link>https://hardmath123.github.io/spaghetti-shadows.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/spaghetti-shadows.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Thu, 26 Mar 2020 07:00:00 GMT</pubDate>
         </item>
@@ -363,8 +363,8 @@ is not a coincidence that Watson is left-handed.”</p>
 Brains, Bodies, Atoms and Cultures. 2002.</p>
 </blockquote>
 ]]></description>
-            <link>http://hardmath123.github.io/eucalyptus.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/eucalyptus.html</guid>
+            <link>https://hardmath123.github.io/eucalyptus.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/eucalyptus.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Wed, 25 Dec 2019 08:00:00 GMT</pubDate>
         </item>
@@ -448,8 +448,8 @@ patterned” regions of the horizon would correspond to regions that are “hard
 rationally approximate”; so, you’d expect them at plus-or-minus the golden
 ratio’s slope from your line of sight.</p>
 ]]></description>
-            <link>http://hardmath123.github.io/orchard.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/orchard.html</guid>
+            <link>https://hardmath123.github.io/orchard.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/orchard.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Tue, 10 Sep 2019 07:00:00 GMT</pubDate>
         </item>
@@ -541,8 +541,8 @@ isn’t a common word, and so we reach for interpretation (3) rather than (5).
 Though now that I think about it, “unforget” is an excellent replacement for
 “remember.”</p>
 ]]></description>
-            <link>http://hardmath123.github.io/un-unravelable.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/un-unravelable.html</guid>
+            <link>https://hardmath123.github.io/un-unravelable.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/un-unravelable.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Tue, 27 Aug 2019 07:00:00 GMT</pubDate>
         </item>
@@ -629,8 +629,8 @@ img:hover {
 website</a> that lets you use this
 font to build your own ambigrams (along with more ambigram fun).</p>
 ]]></description>
-            <link>http://hardmath123.github.io/ambigrams.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/ambigrams.html</guid>
+            <link>https://hardmath123.github.io/ambigrams.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/ambigrams.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Mon, 26 Aug 2019 07:00:00 GMT</pubDate>
         </item>
@@ -680,8 +680,8 @@ $). The IPython notebook that generated this graph is
 <a href="static/sock-graph.ipynb">here</a>.</p>
 <p><img src="static/sock-graph.png" alt="sock graph"></p>
 ]]></description>
-            <link>http://hardmath123.github.io/sock-buffer.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/sock-buffer.html</guid>
+            <link>https://hardmath123.github.io/sock-buffer.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/sock-buffer.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Sat, 13 Apr 2019 07:00:00 GMT</pubDate>
         </item>
@@ -719,8 +719,8 @@ than it’s going out, the momentum flux across the plane of the windmill is net
 negative.  Applying Gauss’ law, we would expect a buildup of air in the
 windmill, which obviously doesn’t happen. What’s wrong?</p>
 ]]></description>
-            <link>http://hardmath123.github.io/windmills.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/windmills.html</guid>
+            <link>https://hardmath123.github.io/windmills.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/windmills.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Wed, 27 Mar 2019 07:00:00 GMT</pubDate>
         </item>
@@ -1005,8 +1005,8 @@ which is freely available on Archive.org.</p>
   }, false);
 </script>
 ]]></description>
-            <link>http://hardmath123.github.io/envelope.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/envelope.html</guid>
+            <link>https://hardmath123.github.io/envelope.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/envelope.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Fri, 04 Jan 2019 08:00:00 GMT</pubDate>
         </item>
@@ -1085,8 +1085,8 @@ post</a> with
 <em>several</em> new approaches to this problem!</p>
 </blockquote>
 ]]></description>
-            <link>http://hardmath123.github.io/crown-typewriter.html</link>
-            <guid isPermaLink="true">http://hardmath123.github.io/crown-typewriter.html</guid>
+            <link>https://hardmath123.github.io/crown-typewriter.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/crown-typewriter.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Tue, 20 Nov 2018 08:00:00 GMT</pubDate>
         </item>
