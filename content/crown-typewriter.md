@@ -81,3 +81,12 @@ So: I leave this as an open problem for readers to explore.
 > Update (Jan 28): @rjp on Github has posted a [blog
 > post](http://rjp.is/blogging/posts/2019/01/linear-typewriters/) with
 > _several_ new approaches to this problem!
+
+> Update (May 21, 2020): I discovered that back at the end of 2018, a bunch of
+> optimization theory researchers wrote _several_ blog posts inspired by this
+> problem. See [Nathan
+> Brixius's
+> post](https://www.theverge.com/2020/5/20/21262302/ap-test-fail-iphone-photos-glitch-email-college-board-jpeg-heic)
+> and a [five-post series by Paul
+> Rubin](https://orinanobworld.blogspot.com/2018/12/of-typewriters-and-permutations-i.html).
+> Amazing!

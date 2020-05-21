@@ -10,7 +10,7 @@
             <link>https://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 13 May 2020 05:02:57 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 21 May 2020 23:45:44 GMT</lastBuildDate>
         <atom:link href="https://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -1083,6 +1083,14 @@ before my visit to the City Museum!</p>
 <p>Update (Jan 28): @rjp on Github has posted a <a href="http://rjp.is/blogging/posts/2019/01/linear-typewriters/">blog
 post</a> with
 <em>several</em> new approaches to this problem!</p>
+<p>Update (May 21, 2020): I discovered that back at the end of 2018, a bunch of
+optimization theory researchers wrote <em>several</em> blog posts inspired by this
+problem. See <a href="https://www.theverge.com/2020/5/20/21262302/ap-test-fail-iphone-photos-glitch-email-college-board-jpeg-heic">Nathan
+Brixius’s
+post</a>
+and a <a href="https://orinanobworld.blogspot.com/2018/12/of-typewriters-and-permutations-i.html">five-post series by Paul
+Rubin</a>.
+Amazing!</p>
 </blockquote>
 ]]></description>
             <link>https://hardmath123.github.io/crown-typewriter.html</link>
