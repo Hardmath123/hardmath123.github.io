@@ -10,7 +10,7 @@
             <link>https://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Thu, 21 May 2020 23:45:44 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 03 Jul 2020 18:31:07 GMT</lastBuildDate>
         <atom:link href="https://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -1091,6 +1091,11 @@ post</a>
 and a <a href="https://orinanobworld.blogspot.com/2018/12/of-typewriters-and-permutations-i.html">five-post series by Paul
 Rubin</a>.
 Amazing!</p>
+<p>Update (July 3, 2020): I discovered that Peter Norvig <a href="https://github.com/norvig/pytudes/blob/master/ipynb/Gesture%20Typing.ipynb">spent some
+time</a>
+thinking about this question for 2D gesture-based keyboards (e.g. “Swype”).
+Relatedly see <a href="https://jasmcole.com/2017/06/04/swype-right/">this</a> blog post
+by Jason Cole.</p>
 </blockquote>
 ]]></description>
             <link>https://hardmath123.github.io/crown-typewriter.html</link>

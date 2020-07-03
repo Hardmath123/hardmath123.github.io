@@ -90,3 +90,9 @@ So: I leave this as an open problem for readers to explore.
 > and a [five-post series by Paul
 > Rubin](https://orinanobworld.blogspot.com/2018/12/of-typewriters-and-permutations-i.html).
 > Amazing!
+
+> Update (July 3, 2020): I discovered that Peter Norvig [spent some
+> time](https://github.com/norvig/pytudes/blob/master/ipynb/Gesture%20Typing.ipynb)
+> thinking about this question for 2D gesture-based keyboards (e.g. "Swype").
+> Relatedly see [this](https://jasmcole.com/2017/06/04/swype-right/) blog post
+> by Jason Cole.
