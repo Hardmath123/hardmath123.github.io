@@ -647,6 +647,14 @@
             "file": "conways-gradient.md",
             "date": "5/5/20",
             "markdown": true
+        },
+        {
+            "title": "A Differentiable Anti-Anti-Aliasing Adventure",
+            "author": "Hardmath123",
+            "description": "Using PyTorch to produce magical moiré patterns",
+            "file": "moire.md",
+            "date": "7/16/20",
+            "markdown": true
         }
     ]
 }

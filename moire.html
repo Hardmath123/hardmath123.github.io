@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="canonical" href="https://hardmath123.github.io/moire.html"/>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>A Differentiable Anti-Anti-Aliasing Adventure - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <script src="static/main.js"></script>
+            <h1>
+                <a href="/"><span class="left-word">Comfortably</span><span class="right-word">Numbered</span></a>
+            </h1>
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h2>A Differentiable Anti-Anti-Aliasing Adventure</h2>
+                <h4>Thursday, July 16, 2020 &middot; 5 min read</h4>
+<p>Another magic trick. Watch these two grids overlap to reveal a secret image!
+Can you spot the phantom horse?</p>
+<style type="text/css">
+.slideme {
+  animation: reveal;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  -webkit-animation-delay: 5ms; /*
+https://stackoverflow.com/questions/30735571/css-rotate-animation-doesnt-start-properly-in-safari
+*/
+  margin-bottom: 0;
+
+  width: 50%;
+}
+
+.slideup {
+  animation: revealb;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  -webkit-animation-delay: 5ms; /*
+https://stackoverflow.com/questions/30735571/css-rotate-animation-doesnt-start-properly-in-safari
+*/
+  margin-top: 0;
+  width: 50%;
+}
+
+@keyframes reveal {
+  from {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes revealb {
+  from {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+</style>
+
+<p><img class="slideme" src="static/moire/warp.png"></img><br/>
+<img class="slideup" src="static/moire/screen.png"></img></p>
+<p>If my janky CSS animation didn’t work for you, here is another way to see it:
+simply shrink the top grid slowly until the horse “pops” out. It’s hard to show
+this effect consistently across displays/browsers because of varying pixel
+spacings and various browsers’ aggressive anti-aliasing tactics, but here is a
+screen recording I captured.</p>
+<video controls="controls" name="Moire" style="width: 100%;" src="static/moire/moire.mov"></video>
+
+<p>Magic trick? Not quite. Graphics folks will immediately recognize this effect
+as a curious instance of the dreaded <em>moiré pattern,</em> caused by the
+interference between two almost-but-not-quite-the-same grids. Researchers work
+really hard to escape such “glitchy” artifacts — they are often a result of
+sloppily sampling a texture in a grid, leading to jagged edges or moiré streaks
+(image below from Wikipedia). </p>
+<p><img src="static/moire/bricks.jpg" alt="bricks"></p>
+<p>In fact, a <a href="http://www.pbr-book.org/3ed-2018/Sampling_and_Reconstruction.html">lot of
+effort</a> has
+gone into finding “good” sampling patterns that avoid moirés; for example, in
+an odd crossover of sampling theory and anatomy, if you look at the
+distribution of <a href="https://www.nap.edu/read/1570/chapter/13">photoreceptors in a monkey’s
+retina</a> they are neither in a grid
+<em>nor</em> uniformly random, but rather arranged in a <em>low-discrepancy</em> pattern to
+avoid exactly this kind of artifact.</p>
+<p>But for all the hard work gone into avoiding these patterns, you kind of have
+to admit that they are beautiful and mysterious. In fact “moiré” gets its name
+from a desirable form of silk weave that exhibits this phenomenon owing to
+interference from the weave (photo from Wikipedia again). Similarly, <a href="https://en.wikipedia.org/wiki/Guardian_(sculpture">this
+sculpture</a> (and a lot more
+art) exploits moiré patterns for their hypnotic beauty.</p>
+<p><img src="static/moire/silk.jpg" alt="moire silk"></p>
+<p>There are lots of real-world ways you can play with this effect, and indeed
+soon enough you can’t stop seeing it everywhere you go (this is the joy and
+frustration of being interested in visual phenomena):</p>
+<ol>
+<li>Point a camera at a checkered shirt; the camera’s pixel grid interferes with
+the fabric pattern (I’ve been told not to wear checkered shirts when giving
+talks at certain venues where everything is recorded).</li>
+<li>Align two kitchen strainers and gently bend them to see the patterns change.</li>
+<li>Watch a screen door’s shadow interfere with the screen itself, poke the
+screen a bit to see the patterns change.</li>
+<li>Watch the wire fences on either side of a pedestrian walkway above a road
+interfere with each other.</li>
+<li>Look at an office chair from behind, watch the mesh of the back interfere
+with the mesh of the seat. Depending on their relative curvature you can get
+some beautiful effects.</li>
+</ol>
+<p>These patterns are seemingly random, like marbled paper. But can we control
+this randomness? Satisfyingly, an on-demand moiré such as the effect above is
+extremely simple to generate using differentiable programming in PyTorch.</p>
+<p>What I am optimizing is a <em>small distortion</em> to the image of the grid such that
+when the grid and its distortion are superimposed, the resulting image has low
+L2 difference from a given target, such as the horse image. What exactly is
+this “distortion”? Imagine the image printed on play-dough and deforming it by
+stretching and squeezing parts. The result is a warping of the image. To
+express this warping, each pixel is assigned a “motion vector” which tells it
+where to go. To make sure the motion vectors are smooth and continuous between
+adjacent pixels, I actually learn a heavily downsampled set of motion vectors
+(even a 12-by-12 array gets good results) and then upsample it to full
+resolution with bicubic interpolation.</p>
+<p>Here is the wonderful thing: all of these operations are built in to PyTorch
+and differentiable, apparently to support <a href="https://arxiv.org/pdf/1506.02025.pdf">Spatial Transformer
+Networks</a>. So, a straightforward 30-line
+implementation of the above algorithm is all it takes to start “learning” a
+moiré grid perturbation. <a href="static/moire/Moire.ipynb">Here</a> is a Jupyter notebook
+with all you need to get started.</p>
+<p>How much computation does it take to get good results? See this animation: it
+converges extremely rapidly, in just 800 iterations or so of plain gradient
+descent (a couple of minutes on my laptop).</p>
+<p><img src="static/moire/morph.gif" alt="learning"></p>
+<hr>
+<p>I’m of course not the first person to try this trick; I found references in
+2001 and 2013. I think my results look significantly better than those
+     presented in the paper <a href="static/moire/2001.pdf"><em>Variational Approach to Moire Pattern Synthesis</em>
+(Lebanon and Bruckstein 2001)</a>, even though my technique
+is much simpler than their gradient-based technique. On the other hand, I think
+the more mathematically-motivated results presented in <a href="static/moire/2013.pdf"><em>Target-Driven Moiré
+Pattern Synthesis by Phase Modulation</em> (Tsai &amp; Chuang
+2013)</a> are much more impressive, even though they have a
+slightly different setup than mine. They also had the resources to print out
+their patterns on transparent film and overlay them physically, as well as to
+mess with a camera whose Bayer pattern was known! And they suggest using this
+trick for cryptography. Very neat.</p>
+<p>To understand what they do we need to understand the mechanics of moiré
+(instead of leaving it all to SGD!). I’ve always been told that when two
+high-frequency signals such as grids are superimposed, they can alias to form
+interesting low-frequeny content (famously there is <a href="https://xkcd.com/1814/">this
+comic</a>). But I’ve never been given more detail than
+that high-level overview, so I looked it up myself. It’s actually quite
+wonderful and principled. Here is my understanding as informed by <a href="static/moire/1994.pdf"><em>A
+Generalized Fourier-based Method for the Analysis of 2D Moiré Envelope-forms in
+Screen Superpositions</em> (Amidror 1994)</a>, specifically by
+Figure 4 reproduced below.</p>
+<p><img src="static/moire/lattice.png" alt="fig 4"></p>
+<p>First, we need to come up with a useful characterization of grids. Recall that
+you can take a 2D signal (i.e. image) and perform a 2D Fourier transform, which
+is <em>also</em> an image. Each point in frequency-space represents a set of stripes
+(i.e. a sine wave) rotated to match the point’s angle with respect to the
+origin (see (a) and (b) in the figure for examples of what I mean). The
+frequency of the stripes is given by the distance from the point to the origin,
+and the amplitude is given by the point’s brightness (complex-valued
+brightnesses let you set phase). To get “sharp” stripes instead of a “smooth”
+sine wave gradient, you have to add “harmonics” at regular multiples of that
+point (recall the Fourier transform of a square wave if that helps). This is
+(d) and (e) in the figure from the paper.</p>
+<p>Next, we note that superimposing two sets of stripes is like pointwise
+multiplication (if you treat zeros as “occlusion”, then multiplying by zero
+always sends the result to zero as desired). Because pointwise multiplication
+is convolution in frequency space, the superposition looks like a <em>lattice</em>
+spanned by the harmonics in frequency space. This lattice is depicted in (f) in
+the figure.</p>
+<p>The key to the illusion is that this lattice might include points much closer
+to the origin than either of the harmonics that span it! Because the human
+visual perceptual system acts as a low-pass filter, the result is that you see
+a low-frequency “phantom” in the superposition. This is visible in (c) in the
+figure.</p>
+<p>Tsai and Chuang use this exact insight to reverse the moiré effect
+analytically, with excellent results.</p>
+<hr>
+<p><strong>Open questions:</strong> I think there’s a lot more to do here. In my mind, the holy
+grail is a T-shirt you can wear which, <em>only when photographed</em> reveals a
+secret message. Another neat application would be a wire mesh rolled into a
+cylinder such that as you rotated it, the moiré patterns animated into
+something cool (perhaps a galloping horse, as a nod to Muybridge). There is
+some precedent for this in “barrier-grid” animation (see, e.g. <a href="https://thevinylfactory.com/features/freaky-formats-moire-effect/">these vinyl
+record
+covers</a>),
+but the benefit of a moiré-based approach would be that the barriers need not
+be as thick, allowing for finer detail.</p>
+<p>Another direction to go in is audio moiré; that is, could we make two sounds,
+both above human aural range (20 kHz) such that when played together you hear a
+perfectly clear, audible voice?</p>
+<p>As you might have guessed, I think naïve gradient descent should be able to get
+us a long way there…</p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="http://github.com/Hardmath123">
+                        <span class="octicon octicon-mark-github"></span>
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        <span class="octicon octicon-rss"></span>
+                        Subscribe (RSS)</a></li>
+                    <li><a href="https://github.com/Hardmath123/hardmath123.github.io/issues/new?title=Hi&body=How's%20it%20going%3F">
+                        <span class="octicon octicon-comment-discussion"></span>
+                        Feedback</a></li>
+                    <li><a href="mailto:contact-at-comfortablynumbered-dot-appspotmail-dot-com">
+                        <span class="octicon octicon-mail-read"></span>
+                        Email me</a></li>
+                    <li><a href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        <span class="octicon octicon-law"></span>
+                        CC BY-NC 3.0</a></li>
+                    <li><a href="appreciation.html">
+                        <span class="octicon octicon-beer"></span>
+                        Other</a></li>
+                </ul>
+            </div>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
