@@ -10,12 +10,12 @@
             <link>https://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Fri, 24 Jul 2020 08:07:49 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 24 Jul 2020 15:05:52 GMT</lastBuildDate>
         <atom:link href="https://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
         <item>
-            <title><![CDATA[GPT-3, Shannon entropy, and a Russian theory of literature]]></title>
+            <title><![CDATA[GPT-3 Visits the Tartu-Moscow School]]></title>
             <description><![CDATA[<p>An information-theoretic approach to the question of “AI Literature”</p>
 
 
@@ -69,7 +69,7 @@ deed and word? Is it a true thing?” — Lotman quoting Pushkin quoting Shakesp
 <p>Pierre Menard did not want to compose <em>another</em> Quixote, which surely is easy enough—he wanted to compose <em>the</em> Quixote. Nor, surely, need one be obliged to note that his goal was never a mechanical transcription of the original; he had no intention of <em>copying</em> it. His admirable ambition was to produce a number of pages which coincided—word for word and line for line—with those of Miguel de Cervantes.</p>
 </blockquote>
 <p>Maybe, in light of the discussion above, these bizarre lines are a little less mystifying, a little more satisfying.</p>
-<p>That brings me back to GPT-3, and the literary status of its output. Can we ever call a GPT-3-generated poem a work of literature? Well, following Lotman, let’s instead ask this: how much information, really, does GPT-3 output? How entropic is GPT-3’s output? And of course the answer is that GPT-3 is quite orderly in the grand scheme of things. “Whenever the text does not realize one of at least two possibilities,” writes Lotman, “but automatically follows one, it loses its capacity to convey information.” That is, every time GPT-3 argmaxes its way to a prediction predestined by its statistical model, which is really a synthesis of gigabytes and gigabytes of data, it is outputting — well, nothing. No new information. The occasional choice made by the random sampling is the only “information” being produced, though it is hidden in the fluffy sheep-skin of statistically-unobjectionable prose. Indeed, if you were to measure the number of bytes read from <code>/dev/urandom</code> (or whatever RNG) by GPT-3 in the course of sampling, and analyze the relative probabilities predicted by the model, perhaps you would be able to compute a Shannon entropy — or even a convincing literariness score — for the output. I sense it would not be very high.</p>
+<p>That brings me back to GPT-3, and the literary status of its output. Can we ever call a GPT-3-generated poem a work of literature? Well, following Lotman, let’s instead ask this: how much information, really, does GPT-3 output? How entropic is GPT-3’s output? And of course the answer is that GPT-3 is quite orderly in the grand scheme of things. “Whenever the text does not realize one of at least two possibilities,” writes Lotman, “but automatically follows one, it loses its capacity to convey information.” That is, every time GPT-3 argmaxes its way to a prediction predestined by its statistical model, which is really a synthesis of gigabytes and gigabytes of data, it is outputting — well, nothing. No new information. The occasional choice made by the random sampling is the only “information” being produced, though it is hidden in the fluffy sheep-skin of statistically-unobjectionable prose. If GPT-3 completed the prompt-word “yesterday” with Roosevelt’s “a date which will live in infamy” speech half the time, and Beatles’ “All my troubles seemed so far away” lyrics the other half the time, then GPT-3 has only really communicated one bit of information; the rest is redundant. Indeed, if you were to measure the number of bytes read from <code>/dev/urandom</code> (or whatever RNG) by GPT-3 in the course of sampling, and analyze the relative probabilities predicted by the model, perhaps you would be able to compute a Shannon entropy — or even a convincing literariness score — for the output. I sense it would not be very high.</p>
 <hr>
 <p>I want to end this piece with two notes.</p>
 <p>First: I see a couple of problems with Lotman’s theory — again, I’m not a literary theorist by trade so I do not know whether he (or others) have addressed them.</p>
