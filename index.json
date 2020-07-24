@@ -655,6 +655,14 @@
             "file": "moire.md",
             "date": "7/16/20",
             "markdown": true
+        },
+        {
+            "title": "GPT-3, Shannon entropy, and a Russian theory of literature",
+            "author": "Hardmath123",
+            "description": "An information-theoretic approach to the question of \"AI Literature\"",
+            "file": "lotman.md",
+            "date": "7/24/20",
+            "markdown": true
         }
     ]
 }
