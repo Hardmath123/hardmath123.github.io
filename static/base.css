@@ -95,8 +95,8 @@ a:visited:hover {
 }
 
 #header {
-  padding-top: 3em;
-  padding-bottom: 3em;
+  padding-top: 4em;
+  padding-bottom: 4em;
   border-bottom: 1px solid #eee;
   overflow: hidden;
   margin-bottom: 5em;
@@ -135,11 +135,11 @@ a:visited:hover {
 }
 
 #header h1 a {
-  transition: text-shadow 0.5s ease;
+  transition: text-shadow 0.2s ease;
   text-shadow: 0 0 0.2em rgba(255, 0, 0, 0);
 }
 #header h1 a:hover {
-  transition: text-shadow 0.5s ease;
+  transition: text-shadow 0.2s ease;
   text-shadow: 0 0 0.2em rgba(255, 0, 0, 1);
 }
 
@@ -192,8 +192,8 @@ h4 {
 }
 
 #footer {
-  padding-top: 3em;
-  padding-bottom: 3em;
+  padding-top: 2em;
+  padding-bottom: 2em;
   font-size: 0.6em;
   margin-top: 5em;
   color: gray;
