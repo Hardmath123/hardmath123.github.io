@@ -663,6 +663,14 @@
             "file": "lotman.md",
             "date": "7/24/20",
             "markdown": true
+        },
+        {
+            "title": "Hybrid Hyperoptimization",
+            "author": "Hardmath123",
+            "description": "The most ambitious crossover event in automatic differentiation history",
+            "file": "hybrid-hyperoptimization.md",
+            "date": "9/11/20",
+            "markdown": true
         }
     ]
 }
