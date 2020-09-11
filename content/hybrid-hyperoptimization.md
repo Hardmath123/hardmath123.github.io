@@ -84,11 +84,20 @@ while True:
   update hyperparameters
 ```
 
-This raises a logistical question: how do we reconcile these two automatic
-differentiation algorithms in the same program? **The "trick" is to "thread"
-dual numbers through a backpropagation implementation.** In other words,
-implement backpropagation as usual, but rather than `float` type numbers,
-exclusively use `dual_number` type numbers (even when doing derivative
+> (Update: I discovered that this was suggested in the 2017 paper [Forward and
+> Reverse Gradient-Based Hyperparameter
+> Optimization](https://arxiv.org/abs/1703.01785). But keep reading --- while
+> the paper's
+> [implementation](https://github.com/lucfra/FAR-HO/blob/master/far_ho/hyper_gradients.py#L375)
+> needs a lot of math to be worked out manually, I'm going to show you how to
+> implement this in a way that makes all the math in the paper fall out "for
+> free"...)
+
+This proposal raises a logistical question: how do we reconcile these two
+automatic differentiation algorithms in the same program? **The "trick" is to
+"thread" dual numbers through a backpropagation implementation.** In other
+words, implement backpropagation as usual, but rather than `float` type
+numbers, exclusively use `dual_number` type numbers (even when doing derivative
 calculations). Initialize the system such that the dual numbers track
 derivatives with respect to the hyperparameters you care about. Then, your
 final loss value's attached ($\epsilon$)-value _immediately_ gives you

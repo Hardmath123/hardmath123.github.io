@@ -105,11 +105,21 @@ while True:
   compute d(loss) / d(hyperparameters)
   update hyperparameters
 </code></pre>
-<p>This raises a logistical question: how do we reconcile these two automatic
-differentiation algorithms in the same program? <strong>The “trick” is to “thread”
-dual numbers through a backpropagation implementation.</strong> In other words,
-implement backpropagation as usual, but rather than <code>float</code> type numbers,
-exclusively use <code>dual_number</code> type numbers (even when doing derivative
+<blockquote>
+<p>(Update: I discovered that this was suggested in the 2017 paper <a href="https://arxiv.org/abs/1703.01785">Forward and
+Reverse Gradient-Based Hyperparameter
+Optimization</a>. But keep reading — while
+the paper’s
+<a href="https://github.com/lucfra/FAR-HO/blob/master/far_ho/hyper_gradients.py#L375">implementation</a>
+needs a lot of math to be worked out manually, I’m going to show you how to
+implement this in a way that makes all the math in the paper fall out “for
+free”…)</p>
+</blockquote>
+<p>This proposal raises a logistical question: how do we reconcile these two
+automatic differentiation algorithms in the same program? <strong>The “trick” is to
+“thread” dual numbers through a backpropagation implementation.</strong> In other
+words, implement backpropagation as usual, but rather than <code>float</code> type
+numbers, exclusively use <code>dual_number</code> type numbers (even when doing derivative
 calculations). Initialize the system such that the dual numbers track
 derivatives with respect to the hyperparameters you care about. Then, your
 final loss value’s attached ($\epsilon$)-value <em>immediately</em> gives you
