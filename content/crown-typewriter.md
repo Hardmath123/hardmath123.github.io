@@ -96,3 +96,7 @@ So: I leave this as an open problem for readers to explore.
 > thinking about this question for 2D gesture-based keyboards (e.g. "Swype").
 > Relatedly see [this](https://jasmcole.com/2017/06/04/swype-right/) blog post
 > by Jason Cole.
+
+> Update (Sept 12, 2020): Found yet another
+> [attack](https://github.com/BenjaminPoilve/Typewriter-Optimisation) on the
+> problem!
