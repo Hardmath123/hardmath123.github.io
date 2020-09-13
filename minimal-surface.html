@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="canonical" href="https://hardmath123.github.io/minimal-surface.html"/>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Sol LeWitt and the Soapy Pit - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <script src="static/main.js"></script>
+            <div>
+                <a href="/"><span class="left-word">Comfortably</span>&nbsp;<span class="right-word">Numbered</span></a>
+            </div>
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h1>Sol LeWitt and the Soapy Pit</h1>
+                <center><em><p>Rendering minimal surfaces of cubical loops</p>
+</em></center>
+                <h4>Sunday, September 13, 2020 &middot; 3 min read</h4>
+<p>A 2014 <a href="https://www.math.ksu.edu/~rozhkovs/LeWitt_cubes.pdf">paper</a> by
+Rozhkovskaya and Reb titled “Is the List of Incomplete Open Cubes Complete?”
+complicates Sol LeWitt’s celebrated 1974 artwork, “Incomplete Open Cubes”. The
+artwork is a <a href="https://www.metmuseum.org/art/collection/search/691091">gallery</a>
+of 122 three-dimensional structures; they are meant to be all distinct
+connected subsets of edges of the unit cube that result in a 3D figure — or,
+in LeWitt’s words, “all the ways of the cube not being complete”. The
+complication, noted by the paper, is that two of the structures are identical
+up to rotation; they should instead be mirror reflections of each other.</p>
+<p>Have art historians realized yet? I would like to think there is some deeper
+philosophical significance to this bit of trivia. The exercise in exhaustive
+enumeration of incompleteness is itself incomplete — and, we cannot help but
+overlook the incompleteness, just as we cannot help but imagine the missing
+edges of any of the 122 almost-cubes.</p>
+<p><img src="static/minimal-surface/incomplete-open-cubes.png" alt="Incomplete Open Cubes"></p>
+<blockquote>
+<p>Image source: <a href="https://cubes-revisited.art">Incomplete Open Cubes Revisited</a></p>
+</blockquote>
+<p>I have <a href="eucalyptus.html">meditated on the art-historical significance of chirality
+before</a>, so today I want to talk about something else. I don’t
+know about you, but when I see LeWitt’s almost-cubes, I feel the need to
+submerge them in a tank of soapy water. Why? To see what shape the films take,
+of course! Is that irrational? Perhaps, but <a href="https://www.moma.org/collection/works/146945">writes
+LeWitt</a>, “Irrational thoughts
+should be followed absolutely and logically.” It turns out that my thought
+isn’t hard to follow — if not absolutely and logically, then at least
+computationally.</p>
+<p>The shape of a soap film is a <a href="https://en.wikipedia.org/wiki/Minimal_surface">minimal
+surface</a>, that is, the surface
+with minimal area that obeys the boundary conditions of the “loop” that the
+film forms within. The definition doesn’t depend at all on the properties of
+soap: any film-forming substance should — in the absence of other forces,
+such as gravity — contract to the same shape as a result of surface tension.</p>
+<p>Now, because finding the surface is a question of continuous minimization, we
+should be able to easily apply automatic differentiation — at least, to a
+discretization of the problem.  Here is the algorithm: we start with a mesh
+grid of points and triangulate it. Then, we compute the surface area by
+repeated application of Heron’s Theorem to the triangles. Finally, we
+differentiate the total area with respect to the positions of the points, and
+nudge the points towards less area. The full source code for this adventure is
+available <a href="static/minimal-surface/minimal-surface.ipynb">here</a>. (By the way,
+I’m using PyTorch out of habit, but perhaps TensorFlow would be more
+appropriate because of its oddly LeWittian logo.)</p>
+<hr>
+<p>Before I give you the results, I want you to take a moment to try and imagine
+what the soap films will look like. I think it’s an interesting exercise in
+qualitative reasoning, and, in any case, LeWitt’s work all but pleads for us to
+see what isn’t there.</p>
+<p>For starters, we can reduce the entire problem from 122 cubes into just a
+handful of cases. Simply ask: how many distinct-up-to-symmetry “loops” are
+there on a cube?  Let’s do casework by face count: there is 1 loop with one
+face (the “square”), 1 loop with two faces (the “L”), and 2 loops with three
+faces (the “U” and the “corner”). The rest are accounted for by complement: a
+four-face loop is also a two-face loop.</p>
+<p>This yields a total of 4 cases — much more manageable! And indeed, I’ll
+suggest that you start with Case 1, the “square”, since the answer in that case
+should be obvious.</p>
+<hr>
+<p>Okay, now, the results!</p>
+<p>Case 1 is easy; we already know the answer. The soap film is just flat, because
+its boundary is planar.</p>
+<p><img src="static/minimal-surface/case_1.gif" alt="Case 1, the square"></p>
+<p>Case 2 is less obvious — I would not have predicted this outcome! It turns
+out that the soap film tries to “flatten” itself into the hypotenuse. What are
+the implications of this? Well, one implication is that if you want to minimize
+the material you use to build a tent (without regard to volume), you can do
+better than stretching the material taught into large rectangles. Sagging
+actually <em>saves</em> material.</p>
+<p><img src="static/minimal-surface/case_2.gif" alt="Case 2, the &quot;L&quot;"></p>
+<p>You might expect Case 3a to flatten similarly, but because of the up-down
+symmetry that can’t happen. Instead, you get a beautiful saddle shape.
+Actually, it turns out that all minimal surfaces are saddle-like; if they had
+nonzero curvature at some point then you should be able to “flatten the bulge”
+to reduce surface area.</p>
+<p><img src="static/minimal-surface/case_3a.gif" alt="Case 3a, the &quot;U&quot;"></p>
+<p>And finally, Case 3b — sorry this isn’t quite perfectly modeled — tries to
+flatten itself around the center, kind of like a tortilla chip.</p>
+<p><img src="static/minimal-surface/case_3b.gif" alt="Case 3b, the &quot;corner&quot;"></p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="https://github.com/kach">
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        Subscribe (RSS feed)</a></li>
+                    <li><a href="https://twitter.com/hardmath123">
+                        Twitter</a></li>
+                    <li><a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        CC BY-NC 3.0</a></li>
+                </ul>
+            </div>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
