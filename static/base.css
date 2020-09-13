@@ -113,7 +113,7 @@ a:visited:hover {
 }
 
 /* Page title is h1 */
-#header h1 {
+#header div {
   position: relative;
   z-index: 2;
   font-variant: small-caps;
@@ -134,31 +134,29 @@ a:visited:hover {
   text-align: center;
 }
 
-#header h1 a {
+#header div a {
   transition: text-shadow 0.2s ease;
   text-shadow: 0 0 0.2em rgba(255, 0, 0, 0);
 }
-#header h1 a:hover {
+#header div a:hover {
   transition: text-shadow 0.2s ease;
   text-shadow: 0 0 0.2em rgba(255, 0, 0, 1);
 }
 
-#header h1 a, #header h1 a:visited, #footer a, #footer a:visited {
+#header div a, #header div a:visited, #footer a, #footer a:visited {
   text-decoration: none;
 }
 
-#header h1:hover {
+#header div:hover {
   cursor: pointer;
 }
 
 
-/* Article title is h2 */
-h2 {
+/* Article title is h1 */
+h1 {
   margin-bottom: 0.1em;
   font-size: 1.5em;
   padding-bottom: 0.1em;
-/*font-weight: lighter;*/
-/*font-family: sans-serif; */
 }
 
 /* Article subheadings are h3 */
@@ -183,7 +181,7 @@ h4 {
   clear: both;
 }
 
-#postcontent h2:first-child, #postcontent h4 {
+#postcontent h1:first-child, #postcontent h4 {
   text-align: center;
 }
 

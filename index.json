@@ -671,6 +671,14 @@
             "file": "hybrid-hyperoptimization.md",
             "date": "9/11/20",
             "markdown": true
+        },
+        {
+            "title": "Sol LeWitt and the Soapy Pit",
+            "author": "Hardmath123",
+            "description": "Rendering minimal surfaces of cubical loops",
+            "file": "minimal-surface.md",
+            "date": "9/13/20",
+            "markdown": true
         }
     ]
 }
