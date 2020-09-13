@@ -62,7 +62,12 @@ surface</a>, that is, the surface
 with minimal area that obeys the boundary conditions of the “loop” that the
 film forms within. The definition doesn’t depend at all on the properties of
 soap: any film-forming substance should — in the absence of other forces,
-such as gravity — contract to the same shape as a result of surface tension.</p>
+such as gravity — contract to the same shape as a result of surface tension.
+These shapes can often be pleasing and unexpected.</p>
+<p><img src="static/minimal-surface/helicoid.png" alt="Soap film on a spring"></p>
+<blockquote>
+<p>Image source: <a href="https://commons.wikimedia.org/wiki/File:Bulle_de_savon_hélicoïde.PNG">Wikipedia</a></p>
+</blockquote>
 <p>Now, because finding the surface is a question of continuous minimization, we
 should be able to easily apply automatic differentiation — at least, to a
 discretization of the problem.  Here is the algorithm: we start with a mesh
