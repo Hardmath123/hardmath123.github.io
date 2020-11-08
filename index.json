@@ -679,6 +679,23 @@
             "file": "minimal-surface.md",
             "date": "9/13/20",
             "markdown": true
+        },
+        {
+            "title": "Leaks and Clogs: Why My Tensors Aren't Flowing",
+            "author": "Hardmath123",
+            "description": "Describing a class of tricky bugs in PyTorch programs",
+            "file": "leaks-and-clogs.md",
+            "date": "9/22/20",
+            "markdown": true,
+            "draft": true
+        },
+        {
+            "title": "Believing",
+            "author": "Hardmath123",
+            "description": "Reprinting old thoughts on faith, mathematical and otherwise",
+            "file": "believing.md",
+            "date": "11/8/20",
+            "markdown": true
         }
     ]
 }
