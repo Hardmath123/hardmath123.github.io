@@ -3,29 +3,16 @@ body {
   margin: 0;
   padding: 0;
   font-size: 12pt;
-  border-top: solid 0.2em #c90426;
-  border-bottom: solid 0.2em #c90426;
-  color: #222;
-  background-color: white;
+  border-top: solid 0.4em #c90426;
+  border-bottom: solid 0.4em #c90426;
+  color: #333;
+  background-color: #fffcfc;
 }
 
 p, li, dd {
   line-height: 1.4em;
   text-rendering: optimizeLegibility;
-
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
 }
-
-/*
-@media screen and (min-width: 500px) {
-    p, li {
-        text-align: justify;
-    }
-}
-*/
 
 img {
   max-width: 100%;
@@ -62,20 +49,7 @@ strong a:visited {
 
 a {
   color: #559;
-  /* text-decoration: none; */
 }
-
-/* Weird degree symbol after anchor thingy
-p a:after, li a:after {
-    position: relative;
-    content: "\FEFF\00B0"; / * zero width no break space + degree symbol * /
-    margin-left: 0.10em;
-    font-size: 90%;
-    top: -0.10em;
-}
-*/
-
-
 
 a:hover {
   color: #77A;
@@ -164,16 +138,14 @@ h3 {
   font-size: 1.5em;
   font-weight: lighter;
   margin-bottom: 0.5em;
-/*font-family: sans-serif;*/
 }
 
-/* Dateline is h4 */
+/* Date line is h4 */
 h4 {
   margin-top: 1em;
   margin-bottom: 2em;
-  font-variant: small-caps;
   font-size: 0.8em;
-  font-weight: lighter;
+  font-weight: normal;
   font-family: sans-serif;
 }
 
@@ -263,18 +235,6 @@ h4 {
   margin-top: 2em;
 }
 
-/*
-#postcontent p:first-of-type:first-letter, .dropcap:first-letter {
-  font-size: 4em;
-  margin-right: 2px;
-  font-family: "Didot", "Baskerville", "Garamond", serif;
-}
-*/
-/*
-#postcontent p:first-of-type:first-line {
-  font-variant: small-caps;
-}
-*/
 strong a {
   color: black;
 }
@@ -284,20 +244,6 @@ strong a {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-
-blockquote {
-  font-style: italic;
-}
-
-blockquote em {
-  font-style: normal;
-}
-
-blockquote p {
-  text-indent:0;
-}
-
-
 
 hr {
   width: 2em;
@@ -316,35 +262,9 @@ hr:after {
 }
 
 
-/*
-code[class*="language-"] {
-  font-size: inherit !important;
-}
-pre[class*="language-"], code[class*="language-"] {
-    text-shadow: none !important;
-}
-
-pre[class*="language-"] *, code[class*="language-"] * {
-    background: inherit !important;
-}
-
-pre {
-    background: inherit !important;
-}*/
-
 pre {
     overflow-x: auto;
     margin: 2em;
-}
-
-#postcontent ul li:before {
-    display: inline-block;
-    content: "\00bb"; /* a right guillimet for a bullet (abuse) */
-    margin-left: -1.5em;
-    width: 1.5em;
-}
-#postcontent ul li {
-    list-style: none;
 }
 
 li {
@@ -358,7 +278,6 @@ li p {
 .sc {
     font-variant: small-caps;
 }
-
 
 #comment-breaker {
   margin-top: 5em;
