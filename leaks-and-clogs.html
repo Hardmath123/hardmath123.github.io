@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="canonical" href="https://hardmath123.github.io/leaks-and-clogs.html"/>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Leaks and Clogs: Why My Tensors Aren&#39;t Flowing - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <link rel="stylesheet" href="/octicons/octicons.css">
+            <script src="static/main.js"></script>
+            <div>
+                <a href="/"><span class="left-word">Comfortably</span>&nbsp;<span class="right-word">Numbered</span></a>
+            </div>
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h1>Leaks and Clogs: Why My Tensors Aren&#39;t Flowing</h1>
+                <center><em><p>Describing a class of tricky bugs in PyTorch programs</p>
+</em></center>
+                <h4>Tuesday, September 22, 2020 &middot; 3 min read</h4>
+<p>I want to briefly describe two kinds of tricky PyTorch program bugs, which I call “leaks” and “clogs.” In my mind they reveal an exciting possible research direction for anyone interested in designing better programming languages and APIs for machine learning.</p>
+<p>The examples here are Python 3.8.5 running PyTorch 1.6.0.</p>
+<h2 id="clogs">Clogs</h2>
+<p>First, consider this simple PyTorch program to compute ($d(\sqrt{x} + x)/dx |_{x=4}$). As you read the code, consider these three questions:</p>
+<ol>
+<li>What do you <em>expect</em> to be printed?</li>
+<li>What do you think <em>actually</em> gets printed?</li>
+<li>What do you think <em>should</em> be printed?</li>
+</ol>
+<pre><code class="lang-python">x = torch.tensor(4., requires_grad=True)
+y = sqrt(x) + x
+y.backward()
+print(x.grad)
+</code></pre>
+<p>What a casual user/AP calculus student would <em>expect</em> is to see 1.25 printed. But what actually gets printed is 1. Why?</p>
+<p>Well, it’s because I didn’t show you the full program. I hid the imports. It turns out that the first line of this program is <code>from math import sqrt</code>, <em>not</em> <code>from torch import sqrt</code>. Now, the Python standard library’s <code>math.sqrt</code> is not a PyTorch-differentiable function, and so PyTorch is unable to track the computation graph through <code>sqrt(x)</code>. As a result, backpropagation gets “stuck” on the way back, and only the derivative of <code>x</code>, i.e. 1, is deposited. This is a clog — the gradients can’t flow! In the dataflow graph below, the dotted arrow represents the clog.</p>
+<p><img src="static/leaks-and-clogs/clog.png" alt="Clog graph"></p>
+<p>Now for my last question: what <em>should</em> be printed? I believe this kind of thing should <em>at the very least</em> raise an error or a warning. While this example was pretty straightforward, there are many different ways to “clog” the backpropagation, with varying degrees of insidiousness, and it’s a nightmare to debug such situations when something goes wrong (that is, if you notice the bug in the first place…!).</p>
+<h2 id="leaks">Leaks</h2>
+<p>Now, consider this slightly more complicated PyTorch program. We are going to implement a very silly contrived-to-be-simple reinforcement learning algorithm. Suppose you’re driving a car and you can choose your velocity. Here is the situation: There is a truck driving on the road with constant velocity, and your goal is to catch up and drive right alongside the truck. At each timestep you can choose your velocity and then you’re told how far you are from the truck.</p>
+<p>So, here’s the setup.</p>
+<pre><code class="lang-python">truck_velocity = torch.tensor(3.142)
+truck_position = torch.tensor(2.718)
+
+def get_measurement(position):
+    global truck_position
+    # Update truck position for current timestep
+    truck_position = truck_position + truck_velocity
+    # Return my distance to the truck
+    return torch.abs(truck_position - position)
+</code></pre>
+<p>And here’s a simple online gradient-based learning algorithm:</p>
+<pre><code class="lang-python">my_velocity = torch.tensor(0.01)
+my_position = torch.tensor(0.)
+
+for i in range(500):
+    my_velocity.requires_grad_()
+
+    # Update my position for current timestep
+    my_position = my_position + my_velocity
+
+    # Compute d(distance to truck) / d(velocity)
+    loss = get_measurement(my_position)
+    loss.backward()
+
+    # Gradient descent on velocity to be closer next time
+    my_velocity =\
+        my_velocity.detach() - my_velocity.grad * 0.01
+</code></pre>
+<p>Unlike last time, there’s absolutely nothing up my sleeve here — this is all reasonable PyTorch code. See anything wrong? No, because there isn’t: this works just fine.</p>
+<p>But, if you run it for long enough (say, 1000 iterations), you’ll notice something odd: each step starts taking longer and longer. The algorithm is <a href="https://accidentallyquadratic.tumblr.com">accidentally quadratic</a>!</p>
+<p><img src="static/leaks-and-clogs/graph.png" alt="Time graph, essentially linear and increasing"></p>
+<p>How can that be? Isn’t each loop the same calculation? Well, if you’ve read <a href="https://arxiv.org/abs/1909.13371">this paper</a> you might immediately look to see if we’re <code>.detach()</code>-ing <code>my_velocity</code>. If we forgot to do that then the gradients would be “leaking” back in time across multiple steps, and each step would take longer and longer as we’re observing.</p>
+<p>But we <em>are</em> detaching <code>my_velocity</code>. So what’s going on?</p>
+<p>It’s tricky, so let me just tell you: the leak is in <code>my_position</code>, which subtly depends on <em>all</em> previous values of <code>my_velocity</code> and therefore makes backpropagation compute gradients for <em>all</em> previous timesteps. The dataflow diagram below hopefully clarifies this: notice how each <code>velocity</code> has its parent nodes detached, but <code>loss</code> still has a dependence on the chain of <code>positions</code>.</p>
+<p><img src="static/leaks-and-clogs/leak.png" alt="Leak graph"></p>
+<p>Finding the correct place to insert the line <code>my_position = my_position.detach()</code> is left as a not-quite-trivial exercise to the reader (putting it in the <em>wrong</em> place will either have no effect <em>or</em> cause <code>my_velocity</code> to always have gradient 0).</p>
+<p>Just like memory leaks, gradient leaks can be very sneaky! They pop up whenever your inference is stateful — so think of applications like physics controllers, reinforcement learning, graphics, RNNs, etc. But they only manifest themselves visibly when your inference passes through enough timesteps for the leak to compound. Just like a dripping tap, you might not notice your losses until you get the bill… and then, you need to track down the source of the leak and figure out the right way to fix it.</p>
+<h2 id="plungers-and-patches-">Plungers and patches?</h2>
+<p>In the long term, how can we protect ourselves from this class of bugs? One potential solution is to embed the API inside a language whose type system carefully tracks the creation of the computation graph. You might be able to use well-understood techniques like <em>taint analysis</em> or <em>linear types</em> (pun not intended) which traditionally track the flow of <em>information</em>, to now track the flow of <em>differentiability</em> through the program. As a result you could alert users to likely bugs, such as leaks and clogs.</p>
+<p>If after reading this post you were inspired to try out your own ideas, then please let me know! I’m very interested in possible solutions.</p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="https://github.com/kach">
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        Subscribe (RSS feed)</a></li>
+                    <li><a href="https://twitter.com/hardmath123">
+                        Twitter</a></li>
+                    <li><a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        CC BY-NC 3.0</a></li>
+                </ul>
+            </div>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>

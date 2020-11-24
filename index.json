@@ -681,15 +681,6 @@
             "markdown": true
         },
         {
-            "title": "Leaks and Clogs: Why My Tensors Aren't Flowing",
-            "author": "Hardmath123",
-            "description": "Describing a class of tricky bugs in PyTorch programs",
-            "file": "leaks-and-clogs.md",
-            "date": "9/22/20",
-            "markdown": true,
-            "draft": true
-        },
-        {
             "title": "Believing",
             "author": "Hardmath123",
             "description": "Reprinting old thoughts on faith, mathematical and otherwise",
@@ -703,6 +694,14 @@
             "description": "An old Levi's ad that ran when I lived in India went like this: \"It's the thread in your seams that's tied to your dreams. It's the soles in your feet that keep the beat.\"",
             "file": "electric-guitar.md",
             "date": "11/13/20",
+            "markdown": true
+        },
+        {
+            "title": "Clogs and Leaks: Why My Tensors Won't Flow",
+            "author": "Hardmath123",
+            "description": "Defining a class of tricky bugs in PyTorch programs",
+            "file": "clogs-and-leaks.md",
+            "date": "11/23/20",
             "markdown": true
         }
     ]

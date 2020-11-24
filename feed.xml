@@ -10,10 +10,187 @@
             <link>https://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 14 Nov 2020 07:12:43 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 24 Nov 2020 18:24:47 GMT</lastBuildDate>
         <atom:link href="https://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Clogs and Leaks: Why My Tensors Won't Flow]]></title>
+            <description><![CDATA[<p>Defining a class of tricky bugs in PyTorch programs</p>
+
+
+<blockquote>
+<p><em>Note:</em> Jekyll and Hyde — is how this blog goes. There are weeks of
+rational thought and weeks of irrational ramblings. This fall has been much
+of the latter, for good reason, but here is a break(!) in the clouds.</p>
+<p>Okay, okay. The truth is that I wrote this essay for my CS class this quarter
+(leave it to Pat to assign an essay for a CS class!). But then, I think I
+have reached the age where every written assignment in college is to be
+treated as an opportunity to say something I otherwise would not have a
+chance to say… and so the essay, lightly edited, finds its way to this
+blog.</p>
+</blockquote>
+<hr>
+<p>In this essay I want to describe two kinds of tricky bugs that might creep into
+your PyTorch programs. I call the bugs “clogs” and “leaks.” In my mind “clogs”
+and “leaks” reveal an exciting possible research direction for anyone
+interested in designing better APIs for automatic differentiation in machine
+learning.</p>
+<p><em>Note: The examples presented, though in principle timeless, were tested using
+Python 3.8.5 running PyTorch 1.6.0.</em></p>
+<h2 id="preliminaries-pytorch-s-pipes">Preliminaries: PyTorch’s Pipes</h2>
+<p>If you are familiar with PyTorch internals, you can skip this section. If not,
+a brief review of a wonderful topic: how does PyTorch differentiate your code
+for gradient descent? The technical term for PyTorch’s approach is <em>tape-based
+reverse-mode automatic differentiation</em>. As you perform arithmetic computations
+on your variables, PyTorch tracks the intermediate values in a computation
+graph. When you want to differentiate a value, you call <code>.backward()</code> on that
+value. PyTorch then walks <em>backwards</em> along this computation graph, computing
+the derivative at each step and accumulating them according to the chain rule.
+Eventually, the leaf nodes of the graph contain the derivatives you asked for.</p>
+<p>Let me give a small example. Suppose we wanted to compute ($d2x^2/dx|_{x=3}$).
+We might write a program that looks like this:</p>
+<pre><code class="lang-python">x = torch.tensor(3., requires_grad=True)
+y = 2 * x**2
+y.backward()
+print(x.grad)
+</code></pre>
+<p>This program generates the following computation graph.</p>
+<p><img src="static/clogs-and-leaks/forward.png" alt="Forward"></p>
+<p>When you call <code>.backward()</code>, the PyTorch automatic differentiation walks
+backwards along the graph, computing derivatives at <em>each</em> step. By the chain
+rule, the product of these gives the overall derivative we sought.</p>
+<p><img src="static/clogs-and-leaks/backward.png" alt="Forward"></p>
+<h2 id="clogs">Clogs</h2>
+<p>Now, consider this simple PyTorch program to compute ($d(\sqrt{x} +
+x)/dx|_{x=4}$). What do you expect to be printed?</p>
+<pre><code class="lang-python">x = torch.tensor(4., requires_grad=True)
+y = sqrt(x) + x
+y.backward()
+print(x.grad)
+</code></pre>
+<p>A casual user or AP calculus student would <em>expect</em> to see 1.25 printed, of
+course. But what <em>actually</em> gets printed is 1. Why?</p>
+<p>Ah! I didn’t show you the full program: I hid the imports. It turns out that
+the first line of this program is <code>from math import sqrt</code>, <em>not</em> <code>from torch
+import sqrt</code>. Now, the Python standard library’s <code>math.sqrt</code> is not a
+PyTorch-differentiable function, and so PyTorch is unable to track the flow of
+derivatives through <code>sqrt(x)</code>.</p>
+<p>As a result of this bug, backpropagation gets “stuck” on the way back, and only
+the derivative of <code>x</code>, i.e. 1, is deposited. This is a clog — the gradients
+can’t flow! In the computation graph below, the dotted arrow represents the
+clog.</p>
+<p><img src="static/clogs-and-leaks/clog.png" alt="Clog graph"></p>
+<p>The reason calling <code>math.sqrt()</code> on a PyTorch tensor is not a runtime error is
+that PyTorch tensors implicitly convert to “raw” floating-point numbers as
+needed. Most of the time this is a useful and indispensable feature. But I
+believe this situation should <em>at the very least</em> raise an error or a warning.
+While the example I presented was reasonably straightforward, there are <em>many</em>
+different ways to “clog” backpropagation, with varying degrees of insidiousness
+(for example, what happens when you mutate a variable in place?). It can be a
+nightmare to debug such situations when something goes wrong — that is, if you
+notice the bug in the first place!</p>
+<p><em>By the way:</em> the celebrated “reparametrization trick” that powers variational
+autoencoders is really just a workaround for a gradient clog problem. To train
+a variational autoencoder, you need to compute the derivative of a sample of a
+probability distribution with respect to the distribution’s parameters (e.g.
+the mean ($\mu$) and variance ($\sigma^2$) of a Gaussian distribution).
+Unfortunately, naïvely sampling from a parametrized distribution abruptly
+truncates the computation graph with respect to the parameters, because the
+random number generator is not differentiable all the way through — who <em>knows</em>
+what <em>it’s</em> doing! The solution, is to sample from a standard unit normal
+distribution (where ($\mu=0$) and ($\sigma=1$)), and then re-scale the sample
+by multiplying by ($\sigma$) and adding ($\mu$). Of course, multiplication and
+addition <em>are</em> easily differentiable, and so the gradients can now flow.
+Problem solved!</p>
+<h2 id="leaks">Leaks</h2>
+<p>Now, consider this slightly more complicated PyTorch program. We are going to
+implement a silly reinforcement learning algorithm. Here is the situation:
+There is a truck driving on the road with constant velocity, and your goal is
+to catch up to it and drive right alongside the truck. At each timestep you are
+allowed to choose your velocity, and then you’re told how far you are from the
+truck.</p>
+<p>The setup:</p>
+<pre><code class="lang-python">truck_velocity = torch.tensor(3.142)
+truck_position = torch.tensor(2.718)
+
+def get_measurement(car_position):
+    global truck_position
+    truck_position = truck_position + truck_velocity
+    return torch.abs(truck_position - car_position)
+</code></pre>
+<p>And a simple online gradient-based learning algorithm:</p>
+<pre><code class="lang-python">my_velocity = torch.tensor(0.01)
+my_position = torch.tensor(0.)
+for i in range(500):
+    my_velocity.requires_grad_()
+    my_position = my_position + my_velocity
+    loss = get_measurement(my_position)
+    loss.backward()
+    my_velocity =\
+        my_velocity.detach() - my_velocity.grad * 0.01
+</code></pre>
+<p>Unlike last time, there’s nothing up my sleeve here — this is all reasonable
+PyTorch code. This code actually works just fine.</p>
+<p>But, if you run it for long enough (say, 1000 iterations), you’ll notice
+something odd: each step starts taking longer and longer. The algorithm is
+<a href="https://accidentallyquadratic.tumblr.com">accidentally quadratic</a>! You can see
+this behavior quite clearly in this graph, which shows a linear growth in
+iteration time from step to step (the spikes are garbage collection pauses).</p>
+<p><img src="static/clogs-and-leaks/graph.png" alt="Time graph, essentially linear and
+increasing"></p>
+<p>How can this be? Isn’t each loop doing the same calculation?</p>
+<p>Here is one hypothesis: if you’ve read <a href="https://arxiv.org/abs/1909.13371">this
+paper</a> you might look to see if we’re
+<code>.detach()</code>-ing <code>my_velocity</code>. The <code>.detach()</code> function snips off all incoming
+edges to a node in the computation graph; essentially, creating an artificial
+clog. If we forget to do that, the gradients would “leak” back in time across
+multiple steps in the graph, all the way back to the first step, and each
+iteration would therefore take longer and longer — just as we’re observing.</p>
+<p>But, alas, this is not the source of the bug: as you can see, we <em>are</em>
+detaching <code>my_velocity</code> when we update it. So, what’s really going on here?</p>
+<p>It’s tricky! The leak is in <code>my_position</code>, which subtly depends on <em>all</em>
+previous values of <code>my_velocity</code> and therefore makes backpropagation compute
+gradients for <em>all</em> previous timesteps. The dataflow diagram below hopefully
+clarifies this point. Notice how each <code>velocity</code> has its parent nodes detached
+(thanks to the call to <code>.detach()</code>!), but <code>loss</code> still has an indirect
+dependence on the chain of <code>positions</code>.</p>
+<p><img src="static/clogs-and-leaks/leak.png" alt="Leak graph"></p>
+<p>Finding the correct place to insert the line <code>my_position =
+my_position.detach()</code> is left as a not-quite-trivial exercise to the reader.
+Beware! Putting it in the <em>wrong</em> place will either have no effect <em>or</em> cause
+<code>my_velocity</code> to always have gradient 0.</p>
+<p>Just like memory leaks, gradient leaks can be extremely sneaky. They pop up
+whenever your inference is “stateful” — think of applications like physics
+controllers, reinforcement learning, animated graphics, RNNs, and so on. I
+would not be surprised if many popular implementations of such algorithms <em>do</em>
+have “gradient leak” bugs. However, the bugs usually only manifest themselves
+visibly when the inference passes through enough timesteps for the leak to
+compound. Just like a dripping tap, you might not notice your losses until you
+get the bill at the end of the month… and then, you need to figure out how to
+track down the source of the leak and figure out the right way to fix it.</p>
+<h2 id="plungers-and-patches-an-appeal-for-plumbing-">Plungers and patches? An appeal for PLumbing…</h2>
+<p>In the long term, how can we protect ourselves from this class of bugs? One
+potential solution is to embed the API inside a language whose type system
+tracks the creation of the computation graph. You might be able to use
+well-understood techniques like <em>taint analysis</em> or <em>linear types</em> (pun not
+intended) which traditionally track the flow of <em>information</em>, to now track the
+flow of <em>differentiability</em> through the program.</p>
+<p>Let me be slightly more concrete about this suggestion. In our “clog” example,
+a good type system might detect that <code>sqrt</code> cuts off the computation graph,
+and, knowing that ($y$) does not directly depend on ($x$) in the expected way
+anymore, complain at compile-time when we try to request ($dy/dx$). In our
+“leak” example, a good type system might notice that the “old” <code>my_position</code>
+effectively goes out of scope when it is re-assigned, and therefore it might
+complain that an unreachable reference to it actually does persist through the
+new <code>my_position</code>. Such checks seem very reasonable to demand from a modern
+type system.</p>
+]]></description>
+            <link>https://hardmath123.github.io/clogs-and-leaks.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/clogs-and-leaks.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Mon, 23 Nov 2020 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Public Time and the Privacy of Time]]></title>
             <description><![CDATA[<p>An old Levi’s ad that ran when I lived in India went like this: “It’s the thread in your seams that’s tied to your dreams. It’s the soles in your feet that keep the beat.”</p>
@@ -1200,91 +1377,6 @@ Brains, Bodies, Atoms and Cultures. 2002.</p>
             <guid isPermaLink="true">https://hardmath123.github.io/eucalyptus.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Wed, 25 Dec 2019 08:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[Dancing Orchards on the I-5]]></title>
-            <description><![CDATA[<p>Investigating number-theoretic patterns in large grids of trees</p>
-
-
-<p>The last time I spent a long time on I-5, I started thinking about
-<a href="envelope.html">envelopes</a>. This time, I started thinking about orchards. As
-you drive along the central valley highway, you can see thousands and thousands
-of perfect rows of trees. You can actually see them from the top on Google’s
-<a href="https://www.google.com/maps/@36.6590095,-120.643549,2656a,35y,236.91h/data=!3m1!1e3">satellite
-imagery</a>;
-try zooming in slowly on that point, it’s really quite beautiful.</p>
-<p>When you drive by them, you see the side view rather than the top view. In
-fact, you see the side view <em>in motion</em> – the trees look like they’re dancing
-an elaborate dance, continuously lining up into different formations to form
-different rows in different angles. Really, of course, it is you who is moving;
-the trees are still but by viewing them from different angles you can see
-different “alignments” of the grid.</p>
-<p>The effect is most pronounced with freshly-planted trees (or perhaps those are
-markers?), where there is no foliage blocking the horizon.</p>
-<p><img src="static/orchard.png" alt="orchard"></p>
-<p>I didn’t think to make a video at the time, but you can imagine that as the car
-moves forwards a little bit, the pattern re-aligns in an incredibly satisfying
-way.</p>
-<p>I’m intrigued by the multiple “vanishing points” you can see in that picture.
-The trees are regularly spaced in a square grid, but somehow there are multiple
-(!) irregularly-spaced (!!) points along the horizon to which rows of trees
-appear to converge. What’s going on here — is there a pattern to the
-patterns? You could either stop reading here to have food for thought on your
-next road trip, or you could keep reading for my ideas.</p>
-<hr>
-<p>The I-5 trees are a variation on a well-known theme: a theme called <em>Euclid’s
-orchard</em> (<a href="https://en.wikipedia.org/wiki/Euclid%27s_orchard">Wikipedia</a>,
-<a href="http://mathworld.wolfram.com/EuclidsOrchard.html">MathWorld</a>). You stand at
-the origin of the plane, and at every integer point there is a line segment
-(“tree”) extending one unit upwards perpendicular to the plane. What you see
-from your vantage point is Euclid’s orchard. Try to imagine what it looks like;
-then, play with a JavaScript simulation of it
-<a href="https://www.khanacademy.org/computer-programming/euclids-orchard/5282060266635264">here</a>.</p>
-<p>The main idea of Euclid’s orchard is that trees at integer points (x, y)
-occlude trees at any integer multiples of that point (nx, ny), so you don’t see
-anything behind them. Also, nearby trees appear taller than farther-away trees
-because that’s how perspective works. So there is a “horizon” where in each
-direction you either see (1) a tree if the direction’s slope is rational, and
-the tree is shorter if its denominator is larger; (2) nothing if the
-direction’s slope is irrational. All sorts of fun can be had with this: see for
-example a <a href="https://mathlesstraveled.com/2017/07/22/a-few-words-about-pww-20/">nice connection to the Fibonacci
-numbers</a>.</p>
-<p>The I-5 orchard in the picture is similar, but now we look upon it from some
-height. Imagine mapping each point on the horizon to the direction in which I
-would have to point my camera to look directly at that point. The “vanishing
-points” have lots of trees along those directions, giving the illusion of
-“rows.” What does this mean? It means that if you walked along that ray in
-Euclid’s orchard, you would run into trees more frequently than other rays. In
-other words, those rays represent directions whose slopes are rational with
-small denominators.</p>
-<p>Hmm… rational with small denominators… where have I blogged about that
-before…? Right — around four years ago, when we
-<a href="a-balance-of-powers.html">showed</a> that 2^12864326 begins with the digits
-“10000000…” (and other number-theoretic shenanigans).  I wasn’t kidding,
-rational approximation really is one of my favorite topics!</p>
-<p>At the time I showed you this picture with little explanation.</p>
-<p><img src="static/ford-circle.png" alt="Ford circle"></p>
-<p>Here is a little more explanation of its significance: as you start filling in
-circles to some level, you generate a sequence of fractions called the <a href="https://en.wikipedia.org/wiki/Farey_sequence">“Farey
-sequence”</a> by listing the points
-of tangency of the circle and the X axis. The Farey sequence is the list of
-completely reduced fractions whose denominators are smaller than some bound.
-Putting those two facts together: the points of tangency of the circles
-represent points that are “rational with small denominators” — exactly what
-we thought our I-9 orchard’s “vanishing points” were!</p>
-<p>Looking back at the image, this is somewhat believable. We see a couple of
-“strong” vanishing points, and then “weaker” vanishing points in between the
-strong ones, and then <em>even</em> “weaker” vanishing points between the strong and
-the weak vanishing points, and so on.</p>
-<p>There are a number of cool implications of this. For example, the “least
-patterned” regions of the horizon would correspond to regions that are “hard to
-rationally approximate”; so, you’d expect them at plus-or-minus the golden
-ratio’s slope from your line of sight.</p>
-]]></description>
-            <link>https://hardmath123.github.io/orchard.html</link>
-            <guid isPermaLink="true">https://hardmath123.github.io/orchard.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 10 Sep 2019 07:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
