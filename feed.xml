@@ -10,10 +10,135 @@
             <link>https://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Tue, 24 Nov 2020 18:24:47 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 15 Dec 2020 23:11:10 GMT</lastBuildDate>
         <atom:link href="https://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Systems for Coordinating Coordinate Systems]]></title>
+            <description><![CDATA[<p>Making 3D graphics code safer by telling vectors where home is</p>
+
+
+<p>When I took Pat and Matt’s wonderful graphics class CS348B (yay PBRT!), one of
+the most frustrating debugging journeys I had was related to interpreting
+vectors in the wrong coordinate systems. At the time I’d come up with an idea
+to catch such bugs statically, and now, 1.5 years later, I finally have found
+time to write down the idea.</p>
+<p>Here is the problem: A vector only has “meaning” with respect to a coordinate
+system. In graphics, a vector could be in all sorts of coordinate systems:
+<em>world space</em>, or <em>object space</em>, or <em>camera space</em>, or <em>screen space</em>, or
+<em>normalized device coordinate (NDC) space,</em> or <em>raster space</em> (some of these
+are self-explanatory, but see <a href="http://www.pbr-book.org/3ed-2018/Camera_Models/Projective_Camera_Models.html">PBR
+&sect;6.1.1-6.2</a>
+for definitions). This leads to bugs. If you interpret a “camera-space” vector
+as if it were in “world space,” your math will be <em>all wrong!</em>  You need to
+apply the affine transformation <code>cameraToWorld</code> before doing any world-space
+computation on a camera-space vector. But what if you forget to do that? Your
+C++ code will happily compile, but your poor bunny might look like chicken soup
+instead… (I learned this the hard way!).</p>
+<p><img src="static/pbrt-coordinate-system-diagram.png" alt="some pbrt coordinate systems"></p>
+<p>This got me thinking: perhaps a safer <code>Vector3f</code> should know <em>at the type
+level</em> what coordinate system it is in. Rather than a <code>Vector3f</code>, perhaps what
+we really want is a <code>Vector3f&lt;WorldSpace&gt;</code>. You simply can’t add a
+<code>Vector3f&lt;CameraSpace&gt;</code> to a <code>Vector3f&lt;WorldSpace&gt;</code> — that’s a <em>type error!</em>
+The compiler <em>makes</em> you call <code>cameraToWorld</code> if you want to do anything with
+these two vectors. (All this is very much in the spirit of
+<a href="https://github.com/kach/torchsaber">torchsaber</a>, by the way.)</p>
+<p>I think there are broadly two ways you might want to implement something like
+this. One way is to treat <code>CameraSpace</code> as a purely formal symbol, just a
+<em>name</em> or an <em>annotation</em>. The compiler’s job is to check these annotations.
+You’d have to explicitly break this abstraction inside the implementation of
+<code>cameraToWorld</code>, but from a pedagogical perspective I think that is exactly
+what you want.</p>
+<p>The other way is for the tag <code>CameraSpace</code> to somehow encode the actual
+geometry of what <em>camera space</em> “means.” For example, each vector could also
+carry around the <code>Transformation</code> that gets you to its host coordinate system
+from <code>WorldSpace</code>. Given this information, the compiler could even be able to
+<em>infer</em> the implementation of <code>cameraToWorld</code> for <em>free!</em> Of course, this comes
+at a cost, which is that the compiler might not be able to statically check
+equality of <code>Transformations</code>, because the matrices might not be materialized
+at compile-time.</p>
+<hr>
+<p>In the rest of this post I’ll quickly literate-ly program option (1) as a proof
+of concept. It is short and sweet (at least, as “sweet” as any bit of C++
+hacking can be).</p>
+<p>First, we define our coordinate system “annotations” as dummy classes.</p>
+<pre><code class="lang-c++">class Space {};
+class WorldSpace : public Space {};
+class CameraSpace : public Space {};
+</code></pre>
+<p>Next, we design a <code>Vec3</code> template class that takes in such a “tag” as a
+template parameter (<code>CoordinateSystem</code>), and enforces that the tags are the
+same on operations. I’ve implemented the “<code>+</code>“ operator but you can imagine the
+rest — there is nothing sneaky going on here! In fact, this is exactly how
+one implements a generic <code>Vector3</code> that can be specialized over numeric types
+(e.g.  <code>Vector3&lt;float&gt;</code>, <code>Vector3&lt;int&gt;</code>, and so on).</p>
+<pre><code class="lang-c++">template &lt;class CoordinateSystem&gt;
+class Vec3 {
+  static_assert(
+    std::is_base_of&lt;Space, CoordinateSystem&gt;::value,
+    &quot;Vec3 annotation must derive from Space&quot;
+  );
+
+public:
+  double x, y, z;
+  Vec3(double x, double y, double z)
+    : x(x), y(y), z(z) {};
+
+  // the &#39;+&#39; operator!
+  Vec3&lt;CoordinateSystem&gt; operator+(
+    Vec3&lt;CoordinateSystem&gt;&amp; other
+  ) {
+    return Vec3(
+      this-&gt;x + other.x,
+      this-&gt;y + other.y,
+      this-&gt;z + other.z
+    );
+  }
+};
+</code></pre>
+<p>(Note that you need to <code>#include &lt;type_traits&gt;</code> to get <code>std::is_base_of</code>, which
+is there just to protect you from trying to make a <code>Vec3&lt;string&gt;</code> or something
+else uncouth like that. Completely optional.)</p>
+<p>…actually, that’s it! We can already get some mileage out of this. For
+example, this should be okay:</p>
+<pre><code class="lang-c++">Vec3&lt;WorldSpace&gt; p(0, 0, 0);
+Vec3&lt;WorldSpace&gt; q(1, 1, 1);
+auto r = p + q; // ok!
+</code></pre>
+<p>On the other hand, this is perhaps <em>not</em> okay:</p>
+<pre><code class="lang-c++">Vec3&lt;CameraSpace&gt; s(2, 2, 2);
+auto t = r + s; // NOT OK!
+</code></pre>
+<p>And indeed, the compiler complains <em>and</em> gives a helpful error message!</p>
+<pre><code>test.cc:40:14: error: no match for &#39;operator+&#39;
+(operand types are &#39;Vec3&lt;WorldSpace&gt;&#39;
+and &#39;Vec3&lt;CameraSpace&gt;&#39;)
+   40 |   auto t = r + s; // NOT OK!
+      |            ~ ^ ~
+      |            |   |
+      |            |   Vec3&lt;CameraSpace&gt;
+      |            Vec3&lt;WorldSpace&gt;
+</code></pre><p>Of course! How <em>dare</em> we add a camera-space vector to a world-space vector? We
+need to transform <code>s</code> to world-space…</p>
+<pre><code class="lang-c++">Vec3&lt;WorldSpace&gt; cameraToWorld(
+  Vec3&lt;CameraSpace&gt;&amp; vec
+) {
+  return Vec3&lt;WorldSpace&gt;(
+    vec.x * 2, vec.y - 4, vec.z + 8 // or whatever
+  );
+}
+</code></pre>
+<p>…and now <code>g++</code> is happy. :)</p>
+<pre><code class="lang-c++">auto u = r + cameraToWorld(s); // ok!
+</code></pre>
+<p>Perhaps this trick will make its way into PBRT someday!</p>
+]]></description>
+            <link>https://hardmath123.github.io/systems-for-coordinating-coordinate-systems.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/systems-for-coordinating-coordinate-systems.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Tue, 15 Dec 2020 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Clogs and Leaks: Why My Tensors Won't Flow]]></title>
             <description><![CDATA[<p>Defining a class of tricky bugs in PyTorch programs</p>
@@ -1259,124 +1384,6 @@ plt.plot(np.linalg.eig(np.cov(X))[1][:, :4])
             <guid isPermaLink="true">https://hardmath123.github.io/spaghetti-shadows.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Thu, 26 Mar 2020 07:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[Dendrological Dexterity]]></title>
-            <description><![CDATA[<p>Thoughts on the chirality of the wood grain in eucalyptus trees</p>
-
-
-<p>It’s Christmastime, shall we talk about trees?</p>
-<p>I was reading about Knuth’s <a href="https://www-cs-faculty.stanford.edu/~knuth/fant.html">Fantasia
-Apocalypta</a>, and his
-description of the “style” he wrote it in contains the wonderfully Knuthian
-line “And of course a musical work on the Apocalypse should also contain
-calypso.” Naturally I had to look up whether or not this was a linguistic
-coincidence, and — in an odd turn of events, since these things usually tend
-to work out — it turns out that <em>apocalypse</em> and <em>calypso</em> are <em>not</em>
-etymologically related.  <em>Apocalypse</em> comes from the Greek root <em>kaluptein,</em>
-“to cover,” and so the <em>apocalypse</em> is the “uncovering” or “revelation” (the
-root <em>kel</em> is related to <em>hell</em>). The word <em>calypso</em> is of unknown origin, but
-from the West Indies (this is distinct from <em>Calypso,</em> the Greek mythological
-nymph, whose name is indeed related to “covered,” or “concealing”).</p>
-<p>I shared this with a good friend of mine and she immediately pointed out that
-we should check out the word <em>eucalyptus</em>. She was right: <em>eucalyptus</em> means
-“well-covered,” referring (not ironically to the bark as I originally thought
-but rather) to the calyx, which <a href="http://www.microscopy-uk.org.uk/mag/indexmag.html?http://www.microscopy-uk.org.uk/mag/artoct07/bj-eucalyptus.html">forms a lid over flowers when in
-bud</a>.</p>
-<p>That got me thinking about eucalyptuses…</p>
-<hr>
-<p>Lately I’ve spent a lot of time around the eucalyptuses in <a href="https://trees.stanford.edu/ENCYC/EUCnotes.htm">Toyon and Arboretum
-Groves</a> at Stanford and I’ve
-noticed that the peeling bark of what I’m 80% sure is the <a href="https://trees.stanford.edu/ENCYC/EUCglo.htm"><em>Eucalyptus
-globulus</em></a> (Tasmanian Blue Gum)
-seems to climb up the tree in a whirling, helical pattern. I didn’t have the
-presence of mind to take a picture at the time but here’s a picture <a href="https://commons.wikimedia.org/wiki/Eucalyptus_globulus#/media/File:Starr_031002-0027_Eucalyptus_globulus.jpg">from
-Wikimedia
-Commons</a>
-taken in Maui.</p>
-<p><img src="static/eucalyptus-grove.jpg" alt="lots of whooshing eucalyptuses"></p>
-<p>Really it’s just beautiful to me, the whorl reaching aspirationally towards the
-sky. I’m reminded of Correggio’s <em>Ganymede Abducted by the Eagle</em>, the way the
-dog and the tree stump look up together, moving, turning even while frozen in
-the painting.</p>
-<p><img src="static/correggio.jpg" alt="correggio&#39;s abduction of ganymede"></p>
-<p>This much would be believable, just another quirk of nature. But here’s the
-truly odd thing: most of the trees seem to grow according to a thumbs-up
-right-hand rule; if you were to try and screw them into the ground you would
-turn them righty-tighty. <em>So eucalyptuses have some kind of chirality?</em> I
-rubbed my eyes, I thought I was dreaming.</p>
-<p>But indeed, some hours of study later, I learned that the “spiral grain” is a
-real thing in the study of wood formation.</p>
-<hr>
-<p>In the Real World of economics spiral grain is considered a defect because it
-reduces the structural quality of wood. But let us set that aside for a moment
-and marvel at the phenomenon itself. I turn to Dr. John Maddern Harris’
-wonderfully comprehensive 1989 text <em>Spiral Grain and Wave Phenomena in Wood
-Formation</em> (thanks Chandler for finding me a copy!) for details. Harris, citing
-confusion about the convention in prior work, carefully defines LH (left-handed
-“sinistral”) and RH (right-handed “dextral”) spirals (I wonder if he was aware
-of the right-hand-rule convention from E&amp;M, which would simplify matters here).
-Perhaps more entertainingly Harris introduces the German words as well:</p>
-<blockquote>
-<p>Numerous other expressions have been used to describe spiral direction,
-reflecting no doubt the notorious difficulty of so doing without waving of
-arms and twisting of wrists. In the German literature the terms “sonnig” and
-“wider- sonnig” are frequently encountered. Their meaning is “with the sun”
-and “against the sun”, and hence (in the Northern Hemisphere!) they relate to
-LH and RH spiral grain respectively.</p>
-</blockquote>
-<p>Here’s a picture of a eucalyptus from Harris’ book.</p>
-<p><img src="static/eucalyptus-spiral.png" alt="spiral-grained eucalyptus"></p>
-<p>Certain species do indeed show predilections for certain handednesses.
-Furthermore, certain species <em>change</em> handedness over the course of their
-lives. In Harald Säll 2002 doctoral thesis <a href="https://www.diva-portal.org/smash/get/diva2:206846/FULLTEXT01.pdf">Spiral Grain in Norway
-Spruce</a> I
-learned the remarkable fact that the Norway Spruce begins life as a left-handed
-spiral grain, but over the decades transitions to a right-handed spiral grain.
-The drawing below is from his thesis:</p>
-<p><img src="static/spruce-spiral.png" alt="spiral grain reversal in spruce trees"></p>
-<p><a href="https://www.conifers.org/topics/spiral_grain.php">We don’t fully understand why trees
-spiral</a>, much less how they
-pick a direction. The most fanciful explanation I’ve come across — the one I
-would like to believe — is that there is some kind of Coriolis effect at
-work. But I will admit that both handednesses have been observed in both
-hemispheres, which weakens that theory.</p>
-<p>At the moment I’m on a quest to find a (translated, ideally) copy of Meyer’s
-1949 article <em>Sprachliche und literarische Bemerkungen zum Problem “Drehwuchs”</em>
-published in <em>Mitt Schweiz Centralanst Forst Veruschswes</em> (26:331-347) to learn
-more about the linguistic history of chirality in relation to spiral grains.
-Until then…</p>
-<p><strong>Open question:</strong> What’s going on here, why are eucalyptuses right-handed?</p>
-<p><strong>Further reading:</strong> Noah Rosenberg’s
-<a href="https://xtrees.sites.stanford.edu/tree-gallery">Xtrees</a> site about Stanford
-trees — I found this while reading about eucalyptuses!</p>
-<p>Edited to add (2/19/2020):</p>
-<blockquote>
-<p>“DNA normally forms a right-handed spiral (although a rare left-handed
-variant can occur). In other words, it twists like a conventional screw.
-That, though, has not stopped it being reproduced wrongly in hundreds of
-places. Dr. Tom Schneider has a website where he has collected hundreds of
-examples of incorrectly drawn ‘left-handed DNA’, most being found in
-scientific journals. Many are in advertisements, so we may perhaps charitably
-suggest the final copy was never seen by a scientist, but that doesn’t quite
-explain them all. Certainly not the editorial comment in Nature, the place
-where DNA’s structure was first described, which in 2000 mentioned the clues
-that ‘led Watson and Crick to deduce the left-handed double helical structure
-of DNA.’ Watson, in fact, has been particularly badly served, his 1978
-textbook, Molecular Biology of the Gene, having six different illustrations
-with left-handed DNA, and in 1990 the American journal Science quoting Watson
-as saying, ‘I have to read SCIENCE every week,’ this being illustrated with
-left-handed DNA. Perhaps worst of all, a 1998 reprint of Watson’s The Double
-Helix was illustrated on the front and back with left-handed DNA. Perhaps it
-is not a coincidence that Watson is left-handed.”</p>
-<p>— Chris McManus, in Right Hand, Left Hand: The Origins of Asymmetry in
-Brains, Bodies, Atoms and Cultures. 2002.</p>
-</blockquote>
-]]></description>
-            <link>https://hardmath123.github.io/eucalyptus.html</link>
-            <guid isPermaLink="true">https://hardmath123.github.io/eucalyptus.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Wed, 25 Dec 2019 08:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>

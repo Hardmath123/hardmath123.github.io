@@ -703,6 +703,14 @@
             "file": "clogs-and-leaks.md",
             "date": "11/23/20",
             "markdown": true
+        },
+        {
+            "title": "Systems for Coordinating Coordinate Systems",
+            "author": "Hardmath123",
+            "description": "Making 3D graphics code safer by telling vectors where home is",
+            "file": "systems-for-coordinating-coordinate-systems.md",
+            "date": "12/15/20",
+            "markdown": true
         }
     ]
 }
