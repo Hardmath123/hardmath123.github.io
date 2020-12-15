@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="canonical" href="https://hardmath123.github.io/systems-for-coordinating-coordinate-systems.html"/>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Systems for Coordinating Coordinate Systems - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['($','$)']]}
+            });
+        </script>
+    </head>
+    <body>
+        <header id="header">
+            <script src="static/main.js"></script>
+            <div>
+                <a href="/"><span class="left-word">Comfortably</span>&nbsp;<span class="right-word">Numbered</span></a>
+            </div>
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h1>Systems for Coordinating Coordinate Systems</h1>
+                <center><em><p>Making 3D graphics code safer by telling vectors where home is</p>
+</em></center>
+                <h4>Tuesday, December 15, 2020 &middot; 3 min read</h4>
+<p>When I took Pat and Matt’s wonderful graphics class CS348B (yay PBRT!), one of
+the most frustrating debugging journeys I had was related to interpreting
+vectors in the wrong coordinate systems. At the time I’d come up with an idea
+to catch such bugs statically, and now, 1.5 years later, I finally have found
+time to write down the idea.</p>
+<p>Here is the problem: A vector only has “meaning” with respect to a coordinate
+system. In graphics, a vector could be in all sorts of coordinate systems:
+<em>world space</em>, or <em>object space</em>, or <em>camera space</em>, or <em>screen space</em>, or
+<em>normalized device coordinate (NDC) space,</em> or <em>raster space</em> (some of these
+are self-explanatory, but see <a href="http://www.pbr-book.org/3ed-2018/Camera_Models/Projective_Camera_Models.html">PBR
+&sect;6.1.1-6.2</a>
+for definitions). This leads to bugs. If you interpret a “camera-space” vector
+as if it were in “world space,” your math will be <em>all wrong!</em>  You need to
+apply the affine transformation <code>cameraToWorld</code> before doing any world-space
+computation on a camera-space vector. But what if you forget to do that? Your
+C++ code will happily compile, but your poor bunny might look like chicken soup
+instead… (I learned this the hard way!).</p>
+<p><img src="static/pbrt-coordinate-system-diagram.png" alt="some pbrt coordinate systems"></p>
+<p>This got me thinking: perhaps a safer <code>Vector3f</code> should know <em>at the type
+level</em> what coordinate system it is in. Rather than a <code>Vector3f</code>, perhaps what
+we really want is a <code>Vector3f&lt;WorldSpace&gt;</code>. You simply can’t add a
+<code>Vector3f&lt;CameraSpace&gt;</code> to a <code>Vector3f&lt;WorldSpace&gt;</code> — that’s a <em>type error!</em>
+The compiler <em>makes</em> you call <code>cameraToWorld</code> if you want to do anything with
+these two vectors. (All this is very much in the spirit of
+<a href="https://github.com/kach/torchsaber">torchsaber</a>, by the way.)</p>
+<p>I think there are broadly two ways you might want to implement something like
+this. One way is to treat <code>CameraSpace</code> as a purely formal symbol, just a
+<em>name</em> or an <em>annotation</em>. The compiler’s job is to check these annotations.
+You’d have to explicitly break this abstraction inside the implementation of
+<code>cameraToWorld</code>, but from a pedagogical perspective I think that is exactly
+what you want.</p>
+<p>The other way is for the tag <code>CameraSpace</code> to somehow encode the actual
+geometry of what <em>camera space</em> “means.” For example, each vector could also
+carry around the <code>Transformation</code> that gets you to its host coordinate system
+from <code>WorldSpace</code>. Given this information, the compiler could even be able to
+<em>infer</em> the implementation of <code>cameraToWorld</code> for <em>free!</em> Of course, this comes
+at a cost, which is that the compiler might not be able to statically check
+equality of <code>Transformations</code>, because the matrices might not be materialized
+at compile-time.</p>
+<hr>
+<p>In the rest of this post I’ll quickly literate-ly program option (1) as a proof
+of concept. It is short and sweet (at least, as “sweet” as any bit of C++
+hacking can be).</p>
+<p>First, we define our coordinate system “annotations” as dummy classes.</p>
+<pre><code class="lang-c++">class Space {};
+class WorldSpace : public Space {};
+class CameraSpace : public Space {};
+</code></pre>
+<p>Next, we design a <code>Vec3</code> template class that takes in such a “tag” as a
+template parameter (<code>CoordinateSystem</code>), and enforces that the tags are the
+same on operations. I’ve implemented the “<code>+</code>“ operator but you can imagine the
+rest — there is nothing sneaky going on here! In fact, this is exactly how
+one implements a generic <code>Vector3</code> that can be specialized over numeric types
+(e.g.  <code>Vector3&lt;float&gt;</code>, <code>Vector3&lt;int&gt;</code>, and so on).</p>
+<pre><code class="lang-c++">template &lt;class CoordinateSystem&gt;
+class Vec3 {
+  static_assert(
+    std::is_base_of&lt;Space, CoordinateSystem&gt;::value,
+    &quot;Vec3 annotation must derive from Space&quot;
+  );
+
+public:
+  double x, y, z;
+  Vec3(double x, double y, double z)
+    : x(x), y(y), z(z) {};
+
+  // the &#39;+&#39; operator!
+  Vec3&lt;CoordinateSystem&gt; operator+(
+    Vec3&lt;CoordinateSystem&gt;&amp; other
+  ) {
+    return Vec3(
+      this-&gt;x + other.x,
+      this-&gt;y + other.y,
+      this-&gt;z + other.z
+    );
+  }
+};
+</code></pre>
+<p>(Note that you need to <code>#include &lt;type_traits&gt;</code> to get <code>std::is_base_of</code>, which
+is there just to protect you from trying to make a <code>Vec3&lt;string&gt;</code> or something
+else uncouth like that. Completely optional.)</p>
+<p>…actually, that’s it! We can already get some mileage out of this. For
+example, this should be okay:</p>
+<pre><code class="lang-c++">Vec3&lt;WorldSpace&gt; p(0, 0, 0);
+Vec3&lt;WorldSpace&gt; q(1, 1, 1);
+auto r = p + q; // ok!
+</code></pre>
+<p>On the other hand, this is perhaps <em>not</em> okay:</p>
+<pre><code class="lang-c++">Vec3&lt;CameraSpace&gt; s(2, 2, 2);
+auto t = r + s; // NOT OK!
+</code></pre>
+<p>And indeed, the compiler complains <em>and</em> gives a helpful error message!</p>
+<pre><code>test.cc:40:14: error: no match for &#39;operator+&#39;
+(operand types are &#39;Vec3&lt;WorldSpace&gt;&#39;
+and &#39;Vec3&lt;CameraSpace&gt;&#39;)
+   40 |   auto t = r + s; // NOT OK!
+      |            ~ ^ ~
+      |            |   |
+      |            |   Vec3&lt;CameraSpace&gt;
+      |            Vec3&lt;WorldSpace&gt;
+</code></pre><p>Of course! How <em>dare</em> we add a camera-space vector to a world-space vector? We
+need to transform <code>s</code> to world-space…</p>
+<pre><code class="lang-c++">Vec3&lt;WorldSpace&gt; cameraToWorld(
+  Vec3&lt;CameraSpace&gt;&amp; vec
+) {
+  return Vec3&lt;WorldSpace&gt;(
+    vec.x * 2, vec.y - 4, vec.z + 8 // or whatever
+  );
+}
+</code></pre>
+<p>…and now <code>g++</code> is happy. :)</p>
+<pre><code class="lang-c++">auto u = r + cameraToWorld(s); // ok!
+</code></pre>
+<p>Perhaps this trick will make its way into PBRT someday!</p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="https://github.com/kach">
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        Subscribe (RSS feed)</a></li>
+                    <li><a href="https://twitter.com/hardmath123">
+                        Twitter</a></li>
+                    <li><a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        CC BY-NC 3.0</a></li>
+                </ul>
+            </div>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
