@@ -144,3 +144,8 @@ auto u = r + cameraToWorld(s); // ok!
 
 Perhaps this trick will make its way into PBRT someday!
 
+---
+
+> Update (Dec 23): Rachit Nigam pointed me to this (very recent) SPLASH
+> [paper](https://2020.splashcon.org/details/splash-2020-oopsla/49/Geometry-Types-for-Graphics-Programming)
+> that considers the same problem. ("See? It's not just me!")

@@ -711,6 +711,14 @@
             "file": "systems-for-coordinating-coordinate-systems.md",
             "date": "12/15/20",
             "markdown": true
+        },
+        {
+            "title": "Learning to Play the Chaos Game",
+            "author": "Hardmath123",
+            "description": "Dreaming of fractal foliage by differentiating iterated function systems",
+            "file": "chaos-game-fractal-foliage.md",
+            "date": "12/25/20",
+            "markdown": true
         }
     ]
 }
