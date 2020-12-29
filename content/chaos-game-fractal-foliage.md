@@ -247,3 +247,16 @@ return in 2021!
 
 (Jupyter notebook for this blog post available [on
 Github](https://github.com/kach/chaos-game-fractal-foliage).)
+
+---
+
+Update (Dec 27): Check out some
+[improvements](https://news.ycombinator.com/item?id=25551557) made by a reader!
+
+Update (Dec 29): I was pointed to [a 1998
+paper](http://demo.cs.brandeis.edu/papers/wcci98.pdf) (Melnik and Pollack) that
+(independently!) tells _exactly_ the same story. I'm struck by how closely the
+two expositions align. There is something deeply comforting about rediscovering
+a place someone else has visited once-upon-a-time, like finding a flag buried
+under the snow on a mountaintop --- a kind of storybook enchantment that sits
+across the table from loneliness.
