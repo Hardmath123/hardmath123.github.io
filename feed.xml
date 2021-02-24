@@ -10,10 +10,327 @@
             <link>https://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Tue, 29 Dec 2020 17:24:50 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 24 Feb 2021 06:47:43 GMT</lastBuildDate>
         <atom:link href="https://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Mr. Bentley's Blizzard-Blossoms]]></title>
+            <description><![CDATA[<p>Variations on a theme; or: synthesizing snowf*akes; or: unsupervised learning at Zoom University</p>
+
+
+<style>
+input[type="range"] {
+  display: block;
+  width: 100%;
+}
+
+#imgbox {
+  display: inline-block;
+  position: relative;
+}
+
+#world {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+</style>
+
+<script src="/static/blizzard-blossoms/onnx.min.js"></script>
+<script>
+
+window.addEventListener('load', function() {
+  var LATENT = 10;
+  var fieldset = document.getElementById('sliders');
+
+  sliders = [];
+  for (var i = 0; i < LATENT; i++) {
+    var slider = document.createElement('input');
+    slider.type = 'range';
+    slider.min = -4;
+    slider.max = +4;
+    slider.step = 0.5;
+    fieldset.appendChild(slider);
+    sliders.push(slider);
+  }
+
+  function randomize(suppress_flurry) {
+    for (var i = 0; i < LATENT; i++) sliders[i].value = Math.random() * 6 - 3;
+    sliders[9].value = +4;
+    sliders[5].value = -4;
+    update();
+    if (!suppress_flurry) flurry();
+  }
+
+  document.getElementById('randomize').addEventListener(
+    'click', function() {randomize(false)}
+  );
+
+  // create a session
+  const myOnnxSession = new onnx.InferenceSession();
+
+  function update() {
+
+    // generate model input
+    var values = [];
+    for (var i = 0; i < LATENT; i++) {
+      values.push(sliders[i].value);
+    }
+    const inferenceInputs = [
+      new Tensor(new Float32Array(values), "float32", [1, LATENT])
+    ];
+
+    // execute the model
+    myOnnxSession.run(inferenceInputs).then((output) => {
+
+      // consume the output
+      const outputTensor = output.values().next().value;
+
+      var can = document.createElement('canvas');
+      can.height = 32;
+      can.width = 32;
+      var ctx = can.getContext('2d');
+      ctx.scale(can.width / outputTensor.dims[2], can.height / outputTensor.dims[3]);
+      for (var x = 0; x < outputTensor.dims[2]; x++) {
+        for (var y = 0; y < outputTensor.dims[3]; y++) {
+          var value = outputTensor.get(0, 0, x, y);
+          ctx.fillStyle = `rgba(100, 100, 255, ${value})`;
+          ctx.fillRect(x, y, 1, 1);
+        }
+      }
+
+      var img = document.getElementById('world');
+      img.width = can.width;
+      img.height = can.height;
+      img.src = can.toDataURL('image/png');
+    });
+
+  }
+
+  // load the ONNX model file
+  myOnnxSession.loadModel("/static/blizzard-blossoms/model.onnx").then(function() {
+    for (var i = 0; i < LATENT; i++) {
+      sliders[i].addEventListener('input', update, false);
+      sliders[i].addEventListener('change', function() {update(); flurry();}, false);
+    }
+    document.getElementById('loading').remove();
+    randomize(true);
+  });
+
+
+  function flurry() {
+    var flake = document.createElement('img');
+    var img = document.getElementById('world');
+    flake.height = img.height;
+    flake.width = img.width;
+    flake.src = img.src;
+    flake.style.position = 'absolute';
+    flake.style.top = img.offsetTop;
+    flake.style.left = img.offsetLeft;
+    document.getElementById('imgbox').appendChild(flake);
+
+    var dx = 0;
+    var xv = Math.random() - 0.5;
+    var dy = 0;
+
+    var dtheta = 0;
+    var dphi = 0;
+
+    function step_animation() {
+      dx += xv;
+      xv = xv * 0.99;
+      dy += 1;
+
+      dtheta += 1;
+      dphi += 1;
+
+      flake.style.transform = `translate(${dx}px, ${dy}px) rotateX(${dtheta}deg) rotateY(${dphi}deg)`;
+
+      if (dy < 1000)
+        window.requestAnimationFrame(step_animation);
+      else
+        flake.remove();
+    }
+
+    step_animation();
+  }
+
+});
+</script>
+
+<fieldset id="sliders">
+<span id="loading">(Please be patient as we wait for the snowflake factory to load&hellip;)</span>
+<center><span id="imgbox"><img id="world" height=32 width=32></img></span></center><br/>
+<center><button id="randomize">Roll the dice</button></center><br/>
+</fieldset>
+
+
+
+
+
+
+
+
+
+<p>Snow and snowflakes have been on my mind lately. This is not entirely because
+of the storm in Texas — rather, I have been thinking since Christmas about
+the snowflake’s <em>shape:</em> those small, delicate, spiky circles we all know so
+well (err, perhaps there is something of current events here after all…).
+This is a blog post about snowflake shapes.</p>
+<p>What shape <em>is</em> a snowflake? In principle, we all know what snowflakes look
+like. We can all imagine the six-fold symmetry, and then we can imagine the
+embellishments.  And yet— not so fast! As a little child I (and I do not
+think I am alone in this) wanted to see the shape of a snowflake for myself.
+Of course, I never quite could — at least, to the point where I could stuff
+and saturate my eyes — because the delicate snowflakes melted away as soon as
+my snow-blind eyes could focus on the crystal caught. Think about it, then:
+where does your own conception of snowflake-shape arise from? Does it come from
+firsthand experience, or from clip-art and wintertime papercrafts?</p>
+<blockquote>
+<p>(Of course, there <em>is</em> something to be said for indirect inference of
+snowflake-shape. Years later, I would marvel at the fact that you could infer
+that snowflakes are hexagonal from the existence of <a href="https://github.com/kach/rocket-flame-renderer">22º
+haloes</a>, a kind of
+crystallography at the heavenly scale, linking the macroscopic and
+microscopic. For now however I am concerned with seeing <em>directly</em>, and face
+to face, with a presence and visual immediacy that cannot be afforded by
+imagination alone.)</p>
+</blockquote>
+<p>This is no small concern. A year or so ago I visited the California Academy of
+Sciences and learned about Wilson Bentley, the first man to photograph a
+snowflake. This was on January 15, 1885; he was just shy of 20 years old. To
+appreciate this moment, you have to imagine a time <em>before</em> January 15, 1885,
+when no such photograph existed. Until Bentley’s innovation, no man had seen a
+single snowflake for more than a delicate glimpse. Perhaps spatially the
+snowflake could be magnified under a microscope (as <a href="https://en.wikipedia.org/wiki/Timeline_of_snowflake_research">Hooke and his
+contemporaries</a>
+demonstrated in the 17th century), but how could anyone magnify it
+<em>temporally?</em> Bentley’s Edgertonesque miracle — akin to Muybridge’s “horse in
+motion,” captured just seven years earlier — is to hold still the moment to
+reveal <em>more</em> — to give us the opportunity to gaze without urgency. Dare I
+say, Bentley <em>freezes time?</em> The manipulation of time becomes an <a href="electric-guitar.html">act of
+unconcealment</a>, and then furthermore an act of creation.
+Bentley’s snowflakes outlived him, and they will outlive me.</p>
+<hr>
+<p>Wilson Bentley was not a scientist by training, and perhaps that served him
+well. Over the course of his life he collected over 5,000 images of what he
+called “ice flowers.” There is something marvelous about this devotion, which
+spanned years and years, crystal after crystal, wonder undiminished. Surely the
+5,000th snowflake brought Wilson as much delight as the 4,999th (and surely it
+is the case that you know you are in love when you find yourself falling in
+love afresh every day).</p>
+<p>There is also something to the uniformity of Bentley’s collection. Each
+snowflake is framed carefully in the center of a slide, on a black background.
+The images are diligently cropped to squares. See for yourself! The University
+of Wisconsin-Madison hosts an <a href="https://library.ssec.wisc.edu/bentley/">online
+archive</a> of 1,181 of Bentley’s images,
+courtesy the Schwerdtfeger Library. Bentley never sought copyright on his
+images; they are in the public domain, and so I downloaded them, along with
+their labeled categories. The categories have wonderful names, such as “crystal
+with broad branches” and “lumped graupel.”</p>
+<p>When displayed in a grid, the snowflakes look like a box of delicious holiday
+sweets. Surely these delights are made of sugar and not ice.</p>
+<p><img src="/static/blizzard-blossoms/snowflakes.png" alt="snowfakes"></p>
+<p>What does one <em>do</em> with 1,181 snowflakes? One searches for patterns, the way
+Bentley would never have been able to. Bentley’s images demand to be studied as
+samples from a distribution, and they are strikingly well-suited to our
+favorite statistical computer vision techniques. For example, though they are
+scanned at a uniform 1000x1000 resolution, they still make sense when
+dramatically downscaled, even to as low as 32x32. Notice also how the
+snowflakes are highly amenable to <em>data augmentation</em> on account of their
+intrinsic symmetry. Each snowflake can be reflected and rotated arbitrarily to
+produce several more high-quality synthetic snowflakes “for free.” So, even
+though there are nominally 1,181 unique images, there is much more juice here
+than one might expect at first. You can’t always play this game: CIFAR images
+can’t really be rotated, and most MNIST digits can’t even be flipped. But
+snowflakes are snowflakes.</p>
+<p>One February evening I trained — with a lot of help from my friends Gautam
+and Jack — a baby variational autoencoder, which embeds the snowflakes in a
+small low-dimensional latent space. Here, “low-dimensional” means
+10-dimensional: it seems very reasonable to encode 2^10 data points with 10
+parameters. In the image below, the top row consists of five randomly-selected
+source images, and the bottom row is the VAE’s attempted reconstruction. The
+contrastive green-and-purple colorscheme comes from matplotlib’s default, and
+reminds me of the delightful pGLO experiments we did in high-school biology.</p>
+<p><img src="/static/blizzard-blossoms/vae.png" alt="snowfakes"></p>
+<p>Of course, as with all things deep-learning, this was easier said than
+done. For a technique that falls broadly under “unsupervised learning,” a VAE
+requires an awful lot of babysitting! —but then again, one of the joys of
+online school is that <em>nobody can tell</em> if you’re training machine learning
+models behind your Zoom tab. So I trained, and I trained. The current model
+takes around 6 hours on my dusty old MacBook, though after the first 30 minutes
+the results are already non-embarrassing.</p>
+<blockquote>
+<p><strong>Do you want to build a snowgan?</strong> Separately, I also spent some time trying
+to build a model adversarially. The snowgan (so to speak) consists of two
+rival sisters: the generator, Elsa, is of the same architecture as the VAE’s
+decoder, and the discriminator, Anna, learns to distinguish Elsa’s output
+from real snowflakes. Elsa and Anna compete, and as a result Elsa gets better
+at camouflaging the fakes among the flakes. Alas, GAN convergence is finicky
+enough that I lost interest after a few days… open problem!</p>
+</blockquote>
+<p>It turns out that the VAE’s decoder can be used to build a small-scale
+snowflake factory. Using ONNX.js and only a little bit of guile, I ported the
+VAE’s decoder to JavaScript and attached the latent space to some <code>&lt;input
+type=&quot;range&quot;&gt;</code> sliders. By using the sliders to choose parameters in the latent
+space and feeding these parameters to the decoder, one can interpolate to
+hallucinate snowflakes that are <em>not</em> part of Bentley’s training set. With some
+experimentation, I found the sliders that correspond to parts of the latent
+space that map to outliers; those parameters I clamped to extreme values in the
+non-outlier-ey direction. This interface is what you see at the top of this
+blog post.</p>
+<blockquote>
+<p>At time of writing, there is only one Google search result for “this
+snowflake does not exist,” which points to a 2017 <a href="http://etd.lib.metu.edu.tr/upload/12621180/index.pdf">master’s
+thesis</a> in
+elementary-school education by Eli̇f Dedebaş. The context is an activity where
+children are making paper snowflakes, and investigating the relationship
+between the number of folds and the symmetries. One child creates a
+snowflake-like shape with <em>eight</em>-fold symmetry and is asked if she knows why
+such a shape is unnatural. Shape!</p>
+</blockquote>
+<hr>
+<p>I imagine this slider infrastructure is on par with the sort of fancy tooling
+UI that they have up in the Great Snow Factory In The Sky. I’m reminded of
+David Wiesner’s wonderful Caldecott-winning picture book <em>Sector 7</em>, which I
+recall reading (“reading”) in my elementary school’s library. It is about a
+cloud factory, accessed from the top of the Empire State Building. Notice how
+the large sousaphone-bell-shaped openings emanating from the factory roof are
+exactly a portrait of an autoencoder’s decoder.</p>
+<p><img src="/static/blizzard-blossoms/sector-7.png" alt="snowfakes"></p>
+<p>“Wiesner visited the Empire State Building on a zero-visibility day to research
+this book,” reads the About-the-Author at the end, “He was the only person
+there.” There is something of Wiesner in Bentley and Bentley in Wiesner, I
+think. Think of them both, and yourself, too, as Friedrich’s <em>Wanderer</em>.</p>
+<p><img src="/static/blizzard-blossoms/wanderer.png" alt="snowfakes"></p>
+<hr>
+<p>The results interpolated by the VAE are surprisingly convincing.  Here are some
+snowflakes that do not exist (snowfakes?). I created these images by sliding
+the sliders haphazardly and recording a trace of the changing image.  Often,
+people display this kind of interpolation in animated form, but in relation
+— and, indeed, deference — to Bentley’s life’s work, I would rather see
+them spread spatially than temporally.</p>
+<p><img src="/static/blizzard-blossoms/snowfakes.png" alt="snowfakes"></p>
+<p>I enjoy trying to work out the exact moment of transition between different
+kinds of snowflakes; there is a snowy saltation that occurs at certain
+boundaries that I cannot quite point you to. A curious fact is that a t-SNE
+plot in the VAE’s latent space shows no clustering with respect to the provided
+labels; the VAE seems to have hallucinated its own classification scheme, one
+which is perhaps more macroscopically morphological in nature than Magono and
+Lee’s 1966 classification scheme.</p>
+<hr>
+<p>The BentleyBlizzardBlossoms (B3) dataset, along with some PyTorch utilities and
+the source code and trained model of the baby autoencoder, is available <a href="https://github.com/kach/bentley-blizzard-blossoms">on
+Github</a>. I think it would
+make a wonderful alternative to MNIST for small experiments. If you use it for
+anything, please let me know!</p>
+]]></description>
+            <link>https://hardmath123.github.io/bentley-blizzard-blossoms.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/bentley-blizzard-blossoms.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Tue, 23 Feb 2021 08:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Learning to Play the Chaos Game]]></title>
             <description><![CDATA[<p>I, Thomasina Coverly, have found a truly wonderful method whereby all the forms of nature must give up their numerical secrets and draw themselves through number alone…</p>
@@ -1379,114 +1696,6 @@ us a long way there…</p>
             <guid isPermaLink="true">https://hardmath123.github.io/moire.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Thu, 16 Jul 2020 07:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[Conway's Gradient of Life]]></title>
-            <description><![CDATA[<p>Approximate Atavising with Differentiable Automata</p>
-
-
-<p>And now, a magic trick. Before you is a 239-by-200 Conway’s Game of Life board:</p>
-<p><img src="static/conways-gradient/conway-out.png" alt="a life config"></p>
-<p>What happens if we start from this configuration and take a single step of the
-game? Here is a snapshot of the next generation:</p>
-<p><img src="static/conways-gradient/conway-out-step.png" alt="a life config, stepped"></p>
-<p>Amazing! It’s a <a href="https://mancala.fandom.com/wiki/John_Horton_Conway">portrait</a>
-of John Conway! (Squint!)</p>
-<hr>
-<p>How does this trick work? (It’s not a hoax — you can try it yourself at
-<a href="https://copy.sh/life/">copy.sh/life</a> using <a href="static/conways-gradient/conway.rle">this RLE
-file</a>.)</p>
-<p>Well, let’s start with how it <em>doesn’t</em> work. Reversing Life configurations
-exactly — the art of “atavising” — is <a href="https://nbickford.wordpress.com/2012/04/15/reversing-the-game-of-life-for-fun-and-profit/">a hard search
-problem</a>,
-and doing it at this scale would be computationally infeasible. Imagine
-searching through ($ 2^{239\times200} $) possible configurations! Surely that
-is hopeless… indeed, the talk I linked shares some clever algorithms that
-nonetheless take a full 10 minutes to find a predecessor for a tiny 10-by-10
-board.</p>
-<p>But it turns out that <em>approximately</em> reversing a Life configuration is much
-easier — instead of a tricky discrete search problem, we have an easy
-<em>continuous optimization</em> problem for which we can use our favorite algorithm,
-gradient descent.</p>
-<p>Here is the idea: Start with a random board configuration ($ b $) and compute
-($ b^\prime $), the result after one step of Life. Now, for some target image
-($ t $) compute the derivative ($ \frac{\partial}{\partial b} \sum|b^\prime-t|
-$), which tells us how to change ($ b $) to make ($ b^\prime $) closer to ($ t
-$). Then take a step of gradient descent, and rinse and repeat!</p>
-<p>Okay, okay, I know what you’re thinking: <em>Life isn’t differentiable!</em> You’re
-right. Life is played on a grid of bools, and there is no way the map ($ b
-\mapsto b^\prime $) is continuous, let alone differentiable.</p>
-<p>But suppose we could make a “best effort” differentiable analogue? Let us play
-Life on a grid of real numbers that are 0 for “dead” cells and 1 for “live”
-cells. Can we “implement” a step of Life using only differentiable operations?
-Let’s try.</p>
-<p>We will look at each cell ($ c $) individually. The first step is to count our
-live neighbors. Well, if “live” cells are 1 and “dead” cells are 0, then we can
-simply add up the values of all 8 of our neighbors to get our live neighbor
-count ($ n $). Indeed, if we wanted to be clever, we could implement this
-efficiently as a convolution with this kernel:</p>
-<p>\[
-\begin{bmatrix}
-1 &amp; 1 &amp; 1 \\
-1 &amp; 0 &amp; 1 \\
-1 &amp; 1 &amp; 1
-\end{bmatrix}
-\]</p>
-<p>Good, so we know ($ n $) and of course our own 0/1 value ($ c $). The next step
-is to figure out whether this cell will be alive in the next generation. Here
-are the rules:</p>
-<ol>
-<li>If the cell is alive, ($ c = 1 $), then it stays alive if and only if ($ n =
-2 $) or ($ n = 3 $).</li>
-<li>If the cell is dead, ($ c = 0 $), then it comes to life if and only if ($ n
-= 3 $).</li>
-</ol>
-<p>Let us approach (2) first. What function is 1 when ($ n = 3 $) and 0 otherwise?
-The “spike-at-3” function, of course. That’s not differentiable, but a narrow
-Gaussian centered at 3 is <em>almost</em> the same thing! If scaled appropriately, the
-Gaussian is one at input 3, and <em>almost</em> zero everywhere else. See this graph:</p>
-<p><img src="static/conways-gradient/approx-graph.png" alt="approximating a spike with a less spiky
-spike"></p>
-<p>Similarly, for (1) an appropriately-scaled Gaussian centered at 2.5 gets the
-job done. Finally, we can mux these two cases under gate ($ c $) by simple
-linear interpolation. Because ($ c \approx 0 $) or ($ c \approx 1 $), we know
-that ($ ca + (1-c)b $) is just like writing <code>if c then a else b</code>.</p>
-<p>That’s it! We now have a differentiable function, which looks like this:</p>
-<p><img src="static/conways-gradient/approx-map.png" alt="the same, in 2d"></p>
-<p>Note that it’s worth “clamping” the output of that function to 0 or 1 using,
-say, the tanh function. That way cell values always end up close to 0 or 1.</p>
-<p>Okay, great! Now all that’s left to do is to write this in PyTorch and call
-.backward()…</p>
-<p>…and it begins to learn, within seconds! Here is a GIF of ($ b $) at every
-100 steps of gradient descent.</p>
-<p><img src="static/conways-gradient/learn.gif" alt="gif of it learning"></p>
-<p>(Note: This GIF is where the target image ($ t $) is an all-white rectangle; my
-janky PyTorch gradient descent finds sparse configurations that give birth to
-an “overpopulated” field where nearly 90% of cells are alive.)</p>
-<hr>
-<p>Looking at that GIF, the beautiful labyrinthine patterns reminded me of
-something seemingly unrelated: the skin of a giant pufferfish. Here’s a picture
-from Wikipedia:</p>
-<p><img src="static/conways-gradient/pufferfish.jpg" alt="pufferfish"></p>
-<p>And here’s a zoomed-in 100-by-100 section of the finished product from above:</p>
-<p><img src="static/conways-gradient/seed.png" alt="pufferfish in Life?"></p>
-<p>Patterns like the one on the pufferfish come about as a result of
-“symmetry-breaking,” when small perturbations disturb an unstable homogeneous
-state. The ideas were first described by Alan Turing (and thus the patterns are
-called <a href="https://en.wikipedia.org/wiki/Turing_pattern">Turing Patterns</a>). Here’s
-his <a href="http://www.dna.caltech.edu/courses/cs191/paperscs191/turing.pdf">1952
-paper</a>.</p>
-<p>I can’t help but wonder if there’s a reaction-diffusion-model-esque effect at
-work here as well, the symmetry being broken by the random initialization of ($
-b $). If that’s the case, it would create quite a wonderful connection between
-cells, cellular automata, Turing-completeness, and Turing patterns…</p>
-<p>(Curious? <a href="static/conways-gradient/atavise.py">Here</a> is the Python program I
-used to play these games. Enjoy!)</p>
-]]></description>
-            <link>https://hardmath123.github.io/conways-gradient.html</link>
-            <guid isPermaLink="true">https://hardmath123.github.io/conways-gradient.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 05 May 2020 07:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>

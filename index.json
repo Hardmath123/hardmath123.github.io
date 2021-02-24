@@ -719,6 +719,14 @@
             "file": "chaos-game-fractal-foliage.md",
             "date": "12/25/20",
             "markdown": true
+        },
+        {
+            "title": "Mr. Bentley's Blizzard-Blossoms",
+            "author": "Hardmath123",
+            "description": "Variations on a theme; or: synthesizing snowf*akes; or: unsupervised learning at Zoom University",
+            "file": "bentley-blizzard-blossoms.md",
+            "date": "2/23/21",
+            "markdown": true
         }
     ]
 }
