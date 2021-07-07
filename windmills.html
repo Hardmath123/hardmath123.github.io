@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -32,23 +59,23 @@
 <p>Quick back-of-the-envelope analysis of a windmill, just for fun.</p>
 <p>According to <a href="https://www.wind-watch.org/faq-size.php">National Wind Watch</a> a
 typical windmill is a GE 1.5-megawatt model which has 116-ft blades.</p>
-<p>Let’s say the wind speed is ($ v $), which is typically 10-15 m/s on a good
-day. Then in time ($ t $) the volume of air that passes across the windmill is
-a cylinder of height ($ tv $) and area ($ \pi r^2$). Air’s density, ($ \rho $),
-is around 1.225 kilograms per cubic meter. This gives a total mass of ($ M =
-\rho tv\pi r^2 $). Taking ($ v $) to be a modest 10 m/s, this works out to 48
+<p>Let’s say the wind speed is $ v $, which is typically 10-15 m/s on a good
+day. Then in time $ t $ the volume of air that passes across the windmill is
+a cylinder of height $ tv $ and area $ \pi r^2$. Air’s density, $ \rho $,
+is around 1.225 kilograms per cubic meter. This gives a total mass of $ M =
+\rho tv\pi r^2 $. Taking $ v $ to be a modest 10 m/s, this works out to 48
 metric <em>tons</em> of air per <em>second</em>.</p>
 <p>Now let’s apply conservation of energy on this mass of air. Initial energy is
-($ Mv^2 / 2 $) and final energy is ($ Mw^2/2 $), and the difference is on the
-order of the energy output, which is a function of the power output and ($ t $)
+$ Mv^2 / 2 $ and final energy is $ Mw^2/2 $, and the difference is on the
+order of the energy output, which is a function of the power output and $ t $
 assuming reasonable efficiency in the turbine.</p>
-<p>So, we have ($ \rho tv\pi r^2 v^2 / 2 - \rho tv\pi r^2 w^2 /2 = Pt $). Time
+<p>So, we have $ \rho tv\pi r^2 v^2 / 2 - \rho tv\pi r^2 w^2 /2 = Pt $. Time
 cancels, which is comforting since this is a continuous process. The equation
 that’s left suggests that power output of a windmill is proportional to the
 <em>cube</em> of the wind speed!</p>
-<p>Another thing to think about is how much the wind slows down by. Solving for ($
-w $) and taking ($ P $) to be 1.5 MW, we have ($ w = \sqrt{ \frac{2P/\rho \pi
-r^2 - v^3 }{-v}} $). For 15 m/s winds, this means wind slows down by around 10%
+<p>Another thing to think about is how much the wind slows down by. Solving for $
+w $ and taking $ P $ to be 1.5 MW, we have $ w = \sqrt{ \frac{2P/\rho \pi
+r^2 - v^3 }{-v}} $. For 15 m/s winds, this means wind slows down by around 10%
 because of the windmill.</p>
 <p>Actually this wasn’t “just for fun,” it was to show off initial progress on my
 side-project. :-)</p>

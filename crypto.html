@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -76,12 +103,12 @@ the encrypted message doesn't know the way the word is broken up for sure, he
 needs some trial and error (but with the key and a reasonable English
 vocabulary, it's relatively easy).
 
-<p><em>(Mathematical aside: If you have a string of length ($l$), how many ways
+<p><em>(Mathematical aside: If you have a string of length $l$, how many ways
 can you break it up into a series 2 or 1 digit numbers? The answer is, believe
 it or not, the l<sup>th</sup> Fibonacci number. The proof is simple: given a
-string, we can chomp off the first digit and break up the rest in ($f(l-1)$)
-ways, or chomp off the first 2 digits and break up the rest in ($f(l-2)$) ways.
-So the total is ($f(l) = f(l-1) + f(l-2)$), which is Fibonacci.)</em>
+string, we can chomp off the first digit and break up the rest in $f(l-1)$
+ways, or chomp off the first 2 digits and break up the rest in $f(l-2)$ ways.
+So the total is $f(l) = f(l-1) + f(l-2)$, which is Fibonacci.)</em>
 
 <p>Anyway, Tim ended up writing a nice little Python program that breaks up
 words into a list of numbers (it turns out we can eliminate quite a few,

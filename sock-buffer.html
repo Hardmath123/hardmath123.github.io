@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -45,28 +72,28 @@ you pull a sock out of the heap of clothes and see its partner on the bedside
 table, you pair them up and put them away. Otherwise, you put the unpaired sock
 on the bedside table.</p>
 <p>Suppose you own an infinite number of socks, each of which is uniformly one of
-($ k $) colors. How big does your bedside table need to be? Let’s call the pile
+$ k $ colors. How big does your bedside table need to be? Let’s call the pile
 of clean clothes the “stream,” and the bedside table the “buffer.” Then the
 question is, what is the distribution of the buffer size over time as a
-function of ($ k $)?</p>
-<p>Here is one way to think about this: if ($ k = 1 $) then the buffer size is 0
+function of $ k $?</p>
+<p>Here is one way to think about this: if $ k = 1 $ then the buffer size is 0
 half the time and 1 half the time; the distribution is normal at mean 0.5 and
-variance 0.25. For larger ($ k $), we can think of this as just a superposition
-of multiple buffers, one for each ($ k $). The means and variances add, so we
-expect the distribution to be normal with mean ($ k/2 $) and standard deviation
-($ \sqrt{k}/2 $).</p>
+variance 0.25. For larger $ k $, we can think of this as just a superposition
+of multiple buffers, one for each $ k $. The means and variances add, so we
+expect the distribution to be normal with mean $ k/2 $ and standard deviation
+$ \sqrt{k}/2 $.</p>
 <p>Here is another way to think about this: we have a Markov process where the
-transition from state ($ i $) to ($ i + 1 $) is with probability ($ (k - i)/k
-$) and to ($ i - 1 $) is with probability ($ i/k $) for ($ 0 \leq i \leq k $).
+transition from state $ i $ to $ i + 1 $ is with probability $ (k - i)/k
+$ and to $ i - 1 $ is with probability $ i/k $ for $ 0 \leq i \leq k $.
 We can create a matrix representing this transition system; then, eigenvectors
 of this matrix (with eigenvalue 1, and normalized to sum 1) represent
 equilibrium probability distributions.</p>
-<p>So, incredibly, we’ve shown that the coordinates of the ($ \lambda=1 $)
+<p>So, incredibly, we’ve shown that the coordinates of the $ \lambda=1 $
 eigenvector for this matrix can be computed using the normal CDF. What a
 fascinating correspondence!</p>
 <p>If you don’t believe it, the graph below shows the normal-CDF predictions
-(orange line) and the elements of the eigenvector (blue dots) for ($ k = 100
-$). The IPython notebook that generated this graph is
+(orange line) and the elements of the eigenvector (blue dots) for $ k = 100
+$. The IPython notebook that generated this graph is
 <a href="static/sock-graph.ipynb">here</a>.</p>
 <p><img src="static/sock-graph.png" alt="sock graph"></p>
 

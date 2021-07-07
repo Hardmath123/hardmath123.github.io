@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -50,8 +77,8 @@ B_5 = \int_0^\infty \frac{\sin(x)\sin(x/3)\sin(x/5)}{x(x/3)(x/5)}dx &amp;=
 \frac{\pi}{2} \\
 B_7 = \int_0^\infty \frac{\sin(x)\sin(x/3)\sin(x/5)\sin(x/7)}{x(x/3)(x/5)(x/7)}dx &amp;= \frac{\pi}{2}\end{aligned}$$</p>
 <p>The aesthetics of mathematics demand at this point for her to formulate
-a <em>conjecture</em>, which is that all Borwein integrals ($B_n$) are equal to
-($\pi/2$).</p>
+a <em>conjecture</em>, which is that all Borwein integrals $B_n$ are equal to
+$\pi/2$.</p>
 <p>Do you believe this conjecture? Perhaps, but our friend the
 Mathematician is not so easily satisfied. She presses on and continues
 evaluating the integrals, and she is rewarded with further evidence.</p>
@@ -59,8 +86,8 @@ evaluating the integrals, and she is rewarded with further evidence.</p>
 B_9 = \frac{\pi}{2} \qquad
 B_{11} = \frac{\pi}{2} \qquad
 B_{13} = \frac{\pi}{2}\end{aligned}$$</p>
-<p>But when she gets to ($B_{15}$), she finds unexpectedly (or is it unexpected?)
-that it is ever so slightly <em>less</em> than ($\pi/2$). The pattern falls apart, the
+<p>But when she gets to $B_{15}$, she finds unexpectedly (or is it unexpected?)
+that it is ever so slightly <em>less</em> than $\pi/2$. The pattern falls apart, the
 conjecture evaporates, and with it our belief.</p>
 <p>The previous essay was on seeing; this one is on believing, the act of
 believing, the art of believing, the ethics of believing. What does it
@@ -166,7 +193,7 @@ theorem becomes in a sense just one shadow cast by this structure.</p>
 sentence, and is reproduced in its entirety on the right. It
 hallucinates for us a truly bizarre object, asserts that it has a
 certain symmetry that forces there to be an odd number of solutions to
-the equation ($x^2 + (2\cdot y)^2 = p$), and, as zero is not odd,
+the equation $x^2 + (2\cdot y)^2 = p$, and, as zero is not odd,
 concludes that there must be at least one solution. This is one of the
 strangest proofs I have ever seen; it provides absolutely no insight
 into <em>why</em> the theorem is true — though it certainly assures me <em>that</em>

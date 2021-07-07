@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -58,7 +85,7 @@ graph. When you want to differentiate a value, you call <code>.backward()</code>
 value. PyTorch then walks <em>backwards</em> along this computation graph, computing
 the derivative at each step and accumulating them according to the chain rule.
 Eventually, the leaf nodes of the graph contain the derivatives you asked for.</p>
-<p>Let me give a small example. Suppose we wanted to compute ($d2x^2/dx|_{x=3}$).
+<p>Let me give a small example. Suppose we wanted to compute $d2x^2/dx|_{x=3}$.
 We might write a program that looks like this:</p>
 <pre><code class="lang-python">x = torch.tensor(3., requires_grad=True)
 y = 2 * x**2
@@ -72,8 +99,8 @@ backwards along the graph, computing derivatives at <em>each</em> step. By the c
 rule, the product of these gives the overall derivative we sought.</p>
 <p><img src="static/clogs-and-leaks/backward.png" alt="Forward"></p>
 <h2 id="clogs">Clogs</h2>
-<p>Now, consider this simple PyTorch program to compute ($d(\sqrt{x} +
-x)/dx|_{x=4}$). What do you expect to be printed?</p>
+<p>Now, consider this simple PyTorch program to compute $d(\sqrt{x} +
+x)/dx|_{x=4}$. What do you expect to be printed?</p>
 <pre><code class="lang-python">x = torch.tensor(4., requires_grad=True)
 y = sqrt(x) + x
 y.backward()
@@ -104,13 +131,13 @@ notice the bug in the first place!</p>
 autoencoders is really just a workaround for a gradient clog problem. To train
 a variational autoencoder, you need to compute the derivative of a sample of a
 probability distribution with respect to the distribution’s parameters (e.g.
-the mean ($\mu$) and variance ($\sigma^2$) of a Gaussian distribution).
+the mean $\mu$ and variance $\sigma^2$ of a Gaussian distribution).
 Unfortunately, naïvely sampling from a parametrized distribution abruptly
 truncates the computation graph with respect to the parameters, because the
 random number generator is not differentiable all the way through — who <em>knows</em>
 what <em>it’s</em> doing! The solution, is to sample from a standard unit normal
-distribution (where ($\mu=0$) and ($\sigma=1$)), and then re-scale the sample
-by multiplying by ($\sigma$) and adding ($\mu$). Of course, multiplication and
+distribution (where $\mu=0$ and $\sigma=1$, and then re-scale the sample
+by multiplying by $\sigma$ and adding $\mu$. Of course, multiplication and
 addition <em>are</em> easily differentiable, and so the gradients can now flow.
 Problem solved!</p>
 <h2 id="leaks">Leaks</h2>
@@ -188,8 +215,8 @@ intended) which traditionally track the flow of <em>information</em>, to now tra
 flow of <em>differentiability</em> through the program.</p>
 <p>Let me be slightly more concrete about this suggestion. In our “clog” example,
 a good type system might detect that <code>sqrt</code> cuts off the computation graph,
-and, knowing that ($y$) does not directly depend on ($x$) in the expected way
-anymore, complain at compile-time when we try to request ($dy/dx$). In our
+and, knowing that $y$ does not directly depend on $x$ in the expected way
+anymore, complain at compile-time when we try to request $dy/dx$. In our
 “leak” example, a good type system might notice that the “old” <code>my_position</code>
 effectively goes out of scope when it is re-assigned, and therefore it might
 complain that an unreachable reference to it actually does persist through the

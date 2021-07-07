@@ -19,14 +19,14 @@ number to the square. (16 plus 4 is 20.) Finally, add forty-one. (20 plus 41 is
 And now -- your result -- is it prime? Ha! I thought so. (61 certainly is.)
 
 This little trick is due to Euler, who pointed out in 1772 that the polynomial
-($ f(x) = x^2 + x + 41$) returns prime numbers for small integers --- indeed,
+$ f(x) = x^2 + x + 41$ returns prime numbers for small integers --- indeed,
 all nonnegative integers up to and including 39. Since then, the quest for
 other such "prime-generating" polynomials has fascinated number theorists from
 around the world. As a little exercise, you may try convincing yourself that
 there is no *perfect* prime-generating polynomial; that is, that there will
 always be at least one integer input that gives a composite output.
 
-But I digress. Here is what matters: The integers ($ x $) for which ($ f(x) $)
+But I digress. Here is what matters: The integers $ x $ for which $ f(x) $
 is composite are the deviants, the rebels, the ones who refuse to play along
 with Euler's little game.
 

@@ -139,17 +139,17 @@ you have rolled all six faces at least once?".
 [Expected value](http://en.wikipedia.org/wiki/Expected_value) is the average
 value of some random variable if you do an experiment lots of times. For
 example, if you roll a die gazillions of time, the average number you'll get is
-($ (1+2+3+4+5+6)/6 = 3.5 $), so that's the *expected* value.
+$ (1+2+3+4+5+6)/6 = 3.5 $, so that's the *expected* value.
 
 We're going to calculate the expected number of times you hit "random" by
 calculating the number of times you need to hit it to get the first, second,
 third, and (in general) nth unique comic. Then, because of a useful property of
-expected values, we can just add them together until ($ n = 1500 $) (there are
+expected values, we can just add them together until $ n = 1500 $ (there are
 1500 comics published as of right now) to see how long, as of today, this
 process would take.
 
-If you're looking for your ($ n $)th unread comic, each time you hit "random"
-you have a ($ 1 - n/1500 $) chance of getting a fresh one. This is a [geometric
+If you're looking for your $ n $th unread comic, each time you hit "random"
+you have a $ 1 - n/1500 $ chance of getting a fresh one. This is a [geometric
 probability distribution](http://en.wikipedia.org/wiki/Geometric_distribution),
 which is Math for "you keep trying something with a constant probability until
 it succeeds".  For geometric probability distributions, the expected value is
@@ -158,8 +158,8 @@ intuitively makes sense: you would expect to have to roll a die around 6 times
 until you get your first 1, or to flip a coin twice until you get your first
 heads).
 
-Anyhow, for the nth comic, the expected number of clicks is ($ 1500/(1500-n) $). Adding
-these up for each ($ n $), we have this monstrosity:
+Anyhow, for the nth comic, the expected number of clicks is $ 1500/(1500-n) $. Adding
+these up for each $ n $, we have this monstrosity:
 
 \\[ \sum_{n=1}^{1500} \frac{1500}{n} = \frac{1500}{1500} + \frac{1500}{1499} + \dots + \frac{1500}{2} + \frac{1500}{1} \\]
 
@@ -172,7 +172,7 @@ seems biased.
 ---
 
 One more bit of statistics: if you've taken a probability class, you might have
-heard of the birthday problem. That is, say you have a party with ($ n $) people.
+heard of the birthday problem. That is, say you have a party with $ n $ people.
 What is the probability that some pair of people at the party share a birthday?
 
 It turns out that if you have just 23 people, the probability is already 50-50.
@@ -197,7 +197,7 @@ don't believe the number 23 quoted above, it's worth spending some time trying
 to solve it yourself just to understand what's really going on (it's not hard).
 I'm just going to dump the formula here without any explanation.
 
-For 1500 comics, the probability that you get a repeat after ($ k $) clicks is:
+For 1500 comics, the probability that you get a repeat after $ k $ clicks is:
 
 \\[ 1 - \frac{1500!}{(1500-k)!1500^k} \\]
 

@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -31,7 +58,7 @@
                 <h4>Thursday, November 19, 2015 &middot; 5 min read</h4>
 <p>Wikipedia has an amusing article on <a href="https://en.wikipedia.org/wiki/Mathematical_coincidence">“mathematical
 coincidence”</a>, where
-they say that it’s a “coincidence” that ($ 2^{10} $) is very close to 1000
+they say that it’s a “coincidence” that $ 2^{10} $ is very close to 1000
 (it’s actually 1024). This is why it’s occasionally confusing whether you mean
 1000 or 1024 bytes when you say
 <a href="https://en.wikipedia.org/wiki/Kilobyte#Definitions_and_usage">“kilobyte”</a>.</p>
@@ -40,15 +67,15 @@ we say about coincidence…</p>
 <p><img src="static/coincidence.gif" alt="The universe is rarely so lazy."></p>
 <p>Here are some fun facts to inspire today’s post:</p>
 <ul>
-<li><p>($ 2^{12864326} \approx 10^{3872548} $) <a href="http://www.wolframalpha.com/input/?i=2%5E12864326">to within
+<li><p>$ 2^{12864326} \approx 10^{3872548} $ <a href="http://www.wolframalpha.com/input/?i=2%5E12864326">to within
 0.0001%</a>, which means it
 begins with the digits “10000000…”.</p>
 </li>
-<li><p>($ 1337^{47168026} \approx \pi\cdot10^{147453447}$) <a href="http://www.wolframalpha.com/input/?i=1337%5E47168026">to within
+<li><p>$ 1337^{47168026} \approx \pi\cdot10^{147453447}$ <a href="http://www.wolframalpha.com/input/?i=1337%5E47168026">to within
 0.00000001%</a>. It begins
 with the digits “31415926…”.</p>
 </li>
-<li><p>The hex expansion of ($ e^{19709930078} $) is around 10 billion digits long,
+<li><p>The hex expansion of $ e^{19709930078} $ is around 10 billion digits long,
 and it begins with the digits <code>deadbeef...</code>.</p>
 </li>
 </ul>
@@ -59,13 +86,13 @@ trying to solve equations that look somewhat like this one</p>
 <p>\[
 2^{\alpha} = \delta10^{\beta}
 \]</p>
-<p>for integers, where we can make ($ \delta $) as close to 1 as we want.</p>
+<p>for integers, where we can make $ \delta $ as close to 1 as we want.</p>
 <p>It should feel intuitive to take logs of both sides at this point. So let’s go
 ahead and do that:</p>
 <p>\[
 \alpha \ln(2) = \ln(\delta) + \beta\ln(10)
 \]</p>
-<p>Since ($ \delta $) is close to 1, its natural log is close to 0. So this
+<p>Since $ \delta $ is close to 1, its natural log is close to 0. So this
 equation reduces to finding a very close <a href="https://en.wikipedia.org/wiki/Diophantine_approximation">rational
 approximations</a> of the
 ratio of the natural logs of 2 and 10.</p>
@@ -76,9 +103,9 @@ number. The na&iuml;ve way to do this is to simply take the decimal expansion
 to as many digits as we want. So, for example, we can find rational
 approximations of pi such as 3/1, 31/10, 314/100, etc.</p>
 <p>So, it follows that we can find arbitrarily precise rational approximations of
-($ \ln(10) / \ln(2) $), which is what we’re looking for! The numerator gives
+$ \ln(10) / \ln(2) $, which is what we’re looking for! The numerator gives
 the power of 2 and the denominator gives the power of 10.</p>
-<p>That ratio is around 3.321928094, so ($ 2^{3321928094} $) should be really
+<p>That ratio is around 3.321928094, so $ 2^{3321928094} $ should be really
 close to a power of 10, right?</p>
 <p><a href="http://www.wolframalpha.com/input/?i=2%5E3321928094">…wrong.</a> The power of
 10 is spot-on, but our first digit is completely off. This is tragic! We’re
@@ -90,7 +117,7 @@ calculations for us. (There’s a nice online calculator
 bigger problems, but loses precision eventually.)</p>
 <p>The problem is that even though we’re close, we’re not close <em>enough</em>. Remember
 that our worst-case scenario with the decimal-truncation strategy is that we’re
-off by ($1/\beta$). That is, we have</p>
+off by $1/\beta$. That is, we have</p>
 <p>\[
 \left| \frac{\alpha}{\beta} - \frac{\ln(10)}{\ln(2)} \right| = \frac{1}{\beta}
 \]</p>
@@ -106,12 +133,12 @@ off by ($1/\beta$). That is, we have</p>
 rational approximation is getting closer, our first digit could still vary
 pretty randomly.</p>
 <p>What’s an easy fix here? We could start by rounding rather than truncating.
-This means our worst-case scenario drops to ($ 1/(2\beta) $) (why?), which
+This means our worst-case scenario drops to $ 1/(2\beta) $ (why?), which
 corresponds to being off by up to a factor of the square root of two (around
 1.4).</p>
-<p>If we round the example above, we get ($ 2^{3321928095} $), which is
+<p>If we round the example above, we get $ 2^{3321928095} $, which is
 <a href="http://www.wolframalpha.com/input/?i=2%5E3321928095">better</a>. But
-percent-error wise, we’re still doing <em>worse</em> than ($ 2^{10} $). We need to
+percent-error wise, we’re still doing <em>worse</em> than $ 2^{10} $. We need to
 take more drastic measures.</p>
 <hr>
 <p>It turns out that there is a way to find the <em>best</em> rational approximation of
@@ -122,12 +149,12 @@ that relates images like the one below to computing GCDs efficiently.</p>
 is <a href="https://en.wikipedia.org/wiki/Dirichlet%27s_approximation_theorem">Dirichlet’s approximation
 theorem</a>,
 which states that we can always find a rational approximation which is within
-($ 1/(\beta^2) $) of the target. In fact, there are an <em>infinite</em> number of
-such rational approximations, which means ($ \beta $) can get as large as we
+$ 1/(\beta^2) $ of the target. In fact, there are an <em>infinite</em> number of
+such rational approximations, which means $ \beta $ can get as large as we
 want (why?).</p>
-<p>Since we have a ($ \beta^2 $) term in the denominator, the error decreases
-<em>faster</em> than the denominator. This means we can get within ($ 2^{(1/\beta)}
-$) of a power of 10. Since there’s a factor of ($ \beta $) in that expression,
+<p>Since we have a $ \beta^2 $ term in the denominator, the error decreases
+<em>faster</em> than the denominator. This means we can get within $ 2^{(1/\beta)}
+$ of a power of 10. Since there’s a factor of $ \beta $ in that expression,
 we can make it as large as we want to get as close to a power of 10 as we want!
 Win!</p>
 <hr>
@@ -141,8 +168,8 @@ With a little twiddling of the “delta” parameter, we <a href="http://www.wol
 get</a>
 approximations within whatever interval we want, and they
 <a href="http://www.wolframalpha.com/input/?i=2%5E254370">work</a>!</p>
-<p>Pushing this gives us lovely results, like ($ 2^{44699994} $), which is around
-($ 9.9999997\times10^{13456038} $), <a href="http://www.wolframalpha.com/input/?i=2%5E44699994">within
+<p>Pushing this gives us lovely results, like $ 2^{44699994} $, which is around
+$ 9.9999997\times10^{13456038} $, <a href="http://www.wolframalpha.com/input/?i=2%5E44699994">within
 0.0000003%</a> of a power of
 ten. Wonderful.</p>
 <hr>
@@ -150,10 +177,10 @@ ten. Wonderful.</p>
 an <em>arbitrary</em> sequence of digits at the beginning of the result? It turns out
 we can. By manipulating Euclidean algorithm a bit, we can generate any
 remainder, not necessarily one that is close to zero. Since the remainder
-controls the first few digits, we need to find an approximation with error ($
-\ln(\delta) $).</p>
+controls the first few digits, we need to find an approximation with error $
+\ln(\delta) $.</p>
 <p>The trick is to use a “secondary” version of the Euclidean Algorithm where we
-approximate ($ \ln(\delta) $) by adding together the errors of successively
+approximate $ \ln(\delta) $ by adding together the errors of successively
 more precise approximations.</p>
 <p>Here’s an example. Suppose we compute a series of rational approximations of a
 number and we get the following two rows:</p>

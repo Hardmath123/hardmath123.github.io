@@ -163,7 +163,7 @@ it merits a writeuplet.
 We know that the message begins with `message:<space>`, and we know the first 9
 bytes of the output. This lets us mount a known-plaintext attack. Here's how:
 we encrypt the plaintext with *all* possible keys (there are
-($2^{24}=16777216$) of them) and we *decrypt* the ciphertext with all possible
+$2^{24}=16777216$ of them) and we *decrypt* the ciphertext with all possible
 keys. Turns out that for the correct pair of keys, we'll get the exact same
 result (the intermediate encryption). This is a 'meet-in-the-middle' attack
 (not to be confused with 'man-in-the-middle' or 'Malcolm-in-the-Middle'), and

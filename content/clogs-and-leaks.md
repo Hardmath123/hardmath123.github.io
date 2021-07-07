@@ -32,7 +32,7 @@ value. PyTorch then walks _backwards_ along this computation graph, computing
 the derivative at each step and accumulating them according to the chain rule.
 Eventually, the leaf nodes of the graph contain the derivatives you asked for.
 
-Let me give a small example. Suppose we wanted to compute ($d2x^2/dx|_{x=3}$).
+Let me give a small example. Suppose we wanted to compute $d2x^2/dx|_{x=3}$.
 We might write a program that looks like this:
 
 ```python
@@ -54,8 +54,8 @@ rule, the product of these gives the overall derivative we sought.
 
 ## Clogs
 
-Now, consider this simple PyTorch program to compute ($d(\sqrt{x} +
-x)/dx|_{x=4}$). What do you expect to be printed?
+Now, consider this simple PyTorch program to compute $d(\sqrt{x} +
+x)/dx|_{x=4}$. What do you expect to be printed?
 
 ```python
 x = torch.tensor(4., requires_grad=True)
@@ -94,13 +94,13 @@ _By the way:_ the celebrated "reparametrization trick" that powers variational
 autoencoders is really just a workaround for a gradient clog problem. To train
 a variational autoencoder, you need to compute the derivative of a sample of a
 probability distribution with respect to the distribution's parameters (e.g.
-the mean ($\mu$) and variance ($\sigma^2$) of a Gaussian distribution).
+the mean $\mu$ and variance $\sigma^2$ of a Gaussian distribution).
 Unfortunately, naïvely sampling from a parametrized distribution abruptly
 truncates the computation graph with respect to the parameters, because the
 random number generator is not differentiable all the way through — who _knows_
 what _it's_ doing! The solution, is to sample from a standard unit normal
-distribution (where ($\mu=0$) and ($\sigma=1$)), and then re-scale the sample
-by multiplying by ($\sigma$) and adding ($\mu$). Of course, multiplication and
+distribution (where $\mu=0$ and $\sigma=1$, and then re-scale the sample
+by multiplying by $\sigma$ and adding $\mu$. Of course, multiplication and
 addition _are_ easily differentiable, and so the gradients can now flow.
 Problem solved!
 
@@ -199,8 +199,8 @@ flow of _differentiability_ through the program.
 
 Let me be slightly more concrete about this suggestion. In our "clog" example,
 a good type system might detect that `sqrt` cuts off the computation graph,
-and, knowing that ($y$) does not directly depend on ($x$) in the expected way
-anymore, complain at compile-time when we try to request ($dy/dx$). In our
+and, knowing that $y$ does not directly depend on $x$ in the expected way
+anymore, complain at compile-time when we try to request $dy/dx$. In our
 "leak" example, a good type system might notice that the "old" `my_position`
 effectively goes out of scope when it is re-assigned, and therefore it might
 complain that an unreachable reference to it actually does persist through the

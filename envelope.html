@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -66,45 +93,45 @@ this question correctly. If you don’t want to work through the math, however,
 then feel free to just scroll to the red-bordered squares and enjoy the
 interactive demos.</p>
 <hr>
-<p><strong>Definition.</strong> Given some region ($ R \subset \mathbb{R}^2 $), the <em>casino
-closure</em> with respect to some point ($ p \in \mathbb{R}^2 $) is defined as</p>
+<p><strong>Definition.</strong> Given some region $ R \subset \mathbb{R}^2 $, the <em>casino
+closure</em> with respect to some point $ p \in \mathbb{R}^2 $ is defined as</p>
 <p>\[
 R^p = \left\{
   c \in \mathbb{R}^2 ~\middle|~
   \exists z \in R, || p - z || &gt; || c - z ||
 \right\}
 \]</p>
-<p>Or, informally: the casino closure is the set of <em>possible casino locations</em> ($
-c $) such that there exists a person ($ z $) in the region ($ R $) who is
-closer to ($ c $) than to ($ p $).</p>
+<p>Or, informally: the casino closure is the set of <em>possible casino locations</em> $
+c $ such that there exists a person $ z $ in the region $ R $ who is
+closer to $ c $ than to $ p $.</p>
 <p>From here on out, I’m only going to worry about “nice” regions, i.e. closed,
-connected regions with smooth boundaries. I’m also going to use ($ x, p, z, c
-$) to range over points in ($ \mathbb{R}^2 $), but really most math that
-follows is equally applicable in ($ \mathbb{R}^n $). It’s just harder to
+connected regions with smooth boundaries. I’m also going to use $ x, p, z, c
+$ to range over points in $ \mathbb{R}^2 $, but really most math that
+follows is equally applicable in $ \mathbb{R}^n $. It’s just harder to
 visualize.</p>
-<p><strong>Lemma.</strong> Let the disk ($ D(z, r) $) be the set of all points in ($
-\mathbb{R}^2 $) within ($ r $) of point ($ z $). Then,
+<p><strong>Lemma.</strong> Let the disk $ D(z, r) $ be the set of all points in $
+\mathbb{R}^2 $ within $ r $ of point $ z $. Then,
 \[
 R^p = \bigcup_{z~\in~R} D(z, ||p - z||)
 \]</p>
-<p>That is, we can construct ($ R^p $) by combining all the disks at all the
-points in ($ R $) that have ($ p $) on their circumference.</p>
-<p><strong>Proof sketch.</strong> This should make sense “by construction.” If point ($ c $) is
-in this constructed ($ R^p $), then it lies in some disk ($ d $), and thus the
-point ($ z \in R $) that created disk ($ d $) fulfills the existence criterion
+<p>That is, we can construct $ R^p $ by combining all the disks at all the
+points in $ R $ that have $ p $ on their circumference.</p>
+<p><strong>Proof sketch.</strong> This should make sense “by construction.” If point $ c $ is
+in this constructed $ R^p $, then it lies in some disk $ d $, and thus the
+point $ z \in R $ that created disk $ d $ fulfills the existence criterion
 of our definition.</p>
-<p><strong>Lemma.</strong> If region ($ R $) has a boundary ($ B \subset R $), then ($
-B^p = R^p $).</p>
-<p><strong>Proof sketch.</strong> Clearly, ($ B^p \subset R^p $) if you believe the first lemma
-— adding more points to ($ B $) should only increase the union of disks.</p>
-<p>The harder direction to show is ($ R^p \subset B^p $). Consider some point ($ z
-\in R$). Extend the ray ($ \overrightarrow{pz} $) until it intersects with ($ B
-$) at point ($ z^\prime $). Then, we can relate the disks created by ($ z $)
-and ($ z^\prime $): ($ D(z, ||p-z||) \subset D(z^\prime, ||p-z^\prime||) $).
-Why? Because the disk from ($ z $) is smaller and internally tangent to the
-disk from ($ z^\prime $).</p>
-<p>Mapping this argument over the entire union, it makes sense that ($ R^p \subset
-B^p $).</p>
+<p><strong>Lemma.</strong> If region $ R $ has a boundary $ B \subset R $, then $
+B^p = R^p $.</p>
+<p><strong>Proof sketch.</strong> Clearly, $ B^p \subset R^p $ if you believe the first lemma
+— adding more points to $ B $ should only increase the union of disks.</p>
+<p>The harder direction to show is $ R^p \subset B^p $. Consider some point $ z
+\in R$. Extend the ray $ \overrightarrow{pz} $ until it intersects with $ B
+$ at point $ z^\prime $. Then, we can relate the disks created by $ z $
+and $ z^\prime $: $ D(z, ||p-z||) \subset D(z^\prime, ||p-z^\prime||) $.
+Why? Because the disk from $ z $ is smaller and internally tangent to the
+disk from $ z^\prime $.</p>
+<p>Mapping this argument over the entire union, it makes sense that $ R^p \subset
+B^p $.</p>
 <p>Okay, time for some empirical verification of all this theory. Try drawing the
 boundary of a region (in black) here! The disks will show up in red. Notice how
 filling in your region with black dots doesn’t change the red blob at all.
@@ -112,67 +139,67 @@ filling in your region with black dots doesn’t change the red blob at all.
 <canvas id="world-freestyle" width=300 height=300 style="border: 1px solid red;"></canvas>
 
 <hr>
-<p>The boundary-circle lemma gives us a nicer characterization of ($ R^p $): it is
+<p>The boundary-circle lemma gives us a nicer characterization of $ R^p $: it is
 the region bounded by the curve that is tangent to all of the disks created by
-the points on ($ B $). It turns out that there is a very nice mathematical
+the points on $ B $. It turns out that there is a very nice mathematical
 theory of “the curve that is tangent to all curves in a given family of
 curves,” and that is the theory of <em>envelopes</em>. The account below is
 paraphrased from <a href="https://www.jstor.org/stable/3617131?seq=1#metadata_info_tab_contents">“What is an
 Envelope?”</a>,
 a lovely 1981 paper.</p>
-<p>Let the function ($ F(x, t) : \mathbb{R}^2 \times \mathbb{R} \rightarrow
-\mathbb{R} $) define a family of curves parameterized by ($ t $), in the sense
-that ($ F(x, 0) = 0 $) defines a curve and ($ F(x, 1) = 0 $) defines another
+<p>Let the function $ F(x, t) : \mathbb{R}^2 \times \mathbb{R} \rightarrow
+\mathbb{R} $ define a family of curves parameterized by $ t $, in the sense
+that $ F(x, 0) = 0 $ defines a curve and $ F(x, 1) = 0 $ defines another
 curve, and so on. Then, we seek to characterize the envelope curve which is
-tangent to every curve in ($ F $).</p>
-<p><strong>Lemma.</strong> If the boundary of ($ R $) can be (periodically) parameterized as ($
-B(t), t \in \mathbb{R} $) then the boundary of ($ R^p $) is the <em>envelope</em> with
-respect to ($ t $) of
+tangent to every curve in $ F $.</p>
+<p><strong>Lemma.</strong> If the boundary of $ R $ can be (periodically) parameterized as $
+B(t), t \in \mathbb{R} $ then the boundary of $ R^p $ is the <em>envelope</em> with
+respect to $ t $ of
 \[
 F(x, t) = || x - B(t) ||^2 - || p - B(t) ||^2
 \]</p>
-<p><strong>Proof sketch.</strong> Again, this should make sense “by construction”: ($ F $) is
-chosen to correspond to circles centered at ($ B(t) $) passing through ($ p $).</p>
+<p><strong>Proof sketch.</strong> Again, this should make sense “by construction”: $ F $ is
+chosen to correspond to circles centered at $ B(t) $ passing through $ p $.</p>
 <hr>
 <p>Ah, but how do we find the envelope? Here we need a tiny bit of multivariable
 calculus.</p>
-<p>Let ($ X(t) $) be the parameterization of the envelope of ($ F $). Then for all
-($ t $), we have that ($ F(X(t), t) = 0 $) because the envelope must lie on the
+<p>Let $ X(t) $ be the parameterization of the envelope of $ F $. Then for all
+$ t $, we have that $ F(X(t), t) = 0 $ because the envelope must lie on the
 respective curve in the family (“tangent” means “touch”!). We also have that
-the curve ($ X(t) $) must be parallel to the member of family ($ F $) at ($ t
-$). We can then express this condition by saying that the gradient (with
-respect to ($ X $)) of ($ F $) at ($ t $) is perpendicular to the derivative of
-($ X $) at ($ t $). Or:</p>
+the curve $ X(t) $ must be parallel to the member of family $ F $ at $ t
+$. We can then express this condition by saying that the gradient (with
+respect to $ X $ of $ F $ at $ t $ is perpendicular to the derivative of
+$ X $ at $ t $. Or:</p>
 <p>\[
 d X(t) / dt    \cdot    \nabla_X F(X(t), t) = 0
 \]</p>
-<p>In two dimensions, with ($ X(t) = (x(t), y(t)) $), this equation manifests
-itself as ($ x^\prime(t)\partial F(x, y, t) / \partial x + y^\prime(t)\partial
-F(x, y, t) / \partial y $).</p>
+<p>In two dimensions, with $ X(t) = (x(t), y(t)) $, this equation manifests
+itself as $ x^\prime(t)\partial F(x, y, t) / \partial x + y^\prime(t)\partial
+F(x, y, t) / \partial y $.</p>
 <p>The left hand side is oddly reminiscent of the multivariable chain rule.
-Indeed, if we took the partial derivative of our equation ($ F(X(t), t) = 0 $)
-with respect to ($ t $), we would get:</p>
+Indeed, if we took the partial derivative of our equation $ F(X(t), t) = 0 $
+with respect to $ t $, we would get:</p>
 <p>\[
 dF(X, t)/dt = dX/dt\cdot\nabla_X F(X, t) + dt/dt\cdot \partial F(X, t)/\partial t = 0
 \]</p>
-<p>So we must have ($ \partial F(X, t) / \partial t = 0$).</p>
+<p>So we must have $ \partial F(X, t) / \partial t = 0$.</p>
 <p>There is a simpler but less rigorous derivation if you believe that the
 envelope is exactly the points of intersection of infinitesimally close curves
-in the family ($ F $). Then we want every point ($ X $) on the envelope to
-satisfy both ($ F(X, t) $) and ($ F(X, t + \delta) $) for some ($ t $) and some
-infinitesimal ($ \delta $). Taking the limit as ($ \delta $) approaches zero
-gives the same condition that ($ \partial F(X, t) / \partial t = 0 $). The
+in the family $ F $. Then we want every point $ X $ on the envelope to
+satisfy both $ F(X, t) $ and $ F(X, t + \delta) $ for some $ t $ and some
+infinitesimal $ \delta $. Taking the limit as $ \delta $ approaches zero
+gives the same condition that $ \partial F(X, t) / \partial t = 0 $. The
 paper above discusses how this notion is subtly different in some strange
-cases, but it suffices to say that for all “nice” ($ R $), we’re fine.</p>
-<p><strong>Almost-a-theorem.</strong> The boundary of ($ R^p $) is given by the parameterized
-vectors ($ X $) that satisfy ($ F(X, t) = 0 $) and ($ \partial F (X, t) /
-\partial t = 0 $) for the ($ F $) defined above.</p>
-<p><strong>Almost-a-proof-sketch.</strong> Almost! In general, the solution for ($ X $) might
-self-intersect, so we want to take only the “outermost” part of ($ X $). But
+cases, but it suffices to say that for all “nice” $ R $, we’re fine.</p>
+<p><strong>Almost-a-theorem.</strong> The boundary of $ R^p $ is given by the parameterized
+vectors $ X $ that satisfy $ F(X, t) = 0 $ and $ \partial F (X, t) /
+\partial t = 0 $ for the $ F $ defined above.</p>
+<p><strong>Almost-a-proof-sketch.</strong> Almost! In general, the solution for $ X $ might
+self-intersect, so we want to take only the “outermost” part of $ X $. But
 this is easy to work out on a case-by-case basis.</p>
-<p><strong>Example.</strong> Suppose ($ R $) is the unit disk centered at ($ (a, 0) $), and ($
-p $) is located at the origin. Then ($ B(t) = (\cos t + a, \sin t) $) and ($ p
-= (0, 0) $). We have</p>
+<p><strong>Example.</strong> Suppose $ R $ is the unit disk centered at $ (a, 0) $, and $
+p $ is located at the origin. Then $ B(t) = (\cos t + a, \sin t) $ and $ p
+= (0, 0) $. We have</p>
 <p>\[
 F((x, y), t) =
   ((x - (\cos t + a))^2 + (y - \sin t)^2) - ((\cos t + a)^2 + \sin^2 t)
@@ -184,17 +211,17 @@ F((x, y), t) = -2ax + x^2 - 2x\cos t + y^2 - 2y \sin t = 0
 <p>\[
 \partial F((x, y), t) / \partial t = 2x\sin t - 2y\cos t = 0
 \]</p>
-<p>Solving these by eliminating ($ t $) is a simple exercise in polar coordinates.
-Discover from the second equation that ($ t = \theta $), then recall that ($
-r^2 = x^2 + y^2 $). The resulting boundary of ($ R^p $) is (almost!) the curve
-($ r = 2(1 + a\cos\theta) $). In other words, it’s (almost!) a limaçon! As ($ a
-$) varies, the character of the limaçon varies, and at the critical points ($ a
-= \pm 1 $), we get a cardioid with a cusp. Beyond those critical points, the
+<p>Solving these by eliminating $ t $ is a simple exercise in polar coordinates.
+Discover from the second equation that $ t = \theta $, then recall that $
+r^2 = x^2 + y^2 $. The resulting boundary of $ R^p $ is (almost!) the curve
+$ r = 2(1 + a\cos\theta) $. In other words, it’s (almost!) a limaçon! As $ a
+$ varies, the character of the limaçon varies, and at the critical points $ a
+= \pm 1 $, we get a cardioid with a cusp. Beyond those critical points, the
 curve has an inner loop that we have to ignore; hence, “almost!”</p>
 <p>Okay, time for more empiricism. Move your mouse around in the square below to
 see how the relative placement of LA and the casino affects the envelope.
 Notice also the inner loop predicted by the envelope, which we should of course
-ignore for the purposes of bounding ($ R^p $).</p>
+ignore for the purposes of bounding $ R^p $.</p>
 <canvas id="world-cardioid" width=300 height=300 style="border: 1px solid red;"></canvas>
 
 <p>An amazing fact is that a cardioid is the same shape you get on the surface of

@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -71,19 +98,19 @@ much of the variance of the data as possible. One way to think about this is
 that it tries to come up with a rotation (“orthogonal transformation”) of the
 data that de-correlates the variance over each axis. In other words, it finds a
 way to diagonalize the covariance matrix of the dataset.</p>
-<p>Okay, in symbols: if ($ X $) is the matrix whose rows are data points and
-columns are fields, and if your data is “centered” at the origin, then ($ X^TX
-$) is the covariance matrix whose entries give the covariance between pairs of
-fields. If ($ E $) is the transformation, then the goal is to select ($ E $)
-such that ($ (XE)^T(XE) = E^T(X^TX)E $) is a diagonal matrix; that is, ($ E $)
-diagonalizes ($ X^TX $). Having done that, our projected path will be the
-(first few columns of) the matrix ($ XE $).</p>
-<p>It turns out that ($ XE $) diagonalizes ($ X X^T $). You can see that by just
-writing it out: ($ (XE)^T XX^T (XE) = E^T (X^TX)^2 E $). Of course an
-eigenvalue of ($ A $) is also an eigenvalue of ($ A^2 $) and therefore ($ E $)
-diagonalizes ($ (X^TX)^2 $) as desired. So, it suffices to study the
-eigenvalues of ($ XX^T $) to learn what the projected path will look like.</p>
-<p>Now let’s look carefully at ($ X X^T$), which is the “covariance” for each step
+<p>Okay, in symbols: if $ X $ is the matrix whose rows are data points and
+columns are fields, and if your data is “centered” at the origin, then $ X^TX
+$ is the covariance matrix whose entries give the covariance between pairs of
+fields. If $ E $ is the transformation, then the goal is to select $ E $
+such that $ (XE)^T(XE) = E^T(X^TX)E $ is a diagonal matrix; that is, $ E $
+diagonalizes $ X^TX $. Having done that, our projected path will be the
+(first few columns of) the matrix $ XE $.</p>
+<p>It turns out that $ XE $ diagonalizes $ X X^T $. You can see that by just
+writing it out: $ (XE)^T XX^T (XE) = E^T (X^TX)^2 E $. Of course an
+eigenvalue of $ A $ is also an eigenvalue of $ A^2 $ and therefore $ E $
+diagonalizes $ (X^TX)^2 $ as desired. So, it suffices to study the
+eigenvalues of $ XX^T $ to learn what the projected path will look like.</p>
+<p>Now let’s look carefully at $ X X^T$, which is the “covariance” for each step
 rather than for each field. The claim is that this matrix is more-or-less
 <em>Toeplitz</em>, which means each row is the previous row but shifted by one spot to
 the right. The reason for this is that adjacent data points are spatially

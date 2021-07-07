@@ -52,21 +52,21 @@ that it tries to come up with a rotation ("orthogonal transformation") of the
 data that de-correlates the variance over each axis. In other words, it finds a
 way to diagonalize the covariance matrix of the dataset.
 
-Okay, in symbols: if ($ X $) is the matrix whose rows are data points and
-columns are fields, and if your data is "centered" at the origin, then ($ X^TX
-$) is the covariance matrix whose entries give the covariance between pairs of
-fields. If ($ E $) is the transformation, then the goal is to select ($ E $)
-such that ($ (XE)^T(XE) = E^T(X^TX)E $) is a diagonal matrix; that is, ($ E $)
-diagonalizes ($ X^TX $). Having done that, our projected path will be the
-(first few columns of) the matrix ($ XE $).
+Okay, in symbols: if $ X $ is the matrix whose rows are data points and
+columns are fields, and if your data is "centered" at the origin, then $ X^TX
+$ is the covariance matrix whose entries give the covariance between pairs of
+fields. If $ E $ is the transformation, then the goal is to select $ E $
+such that $ (XE)^T(XE) = E^T(X^TX)E $ is a diagonal matrix; that is, $ E $
+diagonalizes $ X^TX $. Having done that, our projected path will be the
+(first few columns of) the matrix $ XE $.
 
-It turns out that ($ XE $) diagonalizes ($ X X^T $). You can see that by just
-writing it out: ($ (XE)^T XX^T (XE) = E^T (X^TX)^2 E $). Of course an
-eigenvalue of ($ A $) is also an eigenvalue of ($ A^2 $) and therefore ($ E $)
-diagonalizes ($ (X^TX)^2 $) as desired. So, it suffices to study the
-eigenvalues of ($ XX^T $) to learn what the projected path will look like.
+It turns out that $ XE $ diagonalizes $ X X^T $. You can see that by just
+writing it out: $ (XE)^T XX^T (XE) = E^T (X^TX)^2 E $. Of course an
+eigenvalue of $ A $ is also an eigenvalue of $ A^2 $ and therefore $ E $
+diagonalizes $ (X^TX)^2 $ as desired. So, it suffices to study the
+eigenvalues of $ XX^T $ to learn what the projected path will look like.
 
-Now let's look carefully at ($ X X^T$), which is the "covariance" for each step
+Now let's look carefully at $ X X^T$, which is the "covariance" for each step
 rather than for each field. The claim is that this matrix is more-or-less
 _Toeplitz_, which means each row is the previous row but shifted by one spot to
 the right. The reason for this is that adjacent data points are spatially

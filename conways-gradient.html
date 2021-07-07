@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -44,7 +71,7 @@ file</a>.)</p>
 exactly — the art of “atavising” — is <a href="https://nbickford.wordpress.com/2012/04/15/reversing-the-game-of-life-for-fun-and-profit/">a hard search
 problem</a>,
 and doing it at this scale would be computationally infeasible. Imagine
-searching through ($ 2^{239\times200} $) possible configurations! Surely that
+searching through $ 2^{239\times200} $ possible configurations! Surely that
 is hopeless… indeed, the talk I linked shares some clever algorithms that
 nonetheless take a full 10 minutes to find a predecessor for a tiny 10-by-10
 board.</p>
@@ -52,22 +79,22 @@ board.</p>
 easier — instead of a tricky discrete search problem, we have an easy
 <em>continuous optimization</em> problem for which we can use our favorite algorithm,
 gradient descent.</p>
-<p>Here is the idea: Start with a random board configuration ($ b $) and compute
-($ b^\prime $), the result after one step of Life. Now, for some target image
-($ t $) compute the derivative ($ \frac{\partial}{\partial b} \sum|b^\prime-t|
-$), which tells us how to change ($ b $) to make ($ b^\prime $) closer to ($ t
-$). Then take a step of gradient descent, and rinse and repeat!</p>
+<p>Here is the idea: Start with a random board configuration $ b $ and compute
+$ b^\prime $, the result after one step of Life. Now, for some target image
+$ t $ compute the derivative $ \frac{\partial}{\partial b} \sum|b^\prime-t|
+$, which tells us how to change $ b $ to make $ b^\prime $ closer to $ t
+$. Then take a step of gradient descent, and rinse and repeat!</p>
 <p>Okay, okay, I know what you’re thinking: <em>Life isn’t differentiable!</em> You’re
-right. Life is played on a grid of bools, and there is no way the map ($ b
-\mapsto b^\prime $) is continuous, let alone differentiable.</p>
+right. Life is played on a grid of bools, and there is no way the map $ b
+\mapsto b^\prime $ is continuous, let alone differentiable.</p>
 <p>But suppose we could make a “best effort” differentiable analogue? Let us play
 Life on a grid of real numbers that are 0 for “dead” cells and 1 for “live”
 cells. Can we “implement” a step of Life using only differentiable operations?
 Let’s try.</p>
-<p>We will look at each cell ($ c $) individually. The first step is to count our
+<p>We will look at each cell $ c $ individually. The first step is to count our
 live neighbors. Well, if “live” cells are 1 and “dead” cells are 0, then we can
 simply add up the values of all 8 of our neighbors to get our live neighbor
-count ($ n $). Indeed, if we wanted to be clever, we could implement this
+count $ n $. Indeed, if we wanted to be clever, we could implement this
 efficiently as a convolution with this kernel:</p>
 <p>\[
 \begin{bmatrix}
@@ -76,35 +103,35 @@ efficiently as a convolution with this kernel:</p>
 1 &amp; 1 &amp; 1
 \end{bmatrix}
 \]</p>
-<p>Good, so we know ($ n $) and of course our own 0/1 value ($ c $). The next step
+<p>Good, so we know $ n $ and of course our own 0/1 value $ c $. The next step
 is to figure out whether this cell will be alive in the next generation. Here
 are the rules:</p>
 <ol>
-<li>If the cell is alive, ($ c = 1 $), then it stays alive if and only if ($ n =
-2 $) or ($ n = 3 $).</li>
-<li>If the cell is dead, ($ c = 0 $), then it comes to life if and only if ($ n
-= 3 $).</li>
+<li>If the cell is alive, $ c = 1 $, then it stays alive if and only if $ n =
+2 $ or $ n = 3 $.</li>
+<li>If the cell is dead, $ c = 0 $, then it comes to life if and only if $ n
+= 3 $.</li>
 </ol>
-<p>Let us approach (2) first. What function is 1 when ($ n = 3 $) and 0 otherwise?
+<p>Let us approach (2) first. What function is 1 when $ n = 3 $ and 0 otherwise?
 The “spike-at-3” function, of course. That’s not differentiable, but a narrow
 Gaussian centered at 3 is <em>almost</em> the same thing! If scaled appropriately, the
 Gaussian is one at input 3, and <em>almost</em> zero everywhere else. See this graph:</p>
 <p><img src="static/conways-gradient/approx-graph.png" alt="approximating a spike with a less spiky
 spike"></p>
 <p>Similarly, for (1) an appropriately-scaled Gaussian centered at 2.5 gets the
-job done. Finally, we can mux these two cases under gate ($ c $) by simple
-linear interpolation. Because ($ c \approx 0 $) or ($ c \approx 1 $), we know
-that ($ ca + (1-c)b $) is just like writing <code>if c then a else b</code>.</p>
+job done. Finally, we can mux these two cases under gate $ c $ by simple
+linear interpolation. Because $ c \approx 0 $ or $ c \approx 1 $, we know
+that $ ca + (1-c)b $ is just like writing <code>if c then a else b</code>.</p>
 <p>That’s it! We now have a differentiable function, which looks like this:</p>
 <p><img src="static/conways-gradient/approx-map.png" alt="the same, in 2d"></p>
 <p>Note that it’s worth “clamping” the output of that function to 0 or 1 using,
 say, the tanh function. That way cell values always end up close to 0 or 1.</p>
 <p>Okay, great! Now all that’s left to do is to write this in PyTorch and call
 .backward()…</p>
-<p>…and it begins to learn, within seconds! Here is a GIF of ($ b $) at every
+<p>…and it begins to learn, within seconds! Here is a GIF of $ b $ at every
 100 steps of gradient descent.</p>
 <p><img src="static/conways-gradient/learn.gif" alt="gif of it learning"></p>
-<p>(Note: This GIF is where the target image ($ t $) is an all-white rectangle; my
+<p>(Note: This GIF is where the target image $ t $ is an all-white rectangle; my
 janky PyTorch gradient descent finds sparse configurations that give birth to
 an “overpopulated” field where nearly 90% of cells are alive.)</p>
 <hr>
@@ -121,8 +148,8 @@ called <a href="https://en.wikipedia.org/wiki/Turing_pattern">Turing Patterns</a
 his <a href="http://www.dna.caltech.edu/courses/cs191/paperscs191/turing.pdf">1952
 paper</a>.</p>
 <p>I can’t help but wonder if there’s a reaction-diffusion-model-esque effect at
-work here as well, the symmetry being broken by the random initialization of ($
-b $). If that’s the case, it would create quite a wonderful connection between
+work here as well, the symmetry being broken by the random initialization of $
+b $. If that’s the case, it would create quite a wonderful connection between
 cells, cellular automata, Turing-completeness, and Turing patterns…</p>
 <p>(Curious? <a href="static/conways-gradient/atavise.py">Here</a> is the Python program I
 used to play these games. Enjoy!)</p>

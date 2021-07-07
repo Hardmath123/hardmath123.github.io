@@ -31,8 +31,8 @@ We can then ask, "will going up the circle of fifths ever get us back to our
 root note?" Obviously, the answer is no: to get back to the root note you need
 to get a ratio of 1 again. But, every time you multiply by 3/2 you add a power
 of 3 to the numerator, which will never cancel with the denominator. That is,
-we are searching for an integer solution to the equation ($ (3/2)^x / 2^y = 1
-$) which clearly does not exist.
+we are searching for an integer solution to the equation $ (3/2)^x / 2^y = 1$
+which clearly does not exist.
 
 However, we can get close! Recall from [A Balance of
 Powers](a-balance-of-powers.html) that we can compute really good approximate
@@ -66,7 +66,7 @@ subtle tuning tendencies of its respective key.
 The big winner turned out to be "even tempering". Even tempering spaces out the
 12 notes of the scale evenly. Since the top note is twice the frequency of the
 root note, each consecutive pair of notes in the even-tempered scale differs by
-a ratio of ($ 2^{(1/12)} : 1$), which is around 1.06. Crucially, the difference
+a ratio of $ 2^{(1/12)} : 1$, which is around 1.06. Crucially, the difference
 between "C" and "D" is the same as that between "D" and "E", so if you start a
 song on "D" instead of "C", everything still fits. Furthermore, even tempering
 frequencies don't stray *too* far from the Pythagorean frequencies, so

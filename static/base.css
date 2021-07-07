@@ -1,16 +1,16 @@
 body {
-  font-family: sans-serif;
+  font-family: "Trebuchet MS", sans-serif;
   margin: 0;
   padding: 0;
   font-size: 11pt;
   border-top: solid 0.4em #c90426;
   border-bottom: solid 0.4em #c90426;
-  color: #333;
-  background-color: #fffcfc;
+  color: #222;
+  background-color: #fff8e4;
 }
 
 p, li, dd {
-  line-height: 1.4em;
+  line-height: 1.5em;
   text-rendering: optimizeLegibility;
 }
 
@@ -71,7 +71,7 @@ a:visited:hover {
 #header {
   padding-top: 4em;
   padding-bottom: 4em;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px dashed black;
   overflow: hidden;
   margin-bottom: 5em;
 }
@@ -91,7 +91,7 @@ a:visited:hover {
   position: relative;
   z-index: 2;
   font-variant: small-caps;
-  font-family: sans-serif;
+  font-family: Luminari, sans-serif;
   letter-spacing: 0.3em;
   font-weight: 100;
   
@@ -165,7 +165,7 @@ h4 {
   font-size: 0.6em;
   margin-top: 5em;
   color: gray;
-  border-top: 1px solid #ddd;
+  border-top: 1px dashed black;
 }
 #footer div {
   max-width: 50em;
@@ -205,7 +205,7 @@ h4 {
   padding-left: 2em;
   padding-right: 2em;
   width: 100%;
-  max-width: 40em;
+  max-width: 45em;
   margin-left: auto;
   margin-right: auto;
 }

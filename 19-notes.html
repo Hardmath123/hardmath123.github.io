@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -57,8 +84,8 @@ then going down by a factor of 2 when it gets higher than 2. So, you get 1,
 root note?” Obviously, the answer is no: to get back to the root note you need
 to get a ratio of 1 again. But, every time you multiply by 3/2 you add a power
 of 3 to the numerator, which will never cancel with the denominator. That is,
-we are searching for an integer solution to the equation ($ (3/2)^x / 2^y = 1
-$) which clearly does not exist.</p>
+we are searching for an integer solution to the equation $ (3/2)^x / 2^y = 1$
+which clearly does not exist.</p>
 <p>However, we can get close! Recall from <a href="a-balance-of-powers.html">A Balance of
 Powers</a> that we can compute really good approximate
 solutions for these equations by taking logaritms and using Diophantine
@@ -86,7 +113,7 @@ subtle tuning tendencies of its respective key.</p>
 <p>The big winner turned out to be “even tempering”. Even tempering spaces out the
 12 notes of the scale evenly. Since the top note is twice the frequency of the
 root note, each consecutive pair of notes in the even-tempered scale differs by
-a ratio of ($ 2^{(1/12)} : 1$), which is around 1.06. Crucially, the difference
+a ratio of $ 2^{(1/12)} : 1$, which is around 1.06. Crucially, the difference
 between “C” and “D” is the same as that between “D” and “E”, so if you start a
 song on “D” instead of “C”, everything still fits. Furthermore, even tempering
 frequencies don’t stray <em>too</em> far from the Pythagorean frequencies, so

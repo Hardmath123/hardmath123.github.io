@@ -727,6 +727,14 @@
             "file": "bentley-blizzard-blossoms.md",
             "date": "2/23/21",
             "markdown": true
+        },
+        {
+            "title": "Fortune in Flux",
+            "author": "Hardmath123",
+            "description": "The fortune of us that are the moon's men doth ebb and flow like the sea (Henry IV, Part I)",
+            "file": "langevin.md",
+            "date": "7/7/21",
+            "markdown": true
         }
     ]
 }

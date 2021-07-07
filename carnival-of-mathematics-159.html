@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -46,13 +73,13 @@ number to the square. (16 plus 4 is 20.) Finally, add forty-one. (20 plus 41 is
 61.)</p>
 <p>And now – your result – is it prime? Ha! I thought so. (61 certainly is.)</p>
 <p>This little trick is due to Euler, who pointed out in 1772 that the polynomial
-($ f(x) = x^2 + x + 41$) returns prime numbers for small integers — indeed,
+$ f(x) = x^2 + x + 41$ returns prime numbers for small integers — indeed,
 all nonnegative integers up to and including 39. Since then, the quest for
 other such “prime-generating” polynomials has fascinated number theorists from
 around the world. As a little exercise, you may try convincing yourself that
 there is no <em>perfect</em> prime-generating polynomial; that is, that there will
 always be at least one integer input that gives a composite output.</p>
-<p>But I digress. Here is what matters: The integers ($ x $) for which ($ f(x) $)
+<p>But I digress. Here is what matters: The integers $ x $ for which $ f(x) $
 is composite are the deviants, the rebels, the ones who refuse to play along
 with Euler’s little game.</p>
 <p>Forty is the first such integer.</p>

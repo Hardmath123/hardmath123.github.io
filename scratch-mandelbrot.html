@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -78,11 +105,11 @@ point wasn’t in the set. However, these form cool patterns, too.</p>
 <h3 id="understanding-the-algorithm">Understanding the Algorithm</h3>
 <p>The M-Set is generated using the algorithm:</p>
 <p>\[ Z_{n+1}=z_{n}^2 + C \]</p>
-<p>Here, both ($ Z $) and ($ C $) are complex numbers. What are complex numbers?
+<p>Here, both $ Z $ and $ C $ are complex numbers. What are complex numbers?
 They’re, put simply, square roots of negative numbers. Since negative numbers
 can’t have square roots, we created ‘complex’ or ‘imaginary’ numbers to deal
-with it. ‘($ i $)’ (pronounced iota) is the symbol for ($ \sqrt{-1} $). Complex
-numbers are expressed as multiples of ($ i $), like ($ 3i $). They are graphed
+with it. ‘$ i $’ (pronounced iota) is the symbol for $ \sqrt{-1} $. Complex
+numbers are expressed as multiples of $ i $, like $ 3i $. They are graphed
 on a number line perpendicular to the number line we all know. The resultant
 plane is called the complex plane, and is where we will graph the Mandelbrot
 Set.</p>
@@ -91,19 +118,19 @@ Set.</p>
 -1  0 +1
   -1i
 </code></pre><p>Complex numbers are defined as the sum of a real number and an imaginary
-number. Examples are ($ 3i + 1 $) or ($ 4i - 2 $).</p>
+number. Examples are $ 3i + 1 $ or $ 4i - 2 $.</p>
 <p>In this expression, C is the complex number for which you are testing whether
 or not it’s in the M-Set (it will define a single point on the complex plane —
 C is a real number plus an imaginary one, remember?). Here’s how you use it:
-You set Z to 0. Then set ($ Z $) to ($ Z^2 + C $). We call this action
-iteration. For example, if C was 3 (I’m using a real number for simplicity), ($
-z $) would be:</p>
+You set Z to 0. Then set $ Z $ to $ Z^2 + C $. We call this action
+iteration. For example, if C was 3 (I’m using a real number for simplicity), $
+z $ would be:</p>
 <p>\[ 0 \]
 \[ 0^2 + 3 = 3 \]
 \[ 3^2 + 3 = 12 \]
 \[ 12^2 + 3 = 147 \]</p>
 <p>etc.</p>
-<p>If you did this many, many times, there are two possibilities for ($ Z $) — it
+<p>If you did this many, many times, there are two possibilities for $ Z $ — it
 escapes to infinity, or it doesn’t. If it doesn’t escape, it is in the set.
 This looks hard to calculate—how can we know whether it reaches infinity? For
 all we know at 1000000000 iterations it’ll be a normal, but after 1000000001
@@ -117,27 +144,27 @@ a more accurate picture, but it will slow the script down considerably. 50 is
 a good number.</p>
 </li>
 </ul>
-<p>So now, all we need to do is repeat ($ Z^2 + C $) 50 times and see how high it
+<p>So now, all we need to do is repeat $ Z^2 + C $ 50 times and see how high it
 is. Great!</p>
 <h3 id="programming-the-algorithm">Programming the Algorithm</h3>
 <p>That’s all very nice, but there’s a catch (isn’t there always?)—this uses
 complex numbers, and Scratch—make that any programming language—doesn’t allow
 square roots of negative numbers. Try it yourself. You’ll get a red <em>Error!</em>.
 So how do we avoid this? Well, remember how a complex number is a real number
-plus an imaginary number, and an imaginary number is just ($ \sqrt{-1} $)?
-Well, that means we can split any variable, say ($ Q $), into two variables:
-q-Real and q-Complex, or abbreviated, ($ qR $) and ($ qX $). We also know that
-($ qX $) squared is real, because ($ i^2 $) is ($ -1 $) which is real, and the
-coefficient is real anyway (here, coefficient is the 3 in ($ 3i $)). This means
+plus an imaginary number, and an imaginary number is just $ \sqrt{-1} $?
+Well, that means we can split any variable, say $ Q $, into two variables:
+q-Real and q-Complex, or abbreviated, $ qR $ and $ qX $. We also know that
+$ qX $ squared is real, because $ i^2 $ is $ -1 $ which is real, and the
+coefficient is real anyway (here, coefficient is the 3 in $ 3i $. This means
 now we know how to square complex numbers to get real numbers. So, let’s take a
 look at the algorithm:</p>
 <p>\[ Z_{n+1} = Z_{n}^2 + C \]
 \[ =(zR + zX)^2 + cR + cX \]
 \[ =zR^2 + zX^2 + 2zR*zX \left\{\text{by opening the brackets}\right\} + cR + cX \]</p>
-<p>If you think carefully, ($ zX $) can only be represented by its coefficient.
-This is because ($ zX^2 $) is real, and ($ 2*zR*zX + cX $) (all the complex
-terms) can be represented by the coefficient, which is again because ($ zX^2 $)
-is real. So, we never ‘need’ the value of ($ i $), which is a huge relief.  Now
+<p>If you think carefully, $ zX $ can only be represented by its coefficient.
+This is because $ zX^2 $ is real, and $ 2*zR*zX + cX $ (all the complex
+terms) can be represented by the coefficient, which is again because $ zX^2 $
+is real. So, we never ‘need’ the value of $ i $, which is a huge relief.  Now
 we can start coding!</p>
 <p>We need a sprite to move through every point on the stage. That’s easy:</p>
 <pre><code>set x to -240
@@ -159,9 +186,9 @@ set zR to 0
 set zX to 0
 set r to 0 {r will be the number of repetitions. You&#39;ll se why this will be helpful pretty soon}
 </code></pre><p>This’ll set up all our variables. Great. Now for the hard part.</p>
-<p>For the calculation, we need to set ($ zR $) to ($ zR^2 + (zX^2*-1
-\{\text{because i^2 is -1}\}) + cR $), and set ($ zX $) to ($ 2*zR*zX + cX
-$). We get this just by grouping them on the basis of their complexness.
+<p>For the calculation, we need to set $ zR $ to $ zR^2 + (zX^2*-1
+\{\text{because i^2 is -1}\}) + cR $, and set $ zX $ to $ 2*zR*zX + cX
+$. We get this just by grouping them on the basis of their complexness.
 Complex values get added into zX, the rest into zR.</p>
 <pre><code>set old_zR to zR {this is because zR will change, and when evaluating zX we&#39;ll get the wrong value of zR}
 set zR to (zR*zR) + -1*(zX*zX) + cR
@@ -169,10 +196,10 @@ set zX to 2*old_zR*zX + cX
 change r by 1 {&#39;cause r counts the repeats}
 </code></pre><p>But, before we put that in, we need to know how many times to iterate. Iterate
 means repeat, so we need to put this into a repeat. We know that by 50
-iterations, we can be pretty sure whether ($ zR $) will ever exceed 2 or not.
+iterations, we can be pretty sure whether $ zR $ will ever exceed 2 or not.
 The problem is that it may exceed 2 very early, and approach infinity, causing
 Scratch to freeze because the numbers get out of hand. So, we need a ‘if I’m
-over 2, stop me right away’ repeat. This is exactly why we needed ($ r $).</p>
+over 2, stop me right away’ repeat. This is exactly why we needed $ r $.</p>
 <pre><code>repeat until [r &gt; 50] or [zR &gt; 2]
 will do the job. [r &gt; 50] says it repeats 50 times, [zR &gt; 2] says if it&#39;s over 2, stop repeating.
 </code></pre><p>Now, we can finally tell whether the point you chose is in the Mandelbrot Set

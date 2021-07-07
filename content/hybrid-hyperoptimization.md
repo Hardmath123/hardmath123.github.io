@@ -34,9 +34,9 @@ and hard to implement (you have to be super careful about numerical precision).
 
 Here's a graph that visualizes these two techniques ([from this
 paper](https://arxiv.org/abs/1909.13371)). You're looking at several parallel
-loss curves (($\log(f)$) is the loss plotted on a log scale), pointing towards
+loss curves $\log(f)$ is the loss plotted on a log scale), pointing towards
 you, arranged in order of the "step size" hyperparameter
-(that's ($\log(\alpha)$)). The orange curve represents a "short-term"
+(that's $\log(\alpha)$. The orange curve represents a "short-term"
 hyperparameter optimization, which is allowed to move along the "step size"
 axis at each step. The "long-term" hyperparameter optimization instead
 optimizes directly on the thick black dashed "U" --- that is, after _several_
@@ -100,7 +100,7 @@ words, implement backpropagation as usual, but rather than `float` type
 numbers, exclusively use `dual_number` type numbers (even when doing derivative
 calculations). Initialize the system such that the dual numbers track
 derivatives with respect to the hyperparameters you care about. Then, your
-final loss value's attached ($\epsilon$)-value _immediately_ gives you
+final loss value's attached $\epsilon$-value _immediately_ gives you
 `d(loss)/d(hyperparameters)`. No backpropagation needed --- and so, it's safe
 to "forget" the computation graph.
 
@@ -116,7 +116,7 @@ accepts. That allowed me to run the reverse-mode algorithms using the
 forward-mode data types.
 
 Running it on a simple quadratic optimization problem, we can see that updating
-the hyperparameter ($\alpha$) yields better-looking loss curves --- in this
+the hyperparameter $\alpha$ yields better-looking loss curves --- in this
 GIF, we're discovering that we should increase the step size. Yay!
 
 ![GIF of loss curve becoming better over

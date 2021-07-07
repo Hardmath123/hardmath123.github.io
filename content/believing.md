@@ -22,8 +22,8 @@ B_5 = \int_0^\infty \frac{\sin(x)\sin(x/3)\sin(x/5)}{x(x/3)(x/5)}dx &=
 B_7 = \int_0^\infty \frac{\sin(x)\sin(x/3)\sin(x/5)\sin(x/7)}{x(x/3)(x/5)(x/7)}dx &= \frac{\pi}{2}\end{aligned}$$
 
 The aesthetics of mathematics demand at this point for her to formulate
-a *conjecture*, which is that all Borwein integrals ($B_n$) are equal to
-($\pi/2$).
+a *conjecture*, which is that all Borwein integrals $B_n$ are equal to
+$\pi/2$.
 
 Do you believe this conjecture? Perhaps, but our friend the
 Mathematician is not so easily satisfied. She presses on and continues
@@ -34,8 +34,8 @@ B\_9 = \frac{\pi}{2} \qquad
 B\_{11} = \frac{\pi}{2} \qquad
 B\_{13} = \frac{\pi}{2}\end{aligned}$$
 
-But when she gets to ($B_{15}$), she finds unexpectedly (or is it unexpected?)
-that it is ever so slightly *less* than ($\pi/2$). The pattern falls apart, the
+But when she gets to $B_{15}$, she finds unexpectedly (or is it unexpected?)
+that it is ever so slightly *less* than $\pi/2$. The pattern falls apart, the
 conjecture evaporates, and with it our belief.
 
 The previous essay was on seeing; this one is on believing, the act of
@@ -157,7 +157,7 @@ The second proof, due to Zagier, was published in 1990 as a single
 sentence, and is reproduced in its entirety on the right. It
 hallucinates for us a truly bizarre object, asserts that it has a
 certain symmetry that forces there to be an odd number of solutions to
-the equation ($x^2 + (2\cdot y)^2 = p$), and, as zero is not odd,
+the equation $x^2 + (2\cdot y)^2 = p$, and, as zero is not odd,
 concludes that there must be at least one solution. This is one of the
 strangest proofs I have ever seen; it provides absolutely no insight
 into *why* the theorem is true --- though it certainly assures me *that*

@@ -45,12 +45,12 @@ the encrypted message doesn't know the way the word is broken up for sure, he
 needs some trial and error (but with the key and a reasonable English
 vocabulary, it's relatively easy).
 
-<p><em>(Mathematical aside: If you have a string of length ($l$), how many ways
+<p><em>(Mathematical aside: If you have a string of length $l$, how many ways
 can you break it up into a series 2 or 1 digit numbers? The answer is, believe
 it or not, the l<sup>th</sup> Fibonacci number. The proof is simple: given a
-string, we can chomp off the first digit and break up the rest in ($f(l-1)$)
-ways, or chomp off the first 2 digits and break up the rest in ($f(l-2)$) ways.
-So the total is ($f(l) = f(l-1) + f(l-2)$), which is Fibonacci.)</em>
+string, we can chomp off the first digit and break up the rest in $f(l-1)$
+ways, or chomp off the first 2 digits and break up the rest in $f(l-2)$ ways.
+So the total is $f(l) = f(l-1) + f(l-2)$, which is Fibonacci.)</em>
 
 <p>Anyway, Tim ended up writing a nice little Python program that breaks up
 words into a list of numbers (it turns out we can eliminate quite a few,

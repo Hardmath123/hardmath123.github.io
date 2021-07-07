@@ -8,12 +8,39 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script>
             MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['($','$)']]}
+                tex2jax: {inlineMath: [['$','$']]}
             });
         </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
     </head>
     <body>
         <header id="header">
@@ -83,8 +110,8 @@ circles of increasing (or decreasing) size stacked above each other (like a
 pile of tires of different radii). For convenience, we can say that each
 circle's radius is equal to it's height above the origin.
 
-<p>The equation of a circle is ($x^2 + y^2 = r^2$), and if ($r = z$), we have
-($x^2 + y^2 = z^2$). If we plug that into a graphing application, we get:
+<p>The equation of a circle is $x^2 + y^2 = r^2$, and if $r = z$, we have
+$x^2 + y^2 = z^2$. If we plug that into a graphing application, we get:
 
 <p><img src="static/conic-3.png"/>
 
@@ -92,10 +119,10 @@ circle's radius is equal to it's height above the origin.
 width of the cone. We could have picked a narrower cone by squishing or
 stretching our equation, but this one is easy to deal with.
 
-<p>Now the screen: that's just a vertical plane. We describe that with ($x=c$)
-for some constant ($c$) (let's pick 1 for simplicity).
+<p>Now the screen: that's just a vertical plane. We describe that with $x=c$
+for some constant $c$ (let's pick 1 for simplicity).
 
-<p>And now we can solve for the intersection: just substiture in ($x=1$) into
+<p>And now we can solve for the intersection: just substiture in $x=1$ into
 the first equation: \[ 1^2 + y^2 = z^2 \]
 
 <p>Or, more canonically: \[ z^2 - y^2
@@ -115,28 +142,28 @@ particular, what would have happened if I had decided to play with the lamp and
 knocked it over? When you tilt the lamp, is it still a hyperbola?
 
 <p>Turns out, only to a point. Let's see how. When we tilt a plane, we go from
-($x=c$) to ($z = mx + c$). Here, ($m$) is the inclination or slope of the plane
-[insert your own inclined plane joke here], and ($c$) is how far it is from the
+$x=c$ to $z = mx + c$. Here, $m$ is the inclination or slope of the plane
+[insert your own inclined plane joke here], and $c$ is how far it is from the
 origin (once more, we'll let this be 1 without loss of generality). When we
 substitute, we get:
 
 \[ x^2 + y^2 = (mx+c)^2 = (mx + 1)^2 = m^2x^2 + 2mx + 1 \]
 \[ y^2 + [(1-m^2)x^2 - 2mx] = 1 \]
 
-<p>Now, the quadratic ($x^2$) term can either be positive, negative, or 0. If
-it's negative, then ($m > 1$). Of course, we get a hyperbola when the ($x^2$)
-term is negative (just like above). When ($ m > 1 $), the slope is steeper, or
+<p>Now, the quadratic $x^2$ term can either be positive, negative, or 0. If
+it's negative, then $m > 1$. Of course, we get a hyperbola when the $x^2$
+term is negative (just like above). When $ m > 1 $, the slope is steeper, or
 closer to vertical.
 
-<p>If it's positive, then ($m < 1$). We get an <strong>ellipse</strong> when
-the ($x^2$) term is positive. When ($ m < 1 $), the slope is flatter, or closer
+<p>If it's positive, then $m < 1$. We get an <strong>ellipse</strong> when
+the $x^2$ term is positive. When $ m < 1 $, the slope is flatter, or closer
 to horizontal. Notice how this plane will chop through just one of the cones,
 but all the way through. So, intuitively, you should get a stretched circle.
 
 <p>Ellipses show up all over the place. Planets orbit stars in ellipses (though
 this truth cost some scientists their reputation, and in some cases, lives).
 
-<p>Finally, that term can be 0 if ($m=1$). That means the plane is parallel to
+<p>Finally, that term can be 0 if $m=1$. That means the plane is parallel to
 the side of the cone. Think about how the intersection would look. It only
 intersects one of the cones, but the intersection doesn't chop all the way
 through like an ellipse. Removing that term gives us a quadratic equation, and
@@ -153,7 +180,7 @@ plenty of fun to study.
 	<li>Since the lampshade's top and bottom openings have different diameters, the top cone and bottom cones aren't necessarily the same, and so we don't necessarily have a perfectly symmetrical hyperbola. Find the unique point where you can place the light bulb in the lamp so that the cones are in fact the same.
 	<li>You may have heard of the pencil-and-string way to build an ellipse. You can stick two pushpins into a piece of paper, and tie each end of a piece of string to one pushpin. Then trace the curve you get with a pencil by keeping the string taught&mdash;it's an ellipse! In other words, given a point on an ellipse, the sum of the distance to each pushpin is a constant. Each pushpin's position is called a <em>focus</em> of an ellipse. This is a perfectly valid definition of an ellipse.<br/>What is the corresponding definition for a hyporbola? If you're ambitious, try to get the equation of an ellipse given the above definition.
 	<li>A parabola is the set of all points that are equidistant from a point and a <em>line</em> (the distance from a point to a line is the length of the perpendicular segment from the point to the line). Can you prove this?
-	<li>Without graphing or drawing or anything, try to imagine what happens to a hyperbola as you keep on zooming out. What does it look like?<br/>You get a pair of intersecting lines called the <em>asymptotes</em>. What are the equations of the asymptotes of ($y^2 - x^2 = 1$)?
+	<li>Without graphing or drawing or anything, try to imagine what happens to a hyperbola as you keep on zooming out. What does it look like?<br/>You get a pair of intersecting lines called the <em>asymptotes</em>. What are the equations of the asymptotes of $y^2 - x^2 = 1$?
 </ul>
 <p>P.S. The lesson here wasn't about conic sections. The lesson here was that
 there is really cool math in <em>everything</em>. Even lampshades. And you
