@@ -10,10 +10,67 @@
             <link>https://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 07 Jul 2021 22:36:54 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 02 Oct 2021 02:47:24 GMT</lastBuildDate>
         <atom:link href="https://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Carnival of Mathematics 198]]></title>
+            <description><![CDATA[<p>The Carnival revisits an old home</p>
+
+
+<p>Hello and welcome to the 198th <a href="https://aperiodical.com/carnival-of-mathematics/">Carnival of Mathematics</a>, a roving monthly roundup of mathy blog posts from around the Internet! Longtime Comfortably Numbered readers should be no stranger to the Carnival: I hosted <a href="carnival-of-mathematics-134.html">#134</a>, <a href="carnival-of-mathematics-148.html">#148</a>, and <a href="carnival-of-mathematics-159.html">#159</a> in the past.</p>
+<p>As is traditional, I want to start by thinking a bit about the number 198. It is actually a very dear number to me — I even own a “198” t-shirt! Why, you ask? The number 198 is the emblem of the wonderful CS198 program at Stanford, which hires a huge team of undergraduates to help teach the introductory computer science courses every year. (As far back as 1995, the faculty running the program published a <a href="https://cormack.uwaterloo.ca/papers/p48-roberts.pdf">retrospective</a> on its impact on campus.)</p>
+<p>Here is another fun fact about the number 198: suppose I start looking at all the integers ($1, 2, 3, 4, 5, \dots$), keeping only the ones that are perfect powers ($1, 4=2^2, 8=2^3, 9=3^2, 16=2^4, \dots$), and then taking their cumulative averages ($1$, $2.5=(1+4)/2$, $4.33=(1+4+8)/3$, $5.5=(1+4+8+9)/4$, $7.6=(1+4+8+9+16)/5, \dots$). You might wonder, are there any other integers in <a href="http://oeis.org/A075457">this sequence</a>? It turns out, <em>yes!</em> And I bet you can guess the first one…</p>
+<hr>
+<p>Now, time for some links! I’ve provided some “teaser” text from each submission to get you interested.</p>
+<p>The BRSR blog asks: <a href="https://brsr.github.io/2021/05/29/curved-triangle.html">can you find a Euclidean triangle on a non-Euclidean surface?</a></p>
+<blockquote>
+<p>A question that came up in a math chatroom (yes, I’m the kind of nerd who spends time in math chatrooms): find a “Euclidean” triangle on a non-Euclidean surface. More exactly, find a geodesic triangle on a surface with non-constant <a href="https://en.wikipedia.org/wiki/Gaussian_curvature">Gaussian curvature</a> having the same sum of interior angles as an Euclidean triangle.</p>
+</blockquote>
+<p>On his blog bit-player, Brian Hayes asks: <a href="http://bit-player.org/2021/riding-the-covid-coaster">why do pandemics peak in distinct waves as the months go by?</a></p>
+<blockquote>
+<p>I’m puzzled by all this structural embellishment. Is it mere noise—a product of random fluctuations—or is there some driving mechanism we ought to know about, some switch or dial that’s turning the infection process on and off every few months?</p>
+<p>I have a few ideas about possible explanations, but I’m not so keen on any of them that I would try to persuade you they’re correct. However, I <em>do</em> hope to persuade you there’s something here that needs explaining.</p>
+</blockquote>
+<p>On Twitter, Thien An asks: <a href="https://twitter.com/thienan496/status/1434522808189521930">would you rather have a bishop and a knight, or two bishops?</a></p>
+<blockquote>
+<p>To get this figure, it suffices to grab 100k games and only keep the positions with BB+pawns v.s. BN+pawns and see who eventually wins. That’s very simplistic since there are indeed many other important positional features, but I was actually expecting less convincing results…</p>
+</blockquote>
+<p>Looking at a video of a pomegranate sorting mechanism, Nisar Khan asks: <a href="https://nisarkhanatwork.medium.com/pomegranate-size-differences-in-different-boxes-ff8a627bb82">how much do the pomegranate sizes vary between sorted buckets?</a></p>
+<blockquote>
+<p>After watching the below video, thought of finding the approximate size differences of pomegranates sorted in different boxes…</p>
+</blockquote>
+<p>On his math blog, Tony asks: <a href="http://tonysmaths.blogspot.com/2021/09/did-studying-maths-help-emma-raducanu.html?m=1">did studying maths help Emma Raducanu win the US Open?</a></p>
+<blockquote>
+<p>I’ve discussed toy examples in public lectures on game theory, which (it seems to me) is relevant to choices players make - whether to serve to the forehand or backhand, and where to expect for your opponent to serve, for example. I very much doubt if players ever analyse in these terms, but they are intuitively doing game theory when making their tactical decisions.</p>
+<p>But I think in the case of Raducanu there is a more general point…</p>
+</blockquote>
+<p>On Risen Crypto, Trajesh asks: <a href="https://risencrypto.github.io/QuadraticSieve/">how does the quadratic sieve factoring algorithm really work?</a></p>
+<blockquote>
+<p>The Quadratic Sieve is the second fastest algorithm for factoring large semiprimes. It’s the fastest for factoring ones which are lesser than 100 digits long.</p>
+</blockquote>
+<p>On The Universe of Discourse, Mark Dominus asks: <a href="https://blog.plover.com/2021/08/28/#combinator-s">why is the “S” combinator named “S”?</a> He also posted a <a href="https://blog.plover.com/math/dilworth.html">nice puzzle</a> that is easily solved if you happen to know Dilworth’s theorem; separately, Jim Fowler built a <a href="https://twitter.com/kisonecat/status/1435265678525620227">musical PICO-8 game</a> where you race to find the chains guaranteed by Dilworth’s theorem.</p>
+<blockquote>
+<p>I thought about this for a while but couldn’t make any progress. But OP had said “I know I have to construct a partially ordered set and possibly use Dilworth’s Theorem…” so I looked up Dilworth’s theorem.</p>
+</blockquote>
+<p>On their blog “Gödel’s Last Letter and P=NP,” Ken Regan and Dick Lipton discuss <a href="https://rjlipton.wpcomstaging.com/2021/09/30/baby-steps/">“baby steps”</a> in math, in the context of some exciting recent results.</p>
+<blockquote>
+<p>Reckoned against a later <a href="https://annals.math.princeton.edu/2009/170-3/p01">paper</a> by Cohn and Elkies, [Viazovska’s] improvement was 0.0000…000001. The recent post where we discussed the phrase “the proof is in the pudding” involves a number with six more zeroes than that. These are <strong>not</strong> what we mean by “baby steps.”</p>
+</blockquote>
+<p>And finally, something more about sequences— on her math blog, Tanya Khovanova explores the <a href="https://blog.tanyakhovanova.com/2021/09/the-top-fifty-largest-numbers-that-start-a-sequence-in-the-oeis/">top 50 largest numbers to start OEIS sequences</a>.</p>
+<blockquote>
+<p>My son, Alexey Radul, wrote a program that finds the largest numbers to start a sequence in the Online Encyclopedia of Integer Sequences (<a href="https://oeis.org/">OEIS</a>). To my surprise, the top ten are all numbers consisting of ones only.</p>
+</blockquote>
+<hr>
+<p>That’s all for this month’s Carnival! What a joy to see — once more — the math blog world <em>overflowing</em> with curiosity. Hosting the Carnival of Mathematics truly is a delight.</p>
+<p>Want even more math? The previous Carnival, the 197th, was hosted by <a href="https://jeremykun.com/2021/09/01/carnival-of-mathematics-197/">Jeremy at Math $\cap$ Programming</a>, and the next — the 199th, to which you can contribute <a href="https://aperiodical.com/carnival-of-mathematics/">here</a>, starting now! — will be hosted by <a href="https://doubleroot.in">Vaibhav at DoubleRoot</a>. See you there!</p>
+]]></description>
+            <link>https://hardmath123.github.io/carnival-of-mathematics-198.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/carnival-of-mathematics-198.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Fri, 01 Oct 2021 04:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Fortune in Flux]]></title>
             <description><![CDATA[<p>The fortune of us that are the moon’s men doth ebb and flow like the sea (Henry IV, Part I)</p>
@@ -196,7 +253,7 @@ intuition, reach a sampling algorithm that solves a real problem.</p>
             <link>https://hardmath123.github.io/langevin.html</link>
             <guid isPermaLink="true">https://hardmath123.github.io/langevin.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Wed, 07 Jul 2021 07:00:00 GMT</pubDate>
+            <pubDate>Wed, 07 Jul 2021 04:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Mr. Bentley's Blizzard-Blossoms]]></title>
@@ -513,7 +570,7 @@ anything, please let me know!</p>
             <link>https://hardmath123.github.io/bentley-blizzard-blossoms.html</link>
             <guid isPermaLink="true">https://hardmath123.github.io/bentley-blizzard-blossoms.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 23 Feb 2021 08:00:00 GMT</pubDate>
+            <pubDate>Tue, 23 Feb 2021 05:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Learning to Play the Chaos Game]]></title>
@@ -738,7 +795,7 @@ across the table from loneliness.</p>
             <link>https://hardmath123.github.io/chaos-game-fractal-foliage.html</link>
             <guid isPermaLink="true">https://hardmath123.github.io/chaos-game-fractal-foliage.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 25 Dec 2020 08:00:00 GMT</pubDate>
+            <pubDate>Fri, 25 Dec 2020 05:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Systems for Coordinating Coordinate Systems]]></title>
@@ -869,7 +926,7 @@ that considers the same problem. (“See? It’s not just me!”)</p>
             <link>https://hardmath123.github.io/systems-for-coordinating-coordinate-systems.html</link>
             <guid isPermaLink="true">https://hardmath123.github.io/systems-for-coordinating-coordinate-systems.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Tue, 15 Dec 2020 08:00:00 GMT</pubDate>
+            <pubDate>Tue, 15 Dec 2020 05:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Clogs and Leaks: Why My Tensors Won't Flow]]></title>
@@ -1046,7 +1103,7 @@ type system.</p>
             <link>https://hardmath123.github.io/clogs-and-leaks.html</link>
             <guid isPermaLink="true">https://hardmath123.github.io/clogs-and-leaks.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 23 Nov 2020 08:00:00 GMT</pubDate>
+            <pubDate>Mon, 23 Nov 2020 05:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Public Time and the Privacy of Time]]></title>
@@ -1134,7 +1191,7 @@ folds of time. Public time, and the privacy of time.</p>
             <link>https://hardmath123.github.io/electric-guitar.html</link>
             <guid isPermaLink="true">https://hardmath123.github.io/electric-guitar.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 13 Nov 2020 08:00:00 GMT</pubDate>
+            <pubDate>Fri, 13 Nov 2020 05:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Believing]]></title>
@@ -1382,7 +1439,7 @@ this is the Mathematician’s defense of her art.</p>
             <link>https://hardmath123.github.io/believing.html</link>
             <guid isPermaLink="true">https://hardmath123.github.io/believing.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 08 Nov 2020 08:00:00 GMT</pubDate>
+            <pubDate>Sun, 08 Nov 2020 05:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Sol LeWitt and the Soapy Pit]]></title>
@@ -1476,7 +1533,7 @@ flatten itself around the center, kind of like a tortilla chip.</p>
             <link>https://hardmath123.github.io/minimal-surface.html</link>
             <guid isPermaLink="true">https://hardmath123.github.io/minimal-surface.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Sun, 13 Sep 2020 07:00:00 GMT</pubDate>
+            <pubDate>Sun, 13 Sep 2020 04:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Hybrid Hyperoptimization]]></title>
@@ -1602,85 +1659,7 @@ you’ve built!</p>
             <link>https://hardmath123.github.io/hybrid-hyperoptimization.html</link>
             <guid isPermaLink="true">https://hardmath123.github.io/hybrid-hyperoptimization.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 11 Sep 2020 07:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[GPT-3 and Claude Shannon Visit the Tartu-Moscow School]]></title>
-            <description><![CDATA[<p>An information-theoretic approach to the question of “AI Literature”</p>
-
-
-<blockquote>
-<p>“I do not know what ‘poetical’ is: is it honest in
-deed and word? Is it a true thing?” — Lotman quoting Pushkin quoting Shakespeare in <em>As You like It, 3.3</em>.</p>
-</blockquote>
-<p>How do I want to say this? Here is one way: Earlier this year, the world was <em>very surprised</em> at a computer doing <em>very unsurprising</em> things. The celebrated computer program, <a href="https://arxiv.org/abs/2005.14165">OpenAI’s GPT-3</a>, is a <em>language model</em>, a machine learning model that (to simplify) outputs the statistically-likeliest completion of a sentence, much like the autocomplete on your iPhone keyboard. If we wrote the prefix</p>
-<blockquote>
-<p>The weather is warm and…</p>
-</blockquote>
-<p>GPT-3 might output “sunny” or “humid” — that would be probable and unsurprising. But it would likely not output “turtledove” — that would be improbable and surprising. Of course, you can run this program again and again to sample more and more words, and thus generate long sequences of text.</p>
-<ul>
-<li>The weather is warm and [sunny]</li>
-<li>The weather is warm and sunny [so]</li>
-<li>The weather is warm and sunny so [let’s]</li>
-<li>The weather is warm and sunny so let’s [go]</li>
-<li>The weather is warm and sunny so let’s go [to]</li>
-<li>The weather is warm and sunny so let’s go to [the]</li>
-<li>The weather is warm and sunny so let’s go to the [beach.]</li>
-</ul>
-<p>In principle this is nothing new. There was a GPT-1 and a GPT-2, too, as you can imagine. But GPT-3 is bigger and better — it has “read” an <em>enormous</em> corpus of text to build up its database, and the model itself consists of <em>175 billion</em> parameters (GPT-2 was a “mere” 1.5 billion parameters). Just training a model of this size is an exciting engineering accomplishment.</p>
-<p>By virtue of its size, GPT-3 is extremely good at hallucinating text in this way. And this is where things begin to get uncanny. If you phrase your prompt as a question, GPT-3 reliably provides answers in complete sentences. If you phrase your prompt as a few coding examples, GPT-3 can generate software to build small user interfaces based on a description of what buttons you want. It can even generate convincing <a href="https://maraoz.com/2020/07/18/openai-gpt3/">hoax blog posts</a>. Don’t worry, what you are reading right now is written by a human — but it is probably not unreasonable to be a little concerned.</p>
-<p>I think it is natural to ask whether it can generate “literary” text as well — whether it is a kind of superintelligent monkey that <em>will</em> generate <em>Hamlet</em> if you ask it to. Now, it’s pretty clear that GPT-3 is not quite a Great Automatic Grammatizer (I have written <a href="fabula.html">in the past</a> about what <em>that</em> may look like). But for short fragments, as lots of people have shown, it <a href="https://www.gwern.net/GPT-3">isn’t embarrassing either</a>. And so, as we hurtle towards a future where statistically-sound “literary text” can be mass-produced, I have been thinking a lot about what “literature” is.</p>
-<hr>
-<p>One set of thoughts comes from an unlikely (so to speak) source, which is the early-1970s literary theory of Yuri Lotman (or Jüri, or Jurij — you choose how to spell it — this becomes relevant soon). In <em>The Structure of the Artistic Text</em> (1971, but I’m referencing Ronald Vroon’s 1977 <a href="https://monoskop.org/images/3/3e/Lotman_Jurij_The_Structure_of_the_Artistic_Text_1977.pdf">translation</a> and <a href="https://www.jstor.org/stable/306702">Ewa Thompson’s guide</a>), Lotman connects Shannon’s and Kolmogorov’s quantitative theories of communication and entropy with the qualitative question <em>what is literature?</em>. At least, that is my understanding — I’m not an expert in Russian literary theory or semiotics, but I’m trying my best.</p>
-<p>Let’s think back to one of Shannon’s big ideas, which is that language is <em>redundant</em>, which means there are many ways to convey the same idea. Because of its redundancy, language is resilient to noise in the communication channel (such as loud music at a party). If I stprt intrdducinq mutnt1ons into my spellings, you can still more or less get the message. Similarly, most ideas can be paraphrased. Or, to put it differently, you can convey a concept in many different ways. That is, notions can be materialized into words in multiple fashions. If there were no redundancy in the language — that is, if every combination of letters formed a different valid word, or if there were only one way to express each idea — then this error-correction would be impossible. Imagine if each volume in Borges’ Library of Babel was a meaningful masterpiece! Imagine spilling a teardrop on a page, only to change the meaning dramatically!</p>
-<p>This redundancy is the reason why text is so <em>compressible</em>, why a ZIP file can be so small compared to the source it is compressing. You can just strip out the redundancy to get a smaller file: your disk’s I/O channel has negligible noise compared to a loud party, and so the redundancy is not needed. (Any introductory theory-of-computation course touches on <em>Kolmogorov Complexity</em>, a kind of theoretical limit to compressibility in terms of computability: it turns out that Kolmogorov worked with language and literature as well.)</p>
-<p>Perhaps this redundancy makes GPT-3’s behavior a little less surprising (I hope that word “surprising” is accruing meaningfulness for you). The more redundancy a language has, the more about the statistical structure of language you can “learn” from data, and therefore the easier it is to predict likely completions. Indeed, <a href="https://bellard.org/textsynth/sms.html">GPT models can be used to perform data compression</a>.</p>
-<p>Now, my understanding of Lotman’s thesis is that <em>literature does not behave this way</em>. Literature is <em>more entropic</em>, which is to say, literature is <em>less redundant</em>. It is packed with meaning — in fact, every choice is intentional and significant. Lotman argues that literature lives outside or above “ordinary” natural language; a work of literature creates its own “code,” and each word takes on a heightened meaning in this code. To read literature is to learn to decipher this code. He writes, <em>The artistic text is an intricately constructed thought. All its elements are meaningful elements.</em> Once a text is composed, it is baked to an immutable, brittle crust. “The reader considers the text placed before him as the only possible text.”</p>
-<p>For example — and this is my example, not Lotman’s — the repetition in a line from <em>Lear</em></p>
-<blockquote>
-<p>No, no, no, no! Come, let’s away to prison:</p>
-</blockquote>
-<p>is exact and precise. Four times, no more, no less — and each utterance of the word “no” is significant, dripping with intention. The raw sound “no” itself becomes a kind of meaningful sign, detached from its usual English-language semantics. You cannot, without losing meaning, compress that text as simply “4 x no.”</p>
-<p>Let me give you another example. Consider Roethke’s “The Waking.” It’s a sestina, a poem built on repetition. Every other stanza ends with the same line.</p>
-<blockquote>
-<p>I wake to sleep, and take my waking slow.<br>I feel my fate in what I cannot fear.<br><strong>I learn by going where I have to go.</strong></p>
-</blockquote>
-<p>This repeats.</p>
-<blockquote>
-<p>Of those so close beside me, which are you?<br>God bless the Ground! I shall walk softly there<br><strong>And learn by going where I have to go.</strong></p>
-</blockquote>
-<p>Until, suddenly and jarringly (in the softest way possible), it doesn’t.</p>
-<blockquote>
-<p>Great Nature has another thing to do<br>To you and me; so take the lively air,<br><strong>And, <em>lovely</em>, learn by going where to go.</strong></p>
-</blockquote>
-<p>That word <em>lovely</em> appears so deliberately in that line that its absence in the previous lines is conspicuous. As a result, those repeated lines, which seemed like blind repetitions, become conscious choices. Roethke could have said <em>whatever he wanted</em> but he chose to repeat himself verbatim, without the word “lovely,” in what Lotman might call a kind of “minus-device,” a trembling vacuum, an absence with presence — that in itself is meaning, that in itself holds entropy.</p>
-<p>It would not do for Roethke to paraphrase those lines, either. “I educate myself by traveling where needed” has no impact. Because literary text is stripped of redundancy, even small mutations — even semantics-preserving ones — can dramatically affect the text. It’s like compiling for embedded targets with <code>-O4</code>. Like <code>gcc</code>, Lotman does not believe you can paraphrase literature to get equivalent literature. You cannot re-tell a story, because there are no synonyms in the unique code of that particular work of literature. I am reminded of Borges’ “Pierre Menard, Author of the Quixote,” a short story wherein Menard <em>writes</em> (not re-writes) <em>Don Quixote</em>.</p>
-<blockquote>
-<p>Pierre Menard did not want to compose <em>another</em> Quixote, which surely is easy enough—he wanted to compose <em>the</em> Quixote. Nor, surely, need one be obliged to note that his goal was never a mechanical transcription of the original; he had no intention of <em>copying</em> it. His admirable ambition was to produce a number of pages which coincided—word for word and line for line—with those of Miguel de Cervantes.</p>
-</blockquote>
-<p>Maybe, in light of the discussion above, these bizarre lines are a little less mystifying, a little more satisfying.</p>
-<p>That brings me back to GPT-3, and the literary status of its output. Can we ever call a GPT-3-generated poem a work of literature? Well, following Lotman, let’s instead ask this: how much information, really, does GPT-3 output? How entropic is GPT-3’s output? And of course the answer is that GPT-3 is quite orderly in the grand scheme of things. “Whenever the text does not realize one of at least two possibilities,” writes Lotman, “but automatically follows one, it loses its capacity to convey information.” That is, every time GPT-3 argmaxes its way to a prediction predestined by its statistical model, which is really a synthesis of gigabytes and gigabytes of data, it is outputting — well, nothing. No new information. The occasional choice made by the random sampling is the only “information” being produced, though it is hidden in the fluffy sheep-skin of statistically-unobjectionable prose. If GPT-3 completed the prompt-word “yesterday” with Roosevelt’s “a date which will live in infamy” speech half the time, and Beatles’ “All my troubles seemed so far away” lyrics the other half the time, then GPT-3 has only really communicated one bit of information; the rest is redundant. Indeed, if you were to measure the number of bytes read from <code>/dev/urandom</code> (or whatever RNG) by GPT-3 in the course of sampling, and analyze the relative probabilities predicted by the model, perhaps you would be able to compute a Shannon entropy — or even a convincing literariness score — for the output. I sense it would not be very high.</p>
-<hr>
-<p>I want to end this piece with two notes.</p>
-<p>First: I see a couple of problems with Lotman’s theory — again, I’m not a literary theorist by trade so I do not know whether he (or others) have addressed them.</p>
-<ol>
-<li>How does Lotman account for the way early (oral) poetry, with its strict rhyme and metrical patterns, was designed to be memorized? Isn’t the poetical form, in a very direct sense, optimizing itself for compression and therefore less entropic — as if the redundancy were to harden the message against the noise of <em>time</em> and <em>amnesia</em>? Or do these qualities themselves encode and exfiltrate information, like the <a href="https://en.wikipedia.org/wiki/Sanskrit_prosody#Chandas_and_mathematics">stress-patterns in Sanskrit verse</a>, or the knots knitted by the women in <em>A Tale of Two Cities</em>? Lotman spends some time at the beginning of Chapter 6 discussing how poetry removed itself from ordinary speech, and then prose removed itself from poetry, and therefore prose is twice-removed from ordinary speech. But that does not quite answer my question.</li>
-<li>How does Lotman account for the fuzziness of texts — for example, the many editions of <em>Hamlet</em> that editors <em>to this day</em> Frankenstein together to try to formulate a coherent whole? How does this theory stand in the absence of an original source text?</li>
-</ol>
-<p>Second: Lotman means all this in a serious technical sense. As far as I can tell, he is not just borrowing scientific buzzwords to give legitimacy to an otherwise fuzzy theory. For example, he cites the quantitative work of Shannon and Kolmogorov directly, even though it was (even for the time) primitive. The preface to his book suggests rhetorically that the only way to test these theories would be to compute empirical metrics on an unthinkably large set of poems. Later Lotman suggests a kind of semantic analysis of poetry, but says</p>
-<blockquote>
-<p>The operations recounted above give only a general and deliberately rough semantic skeleton, since <strong>a description of all connections arising in the text and of all extra-textual relations which could be ascertained would be an unrealistic task in terms of sheer volume.</strong></p>
-</blockquote>
-<p>But today, we can do that — take exactly those measurements that Lotman (and Kolmogorov and Shannon) could only have dreamed of! It is as if Lotman predicted the relativistic warping of the stars, and we had to wait decades for the eclipse to make the confirming observations. Practical technology has finally caught up to theory.</p>
-<p>And so I think there is potential for unprecedented scholarship here. This is a question where deep learning enthusiasts and literary theorists and semioticians all have something valuable to say. I wonder what the conversation will be like? It is comforting to note that our hero Kolmogorov appeals as early as 1964,</p>
-<blockquote>
-<p>But real progress in this direction demands that cyberneticians [today’s deep learning researchers?] take a greater interest in the humanities and learn more about them.</p>
-</blockquote>
-]]></description>
-            <link>https://hardmath123.github.io/lotman.html</link>
-            <guid isPermaLink="true">https://hardmath123.github.io/lotman.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 24 Jul 2020 07:00:00 GMT</pubDate>
+            <pubDate>Fri, 11 Sep 2020 04:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>

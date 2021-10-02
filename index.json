@@ -735,6 +735,14 @@
             "file": "langevin.md",
             "date": "7/7/21",
             "markdown": true
+        },
+        {
+            "title": "Carnival of Mathematics 198",
+            "author": "Hardmath123",
+            "description": "The Carnival revisits an old home",
+            "file": "carnival-of-mathematics-198.md",
+            "date": "10/1/21",
+            "markdown": true
         }
     ]
 }
