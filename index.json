@@ -743,6 +743,14 @@
             "file": "carnival-of-mathematics-198.md",
             "date": "10/1/21",
             "markdown": true
+        },
+        {
+            "title": "Birds and the Representation of Representation",
+            "author": "Hardmath123",
+            "description": "What is it about birds?",
+            "file": "birds-and-the-representation-of-representation.md",
+            "date": "10/21/21",
+            "markdown": true
         }
     ]
 }

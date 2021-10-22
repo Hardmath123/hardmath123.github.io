@@ -10,10 +10,50 @@
             <link>https://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sat, 02 Oct 2021 02:47:24 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 22 Oct 2021 02:21:42 GMT</lastBuildDate>
         <atom:link href="https://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Birds and the Representation of Representation]]></title>
+            <description><![CDATA[<p>What is it about birds?</p>
+
+
+<h2 id="toni-morrison-nobel-lecture">Toni Morrison, Nobel Lecture</h2>
+<blockquote>
+<p>Speculation on what (other than its own frail body) that bird-in-the-hand might signify has always been attractive to me, but especially so now thinking, as I have been, about the work I do that has brought me to this company. <a href="https://www.nobelprize.org/prizes/literature/1993/morrison/lecture/">(full)</a></p>
+</blockquote>
+<h2 id="richard-siken-the-language-of-the-birds-">Richard Siken, “The Language of the Birds”</h2>
+<blockquote>
+<p>And just because you want to paint a bird, do actually paint a bird, it doesn’t mean you’ve accomplished anything. <a href="https://poets.org/poem/language-birds">(full)</a></p>
+</blockquote>
+<h2 id="cross-examination-in-_brancusi-v-united-states_">Cross-examination in <em>Brancusi v. United States</em></h2>
+<blockquote>
+<p><strong>Waite:</strong> What do you call this?<br><strong>Steichen:</strong> I use the same term the sculptor did, oiseau, a bird.<br><strong>Waite:</strong> What makes you call it a bird, does it look like a bird to you?<br><strong>Steichen:</strong> It does not look like a bird but I feel that it is a bird, it is 
+characterized by the artist as a bird.<br><strong>Waite:</strong> Simply because he called it a bird does that make it a bird to you?<br><strong>Steichen:</strong> Yes, your honor.<br><strong>Waite:</strong> If you would see it on the street you never would think of 
+calling it a bird, would you?<br>[<strong>Steichen:</strong> Silence]<br><strong>Young:</strong> If you saw it in the forest you would not take a shot at it?<br><strong>Steichen:</strong> No, your honor. <a href="https://www.legalaffairs.org/issues/September-October-2002/story_giry_sepoct2002.msp">(more)</a></p>
+</blockquote>
+<h2 id="donna-tartt-_the-goldfinch_">Donna Tartt, <em>The Goldfinch</em></h2>
+<blockquote>
+<p>But who knows what Fabritius intended? There’s not enough of his work left to even make a guess. The bird looks out at us. It’s not idealized or humanized. It’s very much a bird.</p>
+</blockquote>
+<h2 id="adam-savage-my-obsession-with-objects-and-the-stories-they-tell-">Adam Savage, “My obsession with objects and the stories they tell”</h2>
+<blockquote>
+<p>And then there is this fourth level, which is a whole new object in the world: the prop made for the movie, the representative of the thing, becomes, in its own right, a whole other thing, a whole new object of desire. . . . There are several people who own originals, and I have been attempting to contact them and reach them, hoping that they will let me spend a few minutes in the presence of one of the real birds, maybe to take a picture, or even to pull out the hand-held laser scanner that I happen to own that fits inside a cereal box, and could maybe, without even touching their bird, I swear, get a perfect 3D scan. And I’m even willing to sign pages saying that I’ll never let anyone else have it, except for me in my office, I promise. I’ll give them one if they want it. And then, maybe, then I’ll achieve the end of this exercise. But really, if we’re all going to be honest with ourselves, I have to admit that achieving the end of the exercise was never the point of the exercise to begin with, was it? <a href="https://www.youtube.com/watch?v=29SopXQfc_s">(full)</a></p>
+</blockquote>
+<h2 id="michael-shewmaker-the-curlew-">Michael Shewmaker, “The Curlew”</h2>
+<blockquote>
+<blockquote>
+<p>Plate 357 <em>(Numenius Borealis)</em> is the only instance in which the subject appears dead in the work of John James Audubon.</p>
+</blockquote>
+<p>He waits alone, sketching angels from the shade—<em>a kind of heavenly bird,</em> he reasons with himself—although their wings are broke, faces scarred, each fragile mouth feigning the same sad smile as the one before it. Offered triple his price to paint a likeness of the pastor’s daughter—buried for more than a week—he reluctantly agreed—times being what they are.<br>. . . . .<br>And yet he studies it—from behind the dunes—studies its several postures, grounded and in sudden flight—and not content to praise it from a distance, to sacrifice detail, unpacks his brushes and arranges them before raising his rifle and taking aim.</p>
+</blockquote>
+]]></description>
+            <link>https://hardmath123.github.io/birds-and-the-representation-of-representation.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/birds-and-the-representation-of-representation.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Thu, 21 Oct 2021 04:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Carnival of Mathematics 198]]></title>
             <description><![CDATA[<p>The Carnival revisits an old home</p>
@@ -1534,132 +1574,6 @@ flatten itself around the center, kind of like a tortilla chip.</p>
             <guid isPermaLink="true">https://hardmath123.github.io/minimal-surface.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Sun, 13 Sep 2020 04:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[Hybrid Hyperoptimization]]></title>
-            <description><![CDATA[<p>The most ambitious crossover event in automatic differentiation history</p>
-
-
-<blockquote>
-<p> Summary of this post: It turns out that by carefully mixing forward-mode and
- reverse-mode automatic differentiation, you can greatly simplify certain
- hyperparameter optimization algorithms.</p>
-</blockquote>
-<p>Here’s a fun recursive idea: just like how we optimize the parameters of
-machine learning models by gradient descent, we can also their
-<em>hyperparameters</em> by gradient descent. This is by no means a new idea; you can
-find 20-year-old papers that discuss (for example) optimizing gradient descent
-step sizes by gradient descent itself.</p>
-<p>Broadly, there are two ways to do this. The “short-term” way is to take a
-<em>single</em>  step of gradient descent, and then based on how that goes, adjust the
-hyperparameters. That’s the premise of the 2018 paper <a href="https://arxiv.org/abs/1703.04782">Online Learning Rate
-Adaptation with Hypergradient Descent</a>: it
-turns out that you can do this in an extremely lightweight way. You would hope
-that over time the hyperparameters converge to something optimal alongside the
-parameters (and indeed that is the case, though you have to be careful).</p>
-<p>The “long-term” way is to train <em>several</em> steps and <em>then</em> backpropagate
-through the <em>entire training</em> to adjust the hyperparameters. The hope is that
-this provides a stronger “signal” to the hyperparameter-gradient, which is
-better for convergence. But, this comes at the (tremendous) expense of having
-to store a copy of the entire computation graph for several steps of training,
-and then backpropagate through it. If your model has 1GB of parameters, you
-need to store ~1GB worth of numbers for <em>each step</em>. You can imagine that adds
-up over the course of many epochs, and so the algorithm is severely limited by
-how much RAM you have.</p>
-<p>The 2015 paper <a href="https://arxiv.org/abs/1502.03492">Gradient-based Hyperparameter Optimization through Reversible
-Learning</a> makes this work by throwing away
-the intermediate steps of the computation graph and then JIT-re-computing it
-“in reverse” during backpropagation. It’s a clever technique, but kind of hairy
-and hard to implement (you have to be super careful about numerical precision).</p>
-<p>Here’s a graph that visualizes these two techniques (<a href="https://arxiv.org/abs/1909.13371">from this
-paper</a>). You’re looking at several parallel
-loss curves $\log(f)$ is the loss plotted on a log scale), pointing towards
-you, arranged in order of the “step size” hyperparameter
-(that’s $\log(\alpha)$. The orange curve represents a “short-term”
-hyperparameter optimization, which is allowed to move along the “step size”
-axis at each step. The “long-term” hyperparameter optimization instead
-optimizes directly on the thick black dashed “U” — that is, after <em>several</em>
-steps of training. You can see how the latter is smoother, but also much harder
-to compute.</p>
-<p><img src="static/hybrid-hyperoptimization/fig-metasurface.png" alt="The preceding paragraph explains this
-figure."></p>
-<p>To summarize: the short-term way is cheap but noisy. The long-term way is
-expensive but less noisy. Can we get the best of both worlds?</p>
-<hr>
-<p>Well, let’s think more carefully about the source of the expense. The problem
-is that we need to store (or be able to reconstruct) the full computation graph
-in order to do backpropagation. Okay, but do we really <em>need</em> to do
-backpropagation? The only reason we backpropagate is that it’s more efficient
-in the case when you want derivatives with respect to <em>many</em> different
-variables. If you have millions of model parameters, backpropagation is
-millions of times faster than the much simpler <a href="https://en.wikipedia.org/wiki/Automatic_differentiation#Automatic_differentiation_using_dual_numbers">forward-mode (“dual numbers”)
-automatic
-differentiation</a>.</p>
-<p>But we <em>don’t</em> have millions of <em>hyperparameters!</em> Step size, for example, is
-just a single number. The Adam optimizer only has a total of 4 hyperparameters.
-With this in mind, backpropagation isn’t even the right choice — we <em>should</em>
-be using dual numbers for the hyperparameter optimization. On the other hand,
-we should still be using backpropagation for the “inner loop” that optimizes
-the (non-hyper-) parameters. That is, we want to do something like this:</p>
-<pre><code class="lang-python">initialize hyperparameters
-# loop to optimize hyperparameters
-while True:
-  initialize parameters
-  # loop to optimize parameters
-  for i in range(100):
-    run model on data to get loss
-    # using reverse-mode!
-    compute d(loss) / d(parameters)
-    update parameters using hyperparameters
-  # using forward-mode
-  compute d(loss) / d(hyperparameters)
-  update hyperparameters
-</code></pre>
-<blockquote>
-<p>(Update: I discovered that this was suggested in the 2017 paper <a href="https://arxiv.org/abs/1703.01785">Forward and
-Reverse Gradient-Based Hyperparameter
-Optimization</a>. But keep reading — while
-the paper’s
-<a href="https://github.com/lucfra/FAR-HO/blob/master/far_ho/hyper_gradients.py#L375">implementation</a>
-needs a lot of math to be worked out manually, I’m going to show you how to
-implement this in a way that makes all the math in the paper fall out “for
-free”…)</p>
-</blockquote>
-<p>This proposal raises a logistical question: how do we reconcile these two
-automatic differentiation algorithms in the same program? <strong>The “trick” is to
-“thread” dual numbers through a backpropagation implementation.</strong> In other
-words, implement backpropagation as usual, but rather than <code>float</code> type
-numbers, exclusively use <code>dual_number</code> type numbers (even when doing derivative
-calculations). Initialize the system such that the dual numbers track
-derivatives with respect to the hyperparameters you care about. Then, your
-final loss value’s attached $\epsilon$-value <em>immediately</em> gives you
-<code>d(loss)/d(hyperparameters)</code>. No backpropagation needed — and so, it’s safe
-to “forget” the computation graph.</p>
-<p>That’s it! That’s all I wanted to share in this blog post! :)</p>
-<p>Of course, it’s not obvious how to implement this in PyTorch, since you can’t
-naïvely do <code>tensor(dtype=dual_number)</code>. Rather than hack in a custom numeric
-data type that implemented dual numbers, I wrote my own tiny implementations of
-forward- and reverse-mode automatic differentiation. It’s just a couple dozen
-(very-recognizable-to-automatic-differentiation-enthusiasts) lines of code. I
-was careful to make each implementation generic in the kind of “number” it
-accepts. That allowed me to run the reverse-mode algorithms using the
-forward-mode data types.</p>
-<p>Running it on a simple quadratic optimization problem, we can see that updating
-the hyperparameter $\alpha$ yields better-looking loss curves — in this
-GIF, we’re discovering that we should increase the step size. Yay!</p>
-<p><img src="static/hybrid-hyperoptimization/loss.gif" alt="GIF of loss curve becoming better over
-time"></p>
-<p>I think this is a very neat trick, which surely has other cool applications
-(for example, differentiating through long-running physics simulations!). If
-you’re curious, check out this <a href="static/hybrid-hyperoptimization/hybrid-hyperoptimization.ipynb">IPython
-notebook</a> for
-the full source code. Feel free to adapt it to your ideas. Then, tell me what
-you’ve built!</p>
-]]></description>
-            <link>https://hardmath123.github.io/hybrid-hyperoptimization.html</link>
-            <guid isPermaLink="true">https://hardmath123.github.io/hybrid-hyperoptimization.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 11 Sep 2020 04:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
