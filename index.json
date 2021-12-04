@@ -751,6 +751,14 @@
             "file": "birds-and-the-representation-of-representation.md",
             "date": "10/21/21",
             "markdown": true
+        },
+        {
+            "title": "PeLU: Porcelain-Emulated Linear Unit",
+            "author": "Hardmath123",
+            "description": "A low-power deep learning inference mechanism inspired by flush toilets",
+            "file": "pelu.md",
+            "date": "12/4/21",
+            "markdown": true
         }
     ]
 }
