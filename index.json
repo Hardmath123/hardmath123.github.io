@@ -759,6 +759,14 @@
             "file": "pelu.md",
             "date": "12/4/21",
             "markdown": true
+        },
+        {
+            "title": "Light from shadow, seeing from seeing",
+            "author": "Hardmath123",
+            "description": "Thoughts on a blue and yellow photograph I took this summer",
+            "file": "thiebaud.md",
+            "date": "9/26/22",
+            "markdown": true
         }
     ]
 }
