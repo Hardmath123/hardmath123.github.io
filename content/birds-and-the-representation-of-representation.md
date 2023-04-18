@@ -37,3 +37,14 @@
 > . . . . .  
 > And yet he studies it---from behind the dunes---studies its several postures, grounded and in sudden flight---and not content to praise it from a distance, to sacrifice detail, unpacks his brushes and arranges them before raising his rifle and taking aim.
 
+---
+
+## Richard Hunt's quest for notation for birdsong
+
+(Added April 18, 2023)
+
+> Zizzy, uncanny, pebble-tapping, lusty, pule. Ventriloquial, tantara,
+> feminine, crepitate. Tintinnabulation, sough, devil’s tattoo. Sparrowy.
+
+([See the article for
+more...](https://daily.jstor.org/what-it-sounds-like-when-doves-cry/))
