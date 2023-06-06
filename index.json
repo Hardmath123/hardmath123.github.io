@@ -767,6 +767,14 @@
             "file": "thiebaud.md",
             "date": "9/26/22",
             "markdown": true
+        },
+        {
+            "title": "How much should you stir your tofu?",
+            "author": "Hardmath123",
+            "description": "Can stirring more ever lead to worse outcomes?",
+            "file": "tofubes.md",
+            "date": "6/6/23",
+            "markdown": true
         }
     ]
 }

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="canonical" href="https://hardmath123.github.io/tofubes.html"/>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>How much should you stir your tofu? - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['$','$']]}
+            });
+        </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
+    </head>
+    <body>
+        <header id="header">
+            <script src="static/main.js"></script>
+            <div>
+                <a href="/"><span class="left-word">Comfortably</span>&nbsp;<span class="right-word">Numbered</span></a>
+            </div>
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h1>How much should you stir your tofu?</h1>
+                <center><em><p>Can stirring more ever lead to worse outcomes?</p>
+</em></center>
+                <h4>Tuesday, June 6, 2023 &middot; 6 min read</h4>
+<p>Suppose you are cooking tofu, cut into tasty 1-inch cubes. On your stove it takes each cube-face 10 minutes to cook. You could cook each of the 6 faces of each cube in one hour (60 minutes) by rotating the cube to an uncooked face every 10 minutes–but this is clearly tedious and suboptimal.</p>
+<p>A better idea is stirring: instead of carefully rotating each cube to an uncooked face, you can vigorously stir your pan and reorient each cube uniformly at random (like rolling dice).</p>
+<p>The question I want to consider today is, “how often should you stir your tofu cubes”? For example, you might choose to stir them every 10 minutes for an hour, for a total of 6 stirs including right at the beginning. In that case, you might get lucky and have every face exposed to heat once. However, because each stir is an independent random roll, the more likely scenario is that some face gets cooked twice or more (burnt!) and other faces don’t get any heat (raw!). <strong>Intuitively, it seems like we should stir more frequently to “even out” the heat.</strong> Let’s check this intuition.</p>
+<hr>
+<p>Suppose we stir $n$ times over the course of the hour, and we are willing to tolerate being off by up to $\delta=5\%$ of optimal cookedness–that is, consider the tofu raw before 9 minutes and 30 seconds, and burnt after 10 minutes and 30 seconds. Let $f(n)$ be the proportion of burnt or raw faces, in expectation. We want to see how $f(n)$ depends on $n$.</p>
+<p>We can compute $f(n)$ many ways. Most obviously, we can simulate the tofu system with some large number of cubes and see what happens.</p>
+<pre><code class="lang-python">import numpy as np
+from matplotlib import pyplot as plt
+
+mean = 1/6
+tol = 0.05
+
+def experiment(n):
+    N = 1_000
+    rolls = np.random.multinomial(n, np.ones(6)/6, size=N)
+    toasts = rolls / n
+    burns = ((np.abs(toasts - mean) &gt;= tol * mean) * 1.0).mean()
+    return burns
+</code></pre>
+<p>It is also not hard to work this out analytically. First, by linearity of expectation we can just look at one face, which acts like a binomial random variable: for each of the $n$ stirs, there is a $1/6$ probability of getting heat. We can subtract the CDFs at the tolerance limits $\mu\cdot(1\pm\delta)$ to compute the proportion of times the face is well-cooked, and then subtract from 1 to get the proportion of bad faces.</p>
+<pre><code class="lang-python">import scipy.stats
+
+def analytical(n):
+    return 1 - (
+        scipy.stats.binom.cdf( (1 + tol) * (n / 6), n, 1/6 ) -
+        scipy.stats.binom.cdf( (1 - tol) * (n / 6), n, 1/6 )
+    )
+</code></pre>
+<p>We can also use statistics tricks to approximate the answer in useful closed forms. For example, we can take a normal approximation to the binomial as $n \rightarrow \infty$. The mean is $\mu=1/6$, of course, and the variance is given by $\sigma^2 = p(1-p)/n = 5/36n$. We can then plug those parameters into the normal CDF, along with the tolerance limits as above.</p>
+<pre><code class="lang-python">def normal(n):
+    vari = 1/6 * (1 - 1/6) / n
+    z = (tol * mean) / np.sqrt(vari)
+    return 1 - (scipy.stats.norm.cdf(z) - scipy.stats.norm.cdf(-z))
+</code></pre>
+<p>Finally, we can apply Chebyshev’s inequality or a Chernoff bound. These formulas only provide an upper bound on the proportion of bad faces, but they don’t depend on a normal approximation and are thus guaranteed to be true. I won’t work through the derivations here.</p>
+<pre><code class="lang-python">def chebyshev(n):
+    vari = 1/6 * (1 - 1/6) / n
+    z = (tol * mean) / np.sqrt(vari)
+    return np.minimum(1., 1 / z ** 2)
+
+def chernoff(n):
+    return np.minimum(1., 2 * np.exp(-(tol ** 2) / 3 * (1/6) * n))
+</code></pre>
+<p>Plotting all of these metrics out to asymptotic $n \rightarrow \infty$ (see the graph below), we see several expected patterns:</p>
+<ol>
+<li>As $n$ increases, the proportion of burnt faces goes down with exponential falloff.</li>
+<li>The analytical solution closely tracks the simulation, at least until the variance of the simulation gets high enough to make it unreliable.</li>
+<li>The normal approximation is indistinguishable from the analytical solution.</li>
+<li>The bounds are quite loose. Chebyshev “wins” for a little while, but ultimately Chernoff’s exponentiality kicks in and dominates.</li>
+</ol>
+<p>So far, so good: it seems like you can get quite well-cooked tofu with only a logarithmic amount of stirring effort!</p>
+<pre><code class="lang-python">ns = np.arange(1, 30000, 100)
+plt.plot(ns, [experiment(int(n)) for n in ns], &#39;x&#39;, label=&#39;Simulation&#39;)
+plt.plot(ns, [analytical(int(n)) for n in ns], &#39;-&#39;, label=&#39;Analytical&#39;)
+plt.plot(ns, [normal(int(n)) for n in ns], &#39;--&#39;, label=&#39;Normal approximation&#39;)
+plt.plot(ns, [chebyshev(int(n)) for n in ns], &#39;-&#39;, label=&#39;Chebyshev\&#39;s inequality&#39;)
+plt.plot(ns, [chernoff(int(n)) for n in ns], &#39;-&#39;, label=&#39;Chernoff bound&#39;)
+plt.yscale(&#39;log&#39;)
+
+plt.ylabel(&#39;P(burnt or raw face)&#39;)
+plt.xlabel(&#39;n, the number of tosses per hour&#39;)
+plt.legend()
+</code></pre>
+<pre><code>&lt;matplotlib.legend.Legend at 0x7fbf0b32ae60&gt;
+</code></pre><p><img src="static/tofubes/output_9_1.png" alt="png"  /></p>
+<p>But asymptotic $n$ is unreasonable in this setting: for example, 6000 flips per hour (6 kfph) is more than one flip per second. Let’s zoom in on small $n$ to see what is happening at the scale of the real world. In this plot, I’m hiding the two bounds (which are all maxed out at 1) and only showing up to $n=600$, which is a stir every 6 seconds.</p>
+<pre><code class="lang-python">ns = np.arange(1, 600)
+plt.plot(ns, [experiment(int(n)) for n in ns], &#39;x&#39;, label=&#39;Simulation&#39;)
+plt.plot(ns, [analytical(int(n)) for n in ns], &#39;.&#39;, label=&#39;Analytical&#39;)
+plt.plot(ns, [normal(int(n)) for n in ns], &#39;--&#39;, label=&#39;Normal approximation&#39;)
+
+plt.ylabel(&#39;P(burnt or raw face)&#39;)
+plt.xlabel(&#39;n, the number of tosses per hour&#39;)
+plt.legend()
+</code></pre>
+<pre><code>&lt;matplotlib.legend.Legend at 0x7fbf09037460&gt;
+</code></pre><p><img src="static/tofubes/output_11_1.png" alt="png"  /></p>
+<p>A curious pattern emerges! Here is what I notice:</p>
+<ol>
+<li>The analytical solution (orange dots) continues to track the simulation (blue crosses).</li>
+<li>However, they both diverge from the normal approximation (which is perhaps as we expect at low $n$).</li>
+<li>This divergence is systematic. The analytical probabilities form an interesting “banded” structure.</li>
+<li>Most surprisingly, sometimes increasing $n$ <em>increases</em> the number of bad faces!</li>
+<li>To do better than $n=6$, you have to go all the way out to $n\approx 500$.</li>
+</ol>
+<p>The puzzle is, <strong>Why does more stirring cause worse cooking?</strong></p>
+<p>Let’s consider the cases $n=6$ and $n=12$. For $n=6$, we already reasoned that a face is well-cooked if it is exposed to heat for only one of the 6 turns. This has probability $\binom{6}{1}(1/6)^1(6/5)^4 \approx 0.402$, and indeed the graph above shows that analytically, we expect a $0.6$ probability of a face getting burnt or being raw at $n=6$.</p>
+<p>Now consider $n=12$. Now, a face is definitely well-cooked if it gets 2 turns on the heat, because $2/12 = 1/6 = \mu$. But what about 1 turn or 3 turns? In each case, it is off by a factor of $(1/12)/(1/6) = 0.5 \geq \delta$, so the face would either be raw or get burnt. Hence, the probability of a well-cooked face is given by $\binom{12}{2}(1/6)^2(5/6)^{10} \approx 0.296$, which yields a probability of $0.704$ that the face is raw or burnt. Higher than $0.6$ at $n=6$!</p>
+<p>Another way to see what’s going on is to consider 2-faced pancakes instead of 6-faced tofu cubes. If you cook a pancake with $n=2$ random flips, you have a good chance that you will cook both sides (one on each flip), though of course there is some chance you burn one side by cooking it twice, and leave one side uncooked. But if you cook a pancake with $n=3$ flips, you will necessarily always burn one side and leave the other side uncooked, because at best you will get a 1/3-2/3 ratio of cooking time.</p>
+<p>Returning to cubes now, let’s see what happens more generally. Say a face gets $X$ turns on the heat where $X \sim \text{Binom}(n, 1/6)$. The probability of being well-cooked is $\Pr[|X/n-\mu| \leq (1+\delta)\mu]$ where $\mu=1/6$. Breaking this up, we can sum over possible outcomes of $X$, to have $\sum_{(1-\delta)(1/6) \leq x/n \leq (1+\delta)(1/6)} \Pr[X=x]$. In other words, we are summing over integer multiples of $1/n$ in the range $[(1-\delta)(1/6), (1+\delta)(1/6))]$. How many integer multiples are there in that range? This is easily given by $\lceil (1/6)(1+\delta)/(1/n) \rceil - \lfloor (1/6)(1-\delta)/(1/n) \rfloor - 1$. We can plot this against the analytical probability to get some insight.</p>
+<pre><code class="lang-python">ns = np.arange(1, 100)
+plt.plot(ns, [analytical(int(n)) for n in ns], &#39;.&#39;, label=&#39;Analytical&#39;)
+plt.plot(
+    ns,
+    (np.ceil(ns * 1/6 * (1 + tol)) -
+     np.floor(ns * 1/6 * (1 - tol)) - 1),
+    label=&#39;Number of integer multiples of 1/n in range&#39;
+)
+plt.xlabel(&#39;n, the number of tosses per hour&#39;)
+plt.legend()
+</code></pre>
+<pre><code>&lt;matplotlib.legend.Legend at 0x7fc0105f1150&gt;
+</code></pre><p><img src="static/tofubes/output_13_1.png" alt="png"  /></p>
+<p>The spikes in the number-of-integers graph correspond directly to the jumps between bands. This suggests the following explanation of what’s going on: that there are two “forces” at play.</p>
+<ol>
+<li>The number of integer multiples of $1/n$ that could be matched within the range allowed by the tolerance, which jumps around in a quantized manner according to number theory.</li>
+<li>The sum of probabilities of matching each of those integer multiples, which decreases as we add more flips, because there are more possible other-outcomes.</li>
+</ol>
+<p>When the first “force” spikes, it causes the probability of a bad face to drop suddenly because there are more ways to cook a good face. However, the second “force” causes the probability of a bad face to rise gradually because each way to make a good face becomes less likely. This explains the banding structure in the graph above.</p>
+<p>To summarize, in the limit, continuous stirring indeed helps cook your tofu more evenly. However, if you are stirring only occasionally, then sometimes more stirring can actually harm your tofu!</p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="https://github.com/kach">
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        Subscribe (RSS feed)</a></li>
+                    <li><a href="https://twitter.com/hardmath123">
+                        Twitter</a></li>
+                    <li><a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        CC BY-NC 3.0</a></li>
+                </ul>
+            </div>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
