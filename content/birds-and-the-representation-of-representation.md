@@ -48,3 +48,15 @@
 
 ([See the article for
 more...](https://daily.jstor.org/what-it-sounds-like-when-doves-cry/))
+
+---
+
+## Children imitating cormorants
+
+By [Kobayashi
+Issa](https://hellopoetry.com/poem/15275/children-imitating-cormorants/);
+mentioned by a professor on a walk by the Charles River.
+
+> Children imitating cormorants  
+> are even more wonderful  
+> than cormorants.
