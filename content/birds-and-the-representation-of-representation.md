@@ -49,9 +49,9 @@
 ([See the article for
 more...](https://daily.jstor.org/what-it-sounds-like-when-doves-cry/))
 
----
-
 ## Children imitating cormorants
+
+(Added June 2023)
 
 By [Kobayashi
 Issa](https://hellopoetry.com/poem/15275/children-imitating-cormorants/);
@@ -60,3 +60,17 @@ mentioned by a professor on a walk by the Charles River.
 > Children imitating cormorants  
 > are even more wonderful  
 > than cormorants.
+
+## Fake birds in Disneyland
+
+(Added June 2023)
+
+From Philip K. Dick's speech, ["How to build a universe."](https://urbigenous.net/library/how_to_build.html)
+
+> In my writing I got so interested in fakes that I finally came up with the
+> concept of fake fakes. For example, in Disneyland there are fake birds worked
+> by electric motors which emit caws and shrieks as you pass by them. Suppose
+> some night all of us sneaked into the park with real birds and substituted
+> them for the artificial ones. Imagine the horror the Disneyland officials
+> would feel when they discovered the cruel hoax. Real birds! And perhaps
+> someday even real hippos and lions. Consternation.
