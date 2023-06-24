@@ -74,3 +74,11 @@ From Philip K. Dick's speech, ["How to build a universe."](https://urbigenous.ne
 > them for the artificial ones. Imagine the horror the Disneyland officials
 > would feel when they discovered the cruel hoax. Real birds! And perhaps
 > someday even real hippos and lions. Consternation.
+
+## A representation of an idea
+
+(Added June 2023)
+
+From Eric Kraft's _Where do we stop?_
+
+> The idea that seemed so bright when it was leaping and darting and fluttering through my mind looked dull and dead when I’d caught it and pinned it to my paper … It wasn’t an idea now, but the representation of an idea. It didn’t fly, didn’t flutter by, didn’t catch the eye as I thought it would. (154)
