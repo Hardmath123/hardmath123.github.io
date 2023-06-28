@@ -82,3 +82,19 @@ From Philip K. Dick's speech, ["How to build a universe."](https://urbigenous.ne
 From Eric Kraft's _Where do we stop?_
 
 > The idea that seemed so bright when it was leaping and darting and fluttering through my mind looked dull and dead when I’d caught it and pinned it to my paper … It wasn’t an idea now, but the representation of an idea. It didn’t fly, didn’t flutter by, didn’t catch the eye as I thought it would. (154)
+
+## Symbolic of my entire existence
+
+(Added June 2023)
+
+From CAKE's Mr. Mastodon Farm
+
+> Now due to a construct in my mind  
+> That makes their falling and their flight  
+> Symbolic of my entire existence  
+> It becomes important for me  
+> To get up and see  
+> Their last-second curves toward flight
+> 
+> It's almost as if my life would fall  
+> Unless I see their ascent.
