@@ -113,7 +113,9 @@ by Howard Nemerov.
 
 ## Why illustrate?
 
-From an interview with illustrator David Sibley.
+From an
+[interview](https://www.nytimes.com/2023/07/06/science/birding-illustration-sibley.html)
+with illustrator David Sibley.
 
 > An illustration provides so much more than a photograph. In an illustration,
 > I can create a typical bird, an average bird of a species in the exact pose
