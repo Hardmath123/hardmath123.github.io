@@ -98,3 +98,25 @@ From CAKE's Mr. Mastodon Farm
 > 
 > It's almost as if my life would fall  
 > Unless I see their ascent.
+
+See also: the poem "[Because You Asked about the Line Between Prose and
+Poetry](https://poets.org/poem/because-you-asked-about-line-between-prose-and-poetry)"
+by Howard Nemerov.
+
+> Sparrows were feeding in a freezing drizzle  
+> That while you watched turned to pieces of snow  
+> Riding a gradient invisible  
+> From silver aslant to random, white, and slow.
+>
+> There came a moment that you couldn’t tell.  
+> And then they clearly flew instead of fell.
+
+## Why illustrate?
+
+From an interview with illustrator David Sibley.
+
+> An illustration provides so much more than a photograph. In an illustration,
+> I can create a typical bird, an average bird of a species in the exact pose
+> that I want, and create an image of a similar species in exactly the same
+> pose so that all the differences are apparent... Your drawing becomes a
+> record of your understanding of that bird in that moment.
