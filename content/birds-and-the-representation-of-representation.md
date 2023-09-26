@@ -122,3 +122,7 @@ with illustrator David Sibley.
 > that I want, and create an image of a similar species in exactly the same
 > pose so that all the differences are apparent... Your drawing becomes a
 > record of your understanding of that bird in that moment.
+
+## Unseeable birds
+
+(See Edgerton's photograph of Mrs. May Rogers Webster with her hummingbirds.)
