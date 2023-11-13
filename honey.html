@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="canonical" href="https://hardmath123.github.io/honey.html"/>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Half a Jar of Honey - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['$','$']]}
+            });
+        </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
+    </head>
+    <body>
+        <header id="header">
+            <script src="static/main.js"></script>
+            <div>
+                <a href="/"><span class="left-word">Comfortably</span>&nbsp;<span class="right-word">Numbered</span></a>
+            </div>
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h1>Half a Jar of Honey</h1>
+                <center><em><p>Investigating the stability of honey containers</p>
+</em></center>
+                <h4>Sunday, November 12, 2023 &middot; 2 min read</h4>
+<p>I knocked over a tall jar of honey. Clumsy, clumsy! But the jar was nearly empty; jars tend to fall when they are nearly empty.</p>
+<p>But jars also tend to fall when they are full, which got me thinking: for both full and empty jars, we can argue by symmetry that their center of mass is halfway up. By Rolle’s Theorem, then, at some point when the jar is partially filled it should have a minimally- or maximally-high center of mass. It’s easy to see that the center of mass can never get higher than halfway up. This suggests that the jar’s stability increases and then decreases as the honey is consumed.</p>
+<p>When is the jar most stable? Working in units where the empty jar’s height and mass are 1, its radius is $r$, and honey’s density is $\alpha$, the height of the center of mass is given by:
+$$
+c = \frac{\alpha r^2h(h/2) + 1/2}{\alpha r^2h + 1}
+$$</p>
+<p>Let’s assume honey is extremely viscous (i.e. changes shape slowly), and that the jar tips over if its center of mass is over its rim. Then the maximum angle you can tip the jar before it falls over is:
+$$
+\theta^\star = \tan^{-1}(r/c)
+$$
+The question is then, for a given $r$ and $\alpha$, what $h$ maximizes $\theta^\star$? Intuitively, it seems like it should be somewhere halfway between empty and full.</p>
+<p>We can compute the optimal $h$ by differentiating $\theta^\star$ with respect to $h$ and setting the derivative to zero:
+$$
+\frac{d\theta^\star}{dh}=-\frac{r^2}{r^2+c^2}\frac{dc}{dh} = 0
+$$
+The positive solution to this, thanks to WolframAlpha, is given by:
+$$
+h^\star=\frac{1}{1+\sqrt{\alpha r^2+1}}
+$$
+Does this make sense? As $\alpha r^2$ increases (heavier honey), the optimal height gets lower, which makes sense because the honey begins to have a ballasting effect.</p>
+<p>Now we can plug in some numbers. A standard 8-oz honey bottle is about 6 inches tall, has a base radius of about 1 inch, and weighs about 1oz. The density of honey is 0.8oz per cubic inch. In our units, this means the jar’s radius is $1/6$ and the density of honey is $0.8/(1/6)^3$. Plugging this in, we find remarkably that $h^\star \approx 0.3$. So a jar of honey is most stable when only about 1/3 full!</p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="https://github.com/kach">
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        Subscribe (RSS feed)</a></li>
+                    <li><a href="https://twitter.com/hardmath123">
+                        Twitter</a></li>
+                    <li><a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        CC BY-NC 3.0</a></li>
+                </ul>
+            </div>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>

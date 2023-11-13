@@ -10,10 +10,42 @@
             <link>https://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Tue, 26 Sep 2023 21:15:41 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 13 Nov 2023 04:41:27 GMT</lastBuildDate>
         <atom:link href="https://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Half a Jar of Honey]]></title>
+            <description><![CDATA[<p>Investigating the stability of honey containers</p>
+
+
+<p>I knocked over a tall jar of honey. Clumsy, clumsy! But the jar was nearly empty; jars tend to fall when they are nearly empty.</p>
+<p>But jars also tend to fall when they are full, which got me thinking: for both full and empty jars, we can argue by symmetry that their center of mass is halfway up. By Rolle’s Theorem, then, at some point when the jar is partially filled it should have a minimally- or maximally-high center of mass. It’s easy to see that the center of mass can never get higher than halfway up. This suggests that the jar’s stability increases and then decreases as the honey is consumed.</p>
+<p>When is the jar most stable? Working in units where the empty jar’s height and mass are 1, its radius is $r$, and honey’s density is $\alpha$, the height of the center of mass is given by:
+$$
+c = \frac{\alpha r^2h(h/2) + 1/2}{\alpha r^2h + 1}
+$$</p>
+<p>Let’s assume honey is extremely viscous (i.e. changes shape slowly), and that the jar tips over if its center of mass is over its rim. Then the maximum angle you can tip the jar before it falls over is:
+$$
+\theta^\star = \tan^{-1}(r/c)
+$$
+The question is then, for a given $r$ and $\alpha$, what $h$ maximizes $\theta^\star$? Intuitively, it seems like it should be somewhere halfway between empty and full.</p>
+<p>We can compute the optimal $h$ by differentiating $\theta^\star$ with respect to $h$ and setting the derivative to zero:
+$$
+\frac{d\theta^\star}{dh}=-\frac{r^2}{r^2+c^2}\frac{dc}{dh} = 0
+$$
+The positive solution to this, thanks to WolframAlpha, is given by:
+$$
+h^\star=\frac{1}{1+\sqrt{\alpha r^2+1}}
+$$
+Does this make sense? As $\alpha r^2$ increases (heavier honey), the optimal height gets lower, which makes sense because the honey begins to have a ballasting effect.</p>
+<p>Now we can plug in some numbers. A standard 8-oz honey bottle is about 6 inches tall, has a base radius of about 1 inch, and weighs about 1oz. The density of honey is 0.8oz per cubic inch. In our units, this means the jar’s radius is $1/6$ and the density of honey is $0.8/(1/6)^3$. Plugging this in, we find remarkably that $h^\star \approx 0.3$. So a jar of honey is most stable when only about 1/3 full!</p>
+]]></description>
+            <link>https://hardmath123.github.io/honey.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/honey.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Sun, 12 Nov 2023 05:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[How much should you stir your tofu?]]></title>
             <description><![CDATA[<p>Can stirring more ever lead to worse outcomes?</p>
@@ -1419,183 +1451,6 @@ that considers the same problem. (“See? It’s not just me!”)</p>
             <guid isPermaLink="true">https://hardmath123.github.io/systems-for-coordinating-coordinate-systems.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Tue, 15 Dec 2020 05:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[Clogs and Leaks: Why My Tensors Won't Flow]]></title>
-            <description><![CDATA[<p>Defining a class of tricky bugs in PyTorch programs</p>
-
-
-<blockquote>
-<p><em>Note:</em> Jekyll and Hyde — is how this blog goes. There are weeks of
-rational thought and weeks of irrational ramblings. This fall has been much
-of the latter, for good reason, but here is a break(!) in the clouds.</p>
-<p>Okay, okay. The truth is that I wrote this essay for my CS class this quarter
-(leave it to Pat to assign an essay for a CS class!). But then, I think I
-have reached the age where every written assignment in college is to be
-treated as an opportunity to say something I otherwise would not have a
-chance to say… and so the essay, lightly edited, finds its way to this
-blog.</p>
-</blockquote>
-<hr>
-<p>In this essay I want to describe two kinds of tricky bugs that might creep into
-your PyTorch programs. I call the bugs “clogs” and “leaks.” In my mind “clogs”
-and “leaks” reveal an exciting possible research direction for anyone
-interested in designing better APIs for automatic differentiation in machine
-learning.</p>
-<p><em>Note: The examples presented, though in principle timeless, were tested using
-Python 3.8.5 running PyTorch 1.6.0.</em></p>
-<h2 id="preliminaries-pytorch-s-pipes">Preliminaries: PyTorch’s Pipes</h2>
-<p>If you are familiar with PyTorch internals, you can skip this section. If not,
-a brief review of a wonderful topic: how does PyTorch differentiate your code
-for gradient descent? The technical term for PyTorch’s approach is <em>tape-based
-reverse-mode automatic differentiation</em>. As you perform arithmetic computations
-on your variables, PyTorch tracks the intermediate values in a computation
-graph. When you want to differentiate a value, you call <code>.backward()</code> on that
-value. PyTorch then walks <em>backwards</em> along this computation graph, computing
-the derivative at each step and accumulating them according to the chain rule.
-Eventually, the leaf nodes of the graph contain the derivatives you asked for.</p>
-<p>Let me give a small example. Suppose we wanted to compute $d2x^2/dx|_{x=3}$.
-We might write a program that looks like this:</p>
-<pre><code class="lang-python">x = torch.tensor(3., requires_grad=True)
-y = 2 * x**2
-y.backward()
-print(x.grad)
-</code></pre>
-<p>This program generates the following computation graph.</p>
-<p><img src="static/clogs-and-leaks/forward.png" alt="Forward"></p>
-<p>When you call <code>.backward()</code>, the PyTorch automatic differentiation walks
-backwards along the graph, computing derivatives at <em>each</em> step. By the chain
-rule, the product of these gives the overall derivative we sought.</p>
-<p><img src="static/clogs-and-leaks/backward.png" alt="Forward"></p>
-<h2 id="clogs">Clogs</h2>
-<p>Now, consider this simple PyTorch program to compute $d(\sqrt{x} +
-x)/dx|_{x=4}$. What do you expect to be printed?</p>
-<pre><code class="lang-python">x = torch.tensor(4., requires_grad=True)
-y = sqrt(x) + x
-y.backward()
-print(x.grad)
-</code></pre>
-<p>A casual user or AP calculus student would <em>expect</em> to see 1.25 printed, of
-course. But what <em>actually</em> gets printed is 1. Why?</p>
-<p>Ah! I didn’t show you the full program: I hid the imports. It turns out that
-the first line of this program is <code>from math import sqrt</code>, <em>not</em> <code>from torch
-import sqrt</code>. Now, the Python standard library’s <code>math.sqrt</code> is not a
-PyTorch-differentiable function, and so PyTorch is unable to track the flow of
-derivatives through <code>sqrt(x)</code>.</p>
-<p>As a result of this bug, backpropagation gets “stuck” on the way back, and only
-the derivative of <code>x</code>, i.e. 1, is deposited. This is a clog — the gradients
-can’t flow! In the computation graph below, the dotted arrow represents the
-clog.</p>
-<p><img src="static/clogs-and-leaks/clog.png" alt="Clog graph"></p>
-<p>The reason calling <code>math.sqrt()</code> on a PyTorch tensor is not a runtime error is
-that PyTorch tensors implicitly convert to “raw” floating-point numbers as
-needed. Most of the time this is a useful and indispensable feature. But I
-believe this situation should <em>at the very least</em> raise an error or a warning.
-While the example I presented was reasonably straightforward, there are <em>many</em>
-different ways to “clog” backpropagation, with varying degrees of insidiousness
-(for example, what happens when you mutate a variable in place?). It can be a
-nightmare to debug such situations when something goes wrong — that is, if you
-notice the bug in the first place!</p>
-<p><em>By the way:</em> the celebrated “reparametrization trick” that powers variational
-autoencoders is really just a workaround for a gradient clog problem. To train
-a variational autoencoder, you need to compute the derivative of a sample of a
-probability distribution with respect to the distribution’s parameters (e.g.
-the mean $\mu$ and variance $\sigma^2$ of a Gaussian distribution).
-Unfortunately, naïvely sampling from a parametrized distribution abruptly
-truncates the computation graph with respect to the parameters, because the
-random number generator is not differentiable all the way through — who <em>knows</em>
-what <em>it’s</em> doing! The solution, is to sample from a standard unit normal
-distribution (where $\mu=0$ and $\sigma=1$, and then re-scale the sample
-by multiplying by $\sigma$ and adding $\mu$. Of course, multiplication and
-addition <em>are</em> easily differentiable, and so the gradients can now flow.
-Problem solved!</p>
-<h2 id="leaks">Leaks</h2>
-<p>Now, consider this slightly more complicated PyTorch program. We are going to
-implement a silly reinforcement learning algorithm. Here is the situation:
-There is a truck driving on the road with constant velocity, and your goal is
-to catch up to it and drive right alongside the truck. At each timestep you are
-allowed to choose your velocity, and then you’re told how far you are from the
-truck.</p>
-<p>The setup:</p>
-<pre><code class="lang-python">truck_velocity = torch.tensor(3.142)
-truck_position = torch.tensor(2.718)
-
-def get_measurement(car_position):
-    global truck_position
-    truck_position = truck_position + truck_velocity
-    return torch.abs(truck_position - car_position)
-</code></pre>
-<p>And a simple online gradient-based learning algorithm:</p>
-<pre><code class="lang-python">my_velocity = torch.tensor(0.01)
-my_position = torch.tensor(0.)
-for i in range(500):
-    my_velocity.requires_grad_()
-    my_position = my_position + my_velocity
-    loss = get_measurement(my_position)
-    loss.backward()
-    my_velocity =\
-        my_velocity.detach() - my_velocity.grad * 0.01
-</code></pre>
-<p>Unlike last time, there’s nothing up my sleeve here — this is all reasonable
-PyTorch code. This code actually works just fine.</p>
-<p>But, if you run it for long enough (say, 1000 iterations), you’ll notice
-something odd: each step starts taking longer and longer. The algorithm is
-<a href="https://accidentallyquadratic.tumblr.com">accidentally quadratic</a>! You can see
-this behavior quite clearly in this graph, which shows a linear growth in
-iteration time from step to step (the spikes are garbage collection pauses).</p>
-<p><img src="static/clogs-and-leaks/graph.png" alt="Time graph, essentially linear and
-increasing"></p>
-<p>How can this be? Isn’t each loop doing the same calculation?</p>
-<p>Here is one hypothesis: if you’ve read <a href="https://arxiv.org/abs/1909.13371">this
-paper</a> you might look to see if we’re
-<code>.detach()</code>-ing <code>my_velocity</code>. The <code>.detach()</code> function snips off all incoming
-edges to a node in the computation graph; essentially, creating an artificial
-clog. If we forget to do that, the gradients would “leak” back in time across
-multiple steps in the graph, all the way back to the first step, and each
-iteration would therefore take longer and longer — just as we’re observing.</p>
-<p>But, alas, this is not the source of the bug: as you can see, we <em>are</em>
-detaching <code>my_velocity</code> when we update it. So, what’s really going on here?</p>
-<p>It’s tricky! The leak is in <code>my_position</code>, which subtly depends on <em>all</em>
-previous values of <code>my_velocity</code> and therefore makes backpropagation compute
-gradients for <em>all</em> previous timesteps. The dataflow diagram below hopefully
-clarifies this point. Notice how each <code>velocity</code> has its parent nodes detached
-(thanks to the call to <code>.detach()</code>!), but <code>loss</code> still has an indirect
-dependence on the chain of <code>positions</code>.</p>
-<p><img src="static/clogs-and-leaks/leak.png" alt="Leak graph"></p>
-<p>Finding the correct place to insert the line <code>my_position =
-my_position.detach()</code> is left as a not-quite-trivial exercise to the reader.
-Beware! Putting it in the <em>wrong</em> place will either have no effect <em>or</em> cause
-<code>my_velocity</code> to always have gradient 0.</p>
-<p>Just like memory leaks, gradient leaks can be extremely sneaky. They pop up
-whenever your inference is “stateful” — think of applications like physics
-controllers, reinforcement learning, animated graphics, RNNs, and so on. I
-would not be surprised if many popular implementations of such algorithms <em>do</em>
-have “gradient leak” bugs. However, the bugs usually only manifest themselves
-visibly when the inference passes through enough timesteps for the leak to
-compound. Just like a dripping tap, you might not notice your losses until you
-get the bill at the end of the month… and then, you need to figure out how to
-track down the source of the leak and figure out the right way to fix it.</p>
-<h2 id="plungers-and-patches-an-appeal-for-plumbing-">Plungers and patches? An appeal for PLumbing…</h2>
-<p>In the long term, how can we protect ourselves from this class of bugs? One
-potential solution is to embed the API inside a language whose type system
-tracks the creation of the computation graph. You might be able to use
-well-understood techniques like <em>taint analysis</em> or <em>linear types</em> (pun not
-intended) which traditionally track the flow of <em>information</em>, to now track the
-flow of <em>differentiability</em> through the program.</p>
-<p>Let me be slightly more concrete about this suggestion. In our “clog” example,
-a good type system might detect that <code>sqrt</code> cuts off the computation graph,
-and, knowing that $y$ does not directly depend on $x$ in the expected way
-anymore, complain at compile-time when we try to request $dy/dx$. In our
-“leak” example, a good type system might notice that the “old” <code>my_position</code>
-effectively goes out of scope when it is re-assigned, and therefore it might
-complain that an unreachable reference to it actually does persist through the
-new <code>my_position</code>. Such checks seem very reasonable to demand from a modern
-type system.</p>
-]]></description>
-            <link>https://hardmath123.github.io/clogs-and-leaks.html</link>
-            <guid isPermaLink="true">https://hardmath123.github.io/clogs-and-leaks.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Mon, 23 Nov 2020 05:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
