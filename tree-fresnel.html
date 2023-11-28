@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="canonical" href="https://hardmath123.github.io/tree-fresnel.html"/>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>The light tries to enter the long black branches - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['$','$']]}
+            });
+        </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
+    </head>
+    <body>
+        <header id="header">
+            <script src="static/main.js"></script>
+            <div>
+                <a href="/"><span class="left-word">Comfortably</span>&nbsp;<span class="right-word">Numbered</span></a>
+            </div>
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h1>The light tries to enter the long black branches</h1>
+                <center><em><p>Thinking about a streetlight’s wooden halo</p>
+</em></center>
+                <h4>Monday, November 27, 2023 &middot; 2 min read</h4>
+<p>Have you noticed the way streetlights shine through the bare branches of trees
+on cold winter nights? Walking home from work tonight I was struck by the
+almost overwhelming beauty of the scene. The light creates a perfect,
+glittering halo around itself, like the moon in a Van Gogh painting. The tree
+in turn all but reaches its fingers out to grasp the light. If you move your
+head from side to side, it feels as if a wormhole has opened in the tree,
+sucking the branches into the light’s force field.</p>
+<p>I think this happens because of the Fresnel effect. If the light hits a branch
+at just the exact angle, the wood (like many other materials in the world)
+becomes unexpectedly shiny. In the bramble that hang off of a tree’s bare
+branch, the only twigs that catch the light’s glint are the ones that make a
+specific shallow angle with your eye. By radial symmetry, it’s not hard to see
+that this should result in a glowing circular halo. It’s similar to how divers
+see a <a href="https://en.wikipedia.org/wiki/Snell%27s_window">circular window</a> on the
+surface of the water when they look up, or the <a href="https://en.wikipedia.org/wiki/22°_halo">22º
+halo</a> you sometimes see around the sun
+— but here the medium is wood, not water.</p>
+<p>If you live in a place that has seasons, I encourage you to go and see this
+effect for yourself. It’s a hard phenomenon to capture on camera — it
+requires high dynamic range, high-resolution video, and patience outdoors when
+it’s cold and dark. For now, here is the best I could do with my old iPhone.
+(I stabilized the light with a little Python script.)</p>
+<video style="width: 100%;" controls>
+  <source src="./static/tree-fresnel.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<p>For comparison, here are two frames from this video:</p>
+<p><img src="./static/tree-fresnel-000.png" alt="Light outside tree"></p>
+<p><img src="./static/tree-fresnel-196.png" alt="Light inside tree"></p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="https://github.com/kach">
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        Subscribe (RSS feed)</a></li>
+                    <li><a href="https://twitter.com/hardmath123">
+                        Twitter</a></li>
+                    <li><a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        CC BY-NC 3.0</a></li>
+                </ul>
+            </div>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>
