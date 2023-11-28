@@ -8,7 +8,7 @@ sucking the branches into the light's force field.
 
 I think this happens because of the Fresnel effect. If the light hits a branch
 at just the exact angle, the wood (like many other materials in the world)
-becomes unexpectedly shiny. In the bramble that hang off of a tree's bare
+becomes unexpectedly shiny. In the brambles that hang off of a tree's bare
 branch, the only twigs that catch the light's glint are the ones that make a
 specific shallow angle with your eye. By radial symmetry, it's not hard to see
 that this should result in a glowing circular halo. It's similar to how divers
