@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="canonical" href="https://hardmath123.github.io/bayesian-improv.html"/>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Undetectable Bayesian Improv Theater - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['$','$']]}
+            });
+        </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
+    </head>
+    <body>
+        <header id="header">
+            <script src="static/main.js"></script>
+            <div>
+                <a href="/"><span class="left-word">Comfortably</span>&nbsp;<span class="right-word">Numbered</span></a>
+            </div>
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h1>Undetectable Bayesian Improv Theater</h1>
+                <center><em><p>How to pretend like you have a biased coin</p>
+</em></center>
+                <h4>Sunday, January 21, 2024 &middot; 2 min read</h4>
+<p>Suppose two Bayesians, Alice and Bob, put on a variety show where they take
+turns tossing a biased coin and announcing outcomes to a live studio audience.
+(Bayesians love this kind of thing—it keeps them entertained for hours…)</p>
+<p>Unfortunately, just as Alice goes on stage, she realizes with dread that she
+forgot to bring the coin. Thinking on her feet, she mimes pulling a tiny
+imaginary coin out of her pocket, and says “This is a biased coin!” It
+works—the audience buys it and the crowd goes wild.</p>
+<p>She mimes tossing the pretend coin and randomly announces “heads” or “tails.”
+Then, she hands the coin to Bob, who (catching on) also mimes a toss. This has
+just turned into a Bayesian improv show.</p>
+<p>But now Bob has a problem. Should he announce “heads” or “tails”? He could
+choose uniformly at random, but after many rounds the audience might get
+suspicious if the coin’s bias is too close to 50%. How can he keep up the
+charade of a <em>biased</em> coin?</p>
+<p>Here’s what Bob does. In the spirit of “yes, and…,” he infers the coin’s bias
+based on Alice’s reported outcome (say, with a uniform prior) and samples a
+fresh outcome with that bias. So if Alice said “heads,” Bob would be a bit
+likelier to say “heads” as well.</p>
+<p>Then Alice takes the coin back and does the same, freshly inferring the coin’s
+bias from the past <em>two</em> tosses. In this way, the two actors take turns
+announcing simulated outcomes to the oblivious audience, while building a
+shared understanding of the coin’s bias.</p>
+<p>What happens? How can we characterize the sequence of outcomes? Intuitively, we
+might expect either a “rich-get-richer” effect where they end up repeating
+heads or tails. Or we might expect a “regression-to-the-mean” where they
+converge to simulating a fair coin.</p>
+<p>The surprising answer is that this process is indistinguishable from Alice and
+Bob tossing a <em>real</em> coin with fixed bias (chosen uniformly). A critic lurking
+in the audience would never suspect something afoot!</p>
+<p>This result is a consequence of the correspondence between the Pólya
+distribution and the Beta-binomial distribution.</p>
+<p>I have a hunch that this observation could be useful: perhaps in designing a
+new kind of cryptographic protocol, or perhaps in explaining something about
+human cognition. If you have ideas, let me know!</p>
+<hr>
+<p>Proof sketch: Model the actors’ belief with a Beta distribution with parameters
+$(h, t)$ initialized to $(1, 1)$, i.e. uniform. At each toss the probability of
+heads is given by $h/(h+t)$, and the outcome increments $h$ or $t$ by 1. You
+can think of this as a Pólya urn with h black and t white balls: each time you
+draw a ball, you put it back and add a “bonus” ball of the same color. It is
+well-known (look
+<a href="https://djalil.chafai.net/blog/2015/11/30/back-to-basics-polya-urns/">here</a> or
+<a href="https://math.uchicago.edu/~may/REU2013/REUPapers/Helfand.pdf">here</a> or
+<a href="https://www.randomservices.org/random/bernoulli/BetaBernoulli.html">here</a>)
+that this is the same as the Beta-binomial process.</p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="https://github.com/kach">
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        Subscribe (RSS feed)</a></li>
+                    <li><a href="https://twitter.com/hardmath123">
+                        Twitter</a></li>
+                    <li><a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        CC BY-NC 3.0</a></li>
+                </ul>
+            </div>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>

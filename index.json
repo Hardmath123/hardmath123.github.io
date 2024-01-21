@@ -791,6 +791,14 @@
             "file": "tree-fresnel.md",
             "date": "11/27/23",
             "markdown": true
+        },
+        {
+            "title": "Undetectable Bayesian Improv Theater",
+            "author": "Hardmath123",
+            "description": "How to pretend like you have a biased coin",
+            "file": "bayesian-improv.md",
+            "date": "1/21/24",
+            "markdown": true
         }
     ]
 }
