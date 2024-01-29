@@ -10,7 +10,7 @@
             <link>https://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 21 Jan 2024 20:46:27 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 29 Jan 2024 21:45:42 GMT</lastBuildDate>
         <atom:link href="https://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
@@ -64,6 +64,10 @@ well-known (look
 <a href="https://math.uchicago.edu/~may/REU2013/REUPapers/Helfand.pdf">here</a> or
 <a href="https://www.randomservices.org/random/bernoulli/BetaBernoulli.html">here</a>)
 that this is the same as the Beta-binomial process.</p>
+<blockquote>
+<p>See also: <a href="https://a.exozy.me/posts/asian-bayesian-2/">cool new blog post that riffs on these
+ideas</a></p>
+</blockquote>
 ]]></description>
             <link>https://hardmath123.github.io/bayesian-improv.html</link>
             <guid isPermaLink="true">https://hardmath123.github.io/bayesian-improv.html</guid>

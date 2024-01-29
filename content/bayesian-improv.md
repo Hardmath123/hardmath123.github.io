@@ -55,3 +55,6 @@ well-known (look
 [here](https://math.uchicago.edu/~may/REU2013/REUPapers/Helfand.pdf) or
 [here](https://www.randomservices.org/random/bernoulli/BetaBernoulli.html))
 that this is the same as the Beta-binomial process.
+
+> See also: [cool new blog post that riffs on these
+> ideas](https://a.exozy.me/posts/asian-bayesian-2/)
