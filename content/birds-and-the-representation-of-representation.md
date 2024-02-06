@@ -126,3 +126,18 @@ with illustrator David Sibley.
 ## Unseeable birds
 
 (See Edgerton's photograph of Mrs. May Rogers Webster with her hummingbirds.)
+
+## My Crow
+
+A poem by Raymond Carver
+
+> A crow flew into the tree outside my window.  
+> It was not Ted Hughes’s crow, or Galway’s crow.  
+> Or Frost’s, Pasternak’s, or Lorca’s crow.  
+> Or one of Homer’s crows, stuffed with gore,  
+> after the battle. This was just a crow.  
+> That never fit in anywhere in its life,  
+> or did anything worth mentioning.  
+> It sat there on the branch for a few minutes.  
+> Then picked up and flew beautifully  
+> out of my life.  
