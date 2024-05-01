@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="canonical" href="https://hardmath123.github.io/stereo-pareidolia.html"/>
+        <link rel="stylesheet" type="text/css" href="/static/base.css"/>
+        <title>Peripheral pareidolia - Comfortably Numbered</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="alternate" type="application/rss+xml" title="Comfortably Numbered" href="/feed.xml" />
+
+        <!--
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>
+            MathJax.Hub.Config({
+                tex2jax: {inlineMath: [['$','$']]}
+            });
+        </script>
+        -->
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" integrity="sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js" integrity="sha384-YNHdsYkH6gMx9y3mRkmcJ2mFUjTd0qNQQvY9VYZgQd7DcN7env35GzlmFaZ23JGp" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\begin{align}', right: '\\end{align}', display: true},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+
+
+    </head>
+    <body>
+        <header id="header">
+            <script src="static/main.js"></script>
+            <div>
+                <a href="/"><span class="left-word">Comfortably</span>&nbsp;<span class="right-word">Numbered</span></a>
+            </div>
+        </header>
+
+        <article id="postcontent" class="centered">
+            <section>
+                <h1>Peripheral pareidolia</h1>
+                <center><em><p>Faces that you can only see without looking</p>
+</em></center>
+                <h4>Tuesday, April 30, 2024 &middot; 2 min read</h4>
+<p>I work in a dense urban campus, and the view from my building looks into the windows of the next building over.</p>
+<p><img src="../static/pareidolia-window.png" alt="The view from my building faces the windows of the next building over"></p>
+<p>Sometimes, when I meet with my advisor, I sit at a table facing that window. On these days, a strange thing happens. When I look up at my advisor, I get the eerie sensation in the corner of my eye that there is a face in that window watching me. Of course, when I look at the window, the face vanishes—there is no one there.</p>
+<p>I have been chalking this up to the paranoid hallucinations of a tired brain. But a chance email from a professor this week made me realize what is actually going on here.</p>
+<p>When I look up at my advisor, my eyes bring them into focus. To do this, they converge (“cross”) slightly, so that the image is aligned on my retinas. What happens to the window in the background? Because it is behind my advisor, it <em>diverges</em> slightly: I actually see two copies of it superimposed with a slight horizontal displacement, kind of like a Magic Eye stereogram. Of course, the window also blurs out of focus—in part because it is far behind my eyes’ current focal plane, and in part because it is in my peripheral vision, which has significantly lower acuity.</p>
+<p>Here is a video of what happens when you simulate diverging and blurring the window. I’ve tiled the image many times so that you always have a few copies in your peripheral vision.</p>
+<video src="../static/pareidolia-video.mp4" style="width: 100%;" controls></video>
+
+<p>Aha! At the end of the simulation, the window-images align perfectly to form a pair of little faces side by side. The light fixtures form the eyes and the nose, and the frame provides the lips and the mouth. The faces are not the clearest, but they are certainly face-like enough to evoke pareidolia.</p>
+<p>Of course, if you were to look directly at the window, your eyes would unconverge, the windows would fuse, and the face would seem to disappear. So, <em>it’s not paranoia, it’s peripheral pareidolia!</em></p>
+<p>(Food for thought: how can we automatically find/create more examples of “peripheral pareidolia”? Does this effect say something interesting about the organization of our visual system?)</p>
+
+            </section>
+
+            <div id="comment-breaker">&loz; &loz; &loz;</div>
+
+        </article>
+        <footer id="footer">
+            <div>
+                <ul>
+                    <li><a href="https://github.com/kach">
+                        Github</a></li>
+                    <li><a href="feed.xml">
+                        Subscribe (RSS feed)</a></li>
+                    <li><a href="https://twitter.com/hardmath123">
+                        Twitter</a></li>
+                    <li><a href="https://creativecommons.org/licenses/by-nc/3.0/deed.en_US">
+                        CC BY-NC 3.0</a></li>
+                </ul>
+            </div>
+
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-46120535-1', 'hardmath123.github.io');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        </footer>
+
+    </body>
+</html>

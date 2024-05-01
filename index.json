@@ -799,6 +799,14 @@
             "file": "bayesian-improv.md",
             "date": "1/21/24",
             "markdown": true
+        },
+        {
+            "title": "Peripheral pareidolia",
+            "author": "Hardmath123",
+            "description": "Faces that you can only see without looking",
+            "file": "stereo-pareidolia.md",
+            "date": "4/30/24",
+            "markdown": true
         }
     ]
 }
