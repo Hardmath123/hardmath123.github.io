@@ -807,6 +807,14 @@
             "file": "peripheral-pareidolia.md",
             "date": "4/30/24",
             "markdown": true
+        },
+        {
+            "title": "Play Me a High C",
+            "author": "Hardmath123",
+            "description": "Listening to the tides in Boston Harbor",
+            "file": "tides.md",
+            "date": "11/4/24",
+            "markdown": true
         }
     ]
 }
