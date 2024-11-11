@@ -141,3 +141,8 @@ A poem by Raymond Carver
 > It sat there on the branch for a few minutes.  
 > Then picked up and flew beautifully  
 > out of my life.  
+
+## Birdman
+
+"A thing is a thing, not what is said of that thing." (on Riggan's dressing
+room mirror)
