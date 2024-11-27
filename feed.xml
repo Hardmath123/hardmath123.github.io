@@ -10,10 +10,38 @@
             <link>https://hardmath123.github.io</link>
         </image>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Mon, 11 Nov 2024 03:03:43 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 27 Nov 2024 15:55:35 GMT</lastBuildDate>
         <atom:link href="https://hardmath123.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Hardmath123]]></author>
         <language><![CDATA[en]]></language>
+        <item>
+            <title><![CDATA[Intersaccadic Perception on Massachusetts Avenue]]></title>
+            <description><![CDATA[<p>Seeing without looking</p>
+
+
+<p>On the crispest, sunniest mornings, Massachusetts Avenue shines as if made of flowing gold. When I bike to work from Harvard to MIT, I ride straight into the sun: squinting into the brightness, holding up my gloved hand to shade my eyes. When I come to traffic lights I look down, dazed, and wait for my vision to adjust. I stare at my bike’s front wheel through a hole in my basket. Even the dusty tire blazes in the sunlight.</p>
+<p>Sometimes, these moments feel almost unbearably beautiful to me: the street, the wheel, the tire-tread, the braided pattern of grooves burnt in by piercing morning rays.</p>
+<p><img src="./static/intersaccadic.png" alt="Picture of my bicycle&#39;s tire"></p>
+<p>When the light turns green, I only know it because the trucks around me start moving. I begin pedaling and my front wheel spins up. The tire-treads blur into streaks, impossible to resolve with my eyes. I look cautiously back up at the road.</p>
+<p>But then a strange thing happens. When I look up, I think I see a flash of the tire-treads in my vision: the pattern of the grooves is sharp, but phantasmic, like an afterimage. I look down at the wheel—still a blur. I look up at the road—there’s that flash again.</p>
+<p>What is going on?</p>
+<p>It takes me a few blocks to form a theory. Here it is: when my eyes saccade from wheel to road, they speed up and slow down in their sockets. If the saccade is fast enough, then at some point—by the intermediate value theorem—the motion of my retinas must coincide perfectly with the motion of the image of the wheel, leaving a clear-but-fleeting impression of the treads in my mind. The flash I am seeing is vision between vision.</p>
+<p>Is this theory plausible? I park the bike, I do some envelope math. Relative to me, the top of the wheel should move at the same speed as the bicycle does relative to the ground. I bike at around 15mph, and my wheel’s rim is about a yard from my eyes. By a speed-to-angular-velocity calculation, that gives the bicycle an angular velocity of about 200°/s on my retina. Reading off the <a href="https://www.sciencedirect.com/science/article/pii/0025556475900759">“main sequence”</a>, it turns out that saccades that reach a peak velocity of 200º/s are on the order of 5º of travel. That seems to me like a plausible measure of my wheel-to-road saccade, so at an order-of-magnitude level, at least, I would say this theory checks out.</p>
+<p>Okay, (I start to worry), but is it really possible to perceive anything at all during a saccade? What about “saccadic suppression”? But it turns out that <a href="https://peerj.com/articles/1150/">we really <em>can</em> perceive during our saccades</a>, and indeed this type of “intersaccadic percepetion” is tested with stimuli not unlike my bicycle wheel. And what about the sun (I continue worrying)? Is the blazing sunlight necessary for this effect? Certainly, I have only ever noticed it on blindingly bright days. But why would that be? Does my theory predict this? I’m not sure yet. Perhaps in dimmer conditions, my pupils are slightly dilated, and so my lenses need to do more work to refocus from the wheel to the (further-away) street. This would interfere with the formation of the sharp intersaccadic percept. It might also simply be the case that only in bright sunlight is the contrast between tire and groove severe enough for the effect to really stand out.</p>
+<p>I have more concerns. But now I’m in the elevator, and late, and it is time to get on with the day.</p>
+<hr>
+<p>I worry a lot about what, if anything, I am learning in graduate school. It is true that at some level, my PhD program is vocational: I am learning to do science, I am preparing for a career as a researcher. I have no doubt that I am gaining those skills (or at the very least, that very gifted teachers are trying their best on me).</p>
+<p>But I came to graduate school for more than that, I think. I want to emerge with some better understanding of myself: of what I am and how I work, of what it means to be human, of what the great mysteries of our world are. I want this understanding to serve me no matter what discipline or career I choose for myself. I really did “enter to grow in wisdom.”</p>
+<p>In the maelstorm of everyday life at MIT, it is very difficult to say, at the end of a long week or semester, what exactly you have learned, how exactly you have grown. If anything, graduates school is an endeavor of discovering more and more things you do <em>not</em> understand.</p>
+<p>These moments on bicycles, then, are precious to me. Strange and rare and trivial though they may be, they are all I have to remind me that, yes, I really do see the world differently—more-ly—than before.</p>
+<hr>
+<p>(Earlier reflections on <em>glimpses:</em> <a href="./peripheral-pareidolia.html">1</a> <a href="./bentley-blizzard-blossoms.html">2</a> <a href="./electric-guitar.html">3</a>.)</p>
+]]></description>
+            <link>https://hardmath123.github.io/intersaccadic.html</link>
+            <guid isPermaLink="true">https://hardmath123.github.io/intersaccadic.html</guid>
+            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
+            <pubDate>Wed, 27 Nov 2024 05:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[Play Me a High C]]></title>
             <description><![CDATA[<p>The world is like an apple whirring silently through space</p>
@@ -695,63 +723,6 @@ room mirror)</p>
             <guid isPermaLink="true">https://hardmath123.github.io/birds-and-the-representation-of-representation.html</guid>
             <dc:creator><![CDATA[Hardmath123]]></dc:creator>
             <pubDate>Thu, 21 Oct 2021 04:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[Carnival of Mathematics 198]]></title>
-            <description><![CDATA[<p>The Carnival revisits an old home</p>
-
-
-<p>Hello and welcome to the 198th <a href="https://aperiodical.com/carnival-of-mathematics/">Carnival of Mathematics</a>, a roving monthly roundup of mathy blog posts from around the Internet! Longtime Comfortably Numbered readers should be no stranger to the Carnival: I hosted <a href="carnival-of-mathematics-134.html">#134</a>, <a href="carnival-of-mathematics-148.html">#148</a>, and <a href="carnival-of-mathematics-159.html">#159</a> in the past.</p>
-<p>As is traditional, I want to start by thinking a bit about the number 198. It is actually a very dear number to me — I even own a “198” t-shirt! Why, you ask? The number 198 is the emblem of the wonderful CS198 program at Stanford, which hires a huge team of undergraduates to help teach the introductory computer science courses every year. (As far back as 1995, the faculty running the program published a <a href="https://cormack.uwaterloo.ca/papers/p48-roberts.pdf">retrospective</a> on its impact on campus.)</p>
-<p>Here is another fun fact about the number 198: suppose I start looking at all the integers ($1, 2, 3, 4, 5, \dots$), keeping only the ones that are perfect powers ($1, 4=2^2, 8=2^3, 9=3^2, 16=2^4, \dots$), and then taking their cumulative averages ($1$, $2.5=(1+4)/2$, $4.33=(1+4+8)/3$, $5.5=(1+4+8+9)/4$, $7.6=(1+4+8+9+16)/5, \dots$). You might wonder, are there any other integers in <a href="http://oeis.org/A075457">this sequence</a>? It turns out, <em>yes!</em> And I bet you can guess the first one…</p>
-<hr>
-<p>Now, time for some links! I’ve provided some “teaser” text from each submission to get you interested.</p>
-<p>The BRSR blog asks: <a href="https://brsr.github.io/2021/05/29/curved-triangle.html">can you find a Euclidean triangle on a non-Euclidean surface?</a></p>
-<blockquote>
-<p>A question that came up in a math chatroom (yes, I’m the kind of nerd who spends time in math chatrooms): find a “Euclidean” triangle on a non-Euclidean surface. More exactly, find a geodesic triangle on a surface with non-constant <a href="https://en.wikipedia.org/wiki/Gaussian_curvature">Gaussian curvature</a> having the same sum of interior angles as an Euclidean triangle.</p>
-</blockquote>
-<p>On his blog bit-player, Brian Hayes asks: <a href="http://bit-player.org/2021/riding-the-covid-coaster">why do pandemics peak in distinct waves as the months go by?</a></p>
-<blockquote>
-<p>I’m puzzled by all this structural embellishment. Is it mere noise—a product of random fluctuations—or is there some driving mechanism we ought to know about, some switch or dial that’s turning the infection process on and off every few months?</p>
-<p>I have a few ideas about possible explanations, but I’m not so keen on any of them that I would try to persuade you they’re correct. However, I <em>do</em> hope to persuade you there’s something here that needs explaining.</p>
-</blockquote>
-<p>On Twitter, Thien An asks: <a href="https://twitter.com/thienan496/status/1434522808189521930">would you rather have a bishop and a knight, or two bishops?</a></p>
-<blockquote>
-<p>To get this figure, it suffices to grab 100k games and only keep the positions with BB+pawns v.s. BN+pawns and see who eventually wins. That’s very simplistic since there are indeed many other important positional features, but I was actually expecting less convincing results…</p>
-</blockquote>
-<p>Looking at a video of a pomegranate sorting mechanism, Nisar Khan asks: <a href="https://nisarkhanatwork.medium.com/pomegranate-size-differences-in-different-boxes-ff8a627bb82">how much do the pomegranate sizes vary between sorted buckets?</a></p>
-<blockquote>
-<p>After watching the below video, thought of finding the approximate size differences of pomegranates sorted in different boxes…</p>
-</blockquote>
-<p>On his math blog, Tony asks: <a href="http://tonysmaths.blogspot.com/2021/09/did-studying-maths-help-emma-raducanu.html?m=1">did studying maths help Emma Raducanu win the US Open?</a></p>
-<blockquote>
-<p>I’ve discussed toy examples in public lectures on game theory, which (it seems to me) is relevant to choices players make - whether to serve to the forehand or backhand, and where to expect for your opponent to serve, for example. I very much doubt if players ever analyse in these terms, but they are intuitively doing game theory when making their tactical decisions.</p>
-<p>But I think in the case of Raducanu there is a more general point…</p>
-</blockquote>
-<p>On Risen Crypto, Trajesh asks: <a href="https://risencrypto.github.io/QuadraticSieve/">how does the quadratic sieve factoring algorithm really work?</a></p>
-<blockquote>
-<p>The Quadratic Sieve is the second fastest algorithm for factoring large semiprimes. It’s the fastest for factoring ones which are lesser than 100 digits long.</p>
-</blockquote>
-<p>On The Universe of Discourse, Mark Dominus asks: <a href="https://blog.plover.com/2021/08/28/#combinator-s">why is the “S” combinator named “S”?</a> He also posted a <a href="https://blog.plover.com/math/dilworth.html">nice puzzle</a> that is easily solved if you happen to know Dilworth’s theorem; separately, Jim Fowler built a <a href="https://twitter.com/kisonecat/status/1435265678525620227">musical PICO-8 game</a> where you race to find the chains guaranteed by Dilworth’s theorem.</p>
-<blockquote>
-<p>I thought about this for a while but couldn’t make any progress. But OP had said “I know I have to construct a partially ordered set and possibly use Dilworth’s Theorem…” so I looked up Dilworth’s theorem.</p>
-</blockquote>
-<p>On their blog “Gödel’s Last Letter and P=NP,” Ken Regan and Dick Lipton discuss <a href="https://rjlipton.wpcomstaging.com/2021/09/30/baby-steps/">“baby steps”</a> in math, in the context of some exciting recent results.</p>
-<blockquote>
-<p>Reckoned against a later <a href="https://annals.math.princeton.edu/2009/170-3/p01">paper</a> by Cohn and Elkies, [Viazovska’s] improvement was 0.0000…000001. The recent post where we discussed the phrase “the proof is in the pudding” involves a number with six more zeroes than that. These are <strong>not</strong> what we mean by “baby steps.”</p>
-</blockquote>
-<p>And finally, something more about sequences— on her math blog, Tanya Khovanova explores the <a href="https://blog.tanyakhovanova.com/2021/09/the-top-fifty-largest-numbers-that-start-a-sequence-in-the-oeis/">top 50 largest numbers to start OEIS sequences</a>.</p>
-<blockquote>
-<p>My son, Alexey Radul, wrote a program that finds the largest numbers to start a sequence in the Online Encyclopedia of Integer Sequences (<a href="https://oeis.org/">OEIS</a>). To my surprise, the top ten are all numbers consisting of ones only.</p>
-</blockquote>
-<hr>
-<p>That’s all for this month’s Carnival! What a joy to see — once more — the math blog world <em>overflowing</em> with curiosity. Hosting the Carnival of Mathematics truly is a delight.</p>
-<p>Want even more math? The previous Carnival, the 197th, was hosted by <a href="https://jeremykun.com/2021/09/01/carnival-of-mathematics-197/">Jeremy at Math $\cap$ Programming</a>, and the next — the 199th, to which you can contribute <a href="https://aperiodical.com/carnival-of-mathematics/">here</a>, starting now! — will be hosted by <a href="https://doubleroot.in">Vaibhav at DoubleRoot</a>. See you there!</p>
-]]></description>
-            <link>https://hardmath123.github.io/carnival-of-mathematics-198.html</link>
-            <guid isPermaLink="true">https://hardmath123.github.io/carnival-of-mathematics-198.html</guid>
-            <dc:creator><![CDATA[Hardmath123]]></dc:creator>
-            <pubDate>Fri, 01 Oct 2021 04:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
