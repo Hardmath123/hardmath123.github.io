@@ -146,3 +146,16 @@ A poem by Raymond Carver
 
 "A thing is a thing, not what is said of that thing." (on Riggan's dressing
 room mirror)
+
+## The Bird Watcher's Christmas Dinner
+
+Poem by Scott Bates, via [Better
+Living](https://betterlivingthroughbeowulf.com/birds-as-heavenly-messengers/)
+
+> They wait their turns with impatience  
+> Perched on the cedar by the fence  
+> Like so many Christmas ornaments,
+> 
+> Cardinal, goldfinch and chickadee,  
+> Turning it, trismegistically,  
+> Into an ancient Christmas tree
