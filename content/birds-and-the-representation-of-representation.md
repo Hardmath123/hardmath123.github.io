@@ -159,3 +159,23 @@ Living](https://betterlivingthroughbeowulf.com/birds-as-heavenly-messengers/)
 > Cardinal, goldfinch and chickadee,  
 > Turning it, trismegistically,  
 > Into an ancient Christmas tree
+
+## Sentences Toward Birds
+
+Al Filreis
+[says](https://readalittlepoetry.com/2025/08/13/sentences-toward-birds-by-robert-grenier/)
+of Robert Grenier's collection:
+
+> One of the bird-card-poems reads this way:
+> 
+> > sing songs to crop duster
+> 
+> This is the one I can’t get out of my mind. The birds are singing. Or perhaps
+> it’s more accurate to say that they are being asked to sing by the poet. Not
+> to us or for us—which would be the traditional lyric gesture. No, the song
+> (the poem) is an ode to something else flying overhead. It’s mundane,
+> agricultural, mechanical, noisy, unnatural, unlyric. Yet it is just as
+> eligible—as a recipient of beautiful tonal inflections—as any word or phase
+> that follows the “to” in the line. This, like many of the cards in “Sentences
+> Toward Birds,” is a meta-poem: a poem about the poem as a song sung to
+> anything.
