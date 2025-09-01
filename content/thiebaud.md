@@ -25,3 +25,9 @@ almost immediately, and we would still see the sidewalk as gray --- we
 experience a truly remarkable "color constancy" across lighting conditions. In
 this way, when he paints a shadow as a saturated, non-gray color, Thiebaud sees
 beyond his own seeing.
+
+---
+
+Update on August 31, 2025
+
+![](./static/cambridge-streetlight.png)
