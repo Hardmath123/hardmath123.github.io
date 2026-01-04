@@ -179,3 +179,30 @@ of Robert Grenier's collection:
 > that follows the “to” in the line. This, like many of the cards in “Sentences
 > Toward Birds,” is a meta-poem: a poem about the poem as a song sung to
 > anything.
+
+## ars poetica of partridges & palestine
+
+> **ars poetica of partridges & palestine**  
+> _Mandy Shunnarah_
+> 
+> Sedo told me once our last name means partridge—  
+> that sweet little bird in the pear tree every Christmas.  
+> I’m looking for metaphors on Wikipedia again. It’s easy  
+> to write poems about birds with so many species of partridges.  
+> National Geographic says 43 of those species are decreasing  
+> in population; something Palestinians know all too well.  
+> People like poems about birds more than they like poems  
+> about Palestine, & actual Palestine & her endangered people.  
+> We just won’t go extinct quickly enough. But I digress.  
+> That’s not the metaphor I’m looking for just yet.  
+> An avian ecologist said partridges  
+> are ground-dwellers, unlikely to roost in pear trees.  
+> Those first day of Christmas birds of the family Phasianidae,  
+> presents from one’s true love, were put in pear trees  
+> against their will—branches like an open-air prison  
+> the world ignores because at least they can still see sky.  
+> Some might say I’m reaching, but that’s what metaphors do.  
+> But inside them, there’s always a feather of truth.  
+> This I know: when it comes to partridges & Palestine,  
+> the pervasive popular messaging around us both is false.  
+> The difference is, everyone knows senselessly killing birds is wrong.  
